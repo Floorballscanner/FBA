@@ -1,0 +1,25 @@
+{% extends 'app_layout.html' %}
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="frontpage-choices">
+			<div class="col-sm-4">
+				<i class="fa fa-bar-chart"></i>
+				<h2>Statistics</h2>
+				<p>View analyzed games</p>
+				<a class="btn btn-primary" href="#" role="button">Select</a>
+			</div>
+		</div>
+		<div class="frontpage-choices">
+			<div class="col-sm-4">
+				<i class="fa fa-caret-square-o-right"></i>
+				<h2>New game analysis</h2>
+				<p>Start analyzing a new game</p>
+				<a class="btn btn-primary" href="/accounts/new_game" role="button">Select</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
