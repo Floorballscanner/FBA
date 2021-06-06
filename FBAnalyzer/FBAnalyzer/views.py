@@ -1,3 +1,9 @@
+"""
+Views are rendered to form html - page
+views.function returns a HttpResponse - that is the .html file content
+
+"""
+
 from django.http import HttpResponse
 from django.shortcuts import render
 

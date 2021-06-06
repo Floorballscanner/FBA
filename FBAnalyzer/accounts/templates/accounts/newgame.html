@@ -1,3 +1,10 @@
+<!--
+
+This is the New Game Analysis - html - page content file. It contains all the functionality of game analysis.
+It extends app_layout.html with Django
+
+-->
+
 {% extends 'app_layout.html' %}
 {% block content %}
 
@@ -17,13 +24,13 @@
         </div>
         <div class="col-sm-4">
             <div class="game-clock">
-                <h4>Period 1</h4>
+                <h4 id="periodNr">Period 1</h4>
                 <h2 id="label">00:00:00</h2>
             </div>
             <div class="game-btn" role="group" aria-label="Game buttons">
-                <button id="reset" type="button" onclick="Reset()" class="btn btn-secondary">Reset</button>
-                <button id="start" type="button" onclick="Start()" class="btn btn-secondary">Start</button>
-                <button id="period" type="button" onclick="Period()" class="btn btn-secondary">Period</button>
+                <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
+                <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
+                <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
             </div>
         </div>
         <div class="team-selection">
@@ -49,7 +56,7 @@
             <div class="col-sm-4">
                 <p>Line on court</p>
                 <div class="line-btn btn-group-lg" role="group" aria-label="Line buttons">
-                    <button id="L1" type="button" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
+                    <button id="L1" type="button" style="background-color: #555555" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
                     <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
                     <button id="L3" type="button" onclick="Line_change(3)" class="btn btn-secondary">Line 3</button>
                 </div>
@@ -61,18 +68,157 @@
                 </div>
             </div>
         </div>
-            <div class="pos-input">
-                <div class="col-sm-4">
-                    <p>Position</p>
-                    <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
-                        <button id="Team1" type="button" onclick="BallTeamOne()" class="btn btn-secondary">Team 1</button>
-                        <button id="Team2" type="button" onclick="BallTeamTwo()" class="btn btn-secondary">Team 2</button>
-                    </div>
-                    <div class="zone-btn btn-group-lg btn-group-vertical" role="group" aria-label="Zone buttons">
-                        <button id="AttZ" type="button" onclick="BallAttack()" class="btn btn-secondary">Attack</button>
-                        <button id="DefZ" type="button" onclick="BallDefence()" class="btn btn-secondary">Defence</button>
-                    </div>
+        <div class="pos-input">
+            <div class="col-sm-4">
+                <p>Position</p>
+                <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
+                    <button id="Team1" type="button" style="background-color: #555555" onclick="BallTeamOne()" class="btn btn-secondary">Team 1</button>
+                    <button id="Team2" type="button" onclick="BallTeamTwo()" class="btn btn-secondary">Team 2</button>
                 </div>
+                <div class="zone-btn btn-group-lg btn-group-vertical" role="group" aria-label="Zone buttons">
+                    <button id="AttZ" type="button" onclick="BallAttack()" class="btn btn-secondary">Attack</button>
+                    <button id="DefZ" type="button" style="background-color: #555555" onclick="BallDefence()" class="btn btn-secondary">Defence</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="sL1" class="stats-L1">
+			<div class="col-sm-3">
+                <h4><hr/>Line 1</h4>
+                <p style="padding-top: 10px">Possession: <span id="pL1">0</span>% | <span id="pL1g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL1">0:00</span> | <span id="tocL1g">0:00</span></p>
+                <p>Attack Zone Time: <span id="attzL1">0:00</span> | <span id="attzL1g">0:00</span></p>
+                <p style="padding-top: 10px">Shots for: <span id="sfL1">0</span> | <span id="sfL1g">0</span></p>
+                <p>Shots against: <span id="saL1">0</span> | <span id="saL1g">0</span></p>
+                <p>Fenwick score: <span id="fwL1">0</span> | <span id="fwL1g">0</span></p>
+                <p>Corsi score: <span id="corsiL1">0</span> | <span id="corsiL1g">0</span></p>
+                <p style="padding-top: 10px">Goals for: <span id="gfL1">0</span> | <span id="gfL1g">0</span></p>
+                <p>Goals against: <span id="gaL1">0</span> | <span id="gaL1g">0</span></p>
+                <p>Plus minus: <span id="pmL1">0</span> | <span id="pmL1g">0</span></p>
+                <p style="padding-top: 10px">Penalties for: <span id="pfL1">0</span> | <span id="pfL1g">0</span></p>
+                <p>Penalties against: <span id="paL1">0</span> | <span id="paL1g">0</span></p>
+            </div>
+        </div>
+        <div id="sL2" class="stats-L2">
+			<div class="col-sm-3">
+                <h4><hr/>Line 2</h4>
+                <p style="padding-top: 10px">Possession: <span id="pL2">0</span>% | <span id="pL2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL2">0:00</span> | <span id="tocL2g">0:00</span></p>
+                <p>Attack Zone Time: <span id="attzL2">0:00</span> | <span id="attzL2g">0:00</span></p>
+                <p style="padding-top: 10px">Shots for: <span id="sfL2">0</span> | <span id="sfL2g">0</span></p>
+                <p>Shots against: <span id="saL2">0</span> | <span id="saL2g">0</span></p>
+                <p>Fenwick score: <span id="fwL2">0</span> | <span id="fwL2g">0</span></p>
+                <p>Corsi score: <span id="corsiL2">0</span> | <span id="corsiL2g">0</span></p>
+                <p style="padding-top: 10px">Goals for: <span id="gfL2">0</span> | <span id="gfL2g">0</span></p>
+                <p>Goals against: <span id="gaL2">0</span> | <span id="gaL2g">0</span></p>
+                <p>Plus minus: <span id="pmL2">0</span> | <span id="pmL2g">0</span></p>
+                <p style="padding-top: 10px">Penalties for: <span id="pfL2">0</span> | <span id="pfL2g">0</span></p>
+                <p>Penalties against: <span id="paL2">0</span> | <span id="paL2g">0</span></p>
+            </div>
+        </div>
+        <div id="sL3" class="stats-L3">
+			<div class="col-sm-3">
+                <h4><hr/>Line 3</h4>
+                <p style="padding-top: 10px">Possession: <span id="pL3">0</span>% | <span id="pL3g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL3">0:00</span> | <span id="tocL3g">0:00</span></p>
+                <p>Attack Zone Time: <span id="attzL3">0:00</span> | <span id="attzL3g">0:00</span></p>
+                <p style="padding-top: 10px">Shots for: <span id="sfL3">0</span> | <span id="sfL3g">0</span></p>
+                <p>Shots against: <span id="saL3">0</span> | <span id="saL3g">0</span></p>
+                <p>Fenwick score: <span id="fwL3">0</span> | <span id="fwL3g">0</span></p>
+                <p>Corsi score: <span id="corsiL3">0</span> | <span id="corsiL3g">0</span></p>
+                <p style="padding-top: 10px">Goals for: <span id="gfL3">0</span> | <span id="gfL3g">0</span></p>
+                <p>Goals against: <span id="gaL3">0</span> | <span id="gaL3g">0</span></p>
+                <p>Plus minus: <span id="pmL3">0</span> | <span id="pmL3g">0</span></p>
+                <p style="padding-top: 10px">Penalties for: <span id="pfL3">0</span> | <span id="pfL3g">0</span></p>
+                <p>Penalties against: <span id="paL3">0</span> | <span id="paL3g">0</span></p>
+            </div>
+        </div>
+        <div id="sTeam" class="stats-Team">
+			<div class="col-sm-3">
+                <h4><hr/>Team</h4>
+                <p style="padding-top: 10px">Possession: <span id="pTeam">0</span>% | <span id="pTeamg">0</span>%<p/>
+                <p>Time on Court: <span id="tocTeam">0:00</span> | <span id="tocTeamg">0:00</span></p>
+                <p>Attack Zone Time: <span id="attzTeam">0:00</span> | <span id="attzTeamg">0:00</span></p>
+                <p style="padding-top: 10px">Shots for: <span id="sfTeam">0</span> | <span id="sfTeamg">0</span></p>
+                <p>Shots against: <span id="saTeam">0</span> | <span id="saTeamg">0</span></p>
+                <p>Fenwick score: <span id="fwTeam">0</span> | <span id="fwTeamg">0</span></p>
+                <p>Corsi score: <span id="corsiTeam">0</span> | <span id="corsiTeamg">0</span></p>
+                <p style="padding-top: 10px">Goals for: <span id="gfTeam">0</span> | <span id="gfTeamg">0</span></p>
+                <p>Goals against: <span id="gaTeam">0</span> | <span id="gaTeamg">0</span></p>
+                <p>Plus minus: <span id="pmTeam">0</span> | <span id="pmTeamg">0</span></p>
+                <p style="padding-top: 10px">Penalties for: <span id="pfTeam">0</span> | <span id="pfTeamg">0</span></p>
+                <p>Penalties against: <span id="paTeam">0</span> | <span id="paTeamg">0</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="sPP1" class="stats-PP1">
+			<div class="col-sm-3">
+                <h4><hr/>Powerplay 1</h4>
+                <p style="padding-top: 10px">Possession: <span id="pPP1">0</span>% | <span id="pPP1g">0</span>%<p/>
+                <p>Time on Court: <span id="tocPP1">0:00</span> | <span id="tocPP1g">0:00</span></p>
+                <p>Attack Zone Time: <span id="attzPP1">0:00</span> | <span id="attzPP1g">0:00</span></p>
+                <p style="padding-top: 10px">Shots for: <span id="sfPP1">0</span> | <span id="sfPP1g">0</span></p>
+                <p>Shots against: <span id="saPP1">0</span> | <span id="saPP1g">0</span></p>
+                <p>Fenwick score: <span id="fwPP1">0</span> | <span id="fwPP1g">0</span></p>
+                <p>Corsi score: <span id="corsiPP1">0</span> | <span id="corsiPP1g">0</span></p>
+                <p style="padding-top: 10px">Goals for: <span id="gfPP1">0</span> | <span id="gfPP1g">0</span></p>
+                <p>Goals against: <span id="gaPP1">0</span> | <span id="gaPP1g">0</span></p>
+                <p>Plus minus: <span id="pmPP1">0</span> | <span id="pmPP1g">0</span></p>
+                <p style="padding-top: 10px">Penalties for: <span id="pfPP1">0</span> | <span id="pfPP1g">0</span></p>
+                <p>Penalties against: <span id="paPP1">0</span> | <span id="paPP1g">0</span></p>
+            </div>
+        </div>
+        <div id="sPP2" class="stats-PP2">
+			<div class="col-sm-3">
+                <h4><hr/>Powerplay 2</h4>
+                <p style="padding-top: 10px">Possession: <span id="pPP2">0</span>% | <span id="pPP2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocPP2">0:00</span> | <span id="tocPP2g">0:00</span></p>
+                <p>Attack Zone Time: <span id="attzPP2">0:00</span> | <span id="attzPP2g">0:00</span></p>
+                <p style="padding-top: 10px">Shots for: <span id="sfPP2">0</span> | <span id="sfPP2g">0</span></p>
+                <p>Shots against: <span id="saPP2">0</span> | <span id="saPP2g">0</span></p>
+                <p>Fenwick score: <span id="fwPP2">0</span> | <span id="fwPP2g">0</span></p>
+                <p>Corsi score: <span id="corsiPP2">0</span> | <span id="corsiPP2g">0</span></p>
+                <p style="padding-top: 10px">Goals for: <span id="gfPP2">0</span> | <span id="gfPP2g">0</span></p>
+                <p>Goals against: <span id="gaPP2">0</span> | <span id="gaPP2g">0</span></p>
+                <p>Plus minus: <span id="pmPP2">0</span> | <span id="pmPP2g">0</span></p>
+                <p style="padding-top: 10px">Penalties for: <span id="pfPP2">0</span> | <span id="pfPP2g">0</span></p>
+                <p>Penalties against: <span id="paPP2">0</span> | <span id="paPP2g">0</span></p>
+            </div>
+        </div>
+        <div id="sSH1" class="stats-SH1">
+			<div class="col-sm-3">
+                <h4><hr/>Shorthanded 1</h4>
+                <p style="padding-top: 10px">Possession: <span id="pSH1">0</span>% | <span id="pSH1g">0</span>%<p/>
+                <p>Time on Court: <span id="tocSH1">0:00</span> | <span id="tocSH1g">0:00</span></p>
+                <p>Attack Zone Time: <span id="attzSH1">0:00</span> | <span id="attzSH1g">0:00</span></p>
+                <p style="padding-top: 10px">Shots for: <span id="sfSH1">0</span> | <span id="sfSH1g">0</span></p>
+                <p>Shots against: <span id="saSH1">0</span> | <span id="saSH1g">0</span></p>
+                <p>Fenwick score: <span id="fwSH1">0</span> | <span id="fwSH1g">0</span></p>
+                <p>Corsi score: <span id="corsiSH1">0</span> | <span id="corsiSH1g">0</span></p>
+                <p style="padding-top: 10px">Goals for: <span id="gfSH1">0</span> | <span id="gfSH1g">0</span></p>
+                <p>Goals against: <span id="gaSH1">0</span> | <span id="gaSH1g">0</span></p>
+                <p>Plus minus: <span id="pmSH1">0</span> | <span id="pmSH1g">0</span></p>
+                <p style="padding-top: 10px">Penalties for: <span id="pfSH1">0</span> | <span id="pfSH1g">0</span></p>
+                <p>Penalties against: <span id="paSH1">0</span> | <span id="paSH1g">0</span></p>
+            </div>
+        </div>
+        <div id="sSH2" class="stats-SH2">
+			<div class="col-sm-3">
+                <h4><hr/>Shorthanded 2</h4>
+                <p style="padding-top: 10px">Possession: <span id="pSH2">0</span>% | <span id="pSH2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocSH2">0:00</span> | <span id="tocSH2g">0:00</span></p>
+                <p>Attack Zone Time: <span id="attzSH2">0:00</span> | <span id="attzSH2g">0:00</span></p>
+                <p style="padding-top: 10px">Shots for: <span id="sfSH2">0</span> | <span id="sfSH2g">0</span></p>
+                <p>Shots against: <span id="saSH2">0</span> | <span id="saSH2g">0</span></p>
+                <p>Fenwick score: <span id="fwSH2">0</span> | <span id="fwSH2g">0</span></p>
+                <p>Corsi score: <span id="corsiSH2">0</span> | <span id="corsiSH2g">0</span></p>
+                <p style="padding-top: 10px">Goals for: <span id="gfSH2">0</span> | <span id="gfSH2g">0</span></p>
+                <p>Goals against: <span id="gaSH2">0</span> | <span id="gaSH2g">0</span></p>
+                <p>Plus minus: <span id="pmSH2">0</span> | <span id="pmSH2g">0</span></p>
+                <p style="padding-top: 10px">Penalties for: <span id="pfSH2">0</span> | <span id="pfSH2g">0</span></p>
+                <p>Penalties against: <span id="paSH2">0</span> | <span id="paSH2g">0</span></p>
             </div>
         </div>
     </div>
@@ -87,69 +233,426 @@
   </ul>
 </div>
 
+<!-- The JavaScript - code that describes the game analysis functionality -->
+
 <script>
-    console.log("1");
-    var line_on = 1;
-    var lines = ["L1", "L2", "L3", "Pp1", "Pp2", "Sh1", "Sh2"];
-    var is_on = 0;
-    var counter = 1;
-    var Ball_pos = 1;
+
+    // Variables
+
+    var line_on = 1; // Line on court
+    var started = 0; // Game started 0/1
+    var lines = ["L1", "L2", "L3", "Pp1", "Pp2", "Sh1", "Sh2"]; // Line array
+    var is_on = 0; // Game clock on 1/0
+    var counter = 1; // Counter for the period time * 1000 ms
+    var gameCounter = 1; // Counter for the game time * 1000 ms
+    var periodN = 1; // Period number
+    var Ball_pos = 1; // Ball possession Team 1/2
+    var Ball_zone = 1; // Ball at the def zone (1) or att zone (2) in relation to Team 1
     var PosX = 0;
     var PosY = 0;
-    var cnvs = document.getElementById("myCanvas");
-    var menu = document.getElementById("shotmenu");
     var myImg = new Image();
-    myImg.src = "/static/field.png"
+    myImg.src = "/static/field.png";
 
+    // Time on court by line period/game (in counters)
 
+    var TocL1p = 0;
+    var TocL2p = 0;
+    var TocL3p = 0;
+    var TocL1g = 0;
+    var TocL2g = 0;
+    var TocL3g = 0;
+    var TocPP1p = 0;
+    var TocPP2p = 0; 
+    var TocSH1p = 0;
+    var TocSH2p = 0;
+    var TocPP1g = 0;
+    var TocPP2g = 0; 
+    var TocSH1g = 0;
+    var TocSH2g = 0;
+
+    // Ball possession by line/team period/game (in counters)
+
+    var PosL1p = 0;
+    var PosL2p = 0;
+    var PosL3p = 0;
+    var PosTeam_p = 0;
+    var PosL1g = 0;
+    var PosL2g = 0;
+    var PosL3g = 0;
+    var PosTeam_g = 0;
+    var PosPP1g = 0;
+    var PosPP1p = 0;
+    var PosSH1p = 0;
+    var PosSH1g = 0;
+    var PosPP2g = 0;
+    var PosPP2p = 0;
+    var PosSH2p = 0;
+    var PosSH2g = 0;
+
+    // Ball on att/def zone by line/team period/game (in counters)
+
+    var DefZ1p = 0;
+    var DefZ2p = 0;
+    var DefZ3p = 0;
+    var DefZTeam_p = 0;
+    var AttZ1p = 0;
+    var AttZ2p = 0;
+    var AttZ3p = 0;
+    var AttZTeam_p = 0;
+    var DefZ1g = 0;
+    var DefZ2g = 0;
+    var DefZ3g = 0;
+    var DefZTeam_g = 0;
+    var AttZ1g = 0;
+    var AttZ2g = 0;
+    var AttZ3g = 0;
+    var AttZTeam_g = 0;
+    var DefZPP1p = 0;
+    var DefZPP1g = 0;
+    var AttZPP1p = 0;
+    var AttZPP1g = 0;
+    var DefZSH1p = 0;
+    var DefZSH1g = 0;
+    var AttZSH1p = 0;
+    var AttZSH1g = 0;
+    var DefZPP2p = 0;
+    var DefZPP2g = 0;
+    var AttZPP2p = 0;
+    var AttZPP2g = 0;
+    var DefZSH2p = 0;
+    var DefZSH2g = 0;
+    var AttZSH2p = 0;
+    var AttZSH2g = 0;
+
+    // Arrays for easy access to variables
+
+    var Toc_p = [TocL1p, TocL2p, TocL3p, TocPP1p, TocPP2p, TocSH1p, TocSH2p];
+    var Toc_g = [TocL1g, TocL2g, TocL3g, TocPP1g, TocPP2g, TocSH1g, TocSH2g];
+    var Pos_g = [PosL1p, PosL2p, PosL3p, PosPP1p, PosPP2p, PosSH1p, PosSH2p, PosTeam_p];
+    var Pos_p = [PosL1g, PosL2g, PosL3g, PosPP1g, PosPP2g, PosSH1g, PosSH2g, PosTeam_g];
+    var Att_p = [AttZ1p, AttZ2p, AttZ3p, AttZPP1p, AttZPP2p, AttZSH1p, AttZSH2p, AttZTeam_p];
+    var Att_g = [AttZ1g, AttZ2g, AttZ3g, AttZPP1g, AttZPP2g, AttZSH1g, AttZSH2g, AttZTeam_g];
+    var Def_p = [DefZ1p, DefZ2p, DefZ3p, DefZPP1p, DefZPP2p, DefZSH1p, DefZSH2p, DefZTeam_p];
+    var Def_g = [DefZ1g, DefZ2g, DefZ3g, DefZPP1g, DefZPP2g, DefZSH1g, DefZSH2g, DefZTeam_g];
+
+    // html id myCanvas to variable
+    var cnvs = document.getElementById("myCanvas");
+    // html id shotmenu to variable
+    var menu = document.getElementById("shotmenu");
+
+    // html ids to variables
+    // Shots/goals/penalties for/against, Fenwick/Corsi, plusminus by line/team and period/game
+
+    var sfL1p = document.getElementById("sfL1");
+    var saL1p = document.getElementById("saL1");
+    var fwL1p = document.getElementById("fwL1");
+    var corsiL1p = document.getElementById("corsiL1");
+    var gfL1p = document.getElementById("gfL1");
+    var gaL1p = document.getElementById("gaL1");
+    var pfL1p = document.getElementById("pfL1");
+    var paL1p = document.getElementById("paL1");
+    var pmL1p = document.getElementById("pmL1");
+    var sfL2p = document.getElementById("sfL2");
+    var saL2p = document.getElementById("saL2");
+    var fwL2p = document.getElementById("fwL2");
+    var corsiL2p = document.getElementById("corsiL2");
+    var gfL2p = document.getElementById("gfL2");
+    var gaL2p = document.getElementById("gaL2");
+    var pfL2p = document.getElementById("pfL2");
+    var paL2p = document.getElementById("paL2");
+    var pmL2p = document.getElementById("pmL2");
+    var sfL3p = document.getElementById("sfL3");
+    var saL3p = document.getElementById("saL3");
+    var fwL3p = document.getElementById("fwL3");
+    var corsiL3p = document.getElementById("corsiL3");
+    var gfL3p = document.getElementById("gfL3");
+    var gaL3p = document.getElementById("gaL3");
+    var pfL3p = document.getElementById("pfL3");
+    var paL3p = document.getElementById("paL3");
+    var pmL3p = document.getElementById("pmL3");
+    var sfPP1p = document.getElementById("sfPP1");
+    var saPP1p = document.getElementById("saPP1");
+    var fwPP1p = document.getElementById("fwPP1");
+    var corsiPP1p = document.getElementById("corsiPP1");
+    var gfPP1p = document.getElementById("gfPP1");
+    var gaPP1p = document.getElementById("gaPP1");
+    var pfPP1p = document.getElementById("pfPP1");
+    var paPP1p = document.getElementById("paPP1");
+    var pmPP1p = document.getElementById("pmPP1");
+    var sfPP2p = document.getElementById("sfPP2");
+    var saPP2p = document.getElementById("saPP2");
+    var fwPP2p = document.getElementById("fwPP2");
+    var corsiPP2p = document.getElementById("corsiPP2");
+    var gfPP2p = document.getElementById("gfPP2");
+    var gaPP2p = document.getElementById("gaPP2");
+    var pfPP2p = document.getElementById("pfPP2");
+    var paPP2p = document.getElementById("paPP2");
+    var pmPP2p = document.getElementById("pmPP2");
+    var sfSH1p = document.getElementById("sfSH1");
+    var saSH1p = document.getElementById("saSH1");
+    var fwSH1p = document.getElementById("fwSH1");
+    var corsiSH1p = document.getElementById("corsiSH1");
+    var gfSH1p = document.getElementById("gfSH1");
+    var gaSH1p = document.getElementById("gaSH1");
+    var pfSH1p = document.getElementById("pfSH1");
+    var paSH1p = document.getElementById("paSH1");
+    var pmSH1p = document.getElementById("pmSH1");
+    var sfSH2p = document.getElementById("sfSH2");
+    var saSH2p = document.getElementById("saSH2");
+    var fwSH2p = document.getElementById("fwSH2");
+    var corsiSH2p = document.getElementById("corsiSH2");
+    var gfSH2p = document.getElementById("gfSH2");
+    var gaSH2p = document.getElementById("gaSH2");
+    var pfSH2p = document.getElementById("pfSH2");
+    var paSH2p = document.getElementById("paSH2");
+    var pmSH2p = document.getElementById("pmSH2");
+    var sfTeamp = document.getElementById("sfTeam");
+    var saTeamp = document.getElementById("saTeam");
+    var fwTeamp = document.getElementById("fwTeam");
+    var corsiTeamp = document.getElementById("corsiTeam");
+    var gfTeamp = document.getElementById("gfTeam");
+    var gaTeamp = document.getElementById("gaTeam");
+    var pfTeamp = document.getElementById("pfTeam");
+    var paTeamp = document.getElementById("paTeam");
+    var pmTeamp = document.getElementById("pmTeam");
+
+    // html ids to variables
+    // Possession/Time on Court/AttZone by line/team period/game
+
+    var pL1p = document.getElementById("pL1");
+    var pL2p = document.getElementById("pL2");
+    var pL3p = document.getElementById("pL3");
+    var pPP1p = document.getElementById("pPP1");
+    var pPP2p = document.getElementById("pPP2");
+    var pSH1p = document.getElementById("pSH1");
+    var pSH2p = document.getElementById("pSH2");
+    var pTeamp = document.getElementById("pTeam");
+    var tocL1p = document.getElementById("tocL1");
+    var tocL2p = document.getElementById("tocL2");
+    var tocL3p = document.getElementById("tocL3");
+    var tocPP1p = document.getElementById("tocPP1");
+    var tocPP2p = document.getElementById("tocPP2");
+    var tocSH1p = document.getElementById("tocSH1");
+    var tocSH2p = document.getElementById("tocSH2");
+    var tocTeamp = document.getElementById("tocTeam");
+    var attzL1p = document.getElementById("attzL1");
+    var attzL2p = document.getElementById("attzL2");
+    var attzL3p = document.getElementById("attzL3");
+    var attzPP1p = document.getElementById("attzPP1");
+    var attzPP2p = document.getElementById("attzPP2");
+    var attzSH1p = document.getElementById("attzSH1");
+    var attzSH2p = document.getElementById("attzSH2");
+    var attzTeamp = document.getElementById("attzTeam");
+
+    // html ids to variables
+    // Shots/goals/penalties for/against, Fenwick/Corsi, plusminus by line/team period/game
+
+    var sfL1g = document.getElementById("sfL1g");
+    var saL1g = document.getElementById("saL1g");
+    var fwL1g = document.getElementById("fwL1g");
+    var corsiL1g = document.getElementById("corsiL1g");
+    var gfL1g = document.getElementById("gfL1g");
+    var gaL1g = document.getElementById("gaL1g");
+    var pfL1g = document.getElementById("pfL1g");
+    var paL1g = document.getElementById("paL1g");
+    var pmL1g = document.getElementById("pmL1g");
+    var sfL2g = document.getElementById("sfL2g");
+    var saL2g = document.getElementById("saL2g");
+    var fwL2g = document.getElementById("fwL2g");
+    var corsiL2g = document.getElementById("corsiL2g");
+    var gfL2g = document.getElementById("gfL2g");
+    var gaL2g = document.getElementById("gaL2g");
+    var pfL2g = document.getElementById("pfL2g");
+    var paL2g = document.getElementById("paL2g");
+    var pmL2g = document.getElementById("pmL2g");
+    var sfL3g = document.getElementById("sfL3g");
+    var saL3g = document.getElementById("saL3g");
+    var fwL3g = document.getElementById("fwL3g");
+    var corsiL3g = document.getElementById("corsiL3g");
+    var gfL3g = document.getElementById("gfL3g");
+    var gaL3g = document.getElementById("gaL3g");
+    var pfL3g = document.getElementById("pfL3g");
+    var paL3g = document.getElementById("paL3g");
+    var pmL3g = document.getElementById("pmL3g");
+    var sfPP1g = document.getElementById("sfPP1g");
+    var saPP1g = document.getElementById("saPP1g");
+    var fwPP1g = document.getElementById("fwPP1g");
+    var corsiPP1g = document.getElementById("corsiPP1g");
+    var gfPP1g = document.getElementById("gfPP1g");
+    var gaPP1g = document.getElementById("gaPP1g");
+    var pfPP1g = document.getElementById("pfPP1g");
+    var paPP1g = document.getElementById("paPP1g");
+    var pmPP1g = document.getElementById("pmPP1g");
+    var sfPP2g = document.getElementById("sfPP2g");
+    var saPP2g = document.getElementById("saPP2g");
+    var fwPP2g = document.getElementById("fwPP2g");
+    var corsiPP2g = document.getElementById("corsiPP2g");
+    var gfPP2g = document.getElementById("gfPP2g");
+    var gaPP2g = document.getElementById("gaPP2g");
+    var pfPP2g = document.getElementById("pfPP2g");
+    var paPP2g = document.getElementById("paPP2g");
+    var pmPP2g = document.getElementById("pmPP2g");
+    var sfSH1g = document.getElementById("sfSH1g");
+    var saSH1g = document.getElementById("saSH1g");
+    var fwSH1g = document.getElementById("fwSH1g");
+    var corsiSH1g = document.getElementById("corsiSH1g");
+    var gfSH1g = document.getElementById("gfSH1g");
+    var gaSH1g = document.getElementById("gaSH1g");
+    var pfSH1g = document.getElementById("pfSH1g");
+    var paSH1g = document.getElementById("paSH1g");
+    var pmSH1g = document.getElementById("pmSH1g");
+    var sfSH2g = document.getElementById("sfSH2g");
+    var saSH2g = document.getElementById("saSH2g");
+    var fwSH2g = document.getElementById("fwSH2g");
+    var corsiSH2g = document.getElementById("corsiSH2g");
+    var gfSH2g = document.getElementById("gfSH2g");
+    var gaSH2g = document.getElementById("gaSH2g");
+    var pfSH2g = document.getElementById("pfSH2g");
+    var paSH2g = document.getElementById("paSH2g");
+    var pmSH2g = document.getElementById("pmSH2g");
+    var sfTeamg = document.getElementById("sfTeamg");
+    var saTeamg = document.getElementById("saTeamg");
+    var fwTeamg = document.getElementById("fwTeamg");
+    var corsiTeamg = document.getElementById("corsiTeamg");
+    var gfTeamg = document.getElementById("gfTeamg");
+    var gaTeamg = document.getElementById("gaTeamg");
+    var pfTeamg = document.getElementById("pfTeamg");
+    var paTeamg = document.getElementById("paTeamg");
+    var pmTeamg = document.getElementById("pmTeamg");
+    var pL1g = document.getElementById("pL1g");
+    var pL2g = document.getElementById("pL2g");
+    var pL3g = document.getElementById("pL3g");
+    var pPP1g = document.getElementById("pPP1g");
+    var pPP2g = document.getElementById("pPP2g");
+    var pSH1g = document.getElementById("pSH1g");
+    var pSH2g = document.getElementById("pSH2g");
+    var pTeamg = document.getElementById("pTeamg");
+    var tocL1g = document.getElementById("tocL1g");
+    var tocL2g = document.getElementById("tocL2g");
+    var tocL3g = document.getElementById("tocL3g");
+    var tocPP1g = document.getElementById("tocPP1g");
+    var tocPP2g = document.getElementById("tocPP2g");
+    var tocSH1g = document.getElementById("tocSH1g");
+    var tocSH2g = document.getElementById("tocSH2g");
+    var tocTeamg = document.getElementById("tocTeamg");
+    var attzL1g = document.getElementById("attzL1g");
+    var attzL2g = document.getElementById("attzL2g");
+    var attzL3g = document.getElementById("attzL3g");
+    var attzPP1g = document.getElementById("attzPP1g");
+    var attzPP2g = document.getElementById("attzPP2g");
+    var attzSH1g = document.getElementById("attzSH1g");
+    var attzSH2g = document.getElementById("attzSH2g");
+    var attzTeamg = document.getElementById("attzTeamg");
+
+    // Arrays for easy access to variables
+
+    var sf_p = [sfL1p, sfL2p, sfL3p, sfPP1p, sfPP2p, sfSH1p, sfSH2p, sfTeamp];
+    var sa_p = [saL1p, saL2p, saL3p, saPP1p, saPP2p, saSH1p, saSH2p, saTeamp];
+    var gf_p = [gfL1p, gfL2p, gfL3p, gfPP1p, gfPP2p, gfSH1p, gfSH2p, gfTeamp];
+    var ga_p = [gaL1p, gaL2p, gaL3p, gaPP1p, gaPP2p, gaSH1p, gaSH2p, gaTeamp];
+    var pf_p = [pfL1p, pfL2p, pfL3p, pfPP1p, pfPP2p, pfSH1p, pfSH2p, pfTeamp];
+    var pa_p = [paL1p, paL2p, paL3p, paPP1p, paPP2p, paSH1p, paSH2p, paTeamp];
+    var pm_p = [pmL1p, pmL2p, pmL3p, pmPP1p, pmPP2p, pmSH1p, pmSH2p, pmTeamp];
+    var fw_p = [fwL1p, fwL2p, fwL3p, fwPP1p, fwPP2p, fwSH1p, fwSH2p, fwTeamp];
+    var corsi_p = [corsiL1p, corsiL2p, corsiL3p, corsiPP1p, corsiPP2p, corsiSH1p, corsiSH2p, corsiTeamp];
+    var p_p = [pL1p, pL2p, pL3p, pPP1p, pPP2p, pSH1p, pSH2p, pTeamp];
+    var toc_p = [tocL1p, tocL2p, tocL3p, tocPP1p, tocPP2p, tocSH1p, tocSH2p, tocTeamp];
+    var attz_p = [attzL1p, attzL2p, attzL3p, attzPP1p, attzPP2p, attzSH1p, attzSH2p, attzTeamp];
+    
+    var sf_g = [sfL1g, sfL2g, sfL3g, sfPP1g, sfPP2g, sfSH1g, sfSH2g, sfTeamg];
+    var sa_g = [saL1g, saL2g, saL3g, saPP1g, saPP2g, saSH1g, saSH2g, saTeamg];
+    var gf_g = [gfL1g, gfL2g, gfL3g, gfPP1g, gfPP2g, gfSH1g, gfSH2g, gfTeamg];
+    var ga_g = [gaL1g, gaL2g, gaL3g, gaPP1g, gaPP2g, gaSH1g, gaSH2g, gaTeamg];
+    var pf_g = [pfL1g, pfL2g, pfL3g, pfPP1g, pfPP2g, pfSH1g, pfSH2g, pfTeamg];
+    var pa_g = [paL1g, paL2g, paL3g, paPP1g, paPP2g, paSH1g, paSH2g, paTeamg];
+    var pm_g = [pmL1g, pmL2g, pmL3g, pmPP1g, pmPP2g, pmSH1g, pmSH2g, pmTeamg];
+    var fw_g = [fwL1g, fwL2g, fwL3g, fwPP1g, fwPP2g, fwSH1g, fwSH2g, fwTeamg];
+    var corsi_g = [corsiL1g, corsiL2g, corsiL3g, corsiPP1g, corsiPP2g, corsiSH1g, corsiSH2g, corsiTeamg];
+    var p_g = [pL1g, pL2g, pL3g, pPP1g, pPP2g, pSH1g, pSH2g, pTeamg];
+    var toc_g = [tocL1g, tocL2g, tocL3g, tocPP1g, tocPP2g, tocSH1g, tocSH2g, tocTeamg];
+    var attz_g = [attzL1g, attzL2g, attzL3g, attzPP1g, attzPP2g, attzSH1g, attzSH2g, attzTeamg];
+
+    // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
         var ctx = cnvs.getContext("2d");
         ctx.drawImage(myImg,0,0,250,355);
     }
 
+    // When the ball team 1 button is pressed the button colors and the variable are changed
     function BallTeamOne() {
         document.getElementById("Team2").style.background='#4CAF50';
         document.getElementById("Team1").style.background='#555555';
         Ball_pos = 1;
     }
+    // When the ball team 2 button is pressed
     function BallTeamTwo() {
         document.getElementById("Team2").style.background='#555555';
         document.getElementById("Team1").style.background='#4CAF50';
         Ball_pos = 2;
     }
+    // When the ball attack zone button is pressed
     function BallAttack() {
         document.getElementById("AttZ").style.background='#555555';
         document.getElementById("DefZ").style.background='#4CAF50';
+        Ball_zone = 2;
     }
+    // When the ball defence zone button is pressed
     function BallDefence() {
         document.getElementById("AttZ").style.background='#4CAF50';
         document.getElementById("DefZ").style.background='#555555';
+        Ball_zone = 1;
     }
+    // When the line is changed by pressing any of the line on court buttons except the one that is on
     function Line_change(line) {
-        console.log(lines);
+        console.log(lines); // debugging
         document.getElementById(lines[line_on-1]).style.background='#4CAF50';
         document.getElementById(lines[line-1]).style.background='#555555';
         line_on = line;
-        console.log(line_on);
+        console.log(line_on); // debugging
     }
+    // Start game or start/stop game clock
     function Start() {
-        if (is_on == 0) {    // Start game clock
-           document.getElementById("start").innerHTML = "Stop";
-           document.getElementById("start").style.background='#555555';
-           is_on = 1;
-           Counter();
+        // If the game has not started
+        if (started == 0) {   // Start game and disable teams etc.
+            var r = confirm("Do you want to start the game,\n changing teams will be disabled?");
+            if (r == true) {
+                document.getElementById("home_teams").disabled = true;
+                document.getElementById("away_teams").disabled = true;
+                document.getElementById("period").disabled = false;
+                document.getElementById("reset").disabled = false;
+                started = 1;
+            } else {
+            }
         }
-        else if (is_on == 1) {  // Stop game clock
-            document.getElementById("start").innerHTML = "Start";
-            document.getElementById("start").style.background='#4CAF50';
-            is_on = 0;
+        // Game has already started, then start/stop the game clock
+        else {
+            if (is_on == 0) {    // Start game clock
+               document.getElementById("start").innerHTML = "Stop";
+               document.getElementById("start").style.background='#555555';
+               is_on = 1;
+               Counter();
+            }
+            else if (is_on == 1) {  // Stop game clock
+                document.getElementById("start").innerHTML = "Start";
+                document.getElementById("start").style.background='#4CAF50';
+                is_on = 0;
+            }
         }
     }
+    // Press the Reset button
     function Reset() {
 
     }
+    // Press the Period button
     function Period() {
-
+        var r = confirm("Changing period will reset clock and statistics,\nand save data, are you sure?");
+            if (r == true) {
+                periodN++
+                counter = 1;
+                document.getElementById("periodNr").innerHTML = "Period " + periodN;
+                document.getElementById("label").innerHTML = "00:00:00";
+            } else {
+            }
     }
     function Counter() {
         Count();
@@ -160,7 +663,62 @@
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
+
+             Toc_p[line_on - 1]++;
+             Toc_g[line_on - 1]++;
+
+             if (Ball_pos == 1) {
+                Pos_p[line_on - 1]++;
+                Pos_g[line_on - 1]++;
+                Pos_g[7]++;
+                Pos_p[7]++;
+                
+                if (Ball_zone == 1) {
+                    Def_p[line_on - 1]++;
+                    Def_g[line_on - 1]++;
+                    Def_p[7]++;
+                    Def_g[7]++;
+                }
+                else {
+                    Att_p[line_on - 1]++;
+                    Att_g[line_on - 1]++;
+                    Att_p[7]++;
+                    Att_g[7]++;
+                }
+             }
+             
+             p_p[line_on - 1].innerHTML = Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+             p_p[7].innerHTML = Math.round(100 * Pos_p[7] / counter);
+             
+             p_g[line_on - 1].innerHTML = Math.round(100 * Pos_g[line_on - 1] / Toc_g[line_on - 1]);
+             p_g[7].innerHTML = Math.round(100 * Pos_g[7] / gameCounter);
+
+             var toc = new Date(Toc_p[line_on - 1] * 1000);
+             var d = toc.toISOString().substr(14, 5);
+             toc_p[line_on - 1].innerHTML = d;
+             
+             var toc = new Date(Toc_g[line_on - 1] * 1000);
+             var d = toc.toISOString().substr(14, 5);
+             toc_g[line_on - 1].innerHTML = d;
+
+             var attz = new Date(Att_p[line_on - 1] * 1000);
+             var a = attz.toISOString().substr(14, 5);
+             attz_p[line_on - 1].innerHTML = a;
+             
+             var attz = new Date(Att_g[line_on - 1] * 1000);
+             var a = attz.toISOString().substr(14, 5);
+             attz_g[line_on - 1].innerHTML = a;
+
+             var attz = new Date(Att_p[7] * 1000);
+             var a = attz.toISOString().substr(14, 5);
+             attz_p[7].innerHTML = a;
+             
+             var attz = new Date(Att_g[7] * 1000);
+             var a = attz.toISOString().substr(14, 5);
+             attz_g[7].innerHTML = a;
+
              counter++;
+             gameCounter++;
              console.log(counter);
              t = setTimeout(function(){ Count() }, 1000);
          }
@@ -229,25 +787,157 @@
     {
         var ctx = cnvs.getContext("2d");
         menu.style.display = "none";
-        ctx.font = "15px Arial";
+        ctx.font = "12px Arial";
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
+            if (type == 1) {    // Shot Missed
+                ctx.fillText("M", x, y);
+                
+                sf_p[line_on - 1].innerHTML++;
+                fw_p[line_on - 1].innerHTML++;
+                corsi_p[line_on - 1].innerHTML++;
+                sf_p[7].innerHTML++;
+                fw_p[7].innerHTML++;
+                corsi_p[7].innerHTML++;
+                
+                sf_g[line_on - 1].innerHTML++;
+                fw_g[line_on - 1].innerHTML++;
+                corsi_g[line_on - 1].innerHTML++;
+                sf_g[7].innerHTML++;
+                fw_g[7].innerHTML++;
+                corsi_g[7].innerHTML++;
+            }
+            else if (type == 2) {   // Shot Blocked
+                ctx.fillText("B", x, y);
+                
+                sf_p[line_on - 1].innerHTML++;
+                corsi_p[line_on - 1].innerHTML++;
+                sf_p[7].innerHTML++;
+                corsi_p[7].innerHTML++;
+                
+                sf_g[line_on - 1].innerHTML++;
+                corsi_g[line_on - 1].innerHTML++;
+                sf_g[7].innerHTML++;
+                corsi_g[7].innerHTML++;
+            }
+            else if (type == 3) {   // Shot Saved
+                ctx.fillText("S", x, y);
+                
+                sf_p[line_on - 1].innerHTML++;
+                fw_p[line_on - 1].innerHTML++;
+                corsi_p[line_on - 1].innerHTML++;
+                sf_p[7].innerHTML++;
+                fw_p[7].innerHTML++;
+                corsi_p[7].innerHTML++;
+                
+                sf_g[line_on - 1].innerHTML++;
+                fw_g[line_on - 1].innerHTML++;
+                corsi_g[line_on - 1].innerHTML++;
+                sf_g[7].innerHTML++;
+                fw_g[7].innerHTML++;
+                corsi_g[7].innerHTML++;
+            }
+            else if (type == 4) {   // Shot Goal
+                ctx.fillText("G", x, y);
+                
+                sf_p[line_on - 1].innerHTML++;
+                gf_p[line_on - 1].innerHTML++;
+                pm_p[line_on - 1].innerHTML++;
+                fw_p[line_on - 1].innerHTML++;
+                corsi_p[line_on - 1].innerHTML++;
+                sf_p[7].innerHTML++;
+                gf_p[7].innerHTML++;
+                pm_p[7].innerHTML++;
+                fw_p[7].innerHTML++;
+                corsi_p[7].innerHTML++;
+                
+                sf_g[line_on - 1].innerHTML++;
+                gf_g[line_on - 1].innerHTML++;
+                pm_g[line_on - 1].innerHTML++;
+                fw_g[line_on - 1].innerHTML++;
+                corsi_g[line_on - 1].innerHTML++;
+                sf_g[7].innerHTML++;
+                gf_g[7].innerHTML++;
+                pm_g[7].innerHTML++;
+                fw_g[7].innerHTML++;
+                corsi_g[7].innerHTML++;
+            }
         }
         else if (Ball_pos == 2) {
             ctx.fillStyle = "red";
-        }
-        if (type == 1) {    // Shot Missed
-        ctx.fillText("M", x, y);
-        }
-        else if (type == 2) {   // Shot Blocked
-        ctx.fillText("B", x, y);
-        }
-        else if (type == 3) {   // Shot Saved
-        ctx.fillText("S", x, y);
-        }
-        else if (type == 4) {   // Shot Goal
-        ctx.fillText("G", x, y);
+            if (type == 1) {    // Shot Missed
+                ctx.fillText("M", x, y);
+                
+                sa_p[line_on - 1].innerHTML++;
+                fw_p[line_on - 1].innerHTML--;
+                corsi_p[line_on - 1].innerHTML--;
+                sa_p[7].innerHTML++;
+                fw_p[7].innerHTML--;
+                corsi_p[7].innerHTML--;
+                
+                sa_g[line_on - 1].innerHTML++;
+                fw_g[line_on - 1].innerHTML--;
+                corsi_g[line_on - 1].innerHTML--;
+                sa_g[7].innerHTML++;
+                fw_g[7].innerHTML--;
+                corsi_g[7].innerHTML--;
+            }
+            else if (type == 2) {   // Shot Blocked
+                ctx.fillText("B", x, y);
+                
+                sa_p[line_on - 1].innerHTML++;
+                corsi_p[line_on - 1].innerHTML--;
+                sa_p[7].innerHTML++;
+                corsi_p[7].innerHTML--;
+                
+                sa_g[line_on - 1].innerHTML++;
+                corsi_g[line_on - 1].innerHTML--;
+                sa_g[7].innerHTML++;
+                corsi_g[7].innerHTML--;
+            }
+            else if (type == 3) {   // Shot Saved
+                ctx.fillText("S", x, y);
+                
+                sa_p[line_on - 1].innerHTML++;
+                fw_p[line_on - 1].innerHTML--;
+                corsi_p[line_on - 1].innerHTML--;
+                sa_p[7].innerHTML++;
+                fw_p[7].innerHTML--;
+                corsi_p[7].innerHTML--;
+                
+                sa_g[line_on - 1].innerHTML++;
+                fw_g[line_on - 1].innerHTML--;
+                corsi_g[line_on - 1].innerHTML--;
+                sa_g[7].innerHTML++;
+                fw_g[7].innerHTML--;
+                corsi_g[7].innerHTML--;
+            }
+            else if (type == 4) {   // Shot Goal
+                ctx.fillText("G", x, y);
+                
+                sa_p[line_on - 1].innerHTML++;
+                ga_p[line_on - 1].innerHTML++;
+                pm_p[line_on - 1].innerHTML--;
+                fw_p[line_on - 1].innerHTML--;
+                corsi_p[line_on - 1].innerHTML--;
+                sa_p[7].innerHTML++;
+                ga_p[7].innerHTML++;
+                pm_p[7].innerHTML--;
+                fw_p[7].innerHTML--;
+                corsi_p[7].innerHTML--;
+                
+                sa_g[line_on - 1].innerHTML++;
+                ga_g[line_on - 1].innerHTML++;
+                pm_g[line_on - 1].innerHTML--;
+                fw_g[line_on - 1].innerHTML--;
+                corsi_g[line_on - 1].innerHTML--;
+                sa_g[7].innerHTML++;
+                ga_g[7].innerHTML++;
+                pm_g[7].innerHTML--;
+                fw_g[7].innerHTML--;
+                corsi_g[7].innerHTML--;
+            }
         }
     }
 

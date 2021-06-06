@@ -1,0 +1,29 @@
+<!--
+
+This is the My Team - html - page content file. It is shown when the user is logged in and
+presses the My Team - button at the index - page.
+
+It extends app_layout.html with Django
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+
+<div class="container">
+    <h3>Edit your team</h3>
+    <div class="row">
+		<div class="my-roster">
+			<div class="col-sm-6">
+                My Roster
+            </div>
+        </div>
+        <div class="my-team">
+            <div class="col-sm-6">
+                  My Team
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

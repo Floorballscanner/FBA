@@ -1,3 +1,6 @@
+# Views is the file that contains information and functions of different html-views.
+
+
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -21,3 +24,6 @@ def sign_up(request):
 
 def new_game(request):
     return render(request, 'accounts/newgame.html')
+
+def my_team(request):
+    return render(request, 'accounts/myteam.html')
