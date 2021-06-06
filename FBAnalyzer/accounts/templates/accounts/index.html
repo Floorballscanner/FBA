@@ -1,3 +1,10 @@
+<!--
+
+This is the index - html - page content file that is the first web page after login.
+It extends app_layout.html with Django
+
+-->
+
 {% extends 'app_layout.html' %}
 {% block content %}
 
@@ -5,18 +12,26 @@
 	<div class="row">
 		<div class="frontpage-choices">
 			<div class="col-sm-4">
-				<i class="fa fa-bar-chart"></i>
-				<h2>Statistics</h2>
-				<p>View analyzed games</p>
-				<a class="btn btn-primary" href="#" role="button">Select</a>
+				<img src="/static/group.png" width="40px" height="40px">
+				<h2>My Team</h2>
+				<p>Edit your team</p>
+				<a class="btn btn-primary" href="/accounts/my_team" role="button">Select</a>
 			</div>
 		</div>
 		<div class="frontpage-choices">
 			<div class="col-sm-4">
-				<i class="fa fa-caret-square-o-right"></i>
+				<img src="/static/play-button.png" width="40px" height="40px">
 				<h2>New game analysis</h2>
 				<p>Start analyzing a new game</p>
 				<a class="btn btn-primary" href="/accounts/new_game" role="button">Select</a>
+			</div>
+		</div>
+		<div class="frontpage-choices">
+			<div class="col-sm-4">
+				<img src="/static/analytics.png" width="40px" height="40px">
+				<h2>Statistics</h2>
+				<p>View statistics of your games</p>
+				<a class="btn btn-primary" href="#" role="button">Select</a>
 			</div>
 		</div>
 	</div>

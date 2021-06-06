@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pricing</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
-    <div class="container">
-        <div class="menu">
-            <ul>
-                <li><a href="/" class="home">Home</a></li>
-                <li><a href="/about" class="about">About</a></li>
-                <li><a href="/pricing" class="active">Pricing</a></li>
-                <li><a href="/contact" class="contact">Contact</a></li>
-                <li><a href="#" class="login-btn"><span>Login</span></a></li>
-            </ul>
-        </div>
-        <div class="banner">
-            <div class="app-text">
-                <h1>Pricing</h1>
-                <p>FB Analyzer is very cheap</p>
-            </div>
-        </div>
-        <div class="app-picture">
-            <img src="/static/floorball.jpg">
-        </div>
+<!--
+
+This is the pricing - infopage of the application.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+ <div class="banner">
+    <div class="app-text">
+        <h1>Pricing</h1>
+        <p>FB Analyzer is very cheap</p>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

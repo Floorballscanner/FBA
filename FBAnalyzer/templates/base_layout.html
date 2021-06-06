@@ -1,3 +1,10 @@
+<!--
+
+This is the Django layout - html file. This file includes the layout of the landing page
+when there is not a logged in user.
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +28,7 @@
                 <li style="float:right"><a href="/accounts/login/">Login</a></li>
             </ul>
         </div>
+        <!-- This is where the extended content is placed -->
         {% block content %}
         {% endblock %}
         <div class="app-picture">
