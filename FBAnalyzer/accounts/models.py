@@ -3,7 +3,7 @@
 from django.db import models
 import uuid
 
-# Create your models here. Testi.
+# Create your models here. Testipäivitys2..
 
 class Player(models.Model):
     print(11)
