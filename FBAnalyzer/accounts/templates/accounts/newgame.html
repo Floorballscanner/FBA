@@ -9,7 +9,7 @@ It extends app_layout.html with Django
 {% block content %}
 
 <div class="container">
-    <h3>Analyze a New Game</h3>
+    <h3>Analyze Game</h3>
     <div class="row">
         <div class="team-selection">
 			<div class="col-sm-4">
@@ -49,7 +49,7 @@ It extends app_layout.html with Django
         <div class="shot-map">
 			<div class="col-sm-4">
                 <p>Shot mapping</p>
-                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="250" height="355"></canvas>
+                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="355" height="250"></canvas>
             </div>
         </div>
         <div class="button-input">
@@ -71,15 +71,14 @@ It extends app_layout.html with Django
         <div class="pos-input">
             <div class="col-sm-4">
                 <p>Position</p>
+                <input type="image" id="changeorder" onclick="ChangeOrder()" src="/static/change_icon.jpeg" width="30" height="30" alt="order">
                 <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
                     <button id="TeamL" type="button" style="background-color: #555555" onclick="BallTeamL()" class="btn btn-secondary">Team 1</button>
                     <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary">Team 2</button>
-                    <input type="image" id="changetorder" onclick="ChangeTeamOrder()" src="/static/change_icon.jpeg" width="30" height="30" alt="teamorder">
                 </div>
                 <div class="zone-btn btn-group-lg btn-group-lg" role="group" aria-label="Zone buttons">
-                    <button id="ZoneL" type="button" onclick="BallZoneL()" class="btn btn-secondary">Attack</button>
-                    <button id="ZoneR" type="button" style="background-color: #555555" onclick="BallZoneR()" class="btn btn-secondary">Defence</button>
-                    <input type="image" id="changezorder" onclick="ChangeZoneOrder()" src="/static/change_icon.jpeg" width="30" height="30" alt="zoneorder">
+                    <button id="ZoneL" type="button" style="background-color: #555555" onclick="BallZoneL()" class="btn btn-secondary">Defence</button>
+                    <button id="ZoneR" type="button" onclick="BallZoneR()" class="btn btn-secondary">Attack</button>
                 </div>
             </div>
         </div>
@@ -250,12 +249,11 @@ It extends app_layout.html with Django
     var periodN = 1; // Period number
     var Ball_pos = 1; // Ball possession Team 1/2
     var Ball_zone = 1; // Ball at the def zone (1) or att zone (2) in relation to Team 1
-    var Pos_order = 1; // Order or Team buttons 1/2
-    var Zone_order = 1; // Order of Zone buttons 1/2
+    var Order = 1; // Order of team and zone buttons 1/2
     var PosX = 0;
     var PosY = 0;
     var myImg = new Image();
-    myImg.src = "/static/field.png";
+    myImg.src = "/static/field_canvas.png";
 
     // Time on court by line period/game (in counters)
 
@@ -579,34 +577,24 @@ It extends app_layout.html with Django
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
-    ctx.drawImage(myImg,0,0,250,355);
+    ctx.drawImage(myImg,0,0,355,250);
     }
 
     // When the change team order button is changed, the teams switch sides
-    function ChangeTeamOrder() {
-        if (Pos_order == 1) {
+    function ChangeOrder() {
+        if (Order == 1) { // Team 1 is moved as the right one, defence zone on the right
             document.getElementById("TeamL").innerHTML = "Team 2";
             document.getElementById("TeamR").innerHTML = "Team 1";
-            Pos_order = 2;
-        }
-        else {
-            document.getElementById("TeamL").innerHTML = "Team 1";
-            document.getElementById("TeamR").innerHTML = "Team 2";
-            Pos_order = 1;
-        }
-    }
-
-    // When the change zone order button is changed, the teams switch sides
-    function ChangeZoneOrder() {
-        if (Zone_order == 1) {
-            document.getElementById("ZoneL").innerHTML = "Defence";
-            document.getElementById("ZoneR").innerHTML = "Attack";
-            Zone_order = 2;
-        }
-        else {
             document.getElementById("ZoneL").innerHTML = "Attack";
             document.getElementById("ZoneR").innerHTML = "Defence";
-            Zone_order = 1;
+            Order = 2;
+        }
+        else { // Team 1 is moved as the left one, defence zone on the left
+            document.getElementById("TeamL").innerHTML = "Team 1";
+            document.getElementById("TeamR").innerHTML = "Team 2";
+            document.getElementById("ZoneL").innerHTML = "Defence";
+            document.getElementById("ZoneR").innerHTML = "Attack";
+            Order = 1;
         }
     }
 
@@ -614,25 +602,34 @@ It extends app_layout.html with Django
     function BallTeamL() {
         document.getElementById("TeamR").style.background='#4CAF50';
         document.getElementById("TeamL").style.background='#555555';
-        Ball_pos = 1;
+        if (Order == 1) {
+            Ball_pos = 1;
+        } else {Ball_pos = 2;}
     }
+
     // When the ball team right button is pressed
     function BallTeamR() {
         document.getElementById("TeamR").style.background='#555555';
         document.getElementById("TeamL").style.background='#4CAF50';
-        Ball_pos = 2;
+        if (Order == 1) {
+            Ball_pos = 2;
+        } else {Ball_pos = 1;}
     }
-    // When the ball attack zone button is pressed
-    function BallAttack() {
-        document.getElementById("AttZ").style.background='#555555';
-        document.getElementById("DefZ").style.background='#4CAF50';
-        Ball_zone = 2;
+    // When the right ball zone button is pressed
+    function BallZoneR() {
+        document.getElementById("ZoneR").style.background='#555555';
+        document.getElementById("ZoneL").style.background='#4CAF50';
+        if (Order == 1) {
+            Ball_zone = 2;
+        } else {Ball_zone = 1;}
     }
-    // When the ball defence zone button is pressed
-    function BallDefence() {
-        document.getElementById("AttZ").style.background='#4CAF50';
-        document.getElementById("DefZ").style.background='#555555';
-        Ball_zone = 1;
+    // When the left ball zone button is pressed
+    function BallZoneL() {
+        document.getElementById("ZoneR").style.background='#4CAF50';
+        document.getElementById("ZoneL").style.background='#555555';
+        if (Order == 2) {
+            Ball_zone = 2;
+        } else {Ball_zone = 1;}
     }
     // When the line is changed by pressing any of the line on court buttons except the one that is on
     function Line_change(line) {
