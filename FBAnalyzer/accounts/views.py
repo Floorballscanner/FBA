@@ -64,4 +64,6 @@ def add_new_player(request):
         'players': players,
     }
 
-    return render(request, 'accounts/myteam.html', context)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    #  return render(request, 'accounts/myteam.html', context)
