@@ -905,7 +905,6 @@ It extends app_layout.html with Django
     }
     function Counter() {
         t = setTimeout(function(){ Count() }, 1000);
-        // Count();
     }
 
     function Count() {
@@ -1006,6 +1005,8 @@ It extends app_layout.html with Django
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
+
+             t = setTimeout(function(){ Count() }, 1000);
          }
     }
 
