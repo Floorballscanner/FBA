@@ -904,13 +904,12 @@ It extends app_layout.html with Django
             }
     }
     function Counter() {
-        Count();
+        t = setTimeout(function(){ Count() }, 1000);
+        // Count();
     }
 
     function Count() {
          if (is_on == 1) {
-
-            t = setTimeout(function(){ Count() }, 1000);
 
              Toc_p[line_on - 1]++;
              Toc_g[line_on - 1]++;
