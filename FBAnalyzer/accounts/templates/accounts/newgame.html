@@ -301,8 +301,8 @@ It extends app_layout.html with Django
     var started = 0; // Game started 0/1
     var lines = ["L1", "L2", "L3", "Pp1", "Pp2", "Sh1", "Sh2"]; // Line array
     var is_on = 0; // Game clock on 1/0
-    var counter = 1; // Counter for the period time * 1000 ms
-    var gameCounter = 1; // Counter for the game time * 1000 ms
+    var counter = 0; // Counter for the period time * 1000 ms
+    var gameCounter = 0; // Counter for the game time * 1000 ms
     var periodN = 1; // Period number
     var Ball_pos = 1; // Ball possession Team 1/2
     var Ball_zone = 1; // Ball at the def zone (1) or att zone (2) in relation to Team 1
@@ -909,7 +909,9 @@ It extends app_layout.html with Django
 
     function Count() {
          if (is_on == 1) {
-         
+
+            t = setTimeout(function(){ Count() }, 1000);
+
              Toc_p[line_on - 1]++;
              Toc_g[line_on - 1]++;
              Toc_p[7]++;
@@ -1001,7 +1003,6 @@ It extends app_layout.html with Django
              counter++;
              gameCounter++;
              console.log(counter);
-             t = setTimeout(function(){ Count() }, 1000);
              
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
