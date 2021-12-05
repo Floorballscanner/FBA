@@ -1,0 +1,19 @@
+<!--
+
+This is the Login - html - page content file. It is shown when the user clicks the Login - button.
+It extends base_layout.html with Django, and utilizes Django's existing login - functionalities.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+<div class="banner">
+    <div class="app-text">
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+{% endblock %}

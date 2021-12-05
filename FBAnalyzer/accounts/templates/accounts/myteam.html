@@ -1,0 +1,100 @@
+<!--
+
+This is the My Team - html - page content file. It is shown when the user is logged in and
+presses the My Team - button at the index - page.
+
+It extends app_layout.html with Django
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+
+<div class="container">
+    <h2>Edit your team</h2>
+    <div class="row">
+		<div class="my-roster">
+			<div class="col-sm-6">
+                <h3>My Roster</h3>
+                {% if players %}
+                    {% for player in players %}
+                        <li class="player-list">
+                        {{ player.jersey_number }} &emsp; {{ player.first_name }} {{ player.last_name }}
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No players in your roster.</p>
+                {% endif %}
+                </br>
+                <button id="AddPlayer" type="button" onclick="addPlayer()" class="btn btn-secondary">Add Player...</button>
+                <div id="addplayerform" class="addplayer-form">
+                  <form action="add_new_player/" method="post">
+                      {% csrf_token %}
+                      Jersey number: &emsp; <input type = "number" name = "jersey_number" /> <br/><br/>
+                      First name: &emsp; <input type = "text" name = "first_name" /> <br/><br/>
+                      Last name: &emsp; <input type = "text" name = "last_name" /> <br/><br/>
+                      <input type = "submit" value = "Submit"/>
+                  </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-team">
+            <div class="col-sm-6">
+                <h3>My Team</h3></br>
+                <h5>1st Line</h5></br>
+                <h5>2nd Line</h5></br>
+                <h5>3rd Line</h5></br>
+                <h5>Goalies</h5></br>
+                <h5>Others</h5></br>
+                <button id="changeTeam" type="button" onclick="changeTeam()" class="btn btn-secondary">Change Team...</button>
+
+                <div id="changeteamform" class="changeteam-form">
+                    <form action="change_team/" method="post">
+                        {% csrf_token %}
+                        {% for Line_choices in changeTeam.line_choice %}
+                            <div class="linechoice">
+                                {{ Line_choices }}
+                            </div>
+                        {% endfor %}
+                        Line nr: &emsp; <input type = "number" name = "line_choice" /> <br/><br/>
+                        Position: &emsp; <input type = "text" name = "position" /> <br/><br/>
+                        Player: &emsp; <input type = "text" name = "player_name" /> <br/><br/>
+                        <input type = "submit" value = "Submit"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The JavaScript - code that describes the game analysis functionality -->
+
+<script>
+
+
+
+
+    function addPlayer() {
+
+        // html id addplayerform to variable
+        var form = document.getElementById("addplayerform");
+        form.style.display = "block";
+        form.style.left = 30 + "px";
+        form.style.top = 30 + "px";
+
+
+    }
+
+    function changeTeam() {
+
+        var form = document.getElementById("changeteamform");
+        form.style.display = "block";
+        form.style.left = 30 + "px";
+        form.style.top = 30 + "px";
+
+    }
+
+</script>
+
+{% endblock %}

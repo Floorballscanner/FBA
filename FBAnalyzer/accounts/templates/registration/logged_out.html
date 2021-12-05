@@ -1,0 +1,15 @@
+<!--
+
+This is the Logged Out - html - page content file. This page is shown after a logout.
+It extends base_layout.html with Django
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+<div class="banner">
+    <div class="app-text">
+        <h1> You are now logged out {{ user }} </h1>
+    </div>
+</div>
+{% endblock %}
