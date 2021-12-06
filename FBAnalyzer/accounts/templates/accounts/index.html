@@ -12,7 +12,8 @@ It extends app_layout.html with Django
 	<div class="row">
 		<div class="frontpage-choices">
 			<div class="col-sm-4">
-				<img src="/static/group.png" width="40px" height="40px">
+				{% load static %}
+				<img src="{% static 'group.png' %}" width="40px" height="40px">
 				<h2>My Team</h2>
 				<p>Edit your team</p>
 				<a class="btn btn-primary" href="/accounts/my_team" role="button">Select</a>
