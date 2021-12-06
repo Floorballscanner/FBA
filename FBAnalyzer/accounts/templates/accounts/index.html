@@ -21,7 +21,8 @@ It extends app_layout.html with Django
 		</div>
 		<div class="frontpage-choices">
 			<div class="col-sm-4">
-				<img src="/static/play-button.png" width="40px" height="40px">
+				{% load static %}
+				<img src="{% static 'play-button.png' %}" width="40px" height="40px">
 				<h2>New game analysis</h2>
 				<p>Start analyzing a new game</p>
 				<a class="btn btn-primary" href="/accounts/new_game" role="button">Select</a>
@@ -29,7 +30,7 @@ It extends app_layout.html with Django
 		</div>
 		<div class="frontpage-choices">
 			<div class="col-sm-4">
-				<img src="/static/analytics.png" width="40px" height="40px">
+				<img src="{% static 'analytics.png' %}" width="40px" height="40px">
 				<h2>Statistics</h2>
 				<p>View statistics of your games</p>
 				<a class="btn btn-primary" href="#" role="button">Select</a>
