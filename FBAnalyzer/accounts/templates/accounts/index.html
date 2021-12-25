@@ -30,6 +30,7 @@ It extends app_layout.html with Django
 		</div>
 		<div class="frontpage-choices">
 			<div class="col-sm-4">
+				{% load static %}
 				<img src="{% static 'analytics.png' %}" width="40px" height="40px">
 				<h2>Statistics</h2>
 				<p>View statistics of your games</p>
