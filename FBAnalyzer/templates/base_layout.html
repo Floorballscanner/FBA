@@ -10,10 +10,11 @@ when there is not a logged in user.
 <head>
     <meta charset="UTF-8">
     <title>FB Analyzer</title>
-    <link rel="stylesheet" href="/staticfiles/styles.css">
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="/staticfiles/bootstrap.min.css">
-    <link rel="stylesheet" href="/staticfiles/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome.min.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
