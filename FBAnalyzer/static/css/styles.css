@@ -212,7 +212,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 .shot-menu ul li:hover {
     background: darkgray;
 }
-.btn {
+.button {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
