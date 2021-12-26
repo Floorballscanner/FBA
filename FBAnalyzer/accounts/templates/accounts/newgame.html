@@ -11,8 +11,8 @@ It extends app_layout.html with Django
 <div class="container">
     <h3>Analyze Game</h3>
     <div class="row">
-        <div class="team-selection">
-			<div class="col-sm-4">
+        <div class="col-sm-4">
+            <div class="team-selection">
                 <h2>Team 1</h2>
                 <select id="home_teams">
                     <option value="None">-- Select --</option>
@@ -33,27 +33,27 @@ It extends app_layout.html with Django
                 <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
             </div>
         </div>
-        <div class="team-selection">
-			<div class="col-sm-4">
-                <h2>Team 2</h2>
-                <select id="away_teams">
-                    <option value="None">-- Select --</option>
-                    <option value="ID001">Rangers</option>
-                    <option value="ID002">Oilers</option>
-                    <option value="ID003">Add team...</option>
-                </select>
+        <div class="col-sm-4">
+            <div class="team-selection">
+            <h2>Team 2</h2>
+            <select id="away_teams">
+                <option value="None">-- Select --</option>
+                <option value="ID001">Rangers</option>
+                <option value="ID002">Oilers</option>
+                <option value="ID003">Add team...</option>
+            </select>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="shot-map">
-			<div class="col-sm-4">
-                <p>Shot mapping</p>
-                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="355" height="250"></canvas>
+        <div class="col-sm-4">
+            <div class="shot-map">
+            <p>Shot mapping</p>
+            <canvas id="myCanvas" onmousedown="GetCoordinates()" width="355" height="250"></canvas>
             </div>
         </div>
-        <div class="button-input">
-            <div class="col-sm-4">
+        <div class="col-sm-4">
+            <div class="button-input">
                 <p>Line on court</p>
                 <div class="line-btn btn-group-lg" role="group" aria-label="Line buttons">
                     <button id="L1" type="button" style="background-color: #555555" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
@@ -68,8 +68,8 @@ It extends app_layout.html with Django
                 </div>
             </div>
         </div>
-        <div class="pos-input">
-            <div class="col-sm-4">
+        <div class="col-sm-4">
+            <div class="pos-input">
                 <p>Position</p>
                 {% load static %}
                 <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="30" height="30" alt="order">
@@ -85,8 +85,8 @@ It extends app_layout.html with Django
         </div>
     </div>
     <div class="row">
-        <div id="sL1" class="stats-L1">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sL1" class="stats-L1">
                 <h4><hr/>Line 1</h4>
                 <p style="padding-top: 10px">Possession: <span id="pL1">0</span>% | <span id="pL1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL1">0:00</span> | <span id="tocL1g">0:00</span></p>
@@ -112,11 +112,10 @@ It extends app_layout.html with Django
                 <p>Won Def Zone: <span id="dzwL1">0</span> | <span id="dzwL1g">0</span></p>
                 <p>Lost Att Zone: <span id="azlL1">0</span> | <span id="azlL1g">0</span></p>
                 <p>Lost Def Zone: <span id="dzlL1">0</span> | <span id="dzlL1g">0</span></p>
-                
             </div>
         </div>
-        <div id="sL2" class="stats-L2">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sL2" class="stats-L2">
                 <h4><hr/>Line 2</h4>
                 <p style="padding-top: 10px">Possession: <span id="pL2">0</span>% | <span id="pL2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL2">0:00</span> | <span id="tocL2g">0:00</span></p>
@@ -144,8 +143,8 @@ It extends app_layout.html with Django
                 <p>Lost Def Zone: <span id="dzlL2">0</span> | <span id="dzlL2g">0</span></p>
             </div>
         </div>
-        <div id="sL3" class="stats-L3">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sL3" class="stats-L3">
                 <h4><hr/>Line 3</h4>
                 <p style="padding-top: 10px">Possession: <span id="pL3">0</span>% | <span id="pL3g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL3">0:00</span> | <span id="tocL3g">0:00</span></p>
@@ -173,8 +172,8 @@ It extends app_layout.html with Django
                 <p>Lost Def Zone: <span id="dzlL3">0</span> | <span id="dzlL3g">0</span></p>
             </div>
         </div>
-        <div id="sTeam" class="stats-Team">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sTeam" class="stats-Team">
                 <h4><hr/>Team</h4>
                 <p style="padding-top: 10px">Possession: <span id="pTeam">0</span>% | <span id="pTeamg">0</span>%<p/>
                 <p>Time on Court: <span id="tocTeam">0:00</span> | <span id="tocTeamg">0:00</span></p>
@@ -204,8 +203,8 @@ It extends app_layout.html with Django
         </div>
     </div>
     <div class="row">
-        <div id="sPP1" class="stats-PP1">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sPP1" class="stats-PP1">
                 <h4><hr/>Powerplay 1</h4>
                 <p style="padding-top: 10px">Possession: <span id="pPP1">0</span>% | <span id="pPP1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocPP1">0:00</span> | <span id="tocPP1g">0:00</span></p>
@@ -233,8 +232,8 @@ It extends app_layout.html with Django
                 <p>Lost Def Zone: <span id="dzlPP1">0</span> | <span id="dzlPP1g">0</span></p>
             </div>
         </div>
-        <div id="sPP2" class="stats-PP2">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sPP2" class="stats-PP2">
                 <h4><hr/>Powerplay 2</h4>
                 <p style="padding-top: 10px">Possession: <span id="pPP2">0</span>% | <span id="pPP2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocPP2">0:00</span> | <span id="tocPP2g">0:00</span></p>
@@ -262,8 +261,8 @@ It extends app_layout.html with Django
                 <p>Lost Def Zone: <span id="dzlPP2">0</span> | <span id="dzlPP2g">0</span></p>
             </div>
         </div>
-        <div id="sSH1" class="stats-SH1">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sSH1" class="stats-SH1">
                 <h4><hr/>Shorthanded 1</h4>
                 <p style="padding-top: 10px">Possession: <span id="pSH1">0</span>% | <span id="pSH1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocSH1">0:00</span> | <span id="tocSH1g">0:00</span></p>
@@ -291,8 +290,8 @@ It extends app_layout.html with Django
                 <p>Lost Def Zone: <span id="dzlSH1">0</span> | <span id="dzlSH1g">0</span></p>
             </div>
         </div>
-        <div id="sSH2" class="stats-SH2">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sSH2" class="stats-SH2">
                 <h4><hr/>Shorthanded 2</h4>
                 <p style="padding-top: 10px">Possession: <span id="pSH2">0</span>% | <span id="pSH2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocSH2">0:00</span> | <span id="tocSH2g">0:00</span></p>
