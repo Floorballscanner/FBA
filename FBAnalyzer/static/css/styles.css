@@ -156,7 +156,10 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .game-btn {
 	text-align: center;
-	background-color: #4CAF50; /* Green */
+}
+
+.game-btn button {
+    background-color: #4CAF50; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -164,6 +167,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     display: inline-block;
     font-size: 16px;
 }
+
 .button-input p{
     text-align: center;
     padding: 30px 0 0 0;
