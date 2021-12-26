@@ -156,6 +156,13 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .game-btn {
 	text-align: center;
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 .button-input p{
     text-align: center;
@@ -211,16 +218,6 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 .shot-menu ul li:hover {
     background: darkgray;
-}
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
 }
 
 .pos-input input {
