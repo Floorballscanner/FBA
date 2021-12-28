@@ -27,7 +27,7 @@ when there is not a logged in user.
                 {% load static %}
                 <li><img src="{% static 'ball.png' %}" width="20px" height="20px"></li>
                 <li><a href="/" class="home">Home</a></li>
-                <li><a href="/about" class="about">About</a></li>
+                <!--<li><a href="/about" class="about">About</a></li-->
                 <li><a href="/pricing" class="pricing">Pricing</a></li>
                 <li><a href="/contact" class="contact">Contact</a></li>
                 <li style="float:right"><a href="/accounts/login/">Login</a></li>
@@ -36,10 +36,6 @@ when there is not a logged in user.
         <!-- This is where the extended content is placed -->
         {% block content %}
         {% endblock %}
-        <div class="app-picture">
-            {% load static %}
-            <img src="{% static 'floorball.jpg' %}">
-        </div>
     </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
