@@ -202,6 +202,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 .shot-map canvas{
 	text-align: center;
+	padding: 0px;
 }
 
 .pos-input input {
