@@ -20,9 +20,6 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     list-style-type: none;
     overflow: hidden;
 }
-.menu ul li{
-
-}
 .menu ul li a{
     display: block;
     color: white;
