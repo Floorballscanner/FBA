@@ -200,6 +200,10 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     background: darkgray;
 }
 
+.shot-map {
+	text-align: center;
+}
+
 .pos-input input {
       margin-left: 10px;
 }
