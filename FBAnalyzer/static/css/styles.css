@@ -88,7 +88,8 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     color: #000000;
 }
 .app-text{
-    float: left;
+    text-align: center;
+    padding: 20px 20px;
 }
 .app-text h1{
     font-size: 38px;
