@@ -25,16 +25,16 @@ when the user has logged in successfully.
             <ul>
                 {% load static %}
                 <li><img src="{% static 'ball.png' %}"></li>
-                <li><a href="/accounts" class="frontpage">Frontpage</a></li>
-                <li><a href="/accounts/my_team" class="myteam">My Team</a></li>
+                <!--li><a href="/accounts" class="frontpage"></a></li>
+                <li><a href="/accounts/my_team" class="myteam">My Team</a></li-->
                 <li><a href="/accounts/new_game" class="newgame">New Game</a></li>
-                <li><a href="#" class="statistics">Statistics</a></li>
+                <!--li><a href="#" class="statistics">Statistics</a></li-->
                 {% load static %}
-                <li style="float:right"><img src="{% static 'settings.png' %}" class="preferences" width="20px" height="20px"></li>
+                <!--li style="float:right"><img src="{% static 'settings.png' %}" class="preferences" width="20px" height="20px"></li-->
                 <li style="float:right"><a href="/accounts/logout/">Logout</a></li>
                 <li style="float:right"><div class="user">{{user}}</div></li>
                 {% load static %}
-                <li style="float:right"><img src="{% static 'user.png' %}" class="user-pic" width="25px" height="25px"></li>
+                <!--li style="float:right"><img src="{% static 'user.png' %}" class="user-pic" width="25px" height="25px"></li-->
             </ul>
         </div>
     </div>
