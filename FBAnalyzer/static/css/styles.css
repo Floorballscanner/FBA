@@ -200,7 +200,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     background: darkgray;
 }
 
-.shot-map {
+.shot-map canvas{
 	text-align: center;
 }
 
