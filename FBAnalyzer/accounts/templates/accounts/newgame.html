@@ -48,7 +48,7 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="shot-map">
             <p>Shot mapping</p>
-            <canvas id="myCanvas" onmousedown="GetCoordinates()" width="355" height="250"></canvas>
+            <canvas id="myCanvas" onmousedown="GetCoordinates()" width="284" height="200"></canvas>
             </div>
         </div>
         <div class="col-sm-4">
@@ -874,7 +874,7 @@ It extends app_layout.html with Django
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
-    ctx.drawImage(myImg,0,0,355,250);
+    ctx.drawImage(myImg,0,0,284,200);
     }
 
     // When the change team order button is changed, the teams switch sides
