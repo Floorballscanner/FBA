@@ -85,31 +85,20 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 .banner{
     top: 20%;
     left: 130px;
-    position: absolute;
     color: #000000;
 }
 .app-text{
-    width: 50%;
     float: left;
 }
 .app-text h1{
     font-size: 38px;
-    width: 640px;
     position: relative;
 }
 .app-text p{
     font-size: 15px;
-    width: 650px;
     margin: 30px 0 30px 0;
     line-height: 25px;
     color: #919191;
-}
-.app-picture{
-    width: 40%;
-    float: right;
-}
-.app-picture img{
-    width: 80%;
 }
 
 /* Index.html - page styling */
