@@ -31,7 +31,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     text-decoration: none;
 }
 .menu ul li img{
-    padding: 10px 20px;
+    padding: 0px 20px;
 }
 .menu ul li a:hover {
     background-color: #111;
