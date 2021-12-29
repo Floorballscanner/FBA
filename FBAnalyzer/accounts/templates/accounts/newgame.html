@@ -14,7 +14,7 @@ It extends app_layout.html with Django
             <div class="team-selection">
                 <h2>Team 1</h2>
                 <form>
-                    <textarea name="message" rows="1" cols="30" placeholder="Your team name" maxlength="20">
+                    <textarea name="home_team" rows="1" cols="20" placeholder="Your team name" maxlength="20">
                     </textarea>
                 </form>
             </div>
@@ -33,12 +33,10 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="team-selection">
             <h2>Team 2</h2>
-            <select id="away_teams">
-                <option value="None">-- Select --</option>
-                <option value="ID001">Rangers</option>
-                <option value="ID002">Oilers</option>
-                <option value="ID003">Add team...</option>
-            </select>
+            <form>
+                <textarea name="away_team" rows="1" cols="20" placeholder="Opponent team name" maxlength="20">
+                </textarea>
+                </form>
             </div>
         </div>
     </div>
