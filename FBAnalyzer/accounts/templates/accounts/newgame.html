@@ -10,23 +10,25 @@ It extends app_layout.html with Django
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
-            <div class="team-selection">
-                <h2>Team 1</h2>
-                <form>
-                    <textarea name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
-                </form>
+        <div class="top-list">
+            <div class="col-sm-4">
+                <div class="team-selection">
+                    <h2>Team 1</h2>
+                    <form>
+                        <textarea name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="game-clock">
-                <h4 id="periodNr">Period 1</h4>
-                <h2 id="label">00:00:00</h2>
-            </div>
-            <div class="game-btn" role="group" aria-label="Game buttons">
-                <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
-                <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
-                <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
+            <div class="col-sm-4">
+                <div class="game-clock">
+                    <h4 id="periodNr">Period 1</h4>
+                    <h2 id="label">00:00:00</h2>
+                </div>
+                <div class="game-btn" role="group" aria-label="Game buttons">
+                    <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
+                    <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
+                    <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
