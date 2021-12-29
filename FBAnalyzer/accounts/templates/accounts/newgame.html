@@ -13,12 +13,10 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="team-selection">
                 <h2>Team 1</h2>
-                <select id="home_teams">
-                    <option value="None">-- Select --</option>
-                    <option value="ID001">Rangers</option>
-                    <option value="ID002">Oilers</option>
-                    <option value="ID003">Add team...</option>
-                </select>
+                <form>
+                  <label for="home_team">Team 1:</label><br>
+                  <input type="text" id="home_team" name="team1"><br>
+                </form>
             </div>
         </div>
         <div class="col-sm-4">
@@ -1236,7 +1234,7 @@ It extends app_layout.html with Django
         }
         else
         {
-            menu.style.left = (PosX-75) + "px";
+            menu.style.left = (PosX-100) + "px";
         }
         menu.style.top = PosY + "px";
 
