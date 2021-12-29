@@ -128,10 +128,6 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 /* Newgame.html - page styling */
 
-.top-list {
-    padding-top: 20px;
-}
-
 .team-selection textarea {
     width: 70%;
     resize: none;
@@ -141,10 +137,12 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 .team-selection {
     text-align: center;
+    padding: 20px 0 0 0;
 }
 
 .game-btn {
 	text-align: center;
+	padding: 20px 0 0 0;
 }
 
 .button-input p{
