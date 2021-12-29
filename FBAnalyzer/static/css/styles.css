@@ -129,7 +129,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 /* Newgame.html - page styling */
 
 .team-selection textarea {
-    width: 100%;
+    width: 70%;
     resize: none;
     font-size: 20px;
     text-align: center;
