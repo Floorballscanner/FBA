@@ -14,7 +14,7 @@ It extends app_layout.html with Django
             <div class="team-selection">
                 <h2>Team 1</h2>
                 <form>
-                    <textarea name="home_team" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
+                    <textarea id="home_team" name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
                 </form>
             </div>
         </div>
@@ -33,7 +33,7 @@ It extends app_layout.html with Django
             <div class="team-selection">
                 <h2>Team 2</h2>
                 <form>
-                    <textarea name="away_team" rows="1" placeholder="Opponent team name" maxlength="20" wrap="off"></textarea>
+                    <textarea id="away_team" name="awayteam" rows="1" placeholder="Opponent team name" maxlength="20" wrap="off"></textarea>
                 </form>
             </div>
         </div>
@@ -1005,8 +1005,8 @@ It extends app_layout.html with Django
         if (started == 0) {   // Start game and disable teams etc.
             var r = confirm("Do you want to start the game,\n changing teams will be disabled?");
             if (r == true) {
-                document.getElementById("home_teams").disabled = true;
-                document.getElementById("away_teams").disabled = true;
+                document.getElementById("home_team").disabled = true;
+                document.getElementById("away_team").disabled = true;
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 started = 1;
