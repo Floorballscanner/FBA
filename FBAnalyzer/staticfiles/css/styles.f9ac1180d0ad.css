@@ -20,18 +20,15 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     list-style-type: none;
     overflow: hidden;
 }
-.menu ul li{
-    float: left;
-}
 .menu ul li a{
     display: block;
     color: white;
     text-align: center;
-    padding: 20px 20px;
+    padding: 20px 10px;
     text-decoration: none;
 }
 .menu ul li img{
-    padding: 18px 20px 0 20px;
+    padding: 10px 20px;
 }
 .menu ul li a:hover {
     background-color: #111;
@@ -84,32 +81,21 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .banner{
     top: 20%;
-    left: 130px;
-    position: absolute;
     color: #000000;
 }
 .app-text{
-    width: 50%;
-    float: left;
+    text-align: center;
+    padding: 20px 20px;
 }
 .app-text h1{
     font-size: 38px;
-    width: 640px;
     position: relative;
 }
 .app-text p{
     font-size: 15px;
-    width: 650px;
     margin: 30px 0 30px 0;
     line-height: 25px;
     color: #919191;
-}
-.app-picture{
-    width: 40%;
-    float: right;
-}
-.app-picture img{
-    width: 80%;
 }
 
 /* Index.html - page styling */
@@ -142,23 +128,17 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 /* Newgame.html - page styling */
 
-.team-selection{
-    font-size: 15px;
+.team-selection h2 {
     text-align: center;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+{
+.team-selection textarea {
+    width: 100%;
 }
-/* Links inside the dropdown */
-.team-selection option {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+
 .game-btn {
 	text-align: center;
 }
+
 .button-input p{
     text-align: center;
     padding: 30px 0 0 0;
@@ -214,15 +194,11 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 .shot-menu ul li:hover {
     background: darkgray;
 }
-.btn {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+
+.shot-map canvas{
+	text-align: center;
+	padding: 0px;
+	margin-left: 0px;
 }
 
 .pos-input input {
