@@ -132,8 +132,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     text-align: center;
 {
 .team-selection textarea {
-    width: 100%;
-    font-size: 20px;
+
 }
 .game-btn {
 	text-align: center;
