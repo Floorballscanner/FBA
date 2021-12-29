@@ -14,7 +14,7 @@ It extends app_layout.html with Django
             <div class="team-selection">
                 <h2>Team 1</h2>
                 <form>
-                    <textarea name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
+                    <textarea id="home_team" name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
                 </form>
             </div>
         </div>
@@ -33,7 +33,7 @@ It extends app_layout.html with Django
             <div class="team-selection">
                 <h2>Team 2</h2>
                 <form>
-                    <textarea name="awayteam" rows="1" placeholder="Opponent team name" maxlength="20" wrap="off"></textarea>
+                    <textarea id="away_team" name="awayteam" rows="1" placeholder="Opponent team name" maxlength="20" wrap="off"></textarea>
                 </form>
             </div>
         </div>
@@ -1009,6 +1009,8 @@ It extends app_layout.html with Django
                 document.getElementById("away_teams").disabled = true;
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
+                document.getElementById("home_team").disabled = true;
+                document.getElementById("away_team").disabled = true;
                 started = 1;
             } else {
             }
