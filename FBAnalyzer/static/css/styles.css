@@ -128,9 +128,6 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 /* Newgame.html - page styling */
 
-.team-selection h2 {
-    text-align: center;
-{
 .team-selection textarea {
     width: 100%;
 }
