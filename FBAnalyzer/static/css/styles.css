@@ -24,7 +24,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     display: block;
     color: white;
     text-align: center;
-    padding: 20px 10px;
+    padding: 25px 10px;
     text-decoration: none;
 }
 .menu ul li img{
@@ -99,7 +99,6 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .app-text ul li{
     font-size: 15px;
-    margin: 30px 0 30px 0;
     line-height: 25px;
     color: #919191;
     text-align: center;
