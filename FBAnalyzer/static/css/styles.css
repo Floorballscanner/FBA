@@ -96,12 +96,12 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 .app-text p{
     font-size: 15px;
     line-height: 25px;
-    color: #919191;
+    color: #fff;
 }
 .app-text ul li{
     font-size: 15px;
     line-height: 25px;
-    color: #919191;
+    color: #fff;
     list-style-position: inside;
     text-align: left;
     padding-left: 30%;
