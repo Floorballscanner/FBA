@@ -25,13 +25,15 @@ This is the landing page of the application.
             </div>
             <div class="main-part-2">
                 <div class="row">
+                    {% load static %}
+                    <img src="{% static 'chart1.png' %}" width="100px" height="100px"></br></br>
+                </div>
+                <div class="row">
                      <div class="col-sm-6">
                         {% load static %}
                         <img src="{% static 'background2.jpg' %}" width="100%">
                     </div>
                     <div class="col-sm-6">
-                        {% load static %}
-                        <img src="{% static 'chart1.png' %}" width="100px" height="100px"></br></br>
                         <h3>Analyse your team performance</h3></br>
                         <p>Floorball Scanner gives you information about your team performance. With the software you
                         are able to see how your team and each line performs on the field.</p></br>
@@ -40,9 +42,11 @@ This is the landing page of the application.
             </div>
             <div class="main-part-3">
                 <div class="row">
+                    {% load static %}
+                    <img src="{% static 'monitoring1.png' %}" width="100px" height="100px"></br></br>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
-                        {% load static %}
-                        <img src="{% static 'monitoring1.png' %}" width="100px" height="100px"></br></br>
                         <h3>Real-time data</h3></br>
                         <p>With Floorball Scanner you have access to real-time data of your team during the game.</p></br>
                         <ul>
