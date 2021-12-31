@@ -9,58 +9,52 @@ This is the landing page of the application.
 <div class="container">
     <div class="banner">
         <div class="app-text">
-            <div class="main-part-1">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h1>Welcome to Floorball Scanner, the best Floorball analyzer software</h1></br>
-                        <p>Floorball Scanner is a tool for Floorball coaches to get <br>deeper insight into the game,
-                            both during, and after the play</p></br>
-                        <a class="btn btn-secondary" href="/pricing" role="button">Sign in</a></br></br>
-                    </div>
-                    <div class="col-sm-6">
-                        {% load static %}
-                        <img src="{% static 'background1.jpg' %}" width="100%">
-                    </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Welcome to Floorball Scanner, the best Floorball analyzer software</h1></br>
+                    <p>Floorball Scanner is a tool for Floorball coaches to get <br>deeper insight into the game,
+                        both during, and after the play</p></br>
+                    <a class="btn btn-secondary" href="/pricing" role="button">Sign in</a></br></br>
+                </div>
+                <div class="col-sm-6">
+                    {% load static %}
+                    <img src="{% static 'background1.jpg' %}" width="100%">
                 </div>
             </div>
-            <div class="main-part-2">
-                <div class="row">
+            <div class="row">
+                {% load static %}
+                <img src="{% static 'chart1.png' %}" width="100px" height="100px"></br></br>
+            </div>
+            <div class="row">
+                 <div class="col-sm-6">
                     {% load static %}
-                    <img src="{% static 'chart1.png' %}" width="100px" height="100px"></br></br>
+                    <img src="{% static 'background2.jpg' %}" width="100%">
                 </div>
-                <div class="row">
-                     <div class="col-sm-6">
-                        {% load static %}
-                        <img src="{% static 'background2.jpg' %}" width="100%">
-                    </div>
-                    <div class="col-sm-6">
-                        <h3>Analyse your team performance</h3></br>
-                        <p>Floorball Scanner gives you information about your team performance. With the software you
-                        are able to see how your team and each line performs on the field.</p></br>
-                    </div>
+                <div class="col-sm-6">
+                    <h3>Analyse your team performance</h3></br>
+                    <p>Floorball Scanner gives you information about your team performance. With the software you
+                    are able to see how your team and each line performs on the field.</p></br>
                 </div>
             </div>
-            <div class="main-part-3">
-                <div class="row">
-                    {% load static %}
-                    <img src="{% static 'monitoring1.png' %}" width="100px" height="100px"></br></br>
+            <div class="row">
+                {% load static %}
+                <img src="{% static 'monitoring1.png' %}" width="100px" height="100px"></br></br>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Real-time data</h3></br>
+                    <p>With Floorball Scanner you have access to real-time data of your team during the game.</p></br>
+                    <ul>
+                        <li>Ball possession attack / defence</li>
+                        <li>Time on court</li>
+                        <li>Saved, missed, and blocked shots with shotmap</li>
+                        <li>Goals and Plusminus</li>
+                        <li>Turnovers</li>
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h3>Real-time data</h3></br>
-                        <p>With Floorball Scanner you have access to real-time data of your team during the game.</p></br>
-                        <ul>
-                            <li>Ball possession attack / defence</li>
-                            <li>Time on court</li>
-                            <li>Saved, missed, and blocked shots with shotmap</li>
-                            <li>Goals and Plusminus</li>
-                            <li>Turnovers</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6">
-                        {% load static %}
-                        <img src="{% static 'background3.jpg' %}" width="100%">
-                    </div>
+                <div class="col-sm-6">
+                    {% load static %}
+                    <img src="{% static 'background3.jpg' %}" width="100%">
                 </div>
             </div>
             {% load static %}
