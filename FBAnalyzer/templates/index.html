@@ -10,26 +10,50 @@ This is the landing page of the application.
     <div class="row">
         <div class="banner">
             <div class="app-text">
-                <h1>Welcome to Floorball Scanner, the best Floorball analyzer software</h1></br>
-                <p>Floorball Scanner is a tool for Floorball coaches to get <br>deeper insight into the game,
-                    both during, and after the play</p></br>
-                <a class="btn btn-secondary" href="/pricing" role="button">Sign in</a></br></br>
-                {% load static %}
-				<img src="{% static 'chart1.png' %}" width="100px" height="100px"></br></br>
-                <h3>Analyse your team performance</h3></br>
-                <p>Floorball Scanner gives you information about your team performance. With the software you
-                are able to see how your team and each line performs on the field.</p></br>
-                {% load static %}
-				<img src="{% static 'monitoring1.png' %}" width="100px" height="100px"></br></br>
-                <h3>Real-time data</h3></br>
-                <p>With Floorball Scanner you have access to real-time data of your team during the game.</p></br>
-                <ul>
-                    <li>Ball possession attack / defence</li>
-                    <li>Time on court</li>
-                    <li>Saved, missed, and blocked shots with shotmap</li>
-                    <li>Goals and Plusminus</li>
-                    <li>Turnovers</li>
-                </ul>
+                <div class="main-part-1">
+                    <div class="col-sm-6">
+                        <h1>Welcome to Floorball Scanner, the best Floorball analyzer software</h1></br>
+                        <p>Floorball Scanner is a tool for Floorball coaches to get <br>deeper insight into the game,
+                            both during, and after the play</p></br>
+                        <a class="btn btn-secondary" href="/pricing" role="button">Sign in</a></br></br>
+                    </div>
+                    <div class="col-sm-6">
+                        {% load static %}
+                        <img src="{% static 'background1.jpg' %}">
+                    </div>
+                </div>
+                <div class="main-part-2">
+                     <div class="col-sm-6">
+                        {% load static %}
+                        <img src="{% static 'background2.jpg' %}">
+                    </div>
+                    <div class="col-sm-6">
+                        {% load static %}
+                        <img src="{% static 'chart1.png' %}" width="100px" height="100px"></br></br>
+                        <h3>Analyse your team performance</h3></br>
+                        <p>Floorball Scanner gives you information about your team performance. With the software you
+                        are able to see how your team and each line performs on the field.</p></br>
+                    </div>
+                </div>
+                <div class="main-part-3">
+                    <div class="col-sm-6">
+                        {% load static %}
+                        <img src="{% static 'monitoring1.png' %}" width="100px" height="100px"></br></br>
+                        <h3>Real-time data</h3></br>
+                        <p>With Floorball Scanner you have access to real-time data of your team during the game.</p></br>
+                        <ul>
+                            <li>Ball possession attack / defence</li>
+                            <li>Time on court</li>
+                            <li>Saved, missed, and blocked shots with shotmap</li>
+                            <li>Goals and Plusminus</li>
+                            <li>Turnovers</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        {% load static %}
+                        <img src="{% static 'background3.jpg' %}">
+                    </div>
+                </div>
                 {% load static %}
 				<img src="{% static 'monitoring2.png' %}" width="100px" height="100px"></br></br></br>
                 <h2>Contact information</h2></br>
