@@ -105,6 +105,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     color: #919191;
     list-style-position: inside;
     text-align: left;
+    left: 40%
 }
 .app-text img{
     padding-top: 20px;
