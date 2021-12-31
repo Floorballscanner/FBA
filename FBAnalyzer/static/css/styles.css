@@ -91,14 +91,13 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .app-text h1{
     font-size: 38px;
-    position: relative;
-    padding-left: 30%;
+    padding-left: 10%;
 }
 .app-text p{
     font-size: 15px;
     line-height: 25px;
     color: #000000;
-    padding-left: 30%;
+    padding-left: 10%;
 }
 .app-text ul li{
     font-size: 15px;
@@ -106,7 +105,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     color: #000000;
     list-style-position: inside;
     text-align: left;
-    padding-left: 30%;
+    padding-left: 10%;
 }
 
 /* Index.html - page styling */
