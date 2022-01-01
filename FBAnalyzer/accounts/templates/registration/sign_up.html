@@ -19,6 +19,8 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
                 <input type="submit" value="Sign up">
             </form>
         </div>
+        {% load static %}
+        <img class="img-fluid" src="{% static 'background2.jpg' %}" width="100%" >
     </div>
 </div>
 {% endblock %}
