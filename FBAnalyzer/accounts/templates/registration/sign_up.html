@@ -7,16 +7,14 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
 
 {% extends 'base_layout.html' %}
 {% block content %}
-<div class="banner">
-    <div class="app-text">
-        <h1>Sign in to Floorball Scanner</h1>
-        <p>If you're interested in analyzing your game, sign in to Floorball Scanner. Fill in the information and
-        we'll send you your own login ID for testing the software.</p>
-        <form method="post">
-            {% csrf_token %}
-            {{form.as_p}}
-            <input type="submit" value="Sign up">
-        </form>
-    </div>
+<div class="app-text">
+    <h1>Sign in to Floorball Scanner</h1></br>
+    <p>If you're interested in analyzing your game, sign in to Floorball Scanner. Fill in the information and
+    enjoy your new coaching tool.</p></br></br>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Sign up">
+    </form>
 </div>
 {% endblock %}
