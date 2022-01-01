@@ -14,5 +14,5 @@ def homepage(request):
 def login(request):
     return render(request, 'login.html')
 
-def signup(request):
+def sign_up(request):
     return render(request, 'sign_up.html')
