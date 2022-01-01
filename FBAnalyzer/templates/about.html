@@ -10,11 +10,11 @@ This is the about - infopage of the application.
     <div class="app-text">
         <div class="row">
             <div class="col-sm-12">
+                {% load static %}
                 <h3>How to use Floorball Scanner</h3></br>
                 <p>Floorball Scanner gives you insight into your team's performance in real-time during
                 the game. You are able to see how each line performs and take actions based on data.</p></br>
                 </br></br>
-                {% load static %}
                 <img src="{% static 'chart1.png' %}" width="100px" height="100px">
                 </br></br>
                 <h3>Setting teams</h3></br>
@@ -87,7 +87,8 @@ This is the about - infopage of the application.
                     <li>Turnovers = Won or lost balls on the defence or attack zone. This is calculated based
                      on Ball possession changes when game clock is on (Team 1 -> Team 2 or Team 2 -> Team 1)</li>
                 </ul>
-                <img src="{% static 'howto14.png' %}"></br>
+                </br></br>
+                <img src="{% static 'monitoring2.png' %}" width="100px" height="100px"></br></br>
             </div>
         </div>
     </div>
