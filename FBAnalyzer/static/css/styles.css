@@ -84,14 +84,13 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     color: #000000;
 }
 .app-text{
-   /* top: 10%;
+    top: 20%;
     text-align: center;
-    vertical-align: middle;
-    width: 100%;
-    margin: auto; */
+    margin: auto;
 }
 .app-text h1{
     font-size: 25px;
+    vertical-align: middle;
 }
 .app-text h3{
     font-size: 20px;
