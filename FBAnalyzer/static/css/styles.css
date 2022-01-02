@@ -21,6 +21,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     top: 0; /* Position the navbar at the top of the page */
     overflow: hidden;
     background-color: #000000;
+    width: 100%;
 
 }
 .menu ul{
