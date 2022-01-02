@@ -22,7 +22,7 @@ when there is not a logged in user.
 </head>
 <body>
     <div class="header">
-        <div class="menu">
+        <nav class="fixed-nav-bar">
             <ul>
                 {% load static %}
                 <li style="float:left"><img src="{% static 'ball.png' %}"></li>
@@ -32,7 +32,7 @@ when there is not a logged in user.
                 <!--li><a href="/contact" class="contact">Contact</a></li-->
                 <li style="float:right"><a href="/accounts/login/">Login</a></li>
             </ul>
-        </div>
+        </nav>
     </div>
 
     <!-- This is where the extended content is placed -->

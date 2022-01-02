@@ -16,12 +16,14 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     length: 100%;
 }
 /* Main header menu style */
-.menu {
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    overflow: hidden;
-    background-color: #000000;
+.fixed-nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
     width: 100%;
+    height: 25px;
+    background-color: #000000;
 
 }
 .menu ul{

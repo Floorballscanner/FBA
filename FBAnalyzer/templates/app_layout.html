@@ -21,8 +21,8 @@ when the user has logged in successfully.
 </head>
 {% load static %}
 <body>
-    <div class="header">
-        <div class="menu">
+    <nav class="header">
+        <nav class="fixed-nav-bar">
             <ul>
                 {% load static %}
                 <li style="float:left"><img src="{% static 'ball.png' %}"></li>
@@ -33,7 +33,7 @@ when the user has logged in successfully.
                 <!--li style="float:right"><img src="{% static 'settings.png' %}" class="preferences" width="20px" height="20px"></li-->
                 <li style="float:right"><a href="/accounts/logout/">Logout</a></li>
             </ul>
-        </div>
+        </nav>
     </div>
     <!-- This is where the extended content is placed -->
     {% block content %}
