@@ -22,26 +22,26 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     left: 0;
     z-index: 9999;
     width: 100%;
-    height: 25px;
+    height: 50px;
     background-color: #000000;
 
 }
-.menu ul{
+.fixed-nav-bar ul{
     list-style-type: none;
     overflow: hidden;
 
 }
-.menu ul li a{
+.fixed-nav-bar ul li a{
     display: block;
     color: white;
     text-align: center;
     padding: 25px 10px;
     text-decoration: none;
 }
-.menu ul li img{
+.fixed-nav-bar ul li img{
     padding: 12px 20px;
 }
-.menu ul li a:hover {
+.fixed-nav-bar ul li a:hover {
     background-color: #7d7d7d;
 }
 .active{
