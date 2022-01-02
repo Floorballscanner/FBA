@@ -124,6 +124,8 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     list-style-position: inside;
     text-align: left;
     padding-left: 20%;
+    padding-right: 20%;
+
 }
 
 /* Index.html - page styling */
