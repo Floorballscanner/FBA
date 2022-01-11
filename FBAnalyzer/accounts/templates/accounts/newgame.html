@@ -70,10 +70,6 @@ It extends app_layout.html with Django
                     <button id="TeamL" type="button" style="background-color: #555555" onclick="BallTeamL()" class="btn btn-secondary">Team 1</button>
                     <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary">Team 2</button>
                 </div>
-                <p>Incidents</p>
-                <div class="inc-btn btn-group-lg btn-group-lg" role="group" aria-label="Incident buttons">
-                    <button id="OtS" type="button" onclick="ScoringOpp()" class="btn btn-secondary">Scoring Opportunity</button>
-                    <button id="OmR" type="button" onclick="OddManRush()" class="btn btn-secondary">Odd Man Rush</button>
             </div>
         </div>
     </div>
@@ -96,6 +92,7 @@ It extends app_layout.html with Django
                 <p>Saved: <span id="saaL1">0</span> | <span id="saaL1g">0</span></p>
                 <p>Goals: <span id="gaL1">0</span> | <span id="gaL1g">0</span></p>
                 <p style="padding-top: 10px"><b>Plus minus:</b> <span id="pmL1">0</span> | <span id="pmL1g">0</span></p>
+                <p style="padding-top: 10px"><b>xG:</b> <span id="xGL1">0</span> | <span id="xGL1g">0</span></p>
             </div>
         </div>
         <div class="col-sm-3">
@@ -116,6 +113,7 @@ It extends app_layout.html with Django
                 <p>Saved: <span id="saaL2">0</span> | <span id="saaL2g">0</span></p>
                 <p>Goals: <span id="gaL2">0</span> | <span id="gaL2g">0</span></p>
                 <p style="padding-top: 10px"><b>Plus minus:</b> <span id="pmL2">0</span> | <span id="pmL2g">0</span></p>
+                <p style="padding-top: 10px"><b>xG:</b> <span id="xGL2">0</span> | <span id="xGL2g">0</span></p>
             </div>
         </div>
         <div class="col-sm-3">
@@ -136,6 +134,7 @@ It extends app_layout.html with Django
                 <p>Saved: <span id="saaL3">0</span> | <span id="saaL3g">0</span></p>
                 <p>Goals: <span id="gaL3">0</span> | <span id="gaL3g">0</span></p>
                 <p style="padding-top: 10px"><b>Plus minus:</b> <span id="pmL3">0</span> | <span id="pmL3g">0</span></p>
+                <p style="padding-top: 10px"><b>xG:</b> <span id="xGL3">0</span> | <span id="xGL3g">0</span></p>
             </div>
         </div>
         <div class="col-sm-3">
@@ -156,6 +155,7 @@ It extends app_layout.html with Django
                 <p>Saved: <span id="saaTeam">0</span> | <span id="saaTeamg">0</span></p>
                 <p>Goals: <span id="gaTeam">0</span> | <span id="gaTeamg">0</span></p>
                 <p style="padding-top: 10px"><b>Plus minus:</b> <span id="pmTeam">0</span> | <span id="pmTeamg">0</span></p>
+                <p style="padding-top: 10px"><b>xG:</b> <span id="xGTeam">0</span> | <span id="xGTeamg">0</span></p>
             </div>
         </div>
     </div>
@@ -178,6 +178,7 @@ It extends app_layout.html with Django
                 <p>Saved: <span id="saaPP1">0</span> | <span id="saaPP1g">0</span></p>
                 <p>Goals: <span id="gaPP1">0</span> | <span id="gaPP1g">0</span></p>
                 <p style="padding-top: 10px"><b>Plus minus:</b> <span id="pmPP1">0</span> | <span id="pmPP1g">0</span></p>
+                <p style="padding-top: 10px"><b>xG:</b> <span id="xGPP1">0</span> | <span id="xGPP1g">0</span></p>
             </div>
         </div>
         <div class="col-sm-3">
@@ -198,6 +199,7 @@ It extends app_layout.html with Django
                 <p>Saved: <span id="saaPP2">0</span> | <span id="saaPP2g">0</span></p>
                 <p>Goals: <span id="gaPP2">0</span> | <span id="gaPP2g">0</span></p>
                 <p style="padding-top: 10px"><b>Plus minus:</b> <span id="pmPP2">0</span> | <span id="pmPP2g">0</span></p>
+                <p style="padding-top: 10px"><b>xG:</b> <span id="xGPP2">0</span> | <span id="xGPP2g">0</span></p>
             </div>
         </div>
         <div class="col-sm-3">
@@ -218,6 +220,7 @@ It extends app_layout.html with Django
                 <p>Saved: <span id="saaSH1">0</span> | <span id="saaSH1g">0</span></p>
                 <p>Goals: <span id="gaSH1">0</span> | <span id="gaSH1g">0</span></p>
                 <p style="padding-top: 10px"><b>Plus minus:</b> <span id="pmSH1">0</span> | <span id="pmSH1g">0</span></p>
+                <p style="padding-top: 10px"><b>xG:</b> <span id="xGSH1">0</span> | <span id="xGSH1g">0</span></p>
             </div>
         </div>
         <div class="col-sm-3">
@@ -238,6 +241,7 @@ It extends app_layout.html with Django
                 <p>Saved: <span id="saaSH2">0</span> | <span id="saaSH2g">0</span></p>
                 <p>Goals: <span id="gaSH2">0</span> | <span id="gaSH2g">0</span></p>
                 <p style="padding-top: 10px"><b>Plus minus:</b> <span id="pmSH2">0</span> | <span id="pmSH2g">0</span></p>
+                <p style="padding-top: 10px"><b>xG:</b> <span id="xGSH2">0</span> | <span id="xGSH2g">0</span></p>
             </div>
         </div>
     </div>
@@ -310,6 +314,25 @@ It extends app_layout.html with Django
     var PosPP2p = 0;
     var PosSH2p = 0;
     var PosSH2g = 0;
+    
+    // xG values by line/team period/game
+    
+    var xGL1p = 0;
+    var xGL2p = 0;
+    var xGL3p = 0;
+    var xGTeam_p = 0;
+    var xGL1g = 0;
+    var xGL2g = 0;
+    var xGL3g = 0;
+    var xGTeam_g = 0;
+    var xGPP1g = 0;
+    var xGPP1p = 0;
+    var xGSH1p = 0;
+    var xGSH1g = 0;
+    var xGPP2g = 0;
+    var xGPP2p = 0;
+    var xGSH2p = 0;
+    var xGSH2g = 0;
 
     // Arrays for easy access to variables
 
@@ -317,6 +340,8 @@ It extends app_layout.html with Django
     var Toc_g = [TocL1g, TocL2g, TocL3g, TocPP1g, TocPP2g, TocSH1g, TocSH2g, TocTeam_g];
     var Pos_g = [PosL1p, PosL2p, PosL3p, PosPP1p, PosPP2p, PosSH1p, PosSH2p, PosTeam_p];
     var Pos_p = [PosL1g, PosL2g, PosL3g, PosPP1g, PosPP2g, PosSH1g, PosSH2g, PosTeam_g];
+    var xG_g = [xGL1p, xGL2p, xGL3p, xGPP1p, xGPP2p, xGSH1p, xGSH2p, xGTeam_p];
+    var xG_p = [xGL1g, xGL2g, xGL3g, xGPP1g, xGPP2g, xGSH1g, xGSH2g, xGTeam_g];
 
     // html id myCanvas to variable
     var cnvs = document.getElementById("myCanvas");
@@ -434,6 +459,14 @@ It extends app_layout.html with Django
     var tocSH1p = document.getElementById("tocSH1");
     var tocSH2p = document.getElementById("tocSH2");
     var tocTeamp = document.getElementById("tocTeam");
+    var xGL1p = document.getElementById("xGL1");
+    var xGL2p = document.getElementById("xGL2");
+    var xGL3p = document.getElementById("xGL3");
+    var xGPP1p = document.getElementById("xGPP1");
+    var xGPP2p = document.getElementById("xGPP2");
+    var xGSH1p = document.getElementById("xGSH1");
+    var xGSH2p = document.getElementById("xGSH2");
+    var xGTeamp = document.getElementById("xGTeam");
 
     // html ids to variables
     // Shots/goals/penalties for/against, Fenwick/ba, plusminus by line/team period/game
@@ -542,6 +575,14 @@ It extends app_layout.html with Django
     var tocSH1g = document.getElementById("tocSH1g");
     var tocSH2g = document.getElementById("tocSH2g");
     var tocTeamg = document.getElementById("tocTeamg");
+    var xGL1g = document.getElementById("xGL1g");
+    var xGL2g = document.getElementById("xGL2g");
+    var xGL3g = document.getElementById("xGL3g");
+    var xGPP1g = document.getElementById("xGPP1g");
+    var xGPP2g = document.getElementById("xGPP2g");
+    var xGSH1g = document.getElementById("xGSH1g");
+    var xGSH2g = document.getElementById("xGSH2g");
+    var xGTeamg = document.getElementById("xGTeamg");
 
     // Arrays for easy access to variables
 
@@ -558,6 +599,7 @@ It extends app_layout.html with Django
     var saa_p = [saaL1p, saaL2p, saaL3p, saaPP1p, saaPP2p, saaSH1p, saaSH2p, saaTeamp];
     var p_p = [pL1p, pL2p, pL3p, pPP1p, pPP2p, pSH1p, pSH2p, pTeamp];
     var toc_p = [tocL1p, tocL2p, tocL3p, tocPP1p, tocPP2p, tocSH1p, tocSH2p, tocTeamp];
+    var xG_p = [xGL1p, xGL2p, xGL3p, xGPP1p, xGPP2p, xGSH1p, xGSH2p, xGTeamp];
     
     var sf_g = [sfL1g, sfL2g, sfL3g, sfPP1g, sfPP2g, sfSH1g, sfSH2g, sfTeamg];
     var sa_g = [saL1g, saL2g, saL3g, saPP1g, saPP2g, saSH1g, saSH2g, saTeamg];
@@ -572,6 +614,23 @@ It extends app_layout.html with Django
     var saa_g = [saaL1g, saaL2g, saaL3g, saaPP1g, saaPP2g, saaSH1g, saaSH2g, saaTeamg];
     var p_g = [pL1g, pL2g, pL3g, pPP1g, pPP2g, pSH1g, pSH2g, pTeamg];
     var toc_g = [tocL1g, tocL2g, tocL3g, tocPP1g, tocPP2g, tocSH1g, tocSH2g, tocTeamg];
+    var xG_g = [xGL1g, xGL2g, xGL3g, xGPP1g, xGPP2g, xGSH1g, xGSH2g, xGTeamg];
+
+    // xG mapping matrix
+
+    let xG_matrix = [
+        [0,2,3,4,8,12,13,13,14,11,10,8,8],
+        [0,2,12,14,13,13,15,16,12,12,12,10,10],
+        [0,13,13,18,16,18,20,22,19,18,11,14,10],
+        [0,14,18,22,20,27,25,24,21,20,19,12,14],
+        [0,35,54,33,32,29,29,27,24,25,20,18,16],
+        [0,99,54,38,35,33,30,28,28,22,20,19,18],
+        [0,35,55,30,32,29,29,28,28,25,18,16,16],
+        [0,15,31,24,26,23,29,23,23,22,18,12,15],
+        [0,14,19,18,24,18,23,17,19,15,13,14,13],
+        [0,13,15,18,16,16,18,15,14,15,12,11,10],
+        [0,2,5,9,16,14,15,15,14,12,15,9,9],
+        [0,2,3,4,7,8,9,12,13,13,10,7,7], ]
 
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
@@ -622,14 +681,6 @@ It extends app_layout.html with Django
         }
     }
 
-    // When the Odd Man Rush - button is pressed
-    function OddManRush() {
-
-    }
-    // When the Scoring Opportunity - button is pressed
-    function ScoringOpp() {
-
-    }
     // When the line is changed by pressing any of the line on court buttons except the one that is on
     function Line_change(line) {
         console.log(lines); // debugging
@@ -824,6 +875,20 @@ It extends app_layout.html with Django
 
     function shotSaved() {
         Draw(PosX,PosY,3);
+
+        var dx = PosX / 284;
+        var dy = PosY / 200;
+        if (Order == 1 && Ball_pos == 1) {
+            if (dx > 0.5) { // Ball on the attack zone
+
+                var dxG = xG_matrix[Math.floor(dx*2*13)][Math.floor(dy*13)];
+                xG_p[line_on - 1].innerHTML = xG_p[line_on - 1].innerHTML + dxG;
+                xG_p[7].innerHTML = xG_p[7].innerHTML + dxG;
+                xG_g[line_on - 1].innerHTML = xG_g[line_on - 1].innerHTML + dxG;
+                xG_g[7].innerHTML = xG_g[7].innerHTML + dxG;
+            }
+        }
+
     }
 
     function shotGoal() {
