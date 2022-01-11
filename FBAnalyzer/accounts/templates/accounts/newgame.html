@@ -882,8 +882,8 @@ It extends app_layout.html with Django
         console.log(dy);
         if (Order == 1 && Ball_pos == 1) {
             if (dx > 0.5) { // Ball on the attack zone
-                console.log(Math.floor(dx*2*13))
-                var dxG = xG_matrix[12 - Math.floor(dx*2*13)][12 - Math.floor(dy*13)];
+                console.log(Math.floor((dx-0.5)*2*13))
+                var dxG = xG_matrix[12 - Math.floor((dx-0.5)*2*13)][Math.floor(dy*13)];
                 console.log(dxG);
                 xG_p[line_on - 1].innerHTML = xG_p[line_on - 1].innerHTML + dxG;
                 xG_p[7].innerHTML = xG_p[7].innerHTML + dxG;
