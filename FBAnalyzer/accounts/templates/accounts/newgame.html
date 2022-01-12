@@ -880,7 +880,7 @@ It extends app_layout.html with Django
         var dy = PosY / 200;
         if (Order == 1 && Ball_pos == 1) {
             if (dx > 0.5) { // Ball on the attack zone
-                console.log("dx " + Math.floor((dx-0.5)*2*13));
+                console.log("dx " + 12 - Math.floor((dx-0.5)*2*13));
                 console.log("dy " + Math.floor(dy*12));
                 var dxG = xG_matrix[12-Math.floor((dx-0.5)*2*13)][Math.floor(dy*12)] / 100;
                 console.log("xG = " + dxG);
