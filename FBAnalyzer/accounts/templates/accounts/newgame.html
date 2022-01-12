@@ -459,14 +459,14 @@ It extends app_layout.html with Django
     var tocSH1p = document.getElementById("tocSH1");
     var tocSH2p = document.getElementById("tocSH2");
     var tocTeamp = document.getElementById("tocTeam");
-    var xGL1p = document.getElementById("xGL1");
-    var xGL2p = document.getElementById("xGL2");
-    var xGL3p = document.getElementById("xGL3");
-    var xGPP1p = document.getElementById("xGPP1");
-    var xGPP2p = document.getElementById("xGPP2");
-    var xGSH1p = document.getElementById("xGSH1");
-    var xGSH2p = document.getElementById("xGSH2");
-    var xGTeamp = document.getElementById("xGTeam");
+    var xG_L1p = document.getElementById("xGL1");
+    var xG_L2p = document.getElementById("xGL2");
+    var xG_L3p = document.getElementById("xGL3");
+    var xG_PP1p = document.getElementById("xGPP1");
+    var xG_PP2p = document.getElementById("xGPP2");
+    var xG_SH1p = document.getElementById("xGSH1");
+    var xG_SH2p = document.getElementById("xGSH2");
+    var xG_Teamp = document.getElementById("xGTeam");
 
     // html ids to variables
     // Shots/goals/penalties for/against, Fenwick/ba, plusminus by line/team period/game
@@ -575,14 +575,14 @@ It extends app_layout.html with Django
     var tocSH1g = document.getElementById("tocSH1g");
     var tocSH2g = document.getElementById("tocSH2g");
     var tocTeamg = document.getElementById("tocTeamg");
-    var xGL1g = document.getElementById("xGL1g");
-    var xGL2g = document.getElementById("xGL2g");
-    var xGL3g = document.getElementById("xGL3g");
-    var xGPP1g = document.getElementById("xGPP1g");
-    var xGPP2g = document.getElementById("xGPP2g");
-    var xGSH1g = document.getElementById("xGSH1g");
-    var xGSH2g = document.getElementById("xGSH2g");
-    var xGTeamg = document.getElementById("xGTeamg");
+    var xG_L1g = document.getElementById("xGL1g");
+    var xG_L2g = document.getElementById("xGL2g");
+    var xG_L3g = document.getElementById("xGL3g");
+    var xG_PP1g = document.getElementById("xGPP1g");
+    var xG_PP2g = document.getElementById("xGPP2g");
+    var xG_SH1g = document.getElementById("xGSH1g");
+    var xG_SH2g = document.getElementById("xGSH2g");
+    var xG_Teamg = document.getElementById("xGTeamg");
 
     // Arrays for easy access to variables
 
@@ -599,7 +599,7 @@ It extends app_layout.html with Django
     var saa_p = [saaL1p, saaL2p, saaL3p, saaPP1p, saaPP2p, saaSH1p, saaSH2p, saaTeamp];
     var p_p = [pL1p, pL2p, pL3p, pPP1p, pPP2p, pSH1p, pSH2p, pTeamp];
     var toc_p = [tocL1p, tocL2p, tocL3p, tocPP1p, tocPP2p, tocSH1p, tocSH2p, tocTeamp];
-    var xG_p = [xGL1p, xGL2p, xGL3p, xGPP1p, xGPP2p, xGSH1p, xGSH2p, xGTeamp];
+    var x_p = [xG_L1p, xG_L2p, xG_L3p, xG_PP1p, xG_PP2p, xG_SH1p, xG_SH2p, xG_Teamp];
     
     var sf_g = [sfL1g, sfL2g, sfL3g, sfPP1g, sfPP2g, sfSH1g, sfSH2g, sfTeamg];
     var sa_g = [saL1g, saL2g, saL3g, saPP1g, saPP2g, saSH1g, saSH2g, saTeamg];
@@ -614,7 +614,7 @@ It extends app_layout.html with Django
     var saa_g = [saaL1g, saaL2g, saaL3g, saaPP1g, saaPP2g, saaSH1g, saaSH2g, saaTeamg];
     var p_g = [pL1g, pL2g, pL3g, pPP1g, pPP2g, pSH1g, pSH2g, pTeamg];
     var toc_g = [tocL1g, tocL2g, tocL3g, tocPP1g, tocPP2g, tocSH1g, tocSH2g, tocTeamg];
-    var xG_g = [xGL1g, xGL2g, xGL3g, xGPP1g, xGPP2g, xGSH1g, xGSH2g, xGTeamg];
+    var x_g = [xG_L1g, xG_L2g, xG_L3g, xG_PP1g, xG_PP2g, xG_SH1g, xG_SH2g, xG_Teamg];
 
     // xG mapping matrix
 
@@ -883,12 +883,17 @@ It extends app_layout.html with Django
         if (Order == 1 && Ball_pos == 1) {
             if (dx > 0.5) { // Ball on the attack zone
                 console.log(Math.floor((dx-0.5)*2*13))
-                var dxG = xG_matrix[12 - Math.floor((dx-0.5)*2*13)][Math.floor(dy*13)];
+                var dxG = xG_matrix[12 - Math.floor((dx-0.5)*2*13)][Math.floor(dy*13)] / 100;
                 console.log(dxG);
-                xG_p[line_on - 1].innerHTML = xG_p[line_on - 1].innerHTML + dxG;
-                xG_p[7].innerHTML = xG_p[7].innerHTML + dxG;
-                xG_g[line_on - 1].innerHTML = xG_g[line_on - 1].innerHTML + dxG;
-                xG_g[7].innerHTML = xG_g[7].innerHTML + dxG;
+                xG_p[line_on - 1] = xG_p[line_on - 1] + dxG;
+                xG_p[7] = xG_p[7] + dxG;
+                xG_g[line_on - 1] = xG_g[line_on - 1] + dxG;
+                xG_g[7]= xG_g[7] + dxG;
+
+                x_p[line_on - 1].innerHTML = xG_p[line_on - 1];
+                x_p[7].innerHTML = xG_p[7];
+                x_g[line_on - 1].innerHTML = xG_g[line_on - 1];;
+                x_g[7].innerHTML = xG_g[7];
             }
         }
 
