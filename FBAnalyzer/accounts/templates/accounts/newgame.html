@@ -885,9 +885,9 @@ It extends app_layout.html with Django
                 var dxG = xG_matrix[Math.floor(dy*12)][12-Math.floor((dx-0.5)*2*13)] / 100;
                 console.log("xG = " + dxG);
                 xG_p[line_on - 1] = Math.round((xG_p[line_on - 1] + dxG) * 100) / 100;
-                xG_p[7] = xG_p[7] + dxG;
-                xG_g[line_on - 1] = xG_g[line_on - 1] + dxG;
-                xG_g[7]= xG_g[7] + dxG;
+                xG_p[7] = Math.round((xG_p[7] + dxG) * 100) / 100;
+                xG_g[line_on - 1] = Math.round((xG_g[line_on - 1] + dxG) * 100) / 100;
+                xG_g[7]= Math.round((xG_g[7] + dxG) * 100) / 100;
 
                 x_p[line_on - 1].innerHTML = xG_p[line_on - 1];
                 x_p[7].innerHTML = xG_p[7];
