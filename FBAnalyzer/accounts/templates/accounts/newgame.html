@@ -934,10 +934,28 @@ It extends app_layout.html with Django
                 xf_p[7].innerHTML = xGf_p[7];
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
                 xf_g[7].innerHTML = xGf_g[7];
+
+                console.log("xG = " + dxG);
+                console.log(xG_matrix);
             }
         }
         if (Order == 2 && Ball_pos == 1) {
 
+            if (dx < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*12)][12-Math.floor(dx*13)] / 100;
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+                xf_p[7].innerHTML = xGf_p[7];
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
+                xf_g[7].innerHTML = xGf_g[7];
+
+                console.log("xG = " + dxG);
+                console.log(xG_matrix);
+            }
         }
     }
 
