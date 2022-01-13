@@ -1009,6 +1009,92 @@ It extends app_layout.html with Django
 
     function shotGoal() {
         Draw(PosX,PosY,4);
+
+        var dx = PosX / 284;
+        var dy = PosY / 200;
+
+        console.log("dx = " + dx);
+        console.log("dy = " + dy);
+
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 left side
+
+            if (dx > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+                xf_p[7].innerHTML = xGf_p[7];
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
+                xf_g[7].innerHTML = xGf_g[7];
+
+                console.log(Math.floor(dy*13));
+                console.log(13-Math.floor((dx-0.5)*2*14));
+                console.log("xG = " + dxG);
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 right side
+
+            if (dx < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+                xf_p[7].innerHTML = xGf_p[7];
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
+                xf_g[7].innerHTML = xGf_g[7];
+
+                console.log(Math.floor(dy*13));
+                console.log(Math.floor(dx*2*14));
+                console.log("xG = " + dxG);
+            }
+        }
+
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 left side
+
+            if (dx < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+                xa_p[7].innerHTML = xGa_p[7];
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];;
+                xa_g[7].innerHTML = xGa_g[7];
+
+                console.log(Math.floor(dy*13));
+                console.log(Math.floor(dx*2*14));
+                console.log("xG = " + dxG);
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 right side
+
+            if (dx > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+                xa_p[7].innerHTML = xGa_p[7];
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];;
+                xa_g[7].innerHTML = xGa_g[7];
+
+                console.log(Math.floor(dy*12));
+                console.log(13-Math.floor((dx-0.5)*2*14));
+                console.log("xG = " + dxG);
+            }
+        }
     }
 
     function Draw(x,y,type)
