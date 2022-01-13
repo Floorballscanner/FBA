@@ -922,6 +922,9 @@ It extends app_layout.html with Django
         var dx = PosX / 284;
         var dy = PosY / 200;
 
+        console.log("dx = " + dx);
+        console.log("dy = " + dy);
+
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 left side
 
             if (dx > 0.5) { // Ball on the attack zone
