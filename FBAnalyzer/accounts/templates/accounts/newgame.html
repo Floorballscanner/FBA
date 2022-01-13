@@ -325,22 +325,39 @@ It extends app_layout.html with Django
     
     // xG values by line/team period/game
     
-    var xGL1p = 0;
-    var xGL2p = 0;
-    var xGL3p = 0;
-    var xGTeam_p = 0;
-    var xGL1g = 0;
-    var xGL2g = 0;
-    var xGL3g = 0;
-    var xGTeam_g = 0;
-    var xGPP1g = 0;
-    var xGPP1p = 0;
-    var xGSH1p = 0;
-    var xGSH1g = 0;
-    var xGPP2g = 0;
-    var xGPP2p = 0;
-    var xGSH2p = 0;
-    var xGSH2g = 0;
+    var xGfL1p = 0;
+    var xGfL2p = 0;
+    var xGfL3p = 0;
+    var xGfTeam_p = 0;
+    var xGfL1g = 0;
+    var xGfL2g = 0;
+    var xGfL3g = 0;
+    var xGfTeam_g = 0;
+    var xGfPP1g = 0;
+    var xGfPP1p = 0;
+    var xGfSH1p = 0;
+    var xGfSH1g = 0;
+    var xGfPP2g = 0;
+    var xGfPP2p = 0;
+    var xGfSH2p = 0;
+    var xGfSH2g = 0;
+    
+    var xGaL1p = 0;
+    var xGaL2p = 0;
+    var xGaL3p = 0;
+    var xGaTeam_p = 0;
+    var xGaL1g = 0;
+    var xGaL2g = 0;
+    var xGaL3g = 0;
+    var xGaTeam_g = 0;
+    var xGaPP1g = 0;
+    var xGaPP1p = 0;
+    var xGaSH1p = 0;
+    var xGaSH1g = 0;
+    var xGaPP2g = 0;
+    var xGaPP2p = 0;
+    var xGaSH2p = 0;
+    var xGaSH2g = 0;
 
     // Arrays for easy access to variables
 
@@ -348,8 +365,10 @@ It extends app_layout.html with Django
     var Toc_g = [TocL1g, TocL2g, TocL3g, TocPP1g, TocPP2g, TocSH1g, TocSH2g, TocTeam_g];
     var Pos_g = [PosL1p, PosL2p, PosL3p, PosPP1p, PosPP2p, PosSH1p, PosSH2p, PosTeam_p];
     var Pos_p = [PosL1g, PosL2g, PosL3g, PosPP1g, PosPP2g, PosSH1g, PosSH2g, PosTeam_g];
-    var xG_g = [xGL1p, xGL2p, xGL3p, xGPP1p, xGPP2p, xGSH1p, xGSH2p, xGTeam_p];
-    var xG_p = [xGL1g, xGL2g, xGL3g, xGPP1g, xGPP2g, xGSH1g, xGSH2g, xGTeam_g];
+    var xGf_g = [xGfL1p, xGfL2p, xGfL3p, xGfPP1p, xGfPP2p, xGfSH1p, xGfSH2p, xGfTeam_p];
+    var xGf_p = [xGfL1g, xGfL2g, xGfL3g, xGfPP1g, xGfPP2g, xGfSH1g, xGfSH2g, xGfTeam_g];
+    var xGa_g = [xGaL1p, xGaL2p, xGaL3p, xGaPP1p, xGaPP2p, xGaSH1p, xGaSH2p, xGaTeam_p];
+    var xGa_p = [xGaL1g, xGaL2g, xGaL3g, xGaPP1g, xGaPP2g, xGaSH1g, xGaSH2g, xGaTeam_g];
 
     // html id myCanvas to variable
     var cnvs = document.getElementById("myCanvas");
@@ -467,14 +486,22 @@ It extends app_layout.html with Django
     var tocSH1p = document.getElementById("tocSH1");
     var tocSH2p = document.getElementById("tocSH2");
     var tocTeamp = document.getElementById("tocTeam");
-    var xG_L1p = document.getElementById("xGL1");
-    var xG_L2p = document.getElementById("xGL2");
-    var xG_L3p = document.getElementById("xGL3");
-    var xG_PP1p = document.getElementById("xGPP1");
-    var xG_PP2p = document.getElementById("xGPP2");
-    var xG_SH1p = document.getElementById("xGSH1");
-    var xG_SH2p = document.getElementById("xGSH2");
-    var xG_Teamp = document.getElementById("xGTeam");
+    var xGf_L1p = document.getElementById("xGfL1");
+    var xGf_L2p = document.getElementById("xGfL2");
+    var xGf_L3p = document.getElementById("xGfL3");
+    var xGf_PP1p = document.getElementById("xGfPP1");
+    var xGf_PP2p = document.getElementById("xGfPP2");
+    var xGf_SH1p = document.getElementById("xGfSH1");
+    var xGf_SH2p = document.getElementById("xGfSH2");
+    var xGf_Teamp = document.getElementById("xGfTeam");
+    var xGa_L1p = document.getElementById("xGaL1");
+    var xGa_L2p = document.getElementById("xGaL2");
+    var xGa_L3p = document.getElementById("xGaL3");
+    var xGa_PP1p = document.getElementById("xGaPP1");
+    var xGa_PP2p = document.getElementById("xGaPP2");
+    var xGa_SH1p = document.getElementById("xGaSH1");
+    var xGa_SH2p = document.getElementById("xGaSH2");
+    var xGa_Teamp = document.getElementById("xGaTeam");
 
     // html ids to variables
     // Shots/goals/penalties for/against, Fenwick/ba, plusminus by line/team period/game
@@ -583,14 +610,22 @@ It extends app_layout.html with Django
     var tocSH1g = document.getElementById("tocSH1g");
     var tocSH2g = document.getElementById("tocSH2g");
     var tocTeamg = document.getElementById("tocTeamg");
-    var xG_L1g = document.getElementById("xGL1g");
-    var xG_L2g = document.getElementById("xGL2g");
-    var xG_L3g = document.getElementById("xGL3g");
-    var xG_PP1g = document.getElementById("xGPP1g");
-    var xG_PP2g = document.getElementById("xGPP2g");
-    var xG_SH1g = document.getElementById("xGSH1g");
-    var xG_SH2g = document.getElementById("xGSH2g");
-    var xG_Teamg = document.getElementById("xGTeamg");
+    var xGf_L1g = document.getElementById("xGfL1g");
+    var xGf_L2g = document.getElementById("xGfL2g");
+    var xGf_L3g = document.getElementById("xGfL3g");
+    var xGf_PP1g = document.getElementById("xGfPP1g");
+    var xGf_PP2g = document.getElementById("xGfPP2g");
+    var xGf_SH1g = document.getElementById("xGfSH1g");
+    var xGf_SH2g = document.getElementById("xGfSH2g");
+    var xGf_Teamg = document.getElementById("xGfTeamg");
+    var xGa_L1g = document.getElementById("xGaL1g");
+    var xGa_L2g = document.getElementById("xGaL2g");
+    var xGa_L3g = document.getElementById("xGaL3g");
+    var xGa_PP1g = document.getElementById("xGaPP1g");
+    var xGa_PP2g = document.getElementById("xGaPP2g");
+    var xGa_SH1g = document.getElementById("xGaSH1g");
+    var xGa_SH2g = document.getElementById("xGaSH2g");
+    var xGa_Teamg = document.getElementById("xGaTeamg");
 
     // Arrays for easy access to variables
 
@@ -607,7 +642,8 @@ It extends app_layout.html with Django
     var saa_p = [saaL1p, saaL2p, saaL3p, saaPP1p, saaPP2p, saaSH1p, saaSH2p, saaTeamp];
     var p_p = [pL1p, pL2p, pL3p, pPP1p, pPP2p, pSH1p, pSH2p, pTeamp];
     var toc_p = [tocL1p, tocL2p, tocL3p, tocPP1p, tocPP2p, tocSH1p, tocSH2p, tocTeamp];
-    var x_p = [xG_L1p, xG_L2p, xG_L3p, xG_PP1p, xG_PP2p, xG_SH1p, xG_SH2p, xG_Teamp];
+    var xf_p = [xGf_L1p, xGf_L2p, xGf_L3p, xGf_PP1p, xGf_PP2p, xGf_SH1p, xGf_SH2p, xGf_Teamp];
+    var xa_p = [xGa_L1p, xGa_L2p, xGa_L3p, xGa_PP1p, xGa_PP2p, xGa_SH1p, xGa_SH2p, xGa_Teamp];
     
     var sf_g = [sfL1g, sfL2g, sfL3g, sfPP1g, sfPP2g, sfSH1g, sfSH2g, sfTeamg];
     var sa_g = [saL1g, saL2g, saL3g, saPP1g, saPP2g, saSH1g, saSH2g, saTeamg];
@@ -622,7 +658,8 @@ It extends app_layout.html with Django
     var saa_g = [saaL1g, saaL2g, saaL3g, saaPP1g, saaPP2g, saaSH1g, saaSH2g, saaTeamg];
     var p_g = [pL1g, pL2g, pL3g, pPP1g, pPP2g, pSH1g, pSH2g, pTeamg];
     var toc_g = [tocL1g, tocL2g, tocL3g, tocPP1g, tocPP2g, tocSH1g, tocSH2g, tocTeamg];
-    var x_g = [xG_L1g, xG_L2g, xG_L3g, xG_PP1g, xG_PP2g, xG_SH1g, xG_SH2g, xG_Teamg];
+    var xf_g = [xGf_L1g, xGf_L2g, xGf_L3g, xGf_PP1g, xGf_PP2g, xGf_SH1g, xGf_SH2g, xGf_Teamg];
+    var xa_g = [xGa_L1g, xGa_L2g, xGa_L3g, xGa_PP1g, xGa_PP2g, xGa_SH1g, xGa_SH2g, xGa_Teamg];
 
     // xG mapping matrix
 
@@ -890,10 +927,10 @@ It extends app_layout.html with Django
 
             if (dx > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*12)][12-Math.floor((dx-0.5)*2*13)] / 100;
-                xG_p[line_on - 1] = Math.round((xG_p[line_on - 1] + dxG) * 100) / 100;
-                xG_p[7] = Math.round((xG_p[7] + dxG) * 100) / 100;
-                xG_g[line_on - 1] = Math.round((xG_g[line_on - 1] + dxG) * 100) / 100;
-                xG_g[7]= Math.round((xG_g[7] + dxG) * 100) / 100;
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
 
                 x_p[line_on - 1].innerHTML = xG_p[line_on - 1];
                 x_p[7].innerHTML = xG_p[7];
