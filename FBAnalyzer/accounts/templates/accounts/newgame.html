@@ -662,18 +662,19 @@ It extends app_layout.html with Django
     // xG mapping matrix
 
     let xG_matrix = [
-        [0,2,3,4,8,12,13,13,14,11,10,8,8],
-        [0,2,12,14,13,13,15,16,12,12,12,10,10],
-        [0,13,13,18,16,18,20,22,19,18,11,14,10],
-        [0,14,18,22,20,27,25,24,21,20,19,12,14],
-        [0,35,54,33,32,29,29,27,24,25,20,18,16],
-        [0,99,54,38,35,33,30,28,28,22,20,19,18],
-        [0,35,55,30,32,29,29,28,28,25,18,16,16],
-        [0,15,31,24,26,23,29,23,23,22,18,12,15],
-        [0,14,19,18,24,18,23,17,19,15,13,14,13],
-        [0,13,15,18,16,16,18,15,14,15,12,11,10],
-        [0,2,5,9,16,14,15,15,14,12,15,9,9],
-        [0,2,3,4,7,8,9,12,13,13,10,7,7], ]
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,2,3,4,8,12,13,13,14,11,10,8,8],
+        [0,0,2,12,14,13,13,15,16,12,12,12,10,10],
+        [0,0,13,13,18,16,18,20,22,19,18,11,14,10],
+        [0,0,14,18,22,20,27,25,24,21,20,19,12,14],
+        [0,0,35,54,33,32,29,29,27,24,25,20,18,16],
+        [0,0,99,54,38,35,33,30,28,28,22,20,19,18],
+        [0,0,35,55,30,32,29,29,28,28,25,18,16,16],
+        [0,0,15,31,24,26,23,29,23,23,22,18,12,15],
+        [0,0,14,19,18,24,18,23,17,19,15,13,14,13],
+        [0,0,13,15,18,16,16,18,15,14,15,12,11,10],
+        [0,0,2,5,9,16,14,15,15,14,12,15,9,9],
+        [0,0,2,3,4,7,8,9,12,13,13,10,7,7], ]
 
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
@@ -928,7 +929,7 @@ It extends app_layout.html with Django
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 left side
 
             if (dx > 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*12)][12-Math.floor((dx-0.5)*2*13)] / 100;
+                var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
@@ -939,8 +940,8 @@ It extends app_layout.html with Django
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
                 xf_g[7].innerHTML = xGf_g[7];
 
-                console.log(Math.floor(dy*12));
-                console.log(12-Math.floor((dx-0.5)*2*13));
+                console.log(Math.floor(dy*13));
+                console.log(13-Math.floor((dx-0.5)*2*14));
                 console.log("xG = " + dxG);
             }
         }
@@ -948,7 +949,7 @@ It extends app_layout.html with Django
         if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 right side
 
             if (dx < 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*12)][Math.floor(dx*2*13)] / 100;
+                var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
@@ -959,8 +960,8 @@ It extends app_layout.html with Django
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
                 xf_g[7].innerHTML = xGf_g[7];
 
-                console.log(Math.floor(dy*12));
-                console.log(Math.floor(dx*2*13));
+                console.log(Math.floor(dy*13));
+                console.log(Math.floor(dx*2*14));
                 console.log("xG = " + dxG);
             }
         }
@@ -968,7 +969,7 @@ It extends app_layout.html with Django
         if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 left side
 
             if (dx < 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*12)][Math.floor(dx*2*13)] / 100;
+                var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
@@ -979,8 +980,8 @@ It extends app_layout.html with Django
                 xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];;
                 xa_g[7].innerHTML = xGa_g[7];
 
-                console.log(Math.floor(dy*12));
-                console.log(Math.floor(dx*2*13));
+                console.log(Math.floor(dy*13));
+                console.log(Math.floor(dx*2*14));
                 console.log("xG = " + dxG);
             }
         }
@@ -988,7 +989,7 @@ It extends app_layout.html with Django
         if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 right side
 
             if (dx > 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*12)][12-Math.floor((dx-0.5)*2*13)] / 100;
+                var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
@@ -1000,7 +1001,7 @@ It extends app_layout.html with Django
                 xa_g[7].innerHTML = xGa_g[7];
 
                 console.log(Math.floor(dy*12));
-                console.log(12-Math.floor((dx-0.5)*2*13));
+                console.log(13-Math.floor((dx-0.5)*2*14));
                 console.log("xG = " + dxG);
             }
         }
