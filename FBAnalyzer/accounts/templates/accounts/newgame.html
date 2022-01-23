@@ -792,6 +792,12 @@ It extends app_layout.html with Django
         document.getElementById(lines[line_on-1]).style.background='#4CAF50';
         document.getElementById(lines[line-1]).style.background='#555555';
         line_on = line;
+        if (Ball_pos == 1) {
+            Not_p[line_on - 1]++;
+            Not_g[line_on - 1]++;
+            Not_p[7]++;
+            Not_g[7]++;
+        }
         PosTime = 0;
         console.log(line_on); // debugging
     }
