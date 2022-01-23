@@ -1074,22 +1074,22 @@ It extends app_layout.html with Django
              if (Not_p[line_on - 1] > 0) {
                 var avg = new Date(Math.round(Pos_p[line_on - 1] / Not_p[line_on - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                avg_p[line_on - 1].innerHTML = a
+                avg_p[line_on - 1].innerHTML = a;
              }
              if (Not_p[7] > 0) {
                 var avg = new Date(Math.round(Pos_p[7] / Not_p[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                avg_p[7].innerHTML = a
+                avg_p[7].innerHTML = a;
              }
              if (Not_g[line_on - 1] > 0) {
                 var avg = new Date(Math.round(Pos_g[line_on - 1] / Not_g[line_on - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                avg_g[line_on - 1].innerHTML = a
+                avg_g[line_on - 1].innerHTML = a;
              }
              if (Not_g[7] > 0) {
                 var avg = new Date(Math.round(Pos_g[7] / Not_g[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                avg_g[7].innerHTML = a
+                avg_g[7].innerHTML = a;
              }
 
              // Average Time without Ball
@@ -1097,22 +1097,22 @@ It extends app_layout.html with Django
              if (Notno_p[line_on - 1] > 0) {
                 var avg = new Date(Math.round((Toc_p[line_on - 1] - Pos_p[line_on - 1]) / Notno_p[line_on - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                avgno_p[line_on - 1].innerHTML = a
+                avgno_p[line_on - 1].innerHTML = a;
              }
              if (Notno_p[7] > 0) {
                 var avg = new Date(Math.round((Toc_p[7] - Pos_p[7]) / Notno_p[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                avgno_p[7].innerHTML = a
+                avgno_p[7].innerHTML = a;
              }
              if (Notno_g[line_on - 1] > 0) {
                 var avg = new Date(Math.round((Toc_g[line_on - 1] - Pos_g[line_on - 1]) / Notno_g[line_on - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                avgno_g[line_on - 1].innerHTML = a
+                avgno_g[line_on - 1].innerHTML = a;
              }
              if (Notno_g[7] > 0) {
                 var avg = new Date(Math.round((Toc_g[7] - Pos_g[7]) / Notno_g[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                avgno_g[7].innerHTML = a
+                avgno_g[7].innerHTML = a;
              }
 
              // Average Time on Court
@@ -1120,22 +1120,22 @@ It extends app_layout.html with Django
              if (Nos_p[line_on - 1] > 0) {
                 var avg = new Date(Math.round(Toc_p[line_on - 1] / Nos_p[line_on - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                atoc_p[line_on - 1].innerHTML = a
+                atoc_p[line_on - 1].innerHTML = a;
              }
              if (Nos_p[7] > 0) {
-                var avg = new Date(Math.round(Toc_p[7] / Nos_p[7] * 1000);
+                var avg = new Date(Math.round(Toc_p[7] / Nos_p[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                atoc_p[7].innerHTML = a
+                atoc_p[7].innerHTML = a;
              }
              if (Nos_g[line_on - 1] > 0) {
                 var avg = new Date(Math.round(Toc_g[line_on - 1] / Nos_g[line_on - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                atoc_g[line_on - 1].innerHTML = a
+                atoc_g[line_on - 1].innerHTML = a;
              }
              if (Nos_g[7] > 0) {
                 var avg = new Date(Math.round(Toc_g[7] / Nos_g[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
-                atoc_g[7].innerHTML = a
+                atoc_g[7].innerHTML = a;
              }
 
              counter++;
