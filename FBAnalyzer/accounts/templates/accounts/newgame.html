@@ -845,7 +845,7 @@ It extends app_layout.html with Django
         var r = confirm("Changing period will reset clock and statistics,\nand save data, are you sure?");
             if (r == true) {
                 periodN++
-                counter = 1;
+                counter = 0;
                 document.getElementById("periodNr").innerHTML = "Period " + periodN;
                 document.getElementById("label").innerHTML = "00:00:00";
 
