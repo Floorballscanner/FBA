@@ -812,6 +812,12 @@ It extends app_layout.html with Django
         // Game has already started, then start/stop the game clock
         else {
             if (is_on == 0) {    // Start game clock
+                (if counter == 0 && Ball_pos == 1) {
+                    Not_p[line_on - 1]++;
+                    Not_g[line_on - 1]++;
+                    Not_p[7]++;
+                    Not_g[7]++;
+                }
                document.getElementById("start").innerHTML = "Stop";
                document.getElementById("start").style.background='#555555';
                is_on = 1;
@@ -916,22 +922,22 @@ It extends app_layout.html with Django
              toc_g[7].innerHTML = d;
 
              if (Not_p[line_on - 1] > 0) {
-                var avg = Math.round(Pos_p[line_on - 1] / Not_p[line_on - 1]);
+                var avg = new Date(Math.round(Pos_p[line_on - 1] / Not_p[line_on - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
                 avg_p[line_on - 1].innerHTML = a
              }
              if (Not_p[7] > 0) {
-                var avg = Math.round(Pos_p[7] / Not_p[7]);
+                var avg = new Date(Math.round(Pos_p[7] / Not_p[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
                 avg_p[7].innerHTML = a
              }
              if (Not_g[line_on - 1] > 0) {
-                var avg = Math.round(Pos_g[line_on - 1] / Not_g[line_on - 1]);
+                var avg = new Date(Math.round(Pos_g[line_on - 1] / Not_g[line_on - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
                 avg_g[line_on - 1].innerHTML = a
              }
              if (Not_g[7] > 0) {
-                var avg = Math.round(Pos_g[7] / Not_g[7]);
+                var avg = new Date(Math.round(Pos_g[7] / Not_g[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
                 avg_g[7].innerHTML = a
              }
