@@ -812,7 +812,7 @@ It extends app_layout.html with Django
         // Game has already started, then start/stop the game clock
         else {
             if (is_on == 0) {    // Start game clock
-                (if counter == 0 && Ball_pos == 1) {
+                if (counter == 0 && Ball_pos == 1) {
                     Not_p[line_on - 1]++;
                     Not_g[line_on - 1]++;
                     Not_p[7]++;
