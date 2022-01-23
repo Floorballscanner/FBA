@@ -751,17 +751,16 @@ It extends app_layout.html with Django
         document.getElementById("TeamL").style.background='#555555';
         if (Order == 1) {
             Ball_pos = 1;
-            PosTime = 0;
-
-        } else {
-            Ball_pos = 2;
-
             if (started == 1 && PosTime > 0) {
                 Not_p[line_on - 1]++;
                 Not_g[line_on - 1]++;
                 Not_p[7]++;
                 Not_g[7]++;
             }
+            PosTime = 0;
+
+        } else {
+            Ball_pos = 2;
             PosTime = 0;
         }
     }
@@ -772,18 +771,17 @@ It extends app_layout.html with Django
         document.getElementById("TeamL").style.background='#4CAF50';
         if (Order == 1) {
             Ball_pos = 2;
-            
+            PosTime = 0;
+        }
+
+        else {
+            Ball_pos = 1;
             if (started == 1 && PosTime > 0) {
                 Not_p[line_on - 1]++;
                 Not_g[line_on - 1]++;
                 Not_p[7]++;
                 Not_g[7]++;
             }
-            PosTime = 0;
-        }
-
-        else {
-            Ball_pos = 1;
             PosTime = 0;
         }
     }
@@ -866,6 +864,7 @@ It extends app_layout.html with Django
 
                     p_p[i].innerHTML = 0;
                     toc_p[i].innerHTML = "00:00";
+                    avg_p[i].innerHTML = "00:00";
                 }
 
             } else {
@@ -917,16 +916,24 @@ It extends app_layout.html with Django
              toc_g[7].innerHTML = d;
 
              if (Not_p[line_on - 1] > 0) {
-                avg_p[line_on - 1].innerHTML = Pos_p[line_on - 1] / Not_p[line_on - 1];
+                var avg = Math.round(Pos_p[line_on - 1] / Not_p[line_on - 1]);
+                var a = avg.toISOString().substr(14, 5);
+                avg_p[line_on - 1].innerHTML = a
              }
              if (Not_p[7] > 0) {
-                avg_p[7].innerHTML = Pos_p[7] / Not_p[7];
+                var avg = Math.round(Pos_p[7] / Not_p[7]);
+                var a = avg.toISOString().substr(14, 5);
+                avg_p[7].innerHTML = a
              }
              if (Not_g[line_on - 1] > 0) {
-                avg_g[line_on - 1].innerHTML = Pos_g[line_on - 1] / Not_g[line_on - 1];
+                var avg = Math.round(Pos_g[line_on - 1] / Not_g[line_on - 1]);
+                var a = avg.toISOString().substr(14, 5);
+                avg_g[line_on - 1].innerHTML = a
              }
              if (Not_g[7] > 0) {
-                avg_g[7].innerHTML = Pos_g[7] / Not_g[7];
+                var avg = Math.round(Pos_g[7] / Not_g[7]);
+                var a = avg.toISOString().substr(14, 5);
+                avg_g[7].innerHTML = a
              }
 
              counter++;
