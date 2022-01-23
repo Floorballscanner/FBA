@@ -79,7 +79,9 @@ It extends app_layout.html with Django
                 <h4><hr/>Line 1</h4>
                 <p style="padding-top: 10px"><b>Possession:</b> <span id="pL1">0</span>% | <span id="pL1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL1">0:00</span> | <span id="tocL1g">0:00</span></p>
+                <p>Average Time on Court: <span id="atocL1">0:00</span> | <span id="atocL1g">0:00</span></p>
                 <p>Average Time w Ball: <span id="avgL1">0:00</span> | <span id="avgL1g">0:00</span></p>
+                <p>Average Time no Ball: <span id="avgnoL1">0:00</span> | <span id="avgnoL1g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL1">0</span> | <span id="pmL1g">0</span></p>
                 <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L1">0</span> | <span id="xGf_L1g">0</span></p>
@@ -102,7 +104,9 @@ It extends app_layout.html with Django
                 <h4><hr/>Line 2</h4>
                 <p style="padding-top: 10px"><b>Possession:</b> <span id="pL2">0</span>% | <span id="pL2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL2">0:00</span> | <span id="tocL2g">0:00</span></p>
+                <p>Average Time on Court: <span id="atocL2">0:00</span> | <span id="atocL2g">0:00</span></p>
                 <p>Average Time w Ball: <span id="avgL2">0:00</span> | <span id="avgL2g">0:00</span></p>
+                <p>Average Time no Ball: <span id="avgnoL2">0:00</span> | <span id="avgnoL2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL2">0</span> | <span id="pmL2g">0</span></p>
                 <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L2">0</span> | <span id="xGf_L2g">0</span></p>
@@ -125,7 +129,9 @@ It extends app_layout.html with Django
                 <h4><hr/>Line 3</h4>
                 <p style="padding-top: 10px"><b>Possession:</b> <span id="pL3">0</span>% | <span id="pL3g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL3">0:00</span> | <span id="tocL3g">0:00</span></p>
+                <p>Average Time on Court: <span id="atocL3">0:00</span> | <span id="atocL3g">0:00</span></p>
                 <p>Average Time w Ball: <span id="avgL3">0:00</span> | <span id="avgL3g">0:00</span></p>
+                <p>Average Time no Ball: <span id="avgnoL3">0:00</span> | <span id="avgnoL3g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL3">0</span> | <span id="pmL3g">0</span></p>
                 <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L3">0</span> | <span id="xGf_L3g">0</span></p>
@@ -148,7 +154,9 @@ It extends app_layout.html with Django
                 <h4><hr/>Team</h4>
                 <p style="padding-top: 10px"><b>Possession:</b> <span id="pTeam">0</span>% | <span id="pTeamg">0</span>%<p/>
                 <p>Time on Court: <span id="tocTeam">0:00</span> | <span id="tocTeamg">0:00</span></p>
+                <p>Average Time on Court: <span id="atocTeam">0:00</span> | <span id="atocTeamg">0:00</span></p>
                 <p>Average Time w Ball: <span id="avgTeam">0:00</span> | <span id="avgTeamg">0:00</span></p>
+                <p>Average Time no Ball: <span id="avgnoTeam">0:00</span> | <span id="avgnoTeamg">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmTeam">0</span> | <span id="pmTeamg">0</span></p>
                 <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_Team">0</span> | <span id="xGf_Teamg">0</span></p>
@@ -173,7 +181,9 @@ It extends app_layout.html with Django
                 <h4><hr/>Powerplay 1</h4>
                 <p style="padding-top: 10px"><b>Possession:</b> <span id="pPP1">0</span>% | <span id="pPP1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocPP1">0:00</span> | <span id="tocPP1g">0:00</span></p>
+                <p>Average Time on Court: <span id="atocPP1">0:00</span> | <span id="atocPP1g">0:00</span></p>
                 <p>Average Time w Ball: <span id="avgPP1">0:00</span> | <span id="avgPP1g">0:00</span></p>
+                <p>Average Time no Ball: <span id="avgnoPP1">0:00</span> | <span id="avgnoPP1g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmPP1">0</span> | <span id="pmPP1g">0</span></p>
                 <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_PP1">0</span> | <span id="xGf_PP1g">0</span></p>
@@ -196,7 +206,9 @@ It extends app_layout.html with Django
                 <h4><hr/>Powerplay 2</h4>
                 <p style="padding-top: 10px"><b>Possession:</b> <span id="pPP2">0</span>% | <span id="pPP2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocPP2">0:00</span> | <span id="tocPP2g">0:00</span></p>
+                <p>Average Time on Court: <span id="atocPP2">0:00</span> | <span id="atocPP2g">0:00</span></p>
                 <p>Average Time w Ball: <span id="avgPP2">0:00</span> | <span id="avgPP2g">0:00</span></p>
+                <p>Average Time no Ball: <span id="avgnoPP2">0:00</span> | <span id="avgnoPP2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmPP2">0</span> | <span id="pmPP2g">0</span></p>
                 <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_PP2">0</span> | <span id="xGf_PP2g">0</span></p>
@@ -219,7 +231,9 @@ It extends app_layout.html with Django
                 <h4><hr/>Shorthanded 1</h4>
                 <p style="padding-top: 10px"><b>Possession:</b> <span id="pSH1">0</span>% | <span id="pSH1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocSH1">0:00</span> | <span id="tocSH1g">0:00</span></p>
+                <p>Average Time on Court: <span id="atocSH1">0:00</span> | <span id="atocSH1g">0:00</span></p>
                 <p>Average Time w Ball: <span id="avgSH1">0:00</span> | <span id="avgSH1g">0:00</span></p>
+                <p>Average Time no Ball: <span id="avgnoSH1">0:00</span> | <span id="avgnoSH1g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmSH1">0</span> | <span id="pmSH1g">0</span></p>
                 <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_SH1">0</span> | <span id="xGf_SH1g">0</span></p>
@@ -242,7 +256,9 @@ It extends app_layout.html with Django
                 <h4><hr/>Shorthanded 2</h4>
                 <p style="padding-top: 10px"><b>Possession:</b> <span id="pSH2">0</span>% | <span id="pSH2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocSH2">0:00</span> | <span id="tocSH2g">0:00</span></p>
+                <p>Average Time on Court: <span id="atocSH2">0:00</span> | <span id="atocSH2g">0:00</span></p>
                 <p>Average Time w Ball: <span id="avgSH2">0:00</span> | <span id="avgSH2g">0:00</span></p>
+                <p>Average Time no Ball: <span id="avgnoSH2">0:00</span> | <span id="avgnoSH2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmSH2">0</span> | <span id="pmSH2g">0</span></p>
                 <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_SH2">0</span> | <span id="xGf_SH2g">0</span></p>
@@ -292,6 +308,7 @@ It extends app_layout.html with Django
     var myImg = new Image();
     myImg.src = "/static/field_canvas.png";
     var PosTime = 0; // Possession time in counters
+    var LineTime = 0; // Line on court time in counters
 
     // Time on court by line period/game (in counters)
 
@@ -330,6 +347,25 @@ It extends app_layout.html with Django
     var NotSH2g = 0;
     var NotTeam_g = 0;
     var NotTeam_p = 0;
+    
+    // Number of times without ball (in pcs)
+
+    var NotnoL1p = 0;
+    var NotnoL2p = 0;
+    var NotnoL3p = 0;
+    var NotnoL1g = 0;
+    var NotnoL2g = 0;
+    var NotnoL3g = 0;
+    var NotnoPP1p = 0;
+    var NotnoPP2p = 0; 
+    var NotnoSH1p = 0;
+    var NotnoSH2p = 0;
+    var NotnoPP1g = 0;
+    var NotnoPP2g = 0; 
+    var NotnoSH1g = 0;
+    var NotnoSH2g = 0;
+    var NotnoTeam_g = 0;
+    var NotnoTeam_p = 0;
 
     // Ball possession by line/team period/game (in counters)
 
@@ -349,6 +385,25 @@ It extends app_layout.html with Django
     var PosPP2p = 0;
     var PosSH2p = 0;
     var PosSH2g = 0;
+    
+    // Number of shifts per line period/game (in pcs)
+
+    var NosL1p = 0;
+    var NosL2p = 0;
+    var NosL3p = 0;
+    var NosTeam_p = 0;
+    var NosL1g = 0;
+    var NosL2g = 0;
+    var NosL3g = 0;
+    var NosTeam_g = 0;
+    var NosPP1g = 0;
+    var NosPP1p = 0;
+    var NosSH1p = 0;
+    var NosSH1g = 0;
+    var NosPP2g = 0;
+    var NosPP2p = 0;
+    var NosSH2p = 0;
+    var NosSH2g = 0;
     
     // xG values by line/team period/game
     
@@ -393,6 +448,10 @@ It extends app_layout.html with Django
     var Pos_p = [PosL1g, PosL2g, PosL3g, PosPP1g, PosPP2g, PosSH1g, PosSH2g, PosTeam_g];
     var Not_g = [NotL1p, NotL2p, NotL3p, NotPP1p, NotPP2p, NotSH1p, NotSH2p, NotTeam_p];
     var Not_p = [NotL1g, NotL2g, NotL3g, NotPP1g, NotPP2g, NotSH1g, NotSH2g, NotTeam_g];
+    var Nos_g = [NosL1p, NosL2p, NosL3p, NosPP1p, NosPP2p, NosSH1p, NosSH2p, NosTeam_p];
+    var Nos_p = [NosL1g, NosL2g, NosL3g, NosPP1g, NosPP2g, NosSH1g, NosSH2g, NosTeam_g];
+    var Notno_g = [NotnoL1p, NotnoL2p, NotnoL3p, NotnoPP1p, NotnoPP2p, NotnoSH1p, NotnoSH2p, NotnoTeam_p];
+    var Notno_p = [NotnoL1g, NotnoL2g, NotnoL3g, NotnoPP1g, NotnoPP2g, NotnoSH1g, NotnoSH2g, NotnoTeam_g];
     var xGf_p = [xGfL1p, xGfL2p, xGfL3p, xGfPP1p, xGfPP2p, xGfSH1p, xGfSH2p, xGfTeam_p];
     var xGf_g = [xGfL1g, xGfL2g, xGfL3g, xGfPP1g, xGfPP2g, xGfSH1g, xGfSH2g, xGfTeam_g];
     var xGa_p = [xGaL1p, xGaL2p, xGaL3p, xGaPP1p, xGaPP2p, xGaSH1p, xGaSH2p, xGaTeam_p];
@@ -514,6 +573,14 @@ It extends app_layout.html with Django
     var tocSH1p = document.getElementById("tocSH1");
     var tocSH2p = document.getElementById("tocSH2");
     var tocTeamp = document.getElementById("tocTeam");
+    var atocL1p = document.getElementById("atocL1");
+    var atocL2p = document.getElementById("atocL2");
+    var atocL3p = document.getElementById("atocL3");
+    var atocPP1p = document.getElementById("atocPP1");
+    var atocPP2p = document.getElementById("atocPP2");
+    var atocSH1p = document.getElementById("atocSH1");
+    var atocSH2p = document.getElementById("atocSH2");
+    var atocTeamp = document.getElementById("atocTeam");
     var avgL1p = document.getElementById("avgL1");
     var avgL2p = document.getElementById("avgL2");
     var avgL3p = document.getElementById("avgL3");
@@ -522,6 +589,14 @@ It extends app_layout.html with Django
     var avgSH1p = document.getElementById("avgSH1");
     var avgSH2p = document.getElementById("avgSH2");
     var avgTeamp = document.getElementById("avgTeam");
+    var avgnoL1p = document.getElementById("avgnoL1");
+    var avgnoL2p = document.getElementById("avgnoL2");
+    var avgnoL3p = document.getElementById("avgnoL3");
+    var avgnoPP1p = document.getElementById("avgnoPP1");
+    var avgnoPP2p = document.getElementById("avgnoPP2");
+    var avgnoSH1p = document.getElementById("avgnoSH1");
+    var avgnoSH2p = document.getElementById("avgnoSH2");
+    var avgnoTeamp = document.getElementById("avgnoTeam");
     var xGf_L1p = document.getElementById("xGf_L1");
     var xGf_L2p = document.getElementById("xGf_L2");
     var xGf_L3p = document.getElementById("xGf_L3");
@@ -646,6 +721,14 @@ It extends app_layout.html with Django
     var tocSH1g = document.getElementById("tocSH1g");
     var tocSH2g = document.getElementById("tocSH2g");
     var tocTeamg = document.getElementById("tocTeamg");
+    var atocL1g = document.getElementById("atocL1g");
+    var atocL2g = document.getElementById("atocL2g");
+    var atocL3g = document.getElementById("atocL3g");
+    var atocPP1g = document.getElementById("atocPP1g");
+    var atocPP2g = document.getElementById("atocPP2g");
+    var atocSH1g = document.getElementById("atocSH1g");
+    var atocSH2g = document.getElementById("atocSH2g");
+    var atocTeamg = document.getElementById("atocTeamg");
     var avgL1g = document.getElementById("avgL1g");
     var avgL2g = document.getElementById("avgL2g");
     var avgL3g = document.getElementById("avgL3g");
@@ -654,6 +737,14 @@ It extends app_layout.html with Django
     var avgSH1g = document.getElementById("avgSH1g");
     var avgSH2g = document.getElementById("avgSH2g");
     var avgTeamg = document.getElementById("avgTeamg");
+    var avgnoL1g = document.getElementById("avgnoL1g");
+    var avgnoL2g = document.getElementById("avgnoL2g");
+    var avgnoL3g = document.getElementById("avgnoL3g");
+    var avgnoPP1g = document.getElementById("avgnoPP1g");
+    var avgnoPP2g = document.getElementById("avgnoPP2g");
+    var avgnoSH1g = document.getElementById("avgnoSH1g");
+    var avgnoSH2g = document.getElementById("avgnoSH2g");
+    var avgnoTeamg = document.getElementById("avgnoTeamg");
     var xGf_L1g = document.getElementById("xGf_L1g");
     var xGf_L2g = document.getElementById("xGf_L2g");
     var xGf_L3g = document.getElementById("xGf_L3g");
@@ -686,7 +777,9 @@ It extends app_layout.html with Django
     var saa_p = [saaL1p, saaL2p, saaL3p, saaPP1p, saaPP2p, saaSH1p, saaSH2p, saaTeamp];
     var p_p = [pL1p, pL2p, pL3p, pPP1p, pPP2p, pSH1p, pSH2p, pTeamp];
     var toc_p = [tocL1p, tocL2p, tocL3p, tocPP1p, tocPP2p, tocSH1p, tocSH2p, tocTeamp];
+    var atoc_p = [atocL1p, atocL2p, atocL3p, atocPP1p, atocPP2p, atocSH1p, atocSH2p, atocTeamp];
     var avg_p = [avgL1p, avgL2p, avgL3p, avgPP1p, avgPP2p, avgSH1p, avgSH2p, avgTeamp];
+    var avgno_p = [avgnoL1p, avgnoL2p, avgnoL3p, avgnoPP1p, avgnoPP2p, avgnoSH1p, avgnoSH2p, avgnoTeamp];
     var xf_p = [xGf_L1p, xGf_L2p, xGf_L3p, xGf_PP1p, xGf_PP2p, xGf_SH1p, xGf_SH2p, xGf_Teamp];
     var xa_p = [xGa_L1p, xGa_L2p, xGa_L3p, xGa_PP1p, xGa_PP2p, xGa_SH1p, xGa_SH2p, xGa_Teamp];
     
@@ -703,7 +796,9 @@ It extends app_layout.html with Django
     var saa_g = [saaL1g, saaL2g, saaL3g, saaPP1g, saaPP2g, saaSH1g, saaSH2g, saaTeamg];
     var p_g = [pL1g, pL2g, pL3g, pPP1g, pPP2g, pSH1g, pSH2g, pTeamg];
     var toc_g = [tocL1g, tocL2g, tocL3g, tocPP1g, tocPP2g, tocSH1g, tocSH2g, tocTeamg];
+    var atoc_g = [atocL1g, atocL2g, atocL3g, atocPP1g, atocPP2g, atocSH1g, atocSH2g, atocTeamg];
     var avg_g = [avgL1g, avgL2g, avgL3g, avgPP1g, avgPP2g, avgSH1g, avgSH2g, avgTeamg];
+    var avgno_g = [avgnoL1g, avgnoL2g, avgnoL3g, avgnoPP1g, avgnoPP2g, avgnoSH1g, avgnoSH2g, avgnoTeamg];
     var xf_g = [xGf_L1g, xGf_L2g, xGf_L3g, xGf_PP1g, xGf_PP2g, xGf_SH1g, xGf_SH2g, xGf_Teamg];
     var xa_g = [xGa_L1g, xGa_L2g, xGa_L3g, xGa_PP1g, xGa_PP2g, xGa_SH1g, xGa_SH2g, xGa_Teamg];
 
@@ -761,6 +856,12 @@ It extends app_layout.html with Django
 
         } else {
             Ball_pos = 2;
+            if (started == 1 && PosTime > 0) {
+                Notno_p[line_on - 1]++;
+                Notno_g[line_on - 1]++;
+                Notno_p[7]++;
+                Notno_g[7]++;
+            }
             PosTime = 0;
         }
     }
@@ -771,6 +872,12 @@ It extends app_layout.html with Django
         document.getElementById("TeamL").style.background='#4CAF50';
         if (Order == 1) {
             Ball_pos = 2;
+            if (started == 1 && PosTime > 0) {
+                Notno_p[line_on - 1]++;
+                Notno_g[line_on - 1]++;
+                Notno_p[7]++;
+                Notno_g[7]++;
+            }
             PosTime = 0;
         }
 
@@ -792,13 +899,26 @@ It extends app_layout.html with Django
         document.getElementById(lines[line_on-1]).style.background='#4CAF50';
         document.getElementById(lines[line-1]).style.background='#555555';
         line_on = line;
-        if (Ball_pos == 1) {
-            Not_p[line_on - 1]++;
-            Not_g[line_on - 1]++;
-            Not_p[7]++;
-            Not_g[7]++;
+        if (LineTime > 0) {
+            if (Ball_pos == 1) {
+                Not_p[line_on - 1]++;
+                Not_g[line_on - 1]++;
+                Not_p[7]++;
+                Not_g[7]++;
+            }
+            if (Ball_pos == 2) {
+                Notno_p[line_on - 1]++;
+                Notno_g[line_on - 1]++;
+                Notno_p[7]++;
+                Notno_g[7]++;
+            }
+            Nos_p[line_on - 1]++;
+            Nos_g[line_on - 1]++;
+            Nos_p[7]++;
+            Nos_g[7]++;
         }
         PosTime = 0;
+        LineTime = 0;
         console.log(line_on); // debugging
     }
     // Start game or start/stop game clock
@@ -824,10 +944,22 @@ It extends app_layout.html with Django
                     Not_p[7]++;
                     Not_g[7]++;
                 }
-               document.getElementById("start").innerHTML = "Stop";
-               document.getElementById("start").style.background='#555555';
-               is_on = 1;
-               Counter();
+                if (counter == 0 && Ball_pos == 2) {
+                    Notno_p[line_on - 1]++;
+                    Notno_g[line_on - 1]++;
+                    Notno_p[7]++;
+                    Notno_g[7]++;
+                }
+                if (counter == 0) {
+                    Nos_p[line_on - 1]++;
+                    Nos_g[line_on - 1]++;
+                    Nos_p[7]++;
+                    Nos_g[7]++;
+                }
+                document.getElementById("start").innerHTML = "Stop";
+                document.getElementById("start").style.background='#555555';
+                is_on = 1;
+                Counter();
             }
             else if (is_on == 1) {  // Stop game clock
                 document.getElementById("start").innerHTML = "Start";
@@ -852,6 +984,7 @@ It extends app_layout.html with Django
                 var ctx = cnvs.getContext("2d");
                 ctx.drawImage(myImg,0,0,284,200);
                 PosTime = 0;
+                LineTime = 0;
 
                 for (let i = 0; i < 8; i++) {
 
@@ -874,10 +1007,14 @@ It extends app_layout.html with Django
                     xGf_p[i] = 0;
                     xGa_p[i] = 0;
                     Not_p[i] = 0;
+                    Nos_p[i] = 0;
+                    Notno_p[i] = 0;
 
                     p_p[i].innerHTML = 0;
                     toc_p[i].innerHTML = "00:00";
+                    atoc_p[i].innerHTML = "00:00";
                     avg_p[i].innerHTML = "00:00";
+                    avgno_p[i].innerHTML = "00:00";
                 }
 
             } else {
@@ -905,12 +1042,16 @@ It extends app_layout.html with Django
              else {
 
              }
-             
+
+             // Possession
+
              p_p[line_on - 1].innerHTML = Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
              p_p[7].innerHTML = Math.round(100 * Pos_p[7] / counter);
              
              p_g[line_on - 1].innerHTML = Math.round(100 * Pos_g[line_on - 1] / Toc_g[line_on - 1]);
              p_g[7].innerHTML = Math.round(100 * Pos_g[7] / gameCounter);
+
+             // Time on Court
 
              var toc = new Date(Toc_p[line_on - 1] * 1000);
              var d = toc.toISOString().substr(14, 5);
@@ -927,6 +1068,8 @@ It extends app_layout.html with Django
              var toc = new Date(Toc_g[7] * 1000);
              var d = toc.toISOString().substr(14, 5);
              toc_g[7].innerHTML = d;
+
+             // Average Time on Ball
 
              if (Not_p[line_on - 1] > 0) {
                 var avg = new Date(Math.round(Pos_p[line_on - 1] / Not_p[line_on - 1]) * 1000);
@@ -949,10 +1092,57 @@ It extends app_layout.html with Django
                 avg_g[7].innerHTML = a
              }
 
+             // Average Time without Ball
+
+             if (Notno_p[line_on - 1] > 0) {
+                var avg = new Date(Math.round((Toc_p[line_on - 1] - Pos_p[line_on - 1]) / Notno_p[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgno_p[line_on - 1].innerHTML = a
+             }
+             if (Notno_p[7] > 0) {
+                var avg = new Date(Math.round((Toc_p[7] - Pos_p[7]) / Notno_p[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgno_p[7].innerHTML = a
+             }
+             if (Notno_g[line_on - 1] > 0) {
+                var avg = new Date(Math.round((Toc_g[line_on - 1] - Pos_g[line_on - 1]) / Notno_g[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgno_g[line_on - 1].innerHTML = a
+             }
+             if (Notno_g[7] > 0) {
+                var avg = new Date(Math.round((Toc_g[7] - Pos_g[7]) / Notno_g[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgno_g[7].innerHTML = a
+             }
+
+             // Average Time on Court
+
+             if (Nos_p[line_on - 1] > 0) {
+                var avg = new Date(Math.round(Toc_p[line_on - 1] / Nos_p[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atoc_p[line_on - 1].innerHTML = a
+             }
+             if (Nos_p[7] > 0) {
+                var avg = new Date(Math.round(Toc_p[7] / Nos_p[7] * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atoc_p[7].innerHTML = a
+             }
+             if (Nos_g[line_on - 1] > 0) {
+                var avg = new Date(Math.round(Toc_g[line_on - 1] / Nos_g[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atoc_g[line_on - 1].innerHTML = a
+             }
+             if (Nos_g[7] > 0) {
+                var avg = new Date(Math.round(Toc_g[7] / Nos_g[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atoc_g[7].innerHTML = a
+             }
+
              counter++;
              gameCounter++;
              console.log(counter);
              PosTime++;
+             LineTime++;
              
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
