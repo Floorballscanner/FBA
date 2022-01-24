@@ -310,6 +310,11 @@ It extends app_layout.html with Django
     var PosTime = 0; // Possession time in counters
     var LineTime = 0; // Line on court time in counters
 
+    // Data arrays for shots and seconds
+
+    var shotData = ['Time', 'Team', 'Result', 'Type', 'Distance', 'Angle', 'PP', 'SH'];
+    var timeData = ['Time', 'Ball_pos', 'Line_on', 'Shot', 'Result', 'xG'];
+
     // Time on court by line period/game (in counters)
 
     var TocL1p = 0;
@@ -1161,6 +1166,10 @@ It extends app_layout.html with Django
                 var a = avg.toISOString().substr(14, 5);
                 atoc_g[7].innerHTML = a;
              }
+
+             // Add one row to timeData - array
+             timeData.push([counter, Ball_pos, Line_on, 'Shot', 'Result', 'xG']);
+             console.log(timeData);
 
              counter++;
              gameCounter++;
