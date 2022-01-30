@@ -317,6 +317,9 @@ It extends app_layout.html with Django
     var dataShot = 0;
     var dataRes = 0;
     var dataxG = 0;
+    var dataType = 0;
+    var dataDis = 0;
+    var dataAngle = 0;
 
     // Time on court by line period/game (in counters)
 
@@ -1175,12 +1178,11 @@ It extends app_layout.html with Django
 
              // Add one row to timeData - array
 
-             timeData.push([counter, Ball_pos, line_on, dataShot, dataRes, dataxG]);
+             timeData.push([gameCounter, Ball_pos, line_on, dataShot, dataRes, dataxG]);
+
              dataShot = 0;
              dataRes = 0;
              dataxG = 0;
-
-             console.log(timeData);
 
              counter++;
              gameCounter++;
@@ -1465,6 +1467,11 @@ It extends app_layout.html with Django
         var ctx = cnvs.getContext("2d");
         menu.style.display = "none";
         ctx.font = "12px Arial";
+        console.log(x);
+        console.log(y);
+        dataType = 0;
+        dataDis = 0;
+        dataAngle = 0;
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
@@ -1627,6 +1634,7 @@ It extends app_layout.html with Django
                 }
             }
         }
+        shotData.push([gameCounter, Ball_pos, dataRes, 'Type', 'Distance', 'Angle', 'PP', 'SH']);
     }
 
 </script>
