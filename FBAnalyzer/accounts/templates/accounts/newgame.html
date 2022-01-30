@@ -1636,7 +1636,7 @@ It extends app_layout.html with Django
         // Goal place(s) x=25/259, y=100 (x = 10%/90% of length, y=50% of width)
         // Field dimensions = 20m x 40m (fWidth x fLength)
         // Shot Angle in respect to reference line (line from the center of the goal line to the
-        // right goal post from the goalie's perspective)
+        // left goal post from the goalie's perspective)
 
         var b = (100 - y) * 20 / fWidth;
 
@@ -1701,8 +1701,16 @@ It extends app_layout.html with Django
                 var dataAngle = angle * (180 / Math.PI);
             }
         }
+        var dataPp = 0;
+        var dataSh = 0;
+        if (line_on == 3 || line_on == 4) {
+            dataPp = 1;
+        }
+        if (line_on == 5 || line_on == 6) {
+            dataSh == 1;
+        }
 
-        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, 'PP', 'SH']);
+        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         console.log(shotData);
     }
 
