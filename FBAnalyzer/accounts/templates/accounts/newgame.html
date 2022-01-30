@@ -309,6 +309,8 @@ It extends app_layout.html with Django
     myImg.src = "/static/field_canvas.png";
     var PosTime = 0; // Possession time in counters
     var LineTime = 0; // Line on court time in counters
+    var fWidth = 200; // Width of the shotmap field in pixels
+    var fLength = 284; // Length of the shotmap field in pixels
 
     // Data arrays for shots and seconds
 
@@ -833,7 +835,7 @@ It extends app_layout.html with Django
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
-    ctx.drawImage(myImg,0,0,284,200);
+    ctx.drawImage(myImg,0,0,fLength,fWidth);
     }
 
     // When the change team order button is changed, the teams switch sides
@@ -1013,7 +1015,7 @@ It extends app_layout.html with Django
                 document.getElementById("label").innerHTML = "00:00:00";
 
                 var ctx = cnvs.getContext("2d");
-                ctx.drawImage(myImg,0,0,284,200);
+                ctx.drawImage(myImg,0,0,fLength,fWidth);
                 PosTime = 0;
                 LineTime = 0;
                 dataShot = 0;
@@ -1233,13 +1235,13 @@ It extends app_layout.html with Django
         }
 
         menu.style.display = "block";
-        if (PosX <= 284/2)
+        if (PosX <= fLength/2)
         {
             menu.style.left = PosX + "px";
         }
         else
         {
-            menu.style.left = (PosX-100) + "px";
+            menu.style.left = (PosX-(fWidth/2)) + "px";
         }
         menu.style.top = PosY + "px";
 
@@ -1258,8 +1260,8 @@ It extends app_layout.html with Django
     function shotSaved() {
         Draw(PosX,PosY,3);
 
-        var dx = PosX / 284;
-        var dy = PosY / 200;
+        var dx = PosX / fLength;
+        var dy = PosY / fWidth;
 
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 left side
 
@@ -1362,8 +1364,8 @@ It extends app_layout.html with Django
     function shotGoal() {
         Draw(PosX,PosY,4);
 
-        var dx = PosX / 284;
-        var dy = PosY / 200;
+        var dx = PosX / fLength;
+        var dy = PosY / fWidth;
 
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 left side
 
@@ -1467,11 +1469,6 @@ It extends app_layout.html with Django
         var ctx = cnvs.getContext("2d");
         menu.style.display = "none";
         ctx.font = "12px Arial";
-        console.log(x);
-        console.log(y);
-        dataType = 0;
-        dataDis = 0;
-        dataAngle = 0;
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
@@ -1634,7 +1631,79 @@ It extends app_layout.html with Django
                 }
             }
         }
-        shotData.push([gameCounter, Ball_pos, dataRes, 'Type', 'Distance', 'Angle', 'PP', 'SH']);
+
+        // Shot Angle and Distance calculation
+        // Goal place(s) x=25/259, y=100 (x = 10%/90% of length, y=50% of width)
+        // Field dimensions = 20m x 40m (fWidth x fLength)
+        // Shot Angle in respect to reference line (line from the center of the goal line to the
+        // right goal post from the goalie's perspective)
+
+        var b = (100 - y) * 20 / fWidth;
+        var ref =
+
+        if (Ball_pos == 1) {
+            if (Order == 1) {
+                var a = (259 - x) * 40 / fLength;
+                dataDis = Math.sqrt( a*a + b*b );
+
+                var dAx = 259 - 259; // Reference line
+                var dAy = 200 - 100;
+                var dBx = x - 259; // Line from the shot position to the center of the goal line
+                var dBy = y - 100;
+
+                var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
+                if (angle < 0) {angle = angle * -1;}
+                var dataAngle = angle * (180 / Math.PI);
+
+            }
+        }
+        if (Ball_pos == 1) {
+            if (Order == 2) {
+                var a = (25 - x) * 40 / fLength;
+                dataDis = Math.sqrt( a*a + b*b );
+
+                var dAx = 25 - 25; // Reference line
+                var dAy = 0 - 100;
+                var dBx = x - 25; // Line from the shot position to the center of the goal line
+                var dBy = y - 100;
+
+                var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
+                if (angle < 0) {angle = angle * -1;}
+                var dataAngle = angle * (180 / Math.PI);
+            }
+        }
+        if (Ball_pos == 2) {
+            if (Order == 1) {
+                var a = (25 - x) * 40 / fLength;
+                dataDis = Math.sqrt( a*a + b*b );
+
+                var dAx = 25 - 25; // Reference line
+                var dAy = 0 - 100;
+                var dBx = x - 25; // Line from the shot position to the center of the goal line
+                var dBy = y - 100;
+
+                var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
+                if (angle < 0) {angle = angle * -1;}
+                var dataAngle = angle * (180 / Math.PI);
+            }
+        }
+        if (Ball_pos == 2) {
+            if (Order == 2) {
+                var a = (259 - x) * 40 / fLength;
+                dataDis = Math.sqrt( a*a + b*b );
+
+                var dAx = 259 - 259; // Reference line
+                var dAy = 200 - 100;
+                var dBx = x - 259; // Line from the shot position to the center of the goal line
+                var dBy = y - 100;
+
+                var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
+                if (angle < 0) {angle = angle * -1;}
+                var dataAngle = angle * (180 / Math.PI);
+            }
+        }
+
+        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, 'PP', 'SH']);
     }
 
 </script>
