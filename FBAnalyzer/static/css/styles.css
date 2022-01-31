@@ -242,7 +242,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 .stats-L1, .stats-L2, .stats-L3, .stats-Team, .stats-PP1, .stats-PP2, .stats-SH1, .stats-SH2 {
     text-align: center;
-    padding-top: 2px;
+    font-size: 10px;
 }
 
 .underline {
