@@ -79,7 +79,6 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 .preferences{
     color: #fff;
     text-decoration: none;
-
 }
 .user-pic{
     text-decoration: none;
@@ -112,7 +111,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .app-text p{
     font-size: 15px;
-    line-height: 25px;
+    line-height: 20px;
     color: #000000;
     padding-left: 20%;
     padding-right: 20%;
