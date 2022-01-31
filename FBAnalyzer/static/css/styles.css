@@ -38,6 +38,13 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     padding: 15px 10px;
     text-decoration: none;
 }
+.fixed-nav-bar ul li {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    text-decoration: none;
+}
 .fixed-nav-bar ul li img{
     padding: 20px 20px;
 }
