@@ -1763,6 +1763,21 @@ It extends app_layout.html with Django
     }
 
     function sendData() {
+        Email.send({
+            SecureToken : "<your generated token>",
+            To : "floorballscanner@gmail.com",
+            From : "floorballscanner@gmail.com",
+            Subject : "Test Email",
+            Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>",
+            //Attachments : [
+            //{
+            //    name : "smtp.png",
+            //    path : "https://…/smtp.png"
+            //}]
+            }).then(
+                message => alert(message)
+            );
+
         console.log("sendData pressed");
     }
 
