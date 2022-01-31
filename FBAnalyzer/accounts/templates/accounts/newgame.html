@@ -484,7 +484,7 @@ It extends app_layout.html with Django
     // html id shotmenu to variable
     var menu = document.getElementById("shotmenu");
     // html id shottype to variable
-    var type = document.getElementById("shottype");
+    var stype = document.getElementById("shottype");
 
     // html ids to variables
     // Shots/goals/misses/blocks/saves for/against, turnovers, plusminus by line/team and period/game
@@ -1723,44 +1723,44 @@ It extends app_layout.html with Django
 
         // Shot type menu
 
-        type.style.display = "block";
+        stype.style.display = "block";
         if (PosX <= fLength/2)
         {
-            type.style.left = PosX + "px";
+            stype.style.left = PosX + "px";
         }
         else
         {
-            type.style.left = (PosX-(fWidth/2)) + "px";
+            stype.style.left = (PosX-(fWidth/2)) + "px";
         }
-        type.style.top = PosY + "px";
+        stype.style.top = PosY + "px";
 
         // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
     }
 
     function shotTurnover() {
         dataType = 1;
-        type.style.display = "none";
+        stype.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         console.log(shotData);
     }
 
     function shotOnetimer() {
         dataType = 2;
-        type.style.display = "none";
+        stype.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         console.log(shotData);
     }
 
     function shotRebound() {
         dataType = 3;
-        type.style.display = "none";
+        stype.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         console.log(shotData);
     }
 
     function shotDirect() {
         dataType = 4;
-        type.style.display = "none";
+        stype.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         console.log(shotData);
     }
