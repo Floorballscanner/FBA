@@ -201,7 +201,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 	text-align: center;
 	padding: 20px 0 0 0;
 }
-.shot-menu {
+.shot-menu, .shot-type {
     position: absolute;
     display: none;
     text-align: center;
@@ -209,24 +209,24 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     border: 1px solid darkgray;
 }
 
-.shot-menu ul {
+.shot-menu ul, .shot-type ul {
     padding: 0px;
     margin: 0px;
     min-width: 150px;
     list-style: none;
 }
 
-.shot-menu ul li {
+.shot-menu ul li, .shot-type ul li {
     padding-bottom: 7px;
     padding-top: 7px;
 }
 
-.shot-menu ul li a {
+.shot-menu ul li a, .shot-type ul li a {
     text-decoration: none;
     color: black;
 }
 
-.shot-menu ul li:hover {
+.shot-menu ul li:hover, .shot-type ul li:hover {
     background: darkgray;
 }
 
@@ -241,7 +241,6 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .stats-L1, .stats-L2, .stats-L3, .stats-Team, .stats-PP1, .stats-PP2, .stats-SH1, .stats-SH2 {
     text-align: center;
-    font-size: 10px;
 }
 
 .underline {
