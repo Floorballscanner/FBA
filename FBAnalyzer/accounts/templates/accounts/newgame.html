@@ -1728,15 +1728,8 @@ It extends app_layout.html with Django
         // Shot type menu
 
         stype.style.display = "block";
-        if (PosX <= fLength/2)
-        {
-            stype.style.left = PosX + "px";
-        }
-        else
-        {
-            stype.style.left = (PosX-(fWidth/2)) + "px";
-        }
-        stype.style.top = PosY + "px";
+        stype.style.left = menu.style.left;
+        stype.style.top = meny.style.top;
 
         // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
     }
