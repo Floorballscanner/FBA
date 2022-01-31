@@ -331,6 +331,8 @@ It extends app_layout.html with Django
     var dataType = 0;
     var dataDis = 0;
     var dataAngle = 0;
+    var dataPp = 0;
+    var dataSh = 0;
 
     // Time on court by line period/game (in counters)
 
@@ -1712,8 +1714,10 @@ It extends app_layout.html with Django
                 var dataAngle = angle * (180 / Math.PI);
             }
         }
-        var dataPp = 0;
-        var dataSh = 0;
+        if (line_on < 4) {
+            dataPp = 0;
+            dataSh = 0;
+        }
         if (line_on == 4 || line_on == 5) {
             dataPp = 1;
         }
