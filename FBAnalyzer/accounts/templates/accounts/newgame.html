@@ -487,6 +487,9 @@ It extends app_layout.html with Django
     var menu = document.getElementById("shotmenu");
     // html id shottype to variable
     var stype = document.getElementById("shottype");
+    // home and away team textfields to variables
+    var hTeam = document.getElementById("home_team");
+    var aTeam = document.getElementById("away_team");
 
     // html ids to variables
     // Shots/goals/misses/blocks/saves for/against, turnovers, plusminus by line/team and period/game
@@ -1763,17 +1766,20 @@ It extends app_layout.html with Django
     }
 
     function sendData() {
+
+        let today = new Date().toLocaleDateString()
+
         Email.send({
             SecureToken : "3b145e7d-a832-4993-b00e-15a5d25b5b98",
             To : 'floorballscanner@gmail.com',
             From : "floorballscanner@gmail.com",
-            Subject : "Test Email",
-            Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>",
-            // Attachments : [
-            // {
-            //    name : "smtp.png",
-            //    path : "https://…/smtp.png"
-            // }]
+            Subject : "Game Data",
+            Body : "<html><h2>"today +": "+ hTeam.value +" - "+ aTeam.value +"</h2><strong>Bold text</strong><br></br><em>Italic</em></html>",
+            Attachments : [
+            {
+                name : "smtp.png",
+                path : "https://…/smtp.png"
+            }]
             }).then(
                 message => alert(message)
             );
