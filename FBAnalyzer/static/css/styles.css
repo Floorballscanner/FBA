@@ -240,30 +240,11 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
       margin-left: 10px;
 }
 
-.stats-L1 {
+.stats-L1, .stats-L2, .stats-L3, .stats-Team, .stats-PP1, .stats-PP2, .stats-SH1, .stats-SH2 {
     text-align: center;
+    padding-top: 2px;
 }
-.stats-L2 {
-    text-align: center;
-}
-.stats-L3 {
-    text-align: center;
-}
-.stats-Team {
-    text-align: center;
-}
-.stats-PP1 {
-    text-align: center;
-}
-.stats-PP2 {
-    text-align: center;
-}
-.stats-SH1 {
-    text-align: center;
-}
-.stats-SH2 {
-    text-align: center;
-}
+
 .underline {
     display: inline-block;
     width: 160px;
