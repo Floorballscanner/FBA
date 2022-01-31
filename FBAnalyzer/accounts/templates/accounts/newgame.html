@@ -1267,11 +1267,11 @@ It extends app_layout.html with Django
     }
 
     function shotBlocked() {
-        Draw(PosX,PosY,2);
+        Draw(PosX,PosY,3);
     }
 
     function shotSaved() {
-        Draw(PosX,PosY,3);
+        Draw(PosX,PosY,2);
 
         var dx = PosX / fLength;
         var dy = PosY / fWidth;
@@ -1507,9 +1507,9 @@ It extends app_layout.html with Django
                     mf_g[7].innerHTML++;
                 }
             }
-            else if (type == 2) {   // Shot Blocked
+            else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
-                dataRes = 2;
+                dataRes = 3;
                 
                 sf_p[line_on - 1].innerHTML++;
                 if (line_on < 4) {
@@ -1528,9 +1528,9 @@ It extends app_layout.html with Django
                     ba_p[7].innerHTML++;
                 }
             }
-            else if (type == 3) {   // Shot Saved
+            else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
-                dataRes = 3;
+                dataRes = 2;
                 
                 sf_p[line_on - 1].innerHTML++;
                 if (line_on < 4) {
