@@ -45,7 +45,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     background-color: #7d7d7d;
 }
 .fixed-nav-bar ul li a:not([href]){
-    display: block;
+    display: none;
     color: white;
     text-align: center;
     padding: 15px 10px;

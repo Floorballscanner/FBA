@@ -490,6 +490,8 @@ It extends app_layout.html with Django
     // home and away team textfields to variables
     var hTeam = document.getElementById("home_team");
     var aTeam = document.getElementById("away_team");
+    // Send Data - button element to variable
+    var sData = document.getElementById("sData");
 
     // html ids to variables
     // Shots/goals/misses/blocks/saves for/against, turnovers, plusminus by line/team and period/game
@@ -975,6 +977,7 @@ It extends app_layout.html with Django
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 started = 1;
+                sData.style.display = "block";
             } else {
             }
         }
