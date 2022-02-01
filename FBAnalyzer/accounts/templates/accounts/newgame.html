@@ -278,7 +278,16 @@ It extends app_layout.html with Django
         </div>
     </div>
     <div class="row">
-        <div id="xG_chart" style="width: 900px; height: 500px"></div>
+        <div id="xGTeam_chart" style="height: 400px"></div>
+    </div>
+    <div class="row">
+        <div id="xGL1_chart" style="height: 300px"></div>
+    </div>
+    <div class="row">
+        <div id="xGL2_chart" style="height: 300px"></div>
+    </div>
+    <div class="row">
+        <div id="xGL3_chart" style="height: 300px"></div>
     </div>
 </div>
 
@@ -345,7 +354,10 @@ It extends app_layout.html with Django
     var dataSh = 0;
 
     // Data arrays for charts
-    var xG_array = [['Time','xG Team 1','xG Team 2']];
+    var xGTeam_array = [['Time','xG Team 1','xG Team 2']];
+    var xGL1_array = [['Time','xG Team 1','xG Team 2']];
+    var xGL2_array = [['Time','xG Team 1','xG Team 2']];
+    var xGL3_array = [['Time','xG Team 1','xG Team 2']];
 
     // Time on court by line period/game (in counters)
 
@@ -1213,10 +1225,13 @@ It extends app_layout.html with Django
              // Add one row to timeData - array
              timeData.push([gameCounter, Ball_pos, line_on, dataShot, dataRes, dataxG]);
 
-             // Add one row to the xG array
+             // Add one row to the xG arrays
              var date = new Date(gameCounter * 1000);
              var display = date.toISOString().substr(11, 8);
-             xG_array.push([display, xGf_g[7], xGa_g[7]]);
+             xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+             xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+             xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+             xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
 
              dataShot = 0;
              dataRes = 0;
@@ -1807,17 +1822,53 @@ It extends app_layout.html with Django
     }
 
     function drawChart() {
-        console.log(xG_array);
-        var data = google.visualization.arrayToDataTable(xG_array);
+
+        // Team xG Chart
+        var data = google.visualization.arrayToDataTable(xGTeam_array);
 
         var options = {
-          title: 'xG by time and team',
+          title: 'xG by Team',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('xG_chart'));
+        var chart = new google.visualization.LineChart(document.getElementById('xGTeam_chart'));
+        chart.draw(data, options);
 
+        // Line 1 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL1_array);
+
+        var options = {
+          title: 'xG by Line 1',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('xGL1_chart'));
+        chart.draw(data, options);
+
+        // Line 2 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL2_array);
+
+        var options = {
+          title: 'xG by Line 2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('xGL2_chart'));
+        chart.draw(data, options);
+
+        // Line 3 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL3_array);
+
+        var options = {
+          title: 'xG by Line 3',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('xGL3_chart'));
         chart.draw(data, options);
 
     }
