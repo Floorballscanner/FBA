@@ -278,16 +278,24 @@ It extends app_layout.html with Django
         </div>
     </div>
     <div class="row">
-        <div id="xGTeam_chart" style="height: 400px"></div>
+        <div class="col-sm-12">
+            <div id="xGTeam_chart" style="height: 400px"></div>
+        </div>
     </div>
     <div class="row">
-        <div id="xGL1_chart" style="height: 300px"></div>
+        <div class="col-sm-12">
+            <div id="xGL1_chart" style="height: 300px"></div>
+        </div>
     </div>
     <div class="row">
-        <div id="xGL2_chart" style="height: 300px"></div>
+        <div class="col-sm-12">
+            <div id="xGL2_chart" style="height: 300px"></div>
+        </div>
     </div>
     <div class="row">
-        <div id="xGL3_chart" style="height: 300px"></div>
+        <div class="col-sm-12">
+            <div id="xGL3_chart" style="height: 300px"></div>
+        </div>
     </div>
 </div>
 
@@ -1630,9 +1638,9 @@ It extends app_layout.html with Django
                     ma_g[7].innerHTML++;
                 }
             }
-            else if (type == 2) {   // Shot Blocked
+            else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
-                dataRes = 2;
+                dataRes = 3;
                 
                 sa_p[line_on - 1].innerHTML++;
                 bf_p[line_on - 1].innerHTML++;
@@ -1645,9 +1653,9 @@ It extends app_layout.html with Django
                     bf_p[7].innerHTML++;
                 }
             }
-            else if (type == 3) {   // Shot Saved
+            else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
-                dataRes = 3;
+                dataRes = 2;
                 
                 sa_p[line_on - 1].innerHTML++;
                 sa_g[line_on - 1].innerHTML++;
