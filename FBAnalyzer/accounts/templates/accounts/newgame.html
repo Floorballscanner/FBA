@@ -302,7 +302,8 @@ It extends app_layout.html with Django
 
 <!-- The JavaScript - code that describes the game analysis functionality -->
 
-<script>
+<!--<script> -->
+<script type="text/javascript">
 
     // Variables
     var line_on = 1; // Line on court
@@ -325,6 +326,7 @@ It extends app_layout.html with Django
     var fLength = 284; // Length of the shotmap field in pixels
 
     // Google charts
+
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
