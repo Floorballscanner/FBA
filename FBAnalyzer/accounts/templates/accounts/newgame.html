@@ -277,6 +277,9 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+    <div class="row">
+        <div id="xG_chart" style="width: 900px; height: 500px"></div>
+    </div>
 </div>
 
 <div id="shotmenu" class="shot-menu">
@@ -320,6 +323,10 @@ It extends app_layout.html with Django
     var LineTime = 0; // Line on court time in counters
     var fWidth = 200; // Width of the shotmap field in pixels
     var fLength = 284; // Length of the shotmap field in pixels
+
+    // Google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
     // Data arrays for shots and seconds
 
@@ -1786,6 +1793,20 @@ It extends app_layout.html with Django
         }
 
         console.log("sendData pressed");
+    }
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(shotData);
+
+        var options = {
+          title: 'xG by time and team',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('xG_chart'));
+
+        chart.draw(data, options);
     }
 
 </script>
