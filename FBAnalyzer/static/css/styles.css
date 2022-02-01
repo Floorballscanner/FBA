@@ -44,12 +44,13 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 .fixed-nav-bar ul li a:hover {
     background-color: #7d7d7d;
 }
-.send_data{
+.fixed-nav-bar ul li a send_data{
     display: block;
     color: white;
     text-align: center;
     padding: 15px 10px;
     text-decoration: none;
+}
 .active{
     color: #C0C0C0;
     text-decoration: none;
