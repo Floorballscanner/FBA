@@ -1775,11 +1775,6 @@ It extends app_layout.html with Django
             From : "floorballscanner@gmail.com",
             Subject : "Game Data",
             Body : "<html><h2>"+ today +": "+ hTeam.value +" - "+ aTeam.value +"</h2><p>"+ shotData +"</p></br><p>"+ timeData +"</html>",
-            //Attachments : [
-            //{
-            //    name : "smtp.png",
-            //    path : "https://…/smtp.png"
-            //}]
             }).then(
                 message => alert(message)
             );
