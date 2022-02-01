@@ -330,7 +330,6 @@ It extends app_layout.html with Django
     // Google charts
 
     google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
 
     // Data arrays for shots and seconds
 
@@ -344,6 +343,9 @@ It extends app_layout.html with Django
     var dataAngle = 0;
     var dataPp = 0;
     var dataSh = 0;
+
+    // Data arrays for charts
+    var xG_array = [];
 
     // Time on court by line period/game (in counters)
 
@@ -1209,8 +1211,10 @@ It extends app_layout.html with Django
              }
 
              // Add one row to timeData - array
-
              timeData.push([gameCounter, Ball_pos, line_on, dataShot, dataRes, dataxG]);
+
+             // Add one row to the xG array
+             xG_array.push([gameCounter,xGfTeam_g,xGaTeam_g]);
 
              dataShot = 0;
              dataRes = 0;
@@ -1224,6 +1228,7 @@ It extends app_layout.html with Django
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
+             drawChart(); // Update charts
 
              t = setTimeout(function(){ Count() }, 1000);
          }
@@ -1800,7 +1805,7 @@ It extends app_layout.html with Django
     }
 
     function drawChart() {
-        var data = google.visualization.arrayToDataTable(timeData);
+        var data = google.visualization.arrayToDataTable(xG_array);
 
         var options = {
           title: 'xG by time and team',
