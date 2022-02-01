@@ -1805,6 +1805,7 @@ It extends app_layout.html with Django
     }
 
     function drawChart() {
+        console.log(xG_array);
         var data = google.visualization.arrayToDataTable(xG_array);
 
         var options = {
@@ -1816,6 +1817,7 @@ It extends app_layout.html with Django
         var chart = new google.visualization.LineChart(document.getElementById('xG_chart'));
 
         chart.draw(data, options);
+
     }
 
 </script>
