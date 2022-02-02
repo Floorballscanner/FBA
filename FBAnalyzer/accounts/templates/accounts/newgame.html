@@ -1050,6 +1050,7 @@ It extends app_layout.html with Django
                 document.getElementById("start").innerHTML = "Start";
                 document.getElementById("start").style.background='#4CAF50';
                 is_on = 0;
+                drawChart(); // Update charts
             }
         }
     }
@@ -1253,7 +1254,6 @@ It extends app_layout.html with Django
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
-             drawChart(); // Update charts
 
              t = setTimeout(function(){ Count() }, 1000);
          }
