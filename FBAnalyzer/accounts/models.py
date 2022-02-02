@@ -6,7 +6,6 @@ import uuid
 # Create your models here
 
 class Player(models.Model):
-    print(11)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     jersey_number = models.IntegerField()
