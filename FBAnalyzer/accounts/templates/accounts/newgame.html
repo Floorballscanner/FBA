@@ -10,65 +10,80 @@ It extends app_layout.html with Django
 
 <div class="container" style="Padding-top: 40px;">
     <div class="row">
-        <div class="col-sm-4">
-            <div class="team-selection">
-                <h2>Team 1</h2>
-                <form>
-                    <textarea id="home_team" name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
-                </form>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="game-clock">
-                <h4 id="periodNr">Period 1</h4>
-                <h2 id="label">00:00:00</h2>
-            </div>
-            <div class="game-btn" role="group" aria-label="Game buttons">
-                <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
-                <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
-                <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="team-selection">
-                <h2>Team 2</h2>
-                <form>
-                    <textarea id="away_team" name="awayteam" rows="1" placeholder="Opponent team name" maxlength="20" wrap="off"></textarea>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
+            // Shot map
             <div class="shot-map">
-            <p>Shot mapping</p>
-            <canvas id="myCanvas" onmousedown="GetCoordinates()" width="284" height="200"></canvas>
+                <p>Shot mapping</p>
+                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="600"></canvas>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="button-input">
-                <p>Line on court</p>
-                <div class="line-btn btn-group-lg" role="group" aria-label="Line buttons">
-                    <button id="L1" type="button" style="background-color: #555555" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
-                    <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
-                    <button id="L3" type="button" onclick="Line_change(3)" class="btn btn-secondary">Line 3</button>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    // Home Team
+                    <div class="team-selection">
+                        <h2>Team 1</h2>
+                        <form>
+                            <textarea id="home_team" name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
+                        </form>
+                    </div>
                 </div>
-                <div class="line-btn" role="group" aria-label="Line buttons">
-                    <button id="Pp1" type="button" onclick="Line_change(4)" class="btn btn-secondary">PP 1</button>
-                    <button id="Pp2" type="button" onclick="Line_change(5)" class="btn btn-secondary">PP 2</button>
-                    <button id="Sh1" type="button" onclick="Line_change(6)" class="btn btn-secondary">SH 1</button>
-                    <button id="Sh2" type="button" onclick="Line_change(7)" class="btn btn-secondary">SH 2</button>
+                <div class="col-sm-6">
+                    // Away Team
+                    <div class="team-selection">
+                        <h2>Team 2</h2>
+                        <form>
+                            <textarea id="away_team" name="awayteam" rows="1" placeholder="Opponent team name" maxlength="20" wrap="off"></textarea>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="pos-input">
-                <p>Position</p>
-                {% load static %}
-                <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="30" height="30" alt="order">
-                <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
-                    <button id="TeamL" type="button" style="background-color: #555555" onclick="BallTeamL()" class="btn btn-secondary">Team 1</button>
-                    <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary">Team 2</button>
+            <div class="row">
+                <div class="col-sm-6">
+                    // Game clock and period
+                    <div class="game-clock">
+                        <h4 id="periodNr">Period 1</h4>
+                        <h2 id="label">00:00:00</h2>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    // Start/Stop/Period/Reset - buttons
+                    <div class="game-btn" role="group" aria-label="Game buttons">
+                        <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
+                        <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
+                        <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    // Lines on court
+                    <div class="button-input">
+                        <p>Line on court</p>
+                        <div class="line-btn btn-group-lg" role="group" aria-label="Line buttons">
+                            <button id="L1" type="button" style="background-color: #555555" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
+                            <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
+                            <button id="L3" type="button" onclick="Line_change(3)" class="btn btn-secondary">Line 3</button>
+                        </div>
+                        <div class="line-btn" role="group" aria-label="Line buttons">
+                            <button id="Pp1" type="button" onclick="Line_change(4)" class="btn btn-secondary">PP 1</button>
+                            <button id="Pp2" type="button" onclick="Line_change(5)" class="btn btn-secondary">PP 2</button>
+                            <button id="Sh1" type="button" onclick="Line_change(6)" class="btn btn-secondary">SH 1</button>
+                            <button id="Sh2" type="button" onclick="Line_change(7)" class="btn btn-secondary">SH 2</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    // Team sides
+                    <div class="pos-input">
+                        <p>Position</p>
+                        {% load static %}
+                        <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="30" height="30" alt="order">
+                        <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
+                            <button id="TeamL" type="button" style="background-color: #555555" onclick="BallTeamL()" class="btn btn-secondary">Team 1</button>
+                            <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary">Team 2</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -338,11 +353,11 @@ It extends app_layout.html with Django
     var PosX = 0;
     var PosY = 0;
     var myImg = new Image();
-    myImg.src = "/static/field_canvas.png";
+    myImg.src = "/static/canvas.png";
     var PosTime = 0; // Possession time in counters
     var LineTime = 0; // Line on court time in counters
-    var fWidth = 200; // Width of the shotmap field in pixels
-    var fLength = 284; // Length of the shotmap field in pixels
+    var fWidth = 300; // Width of the shotmap field in pixels
+    var fLength = 600; // Length of the shotmap field in pixels
 
     // Google charts
 
@@ -886,7 +901,7 @@ It extends app_layout.html with Django
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
-    ctx.drawImage(myImg,0,0,fLength,fWidth);
+    ctx.drawImage(myImg,0,0,fWidth,fLength);
     }
 
     // When the change team order button is changed, the teams switch sides
