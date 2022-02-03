@@ -105,26 +105,26 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     margin: auto;
 }
 .app-text h1{
-    font-size: 25px;
+    font-size: 15px;
     padding-top: 20%;
     padding-left: 20%;
     padding-right: 20%;
 }
 .app-text h3{
-    font-size: 20px;
+    font-size: 12px;
     padding-top: 10%;
     padding-left: 20%;
     padding-right: 20%;
 }
 .app-text p{
-    font-size: 15px;
+    font-size: 10px;
     line-height: 20px;
     color: #000000;
     padding-left: 20%;
     padding-right: 20%;
 }
 .app-text ul li{
-    font-size: 15px;
+    font-size: 10px;
     line-height: 25px;
     color: #000000;
     list-style-position: inside;
@@ -167,7 +167,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 .team-selection textarea {
     width: 70%;
     resize: none;
-    font-size: 20px;
+    font-size: 15px;
     text-align: center;
 }
 
