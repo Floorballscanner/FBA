@@ -16,7 +16,7 @@ It extends app_layout.html with Django
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="row justify-content-center align-items-start">
+            <div class="row justify-content-center">
                 <div class="team-selection">
                     <h2>Team 1</h2>
                     <form>
@@ -24,13 +24,13 @@ It extends app_layout.html with Django
                     </form>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center">
+            <div class="row justify-content-center">
                 <div class="game-clock">
                     <h4 id="periodNr">Period 1</h4>
                     <h2 id="label">00:00:00</h2>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-end">
+            <div class="row justify-content-center">
                 <div class="button-input">
                     <p>Line on court</p>
                     <div class="line-btn btn-group-lg" role="group" aria-label="Line buttons">
@@ -48,7 +48,7 @@ It extends app_layout.html with Django
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="row justify-content-center align-items-start">
+            <div class="row justify-content-center">
                 <div class="team-selection">
                     <h2>Team 2</h2>
                     <form>
@@ -56,14 +56,14 @@ It extends app_layout.html with Django
                     </form>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center">
+            <div class="row justify-content-center">
                 <div class="game-btn" role="group" aria-label="Game buttons">
                     <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
                     <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
                     <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-end">
+            <div class="row justify-content-center">
                 <div class="pos-input">
                     <p>Position</p>
                     {% load static %}
