@@ -12,7 +12,7 @@ It extends app_layout.html with Django
     <div class="row">
         <div class="col-sm-6">
             <div class="shot-map">
-                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="250" height="500"></canvas>
+                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
             </div>
         </div>
         <div class="col-sm-6">
@@ -348,7 +348,7 @@ It extends app_layout.html with Django
     myImg.src = "/static/field.png";
     var PosTime = 0; // Possession time in counters
     var LineTime = 0; // Line on court time in counters
-    var fWidth = 250; // Width of the shotmap field in pixels
+    var fWidth = 300; // Width of the shotmap field in pixels
     var fLength = 500; // Length of the shotmap field in pixels
 
     // Google charts
