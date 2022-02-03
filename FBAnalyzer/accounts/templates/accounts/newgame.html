@@ -57,13 +57,6 @@ It extends app_layout.html with Django
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="game-btn" role="group" aria-label="Game buttons">
-                    <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
-                    <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
-                    <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
-                </div>
-            </div>
-            <div class="row justify-content-center">
                 <div class="pos-input">
                     <p>Position</p>
                     {% load static %}
@@ -74,6 +67,13 @@ It extends app_layout.html with Django
                     <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
                         <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary">Team 2</button>
                     </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="game-btn" role="group" aria-label="Game buttons">
+                    <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
+                    <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
+                    <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
                 </div>
             </div>
         </div>
