@@ -11,7 +11,6 @@ It extends app_layout.html with Django
 <div class="container" style="Padding-top: 40px;">
     <div class="row">
         <div class="col-sm-6">
-            // Shot map
             <div class="shot-map">
                 <p>Shot mapping</p>
                 <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="600"></canvas>
@@ -20,7 +19,6 @@ It extends app_layout.html with Django
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-6">
-                    // Home Team
                     <div class="team-selection">
                         <h2>Team 1</h2>
                         <form>
@@ -29,7 +27,6 @@ It extends app_layout.html with Django
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    // Away Team
                     <div class="team-selection">
                         <h2>Team 2</h2>
                         <form>
@@ -40,14 +37,12 @@ It extends app_layout.html with Django
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    // Game clock and period
                     <div class="game-clock">
                         <h4 id="periodNr">Period 1</h4>
                         <h2 id="label">00:00:00</h2>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    // Start/Stop/Period/Reset - buttons
                     <div class="game-btn" role="group" aria-label="Game buttons">
                         <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
                         <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
@@ -57,7 +52,6 @@ It extends app_layout.html with Django
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    // Lines on court
                     <div class="button-input">
                         <p>Line on court</p>
                         <div class="line-btn btn-group-lg" role="group" aria-label="Line buttons">
@@ -74,7 +68,6 @@ It extends app_layout.html with Django
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    // Team sides
                     <div class="pos-input">
                         <p>Position</p>
                         {% load static %}
@@ -353,7 +346,7 @@ It extends app_layout.html with Django
     var PosX = 0;
     var PosY = 0;
     var myImg = new Image();
-    myImg.src = "/static/canvas.png";
+    myImg.src = "/static/field.png";
     var PosTime = 0; // Possession time in counters
     var LineTime = 0; // Line on court time in counters
     var fWidth = 300; // Width of the shotmap field in pixels
