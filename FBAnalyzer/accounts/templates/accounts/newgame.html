@@ -1335,7 +1335,7 @@ It extends app_layout.html with Django
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
             if (dy < 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[13-Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxG = xG_matrix[Math.floor(dy*14)][Math.floor(dx*13)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1360,7 +1360,7 @@ It extends app_layout.html with Django
         if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
 
             if (dy > 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
+                var dxG = xG_matrix[14-Math.floor((dy-0.5)*14)][13-Math.floor(dx*13)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1384,7 +1384,7 @@ It extends app_layout.html with Django
         if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
 
             if (dy > 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
+                var dxG = xG_matrix[14-Math.floor((dy-0.5)*14)][13-Math.floor(dx*13)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
@@ -1405,10 +1405,10 @@ It extends app_layout.html with Django
             }
         }
 
-        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
 
             if (dy < 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
+                var dxG = xG_matrix[Math.floor(dy*14)][Math.floor(dx*13)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
@@ -1438,8 +1438,8 @@ It extends app_layout.html with Django
 
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
-            if (dy > 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*14)][Math.floor(dx*13)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1462,8 +1462,8 @@ It extends app_layout.html with Django
 
         if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
 
-            if (dy < 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[14-Math.floor((dy-0.5)*14)][13-Math.floor(dx*13)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1486,8 +1486,8 @@ It extends app_layout.html with Django
 
         if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
 
-            if (dy < 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[14-Math.floor((dy-0.5)*14)][13-Math.floor(dx*13)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
@@ -1510,8 +1510,8 @@ It extends app_layout.html with Django
 
         if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
 
-            if (dy > 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*14)][Math.floor(dx*13)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
