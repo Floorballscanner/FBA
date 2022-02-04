@@ -874,19 +874,23 @@ It extends app_layout.html with Django
     // xG mapping matrix
 
     let xG_matrix = [
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,2,3,4,8,12,13,13,14,11,10,8,8],
-        [0,0,2,12,14,13,13,15,16,12,12,12,10,10],
-        [0,0,13,13,18,16,18,20,22,19,18,11,14,10],
-        [0,0,14,18,22,20,27,25,24,21,20,19,12,14],
-        [0,0,35,54,33,32,29,29,27,24,25,20,18,16],
-        [0,0,99,54,38,35,33,30,28,28,22,20,19,18],
-        [0,0,35,55,30,32,29,29,28,28,25,18,16,16],
-        [0,0,15,31,24,26,23,29,23,23,22,18,12,15],
-        [0,0,14,19,18,24,18,23,17,19,15,13,14,13],
-        [0,0,13,15,18,16,16,18,15,14,15,12,11,10],
-        [0,0,2,5,9,16,14,15,15,14,12,15,9,9],
-        [0,0,2,3,4,7,8,9,12,13,13,10,7,7], ]
+
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 2, 2,13,14,15,35,99,35,14,13, 2, 2, 0],
+        [ 3, 5,15,19,31,55,54,54,18,13,12, 3, 0],
+        [ 4, 9,18,18,24,30,38,33,22,18,14, 4, 0],
+        [ 7,16,16,24,26,32,35,32,20,16,13, 8, 0],
+        [ 8,14,16,18,23,29,33,29,27,18,13,12, 0],
+        [ 9,15,18,23,29,29,30,29,25,20,15,13, 0],
+        [12,15,15,17,23,28,28,27,24,22,16,13, 0],
+        [13,14,14,19,23,28,28,24,21,19,12,14, 0],
+        [13,12,15,15,22,25,22,25,20,18,12,11, 0],
+        [10,15,12,13,18,18,20,20,19,11,12,10, 0],
+        [ 7, 9,11,14,12,16,19,18,12,14,10, 8, 0],
+        [ 7, 9,10,13,15,16,18,16,14,10,10, 8, 0],
+
+        ];
 
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
@@ -1300,7 +1304,7 @@ It extends app_layout.html with Django
         }
 
         menu.style.display = "block";
-        if (PosX <= fLength/2)
+        if (PosX <= fWidth/2)
         {
             menu.style.left = PosX + "px";
         }
@@ -1330,8 +1334,8 @@ It extends app_layout.html with Django
 
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
-            if (dy > 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[13-Math.floor((dx-0.5)*2*14)][Math.floor(dy*13)] / 100;
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1355,7 +1359,7 @@ It extends app_layout.html with Django
 
         if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
 
-            if (dy < 0.5) { // Ball on the attack zone
+            if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1379,7 +1383,7 @@ It extends app_layout.html with Django
 
         if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
 
-            if (dy < 0.5) { // Ball on the attack zone
+            if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1403,7 +1407,7 @@ It extends app_layout.html with Django
 
         if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
 
-            if (dy > 0.5) { // Ball on the attack zone
+            if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1534,8 +1538,6 @@ It extends app_layout.html with Django
         var ctx = cnvs.getContext("2d");
         menu.style.display = "none";
         ctx.font = "12px Arial";
-        console.log(x);
-        console.log(y);
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
@@ -1700,7 +1702,7 @@ It extends app_layout.html with Django
         }
 
         // Shot Angle and Distance calculation
-        // Goal place(s) x=50/450, y=150 (x = 10%/90% of length, y=50% of width)
+        // Goal place(s) y=50/450, x=150 (x = 10%/90% of length, y=50% of width)
         // Field dimensions = 20m x 40m (fWidth x fLength)
         // Shot Angle in respect to reference line (line from the center of the goal line to the
         // left goal post from the goalie's perspective)
@@ -1709,13 +1711,13 @@ It extends app_layout.html with Django
 
         if (Ball_pos == 1) {
             if (Order == 1) {
-                var a = (450 - y) * 40 / fLength;
+                var a = (50 - y) * 40 / fLength;
                 dataDis = Math.sqrt( a*a + b*b );
 
-                var dAy = 450 - 450; // Reference line
+                var dAy = 50 - 50; // Reference line
                 var dAx = 300 - 150;
-                var dBy = x - 450; // Line from the shot position to the center of the goal line
-                var dBx = y - 150;
+                var dBy = y - 50; // Line from the shot position to the center of the goal line
+                var dBx = x - 150;
 
                 var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
                 if (angle < 0) {angle = angle * -1;}
@@ -1725,12 +1727,12 @@ It extends app_layout.html with Django
         }
         if (Ball_pos == 1) {
             if (Order == 2) {
-                var a = (50 - y) * 40 / fLength;
+                var a = (450 - y) * 40 / fLength;
                 dataDis = Math.sqrt( a*a + b*b );
 
-                var dAy = 50 - 50; // Reference line
-                var dAx = 0 - 150;
-                var dBy = y - 50; // Line from the shot position to the center of the goal line
+                var dAy = 450 - 450; // Reference line
+                var dAx = 300 - 150;
+                var dBy = y - 450; // Line from the shot position to the center of the goal line
                 var dBx = x - 150;
 
                 var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
@@ -1740,12 +1742,12 @@ It extends app_layout.html with Django
         }
         if (Ball_pos == 2) {
             if (Order == 1) {
-                var a = (50 - y) * 40 / fLength;
+                var a = (450 - y) * 40 / fLength;
                 dataDis = Math.sqrt( a*a + b*b );
 
-                var dAy = 50 - 50; // Reference line
-                var dAx = 0 - 150;
-                var dBy = y - 50; // Line from the shot position to the center of the goal line
+                var dAy = 450 - 450; // Reference line
+                var dAx = 300 - 150;
+                var dBy = y - 450; // Line from the shot position to the center of the goal line
                 var dBx = x - 150;
 
                 var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
@@ -1755,12 +1757,12 @@ It extends app_layout.html with Django
         }
         if (Ball_pos == 2) {
             if (Order == 2) {
-                var a = (450 - y) * 40 / fLength;
+                var a = (50 - y) * 40 / fLength;
                 dataDis = Math.sqrt( a*a + b*b );
 
-                var dAy = 450 - 450; // Reference line
+                var dAy = 50 - 50; // Reference line
                 var dAx = 300 - 150;
-                var dBy = y - 450; // Line from the shot position to the center of the goal line
+                var dBy = y - 50; // Line from the shot position to the center of the goal line
                 var dBx = x - 150;
 
                 var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
