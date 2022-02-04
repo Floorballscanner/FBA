@@ -1354,6 +1354,9 @@ It extends app_layout.html with Django
                     xf_g[7].innerHTML = xGf_g[7];
                 }
                 dataxG = dxG;
+                console.log(Math.floor(dy*14));
+                console.log(Math.floor(dx*13));
+                console.log(dxG);
             }
         }
 
@@ -1378,6 +1381,9 @@ It extends app_layout.html with Django
                     xf_g[7].innerHTML = xGf_g[7];
                 }
                 dataxG = dxG;
+                console.log(14-Math.floor((dy-0.5)*14));
+                console.log(13-Math.floor(dx*13));
+                console.log(dxG);
             }
         }
 
@@ -1402,6 +1408,9 @@ It extends app_layout.html with Django
                     xa_g[7].innerHTML = xGa_g[7];
                 }
                 dataxG = dxG;
+                console.log(14-Math.floor((dy-0.5)*14));
+                console.log(13-Math.floor(dx*13));
+                console.log(dxG);
             }
         }
 
@@ -1426,6 +1435,9 @@ It extends app_layout.html with Django
                     xa_g[7].innerHTML = xGa_g[7];
                 }
                 dataxG = dxG;
+                console.log(Math.floor(dy*14));
+                console.log(Math.floor(dx*13));
+                console.log(dxG);
             }
         }
     }
@@ -1794,28 +1806,28 @@ It extends app_layout.html with Django
         dataType = 1;
         stype.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
-        console.log(shotData);
+        // console.log(shotData);
     }
 
     function shotOnetimer() {
         dataType = 2;
         stype.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
-        console.log(shotData);
+        // console.log(shotData);
     }
 
     function shotRebound() {
         dataType = 3;
         stype.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
-        console.log(shotData);
+        // console.log(shotData);
     }
 
     function shotDirect() {
         dataType = 4;
         stype.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
-        console.log(shotData);
+        // console.log(shotData);
     }
 
     function sendData() {
