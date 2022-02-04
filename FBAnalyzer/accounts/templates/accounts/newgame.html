@@ -896,12 +896,12 @@ It extends app_layout.html with Django
 
     // When the change team order button is changed, the teams switch sides
     function ChangeOrder() {
-        if (Order == 1) { // Team 1 is moved as the right one, defence zone on the right
+        if (Order == 1) { // Team 1 is moved as the upper one, defence zone is up
             document.getElementById("TeamL").innerHTML = "Team 2";
             document.getElementById("TeamR").innerHTML = "Team 1";
             Order = 2;
         }
-        else { // Team 1 is moved as the left one, defence zone on the left
+        else { // Team 1 is moved as the bottom one, defence zone is down
             document.getElementById("TeamL").innerHTML = "Team 1";
             document.getElementById("TeamR").innerHTML = "Team 2";
             Order = 1;
@@ -1325,13 +1325,13 @@ It extends app_layout.html with Django
     function shotSaved() {
         Draw(PosX,PosY,2);
 
-        var dx = PosX / fLength;
-        var dy = PosY / fWidth;
+        var dx = PosX / fWidth;
+        var dy = PosY / fLength;
 
-        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 left side
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
-            if (dx > 0.5) { // Ball on the attack zone
-                var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dx-0.5)*2*14)][Math.floor(dy*13)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1353,9 +1353,9 @@ It extends app_layout.html with Django
             }
         }
 
-        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 right side
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
 
-            if (dx < 0.5) { // Ball on the attack zone
+            if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1377,9 +1377,9 @@ It extends app_layout.html with Django
             }
         }
 
-        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 left side
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
 
-            if (dx < 0.5) { // Ball on the attack zone
+            if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1401,9 +1401,9 @@ It extends app_layout.html with Django
             }
         }
 
-        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 right side
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
 
-            if (dx > 0.5) { // Ball on the attack zone
+            if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1429,12 +1429,12 @@ It extends app_layout.html with Django
     function shotGoal() {
         Draw(PosX,PosY,4);
 
-        var dx = PosX / fLength;
-        var dy = PosY / fWidth;
+        var dx = PosX / fWidth;
+        var dy = PosY / fLength;
 
-        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 left side
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
-            if (dx > 0.5) { // Ball on the attack zone
+            if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1456,9 +1456,9 @@ It extends app_layout.html with Django
             }
         }
 
-        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 right side
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
 
-            if (dx < 0.5) { // Ball on the attack zone
+            if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1480,9 +1480,9 @@ It extends app_layout.html with Django
             }
         }
 
-        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 left side
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
 
-            if (dx < 0.5) { // Ball on the attack zone
+            if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][Math.floor(dx*2*14)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1504,9 +1504,9 @@ It extends app_layout.html with Django
             }
         }
 
-        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 right side
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
 
-            if (dx > 0.5) { // Ball on the attack zone
+            if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*13)][13-Math.floor((dx-0.5)*2*14)] / 100;
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
@@ -1698,22 +1698,22 @@ It extends app_layout.html with Django
         }
 
         // Shot Angle and Distance calculation
-        // Goal place(s) x=25/259, y=100 (x = 10%/90% of length, y=50% of width)
+        // Goal place(s) x=50/450, y=150 (x = 10%/90% of length, y=50% of width)
         // Field dimensions = 20m x 40m (fWidth x fLength)
         // Shot Angle in respect to reference line (line from the center of the goal line to the
         // left goal post from the goalie's perspective)
 
-        var b = (100 - y) * 20 / fWidth;
+        var b = (150 - x) * 20 / fWidth;
 
         if (Ball_pos == 1) {
             if (Order == 1) {
-                var a = (259 - x) * 40 / fLength;
+                var a = (450 - y) * 40 / fLength;
                 dataDis = Math.sqrt( a*a + b*b );
 
-                var dAx = 259 - 259; // Reference line
-                var dAy = 200 - 100;
-                var dBx = x - 259; // Line from the shot position to the center of the goal line
-                var dBy = y - 100;
+                var dAy = 450 - 450; // Reference line
+                var dAx = 300 - 150;
+                var dBy = x - 450; // Line from the shot position to the center of the goal line
+                var dBx = y - 150;
 
                 var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
                 if (angle < 0) {angle = angle * -1;}
@@ -1723,13 +1723,13 @@ It extends app_layout.html with Django
         }
         if (Ball_pos == 1) {
             if (Order == 2) {
-                var a = (25 - x) * 40 / fLength;
+                var a = (50 - y) * 40 / fLength;
                 dataDis = Math.sqrt( a*a + b*b );
 
-                var dAx = 25 - 25; // Reference line
-                var dAy = 0 - 100;
-                var dBx = x - 25; // Line from the shot position to the center of the goal line
-                var dBy = y - 100;
+                var dAy = 50 - 50; // Reference line
+                var dAx = 0 - 150;
+                var dBy = y - 50; // Line from the shot position to the center of the goal line
+                var dBx = x - 150;
 
                 var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
                 if (angle < 0) {angle = angle * -1;}
@@ -1738,13 +1738,13 @@ It extends app_layout.html with Django
         }
         if (Ball_pos == 2) {
             if (Order == 1) {
-                var a = (25 - x) * 40 / fLength;
+                var a = (50 - y) * 40 / fLength;
                 dataDis = Math.sqrt( a*a + b*b );
 
-                var dAx = 25 - 25; // Reference line
-                var dAy = 0 - 100;
-                var dBx = x - 25; // Line from the shot position to the center of the goal line
-                var dBy = y - 100;
+                var dAy = 50 - 50; // Reference line
+                var dAx = 0 - 150;
+                var dBy = y - 50; // Line from the shot position to the center of the goal line
+                var dBx = x - 150;
 
                 var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
                 if (angle < 0) {angle = angle * -1;}
@@ -1753,13 +1753,13 @@ It extends app_layout.html with Django
         }
         if (Ball_pos == 2) {
             if (Order == 2) {
-                var a = (259 - x) * 40 / fLength;
+                var a = (450 - y) * 40 / fLength;
                 dataDis = Math.sqrt( a*a + b*b );
 
-                var dAx = 259 - 259; // Reference line
-                var dAy = 200 - 100;
-                var dBx = x - 259; // Line from the shot position to the center of the goal line
-                var dBy = y - 100;
+                var dAy = 450 - 450; // Reference line
+                var dAx = 300 - 150;
+                var dBy = y - 450; // Line from the shot position to the center of the goal line
+                var dBx = x - 150;
 
                 var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
                 if (angle < 0) {angle = angle * -1;}
