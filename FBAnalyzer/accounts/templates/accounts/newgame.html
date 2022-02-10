@@ -1148,10 +1148,10 @@ It extends app_layout.html with Django
              // Possession
 
              p_p[line_on - 1].innerHTML = Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
-             p_p[7].innerHTML = Math.round(100 * Pos_p[7] / counter);
+             p_p[7].innerHTML = Math.round(100 * Pos_p[7] / (Toc_p[0] + Toc_p[1] + Toc_p[2]));
              
              p_g[line_on - 1].innerHTML = Math.round(100 * Pos_g[line_on - 1] / Toc_g[line_on - 1]);
-             p_g[7].innerHTML = Math.round(100 * Pos_g[7] / gameCounter);
+             p_g[7].innerHTML = Math.round(100 * Pos_g[7] / (Toc_g[0] + Toc_g[1] + Toc_g[2]));
 
              // Time on Court
 
@@ -1304,7 +1304,7 @@ It extends app_layout.html with Django
         }
 
         menu.style.display = "block";
-        if (PosY <= 3*fLength/4)
+        if (PosY <= 4*fLength/5)
         {
             menu.style.top = PosY + "px";
         }
