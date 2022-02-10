@@ -1077,7 +1077,7 @@ It extends app_layout.html with Django
                 document.getElementById("label").innerHTML = "00:00:00";
 
                 var ctx = cnvs.getContext("2d");
-                ctx.drawImage(myImg,0,0,fLength,fWidth);
+                ctx.drawImage(myImg,0,0,fWidth,fLength);
                 PosTime = 0;
                 LineTime = 0;
                 dataShot = 0;
@@ -1304,15 +1304,15 @@ It extends app_layout.html with Django
         }
 
         menu.style.display = "block";
-        if (PosX <= fWidth/2)
+        if (PosY <= 3*fLength/4)
         {
-            menu.style.left = PosX + "px";
+            menu.style.top = PosY + "px";
         }
         else
         {
-            menu.style.left = (PosX-(fWidth/2)) + "px";
+            menu.style.top = (PosY-(fLength/4)) + "px";
         }
-        menu.style.top = PosY + "px";
+        menu.style.left = PosX + "px";
 
         PosX = PosX - ImgPos[0];
         PosY = PosY - ImgPos[1];
