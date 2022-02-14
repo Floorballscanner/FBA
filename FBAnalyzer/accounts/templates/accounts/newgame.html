@@ -1244,7 +1244,7 @@ It extends app_layout.html with Django
              timeData.push([gameCounter, Ball_pos, line_on, dataShot, dataRes, dataxG]);
 
              // Add one row to the xG arrays every minute
-             if (gamecounter % 60 == 0) {
+             if (gameCounter % 60 == 0) {
 
                  var date = new Date(gameCounter * 1000);
                  var display = date.toISOString().substr(11, 8);
