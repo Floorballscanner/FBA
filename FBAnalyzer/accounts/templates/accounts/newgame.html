@@ -1243,13 +1243,16 @@ It extends app_layout.html with Django
              // Add one row to timeData - array
              timeData.push([gameCounter, Ball_pos, line_on, dataShot, dataRes, dataxG]);
 
-             // Add one row to the xG arrays
-             var date = new Date(gameCounter * 1000);
-             var display = date.toISOString().substr(11, 8);
-             xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
-             xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
-             xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
-             xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
+             // Add one row to the xG arrays every minute
+             if (gamecounter % 60 == 0) {
+
+                 var date = new Date(gameCounter * 1000);
+                 var display = date.toISOString().substr(11, 8);
+                 xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                 xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                 xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                 xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
+             }
 
              dataShot = 0;
              dataRes = 0;
@@ -1354,6 +1357,12 @@ It extends app_layout.html with Django
                     xf_g[7].innerHTML = xGf_g[7];
                 }
                 dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
             }
         }
 
@@ -1378,6 +1387,12 @@ It extends app_layout.html with Django
                     xf_g[7].innerHTML = xGf_g[7];
                 }
                 dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
             }
         }
 
@@ -1402,6 +1417,12 @@ It extends app_layout.html with Django
                     xa_g[7].innerHTML = xGa_g[7];
                 }
                 dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
             }
         }
 
@@ -1426,6 +1447,12 @@ It extends app_layout.html with Django
                     xa_g[7].innerHTML = xGa_g[7];
                 }
                 dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
             }
         }
     }
@@ -1457,6 +1484,12 @@ It extends app_layout.html with Django
                     xf_g[7].innerHTML = xGf_g[7];
                 }
                 dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
             }
         }
 
@@ -1481,6 +1514,12 @@ It extends app_layout.html with Django
                     xf_g[7].innerHTML = xGf_g[7];
                 };
                 dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
             }
         }
 
@@ -1505,6 +1544,12 @@ It extends app_layout.html with Django
                     xa_g[7].innerHTML = xGa_g[7];
                 }
                 dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
             }
         }
 
@@ -1529,6 +1574,12 @@ It extends app_layout.html with Django
                     xa_g[7].innerHTML = xGa_g[7];
                 }
                 dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7]]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0]]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1]]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2]]);
             }
         }
     }
