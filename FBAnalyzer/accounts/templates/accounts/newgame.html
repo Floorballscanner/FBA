@@ -367,10 +367,10 @@ It extends app_layout.html with Django
     var dataSh = 0;
 
     // Data arrays for charts
-    var xGTeam_array = [['Time','xG Team 1','xG Team 2','Goal xG T1','Goal xG T2']];
-    var xGL1_array = [['Time','xG Team 1','xG Team 2','Goal xG T1','Goal xG T2']];
-    var xGL2_array = [['Time','xG Team 1','xG Team 2','Goal xG T1','Goal xG T2']];
-    var xGL3_array = [['Time','xG Team 1','xG Team 2','Goal xG T1','Goal xG T2']];
+    var xGTeam_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL1_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL3_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
 
     // Time on court by line period/game (in counters)
 
@@ -1899,8 +1899,8 @@ It extends app_layout.html with Django
           curveType: 'function',
           legend: { position: 'bottom' },
           seriesType: 'lines',
-          series: {2: {type: 'bars'}},
-          series: {3: {type: 'bars'}}
+          series: {3: {type: 'bars', color: 'blue'}},
+          series: {4: {type: 'bars', color: 'red'}}
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
@@ -1914,8 +1914,8 @@ It extends app_layout.html with Django
           curveType: 'function',
           legend: { position: 'bottom' },
           seriesType: 'lines',
-          series: {2: {type: 'bars'}},
-          series: {3: {type: 'bars'}}
+          series: {3: {type: 'bars', color: 'blue'}},
+          series: {4: {type: 'bars', color: 'red'}}
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGL1_chart'));
@@ -1929,8 +1929,8 @@ It extends app_layout.html with Django
           curveType: 'function',
           legend: { position: 'bottom' },
           seriesType: 'lines',
-          series: {2: {type: 'bars'}},
-          series: {3: {type: 'bars'}}
+          series: {3: {type: 'bars', color: 'blue'}},
+          series: {4: {type: 'bars', color: 'red'}}
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGL2_chart'));
@@ -1944,8 +1944,8 @@ It extends app_layout.html with Django
           curveType: 'function',
           legend: { position: 'bottom' },
           seriesType: 'lines',
-          series: {2: {type: 'bars'}},
-          series: {3: {type: 'bars'}}
+          series: {3: {type: 'bars', color: 'blue'}},
+          series: {4: {type: 'bars', color: 'red'}}
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGL3_chart'));
