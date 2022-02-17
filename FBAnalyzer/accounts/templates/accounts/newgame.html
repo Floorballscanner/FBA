@@ -284,7 +284,12 @@ It extends app_layout.html with Django
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div id="xGTeam_chart" style="height: 400px"></div>
+            <div id="posTeam_chart" style="height: 300px"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGTeam_chart" style="height: 300px"></div>
         </div>
     </div>
     <div class="row">
@@ -348,6 +353,8 @@ It extends app_layout.html with Django
     var LineTime = 0; // Line on court time in counters
     var fWidth = 300; // Width of the shotmap field in pixels
     var fLength = 500; // Length of the shotmap field in pixels
+    var shiftNo = 1; // Number of shifts in numbers
+    var shiftPos = 0; // Possession time in shift in counters
 
     // Google charts
 
@@ -366,11 +373,16 @@ It extends app_layout.html with Django
     var dataPp = 0;
     var dataSh = 0;
 
-    // Data arrays for charts
+    // Data arrays for xG charts
+
     var xGTeam_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGL1_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGL2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGL3_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+
+    // Data arrays for line shift charts
+
+    var posTeam_array = [['Shift nr','Line 1','Line 2','Line 3','PP Line','SH Line', 'Team']];
 
     // Time on court by line period/game (in counters)
 
@@ -506,14 +518,14 @@ It extends app_layout.html with Django
     // Arrays for easy access to variables
     var Toc_p = [TocL1p, TocL2p, TocL3p, TocPP1p, TocPP2p, TocSH1p, TocSH2p, TocTeam_p];
     var Toc_g = [TocL1g, TocL2g, TocL3g, TocPP1g, TocPP2g, TocSH1g, TocSH2g, TocTeam_g];
-    var Pos_g = [PosL1p, PosL2p, PosL3p, PosPP1p, PosPP2p, PosSH1p, PosSH2p, PosTeam_p];
-    var Pos_p = [PosL1g, PosL2g, PosL3g, PosPP1g, PosPP2g, PosSH1g, PosSH2g, PosTeam_g];
-    var Not_g = [NotL1p, NotL2p, NotL3p, NotPP1p, NotPP2p, NotSH1p, NotSH2p, NotTeam_p];
-    var Not_p = [NotL1g, NotL2g, NotL3g, NotPP1g, NotPP2g, NotSH1g, NotSH2g, NotTeam_g];
-    var Nos_g = [NosL1p, NosL2p, NosL3p, NosPP1p, NosPP2p, NosSH1p, NosSH2p, NosTeam_p];
-    var Nos_p = [NosL1g, NosL2g, NosL3g, NosPP1g, NosPP2g, NosSH1g, NosSH2g, NosTeam_g];
-    var Notno_g = [NotnoL1p, NotnoL2p, NotnoL3p, NotnoPP1p, NotnoPP2p, NotnoSH1p, NotnoSH2p, NotnoTeam_p];
-    var Notno_p = [NotnoL1g, NotnoL2g, NotnoL3g, NotnoPP1g, NotnoPP2g, NotnoSH1g, NotnoSH2g, NotnoTeam_g];
+    var Pos_p = [PosL1p, PosL2p, PosL3p, PosPP1p, PosPP2p, PosSH1p, PosSH2p, PosTeam_p];
+    var Pos_g = [PosL1g, PosL2g, PosL3g, PosPP1g, PosPP2g, PosSH1g, PosSH2g, PosTeam_g];
+    var Not_p = [NotL1p, NotL2p, NotL3p, NotPP1p, NotPP2p, NotSH1p, NotSH2p, NotTeam_p];
+    var Not_g = [NotL1g, NotL2g, NotL3g, NotPP1g, NotPP2g, NotSH1g, NotSH2g, NotTeam_g];
+    var Nos_p = [NosL1p, NosL2p, NosL3p, NosPP1p, NosPP2p, NosSH1p, NosSH2p, NosTeam_p];
+    var Nos_g = [NosL1g, NosL2g, NosL3g, NosPP1g, NosPP2g, NosSH1g, NosSH2g, NosTeam_g];
+    var Notno_p = [NotnoL1p, NotnoL2p, NotnoL3p, NotnoPP1p, NotnoPP2p, NotnoSH1p, NotnoSH2p, NotnoTeam_p];
+    var Notno_g = [NotnoL1g, NotnoL2g, NotnoL3g, NotnoPP1g, NotnoPP2g, NotnoSH1g, NotnoSH2g, NotnoTeam_g];
     var xGf_p = [xGfL1p, xGfL2p, xGfL3p, xGfPP1p, xGfPP2p, xGfSH1p, xGfSH2p, xGfTeam_p];
     var xGf_g = [xGfL1g, xGfL2g, xGfL3g, xGfPP1g, xGfPP2g, xGfSH1g, xGfSH2g, xGfTeam_g];
     var xGa_p = [xGaL1p, xGaL2p, xGaL3p, xGaPP1p, xGaPP2p, xGaSH1p, xGaSH2p, xGaTeam_p];
@@ -979,6 +991,7 @@ It extends app_layout.html with Django
         console.log(lines); // debugging
         document.getElementById(lines[line_on-1]).style.background='#4CAF50';
         document.getElementById(lines[line-1]).style.background='#555555';
+        old_line = line_on;
         line_on = line;
         if (LineTime > 0) {
             if (Ball_pos == 1) {
@@ -1003,9 +1016,52 @@ It extends app_layout.html with Django
                 Nos_p[7]++;
                 Nos_g[7]++;
             }
+
+            if (old_line == 1) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = PosL1g + PosL2g + PosL3g + PosPP1g + PosPP2g + PosSH1g + PosSH2g;
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, shiftP, 0, 0, 0, 0, teamPos]);
+            }
+            if (old_line == 2) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = PosL1g + PosL2g + PosL3g + PosPP1g + PosPP2g + PosSH1g + PosSH2g;
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, 0, shiftP, 0, 0, 0, teamPos]);
+            }
+            if (old_line == 3) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = PosL1g + PosL2g + PosL3g + PosPP1g + PosPP2g + PosSH1g + PosSH2g;
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, 0, 0, shiftP, 0, 0, teamPos]);
+            }
+            if (old_line == 4 || old_line == 5) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = PosL1g + PosL2g + PosL3g + PosPP1g + PosPP2g + PosSH1g + PosSH2g;
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, 0, 0, 0, shiftP, 0, teamPos]);
+            }
+            if (old_line == 6 || old_line == 7) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = PosL1g + PosL2g + PosL3g + PosPP1g + PosPP2g + PosSH1g + PosSH2g;
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, 0, 0, 0, 0, shiftP, teamPos]);
+            }
         }
         PosTime = 0;
         LineTime = 0;
+        shiftNo++;
+        shiftPos = 0;
         console.log(line_on); // debugging
     }
     // Start game or start/stop game clock
@@ -1083,6 +1139,7 @@ It extends app_layout.html with Django
                 dataShot = 0;
                 dataRes = 0;
                 dataxG = 0;
+                shiftPos = 0;
 
                 for (let i = 0; i < 8; i++) {
 
@@ -1135,6 +1192,7 @@ It extends app_layout.html with Django
              if (Ball_pos == 1) {
                 Pos_p[line_on - 1]++;
                 Pos_g[line_on - 1]++;
+                shiftPos++;
                 if (line_on < 4) {
                     Pos_g[7]++;
                     Pos_p[7]++;
@@ -1954,6 +2012,22 @@ It extends app_layout.html with Django
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGL3_chart'));
         chart.draw(data, options);
+
+        // Position Chart
+        var data = google.visualization.arrayToDataTable(posTeam_array);
+
+        var options = {
+          title: 'Possession by Line',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'bars',
+          series: {
+              5:{type: 'lines', color: 'blue'}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('posTeam_chart'));
+        chart.draw(data, options);
+
     }
 
 </script>
