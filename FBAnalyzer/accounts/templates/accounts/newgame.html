@@ -1683,19 +1683,19 @@ It extends app_layout.html with Django
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
 
-                if (line_on == 0) {
+                if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
-                if (line_on == 1) {
+                if (line_on == 2) {
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, xGa_g[1]]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
-                if (line_on == 2) {
+                if (line_on == 3) {
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, xGa_g[2]]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
@@ -2084,6 +2084,11 @@ It extends app_layout.html with Django
           legend: { position: 'bottom' },
           seriesType: 'bars',
           series: {
+              0:{color: 'blue'}},
+              1:{color: 'purple'}},
+              2:{color: 'yellow'}},
+              3:{color: 'green'}},
+              4:{color: 'red'}},
               5:{type: 'line', color: 'black'}}
         };
 
