@@ -1550,21 +1550,20 @@ It extends app_layout.html with Django
 
                 if (line_on == 0) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
-                else {
-                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
-                }
+
                 if (line_on == 1) {
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], xGf_g[1], 0]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
-                else {
-                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
-                }
+
                 if (line_on == 2) {
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
-                }
-                else {
-                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 }
             }
         }
