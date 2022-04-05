@@ -1366,16 +1366,16 @@ It extends app_layout.html with Django
             + document.documentElement.scrollTop;
         }
 
-        menu.style.display = "block";
+        stype.style.display = "block";
         if (PosY <= 4*fLength/5)
         {
-            menu.style.top = PosY + "px";
+            stype.style.top = PosY + "px";
         }
         else
         {
-            menu.style.top = (PosY-(fLength/4)) + "px";
+            stype.style.top = (PosY-(fLength/4)) + "px";
         }
-        menu.style.left = PosX + "px";
+        stype.style.left = PosX + "px";
 
         PosX = PosX - ImgPos[0];
         PosY = PosY - ImgPos[1];
@@ -1399,6 +1399,17 @@ It extends app_layout.html with Django
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1430,6 +1441,17 @@ It extends app_layout.html with Django
 
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1460,6 +1482,17 @@ It extends app_layout.html with Django
 
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
@@ -1490,6 +1523,17 @@ It extends app_layout.html with Django
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
@@ -1527,6 +1571,17 @@ It extends app_layout.html with Django
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1572,6 +1627,17 @@ It extends app_layout.html with Django
 
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
@@ -1617,6 +1683,17 @@ It extends app_layout.html with Django
 
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
@@ -1662,6 +1739,17 @@ It extends app_layout.html with Django
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
                 if (line_on < 4) {
                     xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
@@ -1952,40 +2040,49 @@ It extends app_layout.html with Django
             dataSh = 1;
         }
 
-        // Shot type menu
+        // Shot menu
 
-        stype.style.display = "block";
-        stype.style.left = menu.style.left;
-        stype.style.top = menu.style.top;
-
-        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        menu.style.display = "none";
+        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
     }
 
     function shotTurnover() {
         dataType = 1;
         stype.style.display = "none";
-        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         // console.log(shotData);
     }
 
     function shotOnetimer() {
         dataType = 2;
         stype.style.display = "none";
-        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         // console.log(shotData);
     }
 
     function shotRebound() {
         dataType = 3;
         stype.style.display = "none";
-        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         // console.log(shotData);
     }
 
     function shotDirect() {
         dataType = 4;
         stype.style.display = "none";
-        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
         // console.log(shotData);
     }
 
