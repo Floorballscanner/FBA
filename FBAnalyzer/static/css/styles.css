@@ -1,0 +1,284 @@
+/*
+
+This is the main CSS - styling file. Mainly styles the newgame.html - page.
+
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+/* The main header of the application */
+.header{
+    background: #111;
+    width: 100%;
+    length: 100%;
+}
+/* Main header menu style */
+.fixed-nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 55px;
+    background-color: #000000;
+
+}
+.fixed-nav-bar ul{
+    list-style-type: none;
+    overflow: hidden;
+
+}
+.fixed-nav-bar ul li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    text-decoration: none;
+}
+.fixed-nav-bar ul li img{
+    padding: 20px 20px;
+}
+.fixed-nav-bar ul li a:hover {
+    background-color: #7d7d7d;
+}
+.fixed-nav-bar ul li a:not([href]){
+    display: none;
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    text-decoration: none;
+}
+.active{
+    color: #C0C0C0;
+    text-decoration: none;
+}
+.about{
+    color: #fff;
+    text-decoration: none;
+}
+.pricing{
+    color: #fff;
+    text-decoration: none;
+}
+.contact{
+    color: #fff;
+    text-decoration: none;
+}
+.home{
+    color: #fff;
+    text-decoration: none;
+}
+.frontpage{
+    color: #fff;
+    text-decoration: none;
+}
+.statistics{
+    color: #fff;
+    text-decoration: none;
+}
+.newgame{
+    color: #fff;
+    text-decoration: none;
+}
+.preferences{
+    color: #fff;
+    text-decoration: none;
+}
+.user-pic{
+    text-decoration: none;
+    padding: 18px;
+}
+.user{
+    text-decoration: none;
+    color: #fff;
+    padding: 20px 400px 0 0;
+}
+.banner{
+    top: 20%;
+    color: #000000;
+}
+.app-text{
+    text-align: center;
+    margin: auto;
+}
+
+.app-text h1{
+    font-size: 25px;
+    padding-top: 20%;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.app-text h3{
+    font-size: 22px;
+    padding-top: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.app-text p{
+    font-size: 15px;
+    line-height: 20px;
+    color: #000000;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.app-text ul li{
+    font-size: 15px;
+    line-height: 25px;
+    color: #000000;
+    list-style-position: inside;
+    text-align: left;
+    padding-left: 20%;
+    padding-right: 20%;
+
+}
+
+/* Index.html - page styling */
+
+.frontpage-choices{
+	text-align: center;
+	margin: 100px 0 30px 0;
+	color: #4CAF50;
+}
+.frontpage-choices h2{
+    font-size: 35px;
+    font-weight: 300;
+    color: black;
+}
+.frontpage-choices p{
+    font-size: 15px;
+    font-weight: 100;
+    color: #919191;
+}
+.frontpage-choices a{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/* Newgame.html - page styling */
+
+.team-selection textarea {
+    width: 100%;
+    resize: none;
+    font-size: 20px;
+    text-align: center;
+}
+
+.team-selection {
+    text-align: center;
+    padding: 20px 0 0 0;
+}
+
+.team-selection h2 {
+    font-size: 25px;
+}
+
+.game-btn {
+	text-align: center;
+}
+
+.button-input p{
+    text-align: center;
+    padding: 30px 0 0 0;
+}
+.shot-map{
+    text-align: center;
+    padding: 30px 0 0 0;
+}
+.pos-input{
+    text-align: center;
+    padding: 30px 0 0 0;
+}
+.pos-btn{
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+.zone-btn{
+    text-align: center;
+    padding: 25px 0 0 0;
+}
+.line-btn{
+    text-align: center;
+    padding: 10px 0 15px 0;
+}
+.game-clock {
+	text-align: center;
+	padding: 20px 0 0 0;
+}
+.shot-menu, .shot-type {
+    position: absolute;
+    display: none;
+    text-align: center;
+    background: white;
+    border: 1px solid darkgray;
+}
+
+.shot-menu ul, .shot-type ul {
+    padding: 0px;
+    margin: 0px;
+    min-width: 150px;
+    list-style: none;
+}
+
+.shot-menu ul li, .shot-type ul li {
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+
+.shot-menu ul li a, .shot-type ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.shot-menu ul li:hover, .shot-type ul li:hover {
+    background: darkgray;
+}
+
+.shot-map canvas{
+	text-align: center;
+	padding: 0px;
+	margin-left: 0px;
+}
+
+.pos-input input {
+      margin-left: 10px;
+}
+.stats-L1, .stats-L2, .stats-L3, .stats-Team, .stats-PP1, .stats-PP2, .stats-SH1, .stats-SH2 {
+    text-align: center;
+}
+
+.underline {
+    display: inline-block;
+    width: 160px;
+    height: 2px;
+    background-color: #65CD00;
+}
+
+/* myteam.html styling */
+
+.my-roster {
+    line-height 30px;
+}
+
+.player-list {
+    text-align: left;
+    list-style: none;
+}
+
+.addplayer-form {
+   display: none;
+   padding: 15px 0 0 0;
+}
+
+.changeteam-form {
+   display: none;
+   padding: 15px 0 0 0;
+}

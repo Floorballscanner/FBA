@@ -6,10 +6,89 @@ This is the about - infopage of the application.
 
 {% extends 'base_layout.html' %}
 {% block content %}
- <div class="banner">
-    <div class="app-text">
-        <h1>About FB Analyzer</h1>
-        <p>FB Analyzer is the greatest Floorball Analyzer software available</p>
+<div class="container-fluid no-padding">
+    <div class="app-text"style="Padding-top: 40px;">
+        <div class="row">
+            <div class="col-sm-12">
+                {% load static %}
+                <h3>How to use Floorball Scanner</h3>
+                <p>Floorball Scanner gives you insight into your team's performance in real-time during
+                the game. You are able to see how each line performs and take actions based on data.</p>
+                <img src="{% static 'chart1.png' %}" width="100px" height="100px">
+                <h3>Setting teams</h3>
+                <p>After logged in successfully, press <b>Select</b> in the New Game Analysis menu.</p>
+                <img class="img-fluid" src="{% static 'howto1.png' %}">
+                <p>Input your team name and opponent team name to the respective text fields.</p>
+                <img class="img-fluid" src="{% static 'howto2.png' %}">
+                <p>The game is best analysed when followed from the long side of the field. You should position
+                team buttons so that your team (Team 1) is on the same side as you see it on the field. If
+                your team is on the right side of the field, press the position change button to change sides.</p>
+                <img class="img-fluid" src="{% static 'howto3.png' %}">
+                <p>After setting team names and their right position (position can be changed also during the game),
+                    you are ready to start. Press the <b>Start Game</b> - button and confirm from the opened window.
+                Notice that you are no longer able to change team names after starting the game.</p>
+                <img class="img-fluid" src="{% static 'howto4.png' %}">
+                <p>You are now ready to start analysing. When the game starts, press the <b>Start game</b> - button
+                again to start the game clock. When the period is over and you have analysed the period results,
+                change the next period by pressing <b>Period</b> - button and confirm. Notice that this will
+                reset the period data and you are not able to see the previous period data anymore.</p>
+                <img class="img-fluid" src="{% static 'howto5.png' %}">
+                <h3>During the game</h3>
+                <p>During the game, your task is to operate game clock, track which line is on field from your team,
+                track on which side the ball is located on the field, which team has the ball, and operate the shot
+                map for both teams.</p>
+                <p>The game clock is used with the <b>Start/Stop</b> - button. Keeping the game clock updated will
+                    enable the correct <b>Time on court</b> and <b>Possession</b> - values. Shot map can be used
+                if the game clock is on or off.</p>
+                <img class="img-fluid" src="{% static 'howto6.png' %}">
+                <p><b>Line on court</b> - buttons are used to track which of your team's line is active. Notice that you only track your
+                own team. In the current version of Floorball Scanner there are three even strength lines, two shorthanded
+                and two powerplay lines. Selected line is indicated with a gray color on the button.</p>
+                <img class="img-fluid" src="{% static 'howto7.png' %}">
+                <p><b>Position</b> - buttons are used to track which team has the ball possession and if the ball
+                possession is on the attack of defence zone, in respect to your team's side of the court.</p>
+                <img class="img-fluid" src="{% static 'howto8.png' %}">
+                <p>When your team has the ball, make sure that <b>Team 1</b> - button is gray (selected). Respectively,
+                 if your opponent has the ball, make sure that <b>Team 2</b> - button is selected.</p>
+                <img class="img-fluid" src="{% static 'howto9.png' %}">
+                <p>When the game possession is on your defence zone of the field, make sure that <b>Defence</b> - button
+                is selected. Respectively, if the game possession is on your attack zone, make sure that <b>Attack</b>
+                    - button is selected. Notice that play possession should be tracked both when your team and the
+                opponent has the ball possession.</p>
+                <img class="img-fluid" src="{% static 'howto10.png' %}">
+                <p><b>Shot mapping</b> is used to track shots, saves, blocks, misses, and goals for both teams. When a shot
+                takes place, mark the shot location by pressing your finger on the map of the field. From the opened
+                list, select the outcome of the shot (saved, missed, etc.) and you can see a mark being drawn to the map.
+                Color and symbol of the shot will appear based on your selection. Blue color means your team and red
+                color opponent team, respectively. The symbol indicates if the shot was saved (s), blocked (b), missed (m),
+                or goal (g).</p>
+                <img class="img-fluid" src="{% static 'howto11.png' %}">
+                <h3>Data sheet</h3>
+                <p>One of the best features of Floorball Scanner is that the data is accessible in real-time. Below the
+                input buttons a data sheet can be found that is updated every second. Data is shown for each line of
+                your team and also the team performance is calculated.</p>
+                <img class="img-fluid" src="{% static 'howto12.png' %}" width="70%">
+                <p>You will see two values for every data row separated with a <b>|</b> - sign. The first value is the
+                result from current period, the second value is the result from the whole game.</p>
+                <img class="img-fluid" src="{% static 'howto13.png' %}">
+                <p>What do the different data elements mean?</p>
+                <ul>
+                    <li>Possession = How many percent has your team had the ball</li>
+                    <li>Time on Court = Time on court in minutes</li>
+                    <li>Att Zone w/no Ball = How many percent has the game possession been on your Attack Zone
+                    with / without ball on your team. With = You have the ball on the attack zone. Without =
+                    Opponent has the ball and you are backchecking</li>
+                    <li>Def Zone w/no Ball = How many percent has the game possession been on your Defence Zone
+                    with / without ball on your team. With = You have the ball on the defence zone. Without =
+                    Opponent has the ball and you are defending your goal</li>
+                    <li>Plus minus = Goals for - goals against</li>
+                    <li>Turnovers = Won or lost balls on the defence or attack zone. This is calculated based
+                     on Ball possession changes when game clock is on (Team 1 -> Team 2 or Team 2 -> Team 1)</li>
+                </ul>
+                </br></br>
+                <img src="{% static 'monitoring2.png' %}" width="100px" height="100px"></br></br>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

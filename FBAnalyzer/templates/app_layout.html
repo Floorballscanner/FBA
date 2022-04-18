@@ -4,33 +4,36 @@ This is the Django layout - html file. This file includes the layout of the appl
 when the user has logged in successfully.
 
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FB Analyzer</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="/static/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/font-awesome.min.css">
+    <title>Floorball Scanner</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+{% load static %}
 <body>
     <div class="header">
-        <div class="menu">
+        <nav class="fixed-nav-bar">
             <ul>
-                <li><img src="/static/ball.png" width="20px" height="20px"></li>
-                <li><a href="/accounts" class="frontpage">Frontpage</a></li>
-                <li><a href="/accounts/my_team" class="myteam">My Team</a></li>
-                <li><a href="/accounts/new_game" class="newgame">New Game</a></li>
-                <li><a href="#" class="statistics">Statistics</a></li>
-                <li style="float:right"><img src="/static/settings.png" class="preferences" width="20px" height="20px"></li>
+                {% load static %}
+                <li style="float:left"><img src="{% static 'ball.png' %}"></li>
+                <li style="float:left"><a href="/accounts" class="frontpage">Home</a></li>
+                <!--li><a href="/accounts/my_team" class="myteam">My Team</a></li-->
+                <li style="float:left"><a href="/accounts/new_game" class="newgame">New Game</a></li>
+                <li style="float:left"><a class="sendData" id="sData" onclick="sendData()">Send Data</a></li>
+                <!--li style="float:right"><img src="{% static 'settings.png' %}" class="preferences" width="20px" height="20px"></li-->
                 <li style="float:right"><a href="/accounts/logout/">Logout</a></li>
-                <li style="float:right"><div class="user">{{user}}</div></li>
-                <li style="float:right"><img src="/static/user.png" class="user-pic" width="25px" height="25px"></li>
             </ul>
-        </div>
+        </nav>
     </div>
     <!-- This is where the extended content is placed -->
     {% block content %}
@@ -39,6 +42,7 @@ when the user has logged in successfully.
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 
 </body>
 </html>

@@ -8,316 +8,303 @@ It extends app_layout.html with Django
 {% extends 'app_layout.html' %}
 {% block content %}
 
-<div class="container">
-    <h3>Analyze Game</h3>
-    <div class="row">
-        <div class="team-selection">
-			<div class="col-sm-4">
-                <h2>Team 1</h2>
-                <select id="home_teams">
-                    <option value="None">-- Select --</option>
-                    <option value="ID001">Rangers</option>
-                    <option value="ID002">Oilers</option>
-                    <option value="ID003">Add team...</option>
-                </select>
+<div class="container" style="Padding-top: 40px;">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="shot-map">
+                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="game-clock">
-                <h4 id="periodNr">Period 1</h4>
-                <h2 id="label">00:00:00</h2>
+            <div class="row justify-content-center">
+                <div class="team-selection">
+                    <h2>Team 1</h2>
+                    <form>
+                        <textarea id="home_team" name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
+                    </form>
+                </div>
             </div>
-            <div class="game-btn" role="group" aria-label="Game buttons">
-                <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
-                <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
-                <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
+            <div class="row justify-content-center">
+                <div class="game-clock">
+                    <h4 id="periodNr">Period 1</h4>
+                    <h2 id="label">00:00:00</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="button-input">
+                    <p>Line on court</p>
+                    <div class="line-btn btn-group-lg" role="group" aria-label="Line buttons">
+                        <button id="L1" type="button" style="background-color: #555555" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
+                        <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
+                        <button id="L3" type="button" onclick="Line_change(3)" class="btn btn-secondary">Line 3</button>
+                    </div>
+                    <div class="line-btn" role="group" aria-label="Line buttons">
+                        <button id="Pp1" type="button" onclick="Line_change(4)" class="btn btn-secondary">PP 1</button>
+                        <button id="Pp2" type="button" onclick="Line_change(5)" class="btn btn-secondary">PP 2</button>
+                        <button id="Sh1" type="button" onclick="Line_change(6)" class="btn btn-secondary">SH 1</button>
+                        <button id="Sh2" type="button" onclick="Line_change(7)" class="btn btn-secondary">SH 2</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="team-selection">
-			<div class="col-sm-4">
-                <h2>Team 2</h2>
-                <select id="away_teams">
-                    <option value="None">-- Select --</option>
-                    <option value="ID001">Rangers</option>
-                    <option value="ID002">Oilers</option>
-                    <option value="ID003">Add team...</option>
-                </select>
+        <div class="col-sm-4">
+            <div class="row justify-content-center">
+                <div class="team-selection">
+                    <h2>Team 2</h2>
+                    <form>
+                        <textarea id="away_team" name="awayteam" rows="1" placeholder="Opponent team name" maxlength="20" wrap="off"></textarea>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="pos-input">
+                    <p>Position</p>
+                    {% load static %}
+                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="30" height="30" alt="order">
+                    <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
+                        <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary">Team 2</button>
+                    </div>
+                    <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
+                        <button id="TeamL" type="button" style="background-color: #555555" onclick="BallTeamL()" class="btn btn-secondary">Team 1</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="game-btn" role="group" aria-label="Game buttons">
+                    <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
+                    <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
+                    <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="shot-map">
-			<div class="col-sm-4">
-                <p>Shot mapping</p>
-                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="355" height="250"></canvas>
-            </div>
-        </div>
-        <div class="button-input">
-            <div class="col-sm-4">
-                <p>Line on court</p>
-                <div class="line-btn btn-group-lg" role="group" aria-label="Line buttons">
-                    <button id="L1" type="button" style="background-color: #555555" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
-                    <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
-                    <button id="L3" type="button" onclick="Line_change(3)" class="btn btn-secondary">Line 3</button>
-                </div>
-                <div class="line-btn" role="group" aria-label="Line buttons">
-                    <button id="Pp1" type="button" onclick="Line_change(4)" class="btn btn-secondary">PP 1</button>
-                    <button id="Pp2" type="button" onclick="Line_change(5)" class="btn btn-secondary">PP 2</button>
-                    <button id="Sh1" type="button" onclick="Line_change(6)" class="btn btn-secondary">SH 1</button>
-                    <button id="Sh2" type="button" onclick="Line_change(7)" class="btn btn-secondary">SH 2</button>
-                </div>
-            </div>
-        </div>
-        <div class="pos-input">
-            <div class="col-sm-4">
-                <p>Position</p>
-                <input type="image" id="changeorder" onclick="ChangeOrder()" src="/static/change_icon.jpeg" width="30" height="30" alt="order">
-                <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
-                    <button id="TeamL" type="button" style="background-color: #555555" onclick="BallTeamL()" class="btn btn-secondary">Team 1</button>
-                    <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary">Team 2</button>
-                </div>
-                <div class="zone-btn btn-group-lg btn-group-lg" role="group" aria-label="Zone buttons">
-                    <button id="ZoneL" type="button" style="background-color: #555555" onclick="BallZoneL()" class="btn btn-secondary">Defence</button>
-                    <button id="ZoneR" type="button" onclick="BallZoneR()" class="btn btn-secondary">Attack</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="sL1" class="stats-L1">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sL1" class="stats-L1">
                 <h4><hr/>Line 1</h4>
-                <p style="padding-top: 10px">Possession: <span id="pL1">0</span>% | <span id="pL1g">0</span>%<p/>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL1">0</span>% | <span id="pL1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL1">0:00</span> | <span id="tocL1g">0:00</span></p>
-                <p>Att Zone w Ball: <span id="attz1L1">0</span>% | <span id="attz1L1g">0</span>%</p>
-                <p>Att Zone no Ball: <span id="attz2L1">0</span>% | <span id="attz2L1g">0</span>%</p>
-                <p>Def Zone w Ball: <span id="defz1L1">0</span>% | <span id="defz1L1g">0</span>%</p>
-                <p>Def Zone no Ball: <span id="defz2L1">0</span>% | <span id="defz2L1g">0</span>%</p>
-                <p style="padding-top: 10px">Team 1 Shots</p>
+                <p>Avg Time on Court: <span id="atocL1">0:00</span> | <span id="atocL1g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL1">0:00</span> | <span id="avgL1g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL1">0:00</span> | <span id="avgnoL1g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL1">0</span> | <span id="pmL1g">0</span></p>
+                <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L1">0</span> | <span id="xGf_L1g">0</span></p>
                 <p>Shots: <span id="sfL1">0</span> | <span id="sfL1g">0</span></p>
                 <p>Blocked: <span id="baL1">0</span> | <span id="baL1g">0</span></p>
                 <p>Missed: <span id="mfL1">0</span> | <span id="mfL1g">0</span></p>
                 <p>Saved: <span id="safL1">0</span> | <span id="safL1g">0</span></p>
                 <p>Goals: <span id="gfL1">0</span> | <span id="gfL1g">0</span></p>
-                <p style="padding-top: 10px">Team 2 Shots</p>
+                <p style="padding-top: 10px"><b>Team 2 Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L1">0</span> | <span id="xGa_L1g">0</span></p>
                 <p>Shots: <span id="saL1">0</span> | <span id="saL1g">0</span></p>
                 <p>Blocked: <span id="bfL1">0</span> | <span id="bfL1g">0</span></p>
                 <p>Missed: <span id="maL1">0</span> | <span id="maL1g">0</span></p>
                 <p>Saved: <span id="saaL1">0</span> | <span id="saaL1g">0</span></p>
                 <p>Goals: <span id="gaL1">0</span> | <span id="gaL1g">0</span></p>
-                <p style="padding-top: 10px">Plus minus: <span id="pmL1">0</span> | <span id="pmL1g">0</span></p>
-                <p style="padding-top: 10px">Turnovers</p>
-                <p>Won Att Zone: <span id="azwL1">0</span> | <span id="azwL1g">0</span></p>
-                <p>Won Def Zone: <span id="dzwL1">0</span> | <span id="dzwL1g">0</span></p>
-                <p>Lost Att Zone: <span id="azlL1">0</span> | <span id="azlL1g">0</span></p>
-                <p>Lost Def Zone: <span id="dzlL1">0</span> | <span id="dzlL1g">0</span></p>
-                
             </div>
         </div>
-        <div id="sL2" class="stats-L2">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sL2" class="stats-L2">
                 <h4><hr/>Line 2</h4>
-                <p style="padding-top: 10px">Possession: <span id="pL2">0</span>% | <span id="pL2g">0</span>%<p/>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL2">0</span>% | <span id="pL2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL2">0:00</span> | <span id="tocL2g">0:00</span></p>
-                <p>Att Zone w Ball: <span id="attz1L2">0</span>% | <span id="attz1L2g">0</span>%</p>
-                <p>Att Zone no Ball: <span id="attz2L2">0</span>% | <span id="attz2L2g">0</span>%</p>
-                <p>Def Zone w Ball: <span id="defz1L2">0</span>% | <span id="defz1L2g">0</span>%</p>
-                <p>Def Zone no Ball: <span id="defz2L2">0</span>% | <span id="defz2L2g">0</span>%</p>
-                <p style="padding-top: 10px">Team 1 Shots</p>
+                <p>Avg Time on Court: <span id="atocL2">0:00</span> | <span id="atocL2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL2">0:00</span> | <span id="avgL2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL2">0:00</span> | <span id="avgnoL2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL2">0</span> | <span id="pmL2g">0</span></p>
+                <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L2">0</span> | <span id="xGf_L2g">0</span></p>
                 <p>Shots: <span id="sfL2">0</span> | <span id="sfL2g">0</span></p>
                 <p>Blocked: <span id="baL2">0</span> | <span id="baL2g">0</span></p>
                 <p>Missed: <span id="mfL2">0</span> | <span id="mfL2g">0</span></p>
                 <p>Saved: <span id="safL2">0</span> | <span id="safL2g">0</span></p>
                 <p>Goals: <span id="gfL2">0</span> | <span id="gfL2g">0</span></p>
-                <p style="padding-top: 10px">Team 2 Shots</p>
+                <p style="padding-top: 10px"><b>Team 2 Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L2">0</span> | <span id="xGa_L2g">0</span></p>
                 <p>Shots: <span id="saL2">0</span> | <span id="saL2g">0</span></p>
                 <p>Blocked: <span id="bfL2">0</span> | <span id="bfL2g">0</span></p>
                 <p>Missed: <span id="maL2">0</span> | <span id="maL2g">0</span></p>
                 <p>Saved: <span id="saaL2">0</span> | <span id="saaL2g">0</span></p>
                 <p>Goals: <span id="gaL2">0</span> | <span id="gaL2g">0</span></p>
-                <p style="padding-top: 10px">Plus minus: <span id="pmL2">0</span> | <span id="pmL2g">0</span></p>
-                <p style="padding-top: 10px">Turnovers</p>
-                <p>Won Att Zone: <span id="azwL2">0</span> | <span id="azwL2g">0</span></p>
-                <p>Won Def Zone: <span id="dzwL2">0</span> | <span id="dzwL2g">0</span></p>
-                <p>Lost Att Zone: <span id="azlL2">0</span> | <span id="azlL2g">0</span></p>
-                <p>Lost Def Zone: <span id="dzlL2">0</span> | <span id="dzlL2g">0</span></p>
             </div>
         </div>
-        <div id="sL3" class="stats-L3">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sL3" class="stats-L3">
                 <h4><hr/>Line 3</h4>
-                <p style="padding-top: 10px">Possession: <span id="pL3">0</span>% | <span id="pL3g">0</span>%<p/>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL3">0</span>% | <span id="pL3g">0</span>%<p/>
                 <p>Time on Court: <span id="tocL3">0:00</span> | <span id="tocL3g">0:00</span></p>
-                <p>Att Zone w Ball: <span id="attz1L3">0</span>% | <span id="attz1L3g">0</span>%</p>
-                <p>Att Zone no Ball: <span id="attz2L3">0</span>% | <span id="attz2L3g">0</span>%</p>
-                <p>Def Zone w Ball: <span id="defz1L3">0</span>% | <span id="defz1L3g">0</span>%</p>
-                <p>Def Zone no Ball: <span id="defz2L3">0</span>% | <span id="defz2L3g">0</span>%</p>
-                <p style="padding-top: 10px">Team 1 Shots</p>
+                <p>Avg Time on Court: <span id="atocL3">0:00</span> | <span id="atocL3g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL3">0:00</span> | <span id="avgL3g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL3">0:00</span> | <span id="avgnoL3g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL3">0</span> | <span id="pmL3g">0</span></p>
+                <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L3">0</span> | <span id="xGf_L3g">0</span></p>
                 <p>Shots: <span id="sfL3">0</span> | <span id="sfL3g">0</span></p>
                 <p>Blocked: <span id="baL3">0</span> | <span id="baL3g">0</span></p>
                 <p>Missed: <span id="mfL3">0</span> | <span id="mfL3g">0</span></p>
                 <p>Saved: <span id="safL3">0</span> | <span id="safL3g">0</span></p>
                 <p>Goals: <span id="gfL3">0</span> | <span id="gfL3g">0</span></p>
-                <p style="padding-top: 10px">Team 2 Shots</p>
+                <p style="padding-top: 10px"><b>Team 2 Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L3">0</span> | <span id="xGa_L3g">0</span></p>
                 <p>Shots: <span id="saL3">0</span> | <span id="saL3g">0</span></p>
                 <p>Blocked: <span id="bfL3">0</span> | <span id="bfL3g">0</span></p>
                 <p>Missed: <span id="maL3">0</span> | <span id="maL3g">0</span></p>
                 <p>Saved: <span id="saaL3">0</span> | <span id="saaL3g">0</span></p>
                 <p>Goals: <span id="gaL3">0</span> | <span id="gaL3g">0</span></p>
-                <p style="padding-top: 10px">Plus minus: <span id="pmL3">0</span> | <span id="pmL3g">0</span></p>
-                <p style="padding-top: 10px">Turnovers</p>
-                <p>Won Att Zone: <span id="azwL3">0</span> | <span id="azwL3g">0</span></p>
-                <p>Won Def Zone: <span id="dzwL3">0</span> | <span id="dzwL3g">0</span></p>
-                <p>Lost Att Zone: <span id="azlL3">0</span> | <span id="azlL3g">0</span></p>
-                <p>Lost Def Zone: <span id="dzlL3">0</span> | <span id="dzlL3g">0</span></p>
             </div>
         </div>
-        <div id="sTeam" class="stats-Team">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sTeam" class="stats-Team">
                 <h4><hr/>Team</h4>
-                <p style="padding-top: 10px">Possession: <span id="pTeam">0</span>% | <span id="pTeamg">0</span>%<p/>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pTeam">0</span>% | <span id="pTeamg">0</span>%<p/>
                 <p>Time on Court: <span id="tocTeam">0:00</span> | <span id="tocTeamg">0:00</span></p>
-                <p>Att Zone w Ball: <span id="attz1Team">0</span>% | <span id="attz1Teamg">0</span>%</p>
-                <p>Att Zone no Ball: <span id="attz2Team">0</span>% | <span id="attz2Teamg">0</span>%</p>
-                <p>Def Zone w Ball: <span id="defz1Team">0</span>% | <span id="defz1Teamg">0</span>%</p>
-                <p>Def Zone no Ball: <span id="defz2Team">0</span>% | <span id="defz2Teamg">0</span>%</p>
-                <p style="padding-top: 10px">Team 1 Shots</p>
+                <p>Avg Time on Court: <span id="atocTeam">0:00</span> | <span id="atocTeamg">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgTeam">0:00</span> | <span id="avgTeamg">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoTeam">0:00</span> | <span id="avgnoTeamg">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmTeam">0</span> | <span id="pmTeamg">0</span></p>
+                <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_Team">0</span> | <span id="xGf_Teamg">0</span></p>
                 <p>Shots: <span id="sfTeam">0</span> | <span id="sfTeamg">0</span></p>
                 <p>Blocked: <span id="baTeam">0</span> | <span id="baTeamg">0</span></p>
                 <p>Missed: <span id="mfTeam">0</span> | <span id="mfTeamg">0</span></p>
                 <p>Saved: <span id="safTeam">0</span> | <span id="safTeamg">0</span></p>
                 <p>Goals: <span id="gfTeam">0</span> | <span id="gfTeamg">0</span></p>
-                <p style="padding-top: 10px">Team 2 Shots</p>
+                <p style="padding-top: 10px"><b>Team 2 Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_Team">0</span> | <span id="xGa_Teamg">0</span></p>
                 <p>Shots: <span id="saTeam">0</span> | <span id="saTeamg">0</span></p>
                 <p>Blocked: <span id="bfTeam">0</span> | <span id="bfTeamg">0</span></p>
                 <p>Missed: <span id="maTeam">0</span> | <span id="maTeamg">0</span></p>
                 <p>Saved: <span id="saaTeam">0</span> | <span id="saaTeamg">0</span></p>
                 <p>Goals: <span id="gaTeam">0</span> | <span id="gaTeamg">0</span></p>
-                <p style="padding-top: 10px">Plus minus: <span id="pmTeam">0</span> | <span id="pmTeamg">0</span></p>
-                <p style="padding-top: 10px">Turnovers</p>
-                <p>Won Att Zone: <span id="azwTeam">0</span> | <span id="azwTeamg">0</span></p>
-                <p>Won Def Zone: <span id="dzwTeam">0</span> | <span id="dzwTeamg">0</span></p>
-                <p>Lost Att Zone: <span id="azlTeam">0</span> | <span id="azlTeamg">0</span></p>
-                <p>Lost Def Zone: <span id="dzlTeam">0</span> | <span id="dzlTeamg">0</span></p>
             </div>
         </div>
     </div>
     <div class="row">
-        <div id="sPP1" class="stats-PP1">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sPP1" class="stats-PP1">
                 <h4><hr/>Powerplay 1</h4>
-                <p style="padding-top: 10px">Possession: <span id="pPP1">0</span>% | <span id="pPP1g">0</span>%<p/>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pPP1">0</span>% | <span id="pPP1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocPP1">0:00</span> | <span id="tocPP1g">0:00</span></p>
-                <p>Att Zone w Ball: <span id="attz1PP1">0</span>% | <span id="attz1PP1g">0</span>%</p>
-                <p>Att Zone no Ball: <span id="attz2PP1">0</span>% | <span id="attz2PP1g">0</span>%</p>
-                <p>Def Zone w Ball: <span id="defz1PP1">0</span>% | <span id="defz1PP1g">0</span>%</p>
-                <p>Def Zone no Ball: <span id="defz2PP1">0</span>% | <span id="defz2PP1g">0</span>%</p>
-                <p style="padding-top: 10px">Team 1 Shots</p>
+                <p>Avg Time on Court: <span id="atocPP1">0:00</span> | <span id="atocPP1g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgPP1">0:00</span> | <span id="avgPP1g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoPP1">0:00</span> | <span id="avgnoPP1g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmPP1">0</span> | <span id="pmPP1g">0</span></p>
+                <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_PP1">0</span> | <span id="xGf_PP1g">0</span></p>
                 <p>Shots: <span id="sfPP1">0</span> | <span id="sfPP1g">0</span></p>
                 <p>Blocked: <span id="baPP1">0</span> | <span id="baPP1g">0</span></p>
                 <p>Missed: <span id="mfPP1">0</span> | <span id="mfPP1g">0</span></p>
                 <p>Saved: <span id="safPP1">0</span> | <span id="safPP1g">0</span></p>
                 <p>Goals: <span id="gfPP1">0</span> | <span id="gfPP1g">0</span></p>
-                <p style="padding-top: 10px">Team 2 Shots</p>
+                <p style="padding-top: 10px"><b>Team 2 Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_PP1">0</span> | <span id="xGa_PP1g">0</span></p>
                 <p>Shots: <span id="saPP1">0</span> | <span id="saPP1g">0</span></p>
                 <p>Blocked: <span id="bfPP1">0</span> | <span id="bfPP1g">0</span></p>
                 <p>Missed: <span id="maPP1">0</span> | <span id="maPP1g">0</span></p>
                 <p>Saved: <span id="saaPP1">0</span> | <span id="saaPP1g">0</span></p>
                 <p>Goals: <span id="gaPP1">0</span> | <span id="gaPP1g">0</span></p>
-                <p style="padding-top: 10px">Plus minus: <span id="pmPP1">0</span> | <span id="pmPP1g">0</span></p>
-                <p style="padding-top: 10px">Turnovers</p>
-                <p>Won Att Zone: <span id="azwPP1">0</span> | <span id="azwPP1g">0</span></p>
-                <p>Won Def Zone: <span id="dzwPP1">0</span> | <span id="dzwPP1g">0</span></p>
-                <p>Lost Att Zone: <span id="azlPP1">0</span> | <span id="azlPP1g">0</span></p>
-                <p>Lost Def Zone: <span id="dzlPP1">0</span> | <span id="dzlPP1g">0</span></p>
             </div>
         </div>
-        <div id="sPP2" class="stats-PP2">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sPP2" class="stats-PP2">
                 <h4><hr/>Powerplay 2</h4>
-                <p style="padding-top: 10px">Possession: <span id="pPP2">0</span>% | <span id="pPP2g">0</span>%<p/>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pPP2">0</span>% | <span id="pPP2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocPP2">0:00</span> | <span id="tocPP2g">0:00</span></p>
-                <p>Att Zone w Ball: <span id="attz1PP2">0</span>% | <span id="attz1PP2g">0</span>%</p>
-                <p>Att Zone no Ball: <span id="attz2PP2">0</span>% | <span id="attz2PP2g">0</span>%</p>
-                <p>Def Zone w Ball: <span id="defz1PP2">0</span>% | <span id="defz1PP2g">0</span>%</p>
-                <p>Def Zone no Ball: <span id="defz2PP2">0</span>% | <span id="defz2PP2g">0</span>%</p>
-                <p style="padding-top: 10px">Team 1 Shots</p>
+                <p>Avg Time on Court: <span id="atocPP2">0:00</span> | <span id="atocPP2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgPP2">0:00</span> | <span id="avgPP2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoPP2">0:00</span> | <span id="avgnoPP2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmPP2">0</span> | <span id="pmPP2g">0</span></p>
+                <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_PP2">0</span> | <span id="xGf_PP2g">0</span></p>
                 <p>Shots: <span id="sfPP2">0</span> | <span id="sfPP2g">0</span></p>
                 <p>Blocked: <span id="baPP2">0</span> | <span id="baPP2g">0</span></p>
                 <p>Missed: <span id="mfPP2">0</span> | <span id="mfPP2g">0</span></p>
                 <p>Saved: <span id="safPP2">0</span> | <span id="safPP2g">0</span></p>
                 <p>Goals: <span id="gfPP2">0</span> | <span id="gfPP2g">0</span></p>
-                <p style="padding-top: 10px">Team 2 Shots</p>
+                <p style="padding-top: 10px"><b>Team 2 Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_PP2">0</span> | <span id="xGa_PP2g">0</span></p>
                 <p>Shots: <span id="saPP2">0</span> | <span id="saPP2g">0</span></p>
                 <p>Blocked: <span id="bfPP2">0</span> | <span id="bfPP2g">0</span></p>
                 <p>Missed: <span id="maPP2">0</span> | <span id="maPP2g">0</span></p>
                 <p>Saved: <span id="saaPP2">0</span> | <span id="saaPP2g">0</span></p>
                 <p>Goals: <span id="gaPP2">0</span> | <span id="gaPP2g">0</span></p>
-                <p style="padding-top: 10px">Plus minus: <span id="pmPP2">0</span> | <span id="pmPP2g">0</span></p>
-                <p style="padding-top: 10px">Turnovers</p>
-                <p>Won Att Zone: <span id="azwPP2">0</span> | <span id="azwPP2g">0</span></p>
-                <p>Won Def Zone: <span id="dzwPP2">0</span> | <span id="dzwPP2g">0</span></p>
-                <p>Lost Att Zone: <span id="azlPP2">0</span> | <span id="azlPP2g">0</span></p>
-                <p>Lost Def Zone: <span id="dzlPP2">0</span> | <span id="dzlPP2g">0</span></p>
             </div>
         </div>
-        <div id="sSH1" class="stats-SH1">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sSH1" class="stats-SH1">
                 <h4><hr/>Shorthanded 1</h4>
-                <p style="padding-top: 10px">Possession: <span id="pSH1">0</span>% | <span id="pSH1g">0</span>%<p/>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pSH1">0</span>% | <span id="pSH1g">0</span>%<p/>
                 <p>Time on Court: <span id="tocSH1">0:00</span> | <span id="tocSH1g">0:00</span></p>
-                <p>Att Zone w Ball: <span id="attz1SH1">0</span>% | <span id="attz1SH1g">0</span>%</p>
-                <p>Att Zone no Ball: <span id="attz2SH1">0</span>% | <span id="attz2SH1g">0</span>%</p>
-                <p>Def Zone w Ball: <span id="defz1SH1">0</span>% | <span id="defz1SH1g">0</span>%</p>
-                <p>Def Zone no Ball: <span id="defz2SH1">0</span>% | <span id="defz2SH1g">0</span>%</p>
-                <p style="padding-top: 10px">Team 1 Shots</p>
+                <p>Avg Time on Court: <span id="atocSH1">0:00</span> | <span id="atocSH1g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgSH1">0:00</span> | <span id="avgSH1g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoSH1">0:00</span> | <span id="avgnoSH1g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmSH1">0</span> | <span id="pmSH1g">0</span></p>
+                <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_SH1">0</span> | <span id="xGf_SH1g">0</span></p>
                 <p>Shots: <span id="sfSH1">0</span> | <span id="sfSH1g">0</span></p>
                 <p>Blocked: <span id="baSH1">0</span> | <span id="baSH1g">0</span></p>
                 <p>Missed: <span id="mfSH1">0</span> | <span id="mfSH1g">0</span></p>
                 <p>Saved: <span id="safSH1">0</span> | <span id="safSH1g">0</span></p>
                 <p>Goals: <span id="gfSH1">0</span> | <span id="gfSH1g">0</span></p>
-                <p style="padding-top: 10px">Team 2 Shots</p>
+                <p style="padding-top: 10px"><b>Team 2 Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_SH1">0</span> | <span id="xGa_SH1g">0</span></p>
                 <p>Shots: <span id="saSH1">0</span> | <span id="saSH1g">0</span></p>
                 <p>Blocked: <span id="bfSH1">0</span> | <span id="bfSH1g">0</span></p>
                 <p>Missed: <span id="maSH1">0</span> | <span id="maSH1g">0</span></p>
                 <p>Saved: <span id="saaSH1">0</span> | <span id="saaSH1g">0</span></p>
                 <p>Goals: <span id="gaSH1">0</span> | <span id="gaSH1g">0</span></p>
-                <p style="padding-top: 10px">Plus minus: <span id="pmSH1">0</span> | <span id="pmSH1g">0</span></p>
-                <p style="padding-top: 10px">Turnovers</p>
-                <p>Won Att Zone: <span id="azwSH1">0</span> | <span id="azwSH1g">0</span></p>
-                <p>Won Def Zone: <span id="dzwSH1">0</span> | <span id="dzwSH1g">0</span></p>
-                <p>Lost Att Zone: <span id="azlSH1">0</span> | <span id="azlSH1g">0</span></p>
-                <p>Lost Def Zone: <span id="dzlSH1">0</span> | <span id="dzlSH1g">0</span></p>
             </div>
         </div>
-        <div id="sSH2" class="stats-SH2">
-			<div class="col-sm-3">
+        <div class="col-sm-3">
+            <div id="sSH2" class="stats-SH2">
                 <h4><hr/>Shorthanded 2</h4>
-                <p style="padding-top: 10px">Possession: <span id="pSH2">0</span>% | <span id="pSH2g">0</span>%<p/>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pSH2">0</span>% | <span id="pSH2g">0</span>%<p/>
                 <p>Time on Court: <span id="tocSH2">0:00</span> | <span id="tocSH2g">0:00</span></p>
-                <p>Att Zone w Ball: <span id="attz1SH2">0</span>% | <span id="attz1SH2g">0</span>%</p>
-                <p>Att Zone no Ball: <span id="attz2SH2">0</span>% | <span id="attz2SH2g">0</span>%</p>
-                <p>Def Zone w Ball: <span id="defz1SH2">0</span>% | <span id="defz1SH2g">0</span>%</p>
-                <p>Def Zone no Ball: <span id="defz2SH2">0</span>% | <span id="defz2SH2g">0</span>%</p>
-                <p style="padding-top: 10px">Team 1 Shots</p>
+                <p>Avg Time on Court: <span id="atocSH2">0:00</span> | <span id="atocSH2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgSH2">0:00</span> | <span id="avgSH2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoSH2">0:00</span> | <span id="avgnoSH2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmSH2">0</span> | <span id="pmSH2g">0</span></p>
+                <p style="padding-top: 10px"><b>Team 1 Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_SH2">0</span> | <span id="xGf_SH2g">0</span></p>
                 <p>Shots: <span id="sfSH2">0</span> | <span id="sfSH2g">0</span></p>
                 <p>Blocked: <span id="baSH2">0</span> | <span id="baSH2g">0</span></p>
                 <p>Missed: <span id="mfSH2">0</span> | <span id="mfSH2g">0</span></p>
                 <p>Saved: <span id="safSH2">0</span> | <span id="safSH2g">0</span></p>
                 <p>Goals: <span id="gfSH2">0</span> | <span id="gfSH2g">0</span></p>
-                <p style="padding-top: 10px">Team 2 Shots</p>
+                <p style="padding-top: 10px"><b>Team 2 Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_SH2">0</span> | <span id="xGa_SH2g">0</span></p>
                 <p>Shots: <span id="saSH2">0</span> | <span id="saSH2g">0</span></p>
                 <p>Blocked: <span id="bfSH2">0</span> | <span id="bfSH2g">0</span></p>
                 <p>Missed: <span id="maSH2">0</span> | <span id="maSH2g">0</span></p>
                 <p>Saved: <span id="saaSH2">0</span> | <span id="saaSH2g">0</span></p>
                 <p>Goals: <span id="gaSH2">0</span> | <span id="gaSH2g">0</span></p>
-                <p style="padding-top: 10px">Plus minus: <span id="pmSH2">0</span> | <span id="pmSH2g">0</span></p>
-                <p style="padding-top: 10px">Turnovers</p>
-                <p>Won Att Zone: <span id="azwSH2">0</span> | <span id="azwSH2g">0</span></p>
-                <p>Won Def Zone: <span id="dzwSH2">0</span> | <span id="dzwSH2g">0</span></p>
-                <p>Lost Att Zone: <span id="azlSH2">0</span> | <span id="azlSH2g">0</span></p>
-                <p>Lost Def Zone: <span id="dzlSH2">0</span> | <span id="dzlSH2g">0</span></p>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="posTeam_chart" style="height: 300px"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGTeam_chart" style="height: 300px"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGL1_chart" style="height: 300px"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGL2_chart" style="height: 300px"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGL3_chart" style="height: 300px"></div>
         </div>
     </div>
 </div>
@@ -331,12 +318,23 @@ It extends app_layout.html with Django
   </ul>
 </div>
 
+<div id="shottype" class="shot-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotTurnover()">Turnover</li>
+    <li class="menu-option" onclick="shotOnetimer()">One-timer</li>
+    <li class="menu-option" onclick="shotRebound()">Rebound</li>
+    <li class="menu-option" onclick="shotDirect()">Direct</li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <!-- The JavaScript - code that describes the game analysis functionality -->
 
-<script>
+<!--<script> -->
+<script type="text/javascript">
 
     // Variables
-
     var line_on = 1; // Line on court
     var started = 0; // Game started 0/1
     var lines = ["L1", "L2", "L3", "Pp1", "Pp2", "Sh1", "Sh2"]; // Line array
@@ -350,11 +348,45 @@ It extends app_layout.html with Django
     var PosX = 0;
     var PosY = 0;
     var myImg = new Image();
-    myImg.src = "/static/field_canvas.png";
+    myImg.src = "/static/field.png";
+    var PosTime = 0; // Possession time in counters
+    var LineTime = 0; // Line on court time in counters
+    var fWidth = 300; // Width of the shotmap field in pixels
+    var fLength = 500; // Length of the shotmap field in pixels
+    var shiftNo = 1; // Number of shifts in numbers
+    var shiftPos = 0; // Possession time in shift in counters
+
+    // Google charts
+
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Data arrays for shots and seconds
+
+    var shotData = [['Time', 'Team', 'Result', 'Type', 'Distance', 'Angle', 'PP', 'SH']];
+    var timeData = [['Time', 'Ball_pos', 'Line_on', 'Shot', 'Result', 'xG']];
+    var dataShot = 0;
+    var dataRes = 0;
+    var dataxG = 0;
+    var dataType = 0;
+    var dataDis = 0;
+    var dataAngle = 0;
+    var dataPp = 0;
+    var dataSh = 0;
+
+    // Data arrays for xG charts
+
+    var xGTeam_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL1_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL3_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+
+    // Data arrays for line shift charts
+
+    var posTeam_array = [['Shift nr','Line 1','Line 2','Line 3','PP Line','SH Line', 'Team']];
 
     // Time on court by line period/game (in counters)
 
-    var TocL1p = 0;
+    var TocL1p = 1;
     var TocL2p = 0;
     var TocL3p = 0;
     var TocL1g = 0;
@@ -370,6 +402,44 @@ It extends app_layout.html with Django
     var TocSH2g = 0;
     var TocTeam_g = 0;
     var TocTeam_p = 0;
+    
+    // Number of times with ball (in pcs)
+
+    var NotL1p = 0;
+    var NotL2p = 0;
+    var NotL3p = 0;
+    var NotL1g = 0;
+    var NotL2g = 0;
+    var NotL3g = 0;
+    var NotPP1p = 0;
+    var NotPP2p = 0; 
+    var NotSH1p = 0;
+    var NotSH2p = 0;
+    var NotPP1g = 0;
+    var NotPP2g = 0; 
+    var NotSH1g = 0;
+    var NotSH2g = 0;
+    var NotTeam_g = 0;
+    var NotTeam_p = 0;
+    
+    // Number of times without ball (in pcs)
+
+    var NotnoL1p = 0;
+    var NotnoL2p = 0;
+    var NotnoL3p = 0;
+    var NotnoL1g = 0;
+    var NotnoL2g = 0;
+    var NotnoL3g = 0;
+    var NotnoPP1p = 0;
+    var NotnoPP2p = 0; 
+    var NotnoSH1p = 0;
+    var NotnoSH2p = 0;
+    var NotnoPP1g = 0;
+    var NotnoPP2g = 0; 
+    var NotnoSH1g = 0;
+    var NotnoSH2g = 0;
+    var NotnoTeam_g = 0;
+    var NotnoTeam_p = 0;
 
     // Ball possession by line/team period/game (in counters)
 
@@ -389,94 +459,89 @@ It extends app_layout.html with Django
     var PosPP2p = 0;
     var PosSH2p = 0;
     var PosSH2g = 0;
-
-    // Ball on att/def zone by line/team period/game (in counters)
-
-    var Def1Z1p = 0;
-    var Def1Z2p = 0;
-    var Def1Z3p = 0;
-    var Def1ZTeam_p = 0;
-    var Att1Z1p = 0;
-    var Att1Z2p = 0;
-    var Att1Z3p = 0;
-    var Att1ZTeam_p = 0;
-    var Def1Z1g = 0;
-    var Def1Z2g = 0;
-    var Def1Z3g = 0;
-    var Def1ZTeam_g = 0;
-    var Att1Z1g = 0;
-    var Att1Z2g = 0;
-    var Att1Z3g = 0;
-    var Att1ZTeam_g = 0;
-    var Def1ZPP1p = 0;
-    var Def1ZPP1g = 0;
-    var Att1ZPP1p = 0;
-    var Att1ZPP1g = 0;
-    var Def1ZSH1p = 0;
-    var Def1ZSH1g = 0;
-    var Att1ZSH1p = 0;
-    var Att1ZSH1g = 0;
-    var Def1ZPP2p = 0;
-    var Def1ZPP2g = 0;
-    var Att1ZPP2p = 0;
-    var Att1ZPP2g = 0;
-    var Def1ZSH2p = 0;
-    var Def1ZSH2g = 0;
-    var Att1ZSH2p = 0;
-    var Att1ZSH2g = 0;
     
-    var Def2Z1p = 0;
-    var Def2Z2p = 0;
-    var Def2Z3p = 0;
-    var Def2ZTeam_p = 0;
-    var Att2Z1p = 0;
-    var Att2Z2p = 0;
-    var Att2Z3p = 0;
-    var Att2ZTeam_p = 0;
-    var Def2Z1g = 0;
-    var Def2Z2g = 0;
-    var Def2Z3g = 0;
-    var Def2ZTeam_g = 0;
-    var Att2Z1g = 0;
-    var Att2Z2g = 0;
-    var Att2Z3g = 0;
-    var Att2ZTeam_g = 0;
-    var Def2ZPP1p = 0;
-    var Def2ZPP1g = 0;
-    var Att2ZPP1p = 0;
-    var Att2ZPP1g = 0;
-    var Def2ZSH1p = 0;
-    var Def2ZSH1g = 0;
-    var Att2ZSH1p = 0;
-    var Att2ZSH1g = 0;
-    var Def2ZPP2p = 0;
-    var Def2ZPP2g = 0;
-    var Att2ZPP2p = 0;
-    var Att2ZPP2g = 0;
-    var Def2ZSH2p = 0;
-    var Def2ZSH2g = 0;
-    var Att2ZSH2p = 0;
-    var Att2ZSH2g = 0;
+    // Number of shifts per line period/game (in pcs)
+
+    var NosL1p = 0;
+    var NosL2p = 0;
+    var NosL3p = 0;
+    var NosTeam_p = 0;
+    var NosL1g = 0;
+    var NosL2g = 0;
+    var NosL3g = 0;
+    var NosTeam_g = 0;
+    var NosPP1g = 0;
+    var NosPP1p = 0;
+    var NosSH1p = 0;
+    var NosSH1g = 0;
+    var NosPP2g = 0;
+    var NosPP2p = 0;
+    var NosSH2p = 0;
+    var NosSH2g = 0;
+    
+    // xG values by line/team period/game
+    
+    var xGfL1p = 0;
+    var xGfL2p = 0;
+    var xGfL3p = 0;
+    var xGfTeam_p = 0;
+    var xGfL1g = 0;
+    var xGfL2g = 0;
+    var xGfL3g = 0;
+    var xGfTeam_g = 0;
+    var xGfPP1g = 0;
+    var xGfPP1p = 0;
+    var xGfSH1p = 0;
+    var xGfSH1g = 0;
+    var xGfPP2g = 0;
+    var xGfPP2p = 0;
+    var xGfSH2p = 0;
+    var xGfSH2g = 0;
+    
+    var xGaL1p = 0;
+    var xGaL2p = 0;
+    var xGaL3p = 0;
+    var xGaTeam_p = 0;
+    var xGaL1g = 0;
+    var xGaL2g = 0;
+    var xGaL3g = 0;
+    var xGaTeam_g = 0;
+    var xGaPP1g = 0;
+    var xGaPP1p = 0;
+    var xGaSH1p = 0;
+    var xGaSH1g = 0;
+    var xGaPP2g = 0;
+    var xGaPP2p = 0;
+    var xGaSH2p = 0;
+    var xGaSH2g = 0;
 
     // Arrays for easy access to variables
-
     var Toc_p = [TocL1p, TocL2p, TocL3p, TocPP1p, TocPP2p, TocSH1p, TocSH2p, TocTeam_p];
     var Toc_g = [TocL1g, TocL2g, TocL3g, TocPP1g, TocPP2g, TocSH1g, TocSH2g, TocTeam_g];
-    var Pos_g = [PosL1p, PosL2p, PosL3p, PosPP1p, PosPP2p, PosSH1p, PosSH2p, PosTeam_p];
-    var Pos_p = [PosL1g, PosL2g, PosL3g, PosPP1g, PosPP2g, PosSH1g, PosSH2g, PosTeam_g];
-    var Att1_p = [Att1Z1p, Att1Z2p, Att1Z3p, Att1ZPP1p, Att1ZPP2p, Att1ZSH1p, Att1ZSH2p, Att1ZTeam_p];
-    var Att1_g = [Att1Z1g, Att1Z2g, Att1Z3g, Att1ZPP1g, Att1ZPP2g, Att1ZSH1g, Att1ZSH2g, Att1ZTeam_g];
-    var Def1_p = [Def1Z1p, Def1Z2p, Def1Z3p, Def1ZPP1p, Def1ZPP2p, Def1ZSH1p, Def1ZSH2p, Def1ZTeam_p];
-    var Def1_g = [Def1Z1g, Def1Z2g, Def1Z3g, Def1ZPP1g, Def1ZPP2g, Def1ZSH1g, Def1ZSH2g, Def1ZTeam_g];
-    var Att2_p = [Att2Z1p, Att2Z2p, Att2Z3p, Att2ZPP1p, Att2ZPP2p, Att2ZSH1p, Att2ZSH2p, Att2ZTeam_p];
-    var Att2_g = [Att2Z1g, Att2Z2g, Att2Z3g, Att2ZPP1g, Att2ZPP2g, Att2ZSH1g, Att2ZSH2g, Att2ZTeam_g];
-    var Def2_p = [Def2Z1p, Def2Z2p, Def2Z3p, Def2ZPP1p, Def2ZPP2p, Def2ZSH1p, Def2ZSH2p, Def2ZTeam_p];
-    var Def2_g = [Def2Z1g, Def2Z2g, Def2Z3g, Def2ZPP1g, Def2ZPP2g, Def2ZSH1g, Def2ZSH2g, Def2ZTeam_g];
+    var Pos_p = [PosL1p, PosL2p, PosL3p, PosPP1p, PosPP2p, PosSH1p, PosSH2p, PosTeam_p];
+    var Pos_g = [PosL1g, PosL2g, PosL3g, PosPP1g, PosPP2g, PosSH1g, PosSH2g, PosTeam_g];
+    var Not_p = [NotL1p, NotL2p, NotL3p, NotPP1p, NotPP2p, NotSH1p, NotSH2p, NotTeam_p];
+    var Not_g = [NotL1g, NotL2g, NotL3g, NotPP1g, NotPP2g, NotSH1g, NotSH2g, NotTeam_g];
+    var Nos_p = [NosL1p, NosL2p, NosL3p, NosPP1p, NosPP2p, NosSH1p, NosSH2p, NosTeam_p];
+    var Nos_g = [NosL1g, NosL2g, NosL3g, NosPP1g, NosPP2g, NosSH1g, NosSH2g, NosTeam_g];
+    var Notno_p = [NotnoL1p, NotnoL2p, NotnoL3p, NotnoPP1p, NotnoPP2p, NotnoSH1p, NotnoSH2p, NotnoTeam_p];
+    var Notno_g = [NotnoL1g, NotnoL2g, NotnoL3g, NotnoPP1g, NotnoPP2g, NotnoSH1g, NotnoSH2g, NotnoTeam_g];
+    var xGf_p = [xGfL1p, xGfL2p, xGfL3p, xGfPP1p, xGfPP2p, xGfSH1p, xGfSH2p, xGfTeam_p];
+    var xGf_g = [xGfL1g, xGfL2g, xGfL3g, xGfPP1g, xGfPP2g, xGfSH1g, xGfSH2g, xGfTeam_g];
+    var xGa_p = [xGaL1p, xGaL2p, xGaL3p, xGaPP1p, xGaPP2p, xGaSH1p, xGaSH2p, xGaTeam_p];
+    var xGa_g = [xGaL1g, xGaL2g, xGaL3g, xGaPP1g, xGaPP2g, xGaSH1g, xGaSH2g, xGaTeam_g];
 
     // html id myCanvas to variable
     var cnvs = document.getElementById("myCanvas");
     // html id shotmenu to variable
     var menu = document.getElementById("shotmenu");
+    // html id shottype to variable
+    var stype = document.getElementById("shottype");
+    // home and away team textfields to variables
+    var hTeam = document.getElementById("home_team");
+    var aTeam = document.getElementById("away_team");
+    // Send Data - button element to variable
+    var sData = document.getElementById("sData");
 
     // html ids to variables
     // Shots/goals/misses/blocks/saves for/against, turnovers, plusminus by line/team and period/game
@@ -492,10 +557,6 @@ It extends app_layout.html with Django
     var maL1p = document.getElementById("maL1");
     var safL1p = document.getElementById("safL1");
     var saaL1p = document.getElementById("saaL1");
-    var azwL1p = document.getElementById("azwL1");
-    var azlL1p = document.getElementById("azlL1");
-    var dzwL1p = document.getElementById("dzwL1");
-    var dzlL1p = document.getElementById("dzlL1");
     var sfL2p = document.getElementById("sfL2");
     var saL2p = document.getElementById("saL2");
     var bfL2p = document.getElementById("bfL2");
@@ -507,10 +568,6 @@ It extends app_layout.html with Django
     var maL2p = document.getElementById("maL2");
     var safL2p = document.getElementById("safL2");
     var saaL2p = document.getElementById("saaL2");
-    var azwL2p = document.getElementById("azwL2");
-    var azlL2p = document.getElementById("azlL2");
-    var dzwL2p = document.getElementById("dzwL2");
-    var dzlL2p = document.getElementById("dzlL2");
     var sfL3p = document.getElementById("sfL3");
     var saL3p = document.getElementById("saL3");
     var bfL3p = document.getElementById("bfL3");
@@ -522,10 +579,6 @@ It extends app_layout.html with Django
     var maL3p = document.getElementById("maL3");
     var safL3p = document.getElementById("safL3");
     var saaL3p = document.getElementById("saaL3");
-    var azwL3p = document.getElementById("azwL3");
-    var azlL3p = document.getElementById("azlL3");
-    var dzwL3p = document.getElementById("dzwL3");
-    var dzlL3p = document.getElementById("dzlL3");
     var sfPP1p = document.getElementById("sfPP1");
     var saPP1p = document.getElementById("saPP1");
     var bfPP1p = document.getElementById("bfPP1");
@@ -537,10 +590,6 @@ It extends app_layout.html with Django
     var maPP1p = document.getElementById("maPP1");
     var safPP1p = document.getElementById("safPP1");
     var saaPP1p = document.getElementById("saaPP1");
-    var azwPP1p = document.getElementById("azwPP1");
-    var azlPP1p = document.getElementById("azlPP1");
-    var dzwPP1p = document.getElementById("dzwPP1");
-    var dzlPP1p = document.getElementById("dzlPP1");
     var sfPP2p = document.getElementById("sfPP2");
     var saPP2p = document.getElementById("saPP2");
     var bfPP2p = document.getElementById("bfPP2");
@@ -552,10 +601,6 @@ It extends app_layout.html with Django
     var maPP2p = document.getElementById("maPP2");
     var safPP2p = document.getElementById("safPP2");
     var saaPP2p = document.getElementById("saaPP2");
-    var azwPP2p = document.getElementById("azwPP2");
-    var azlPP2p = document.getElementById("azlPP2");
-    var dzwPP2p = document.getElementById("dzwPP2");
-    var dzlPP2p = document.getElementById("dzlPP2");
     var sfSH1p = document.getElementById("sfSH1");
     var saSH1p = document.getElementById("saSH1");
     var bfSH1p = document.getElementById("bfSH1");
@@ -567,10 +612,6 @@ It extends app_layout.html with Django
     var maSH1p = document.getElementById("maSH1");
     var safSH1p = document.getElementById("safSH1");
     var saaSH1p = document.getElementById("saaSH1");
-    var azwSH1p = document.getElementById("azwSH1");
-    var azlSH1p = document.getElementById("azlSH1");
-    var dzwSH1p = document.getElementById("dzwSH1");
-    var dzlSH1p = document.getElementById("dzlSH1");
     var sfSH2p = document.getElementById("sfSH2");
     var saSH2p = document.getElementById("saSH2");
     var bfSH2p = document.getElementById("bfSH2");
@@ -582,10 +623,6 @@ It extends app_layout.html with Django
     var maSH2p = document.getElementById("maSH2");
     var safSH2p = document.getElementById("safSH2");
     var saaSH2p = document.getElementById("saaSH2");
-    var azwSH2p = document.getElementById("azwSH2");
-    var azlSH2p = document.getElementById("azlSH2");
-    var dzwSH2p = document.getElementById("dzwSH2");
-    var dzlSH2p = document.getElementById("dzlSH2");
     var sfTeamp = document.getElementById("sfTeam");
     var saTeamp = document.getElementById("saTeam");
     var bfTeamp = document.getElementById("bfTeam");
@@ -597,10 +634,6 @@ It extends app_layout.html with Django
     var maTeamp = document.getElementById("maTeam");
     var safTeamp = document.getElementById("safTeam");
     var saaTeamp = document.getElementById("saaTeam");
-    var azwTeamp = document.getElementById("azwTeam");
-    var azlTeamp = document.getElementById("azlTeam");
-    var dzwTeamp = document.getElementById("dzwTeam");
-    var dzlTeamp = document.getElementById("dzlTeam");
 
     // html ids to variables
     // Possession/Time on Court/AttZone by line/team period/game
@@ -621,38 +654,46 @@ It extends app_layout.html with Django
     var tocSH1p = document.getElementById("tocSH1");
     var tocSH2p = document.getElementById("tocSH2");
     var tocTeamp = document.getElementById("tocTeam");
-    var attz1L1p = document.getElementById("attz1L1");
-    var attz1L2p = document.getElementById("attz1L2");
-    var attz1L3p = document.getElementById("attz1L3");
-    var attz1PP1p = document.getElementById("attz1PP1");
-    var attz1PP2p = document.getElementById("attz1PP2");
-    var attz1SH1p = document.getElementById("attz1SH1");
-    var attz1SH2p = document.getElementById("attz1SH2");
-    var attz1Teamp = document.getElementById("attz1Team");
-    var defz1L1p = document.getElementById("defz1L1");
-    var defz1L2p = document.getElementById("defz1L2");
-    var defz1L3p = document.getElementById("defz1L3");
-    var defz1PP1p = document.getElementById("defz1PP1");
-    var defz1PP2p = document.getElementById("defz1PP2");
-    var defz1SH1p = document.getElementById("defz1SH1");
-    var defz1SH2p = document.getElementById("defz1SH2");
-    var defz1Teamp = document.getElementById("defz1Team");
-    var attz2L1p = document.getElementById("attz2L1");
-    var attz2L2p = document.getElementById("attz2L2");
-    var attz2L3p = document.getElementById("attz2L3");
-    var attz2PP1p = document.getElementById("attz2PP1");
-    var attz2PP2p = document.getElementById("attz2PP2");
-    var attz2SH1p = document.getElementById("attz2SH1");
-    var attz2SH2p = document.getElementById("attz2SH2");
-    var attz2Teamp = document.getElementById("attz2Team");
-    var defz2L1p = document.getElementById("defz2L1");
-    var defz2L2p = document.getElementById("defz2L2");
-    var defz2L3p = document.getElementById("defz2L3");
-    var defz2PP1p = document.getElementById("defz2PP1");
-    var defz2PP2p = document.getElementById("defz2PP2");
-    var defz2SH1p = document.getElementById("defz2SH1");
-    var defz2SH2p = document.getElementById("defz2SH2");
-    var defz2Teamp = document.getElementById("defz2Team");
+    var atocL1p = document.getElementById("atocL1");
+    var atocL2p = document.getElementById("atocL2");
+    var atocL3p = document.getElementById("atocL3");
+    var atocPP1p = document.getElementById("atocPP1");
+    var atocPP2p = document.getElementById("atocPP2");
+    var atocSH1p = document.getElementById("atocSH1");
+    var atocSH2p = document.getElementById("atocSH2");
+    var atocTeamp = document.getElementById("atocTeam");
+    var avgL1p = document.getElementById("avgL1");
+    var avgL2p = document.getElementById("avgL2");
+    var avgL3p = document.getElementById("avgL3");
+    var avgPP1p = document.getElementById("avgPP1");
+    var avgPP2p = document.getElementById("avgPP2");
+    var avgSH1p = document.getElementById("avgSH1");
+    var avgSH2p = document.getElementById("avgSH2");
+    var avgTeamp = document.getElementById("avgTeam");
+    var avgnoL1p = document.getElementById("avgnoL1");
+    var avgnoL2p = document.getElementById("avgnoL2");
+    var avgnoL3p = document.getElementById("avgnoL3");
+    var avgnoPP1p = document.getElementById("avgnoPP1");
+    var avgnoPP2p = document.getElementById("avgnoPP2");
+    var avgnoSH1p = document.getElementById("avgnoSH1");
+    var avgnoSH2p = document.getElementById("avgnoSH2");
+    var avgnoTeamp = document.getElementById("avgnoTeam");
+    var xGf_L1p = document.getElementById("xGf_L1");
+    var xGf_L2p = document.getElementById("xGf_L2");
+    var xGf_L3p = document.getElementById("xGf_L3");
+    var xGf_PP1p = document.getElementById("xGf_PP1");
+    var xGf_PP2p = document.getElementById("xGf_PP2");
+    var xGf_SH1p = document.getElementById("xGf_SH1");
+    var xGf_SH2p = document.getElementById("xGf_SH2");
+    var xGf_Teamp = document.getElementById("xGf_Team");
+    var xGa_L1p = document.getElementById("xGa_L1");
+    var xGa_L2p = document.getElementById("xGa_L2");
+    var xGa_L3p = document.getElementById("xGa_L3");
+    var xGa_PP1p = document.getElementById("xGa_PP1");
+    var xGa_PP2p = document.getElementById("xGa_PP2");
+    var xGa_SH1p = document.getElementById("xGa_SH1");
+    var xGa_SH2p = document.getElementById("xGa_SH2");
+    var xGa_Teamp = document.getElementById("xGa_Team");
 
     // html ids to variables
     // Shots/goals/penalties for/against, Fenwick/ba, plusminus by line/team period/game
@@ -668,10 +709,6 @@ It extends app_layout.html with Django
     var maL1g = document.getElementById("maL1g");
     var safL1g = document.getElementById("safL1g");
     var saaL1g = document.getElementById("saaL1g");
-    var azwL1g = document.getElementById("azwL1g");
-    var azlL1g = document.getElementById("azlL1g");
-    var dzwL1g = document.getElementById("dzwL1g");
-    var dzlL1g = document.getElementById("dzlL1g");
     var sfL2g = document.getElementById("sfL2g");
     var saL2g = document.getElementById("saL2g");
     var bfL2g = document.getElementById("bfL2g");
@@ -683,10 +720,6 @@ It extends app_layout.html with Django
     var maL2g = document.getElementById("maL2g");
     var safL2g = document.getElementById("safL2g");
     var saaL2g = document.getElementById("saaL2g");
-    var azwL2g = document.getElementById("azwL2g");
-    var azlL2g = document.getElementById("azlL2g");
-    var dzwL2g = document.getElementById("dzwL2g");
-    var dzlL2g = document.getElementById("dzlL2g");
     var sfL3g = document.getElementById("sfL3g");
     var saL3g = document.getElementById("saL3g");
     var bfL3g = document.getElementById("bfL3g");
@@ -698,10 +731,6 @@ It extends app_layout.html with Django
     var maL3g = document.getElementById("maL3g");
     var safL3g = document.getElementById("safL3g");
     var saaL3g = document.getElementById("saaL3g");
-    var azwL3g = document.getElementById("azwL3g");
-    var azlL3g = document.getElementById("azlL3g");
-    var dzwL3g = document.getElementById("dzwL3g");
-    var dzlL3g = document.getElementById("dzlL3g");
     var sfPP1g = document.getElementById("sfPP1g");
     var saPP1g = document.getElementById("saPP1g");
     var bfPP1g = document.getElementById("bfPP1g");
@@ -713,10 +742,6 @@ It extends app_layout.html with Django
     var maPP1g = document.getElementById("maPP1g");
     var safPP1g = document.getElementById("safPP1g");
     var saaPP1g = document.getElementById("saaPP1g");
-    var azwPP1g = document.getElementById("azwPP1g");
-    var azlPP1g = document.getElementById("azlPP1g");
-    var dzwPP1g = document.getElementById("dzwPP1g");
-    var dzlPP1g = document.getElementById("dzlPP1g");
     var sfPP2g = document.getElementById("sfPP2g");
     var saPP2g = document.getElementById("saPP2g");
     var bfPP2g = document.getElementById("bfPP2g");
@@ -728,10 +753,6 @@ It extends app_layout.html with Django
     var maPP2g = document.getElementById("maPP2g");
     var safPP2g = document.getElementById("safPP2g");
     var saaPP2g = document.getElementById("saaPP2g");
-    var azwPP2g = document.getElementById("azwPP2g");
-    var azlPP2g = document.getElementById("azlPP2g");
-    var dzwPP2g = document.getElementById("dzwPP2g");
-    var dzlPP2g = document.getElementById("dzlPP2g");
     var sfSH1g = document.getElementById("sfSH1g");
     var saSH1g = document.getElementById("saSH1g");
     var bfSH1g = document.getElementById("bfSH1g");
@@ -743,10 +764,6 @@ It extends app_layout.html with Django
     var maSH1g = document.getElementById("maSH1g");
     var safSH1g = document.getElementById("safSH1g");
     var saaSH1g = document.getElementById("saaSH1g");
-    var azwSH1g = document.getElementById("azwSH1g");
-    var azlSH1g = document.getElementById("azlSH1g");
-    var dzwSH1g = document.getElementById("dzwSH1g");
-    var dzlSH1g = document.getElementById("dzlSH1g");
     var sfSH2g = document.getElementById("sfSH2g");
     var saSH2g = document.getElementById("saSH2g");
     var bfSH2g = document.getElementById("bfSH2g");
@@ -758,10 +775,6 @@ It extends app_layout.html with Django
     var maSH2g = document.getElementById("maSH2g");
     var safSH2g = document.getElementById("safSH2g");
     var saaSH2g = document.getElementById("saaSH2g");
-    var azwSH2g = document.getElementById("azwSH2g");
-    var azlSH2g = document.getElementById("azlSH2g");
-    var dzwSH2g = document.getElementById("dzwSH2g");
-    var dzlSH2g = document.getElementById("dzlSH2g");
     var sfTeamg = document.getElementById("sfTeamg");
     var saTeamg = document.getElementById("saTeamg");
     var bfTeamg = document.getElementById("bfTeamg");
@@ -773,10 +786,6 @@ It extends app_layout.html with Django
     var maTeamg = document.getElementById("maTeamg");
     var safTeamg = document.getElementById("safTeamg");
     var saaTeamg = document.getElementById("saaTeamg");
-    var azwTeamg = document.getElementById("azwTeamg");
-    var azlTeamg = document.getElementById("azlTeamg");
-    var dzwTeamg = document.getElementById("dzwTeamg");
-    var dzlTeamg = document.getElementById("dzlTeamg");
     var pL1g = document.getElementById("pL1g");
     var pL2g = document.getElementById("pL2g");
     var pL3g = document.getElementById("pL3g");
@@ -793,38 +802,46 @@ It extends app_layout.html with Django
     var tocSH1g = document.getElementById("tocSH1g");
     var tocSH2g = document.getElementById("tocSH2g");
     var tocTeamg = document.getElementById("tocTeamg");
-    var attz1L1g = document.getElementById("attz1L1g");
-    var attz1L2g = document.getElementById("attz1L2g");
-    var attz1L3g = document.getElementById("attz1L3g");
-    var attz1PP1g = document.getElementById("attz1PP1g");
-    var attz1PP2g = document.getElementById("attz1PP2g");
-    var attz1SH1g = document.getElementById("attz1SH1g");
-    var attz1SH2g = document.getElementById("attz1SH2g");
-    var attz1Teamg = document.getElementById("attz1Teamg");
-    var defz1L1g = document.getElementById("defz1L1g");
-    var defz1L2g = document.getElementById("defz1L2g");
-    var defz1L3g = document.getElementById("defz1L3g");
-    var defz1PP1g = document.getElementById("defz1PP1g");
-    var defz1PP2g = document.getElementById("defz1PP2g");
-    var defz1SH1g = document.getElementById("defz1SH1g");
-    var defz1SH2g = document.getElementById("defz1SH2g");
-    var defz1Teamg = document.getElementById("defz1Teamg");
-    var attz2L1g = document.getElementById("attz2L1g");
-    var attz2L2g = document.getElementById("attz2L2g");
-    var attz2L3g = document.getElementById("attz2L3g");
-    var attz2PP1g = document.getElementById("attz2PP1g");
-    var attz2PP2g = document.getElementById("attz2PP2g");
-    var attz2SH1g = document.getElementById("attz2SH1g");
-    var attz2SH2g = document.getElementById("attz2SH2g");
-    var attz2Teamg = document.getElementById("attz2Teamg");
-    var defz2L1g = document.getElementById("defz2L1g");
-    var defz2L2g = document.getElementById("defz2L2g");
-    var defz2L3g = document.getElementById("defz2L3g");
-    var defz2PP1g = document.getElementById("defz2PP1g");
-    var defz2PP2g = document.getElementById("defz2PP2g");
-    var defz2SH1g = document.getElementById("defz2SH1g");
-    var defz2SH2g = document.getElementById("defz2SH2g");
-    var defz2Teamg = document.getElementById("defz2Teamg");
+    var atocL1g = document.getElementById("atocL1g");
+    var atocL2g = document.getElementById("atocL2g");
+    var atocL3g = document.getElementById("atocL3g");
+    var atocPP1g = document.getElementById("atocPP1g");
+    var atocPP2g = document.getElementById("atocPP2g");
+    var atocSH1g = document.getElementById("atocSH1g");
+    var atocSH2g = document.getElementById("atocSH2g");
+    var atocTeamg = document.getElementById("atocTeamg");
+    var avgL1g = document.getElementById("avgL1g");
+    var avgL2g = document.getElementById("avgL2g");
+    var avgL3g = document.getElementById("avgL3g");
+    var avgPP1g = document.getElementById("avgPP1g");
+    var avgPP2g = document.getElementById("avgPP2g");
+    var avgSH1g = document.getElementById("avgSH1g");
+    var avgSH2g = document.getElementById("avgSH2g");
+    var avgTeamg = document.getElementById("avgTeamg");
+    var avgnoL1g = document.getElementById("avgnoL1g");
+    var avgnoL2g = document.getElementById("avgnoL2g");
+    var avgnoL3g = document.getElementById("avgnoL3g");
+    var avgnoPP1g = document.getElementById("avgnoPP1g");
+    var avgnoPP2g = document.getElementById("avgnoPP2g");
+    var avgnoSH1g = document.getElementById("avgnoSH1g");
+    var avgnoSH2g = document.getElementById("avgnoSH2g");
+    var avgnoTeamg = document.getElementById("avgnoTeamg");
+    var xGf_L1g = document.getElementById("xGf_L1g");
+    var xGf_L2g = document.getElementById("xGf_L2g");
+    var xGf_L3g = document.getElementById("xGf_L3g");
+    var xGf_PP1g = document.getElementById("xGf_PP1g");
+    var xGf_PP2g = document.getElementById("xGf_PP2g");
+    var xGf_SH1g = document.getElementById("xGf_SH1g");
+    var xGf_SH2g = document.getElementById("xGf_SH2g");
+    var xGf_Teamg = document.getElementById("xGf_Teamg");
+    var xGa_L1g = document.getElementById("xGa_L1g");
+    var xGa_L2g = document.getElementById("xGa_L2g");
+    var xGa_L3g = document.getElementById("xGa_L3g");
+    var xGa_PP1g = document.getElementById("xGa_PP1g");
+    var xGa_PP2g = document.getElementById("xGa_PP2g");
+    var xGa_SH1g = document.getElementById("xGa_SH1g");
+    var xGa_SH2g = document.getElementById("xGa_SH2g");
+    var xGa_Teamg = document.getElementById("xGa_Teamg");
 
     // Arrays for easy access to variables
 
@@ -839,16 +856,13 @@ It extends app_layout.html with Django
     var ma_p = [maL1p, maL2p, maL3p, maPP1p, maPP2p, maSH1p, maSH2p, maTeamp];
     var saf_p = [safL1p, safL2p, safL3p, safPP1p, safPP2p, safSH1p, safSH2p, safTeamp];
     var saa_p = [saaL1p, saaL2p, saaL3p, saaPP1p, saaPP2p, saaSH1p, saaSH2p, saaTeamp];
-    var azw_p = [azwL1p, azwL2p, azwL3p, azwPP1p, azwPP2p, azwSH1p, azwSH2p, azwTeamp];
-    var azl_p = [azlL1p, azlL2p, azlL3p, azlPP1p, azlPP2p, azlSH1p, azlSH2p, azlTeamp];
-    var dzw_p = [dzwL1p, dzwL2p, dzwL3p, dzwPP1p, dzwPP2p, dzwSH1p, dzwSH2p, dzwTeamp];
-    var dzl_p = [dzlL1p, dzlL2p, dzlL3p, dzlPP1p, dzlPP2p, dzlSH1p, dzlSH2p, dzlTeamp];
     var p_p = [pL1p, pL2p, pL3p, pPP1p, pPP2p, pSH1p, pSH2p, pTeamp];
     var toc_p = [tocL1p, tocL2p, tocL3p, tocPP1p, tocPP2p, tocSH1p, tocSH2p, tocTeamp];
-    var attz1_p = [attz1L1p, attz1L2p, attz1L3p, attz1PP1p, attz1PP2p, attz1SH1p, attz1SH2p, attz1Teamp];
-    var defz1_p = [defz1L1p, defz1L2p, defz1L3p, defz1PP1p, defz1PP2p, defz1SH1p, defz1SH2p, defz1Teamp];
-    var attz2_p = [attz2L1p, attz2L2p, attz2L3p, attz2PP1p, attz2PP2p, attz2SH1p, attz2SH2p, attz2Teamp];
-    var defz2_p = [defz2L1p, defz2L2p, defz2L3p, defz2PP1p, defz2PP2p, defz2SH1p, defz2SH2p, defz2Teamp];
+    var atoc_p = [atocL1p, atocL2p, atocL3p, atocPP1p, atocPP2p, atocSH1p, atocSH2p, atocTeamp];
+    var avg_p = [avgL1p, avgL2p, avgL3p, avgPP1p, avgPP2p, avgSH1p, avgSH2p, avgTeamp];
+    var avgno_p = [avgnoL1p, avgnoL2p, avgnoL3p, avgnoPP1p, avgnoPP2p, avgnoSH1p, avgnoSH2p, avgnoTeamp];
+    var xf_p = [xGf_L1p, xGf_L2p, xGf_L3p, xGf_PP1p, xGf_PP2p, xGf_SH1p, xGf_SH2p, xGf_Teamp];
+    var xa_p = [xGa_L1p, xGa_L2p, xGa_L3p, xGa_PP1p, xGa_PP2p, xGa_SH1p, xGa_SH2p, xGa_Teamp];
     
     var sf_g = [sfL1g, sfL2g, sfL3g, sfPP1g, sfPP2g, sfSH1g, sfSH2g, sfTeamg];
     var sa_g = [saL1g, saL2g, saL3g, saPP1g, saPP2g, saSH1g, saSH2g, saTeamg];
@@ -861,81 +875,83 @@ It extends app_layout.html with Django
     var ma_g = [maL1g, maL2g, maL3g, maPP1g, maPP2g, maSH1g, maSH2g, maTeamg];
     var saf_g = [safL1g, safL2g, safL3g, safPP1g, safPP2g, safSH1g, safSH2g, safTeamg];
     var saa_g = [saaL1g, saaL2g, saaL3g, saaPP1g, saaPP2g, saaSH1g, saaSH2g, saaTeamg];
-    var azw_g = [azwL1g, azwL2g, azwL3g, azwPP1g, azwPP2g, azwSH1g, azwSH2g, azwTeamg];
-    var azl_g = [azlL1g, azlL2g, azlL3g, azlPP1g, azlPP2g, azlSH1g, azlSH2g, azlTeamg];
-    var dzw_g = [dzwL1g, dzwL2g, dzwL3g, dzwPP1g, dzwPP2g, dzwSH1g, dzwSH2g, dzwTeamg];
-    var dzl_g = [dzlL1g, dzlL2g, dzlL3g, dzlPP1g, dzlPP2g, dzlSH1g, dzlSH2g, dzlTeamg];
     var p_g = [pL1g, pL2g, pL3g, pPP1g, pPP2g, pSH1g, pSH2g, pTeamg];
     var toc_g = [tocL1g, tocL2g, tocL3g, tocPP1g, tocPP2g, tocSH1g, tocSH2g, tocTeamg];
-    var attz1_g = [attz1L1g, attz1L2g, attz1L3g, attz1PP1g, attz1PP2g, attz1SH1g, attz1SH2g, attz1Teamg];
-    var defz1_g = [defz1L1g, defz1L2g, defz1L3g, defz1PP1g, defz1PP2g, defz1SH1g, defz1SH2g, defz1Teamg];
-    var attz2_g = [attz2L1g, attz2L2g, attz2L3g, attz2PP1g, attz2PP2g, attz2SH1g, attz2SH2g, attz2Teamg];
-    var defz2_g = [defz2L1g, defz2L2g, defz2L3g, defz2PP1g, defz2PP2g, defz2SH1g, defz2SH2g, defz2Teamg];
+    var atoc_g = [atocL1g, atocL2g, atocL3g, atocPP1g, atocPP2g, atocSH1g, atocSH2g, atocTeamg];
+    var avg_g = [avgL1g, avgL2g, avgL3g, avgPP1g, avgPP2g, avgSH1g, avgSH2g, avgTeamg];
+    var avgno_g = [avgnoL1g, avgnoL2g, avgnoL3g, avgnoPP1g, avgnoPP2g, avgnoSH1g, avgnoSH2g, avgnoTeamg];
+    var xf_g = [xGf_L1g, xGf_L2g, xGf_L3g, xGf_PP1g, xGf_PP2g, xGf_SH1g, xGf_SH2g, xGf_Teamg];
+    var xa_g = [xGa_L1g, xGa_L2g, xGa_L3g, xGa_PP1g, xGa_PP2g, xGa_SH1g, xGa_SH2g, xGa_Teamg];
+
+    // xG mapping matrix
+
+    let xG_matrix = [
+
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 2, 2,13,14,15,35,99,35,14,13, 2, 2, 0],
+        [ 3, 5,15,19,31,55,54,54,18,13,12, 3, 0],
+        [ 4, 9,18,18,24,30,38,33,22,18,14, 4, 0],
+        [ 7,16,16,24,26,32,35,32,20,16,13, 8, 0],
+        [ 8,14,16,18,23,29,33,29,27,18,13,12, 0],
+        [ 9,15,18,23,29,29,30,29,25,20,15,13, 0],
+        [12,15,15,17,23,28,28,27,24,22,16,13, 0],
+        [13,14,14,19,23,28,28,24,21,19,12,14, 0],
+        [13,12,15,15,22,25,22,25,20,18,12,11, 0],
+        [10,15,12,13,18,18,20,20,19,11,12,10, 0],
+        [ 7, 9,11,14,12,16,19,18,12,14,10, 8, 0],
+        [ 7, 9,10,13,15,16,18,16,14,10,10, 8, 0],
+
+        ];
 
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
-    ctx.drawImage(myImg,0,0,284,200);
+    ctx.drawImage(myImg,0,0,fWidth,fLength);
     }
 
     // When the change team order button is changed, the teams switch sides
     function ChangeOrder() {
-        if (Order == 1) { // Team 1 is moved as the right one, defence zone on the right
+        if (Order == 1) { // Team 1 is moved as the upper one, defence zone is up
             document.getElementById("TeamL").innerHTML = "Team 2";
             document.getElementById("TeamR").innerHTML = "Team 1";
-            document.getElementById("ZoneL").innerHTML = "Attack";
-            document.getElementById("ZoneR").innerHTML = "Defence";
             Order = 2;
         }
-        else { // Team 1 is moved as the left one, defence zone on the left
+        else { // Team 1 is moved as the bottom one, defence zone is down
             document.getElementById("TeamL").innerHTML = "Team 1";
             document.getElementById("TeamR").innerHTML = "Team 2";
-            document.getElementById("ZoneL").innerHTML = "Defence";
-            document.getElementById("ZoneR").innerHTML = "Attack";
             Order = 1;
         }
     }
 
     // When the ball team left button is pressed the button colors and the variable are changed
-    // If game is on, them turnover is added
+    // If game is on, them one number is added to number of times with ball
     function BallTeamL() {
         document.getElementById("TeamR").style.background='#4CAF50';
         document.getElementById("TeamL").style.background='#555555';
         if (Order == 1) {
             Ball_pos = 1;
-
-            if (is_on == 1) {
-                if (Ball_zone == 1) { // defence zone turnover win
-                    dzw_p[line_on - 1].innerHTML++;
-                    dzw_p[7].innerHTML++;
-                    dzw_g[line_on - 1].innerHTML++;
-                    dzw_g[7].innerHTML++;
-                }
-                if (Ball_zone == 2) { // attack zone turnover win
-                    azw_p[line_on - 1].innerHTML++;
-                    azw_p[7].innerHTML++;
-                    azw_g[line_on - 1].innerHTML++;
-                    azw_g[7].innerHTML++;
+            if (started == 1 && PosTime > 0) {
+                Not_p[line_on - 1]++;
+                Not_g[line_on - 1]++;
+                if (line_on < 4) {
+                    Not_p[7]++;
+                    Not_g[7]++;
                 }
             }
+            PosTime = 0;
 
         } else {
             Ball_pos = 2;
-
-            if (is_on == 1) {
-                if (Ball_zone == 1) { // defence zone turnover lost
-                    dzl_p[line_on - 1].innerHTML++;
-                    dzl_p[7].innerHTML++;
-                    dzl_g[line_on - 1].innerHTML++;
-                    dzl_g[7].innerHTML++;
-                }
-                if (Ball_zone == 2) { // attack zone turnover lost
-                    azl_p[line_on - 1].innerHTML++;
-                    azl_p[7].innerHTML++;
-                    azl_g[line_on - 1].innerHTML++;
-                    azl_g[7].innerHTML++;
+            if (started == 1 && PosTime > 0) {
+                Notno_p[line_on - 1]++;
+                Notno_g[line_on - 1]++;
+                if (line_on < 4) {
+                    Notno_p[7]++;
+                    Notno_g[7]++;
                 }
             }
+            PosTime = 0;
         }
     }
 
@@ -945,65 +961,109 @@ It extends app_layout.html with Django
         document.getElementById("TeamL").style.background='#4CAF50';
         if (Order == 1) {
             Ball_pos = 2;
-
-            if (is_on == 1) {
-                if (Ball_zone == 1) { // defence zone turnover lost
-                    dzl_p[line_on - 1].innerHTML++;
-                    dzl_p[7].innerHTML++;
-                    dzl_g[line_on - 1].innerHTML++;
-                    dzl_g[7].innerHTML++;
-                }
-                if (Ball_zone == 2) { // attack zone turnover lost
-                    azl_p[line_on - 1].innerHTML++;
-                    azl_p[7].innerHTML++;
-                    azl_g[line_on - 1].innerHTML++;
-                    azl_g[7].innerHTML++;
+            if (started == 1 && PosTime > 0) {
+                Notno_p[line_on - 1]++;
+                Notno_g[line_on - 1]++;
+                if (line_on < 4) {
+                    Notno_p[7]++;
+                    Notno_g[7]++;
                 }
             }
-
+            PosTime = 0;
         }
 
         else {
             Ball_pos = 1;
-
-            if (is_on == 1) {
-                if (Ball_zone == 1) { // defence zone turnover win
-                    dzw_p[line_on - 1].innerHTML++;
-                    dzw_p[7].innerHTML++;
-                    dzw_g[line_on - 1].innerHTML++;
-                    dzw_g[7].innerHTML++;
-                }
-                if (Ball_zone == 2) { // attack zone turnover win
-                    azw_p[line_on - 1].innerHTML++;
-                    azw_p[7].innerHTML++;
-                    azw_g[line_on - 1].innerHTML++;
-                    azw_g[7].innerHTML++;
+            if (started == 1 && PosTime > 0) {
+                Not_p[line_on - 1]++;
+                Not_g[line_on - 1]++;
+                if (line_on < 4) {
+                    Not_p[7]++;
+                    Not_g[7]++;
                 }
             }
+            PosTime = 0;
         }
     }
-    // When the right ball zone button is pressed
-    function BallZoneR() {
-        document.getElementById("ZoneR").style.background='#555555';
-        document.getElementById("ZoneL").style.background='#4CAF50';
-        if (Order == 1) {
-            Ball_zone = 2;
-        } else {Ball_zone = 1;}
-    }
-    // When the left ball zone button is pressed
-    function BallZoneL() {
-        document.getElementById("ZoneR").style.background='#4CAF50';
-        document.getElementById("ZoneL").style.background='#555555';
-        if (Order == 2) {
-            Ball_zone = 2;
-        } else {Ball_zone = 1;}
-    }
+
     // When the line is changed by pressing any of the line on court buttons except the one that is on
     function Line_change(line) {
         console.log(lines); // debugging
         document.getElementById(lines[line_on-1]).style.background='#4CAF50';
         document.getElementById(lines[line-1]).style.background='#555555';
+        old_line = line_on;
         line_on = line;
+        if (LineTime > 0) {
+            if (Ball_pos == 1) {
+                Not_p[line_on - 1]++;
+                Not_g[line_on - 1]++;
+                if (line_on < 4) {
+                    Not_p[7]++;
+                    Not_g[7]++;
+                }
+            }
+            if (Ball_pos == 2) {
+                Notno_p[line_on - 1]++;
+                Notno_g[line_on - 1]++;
+                if (line_on < 4) {
+                    Notno_p[7]++;
+                    Notno_g[7]++;
+                }
+            }
+            Nos_p[line_on - 1]++;
+            Nos_g[line_on - 1]++;
+            if (line_on < 4) {
+                Nos_p[7]++;
+                Nos_g[7]++;
+            }
+
+            if (old_line == 1) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, shiftP, 0, 0, 0, 0, teamPos]);
+            }
+            if (old_line == 2) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, 0, shiftP, 0, 0, 0, teamPos]);
+            }
+            if (old_line == 3) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, 0, 0, shiftP, 0, 0, teamPos]);
+            }
+            if (old_line == 4 || old_line == 5) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, 0, 0, 0, shiftP, 0, teamPos]);
+            }
+            if (old_line == 6 || old_line == 7) {
+                shiftP = Math.round(100 * shiftPos / LineTime);
+                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                teamPos = Math.round(100 * posT / gameCounter);
+                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+
+                posTeam_array.push([shiftNo, 0, 0, 0, 0, shiftP, teamPos]);
+            }
+        }
+        console.log("Shift Possession: " + shiftP);
+        console.log("Team Possession: " + teamPos);
+        PosTime = 0;
+        LineTime = 0;
+        shiftNo++;
+        shiftPos = 0;
         console.log(line_on); // debugging
     }
     // Start game or start/stop game clock
@@ -1012,26 +1072,52 @@ It extends app_layout.html with Django
         if (started == 0) {   // Start game and disable teams etc.
             var r = confirm("Do you want to start the game,\n changing teams will be disabled?");
             if (r == true) {
-                document.getElementById("home_teams").disabled = true;
-                document.getElementById("away_teams").disabled = true;
+                document.getElementById("home_team").disabled = true;
+                document.getElementById("away_team").disabled = true;
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 started = 1;
+                sData.style.display = "block";
             } else {
             }
         }
         // Game has already started, then start/stop the game clock
         else {
             if (is_on == 0) {    // Start game clock
-               document.getElementById("start").innerHTML = "Stop";
-               document.getElementById("start").style.background='#555555';
-               is_on = 1;
-               Counter();
+                if (counter == 0 && Ball_pos == 1) {
+                    Not_p[line_on - 1]++;
+                    Not_g[line_on - 1]++;
+                    if (line_on < 4) {
+                        Not_p[7]++;
+                        Not_g[7]++;
+                    }
+                }
+                if (counter == 0 && Ball_pos == 2) {
+                    Notno_p[line_on - 1]++;
+                    Notno_g[line_on - 1]++;
+                    if (line_on < 4) {
+                        Notno_p[7]++;
+                        Notno_g[7]++;
+                    }
+                }
+                if (counter == 0) {
+                    Nos_p[line_on - 1]++;
+                    Nos_g[line_on - 1]++;
+                    if (line_on < 4) {
+                        Nos_p[7]++;
+                        Nos_g[7]++;
+                    }
+                }
+                document.getElementById("start").innerHTML = "Stop";
+                document.getElementById("start").style.background='#555555';
+                is_on = 1;
+                Counter();
             }
             else if (is_on == 1) {  // Stop game clock
                 document.getElementById("start").innerHTML = "Start";
                 document.getElementById("start").style.background='#4CAF50';
                 is_on = 0;
+                drawChart(); // Update charts
             }
         }
     }
@@ -1044,12 +1130,18 @@ It extends app_layout.html with Django
         var r = confirm("Changing period will reset clock and statistics,\nand save data, are you sure?");
             if (r == true) {
                 periodN++
-                counter = 1;
+                counter = 0;
                 document.getElementById("periodNr").innerHTML = "Period " + periodN;
                 document.getElementById("label").innerHTML = "00:00:00";
 
                 var ctx = cnvs.getContext("2d");
-                ctx.drawImage(myImg,0,0,284,200);
+                ctx.drawImage(myImg,0,0,fWidth,fLength);
+                PosTime = 0;
+                LineTime = 0;
+                dataShot = 0;
+                dataRes = 0;
+                dataxG = 0;
+                shiftPos = 0;
 
                 for (let i = 0; i < 8; i++) {
 
@@ -1064,25 +1156,22 @@ It extends app_layout.html with Django
                     ma_p[i].innerHTML = 0;
                     saf_p[i].innerHTML = 0;
                     saa_p[i].innerHTML = 0;
-                    azw_p[i].innerHTML = 0;
-                    azl_p[i].innerHTML = 0;
-                    dzw_p[i].innerHTML = 0;
-                    dzl_p[i].innerHTML = 0;
+                    xf_p[i].innerHTML = 0;
+                    xa_p[i].innerHTML = 0;
 
                     Pos_p[i] = 0;
-                    Def1_p[i] = 0;
-                    Att1_p[i] = 0;
-                    Def2_p[i] = 0;
-                    Att2_p[i] = 0;
                     Toc_p[i] = 0;
+                    xGf_p[i] = 0;
+                    xGa_p[i] = 0;
+                    Not_p[i] = 0;
+                    Nos_p[i] = 0;
+                    Notno_p[i] = 0;
 
                     p_p[i].innerHTML = 0;
                     toc_p[i].innerHTML = "00:00";
-                    attz1_p[i].innerHTML = 0;
-                    defz1_p[i].innerHTML = 0;
-                    attz2_p[i].innerHTML = 0;
-                    defz2_p[i].innerHTML = 0;
-
+                    atoc_p[i].innerHTML = "00:00";
+                    avg_p[i].innerHTML = "00:00";
+                    avgno_p[i].innerHTML = "00:00";
                 }
 
             } else {
@@ -1097,51 +1186,34 @@ It extends app_layout.html with Django
 
              Toc_p[line_on - 1]++;
              Toc_g[line_on - 1]++;
-             Toc_p[7]++;
-             Toc_g[7]++;
+             if (line_on < 4) {
+                 Toc_p[7]++;
+                 Toc_g[7]++;
+             }
 
              if (Ball_pos == 1) {
                 Pos_p[line_on - 1]++;
                 Pos_g[line_on - 1]++;
-                Pos_g[7]++;
-                Pos_p[7]++;
-                
-                if (Ball_zone == 1) { // Ball Team 1 Def Zone
-                    Def1_p[line_on - 1]++;
-                    Def1_g[line_on - 1]++;
-                    Def1_p[7]++;
-                    Def1_g[7]++;
+                shiftPos++;
+                if (line_on < 4) {
+                    Pos_g[7]++;
+                    Pos_p[7]++;
                 }
-                
-                if (Ball_zone == 2) { // Ball Team 1 Att Zone
-                    Att1_p[line_on - 1]++;
-                    Att1_g[line_on - 1]++;
-                    Att1_p[7]++;
-                    Att1_g[7]++;
-                }
+
              }
              else {
-             
-                if (Ball_zone == 1) { // Ball Team 2 Def Zone
-                    Def2_p[line_on - 1]++;
-                    Def2_g[line_on - 1]++;
-                    Def2_p[7]++;
-                    Def2_g[7]++;
-                }
-                
-                if (Ball_zone == 2) { // Ball Team 2 Att Zone
-                    Att2_p[line_on - 1]++;
-                    Att2_g[line_on - 1]++;
-                    Att2_p[7]++;
-                    Att2_g[7]++;
-                }
+
              }
-             
+
+             // Possession
+
              p_p[line_on - 1].innerHTML = Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
-             p_p[7].innerHTML = Math.round(100 * Pos_p[7] / counter);
+             p_p[7].innerHTML = Math.round(100 * Pos_p[7] / (Toc_p[0] + Toc_p[1] + Toc_p[2]));
              
              p_g[line_on - 1].innerHTML = Math.round(100 * Pos_g[line_on - 1] / Toc_g[line_on - 1]);
-             p_g[7].innerHTML = Math.round(100 * Pos_g[7] / gameCounter);
+             p_g[7].innerHTML = Math.round(100 * Pos_g[7] / (Toc_g[0] + Toc_g[1] + Toc_g[2]));
+
+             // Time on Court
 
              var toc = new Date(Toc_p[line_on - 1] * 1000);
              var d = toc.toISOString().substr(14, 5);
@@ -1158,34 +1230,98 @@ It extends app_layout.html with Django
              var toc = new Date(Toc_g[7] * 1000);
              var d = toc.toISOString().substr(14, 5);
              toc_g[7].innerHTML = d;
-             
-             attz1_p[line_on - 1].innerHTML = Math.round(100 * Att1_p[line_on - 1] / Toc_p[line_on - 1]);
-             attz1_p[7].innerHTML = Math.round(100 * Att1_p[7] / counter);
-             
-             attz1_g[line_on - 1].innerHTML = Math.round(100 * Att1_g[line_on - 1] / Toc_g[line_on - 1]);
-             attz1_g[7].innerHTML = Math.round(100 * Att1_g[7] / gameCounter);
-             
-             attz2_p[line_on - 1].innerHTML = Math.round(100 * Att2_p[line_on - 1] / Toc_p[line_on - 1]);
-             attz2_p[7].innerHTML = Math.round(100 * Att2_p[7] / counter);
-             
-             attz2_g[line_on - 1].innerHTML = Math.round(100 * Att2_g[line_on - 1] / Toc_g[line_on - 1]);
-             attz2_g[7].innerHTML = Math.round(100 * Att2_g[7] / gameCounter);
-             
-             defz1_p[line_on - 1].innerHTML = Math.round(100 * Def1_p[line_on - 1] / Toc_p[line_on - 1]);
-             defz1_p[7].innerHTML = Math.round(100 * Def1_p[7] / counter);
-             
-             defz1_g[line_on - 1].innerHTML = Math.round(100 * Def1_g[line_on - 1] / Toc_g[line_on - 1]);
-             defz1_g[7].innerHTML = Math.round(100 * Def1_g[7] / gameCounter);
-             
-             defz2_p[line_on - 1].innerHTML = Math.round(100 * Def2_p[line_on - 1] / Toc_p[line_on - 1]);
-             defz2_p[7].innerHTML = Math.round(100 * Def2_p[7] / counter);
-             
-             defz2_g[line_on - 1].innerHTML = Math.round(100 * Def2_g[line_on - 1] / Toc_g[line_on - 1]);
-             defz2_g[7].innerHTML = Math.round(100 * Def2_g[7] / gameCounter);
+
+             // Average Time on Ball
+
+             if (Not_p[line_on - 1] > 0) {
+                var avg = new Date(Math.round(Pos_p[line_on - 1] / Not_p[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avg_p[line_on - 1].innerHTML = a;
+             }
+             if (Not_p[7] > 0) {
+                var avg = new Date(Math.round(Pos_p[7] / Not_p[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avg_p[7].innerHTML = a;
+             }
+             if (Not_g[line_on - 1] > 0) {
+                var avg = new Date(Math.round(Pos_g[line_on - 1] / Not_g[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avg_g[line_on - 1].innerHTML = a;
+             }
+             if (Not_g[7] > 0) {
+                var avg = new Date(Math.round(Pos_g[7] / Not_g[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avg_g[7].innerHTML = a;
+             }
+
+             // Average Time without Ball
+
+             if (Notno_p[line_on - 1] > 0) {
+                var avg = new Date(Math.round((Toc_p[line_on - 1] - Pos_p[line_on - 1]) / Notno_p[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgno_p[line_on - 1].innerHTML = a;
+             }
+             if (Notno_p[7] > 0) {
+                var avg = new Date(Math.round((Toc_p[7] - Pos_p[7]) / Notno_p[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgno_p[7].innerHTML = a;
+             }
+             if (Notno_g[line_on - 1] > 0) {
+                var avg = new Date(Math.round((Toc_g[line_on - 1] - Pos_g[line_on - 1]) / Notno_g[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgno_g[line_on - 1].innerHTML = a;
+             }
+             if (Notno_g[7] > 0) {
+                var avg = new Date(Math.round((Toc_g[7] - Pos_g[7]) / Notno_g[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgno_g[7].innerHTML = a;
+             }
+
+             // Average Time on Court
+
+             if (Nos_p[line_on - 1] > 0) {
+                var avg = new Date(Math.round(Toc_p[line_on - 1] / Nos_p[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atoc_p[line_on - 1].innerHTML = a;
+             }
+             if (Nos_p[7] > 0) {
+                var avg = new Date(Math.round(Toc_p[7] / Nos_p[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atoc_p[7].innerHTML = a;
+             }
+             if (Nos_g[line_on - 1] > 0) {
+                var avg = new Date(Math.round(Toc_g[line_on - 1] / Nos_g[line_on - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atoc_g[line_on - 1].innerHTML = a;
+             }
+             if (Nos_g[7] > 0) {
+                var avg = new Date(Math.round(Toc_g[7] / Nos_g[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atoc_g[7].innerHTML = a;
+             }
+
+             // Add one row to timeData - array
+             timeData.push([gameCounter, Ball_pos, line_on, dataShot, dataRes, dataxG]);
+
+             // Add one row to the xG arrays every minute
+             if (gameCounter % 60 == 0) {
+
+                 var date = new Date(gameCounter * 1000);
+                 var display = date.toISOString().substr(11, 8);
+                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+             }
+
+             dataShot = 0;
+             dataRes = 0;
+             dataxG = 0;
 
              counter++;
              gameCounter++;
-             console.log(counter);
+             PosTime++;
+             LineTime++;
              
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
@@ -1230,9 +1366,16 @@ It extends app_layout.html with Django
             + document.documentElement.scrollTop;
         }
 
-        menu.style.display = "block";
-        menu.style.left = PosX + "px";
-        menu.style.top = PosY + "px";
+        stype.style.display = "block";
+        if (PosY <= 4*fLength/5)
+        {
+            stype.style.top = PosY + "px";
+        }
+        else
+        {
+            stype.style.top = (PosY-(fLength/4)) + "px";
+        }
+        stype.style.left = PosX + "px";
 
         PosX = PosX - ImgPos[0];
         PosY = PosY - ImgPos[1];
@@ -1243,15 +1386,410 @@ It extends app_layout.html with Django
     }
 
     function shotBlocked() {
-        Draw(PosX,PosY,2);
+        Draw(PosX,PosY,3);
     }
 
     function shotSaved() {
-        Draw(PosX,PosY,3);
+        Draw(PosX,PosY,2);
+
+        var dx = PosX / fWidth;
+        var dy = PosY / fLength;
+
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                }
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+                }
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+                if (line_on < 4) {
+                    xf_p[7].innerHTML = xGf_p[7];
+                }
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
+                if (line_on < 4) {
+                    xf_g[7].innerHTML = xGf_g[7];
+                }
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                }
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+                }
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+                if (line_on < 4) {
+                    xf_p[7].innerHTML = xGf_p[7];
+                }
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+                if (line_on < 4) {
+                    xf_g[7].innerHTML = xGf_g[7];
+                }
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+            }
+        }
+
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+                }
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+                }
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+                if (line_on < 4) {
+                    xa_p[7].innerHTML = xGa_p[7];
+                }
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+                if (line_on < 4) {
+                    xa_g[7].innerHTML = xGa_g[7];
+                }
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+                }
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+                }
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+                if (line_on < 4) {
+                    xa_p[7].innerHTML = xGa_p[7];
+                }
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+                if (line_on < 4) {
+                    xa_g[7].innerHTML = xGa_g[7];
+                }
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+            }
+        }
     }
 
     function shotGoal() {
         Draw(PosX,PosY,4);
+
+        var dx = PosX / fWidth;
+        var dy = PosY / fLength;
+
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                }
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+                }
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+                if (line_on < 4) {
+                    xf_p[7].innerHTML = xGf_p[7];
+                }
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+                if (line_on < 4) {
+                    xf_g[7].innerHTML = xGf_g[7];
+                }
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
+
+                if (line_on == 1) {
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                }
+
+                if (line_on == 2) {
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], xGf_g[1], 0]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                }
+
+                if (line_on == 3) {
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                }
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                }
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+                }
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+                if (line_on < 4) {
+                    xf_p[7].innerHTML = xGf_p[7];
+                }
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+                if (line_on < 4) {
+                    xf_g[7].innerHTML = xGf_g[7];
+                };
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
+
+                if (line_on == 1) {
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                }
+
+                if (line_on == 2) {
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], xGf_g[1], 0]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                }
+
+                if (line_on == 3) {
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                }
+            }
+        }
+
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+                }
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+                }
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+                if (line_on < 4) {
+                    xa_p[7].innerHTML = xGa_p[7];
+                }
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+                if (line_on < 4) {
+                    xa_g[7].innerHTML = xGa_g[7];
+                }
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
+
+                if (line_on == 1) {
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                }
+
+                if (line_on == 2) {
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, xGa_g[1]]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                }
+
+                if (line_on == 3) {
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, xGa_g[2]]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                }
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 1) { // turnover x 1,25 xG
+                    dxG = dxG * 1.25;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+                if (dataType == 3) { // rebound x 1,5 xG
+                    dxG = dxG * 1.5;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+                }
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+                if (line_on < 4) {
+                    xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+                }
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+                if (line_on < 4) {
+                    xa_p[7].innerHTML = xGa_p[7];
+                }
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+                if (line_on < 4) {
+                    xa_g[7].innerHTML = xGa_g[7];
+                }
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
+
+                if (line_on == 1) {
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                }
+
+                if (line_on == 2) {
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, xGa_g[1]]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                }
+
+                if (line_on == 3) {
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, xGa_g[2]]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                }
+            }
+        }
     }
 
     function Draw(x,y,type)
@@ -1262,130 +1800,398 @@ It extends app_layout.html with Django
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
+            dataShot = 1;
             if (type == 1) {    // Shot Missed
                 ctx.fillText("M", x, y);
-                
-                sf_p[line_on - 1].innerHTML++;
-                sf_p[7].innerHTML++;
-                sf_g[line_on - 1].innerHTML++;
-                sf_g[7].innerHTML++;
+                dataRes = 1;
 
+                sf_p[line_on - 1].innerHTML++;
+                if (line_on < 4) {
+                    sf_p[7].innerHTML++;
+                }
+                sf_g[line_on - 1].innerHTML++;
+                if (line_on < 4) {
+                    sf_g[7].innerHTML++;
+                }
                 mf_p[line_on - 1].innerHTML++;
-                mf_p[7].innerHTML++;
+                if (line_on < 4) {
+                    mf_p[7].innerHTML++;
+                }
                 mf_g[line_on - 1].innerHTML++;
-                mf_g[7].innerHTML++;
+                if (line_on < 4) {
+                    mf_g[7].innerHTML++;
+                }
             }
-            else if (type == 2) {   // Shot Blocked
+            else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
+                dataRes = 3;
                 
                 sf_p[line_on - 1].innerHTML++;
-                sf_p[7].innerHTML++;
+                if (line_on < 4) {
+                    sf_p[7].innerHTML++;
+                }
                 sf_g[line_on - 1].innerHTML++;
-                sf_g[7].innerHTML++;
-
+                if (line_on < 4) {
+                    sf_g[7].innerHTML++;
+                }
                 ba_g[line_on - 1].innerHTML++;
-                ba_g[7].innerHTML++;
+                if (line_on < 4) {
+                    ba_g[7].innerHTML++;
+                }
                 ba_p[line_on - 1].innerHTML++;
-                ba_p[7].innerHTML++;
+                if (line_on < 4) {
+                    ba_p[7].innerHTML++;
+                }
             }
-            else if (type == 3) {   // Shot Saved
+            else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
+                dataRes = 2;
                 
                 sf_p[line_on - 1].innerHTML++;
-                sf_p[7].innerHTML++;
+                if (line_on < 4) {
+                    sf_p[7].innerHTML++;
+                }
                 sf_g[line_on - 1].innerHTML++;
-                sf_g[7].innerHTML++;
-
+                if (line_on < 4) {
+                    sf_g[7].innerHTML++;
+                }
                 saf_p[line_on - 1].innerHTML++;
-                saf_p[7].innerHTML++;
+                if (line_on < 4) {
+                    saf_p[7].innerHTML++;
+                }
                 saf_g[line_on - 1].innerHTML++;
-                saf_g[7].innerHTML++;
+                if (line_on < 4) {
+                    saf_g[7].innerHTML++;
+                }
             }
             else if (type == 4) {   // Shot Goal
                 ctx.fillText("G", x, y);
+                dataRes = 4;
                 
                 sf_p[line_on - 1].innerHTML++;
                 gf_p[line_on - 1].innerHTML++;
                 pm_p[line_on - 1].innerHTML++;
-                sf_p[7].innerHTML++;
-                gf_p[7].innerHTML++;
-                pm_p[7].innerHTML++;
+                if (line_on < 4) {
+                    sf_p[7].innerHTML++;
+                    gf_p[7].innerHTML++;
+                    pm_p[7].innerHTML++;
+                }
                 
                 sf_g[line_on - 1].innerHTML++;
                 gf_g[line_on - 1].innerHTML++;
                 pm_g[line_on - 1].innerHTML++;
-                sf_g[7].innerHTML++;
-                gf_g[7].innerHTML++;
-                pm_g[7].innerHTML++;
+                if (line_on < 4) {
+                    sf_g[7].innerHTML++;
+                    gf_g[7].innerHTML++;
+                    pm_g[7].innerHTML++;
+                }
             }
         }
         else if (Ball_pos == 2) {
             ctx.fillStyle = "red";
+            dataShot = 2;
+
             if (type == 1) {    // Shot Missed
                 ctx.fillText("M", x, y);
+                dataRes = 1;
                 
                 sa_p[line_on - 1].innerHTML++;
-                sa_p[7].innerHTML++;
                 sa_g[line_on - 1].innerHTML++;
-                sa_g[7].innerHTML++;
-
                 ma_p[line_on - 1].innerHTML++;
-                ma_p[7].innerHTML++;
                 ma_g[line_on - 1].innerHTML++;
-                ma_g[7].innerHTML++;
+                if (line_on < 4) {
+                    sa_g[7].innerHTML++;
+                    sa_p[7].innerHTML++;
+                    ma_p[7].innerHTML++;
+                    ma_g[7].innerHTML++;
+                }
             }
-            else if (type == 2) {   // Shot Blocked
+            else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
+                dataRes = 3;
                 
                 sa_p[line_on - 1].innerHTML++;
                 bf_p[line_on - 1].innerHTML++;
-                sa_p[7].innerHTML++;
-                bf_p[7].innerHTML++;
-                
                 sa_g[line_on - 1].innerHTML++;
                 bf_g[line_on - 1].innerHTML++;
-                sa_g[7].innerHTML++;
-                bf_g[7].innerHTML++;
+                if (line_on < 4) {
+                    sa_g[7].innerHTML++;
+                    bf_g[7].innerHTML++;
+                    sa_p[7].innerHTML++;
+                    bf_p[7].innerHTML++;
+                }
             }
-            else if (type == 3) {   // Shot Saved
+            else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
+                dataRes = 2;
                 
                 sa_p[line_on - 1].innerHTML++;
-                sa_p[7].innerHTML++;
                 sa_g[line_on - 1].innerHTML++;
-                sa_g[7].innerHTML++;
-
                 saa_p[line_on - 1].innerHTML++;
-                saa_p[7].innerHTML++;
                 saa_g[line_on - 1].innerHTML++;
-                saa_g[7].innerHTML++;
+                if (line_on < 4) {
+                    sa_p[7].innerHTML++;
+                    sa_g[7].innerHTML++;
+                    saa_p[7].innerHTML++;
+                    saa_g[7].innerHTML++;
+                }
             }
             else if (type == 4) {   // Shot Goal
                 ctx.fillText("G", x, y);
+                dataRes = 4;
                 
                 sa_p[line_on - 1].innerHTML++;
                 ga_p[line_on - 1].innerHTML++;
                 pm_p[line_on - 1].innerHTML--;
-                sa_p[7].innerHTML++;
-                ga_p[7].innerHTML++;
-                pm_p[7].innerHTML--;
+                if (line_on < 4) {
+                    sa_p[7].innerHTML++;
+                    ga_p[7].innerHTML++;
+                    pm_p[7].innerHTML--;
+                }
                 
                 sa_g[line_on - 1].innerHTML++;
                 ga_g[line_on - 1].innerHTML++;
                 pm_g[line_on - 1].innerHTML--;
-                sa_g[7].innerHTML++;
-                ga_g[7].innerHTML++;
-                pm_g[7].innerHTML--;
+                if (line_on < 4) {
+                    sa_g[7].innerHTML++;
+                    ga_g[7].innerHTML++;
+                    pm_g[7].innerHTML--;
+                }
             }
         }
+
+        // Shot Angle and Distance calculation
+        // Goal place(s) y=50/450, x=150 (x = 10%/90% of length, y=50% of width)
+        // Field dimensions = 20m x 40m (fWidth x fLength)
+        // Shot Angle in respect to reference line (line from the center of the goal line to the
+        // left goal post from the goalie's perspective)
+
+        var b = (150 - x) * 20 / fWidth;
+
+        if (Ball_pos == 1) {
+            if (Order == 1) {
+                var a = (50 - y) * 40 / fLength;
+                dataDis = Math.sqrt( a*a + b*b );
+
+                var dAy = 50 - 50; // Reference line
+                var dAx = 300 - 150;
+                var dBy = y - 50; // Line from the shot position to the center of the goal line
+                var dBx = x - 150;
+
+                var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
+                if (angle < 0) {angle = angle * -1;}
+                dataAngle = angle * (180 / Math.PI);
+
+            }
+        }
+        if (Ball_pos == 1) {
+            if (Order == 2) {
+                var a = (450 - y) * 40 / fLength;
+                dataDis = Math.sqrt( a*a + b*b );
+
+                var dAy = 450 - 450; // Reference line
+                var dAx = 0 - 150;
+                var dBy = y - 450; // Line from the shot position to the center of the goal line
+                var dBx = x - 150;
+
+                var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
+                if (angle < 0) {angle = angle * -1;}
+                dataAngle = angle * (180 / Math.PI);
+            }
+        }
+        if (Ball_pos == 2) {
+            if (Order == 1) {
+                var a = (450 - y) * 40 / fLength;
+                dataDis = Math.sqrt( a*a + b*b );
+
+                var dAy = 450 - 450; // Reference line
+                var dAx = 0 - 150;
+                var dBy = y - 450; // Line from the shot position to the center of the goal line
+                var dBx = x - 150;
+
+                var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
+                if (angle < 0) {angle = angle * -1;}
+                dataAngle = angle * (180 / Math.PI);
+            }
+        }
+        if (Ball_pos == 2) {
+            if (Order == 2) {
+                var a = (50 - y) * 40 / fLength;
+                dataDis = Math.sqrt( a*a + b*b );
+
+                var dAy = 50 - 50; // Reference line
+                var dAx = 300 - 150;
+                var dBy = y - 50; // Line from the shot position to the center of the goal line
+                var dBx = x - 150;
+
+                var angle = Math.atan2(dAx * dBy - dAy * dBx, dAx * dBx + dAy * dBy);
+                if (angle < 0) {angle = angle * -1;}
+                dataAngle = angle * (180 / Math.PI);
+            }
+        }
+        if (line_on < 4) {
+            dataPp = 0;
+            dataSh = 0;
+        }
+        if (line_on == 4 || line_on == 5) {
+            dataPp = 1;
+        }
+        if (line_on == 6 || line_on == 7) {
+            dataSh = 1;
+        }
+
+        // Shot menu
+
+        menu.style.display = "none";
+        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
     }
 
-    function homeTeam() {
-        console.log("Home Team changed");
+    function shotTurnover() {
+        dataType = 1;
+        stype.style.display = "none";
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // console.log(shotData);
     }
 
-    function awayTeam() {
-        console.log("Away Team changed");
+    function shotOnetimer() {
+        dataType = 2;
+        stype.style.display = "none";
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // console.log(shotData);
+    }
+
+    function shotRebound() {
+        dataType = 3;
+        stype.style.display = "none";
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // console.log(shotData);
+    }
+
+    function shotDirect() {
+        dataType = 4;
+        stype.style.display = "none";
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // console.log(shotData);
+    }
+
+    function sendData() {
+
+        var r = confirm("Are you sure you want to send data,\n do this when your game is over?");
+        if (r == true) {
+            let today = new Date().toLocaleDateString()
+
+            Email.send({
+                SecureToken : "3b145e7d-a832-4993-b00e-15a5d25b5b98",
+                To : 'floorballscanner@gmail.com',
+                From : "floorballscanner@gmail.com",
+                Subject : "Game Data",
+                Body : "<html><h2>"+ today +": "+ hTeam.value +" - "+ aTeam.value +"</h2><p>"+ shotData +"</p></br><p>"+ timeData +"</html>",
+                }).then(
+                    message => alert(message)
+            );
+        }
+
+        console.log("sendData pressed");
+    }
+
+    function drawChart() {
+
+        // Team xG Chart
+        var data = google.visualization.arrayToDataTable(xGTeam_array);
+
+        var options = {
+          title: 'xG by Team',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
+        chart.draw(data, options);
+
+        // Line 1 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL1_array);
+
+        var options = {
+          title: 'xG by Line 1',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('xGL1_chart'));
+        chart.draw(data, options);
+
+        // Line 2 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL2_array);
+
+        var options = {
+          title: 'xG by Line 2',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('xGL2_chart'));
+        chart.draw(data, options);
+
+        // Line 3 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL3_array);
+
+        var options = {
+          title: 'xG by Line 3',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('xGL3_chart'));
+        chart.draw(data, options);
+
+        // Position Chart
+        var data = google.visualization.arrayToDataTable(posTeam_array);
+
+        var options = {
+          title: 'Possession by Line',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'bars',
+          series: {
+              0:{color: 'blue'},
+              1:{color: 'purple'},
+              2:{color: 'yellow'},
+              3:{color: 'green'},
+              4:{color: 'red'},
+              5:{type: 'line', color: 'black'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('posTeam_chart'));
+        chart.draw(data, options);
+
     }
 
 </script>

@@ -7,13 +7,21 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
 
 {% extends 'base_layout.html' %}
 {% block content %}
-<div class="banner">
-    <div class="app-text">
-        <form method="post">
-            {% csrf_token %}
-            {{form.as_p}}
-            <input type="submit" value="Sign up">
-        </form>
+<div class="container-fluid no-padding">
+    <div class="col-sm-12">
+        <div class="app-text" style="Padding-top: 40px;">
+            <h3>Sign up to Floorball Scanner</h3></br>
+            <p>If you're interested in analyzing your game, sign up to Floorball Scanner. Fill in the information and
+            enjoy your new coaching tool.</p></br></br>
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Sign up">
+                </br></br>
+            </form>
+        {% load static %}
+        <img src="{% static 'monitoring2.png' %}" width="100px" height="100px"></br></br>
+        </div>
     </div>
 </div>
 {% endblock %}

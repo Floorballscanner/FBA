@@ -7,13 +7,21 @@ It extends base_layout.html with Django, and utilizes Django's existing login - 
 
 {% extends 'base_layout.html' %}
 {% block content %}
-<div class="banner">
-    <div class="app-text">
+<div class="container-fluid no-padding">
+    <div class="col-sm-12">
+        <div class="app-text" style="Padding-top: 40px;">
+            <h3>Login to Floorball Scanner</h3></br>
+            <p>Log in with your username and password.</p></br></br>
         <form method="post">
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" value="Login">
+            </br></br>
         </form>
+        {% load static %}
+        <img src="{% static 'chart1.png' %}" width="100px" height="100px">
+        </div>
+        </br></br>
     </div>
 </div>
 {% endblock %}

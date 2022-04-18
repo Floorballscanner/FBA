@@ -1,0 +1,271 @@
+/*
+
+This is the main CSS - styling file. Mainly styles the newgame.html - page.
+
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+/* The main header of the application */
+.header{
+    background: #111;
+    width: 100%;
+    length: 100%;
+}
+/* Main header menu style */
+.menu ul{
+    list-style-type: none;
+    overflow: hidden;
+}
+.menu ul li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+    text-decoration: none;
+}
+.menu ul li img{
+    padding: 12px 20px;
+}
+.menu ul li a:hover {
+    background-color: #7d7d7d;
+}
+.active{
+    color: #C0C0C0;
+    text-decoration: none;
+}
+.about{
+    color: #fff;
+    text-decoration: none;
+}
+.pricing{
+    color: #fff;
+    text-decoration: none;
+}
+.contact{
+    color: #fff;
+    text-decoration: none;
+}
+.home{
+    color: #fff;
+    text-decoration: none;
+}
+.frontpage{
+    color: #fff;
+    text-decoration: none;
+}
+.statistics{
+    color: #fff;
+    text-decoration: none;
+}
+.newgame{
+    color: #fff;
+    text-decoration: none;
+}
+.preferences{
+    color: #fff;
+    text-decoration: none;
+
+}
+.user-pic{
+    text-decoration: none;
+    padding: 18px;
+}
+.user{
+    text-decoration: none;
+    color: #fff;
+    padding: 20px 400px 0 0;
+}
+.banner{
+    top: 20%;
+    color: #000000;
+}
+.app-text{
+    text-align: center;
+    padding: 20px 20px;
+}
+.app-text h1{
+    font-size: 38px;
+    position: relative;
+}
+.app-text p{
+    font-size: 15px;
+    margin: 30px 0 30px 0;
+    line-height: 25px;
+    color: #919191;
+}
+.app-text ul li{
+    font-size: 15px;
+    line-height: 25px;
+    color: #919191;
+    text-align: center;
+    list-style-position: inside;
+}
+
+/* Index.html - page styling */
+
+.frontpage-choices{
+	text-align: center;
+	margin: 100px 0 30px 0;
+	color: #4CAF50;
+}
+.frontpage-choices h2{
+    font-size: 35px;
+    font-weight: 300;
+    color: black;
+}
+.frontpage-choices p{
+    font-size: 15px;
+    font-weight: 100;
+    color: #919191;
+}
+.frontpage-choices a{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/* Newgame.html - page styling */
+
+.team-selection textarea {
+    width: 70%;
+    resize: none;
+    font-size: 20px;
+    text-align: center;
+}
+
+.team-selection {
+    text-align: center;
+    padding: 20px 0 0 0;
+}
+
+.game-btn {
+	text-align: center;
+}
+
+.button-input p{
+    text-align: center;
+    padding: 30px 0 0 0;
+}
+.shot-map{
+    text-align: center;
+    padding: 30px 0 0 0;
+}
+.pos-input{
+    text-align: center;
+    padding: 30px 0 0 0;
+}
+.pos-btn{
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+.zone-btn{
+    text-align: center;
+    padding: 25px 0 0 0;
+}
+.line-btn{
+    text-align: center;
+    padding: 10px 0 15px 0;
+}
+.game-clock {
+	text-align: center;
+	padding: 20px 0 0 0;
+}
+.shot-menu {
+    position: absolute;
+    display: none;
+    text-align: center;
+    background: white;
+    border: 1px solid darkgray;
+}
+
+.shot-menu ul {
+    padding: 0px;
+    margin: 0px;
+    min-width: 150px;
+    list-style: none;
+}
+
+.shot-menu ul li {
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+
+.shot-menu ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.shot-menu ul li:hover {
+    background: darkgray;
+}
+
+.shot-map canvas{
+	text-align: center;
+	padding: 0px;
+	margin-left: 0px;
+}
+
+.pos-input input {
+      margin-left: 10px;
+}
+
+.stats-L1 {
+    text-align: center;
+}
+.stats-L2 {
+    text-align: center;
+}
+.stats-L3 {
+    text-align: center;
+}
+.stats-Team {
+    text-align: center;
+}
+.stats-PP1 {
+    text-align: center;
+}
+.stats-PP2 {
+    text-align: center;
+}
+.stats-SH1 {
+    text-align: center;
+}
+.stats-SH2 {
+    text-align: center;
+}
+.underline {
+    display: inline-block;
+    width: 160px;
+    height: 2px;
+    background-color: #65CD00;
+}
+
+/* myteam.html styling */
+
+.my-roster {
+    line-height 30px;
+}
+
+.player-list {
+    text-align: left;
+    list-style: none;
+}
+
+.addplayer-form {
+   display: none;
+   padding: 15px 0 0 0;
+}
+
+.changeteam-form {
+   display: none;
+   padding: 15px 0 0 0;
+}
