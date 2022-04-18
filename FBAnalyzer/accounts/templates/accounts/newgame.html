@@ -28,6 +28,7 @@ It extends app_layout.html with Django
                 <div class="game-clock">
                     <h4 id="periodNr">Period 1</h4>
                     <h2 id="label">00:00:00</h2>
+                    <h2 id="gres"><span id="totg1">0</span> - <span id="totg2">0</span></p></h2>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -335,6 +336,9 @@ It extends app_layout.html with Django
 <script type="text/javascript">
 
     // Variables
+
+    var tgt_1 = document.getElementById("totg1"); // Team 1 goals
+    var tgt_2 = document.getElementById("totg2"); // -||-
     var line_on = 1; // Line on court
     var started = 0; // Game started 0/1
     var lines = ["L1", "L2", "L3", "Pp1", "Pp2", "Sh1", "Sh2"]; // Line array
@@ -924,7 +928,7 @@ It extends app_layout.html with Django
         }
     }
 
-    // When the ball team left button is pressed the button colors and the variable are changed
+    // When the ball team 1 button is pressed the button colors and the variable are changed
     // If game is on, them one number is added to number of times with ball
     function BallTeamL() {
         document.getElementById("TeamR").style.background='#4CAF50';
@@ -955,7 +959,7 @@ It extends app_layout.html with Django
         }
     }
 
-    // When the ball team right button is pressed
+    // When the ball team 2 button is pressed
     function BallTeamR() {
         document.getElementById("TeamR").style.background='#555555';
         document.getElementById("TeamL").style.background='#4CAF50';
@@ -1885,6 +1889,8 @@ It extends app_layout.html with Django
                     gf_g[7].innerHTML++;
                     pm_g[7].innerHTML++;
                 }
+
+                tgt_1.innerHTML++;
             }
         }
         else if (Ball_pos == 2) {
@@ -1957,7 +1963,10 @@ It extends app_layout.html with Django
                     ga_g[7].innerHTML++;
                     pm_g[7].innerHTML--;
                 }
+
+                tgt_2.innerHTML++;
             }
+
         }
 
         // Shot Angle and Distance calculation
