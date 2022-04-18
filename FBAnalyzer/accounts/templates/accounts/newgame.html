@@ -29,7 +29,7 @@ It extends app_layout.html with Django
                     <h4 id="periodNr">Period 1</h4>
                     <h2 id="label">00:00:00</h2>
                     <h4 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span></h4>
-                    <h5 id="gxG"><span id="totxG_1">0</span> - <span id="totxG_2">0</span></h5>
+                    <h5 id="gxG">xG <span id="totxG_1">0</span> - <span id="totxG_2">0</span></h5>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -1442,7 +1442,8 @@ It extends app_layout.html with Django
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
 
-                txG_1.innerHTML = txG_1.innerHTML + dxG;
+                a = Math.round((txG_1.innerHTML + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
             }
         }
 
@@ -1485,7 +1486,8 @@ It extends app_layout.html with Django
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
 
-                txG_1.innerHTML = txG_1.innerHTML + dxG;
+                a = Math.round((txG_1.innerHTML + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
             }
         }
 
@@ -1528,7 +1530,8 @@ It extends app_layout.html with Django
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
 
-                txG_2.innerHTML = txG_2.innerHTML + dxG;
+                a = Math.round((txG_2.innerHTML + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
             }
         }
 
@@ -1571,7 +1574,8 @@ It extends app_layout.html with Django
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
 
-                txG_2.innerHTML = txG_2.innerHTML + dxG;
+                a = Math.round((txG_2.innerHTML + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
             }
         }
     }
@@ -1618,7 +1622,8 @@ It extends app_layout.html with Django
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
 
-                txG_1.innerHTML = txG_1.innerHTML + dxG;
+                a = Math.round((txG_1.innerHTML + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -1676,7 +1681,8 @@ It extends app_layout.html with Django
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
 
-                txG_1.innerHTML = txG_1.innerHTML + dxG;
+                a = Math.round((txG_1.innerHTML + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -1734,7 +1740,8 @@ It extends app_layout.html with Django
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
 
-                txG_2.innerHTML = txG_2.innerHTML + dxG;
+                a = Math.round((txG_2.innerHTML + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
@@ -1792,7 +1799,8 @@ It extends app_layout.html with Django
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
 
-                txG_2.innerHTML = txG_2.innerHTML + dxG;
+                a = Math.round((txG_2.innerHTML + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
