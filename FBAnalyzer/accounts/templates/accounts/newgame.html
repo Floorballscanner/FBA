@@ -28,6 +28,7 @@ It extends app_layout.html with Django
                 <div class="game-clock">
                     <h4 id="periodNr">Period 1</h4>
                     <h2 id="label">00:00:00</h2>
+                    <h2 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span></h2>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -335,6 +336,9 @@ It extends app_layout.html with Django
 <script type="text/javascript">
 
     // Variables
+
+    var tgt_1 = document.getElementById("totg_1");
+    var tgt_2 = document.getElementById("totg_2");
     var line_on = 1; // Line on court
     var started = 0; // Game started 0/1
     var lines = ["L1", "L2", "L3", "Pp1", "Pp2", "Sh1", "Sh2"]; // Line array
@@ -1885,6 +1889,8 @@ It extends app_layout.html with Django
                     gf_g[7].innerHTML++;
                     pm_g[7].innerHTML++;
                 }
+
+                tgt_1.innerHTML++;
             }
         }
         else if (Ball_pos == 2) {
@@ -1957,6 +1963,8 @@ It extends app_layout.html with Django
                     ga_g[7].innerHTML++;
                     pm_g[7].innerHTML--;
                 }
+
+                tgt_2.innerHTML++;
             }
         }
 
