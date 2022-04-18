@@ -28,7 +28,8 @@ It extends app_layout.html with Django
                 <div class="game-clock">
                     <h4 id="periodNr">Period 1</h4>
                     <h2 id="label">00:00:00</h2>
-                    <h2 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span></h2>
+                    <h5 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span></h5>
+                    <h5 id="gxG"><span id="totxG_1">0</span> - <span id="totxG_2">0</span></h5>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -339,6 +340,8 @@ It extends app_layout.html with Django
 
     var tgt_1 = document.getElementById("totg_1");
     var tgt_2 = document.getElementById("totg_2");
+    var txG_1 = document.getElementById("totxG_1");
+    var txG_2 = document.getElementById("totxG_2");
     var line_on = 1; // Line on court
     var started = 0; // Game started 0/1
     var lines = ["L1", "L2", "L3", "Pp1", "Pp2", "Sh1", "Sh2"]; // Line array
@@ -1438,6 +1441,8 @@ It extends app_layout.html with Django
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+
+                txG_1.innerHTML = txG_1.innerHTML + dxG;
             }
         }
 
@@ -1479,6 +1484,8 @@ It extends app_layout.html with Django
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+
+                txG_1.innerHTML = txG_1.innerHTML + dxG;
             }
         }
 
@@ -1520,6 +1527,8 @@ It extends app_layout.html with Django
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+
+                txG_2.innerHTML = txG_2.innerHTML + dxG;
             }
         }
 
@@ -1561,6 +1570,8 @@ It extends app_layout.html with Django
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+
+                txG_2.innerHTML = txG_2.innerHTML + dxG;
             }
         }
     }
@@ -1606,6 +1617,8 @@ It extends app_layout.html with Django
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
+
+                txG_1.innerHTML = txG_1.innerHTML + dxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -1663,6 +1676,8 @@ It extends app_layout.html with Django
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
 
+                txG_1.innerHTML = txG_1.innerHTML + dxG;
+
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
@@ -1719,6 +1734,8 @@ It extends app_layout.html with Django
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
 
+                txG_2.innerHTML = txG_2.innerHTML + dxG;
+
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
@@ -1774,6 +1791,8 @@ It extends app_layout.html with Django
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
+
+                txG_2.innerHTML = txG_2.innerHTML + dxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
