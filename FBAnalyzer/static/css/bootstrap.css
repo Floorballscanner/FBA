@@ -2977,7 +2977,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-sm, .btn-group-sm > .btn {
-  padding: 0.1rem 0.1rem;
+  padding: 0.2rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
@@ -2989,7 +2989,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-block + .btn-block {
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
 }
 
 input[type="submit"].btn-block,
