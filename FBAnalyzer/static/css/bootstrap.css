@@ -7036,6 +7036,7 @@ button.bg-dark:focus {
 .justify-content-center {
   -ms-flex-pack: center !important;
   justify-content: center !important;
+  margin: 0 0 0 0;
 }
 
 .justify-content-between {
