@@ -219,7 +219,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .game-clock {
 	text-align: center;
-	padding: 20px 0 0 0;
+	padding: 10px 0 0 0;
 }
 .shot-menu, .shot-type {
     position: absolute;
