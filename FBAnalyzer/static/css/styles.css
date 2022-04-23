@@ -174,7 +174,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 .team-selection {
     text-align: center;
-    padding: 20px 0 0 0;
+    padding: 10px 0 0 0;
 }
 
 .team-selection h2 {
@@ -187,11 +187,11 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 
 .button-input p{
     text-align: center;
-    padding: 10px 0 0 0;
+    padding: 5px 0 0 0;
 }
 .button-input-2 p{
     text-align: center;
-    padding: 10px 0 0 0;
+    padding: 5px 0 0 0;
 }
 .shot-map{
     text-align: center;
@@ -211,15 +211,15 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .line-btn{
     text-align: center;
-    padding: 5px 0 15px 0;
+    padding: 5px 0 5px 0;
 }
 .line-btn-2{
     text-align: center;
-    padding: 5px 0 15px 0;
+    padding: 5px 0 5px 0;
 }
 .game-clock {
 	text-align: center;
-	padding: 10px 0 0 0;
+	padding: 5px 0 0 0;
 }
 .shot-menu, .shot-type {
     position: absolute;
