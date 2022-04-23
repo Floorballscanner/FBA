@@ -50,10 +50,10 @@
 
     // Data arrays for xG charts
 
-    var xGTeamT2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
-    var xGL1T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
-    var xGL2T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
-    var xGL3T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGTeam_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL1_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL3_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
 
     var xGTeamT2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGL1T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
