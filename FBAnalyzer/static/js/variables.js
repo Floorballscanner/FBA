@@ -50,14 +50,20 @@
 
     // Data arrays for xG charts
 
-    var xGTeam_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
-    var xGL1_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
-    var xGL2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
-    var xGL3_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGTeamT2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL1T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL2T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL3T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+
+    var xGTeamT2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL1T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL2T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGL3T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
 
     // Data arrays for line shift charts
 
     var posTeam_array = [['Shift nr','Line 1','Line 2','Line 3','PP Line','SH Line', 'Team']];
+    var posTeamT2_array = [['Shift nr','Line 1','Line 2','Line 3','PP Line','SH Line', 'Team']];
 
     // Time on court by line period/game (in counters)
     // Team 1

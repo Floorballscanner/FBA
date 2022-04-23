@@ -165,82 +165,82 @@
 
     // Team 2 line change functionality
     function Line_change_2(line) {
-        console.log(lines); // debugging
-        document.getElementById(lines[line_on-1]).style.background='#4CAF50';
-        document.getElementById(lines[line-1]).style.background='#555555';
-        old_line = line_on;
-        line_on = line;
-        if (LineTime > 0) {
-            if (Ball_pos == 1) {
-                Not_p[line_on - 1]++;
-                Not_g[line_on - 1]++;
-                if (line_on < 4) {
-                    Not_p[7]++;
-                    Not_g[7]++;
-                }
-            }
+        console.log(lines_2); // debugging
+        document.getElementById(lines_2[line_on_2-1]).style.background='#4CAF50';
+        document.getElementById(lines_2[line-1]).style.background='#555555';
+        old_line = line_on_2;
+        line_on_2 = line;
+        if (LineTime_2 > 0) {
             if (Ball_pos == 2) {
-                Notno_p[line_on - 1]++;
-                Notno_g[line_on - 1]++;
-                if (line_on < 4) {
-                    Notno_p[7]++;
-                    Notno_g[7]++;
+                NotT2_p[line_on_2 - 1]++;
+                NotT2_g[line_on_2 - 1]++;
+                if (line_on_2 < 4) {
+                    NotT2_p[7]++;
+                    NotT2_g[7]++;
                 }
             }
-            Nos_p[line_on - 1]++;
-            Nos_g[line_on - 1]++;
-            if (line_on < 4) {
-                Nos_p[7]++;
-                Nos_g[7]++;
+            if (Ball_pos == 1) {
+                NotnoT2_p[line_on_2 - 1]++;
+                NotnoT2_g[line_on_2 - 1]++;
+                if (line_on_2 < 4) {
+                    NotnoT2_p[7]++;
+                    NotnoT2_g[7]++;
+                }
+            }
+            NosT2_p[line_on_2 - 1]++;
+            NosT2_g[line_on_2 - 1]++;
+            if (line_on_2 < 4) {
+                NosT2_p[7]++;
+                NosT2_g[7]++;
             }
 
             if (old_line == 1) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
                 teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo, shiftP, 0, 0, 0, 0, teamPos]);
+                posTeamT2_array.push([shiftNo_2, shiftP, 0, 0, 0, 0, teamPos]);
             }
             if (old_line == 2) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
                 teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo, 0, shiftP, 0, 0, 0, teamPos]);
+                posTeam_array.push([shiftNo_2, 0, shiftP, 0, 0, 0, teamPos]);
             }
             if (old_line == 3) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
                 teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo, 0, 0, shiftP, 0, 0, teamPos]);
+                posTeam_array.push([shiftNo_2, 0, 0, shiftP, 0, 0, teamPos]);
             }
             if (old_line == 4 || old_line == 5) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
                 teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo, 0, 0, 0, shiftP, 0, teamPos]);
+                posTeam_array.push([shiftNo_2, 0, 0, 0, shiftP, 0, teamPos]);
             }
             if (old_line == 6 || old_line == 7) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
                 teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo, 0, 0, 0, 0, shiftP, teamPos]);
+                posTeam_array.push([shiftNo_2, 0, 0, 0, 0, shiftP, teamPos]);
             }
         }
         console.log("Shift Possession: " + shiftP);
         console.log("Team Possession: " + teamPos);
-        PosTime = 0;
-        LineTime = 0;
-        shiftNo++;
-        shiftPos = 0;
+        PosTime_2 = 0;
+        LineTime_2 = 0;
+        shiftNo_2++;
+        shiftPos_2 = 0;
         console.log(line_on); // debugging
     }
 
