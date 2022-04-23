@@ -269,6 +269,12 @@
                         Not_p[7]++;
                         Not_g[7]++;
                     }
+                    NotnoT2_p[line_on_2 - 1]++;
+                    NotnoT2_g[line_on_2 - 1]++;
+                    if (line_on_2 < 4) {
+                        NotnoT2_p[7]++;
+                        NotnoT2_g[7]++;
+                    }
                 }
                 if (counter == 0 && Ball_pos == 2) {
                     Notno_p[line_on - 1]++;
@@ -277,6 +283,12 @@
                         Notno_p[7]++;
                         Notno_g[7]++;
                     }
+                    NotT2_p[line_on_2 - 1]++;
+                    NotT2_g[line_on_2 - 1]++;
+                    if (line_on_2 < 4) {
+                        NotT2_p[7]++;
+                        NotT2_g[7]++;
+                    }
                 }
                 if (counter == 0) {
                     Nos_p[line_on - 1]++;
@@ -284,6 +296,12 @@
                     if (line_on < 4) {
                         Nos_p[7]++;
                         Nos_g[7]++;
+                    }
+                    NosT2_p[line_on_2 - 1]++;
+                    NosT2_g[line_on_2 - 1]++;
+                    if (line_on_2 < 4) {
+                        NosT2_p[7]++;
+                        NosT2_g[7]++;
                     }
                 }
                 document.getElementById("start").innerHTML = "Stop";
@@ -320,6 +338,12 @@
                 dataRes = 0;
                 dataxG = 0;
                 shiftPos = 0;
+                PosTime_2 = 0;
+                LineTime_2 = 0;
+                dataShot = 0;
+                dataRes = 0;
+                dataxG = 0;
+                shiftPos_2 = 0;
 
                 for (let i = 0; i < 8; i++) {
 
@@ -350,6 +374,34 @@
                     atoc_p[i].innerHTML = "00:00";
                     avg_p[i].innerHTML = "00:00";
                     avgno_p[i].innerHTML = "00:00";
+                    
+                    sfT2_p[i].innerHTML = 0;
+                    saT2_p[i].innerHTML = 0;
+                    gfT2_p[i].innerHTML = 0;
+                    gaT2_p[i].innerHTML = 0;
+                    pmT2_p[i].innerHTML = 0;
+                    bfT2_p[i].innerHTML = 0;
+                    baT2_p[i].innerHTML = 0;
+                    mfT2_p[i].innerHTML = 0;
+                    maT2_p[i].innerHTML = 0;
+                    safT2_p[i].innerHTML = 0;
+                    saaT2_p[i].innerHTML = 0;
+                    xfT2_p[i].innerHTML = 0;
+                    xaT2_p[i].innerHTML = 0;
+
+                    PosT2_p[i] = 0;
+                    TocT2_p[i] = 0;
+                    xGfT2_p[i] = 0;
+                    xGaT2_p[i] = 0;
+                    NotT2_p[i] = 0;
+                    NosT2_p[i] = 0;
+                    NotnoT2_p[i] = 0;
+
+                    pT2_p[i].innerHTML = 0;
+                    tocT2_p[i].innerHTML = "00:00";
+                    atocT2_p[i].innerHTML = "00:00";
+                    avgT2_p[i].innerHTML = "00:00";
+                    avgnoT2_p[i].innerHTML = "00:00";
                 }
 
             } else {
@@ -368,6 +420,13 @@
                  Toc_p[7]++;
                  Toc_g[7]++;
              }
+             
+             TocT2_p[line_on_2 - 1]++;
+             TocT2_g[line_on_2 - 1]++;
+             if (line_on_2 < 4) {
+                 TocT2_p[7]++;
+                 TocT2_g[7]++;
+             }
 
              if (Ball_pos == 1) {
                 Pos_p[line_on - 1]++;
@@ -377,11 +436,21 @@
                     Pos_g[7]++;
                     Pos_p[7]++;
                 }
+             }
+             
+             if (Ball_pos == 2) {
+                PosT2_p[line_on_2 - 1]++;
+                PosT2_g[line_on_2 - 1]++;
+                shiftPos_2++;
+                if (line_on_2 < 4) {
+                    PosT2_g[7]++;
+                    PosT2_p[7]++;
+                }
 
              }
-             else {
+         else {
 
-             }
+         }
 
              // Possession
 
@@ -390,6 +459,12 @@
 
              p_g[line_on - 1].innerHTML = Math.round(100 * Pos_g[line_on - 1] / Toc_g[line_on - 1]);
              p_g[7].innerHTML = Math.round(100 * Pos_g[7] / (Toc_g[0] + Toc_g[1] + Toc_g[2]));
+             
+             pT2_p[line_on_2 - 1].innerHTML = Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
+             pT2_p[7].innerHTML = Math.round(100 * PosT2_p[7] / (TocT2_p[0] + TocT2_p[1] + TocT2_p[2]));
+
+             pT2_g[line_on_2 - 1].innerHTML = Math.round(100 * PosT2_g[line_on_2 - 1] / TocT2_g[line_on_2 - 1]);
+             pT2_g[7].innerHTML = Math.round(100 * PosT2_g[7] / (TocT2_g[0] + TocT2_g[1] + TocT2_g[2]));
 
              // Time on Court
 
@@ -408,6 +483,22 @@
              var toc = new Date(Toc_g[7] * 1000);
              var d = toc.toISOString().substr(14, 5);
              toc_g[7].innerHTML = d;
+             
+             var toc = new Date(TocT2_p[line_on_2 - 1] * 1000);
+             var d = toc.toISOString().substr(14, 5);
+             tocT2_p[line_on_2 - 1].innerHTML = d;
+
+             var toc = new Date(TocT2_g[line_on_2 - 1] * 1000);
+             var d = toc.toISOString().substr(14, 5);
+             tocT2_g[line_on_2 - 1].innerHTML = d;
+
+             var toc = new Date(TocT2_p[7] * 1000);
+             var d = toc.toISOString().substr(14, 5);
+             tocT2_p[7].innerHTML = d;
+
+             var toc = new Date(TocT2_g[7] * 1000);
+             var d = toc.toISOString().substr(14, 5);
+             tocT2_g[7].innerHTML = d;
 
              // Average Time on Ball
 
@@ -430,6 +521,27 @@
                 var avg = new Date(Math.round(Pos_g[7] / Not_g[7]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
                 avg_g[7].innerHTML = a;
+             }
+             
+             if (NotT2_p[line_on_2 - 1] > 0) {
+                var avg = new Date(Math.round(PosT2_p[line_on_2 - 1] / NotT2_p[line_on_2 - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgT2_p[line_on_2 - 1].innerHTML = a;
+             }
+             if (NotT2_p[7] > 0) {
+                var avg = new Date(Math.round(PosT2_p[7] / NotT2_p[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgT2_p[7].innerHTML = a;
+             }
+             if (NotT2_g[line_on_2 - 1] > 0) {
+                var avg = new Date(Math.round(PosT2_g[line_on_2 - 1] / NotT2_g[line_on_2 - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgT2_g[line_on_2 - 1].innerHTML = a;
+             }
+             if (NotT2_g[7] > 0) {
+                var avg = new Date(Math.round(PosT2_g[7] / NotT2_g[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgT2_g[7].innerHTML = a;
              }
 
              // Average Time without Ball
@@ -454,6 +566,27 @@
                 var a = avg.toISOString().substr(14, 5);
                 avgno_g[7].innerHTML = a;
              }
+             
+             if (NotnoT2_p[line_on_2 - 1] > 0) {
+                var avg = new Date(Math.round((TocT2_p[line_on_2 - 1] - PosT2_p[line_on_2 - 1]) / NotnoT2_p[line_on_2 - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgnoT2_p[line_on_2 - 1].innerHTML = a;
+             }
+             if (NotnoT2_p[7] > 0) {
+                var avg = new Date(Math.round((TocT2_p[7] - PosT2_p[7]) / NotnoT2_p[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgnoT2_p[7].innerHTML = a;
+             }
+             if (NotnoT2_g[line_on_2 - 1] > 0) {
+                var avg = new Date(Math.round((TocT2_g[line_on_2 - 1] - PosT2_g[line_on_2 - 1]) / NotnoT2_g[line_on_2 - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgnoT2_g[line_on_2 - 1].innerHTML = a;
+             }
+             if (NotnoT2_g[7] > 0) {
+                var avg = new Date(Math.round((TocT2_g[7] - PosT2_g[7]) / NotnoT2_g[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                avgnoT2_g[7].innerHTML = a;
+             }
 
              // Average Time on Court
 
@@ -477,9 +610,30 @@
                 var a = avg.toISOString().substr(14, 5);
                 atoc_g[7].innerHTML = a;
              }
+             
+             if (NosT2_p[line_on_2 - 1] > 0) {
+                var avg = new Date(Math.round(TocT2_p[line_on_2 - 1] / NosT2_p[line_on_2 - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atocT2_p[line_on_2 - 1].innerHTML = a;
+             }
+             if (NosT2_p[7] > 0) {
+                var avg = new Date(Math.round(TocT2_p[7] / NosT2_p[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atocT2_p[7].innerHTML = a;
+             }
+             if (NosT2_g[line_on_2 - 1] > 0) {
+                var avg = new Date(Math.round(TocT2_g[line_on_2 - 1] / NosT2_g[line_on_2 - 1]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atocT2_g[line_on_2 - 1].innerHTML = a;
+             }
+             if (NosT2_g[7] > 0) {
+                var avg = new Date(Math.round(TocT2_g[7] / NosT2_g[7]) * 1000);
+                var a = avg.toISOString().substr(14, 5);
+                atocT2_g[7].innerHTML = a;
+             }
 
              // Add one row to timeData - array
-             timeData.push([gameCounter, Ball_pos, line_on, dataShot, dataRes, dataxG]);
+             timeData.push([gameCounter, Ball_pos, line_on, line_on_2, dataShot, dataRes, dataxG]);
 
              // Add one row to the xG arrays every minute
              if (gameCounter % 60 == 0) {
@@ -490,6 +644,10 @@
                  xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                  xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                  xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
              }
 
              dataShot = 0;
@@ -500,6 +658,8 @@
              gameCounter++;
              PosTime++;
              LineTime++;
+             PosTime_2++;
+             LineTime_2++;
 
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
@@ -599,6 +759,15 @@
                 if (line_on < 4) {
                     xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
                 }
+                
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+                }
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+                }
 
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
                 if (line_on < 4) {
@@ -608,6 +777,16 @@
                 if (line_on < 4) {
                     xf_g[7].innerHTML = xGf_g[7];
                 }
+                
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+                if (line_on_2 < 4) {
+                    xaT2_p[7].innerHTML = xGaT2_p[7];
+                }
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+                if (line_on_2 < 4) {
+                    xaT2_g[7].innerHTML = xGaT2_g[7];
+                }
+                
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -615,6 +794,10 @@
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -648,6 +831,16 @@
                 if (line_on < 4) {
                     xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
                 }
+                
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+                }
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+                }
+                
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
                 if (line_on < 4) {
                     xf_p[7].innerHTML = xGf_p[7];
@@ -656,6 +849,16 @@
                 if (line_on < 4) {
                     xf_g[7].innerHTML = xGf_g[7];
                 }
+                
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+                if (line_on_2 < 4) {
+                    xaT2_p[7].innerHTML = xGaT2_p[7];
+                }
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+                if (line_on_2 < 4) {
+                    xaT2_g[7].innerHTML = xGaT2_g[7];
+                }
+                
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -663,6 +866,10 @@
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -696,6 +903,16 @@
                 if (line_on < 4) {
                     xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
                 }
+                
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+                }
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+                }
+                
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
                 if (line_on < 4) {
                     xa_p[7].innerHTML = xGa_p[7];
@@ -704,6 +921,16 @@
                 if (line_on < 4) {
                     xa_g[7].innerHTML = xGa_g[7];
                 }
+                
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+                if (line_on_2 < 4) {
+                    xfT2_p[7].innerHTML = xGfT2_p[7];
+                }
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+                if (line_on_2 < 4) {
+                    xfT2_g[7].innerHTML = xGfT2_g[7];
+                }
+                
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -711,6 +938,10 @@
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -745,6 +976,16 @@
                 if (line_on < 4) {
                     xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
                 }
+                
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+                }
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+                }
+                
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
                 if (line_on < 4) {
                     xa_p[7].innerHTML = xGa_p[7];
@@ -753,6 +994,16 @@
                 if (line_on < 4) {
                     xa_g[7].innerHTML = xGa_g[7];
                 }
+                
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+                if (line_on_2 < 4) {
+                    xfT2_p[7].innerHTML = xGfT2_p[7];
+                }
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+                if (line_on_2 < 4) {
+                    xfT2_g[7].innerHTML = xGfT2_g[7];
+                }
+                
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -760,6 +1011,10 @@
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -800,18 +1055,39 @@
                 if (line_on < 4) {
                     xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
                 }
+                
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+                }
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+                }
+
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
                 if (line_on < 4) {
                     xf_p[7].innerHTML = xGf_p[7];
                 }
-                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
                 if (line_on < 4) {
                     xf_g[7].innerHTML = xGf_g[7];
                 }
+                
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+                if (line_on_2 < 4) {
+                    xaT2_p[7].innerHTML = xGaT2_p[7];
+                }
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+                if (line_on_2 < 4) {
+                    xaT2_g[7].innerHTML = xGaT2_g[7];
+                }
+                
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -833,6 +1109,24 @@
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                }
+
+                if (line_on_2 == 1) {
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], xGfT2_g[0], 0]);
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+                }
+
+                if (line_on_2 == 2) {
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], xGfT2_g[1], 0]);
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+                }
+
+                if (line_on_2 == 3) {
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], xGfT2_g[2], 0]);
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 }
             }
         }
@@ -863,6 +1157,16 @@
                 if (line_on < 4) {
                     xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
                 }
+
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+                }
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+                }
+
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
                 if (line_on < 4) {
                     xf_p[7].innerHTML = xGf_p[7];
@@ -870,11 +1174,22 @@
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
                 if (line_on < 4) {
                     xf_g[7].innerHTML = xGf_g[7];
-                };
+                }
+
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+                if (line_on_2 < 4) {
+                    xaT2_p[7].innerHTML = xGaT2_p[7];
+                }
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+                if (line_on_2 < 4) {
+                    xaT2_g[7].innerHTML = xGaT2_g[7];
+                }
+
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -896,6 +1211,24 @@
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                }
+
+                if (line_on_2 == 1) {
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], xGfT2_g[0], 0]);
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+                }
+
+                if (line_on_2 == 2) {
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], xGfT2_g[1], 0]);
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+                }
+
+                if (line_on_2 == 3) {
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], xGfT2_g[2], 0]);
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 }
             }
         }
@@ -926,6 +1259,16 @@
                 if (line_on < 4) {
                     xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
                 }
+
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+                }
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+                }
+
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
                 if (line_on < 4) {
                     xa_p[7].innerHTML = xGa_p[7];
@@ -934,31 +1277,60 @@
                 if (line_on < 4) {
                     xa_g[7].innerHTML = xGa_g[7];
                 }
+
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+                if (line_on_2 < 4) {
+                    xfT2_p[7].innerHTML = xGfT2_p[7];
+                }
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+                if (line_on_2 < 4) {
+                    xfT2_g[7].innerHTML = xGfT2_g[7];
+                }
+
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, xGaT2_g[7]]);
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_2.innerHTML = a;
 
                 if (line_on == 1) {
-                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
                 if (line_on == 2) {
-                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, xGa_g[1]]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], xGf_g[1], 0]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
                 if (line_on == 3) {
-                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, xGa_g[2]]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                }
+
+                if (line_on_2 == 1) {
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], xGfT2_g[0], 0]);
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+                }
+
+                if (line_on_2 == 2) {
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], xGfT2_g[1], 0]);
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+                }
+
+                if (line_on_2 == 3) {
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], xGfT2_g[2], 0]);
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 }
             }
         }
@@ -989,6 +1361,16 @@
                 if (line_on < 4) {
                     xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
                 }
+
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+                }
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                if (line_on_2 < 4) {
+                    xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+                }
+
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
                 if (line_on < 4) {
                     xa_p[7].innerHTML = xGa_p[7];
@@ -997,31 +1379,60 @@
                 if (line_on < 4) {
                     xa_g[7].innerHTML = xGa_g[7];
                 }
+
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+                if (line_on_2 < 4) {
+                    xfT2_p[7].innerHTML = xGfT2_p[7];
+                }
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+                if (line_on_2 < 4) {
+                    xfT2_g[7].innerHTML = xGfT2_g[7];
+                }
+
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, xGaT2_g[7]]);
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_2.innerHTML = a;
 
                 if (line_on == 1) {
-                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
                 if (line_on == 2) {
-                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, xGa_g[1]]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], xGf_g[1], 0]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
                 if (line_on == 3) {
-                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, xGa_g[2]]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                }
+
+                if (line_on_2 == 1) {
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], xGfT2_g[0], 0]);
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+                }
+
+                if (line_on_2 == 2) {
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], xGfT2_g[1], 0]);
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+                }
+
+                if (line_on_2 == 3) {
+                    xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], xGfT2_g[2], 0]);
+                    xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                    xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 }
             }
         }
@@ -1036,6 +1447,7 @@
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
             dataShot = 1;
+
             if (type == 1) {    // Shot Missed
                 ctx.fillText("M", x, y);
                 dataRes = 1;
@@ -1055,6 +1467,23 @@
                 mf_g[line_on - 1].innerHTML++;
                 if (line_on < 4) {
                     mf_g[7].innerHTML++;
+                }
+
+                saT2_p[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    saT2_p[7].innerHTML++;
+                }
+                saT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    saT2_g[7].innerHTML++;
+                }
+                maT2_p[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    maT2_p[7].innerHTML++;
+                }
+                maT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    maT2_g[7].innerHTML++;
                 }
             }
             else if (type == 3) {   // Shot Blocked
@@ -1077,6 +1506,23 @@
                 if (line_on < 4) {
                     ba_p[7].innerHTML++;
                 }
+
+                saT2_p[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    saT2_p[7].innerHTML++;
+                }
+                saT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    saT2_g[7].innerHTML++;
+                }
+                bfT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    bfT2_g[7].innerHTML++;
+                }
+                bfT2_p[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    bfT2_p[7].innerHTML++;
+                }
             }
             else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
@@ -1097,6 +1543,23 @@
                 saf_g[line_on - 1].innerHTML++;
                 if (line_on < 4) {
                     saf_g[7].innerHTML++;
+                }
+
+                saT2_p[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    saT2_p[7].innerHTML++;
+                }
+                saT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    saT2_g[7].innerHTML++;
+                }
+                saaT2_p[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    saaT2_p[7].innerHTML++;
+                }
+                saaT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    saaT2_g[7].innerHTML++;
                 }
             }
             else if (type == 4) {   // Shot Goal
@@ -1121,6 +1584,24 @@
                     pm_g[7].innerHTML++;
                 }
 
+                saT2_p[line_on_2 - 1].innerHTML++;
+                gaT2_p[line_on_2 - 1].innerHTML++;
+                pmT2_p[line_on_2 - 1].innerHTML--;
+                if (line_on_2 < 4) {
+                    saT2_p[7].innerHTML++;
+                    gaT2_p[7].innerHTML++;
+                    pmT2_p[7].innerHTML--;
+                }
+
+                saT2_g[line_on_2 - 1].innerHTML++;
+                gaT2_g[line_on_2 - 1].innerHTML++;
+                pmT2_g[line_on_2 - 1].innerHTML--;
+                if (line_on_2 < 4) {
+                    saT2_g[7].innerHTML++;
+                    gaT2_g[7].innerHTML++;
+                    pmT2_g[7].innerHTML--;
+                }
+
                 tgt_1.innerHTML++;
             }
         }
@@ -1142,6 +1623,17 @@
                     ma_p[7].innerHTML++;
                     ma_g[7].innerHTML++;
                 }
+
+                sfT2_p[line_on_2 - 1].innerHTML++;
+                sfT2_g[line_on_2 - 1].innerHTML++;
+                mfT2_p[line_on_2 - 1].innerHTML++;
+                mfT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    sfT2_g[7].innerHTML++;
+                    sfT2_p[7].innerHTML++;
+                    mfT2_p[7].innerHTML++;
+                    mfT2_g[7].innerHTML++;
+                }
             }
             else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
@@ -1157,6 +1649,17 @@
                     sa_p[7].innerHTML++;
                     bf_p[7].innerHTML++;
                 }
+
+                sfT2_p[line_on_2 - 1].innerHTML++;
+                baT2_p[line_on_2 - 1].innerHTML++;
+                sfT2_g[line_on_2 - 1].innerHTML++;
+                baT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    sfT2_g[7].innerHTML++;
+                    baT2_g[7].innerHTML++;
+                    sfT2_p[7].innerHTML++;
+                    baT2_p[7].innerHTML++;
+                }
             }
             else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
@@ -1171,6 +1674,17 @@
                     sa_g[7].innerHTML++;
                     saa_p[7].innerHTML++;
                     saa_g[7].innerHTML++;
+                }
+
+                sfT2_p[line_on_2 - 1].innerHTML++;
+                sfT2_g[line_on_2 - 1].innerHTML++;
+                safT2_p[line_on_2 - 1].innerHTML++;
+                safT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    sfT2_p[7].innerHTML++;
+                    sfT2_g[7].innerHTML++;
+                    safT2_p[7].innerHTML++;
+                    safT2_g[7].innerHTML++;
                 }
             }
             else if (type == 4) {   // Shot Goal
@@ -1193,6 +1707,24 @@
                     sa_g[7].innerHTML++;
                     ga_g[7].innerHTML++;
                     pm_g[7].innerHTML--;
+                }
+
+                sfT2_p[line_on_2 - 1].innerHTML++;
+                gfT2_p[line_on_2 - 1].innerHTML++;
+                pmT2_p[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    sfT2_p[7].innerHTML++;
+                    gfT2_p[7].innerHTML++;
+                    pmT2_p[7].innerHTML++;
+                }
+
+                sfT2_g[line_on_2 - 1].innerHTML++;
+                gfT2_g[line_on_2 - 1].innerHTML++;
+                pmT2_g[line_on_2 - 1].innerHTML++;
+                if (line_on_2 < 4) {
+                    sfT2_g[7].innerHTML++;
+                    gfT2_g[7].innerHTML++;
+                    pmT2_g[7].innerHTML++;
                 }
 
                 tgt_2.innerHTML++;
@@ -1268,15 +1800,29 @@
                 dataAngle = angle * (180 / Math.PI);
             }
         }
-        if (line_on < 4) {
-            dataPp = 0;
-            dataSh = 0;
+        if (Ball_pos == 1) {
+            if (line_on < 4) {
+                dataPp = 0;
+                dataSh = 0;
+            }
+            if (line_on == 4 || line_on == 5) {
+                dataPp = 1;
+            }
+            if (line_on == 6 || line_on == 7) {
+                dataSh = 1;
+            }
         }
-        if (line_on == 4 || line_on == 5) {
-            dataPp = 1;
-        }
-        if (line_on == 6 || line_on == 7) {
-            dataSh = 1;
+        if (Ball_pos == 2) {
+            if (line_on_2 < 4) {
+                dataPp = 0;
+                dataSh = 0;
+            }
+            if (line_on_2 == 4 || line_on_2 == 5) {
+                dataPp = 1;
+            }
+            if (line_on_2 == 6 || line_on_2 == 7) {
+                dataSh = 1;
+            }
         }
 
         // Shot menu
