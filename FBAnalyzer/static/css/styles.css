@@ -213,6 +213,10 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     text-align: center;
     padding: 10px 0 15px 0;
 }
+.line-btn-2{
+    text-align: center;
+    padding: 10px 0 15px 0;
+}
 .game-clock {
 	text-align: center;
 	padding: 20px 0 0 0;
