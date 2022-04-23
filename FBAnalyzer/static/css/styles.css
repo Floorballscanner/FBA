@@ -189,6 +189,10 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     text-align: center;
     padding: 30px 0 0 0;
 }
+.button-input-2 p{
+    text-align: center;
+    padding: 30px 0 0 0;
+}
 .shot-map{
     text-align: center;
     padding: 30px 0 0 0;
