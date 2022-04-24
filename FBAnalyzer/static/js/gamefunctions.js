@@ -161,6 +161,8 @@
         shiftNo++;
         shiftPos = 0;
         console.log(line_on); // debugging
+        // Automatic line change for Team 2
+        Line_change_2(line);
     }
 
     // Team 2 line change functionality
