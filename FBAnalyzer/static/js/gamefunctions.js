@@ -162,7 +162,21 @@
         shiftPos = 0;
         console.log(line_on); // debugging
         // Automatic line change for Team 2
-        Line_change_2(line);
+        if (line < 4) {
+            Line_change_2(line);
+        }
+        if (line == 4) {
+            Line_change_2(6);
+        }
+        if (line == 5) {
+            Line_change_2(7);
+        }
+        if (line == 6) {
+            Line_change_2(4);
+        }
+        if (line == 7) {
+            Line_change_2(5);
+        }
     }
 
     // Team 2 line change functionality
@@ -1115,9 +1129,9 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
 
-                b = Number(txGp_1.innerHTML);
-                a = Math.round((b + dxG) * 100) / 100;
-                txGp_1.innerHTML = a;
+                c = Number(txGp_1.innerHTML);
+                d = Math.round((c + dxG) * 100) / 100;
+                txGp_1.innerHTML = d;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -1221,9 +1235,9 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
 
-                b = Number(txGp_1.innerHTML);
-                a = Math.round((b + dxG) * 100) / 100;
-                txGp_1.innerHTML = a;
+                c = Number(txGp_1.innerHTML);
+                d = Math.round((c + dxG) * 100) / 100;
+                txGp_1.innerHTML = d;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
