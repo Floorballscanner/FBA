@@ -331,10 +331,10 @@
                 counter = 0;
                 document.getElementById("periodNr").innerHTML = "Period " + periodN;
                 document.getElementById("label").innerHTML = "00:00:00";
-                tgtp_2.innerHTML = 0;
-                tgtp_1.innerHTML = 0;
-                txGp_1.innerHTML = 0;
-                txGp_2.innerHTML = 0;
+                tgtp_2.innerHTML = "0";
+                tgtp_1.innerHTML = "0";
+                txGp_1.innerHTML = "0";
+                txGp_2.innerHTML = "0";
 
                 var ctx = cnvs.getContext("2d");
                 ctx.drawImage(myImg,0,0,fWidth,fLength);
@@ -1327,9 +1327,9 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_2.innerHTML = a;
 
-                b = Number(txGp_2.innerHTML);
-                a = Math.round((b + dxG) * 100) / 100;
-                txGp_2.innerHTML = a;
+                c = Number(txGp_2.innerHTML);
+                d = Math.round((c + dxG) * 100) / 100;
+                txGp_2.innerHTML = d;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
