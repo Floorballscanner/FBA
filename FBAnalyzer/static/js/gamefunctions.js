@@ -273,14 +273,17 @@
                 started = 1;
                 sData.style.display = "block";
 
+                console.log(1);
                 if (document.getElementById("home_team").value !== "") {
                     name_t1 = document.getElementById("home_team").value;
                     set_t1_names();
+                    console.log(name_t1);
                 }
 
                 if (document.getElementById("away_team").value !== "") {
                     name_t2 = document.getElementById("away_team").value;
                     set_t2_names();
+                    console.log(name_t2);
                 }
 
             } else {
