@@ -695,6 +695,7 @@
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
+             name_t1_id[0].innerHTML = counter;
 
              t = setTimeout(function(){ Count() }, 1000);
          }
