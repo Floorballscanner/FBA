@@ -34,7 +34,7 @@ It extends app_layout.html with Django
             </div>
             <div class="row justify-content-center" style="Padding-top: 0px;">
                 <div class="button-input">
-                    <p><span id="name_t1_1>">Team 1</span> line on court</p>
+                    <p><span id="name_t1_1">Team 1</span> line on court</p>
                     <div class="line-btn btn-group" role="group" aria-label="Line buttons">
                         <button id="L1" type="button" style="background-color: #555555" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
                         <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
@@ -50,7 +50,7 @@ It extends app_layout.html with Django
             </div>
             <div class="row justify-content-center" style="Padding-top: 0px;">
                 <div class="button-input-2">
-                    <p><span id="name_t2_1>">Team 2</span> line on court</p>
+                    <p><span id="name_t2_1">Team 2</span> line on court</p>
                     <div class="line-btn-2 btn-group" role="group" aria-label="Line buttons Team 2">
                         <button id="L1T2" type="button" style="background-color: #555555" onclick="Line_change_2(1)" class="btn btn-secondary">Line 1</button>
                         <button id="L2T2" type="button" onclick="Line_change_2(2)" class="btn btn-secondary">Line 2</button>
@@ -80,10 +80,10 @@ It extends app_layout.html with Django
                     {% load static %}
                     <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="30" height="30" alt="order">
                     <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
-                        <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary"><span id="name_t2_2>">Team 2</span></button>
+                        <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary"><span id="name_t2_2">Team 2</span></button>
                     </div>
                     <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
-                        <button id="TeamL" type="button" style="background-color: #555555" onclick="BallTeamL()" class="btn btn-secondary"><span id="name_t1_2>">Team 1</span></button>
+                        <button id="TeamL" type="button" style="background-color: #555555" onclick="BallTeamL()" class="btn btn-secondary"><span id="name_t1_2">Team 1</span></button>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@ It extends app_layout.html with Django
         </div>
     </div>
     <div class="row justify-content-center">
-        <h4><span id="name_t1_3>">Team 1</span></h4>
+        <h4><span id="name_t1_3">Team 1</span></h4>
     </div>
     <div class="row">
         <div class="col-sm-3">
@@ -109,14 +109,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgL1">0:00</span> | <span id="avgL1g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoL1">0:00</span> | <span id="avgnoL1g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL1">0</span> | <span id="pmL1g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_4>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_4">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L1">0</span> | <span id="xGf_L1g">0</span></p>
                 <p>Shots: <span id="sfL1">0</span> | <span id="sfL1g">0</span></p>
                 <p>Blocked: <span id="baL1">0</span> | <span id="baL1g">0</span></p>
                 <p>Missed: <span id="mfL1">0</span> | <span id="mfL1g">0</span></p>
                 <p>Saved: <span id="safL1">0</span> | <span id="safL1g">0</span></p>
                 <p>Goals: <span id="gfL1">0</span> | <span id="gfL1g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_4>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_4">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_L1">0</span> | <span id="xGa_L1g">0</span></p>
                 <p>Shots: <span id="saL1">0</span> | <span id="saL1g">0</span></p>
                 <p>Blocked: <span id="bfL1">0</span> | <span id="bfL1g">0</span></p>
@@ -134,14 +134,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgL2">0:00</span> | <span id="avgL2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoL2">0:00</span> | <span id="avgnoL2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL2">0</span> | <span id="pmL2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_5>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_5">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L2">0</span> | <span id="xGf_L2g">0</span></p>
                 <p>Shots: <span id="sfL2">0</span> | <span id="sfL2g">0</span></p>
                 <p>Blocked: <span id="baL2">0</span> | <span id="baL2g">0</span></p>
                 <p>Missed: <span id="mfL2">0</span> | <span id="mfL2g">0</span></p>
                 <p>Saved: <span id="safL2">0</span> | <span id="safL2g">0</span></p>
                 <p>Goals: <span id="gfL2">0</span> | <span id="gfL2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_5>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_5">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_L2">0</span> | <span id="xGa_L2g">0</span></p>
                 <p>Shots: <span id="saL2">0</span> | <span id="saL2g">0</span></p>
                 <p>Blocked: <span id="bfL2">0</span> | <span id="bfL2g">0</span></p>
@@ -159,14 +159,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgL3">0:00</span> | <span id="avgL3g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoL3">0:00</span> | <span id="avgnoL3g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL3">0</span> | <span id="pmL3g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_6>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_6">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L3">0</span> | <span id="xGf_L3g">0</span></p>
                 <p>Shots: <span id="sfL3">0</span> | <span id="sfL3g">0</span></p>
                 <p>Blocked: <span id="baL3">0</span> | <span id="baL3g">0</span></p>
                 <p>Missed: <span id="mfL3">0</span> | <span id="mfL3g">0</span></p>
                 <p>Saved: <span id="safL3">0</span> | <span id="safL3g">0</span></p>
                 <p>Goals: <span id="gfL3">0</span> | <span id="gfL3g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_6>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_6">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_L3">0</span> | <span id="xGa_L3g">0</span></p>
                 <p>Shots: <span id="saL3">0</span> | <span id="saL3g">0</span></p>
                 <p>Blocked: <span id="bfL3">0</span> | <span id="bfL3g">0</span></p>
@@ -184,14 +184,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgTeam">0:00</span> | <span id="avgTeamg">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoTeam">0:00</span> | <span id="avgnoTeamg">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmTeam">0</span> | <span id="pmTeamg">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_7>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_7">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_Team">0</span> | <span id="xGf_Teamg">0</span></p>
                 <p>Shots: <span id="sfTeam">0</span> | <span id="sfTeamg">0</span></p>
                 <p>Blocked: <span id="baTeam">0</span> | <span id="baTeamg">0</span></p>
                 <p>Missed: <span id="mfTeam">0</span> | <span id="mfTeamg">0</span></p>
                 <p>Saved: <span id="safTeam">0</span> | <span id="safTeamg">0</span></p>
                 <p>Goals: <span id="gfTeam">0</span> | <span id="gfTeamg">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_7>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_7">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_Team">0</span> | <span id="xGa_Teamg">0</span></p>
                 <p>Shots: <span id="saTeam">0</span> | <span id="saTeamg">0</span></p>
                 <p>Blocked: <span id="bfTeam">0</span> | <span id="bfTeamg">0</span></p>
@@ -211,14 +211,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgPP1">0:00</span> | <span id="avgPP1g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoPP1">0:00</span> | <span id="avgnoPP1g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmPP1">0</span> | <span id="pmPP1g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_8>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_8">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_PP1">0</span> | <span id="xGf_PP1g">0</span></p>
                 <p>Shots: <span id="sfPP1">0</span> | <span id="sfPP1g">0</span></p>
                 <p>Blocked: <span id="baPP1">0</span> | <span id="baPP1g">0</span></p>
                 <p>Missed: <span id="mfPP1">0</span> | <span id="mfPP1g">0</span></p>
                 <p>Saved: <span id="safPP1">0</span> | <span id="safPP1g">0</span></p>
                 <p>Goals: <span id="gfPP1">0</span> | <span id="gfPP1g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_8>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_8">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_PP1">0</span> | <span id="xGa_PP1g">0</span></p>
                 <p>Shots: <span id="saPP1">0</span> | <span id="saPP1g">0</span></p>
                 <p>Blocked: <span id="bfPP1">0</span> | <span id="bfPP1g">0</span></p>
@@ -236,14 +236,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgPP2">0:00</span> | <span id="avgPP2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoPP2">0:00</span> | <span id="avgnoPP2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmPP2">0</span> | <span id="pmPP2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_9>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_9">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_PP2">0</span> | <span id="xGf_PP2g">0</span></p>
                 <p>Shots: <span id="sfPP2">0</span> | <span id="sfPP2g">0</span></p>
                 <p>Blocked: <span id="baPP2">0</span> | <span id="baPP2g">0</span></p>
                 <p>Missed: <span id="mfPP2">0</span> | <span id="mfPP2g">0</span></p>
                 <p>Saved: <span id="safPP2">0</span> | <span id="safPP2g">0</span></p>
                 <p>Goals: <span id="gfPP2">0</span> | <span id="gfPP2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_9>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_9">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_PP2">0</span> | <span id="xGa_PP2g">0</span></p>
                 <p>Shots: <span id="saPP2">0</span> | <span id="saPP2g">0</span></p>
                 <p>Blocked: <span id="bfPP2">0</span> | <span id="bfPP2g">0</span></p>
@@ -261,14 +261,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgSH1">0:00</span> | <span id="avgSH1g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoSH1">0:00</span> | <span id="avgnoSH1g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmSH1">0</span> | <span id="pmSH1g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_10>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_10">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_SH1">0</span> | <span id="xGf_SH1g">0</span></p>
                 <p>Shots: <span id="sfSH1">0</span> | <span id="sfSH1g">0</span></p>
                 <p>Blocked: <span id="baSH1">0</span> | <span id="baSH1g">0</span></p>
                 <p>Missed: <span id="mfSH1">0</span> | <span id="mfSH1g">0</span></p>
                 <p>Saved: <span id="safSH1">0</span> | <span id="safSH1g">0</span></p>
                 <p>Goals: <span id="gfSH1">0</span> | <span id="gfSH1g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_10>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_10">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_SH1">0</span> | <span id="xGa_SH1g">0</span></p>
                 <p>Shots: <span id="saSH1">0</span> | <span id="saSH1g">0</span></p>
                 <p>Blocked: <span id="bfSH1">0</span> | <span id="bfSH1g">0</span></p>
@@ -286,14 +286,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgSH2">0:00</span> | <span id="avgSH2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoSH2">0:00</span> | <span id="avgnoSH2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmSH2">0</span> | <span id="pmSH2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_11>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_11">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_SH2">0</span> | <span id="xGf_SH2g">0</span></p>
                 <p>Shots: <span id="sfSH2">0</span> | <span id="sfSH2g">0</span></p>
                 <p>Blocked: <span id="baSH2">0</span> | <span id="baSH2g">0</span></p>
                 <p>Missed: <span id="mfSH2">0</span> | <span id="mfSH2g">0</span></p>
                 <p>Saved: <span id="safSH2">0</span> | <span id="safSH2g">0</span></p>
                 <p>Goals: <span id="gfSH2">0</span> | <span id="gfSH2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_11>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_11">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_SH2">0</span> | <span id="xGa_SH2g">0</span></p>
                 <p>Shots: <span id="saSH2">0</span> | <span id="saSH2g">0</span></p>
                 <p>Blocked: <span id="bfSH2">0</span> | <span id="bfSH2g">0</span></p>
@@ -304,7 +304,7 @@ It extends app_layout.html with Django
         </div>
     </div>
     <div class="row justify-content-center">
-        <h4><span id="name_t2_3>">Team 2</span></h4>
+        <h4><span id="name_t2_3">Team 2</span></h4>
     </div>
     <div class="row">
         <div class="col-sm-3">
@@ -316,14 +316,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgL1T2">0:00</span> | <span id="avgL1T2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoL1T2">0:00</span> | <span id="avgnoL1T2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL1T2">0</span> | <span id="pmL1T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_12>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_12">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L1T2">0</span> | <span id="xGf_L1T2g">0</span></p>
                 <p>Shots: <span id="sfL1T2">0</span> | <span id="sfL1T2g">0</span></p>
                 <p>Blocked: <span id="baL1T2">0</span> | <span id="baL1T2g">0</span></p>
                 <p>Missed: <span id="mfL1T2">0</span> | <span id="mfL1T2g">0</span></p>
                 <p>Saved: <span id="safL1T2">0</span> | <span id="safL1T2g">0</span></p>
                 <p>Goals: <span id="gfL1T2">0</span> | <span id="gfL1T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_12>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_12">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_L1T2">0</span> | <span id="xGa_L1T2g">0</span></p>
                 <p>Shots: <span id="saL1T2">0</span> | <span id="saL1T2g">0</span></p>
                 <p>Blocked: <span id="bfL1T2">0</span> | <span id="bfL1T2g">0</span></p>
@@ -341,14 +341,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgL2T2">0:00</span> | <span id="avgL2T2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoL2T2">0:00</span> | <span id="avgnoL2T2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL2T2">0</span> | <span id="pmL2T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_13>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_13">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L2T2">0</span> | <span id="xGf_L2T2g">0</span></p>
                 <p>Shots: <span id="sfL2T2">0</span> | <span id="sfL2T2g">0</span></p>
                 <p>Blocked: <span id="baL2T2">0</span> | <span id="baL2T2g">0</span></p>
                 <p>Missed: <span id="mfL2T2">0</span> | <span id="mfL2T2g">0</span></p>
                 <p>Saved: <span id="safL2T2">0</span> | <span id="safL2T2g">0</span></p>
                 <p>Goals: <span id="gfL2T2">0</span> | <span id="gfL2T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_13>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_13">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_L2T2">0</span> | <span id="xGa_L2T2g">0</span></p>
                 <p>Shots: <span id="saL2T2">0</span> | <span id="saL2T2g">0</span></p>
                 <p>Blocked: <span id="bfL2T2">0</span> | <span id="bfL2T2g">0</span></p>
@@ -366,14 +366,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgL3T2">0:00</span> | <span id="avgL3T2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoL3T2">0:00</span> | <span id="avgnoL3T2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmL3T2">0</span> | <span id="pmL3T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_14>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_14">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_L3T2">0</span> | <span id="xGf_L3T2g">0</span></p>
                 <p>Shots: <span id="sfL3T2">0</span> | <span id="sfL3T2g">0</span></p>
                 <p>Blocked: <span id="baL3T2">0</span> | <span id="baL3T2g">0</span></p>
                 <p>Missed: <span id="mfL3T2">0</span> | <span id="mfL3T2g">0</span></p>
                 <p>Saved: <span id="safL3T2">0</span> | <span id="safL3T2g">0</span></p>
                 <p>Goals: <span id="gfL3T2">0</span> | <span id="gfL3T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_14>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_14">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_L3T2">0</span> | <span id="xGa_L3T2g">0</span></p>
                 <p>Shots: <span id="saL3T2">0</span> | <span id="saL3T2g">0</span></p>
                 <p>Blocked: <span id="bfL3T2">0</span> | <span id="bfL3T2g">0</span></p>
@@ -391,14 +391,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgTeamT2">0:00</span> | <span id="avgTeamT2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoTeamT2">0:00</span> | <span id="avgnoTeamT2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmTeamT2">0</span> | <span id="pmTeamT2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_15>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_15">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_TeamT2">0</span> | <span id="xGf_TeamT2g">0</span></p>
                 <p>Shots: <span id="sfTeamT2">0</span> | <span id="sfTeamT2g">0</span></p>
                 <p>Blocked: <span id="baTeamT2">0</span> | <span id="baTeamT2g">0</span></p>
                 <p>Missed: <span id="mfTeamT2">0</span> | <span id="mfTeamT2g">0</span></p>
                 <p>Saved: <span id="safTeamT2">0</span> | <span id="safTeamT2g">0</span></p>
                 <p>Goals: <span id="gfTeamT2">0</span> | <span id="gfTeamT2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_15>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_15">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_TeamT2">0</span> | <span id="xGa_TeamT2g">0</span></p>
                 <p>Shots: <span id="saTeamT2">0</span> | <span id="saTeamT2g">0</span></p>
                 <p>Blocked: <span id="bfTeamT2">0</span> | <span id="bfTeamT2g">0</span></p>
@@ -418,14 +418,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgPP1T2">0:00</span> | <span id="avgPP1T2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoPP1T2">0:00</span> | <span id="avgnoPP1T2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmPP1T2">0</span> | <span id="pmPP1T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_16>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_16">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_PP1T2">0</span> | <span id="xGf_PP1T2g">0</span></p>
                 <p>Shots: <span id="sfPP1T2">0</span> | <span id="sfPP1T2g">0</span></p>
                 <p>Blocked: <span id="baPP1T2">0</span> | <span id="baPP1T2g">0</span></p>
                 <p>Missed: <span id="mfPP1T2">0</span> | <span id="mfPP1T2g">0</span></p>
                 <p>Saved: <span id="safPP1T2">0</span> | <span id="safPP1T2g">0</span></p>
                 <p>Goals: <span id="gfPP1T2">0</span> | <span id="gfPP1T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_16>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_16">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_PP1T2">0</span> | <span id="xGa_PP1T2g">0</span></p>
                 <p>Shots: <span id="saPP1T2">0</span> | <span id="saPP1T2g">0</span></p>
                 <p>Blocked: <span id="bfPP1T2">0</span> | <span id="bfPP1T2g">0</span></p>
@@ -443,14 +443,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgPP2T2">0:00</span> | <span id="avgPP2T2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoPP2T2">0:00</span> | <span id="avgnoPP2T2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmPP2T2">0</span> | <span id="pmPP2T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_17>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_17">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_PP2T2">0</span> | <span id="xGf_PP2T2g">0</span></p>
                 <p>Shots: <span id="sfPP2T2">0</span> | <span id="sfPP2T2g">0</span></p>
                 <p>Blocked: <span id="baPP2T2">0</span> | <span id="baPP2T2g">0</span></p>
                 <p>Missed: <span id="mfPP2T2">0</span> | <span id="mfPP2T2g">0</span></p>
                 <p>Saved: <span id="safPP2T2">0</span> | <span id="safPP2T2g">0</span></p>
                 <p>Goals: <span id="gfPP2T2">0</span> | <span id="gfPP2T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_17>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_17">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_PP2T2">0</span> | <span id="xGa_PP2T2g">0</span></p>
                 <p>Shots: <span id="saPP2T2">0</span> | <span id="saPP2T2g">0</span></p>
                 <p>Blocked: <span id="bfPP2T2">0</span> | <span id="bfPP2T2g">0</span></p>
@@ -468,14 +468,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgSH1T2">0:00</span> | <span id="avgSH1T2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoSH1T2">0:00</span> | <span id="avgnoSH1T2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmSH1T2">0</span> | <span id="pmSH1T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_18>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_18">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_SH1T2">0</span> | <span id="xGf_SH1T2g">0</span></p>
                 <p>Shots: <span id="sfSH1T2">0</span> | <span id="sfSH1T2g">0</span></p>
                 <p>Blocked: <span id="baSH1T2">0</span> | <span id="baSH1T2g">0</span></p>
                 <p>Missed: <span id="mfSH1T2">0</span> | <span id="mfSH1T2g">0</span></p>
                 <p>Saved: <span id="safSH1T2">0</span> | <span id="safSH1T2g">0</span></p>
                 <p>Goals: <span id="gfSH1T2">0</span> | <span id="gfSH1T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_18>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_18">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_SH1T2">0</span> | <span id="xGa_SH1T2g">0</span></p>
                 <p>Shots: <span id="saSH1T2">0</span> | <span id="saSH1T2g">0</span></p>
                 <p>Blocked: <span id="bfSH1T2">0</span> | <span id="bfSH1T2g">0</span></p>
@@ -493,14 +493,14 @@ It extends app_layout.html with Django
                 <p>Avg Time w Ball: <span id="avgSH2T2">0:00</span> | <span id="avgSH2T2g">0:00</span></p>
                 <p>Avg Time no Ball: <span id="avgnoSH2T2">0:00</span> | <span id="avgnoSH2T2g">0:00</span></p>
                 <p><b>Plus minus:</b> <span id="pmSH2T2">0</span> | <span id="pmSH2T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t2_19>">Team 2</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_19">Team 2</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGf_SH2T2">0</span> | <span id="xGf_SH2T2g">0</span></p>
                 <p>Shots: <span id="sfSH2T2">0</span> | <span id="sfSH2T2g">0</span></p>
                 <p>Blocked: <span id="baSH2T2">0</span> | <span id="baSH2T2g">0</span></p>
                 <p>Missed: <span id="mfSH2T2">0</span> | <span id="mfSH2T2g">0</span></p>
                 <p>Saved: <span id="safSH2T2">0</span> | <span id="safSH2T2g">0</span></p>
                 <p>Goals: <span id="gfSH2T2">0</span> | <span id="gfSH2T2g">0</span></p>
-                <p style="padding-top: 10px"><b><span id="name_t1_19>">Team 1</span> Shots</b></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_19">Team 1</span> Shots</b></p>
                 <p><b>xG:</b> <span id="xGa_SH2T2">0</span> | <span id="xGa_SH2T2g">0</span></p>
                 <p>Shots: <span id="saSH2T2">0</span> | <span id="saSH2T2g">0</span></p>
                 <p>Blocked: <span id="bfSH2T2">0</span> | <span id="bfSH2T2g">0</span></p>

@@ -695,7 +695,6 @@
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
-             name_t1_id[0].innerHTML = counter;
 
              t = setTimeout(function(){ Count() }, 1000);
          }
@@ -2050,13 +2049,13 @@
         console.log(name_t1);
         for (let i = 0; i < 19; i++) {
         console.log(i);
-            name_t1_id[i].innerHTML = 1;
+            name_t1_id[i].innerHTML = name_t1;
         }
     }
 
     function set_t2_names() {
 
         for (let i = 0; i < 19; i++) {
-            name_t2_id[i].innerHTML = 2;
+            name_t2_id[i].innerHTML = name_t2;
         }
     }
