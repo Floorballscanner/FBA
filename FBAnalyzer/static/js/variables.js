@@ -34,6 +34,9 @@
     var shiftNo_2 = 1; // Number of shifts in numbers Team 2
     var shiftPos = 0; // Possession time in shift in counters Team 1
     var shiftPos_2 = 0; // Possession time in shift in counters Team 2
+    var name_t1 = "Team 1"; // Team 1 name variable
+    var name_t2 = "Team 2"; // Team 2 name variable
+
 
     // Google charts
 

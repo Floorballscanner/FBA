@@ -272,6 +272,17 @@
                 document.getElementById("reset").disabled = false;
                 started = 1;
                 sData.style.display = "block";
+
+                if (document.getElementById("home_team").value !== "") {
+                    name_t1 = document.getElementById("home_team").value;
+                    set_t1_names();
+                }
+
+                if (document.getElementById("away_team").value !== "") {
+                    name_t2 = document.getElementById("away_team").value;
+                    set_t2_names();
+                }
+
             } else {
             }
         }
@@ -2031,4 +2042,12 @@
         var chart = new google.visualization.ComboChart(document.getElementById('posTeam_chart'));
         chart.draw(data, options);
 
+    }
+
+    function set_t1_names() {
+        document.write(name_t1);
+    }
+
+    function set_t2_names() {
+        document.write(name_t2);
     }
