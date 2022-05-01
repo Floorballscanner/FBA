@@ -2045,9 +2045,17 @@
     }
 
     function set_t1_names() {
-        document.write(name_t1);
+
+        for (let i = 1; i < 20; i++) {
+            var a = "name_t1_" + i;
+            a.innerHTML = name_t1;
+        }
     }
 
     function set_t2_names() {
-        document.write(name_t2);
+
+        for (let i = 1; i < 20; i++) {
+            var a = "name_t2_" + i;
+            a.innerHTML = name_t2;
+        }
     }
