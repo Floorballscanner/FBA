@@ -2049,13 +2049,13 @@
         console.log(name_t1);
         for (let i = 0; i < 19; i++) {
         console.log(i);
-            name_t1_id[i] = name_t1;
+            name_t1_id[i].innerHTML = name_t1;
         }
     }
 
     function set_t2_names() {
 
         for (let i = 0; i < 19; i++) {
-            name_t2_id[i] = name_t2;
+            name_t2_id[i].innerHTML = name_t2;
         }
     }
