@@ -34,7 +34,7 @@ It extends app_layout.html with Django
             </div>
             <div class="row justify-content-center" style="Padding-top: 0px;">
                 <div class="button-input">
-                    <p><script>set_t1_names()</script> line on court</p>
+                    <p><script>document.write(name_t1);</script> line on court</p>
                     <div class="line-btn btn-group" role="group" aria-label="Line buttons">
                         <button id="L1" type="button" style="background-color: #555555" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
                         <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
