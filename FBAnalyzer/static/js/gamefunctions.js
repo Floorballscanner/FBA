@@ -2050,6 +2050,7 @@
                  "name_t1_16", "name_t1_17", "name_t1_18", "name_t1_19"];
         for (let i = 0; i < 19; i++) {
             document.getElementById(a[i]).innerHTML = name_t1;
+        }
     }
 
     function set_t2_names() {
