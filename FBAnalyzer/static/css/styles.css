@@ -203,6 +203,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .pos-btn{
     text-align: center;
+    width: 40%;
     padding: 10px 0 0 0;
 }
 .zone-btn{
