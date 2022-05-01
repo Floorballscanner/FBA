@@ -2049,7 +2049,7 @@
                  name_t1_9, name_t1_10, name_t1_11, name_t1_12, name_t1_13, name_t1_14, name_t1_15,
                  name_t1_16, name_t1_17, name_t1_18, name_t1_19];
         for (let i = 0; i < 19; i++) {
-            a(i).innerHTML = name_t1;
+            document.getElementById(a[i]).innerHTML = name_t1;
     }
 
     function set_t2_names() {
@@ -2057,6 +2057,6 @@
                  name_t2_9, name_t2_10, name_t2_11, name_t2_12, name_t2_13, name_t2_14, name_t2_15,
                  name_t2_16, name_t2_17, name_t2_18, name_t2_19];
         for (let i = 0; i < 19; i++) {
-            a(i).innerHTML = name_t2;
+            document.getElementById(a[i]).innerHTML = name_t2;
         }
     }
