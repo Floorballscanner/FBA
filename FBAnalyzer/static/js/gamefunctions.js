@@ -8,13 +8,13 @@
     // When the change team order button is changed, the teams switch sides
     function ChangeOrder() {
         if (Order == 1) { // Team 1 is moved as the upper one, defence zone is up
-            document.getElementById("TeamL").innerHTML = "Team 2";
-            document.getElementById("TeamR").innerHTML = "Team 1";
+            document.getElementById("TeamL").innerHTML = name_t2;
+            document.getElementById("TeamR").innerHTML = name_t1;
             Order = 2;
         }
         else { // Team 1 is moved as the bottom one, defence zone is down
-            document.getElementById("TeamL").innerHTML = "Team 1";
-            document.getElementById("TeamR").innerHTML = "Team 2";
+            document.getElementById("TeamL").innerHTML = name_t1;
+            document.getElementById("TeamR").innerHTML = name_t2;
             Order = 1;
         }
     }
