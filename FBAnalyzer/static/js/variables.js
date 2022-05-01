@@ -34,9 +34,59 @@
     var shiftNo_2 = 1; // Number of shifts in numbers Team 2
     var shiftPos = 0; // Possession time in shift in counters Team 1
     var shiftPos_2 = 0; // Possession time in shift in counters Team 2
+    
+    // Team 1 and Team 2 name elements
+    
     var name_t1 = "Team 1"; // Team 1 name variable
     var name_t2 = "Team 2"; // Team 2 name variable
+    
+    var n_t1_1 = document.getElementById("name_t1_1");
+    var n_t1_2 = document.getElementById("name_t1_2");
+    var n_t1_3 = document.getElementById("name_t1_3");
+    var n_t1_4 = document.getElementById("name_t1_4");
+    var n_t1_5 = document.getElementById("name_t1_5");
+    var n_t1_6 = document.getElementById("name_t1_6");
+    var n_t1_7 = document.getElementById("name_t1_7");
+    var n_t1_8 = document.getElementById("name_t1_8");
+    var n_t1_9 = document.getElementById("name_t1_9");
+    var n_t1_10 = document.getElementById("name_t1_10");
+    var n_t1_11 = document.getElementById("name_t1_11");
+    var n_t1_12 = document.getElementById("name_t1_12");
+    var n_t1_13 = document.getElementById("name_t1_13");
+    var n_t1_14 = document.getElementById("name_t1_14");
+    var n_t1_15 = document.getElementById("name_t1_15");
+    var n_t1_16 = document.getElementById("name_t1_16");
+    var n_t1_17 = document.getElementById("name_t1_17");
+    var n_t1_18 = document.getElementById("name_t1_18");
+    var n_t1_19 = document.getElementById("name_t1_19");
+    
+    var name_t1_id = [n_t1_1, n_t1_2, n_t1_3, n_t1_4, n_t1_5, n_t1_6, n_t1_7, n_t1_8,
+                 n_t1_9, n_t1_10, n_t1_11, n_t1_12, n_t1_13, n_t1_14, n_t1_15,
+                 n_t1_16, n_t1_17, n_t1_18, n_t1_19];
 
+    var n_t2_1 = document.getElementById("name_t2_1");
+    var n_t2_2 = document.getElementById("name_t2_2");
+    var n_t2_3 = document.getElementById("name_t2_3");
+    var n_t2_4 = document.getElementById("name_t2_4");
+    var n_t2_5 = document.getElementById("name_t2_5");
+    var n_t2_6 = document.getElementById("name_t2_6");
+    var n_t2_7 = document.getElementById("name_t2_7");
+    var n_t2_8 = document.getElementById("name_t2_8");
+    var n_t2_9 = document.getElementById("name_t2_9");
+    var n_t2_10 = document.getElementById("name_t2_10");
+    var n_t2_11 = document.getElementById("name_t2_11");
+    var n_t2_12 = document.getElementById("name_t2_12");
+    var n_t2_13 = document.getElementById("name_t2_13");
+    var n_t2_14 = document.getElementById("name_t2_14");
+    var n_t2_15 = document.getElementById("name_t2_15");
+    var n_t2_16 = document.getElementById("name_t2_16");
+    var n_t2_17 = document.getElementById("name_t2_17");
+    var n_t2_18 = document.getElementById("name_t2_18");
+    var n_t2_19 = document.getElementById("name_t2_19");
+    
+    var name_t2_id = [n_t2_1, n_t2_2, n_t2_3, n_t2_4, n_t2_5, n_t2_6, n_t2_7, n_t2_8,
+                 n_t2_9, n_t2_10, n_t2_11, n_t2_12, n_t2_13, n_t2_14, n_t2_15,
+                 n_t2_16, n_t2_17, n_t2_18, n_t2_19];
 
     // Google charts
 

@@ -2045,22 +2045,17 @@
     }
 
     function set_t1_names() {
-        var a = ["name_t1_1", "name_t1_2", "name_t1_3", "name_t1_4", "name_t1_5", "name_t1_6", "name_t1_7", "name_t1_8",
-                 "name_t1_9", "name_t1_10", "name_t1_11", "name_t1_12", "name_t1_13", "name_t1_14", "name_t1_15",
-                 "name_t1_16", "name_t1_17", "name_t1_18", "name_t1_19"];
+
         console.log(name_t1);
         for (let i = 0; i < 19; i++) {
         console.log(i);
-        console.log(a[i]);
-            document.getElementById(a[i]).innerHTML = name_t1;
+            name_t1_id[i] = name_t1;
         }
     }
 
     function set_t2_names() {
-        var a = ["name_t2_1", "name_t2_2", "name_t2_3", "name_t2_4", "name_t2_5", "name_t2_6", "name_t2_7", "name_t2_8",
-                 "name_t2_9", "name_t2_10", "name_t2_11", "name_t2_12", "name_t2_13", "name_t2_14", "name_t2_15",
-                 "name_t2_16", "name_t2_17", "name_t2_18", "name_t2_19"];
+
         for (let i = 0; i < 19; i++) {
-            document.getElementById(a[i]).innerHTML = name_t2;
+            name_t2_id[i] = name_t2;
         }
     }
