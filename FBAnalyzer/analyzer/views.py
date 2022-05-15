@@ -19,3 +19,6 @@ def signup(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def live(request):
+    return render(request, 'live.html')
