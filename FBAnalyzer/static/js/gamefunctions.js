@@ -224,7 +224,7 @@
                 teamPos = Math.round(100 * posT / gameCounter);
                 Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo_2, 0, shiftP, 0, 0, 0, teamPos]);
+                posTeamT2_array.push([shiftNo_2, 0, shiftP, 0, 0, 0, teamPos]);
             }
             if (old_line == 3) {
                 shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
@@ -232,7 +232,7 @@
                 teamPos = Math.round(100 * posT / gameCounter);
                 Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo_2, 0, 0, shiftP, 0, 0, teamPos]);
+                posTeamT2_array.push([shiftNo_2, 0, 0, shiftP, 0, 0, teamPos]);
             }
             if (old_line == 4 || old_line == 5) {
                 shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
@@ -240,7 +240,7 @@
                 teamPos = Math.round(100 * posT / gameCounter);
                 Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo_2, 0, 0, 0, shiftP, 0, teamPos]);
+                posTeamT2_array.push([shiftNo_2, 0, 0, 0, shiftP, 0, teamPos]);
             }
             if (old_line == 6 || old_line == 7) {
                 shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
@@ -248,7 +248,7 @@
                 teamPos = Math.round(100 * posT / gameCounter);
                 Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeam_array.push([shiftNo_2, 0, 0, 0, 0, shiftP, teamPos]);
+                posTeamT2_array.push([shiftNo_2, 0, 0, 0, 0, shiftP, teamPos]);
             }
         }
         console.log("Shift Possession: " + shiftP);
@@ -1357,19 +1357,19 @@
                 txGp_2.innerHTML = d;
 
                 if (line_on == 1) {
-                    xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
                 if (line_on == 2) {
-                    xGL2_array.push([display, xGf_g[1], xGa_g[1], xGf_g[1], 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, xGa_g[1]]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
                 if (line_on == 3) {
-                    xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, xGf_g[2]]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 }
@@ -1463,19 +1463,19 @@
                 txGp_2.innerHTML = a;
 
                 if (line_on == 1) {
-                    xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
+                    xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
                 if (line_on == 2) {
-                    xGL2_array.push([display, xGf_g[1], xGa_g[1], xGf_g[1], 0]);
+                    xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, xGa_g[1]]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 }
 
                 if (line_on == 3) {
-                    xGL3_array.push([display, xGf_g[2], xGa_g[2], xGf_g[2], 0]);
+                    xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, xGa_g[2]]);
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 }
