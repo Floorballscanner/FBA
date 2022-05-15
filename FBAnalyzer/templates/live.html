@@ -1,0 +1,42 @@
+<!--
+
+This is the live result page.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+<div class="container-fluid no-padding">
+    <div class="app-text" style="Padding-top: 30px;">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Home xG: <span id="homexG">0</span> - <span id="awayxG">0</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var homexg = document.getElementById("homexG");
+    var awayxg = document.getElementById("awayxG");
+    var home = sessionStorage.getItem('home');
+    var away = sessionStorage.getItem('away');
+
+    window.onload = Update();
+
+
+    function Update() {
+
+        home = sessionStorage.getItem('home');
+        away = sessionStorage.getItem('away');
+
+        homexg.innerHTML = home;
+        awayxg.innerHTML = away;
+
+        t = setTimeout(function(){ Update() }, 1000);
+    }
+
+</script>
+
+{% endblock %}
