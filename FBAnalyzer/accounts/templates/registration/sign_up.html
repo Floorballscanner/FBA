@@ -8,8 +8,6 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
 {% extends 'base_layout.html' %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/contact.css' %}">
-
 <div class="container-fluid no-padding">
     <div class="col-sm-12">
         <div class="app-text" style="Padding-top: 40px;">
@@ -57,4 +55,7 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+
 {% endblock %}
