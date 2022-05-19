@@ -16,30 +16,4 @@ This is the live result page.
     </div>
 </div>
 
-<script type="text/javascript">
-
-    var homexg = document.getElementById("homexG");
-    var awayxg = document.getElementById("awayxG");
-    var home = sessionStorage.getItem('home');
-    var away = sessionStorage.getItem('away');
-
-    window.onload = Update();
-
-
-    function Update() {
-
-        home = sessionStorage.getItem('home');
-        away = sessionStorage.getItem('away');
-
-        console.log(home);
-        console.log(away);
-
-        homexg.innerHTML = home;
-        awayxg.innerHTML = away;
-
-        t = setTimeout(function(){ Update() }, 1000);
-    }
-
-</script>
-
 {% endblock %}

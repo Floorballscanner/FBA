@@ -695,8 +695,8 @@
              var date = new Date(counter * 1000);
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
-             sessionStorage.setItem('home',xGf_g[7]);
-             sessionStorage.setItem('away',xGa_g[7]);
+             localStorage.setItem('home',xGf_g[7]);
+             localStorage.setItem('away',xGa_g[7]);
 
              t = setTimeout(function(){ Count() }, 1000);
          }
