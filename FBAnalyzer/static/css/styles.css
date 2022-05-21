@@ -33,7 +33,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     overflow: hidden;
 
 }
-.fixed-nav-bar ul li a{
+.fixed-nav-bar ul li a img{
     display: block;
     color: white;
     text-align: center;
