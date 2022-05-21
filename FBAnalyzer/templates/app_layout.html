@@ -25,11 +25,15 @@ when the user has logged in successfully.
         <nav class="fixed-nav-bar">
             <ul>
                 {% load static %}
-                <li style="float:left"><img src="{% static 'logo_transparent.png' %}" width="20%"></li>
-                <li style="float:left"><a href="/accounts" class="frontpage">Home</a></li>
+
+                <li style="float:left">
+                    <a href="/accounts" class="frontpage">
+                        <img src="{% static 'logo_transparent.png' %}" width="30%">
+                    </a>
+                </li>
                 <!--li><a href="/accounts/my_team" class="myteam">My Team</a></li-->
-                <li style="float:left"><a href="/accounts/new_game" class="newgame">New Game</a></li>
-                <li style="float:left"><a class="sendData" id="sData" onclick="sendData()">Send Data</a></li>
+                <li style="float:right"><a href="/accounts/new_game" class="newgame">New Game</a></li>
+                <li style="float:right"><a class="sendData" id="sData" onclick="sendData()">Send Data</a></li>
                 <!--li style="float:right"><img src="{% static 'settings.png' %}" class="preferences" width="20px" height="20px"></li-->
                 <li style="float:right"><a href="/accounts/logout/">Logout</a></li>
             </ul>
