@@ -44,6 +44,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     display: block;
     color: white;
     text-align: center;
+    object-fit: cover;
     padding: 15px 10px;
     text-decoration: none;
 }
