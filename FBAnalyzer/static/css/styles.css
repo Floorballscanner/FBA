@@ -23,7 +23,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     z-index: 9999;
     width: 100%;
     height: 55px;
-    background-color: #000000;
+    background-color: #002072;
 
 }
 .fixed-nav-bar ul{
