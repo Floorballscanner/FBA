@@ -13,7 +13,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 /* The main header of the application */
 .header{
-    background: #002072;
+    background: #fff;
     width: 100%;
     length: 100%;
 }
@@ -33,7 +33,14 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     overflow: hidden;
 
 }
-.fixed-nav-bar ul li a img{
+.fixed-nav-bar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    text-decoration: none;
+}
+.fixed-nav-bar ul li img {
     display: block;
     color: white;
     text-align: center;
