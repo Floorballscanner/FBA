@@ -23,7 +23,7 @@
     // If game is on, them one number is added to number of times with ball
     function BallTeamL() {
         document.getElementById("TeamR").style.background='#4CAF50';
-        document.getElementById("TeamL").style.background='#555555';
+        document.getElementById("TeamL").style.background='#002072';
         if (Order == 1) {
             Ball_pos = 1;
             if (started == 1 && PosTime > 0) {
@@ -52,7 +52,7 @@
 
     // When the ball team right button is pressed
     function BallTeamR() {
-        document.getElementById("TeamR").style.background='#555555';
+        document.getElementById("TeamR").style.background='#002072';
         document.getElementById("TeamL").style.background='#4CAF50';
         if (Order == 1) {
             Ball_pos = 2;
@@ -86,7 +86,7 @@
     function Line_change(line) {
         console.log(lines); // debugging
         document.getElementById(lines[line_on-1]).style.background='#4CAF50';
-        document.getElementById(lines[line-1]).style.background='#555555';
+        document.getElementById(lines[line-1]).style.background='#002072';
         old_line = line_on;
         line_on = line;
         if (LineTime > 0) {
@@ -183,7 +183,7 @@
     function Line_change_2(line) {
         console.log(lines_2); // debugging
         document.getElementById(lines_2[line_on_2-1]).style.background='#4CAF50';
-        document.getElementById(lines_2[line-1]).style.background='#555555';
+        document.getElementById(lines_2[line-1]).style.background='#002072';
         old_line = line_on_2;
         line_on_2 = line;
         if (LineTime_2 > 0) {
@@ -332,7 +332,7 @@
                     }
                 }
                 document.getElementById("start").innerHTML = "Stop";
-                document.getElementById("start").style.background='#555555';
+                document.getElementById("start").style.background='#002072';
                 is_on = 1;
                 Counter();
             }

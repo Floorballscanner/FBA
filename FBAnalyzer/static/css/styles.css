@@ -13,7 +13,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 /* The main header of the application */
 .header{
-    background: #fff;
+    background: #F5F5F5;
     width: 100%;
     length: 100%;
 }
@@ -62,35 +62,35 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     text-decoration: none;
 }
 .about{
-    color: #fff;
+    color: #F5F5F5;
     text-decoration: none;
 }
 .pricing{
-    color: #fff;
+    color: #F5F5F5;
     text-decoration: none;
 }
 .contact{
-    color: #fff;
+    color: #F5F5F5;
     text-decoration: none;
 }
 .home{
-    color: #fff;
+    color: #F5F5F5;
     text-decoration: none;
 }
 .frontpage{
-    color: #fff;
+    color: #F5F5F5;
     text-decoration: none;
 }
 .statistics{
-    color: #fff;
+    color: #F5F5F5;
     text-decoration: none;
 }
 .newgame{
-    color: #fff;
+    color: #F5F5F5;
     text-decoration: none;
 }
 .preferences{
-    color: #fff;
+    color: #F5F5F5;
     text-decoration: none;
 }
 .user-pic{
@@ -99,7 +99,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
 }
 .user{
     text-decoration: none;
-    color: #fff;
+    color: #F5F5F5;
     padding: 20px 400px 0 0;
 }
 .banner{
