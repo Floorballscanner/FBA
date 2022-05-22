@@ -40,11 +40,11 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     padding: 15px 10px;
     text-decoration: none;
 }
-.fixed-nav-bar ul li img {
+.fixed-nav-bar ul li a img {
     display: block;
     color: white;
     text-align: center;
-    padding: 0px 0px;
+    padding: 10px 10px;
     text-decoration: none;
 }
 .fixed-nav-bar ul li a:hover {
