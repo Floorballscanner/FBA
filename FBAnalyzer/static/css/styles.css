@@ -24,7 +24,7 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     left: 0;
     z-index: 9999;
     width: 100%;
-    height: 64px;
+    height: 54px;
     background-color: #002072;
 
 }
@@ -37,14 +37,14 @@ This is the main CSS - styling file. Mainly styles the newgame.html - page.
     display: block;
     color: white;
     text-align: center;
-    padding: 20px 10px;
+    padding: 15px 10px;
     text-decoration: none;
 }
 .fixed-nav-bar ul li a img {
     display: block;
     color: white;
     text-align: center;
-    padding: -5px 0px;
+    padding: 0px 0px;
     text-decoration: none;
 }
 .fixed-nav-bar ul li a:hover {
