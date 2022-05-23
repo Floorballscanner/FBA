@@ -332,7 +332,7 @@
                     }
                 }
                 document.getElementById("start").innerHTML = "Stop";
-                document.getElementById("start").style.background='#007bff';
+                document.getElementById("start").style.background='#3046FB';
                 is_on = 1;
                 Counter();
             }
