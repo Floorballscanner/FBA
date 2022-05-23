@@ -22,8 +22,8 @@
     // When the ball team left button is pressed the button colors and the variable are changed
     // If game is on, them one number is added to number of times with ball
     function BallTeamL() {
-        document.getElementById("TeamR").style.background='#4CAF50';
-        document.getElementById("TeamL").style.background='#002072';
+        document.getElementById("TeamR").style.background='#002072';
+        document.getElementById("TeamL").style.background='#3046FB';
         if (Order == 1) {
             Ball_pos = 1;
             if (started == 1 && PosTime > 0) {
@@ -52,8 +52,8 @@
 
     // When the ball team right button is pressed
     function BallTeamR() {
-        document.getElementById("TeamR").style.background='#002072';
-        document.getElementById("TeamL").style.background='#4CAF50';
+        document.getElementById("TeamR").style.background='#3046FB';
+        document.getElementById("TeamL").style.background='#002072';
         if (Order == 1) {
             Ball_pos = 2;
             if (started == 1 && PosTime > 0) {
@@ -85,8 +85,8 @@
     // Team 1 line change functionality
     function Line_change(line) {
         console.log(lines); // debugging
-        document.getElementById(lines[line_on-1]).style.background='#4CAF50';
-        document.getElementById(lines[line-1]).style.background='#002072';
+        document.getElementById(lines[line_on-1]).style.background='#002072';
+        document.getElementById(lines[line-1]).style.background='#3046FB';
         old_line = line_on;
         line_on = line;
         if (LineTime > 0) {
@@ -182,8 +182,8 @@
     // Team 2 line change functionality
     function Line_change_2(line) {
         console.log(lines_2); // debugging
-        document.getElementById(lines_2[line_on_2-1]).style.background='#4CAF50';
-        document.getElementById(lines_2[line-1]).style.background='#002072';
+        document.getElementById(lines_2[line_on_2-1]).style.background='#002072';
+        document.getElementById(lines_2[line-1]).style.background='#3046FB';
         old_line = line_on_2;
         line_on_2 = line;
         if (LineTime_2 > 0) {
@@ -332,13 +332,13 @@
                     }
                 }
                 document.getElementById("start").innerHTML = "Stop";
-                document.getElementById("start").style.background='#002072';
+                document.getElementById("start").style.background='#3046FB';
                 is_on = 1;
                 Counter();
             }
             else if (is_on == 1) {  // Stop game clock
                 document.getElementById("start").innerHTML = "Start";
-                document.getElementById("start").style.background='#4CAF50';
+                document.getElementById("start").style.background='#002072';
                 is_on = 0;
                 drawChart(); // Update charts
             }
