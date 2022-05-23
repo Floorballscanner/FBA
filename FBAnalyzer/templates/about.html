@@ -8,36 +8,50 @@ This is the about - infopage of the application.
 {% block content %}
 <div class="container-fluid no-padding">
     <div class="app-text" style="Padding-top: 40px;">
+        {% load static %}
         <div class="row">
-            <div class="col-sm-12">
-                {% load static %}
+            <div class="col-sm-6">
                 <h3>What is Floorball Scanner?</h3>
                 </br>
                 <p>Floorball Scanner gives you insight into your team's performance in real-time during
                 the game. You are able to see how each line performs and take actions based on the data.</p>
                 </br>
+            </div>
+            <div class="col-sm-6">
                 <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                 <h3>Shotmap</h3>
                 <p>Map easily your and opponents shots and get a picture of how shots are distributed on the field.</p>
-                </br>
+            </div>
+            <div class="col-sm-6">
                 <img class="img-fluid" src="{% static 'shotmap.jpg' %}">
-                </br></br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                 <h3>Advanced statistics</h3>
                 <p>See deeper into the game result with advanced statistics, such as expected goals (xG) and ball possessions
                 of each line individually. With advanced statistics provided by Floorball Scanner you are able to make better
                 and more informed decisions also during game.</p>
-                </br>
+            </div>
+            <div class="col-sm-6">
                 <img class="img-fluid" src="{% static 'textresult.jpg' %}">
-                </br></br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                 <h3>Intuitive visualizations</h3>
                 <p>Sophisticated graphs and pictures help you form a better understanding of how your team and lines
                 are doing against the opponent.</p>
-                </br>
+            </div>
+            <div class="col-sm-6">
                 <img class="img-fluid" src="{% static 'graphs.jpg' %}">
-                </br></br></br>
-                <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
             </div>
         </div>
+        <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
     </div>
 </div>
 {% endblock %}
