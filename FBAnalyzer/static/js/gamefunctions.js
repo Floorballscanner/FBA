@@ -22,8 +22,8 @@
     // When the ball team left button is pressed the button colors and the variable are changed
     // If game is on, them one number is added to number of times with ball
     function BallTeamL() {
-        document.getElementById("TeamR").style.background='#4CAF50';
-        document.getElementById("TeamL").style.background='#002072';
+        document.getElementById("TeamR").style.background='#002072';
+        document.getElementById("TeamL").style.background='#3046FB';
         if (Order == 1) {
             Ball_pos = 1;
             if (started == 1 && PosTime > 0) {
@@ -52,8 +52,8 @@
 
     // When the ball team right button is pressed
     function BallTeamR() {
-        document.getElementById("TeamR").style.background='#002072';
-        document.getElementById("TeamL").style.background='#4CAF50';
+        document.getElementById("TeamR").style.background='#3046FB';
+        document.getElementById("TeamL").style.background='#002072';
         if (Order == 1) {
             Ball_pos = 2;
             if (started == 1 && PosTime > 0) {
