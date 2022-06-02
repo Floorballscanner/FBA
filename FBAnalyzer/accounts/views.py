@@ -1,7 +1,7 @@
 # Views is the file that contains information and functions of different html-views.
 
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -10,35 +10,14 @@ from .models import Player
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from accounts.forms import AddNewPlayer
-from .forms import ContactForm
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
+
 
 @login_required
 def index(request):
     return render(request,'accounts/index.html')
 
 def sign_up(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = "Website Inquiry from Floorball Scanner"
-            body = {
-                'first_name': form.cleaned_data['first_name'],
-                'last_name': form.cleaned_data['last_name'],
-                'email': form.cleaned_data['email_address'],
-                'message': form.cleaned_data['message'],
-            }
-            message = "\n".join(body.values())
-
-            try:
-                send_mail(subject, message, 'floorballscanner@gmail.com', ['floorballscanner@gmail.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return redirect("main:home")
-
-    form = ContactForm()
-    return render(request, 'sign_up.html', {'form': form})
+    return render(request, 'accounts/sign_up.html')
 
 def new_game(request):
     return render(request, 'accounts/newgame.html')
