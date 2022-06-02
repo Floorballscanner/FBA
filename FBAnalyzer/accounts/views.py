@@ -35,10 +35,10 @@ def sign_up(request):
                 send_mail(subject, message, 'floorballscanner@gmail.com', ['floorballscanner@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return redirect("main:homepage")
+            return redirect("main:home")
 
     form = ContactForm()
-    return render(request, 'accounts/sign_up.html', {'form': form})
+    return render(request, 'sign_up.html', {'form': form})
 
 def new_game(request):
     return render(request, 'accounts/newgame.html')
