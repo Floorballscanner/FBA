@@ -38,7 +38,7 @@ def sign_up(request):
             return redirect("main:homepage")
 
     form = ContactForm()
-    return render(request, 'sign_up.html', {'form': form})
+    return render(request, 'accounts/sign_up.html', {'form': form})
 
 def new_game(request):
     return render(request, 'accounts/newgame.html')
