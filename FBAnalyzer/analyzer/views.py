@@ -34,7 +34,7 @@ def signup(request):
                 send_mail(subject, message, 'floorballscanner@gmail.com', ['floorballscanner@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return redirect("main:home")
+            return redirect("sign-up")
 
     form = ContactForm()
     return render(request, 'sign_up.html', {'form': form})
