@@ -38,7 +38,6 @@ def signup(request):
 
     form = ContactForm()
     return render(request, 'sign_up.html', {'form': form})
-    return render(request, 'sign_up.html')
 
 def about(request):
     return render(request, 'about.html')
