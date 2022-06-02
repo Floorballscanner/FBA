@@ -15,28 +15,10 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
 
         <div class="row">
             <div class="col-sm-12">
-                <form action="action_page.php">
-
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="yourname" placeholder="Your name..">
-
-                    <label for="email">Last Name</label>
-                    <input type="text" id="email" name="youremail" placeholder="Your email address..">
-
-                    <label for="country">Country</label>
-                    <select id="country" name="country">
-                        <option value="finland">Finland</option>
-                        <option value="sweden">Sweden</option>
-                        <option value="czech">Czech</option>
-                        <option value="switzerland">Switzerland</option>
-                        <option value="other">Other</option>
-                    </select>
-
-                    <label for="subject">Subject</label>
-                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-                    <input type="submit" value="Submit">
-
+                <form method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         </div>
