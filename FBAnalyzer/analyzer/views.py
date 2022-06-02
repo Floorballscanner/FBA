@@ -36,7 +36,7 @@ def signup(request):
                 return HttpResponse('Invalid header found.')
             return redirect("sign-up")
 
-    form = ContactForm()
+    form = ContactForm(initial={'message': 'I want to know more about Floorball Scanner, please send me more information.'})
     return render(request, 'sign_up.html', {'form': form})
 
 def about(request):
