@@ -17,7 +17,7 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
             <div class="col-sm-12">
                 <form method="post">
                     {% csrf_token %}
-                    {{form.as_p}}
+                    {{cform.as_p}}
                     <button type="submit">Submit</button>
                 </form>
             </div>

@@ -27,14 +27,14 @@ def live(request):
 
 def contact(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
+        cform = ContactForm(request.POST)
+        if cform.is_valid():
             subject = "Website Inquiry from Floorball Scanner"
             body = {
-                'first_name': form.cleaned_data['first_name'],
-                'last_name': form.cleaned_data['last_name'],
-                'email': form.cleaned_data['email_address'],
-                'message': form.cleaned_data['message'],
+                'first_name': cform.cleaned_data['first_name'],
+                'last_name': cform.cleaned_data['last_name'],
+                'email': cform.cleaned_data['email_address'],
+                'message': cform.cleaned_data['message'],
             }
             message = "\n".join(body.values())
 
@@ -44,5 +44,5 @@ def contact(request):
                 return HttpResponse('Invalid header found.')
             return redirect("main:homepage")
 
-    form = ContactForm()
-    return render(request, 'sign_up.html', {'form': form})
+    cform = ContactForm()
+    return render(request, 'sign_up.html', {'form': cform})
