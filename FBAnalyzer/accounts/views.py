@@ -16,9 +16,6 @@ from accounts.forms import AddNewPlayer
 def index(request):
     return render(request,'accounts/index.html')
 
-def sign_up(request):
-    return render(request, 'accounts/sign_up.html')
-
 def new_game(request):
     return render(request, 'accounts/newgame.html')
 
