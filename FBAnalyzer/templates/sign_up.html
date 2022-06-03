@@ -49,7 +49,7 @@ function SendMail() {
         To : 'floorballscanner@gmail.com',
         From : 'floorballscanner@gmail.com',
         Subject : "Website Inquiry from Floorball Scanner",
-        Body : "<html><h2>"+ fname +" "+ lname +" "+ "wants to know about Floorball Scanner" +"</h2></br></br><p>
+        Body : "<html><h2>"+ fname +" "+ lname +" wants to know about Floorball Scanner</h2></br></br><p>
         Sender email: "+ email +"</>p></br><p>"+ msg +"</>p></html>",
         }).then(
             message => alert(message)
