@@ -16,15 +16,15 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
         <div class="row">
             <div class="col-sm-12">
                 <form>
-                    First Name: <textarea id="first-name" name="hometeam" rows="1" placeholder="First name" maxlength="20" wrap="off"></textarea>
+                    <textarea id="first-name" name="hometeam" rows="1" placeholder="First name" maxlength="20" wrap="off"></textarea>
                     </br>
-                    Last Name: <textarea id="last-name" name="hometeam" rows="1" placeholder="Last name" maxlength="20" wrap="off"></textarea>
+                    <textarea id="last-name" name="hometeam" rows="1" placeholder="Last name" maxlength="20" wrap="off"></textarea>
                     </br>
-                    Email: <textarea id="email-addr" name="hometeam" rows="1" placeholder="Email address" maxlength="20" wrap="off"></textarea>
+                    <textarea id="email-addr" name="hometeam" rows="1" placeholder="Email address" maxlength="20" wrap="off"></textarea>
                     </br>
-                    Message: <textarea id="email-addr" name="hometeam" rows="10" maxlength="2000" wrap="off">I want to know about Floorball Scanner, please send me more information.</textarea>
+                    <textarea id="email-addr" name="hometeam" rows="10" maxlength="2000" wrap="off">I want to know about Floorball Scanner, please send me more information.</textarea>
                     </br>
-                    <button id="sendmail" type="button" onclick="SendMail()">Submit</button>
+                    <button id="sendmail" class="btn btn-secondary" onclick="SendMail()">Submit</button>
                 </form>
             </div>
         </div>
