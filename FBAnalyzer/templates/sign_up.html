@@ -15,10 +15,16 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
 
         <div class="row">
             <div class="col-sm-12">
-                <form method="post">
-                    {% csrf_token %}
-                    {{form.as_p}}
-                    <button type="submit">Submit</button>
+                <form>
+                    First Name: <textarea id="first-name" name="hometeam" rows="1" placeholder="First name" maxlength="20" wrap="off"></textarea>
+                    </br>
+                    Last Name: <textarea id="last-name" name="hometeam" rows="1" placeholder="Last name" maxlength="20" wrap="off"></textarea>
+                    </br>
+                    Email: <textarea id="email-addr" name="hometeam" rows="1" placeholder="Email address" maxlength="20" wrap="off"></textarea>
+                    </br>
+                    Message: <textarea id="email-addr" name="hometeam" rows="10" maxlength="2000" wrap="off">I want to know about Floorball Scanner, please send me more information.</textarea>
+                    </br>
+                    <button id="sendmail" type="button" onclick="SendMail()">Submit</button>
                 </form>
             </div>
         </div>
@@ -28,5 +34,22 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
     <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
     </div>
 </div>
+
+<script>
+
+function SendMail() {
+
+    Email.send({
+        SecureToken : "3b145e7d-a832-4993-b00e-15a5d25b5b98",
+        To : 'floorballscanner@gmail.com',
+        From : "floorballscanner@gmail.com",
+        Subject : "Website Inquiry from Floorball Scanner",
+        Body : "<html><h2>"+ today +": "+ hTeam.value +" - "+ aTeam.value +"</h2><p>"+ shotData +"</p></br><p>"+ timeData +"</html>",
+        }).then(
+            message => alert(message)
+    );
+}
+
+</script>
 
 {% endblock %}
