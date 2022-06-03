@@ -17,9 +17,13 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
             <div class="col-sm-12">
                 <form>
                     <input required id="first-name" name="firstname" autocomplete="given-name" placeholder="First name" maxlength="20">
+                    </br></br>
                     <input required id="last-name" name="lastname" autocomplete="family-name" placeholder="Last name" maxlength="20">
+                    </br></br>
                     <input required id="email-addr" name="emailaddr" autocomplete="email" placeholder="Email address" maxlength="50">
+                    </br></br>
                     <textarea id="message" name="messagefield" rows="10" maxlength="2000" wrap="on">I want to know about Floorball Scanner, please send me more information.</textarea>
+                    </br></br>
                     <button id="sendmail" class="btn btn-secondary" onclick="SendMail()">Submit</button>
                 </form>
             </div>
