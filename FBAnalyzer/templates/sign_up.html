@@ -22,7 +22,7 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
                     </br>
                     <textarea id="email-addr" name="hometeam" rows="1" placeholder="Email address" maxlength="20" wrap="off"></textarea>
                     </br>
-                    <textarea id="email-addr" name="hometeam" rows="10" maxlength="2000" wrap="on">I want to know about Floorball Scanner, please send me more information.</textarea>
+                    <textarea id="message" name="hometeam" rows="10" maxlength="2000" wrap="on">I want to know about Floorball Scanner, please send me more information.</textarea>
                     </br>
                     <button id="sendmail" class="btn btn-secondary" onclick="SendMail()">Submit</button>
                 </form>
@@ -39,15 +39,22 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
 
 function SendMail() {
 
+    var fname = document.getElementById("first-name").value;
+    var lname = document.getElementById("last-name").value;
+    var email = document.getElementById("email-addr").value;
+    var msg = document.getElementById("message").value;
+
     Email.send({
         SecureToken : "3b145e7d-a832-4993-b00e-15a5d25b5b98",
         To : 'floorballscanner@gmail.com',
-        From : "floorballscanner@gmail.com",
+        From : email,
         Subject : "Website Inquiry from Floorball Scanner",
-        Body : "<html><h2>"+ today +": "+ hTeam.value +" - "+ aTeam.value +"</h2><p>"+ shotData +"</p></br><p>"+ timeData +"</html>",
+        Body : "<html><h2>"+ fname +" "+ lname +" "+ "wants to know about Floorball Scanner" +"</h2></br></br><p>"+ msg +"</>p></html>",
         }).then(
             message => alert(message)
     );
+
+    location.href = '/';
 }
 
 </script>
