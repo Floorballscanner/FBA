@@ -26,3 +26,6 @@ def about(request):
 def live(request):
     return render(request, 'live.html')
 
+def sitemap(request):
+    return render(request, 'sitemap.txt')
+
