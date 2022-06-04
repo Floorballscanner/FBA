@@ -20,7 +20,7 @@ function updateLive() {
           "xGGame": xGfTeam_g,
           "lines": [
             {
-                "name": "Line 1"
+                "name": "Line 1",
                 "possessionPeriod": PosL1p,
                 "possessionGame": PosL1g,
                 "gfPeriod": ~~gfL1p.innerHTML,
@@ -35,7 +35,7 @@ function updateLive() {
                 "xGaGame": xGaL1g,
             },
             {
-                "name": "Line 2"
+                "name": "Line 2",
                 "possessionPeriod": PosL2p,
                 "possessionGame": PosL2g,
                 "gfPeriod": ~~gfL2p.innerHTML,
@@ -50,7 +50,7 @@ function updateLive() {
                 "xGaGame": xGaL2g,
             },
             {
-                "name": "Line 3"
+                "name": "Line 3",
                 "possessionPeriod": PosL3p,
                 "possessionGame": PosL3g,
                 "gfPeriod": ~~gfL3p.innerHTML,
@@ -65,7 +65,7 @@ function updateLive() {
                 "xGaGame": xGaL3g,
             },
             {
-                "name": "Powerplay 1"
+                "name": "Powerplay 1",
                 "possessionPeriod": PosPP1p,
                 "possessionGame": PosPP1g,
                 "gfPeriod": ~~gfPP1p.innerHTML,
@@ -80,7 +80,7 @@ function updateLive() {
                 "xGaGame": xGaPP1g,
             },
             {
-                "name": "Powerplay 2"
+                "name": "Powerplay 2",
                 "possessionPeriod": PosPP2p,
                 "possessionGame": PosPP2g,
                 "gfPeriod": ~~gfPP2p.innerHTML,
@@ -95,7 +95,7 @@ function updateLive() {
                 "xGaGame": xGaPP2g,
             },
             {
-                "name": "Shorthanded 1"
+                "name": "Shorthanded 1",
                 "possessionPeriod": PosSH1p,
                 "possessionGame": PosSH1g,
                 "gfPeriod": ~~gfSH1p.innerHTML,
@@ -110,7 +110,7 @@ function updateLive() {
                 "xGaGame": xGaSH1g,
             },
             {
-                "name": "Shorthanded 2"
+                "name": "Shorthanded 2",
                 "possessionPeriod": PosSH2p,
                 "possessionGame": PosSH2g,
                 "gfPeriod": ~~gfSH2p.innerHTML,
@@ -137,7 +137,7 @@ function updateLive() {
           "xGGame": xGaTeam_g,
           "lines": [
             {
-                "name": "Line 1"
+                "name": "Line 1",
                 "possessionPeriod": PosL1T2p,
                 "possessionGame": PosL1T2g,
                 "gfPeriod": ~~gfL1T2p.innerHTML,
@@ -152,7 +152,7 @@ function updateLive() {
                 "xGaGame": xGaL1T2g,
             },
             {
-                "name": "Line 2"
+                "name": "Line 2",
                 "possessionPeriod": PosL2T2p,
                 "possessionGame": PosL2T2g,
                 "gfPeriod": ~~gfL2T2p.innerHTML,
@@ -167,7 +167,7 @@ function updateLive() {
                 "xGaGame": xGaL2T2g,
             },
             {
-                "name": "Line 3"
+                "name": "Line 3",
                 "possessionPeriod": PosL3T2p,
                 "possessionGame": PosL3T2g,
                 "gfPeriod": ~~gfL3T2p.innerHTML,
@@ -182,7 +182,7 @@ function updateLive() {
                 "xGaGame": xGaL3T2g,
             },
             {
-                "name": "Powerplay 1"
+                "name": "Powerplay 1",
                 "possessionPeriod": PosPP1T2p,
                 "possessionGame": PosPP1T2g,
                 "gfPeriod": ~~gfPP1T2p.innerHTML,
@@ -197,7 +197,7 @@ function updateLive() {
                 "xGaGame": xGaPP1T2g,
             },
             {
-                "name": "Powerplay 2"
+                "name": "Powerplay 2",
                 "possessionPeriod": PosPP2T2p,
                 "possessionGame": PosPP2T2g,
                 "gfPeriod": ~~gfPP2T2p.innerHTML,
@@ -212,7 +212,7 @@ function updateLive() {
                 "xGaGame": xGaPP2T2g,
             },
             {
-                "name": "Shorthanded 1"
+                "name": "Shorthanded 1",
                 "possessionPeriod": PosSH1T2p,
                 "possessionGame": PosSH1T2g,
                 "gfPeriod": ~~gfSH1T2p.innerHTML,
@@ -227,7 +227,7 @@ function updateLive() {
                 "xGaGame": xGaSH1T2g,
             },
             {
-                "name": "Shorthanded 2"
+                "name": "Shorthanded 2",
                 "possessionPeriod": PosSH2T2p,
                 "possessionGame": PosSH2T2g,
                 "gfPeriod": ~~gfSH2T2p.innerHTML,
