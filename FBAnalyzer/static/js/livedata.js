@@ -12,8 +12,8 @@ function updateLive() {
         {
           "name": name_t1,
           "lineOn": line_on,
-          "possessionPeriod": ~~PosTeam_p,
-          "possessionGame": ~~PosTeam_g,
+          "possessionPeriod": PosTeam_p,
+          "possessionGame": PosTeam_g,
           "goalsPeriod": ~~gfTeamp.innerHTML,
           "goalsGame": ~~gfTeamg.innerHTML,
           "xGPeriod": xGfTeam_p,
@@ -21,8 +21,8 @@ function updateLive() {
           "lines": [
             {
                 "name": "Line 1",
-                "possessionPeriod": ~~PosL1p,
-                "possessionGame": ~~PosL1g,
+                "possessionPeriod": PosL1p,
+                "possessionGame": PosL1g,
                 "gfPeriod": ~~gfL1p.innerHTML,
                 "gfGame": ~~gfL1g.innerHTML,
                 "gaPeriod": ~~gaL1p.innerHTML,

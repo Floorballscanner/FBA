@@ -700,6 +700,8 @@
 
              updateLive();
              console.log(data)
+             console.log(PosL1p)
+             console.log(PosL1T2p)
 
              t = setTimeout(function(){ Count() }, 1000);
          }
