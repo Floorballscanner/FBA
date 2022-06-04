@@ -21,8 +21,8 @@ function updateLive() {
           "lines": [
             {
                 "name": "Line 1",
-                "possessionPeriod": PosL1p,
-                "possessionGame": PosL1g,
+                "possessionPeriod": Pos_p[line_on - 1],
+                "possessionGame": Pos_g[line_on - 1],
                 "gfPeriod": ~~gfL1p.innerHTML,
                 "gfGame": ~~gfL1g.innerHTML,
                 "gaPeriod": ~~gaL1p.innerHTML,
