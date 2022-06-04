@@ -14,8 +14,8 @@ let data = {
       "lineOn": line_on,
       "possessionPeriod": PosTeam_p,
       "possessionGame": PosTeam_g,
-      "goalsPeriod": gfTeamp.innerHTML,
-      "goalsGame": gfTeamg.innerHTML,
+      "goalsPeriod": ~~gfTeamp.innerHTML,
+      "goalsGame": ~~gfTeamg.innerHTML,
       "xGPeriod": xGfTeam_p,
       "xGGame": xGfTeam_g,
       "lines": [
