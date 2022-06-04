@@ -88,6 +88,7 @@ let data = {
             "xGfGame": xGfSH2g,
             "xGaPeriod": xGaSH2p,
             "xGaGame": xGaSH2g,
+        }
       ]
     },
     {
