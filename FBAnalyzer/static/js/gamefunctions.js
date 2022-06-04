@@ -698,6 +698,8 @@
              localStorage.setItem('home',xGf_g[7]);
              localStorage.setItem('away',xGa_g[7]);
 
+             console.log(data)
+
              t = setTimeout(function(){ Count() }, 1000);
          }
     }
