@@ -249,7 +249,7 @@ function updateLive() {
     liveData.data = JSON.stringify(data);
     liveData.save();
 
-    fetch('https://fbscanner.io/live/', {
+  /* fetch('https://fbscanner.io/live/', {
 
           method: 'POST', // or 'PUT'
           headers: {
@@ -263,5 +263,5 @@ function updateLive() {
     })
         .catch((error) => {
           console.error('Error:', error);
-    });
+    }); */
 }
