@@ -37,7 +37,6 @@ urlpatterns = [
     path('signup/', analyzer.views.signup, name="sign-up"),
     path('sitemap', analyzer.views.sitemap, name="sitemap"),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
