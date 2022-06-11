@@ -246,6 +246,9 @@ function updateLive() {
       ]
     }
 
+    liveData.data = JSON.stringify(data);
+    liveData.save();
+
     fetch('https://fbscanner.io/live/', {
 
           method: 'POST', // or 'PUT'
