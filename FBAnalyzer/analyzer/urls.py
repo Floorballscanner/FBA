@@ -33,7 +33,6 @@ urlpatterns = [
     path('about/', analyzer.views.about),
     path('', include("accounts.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('live/', analyzer.views.live),
     path('signup/', analyzer.views.signup, name="sign-up"),
     path('sitemap', analyzer.views.sitemap, name="sitemap"),
     path('', include(router.urls)),
