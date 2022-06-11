@@ -3,7 +3,6 @@
 
 from django.contrib import admin
 from django.urls import path, include
-
 import analyzer
 from analyzer import views
 from accounts import views
