@@ -35,7 +35,7 @@
     var shiftPos = 0; // Possession time in shift in counters Team 1
     var shiftPos_2 = 0; // Possession time in shift in counters Team 2
     var data = {}; // Live data object
-    liveData = new Live(JSON.stringify(data));
+    var liveData = new Live(JSON.stringify(data));
     var today = new Date();
     
     // Team 1 and Team 2 name elements
