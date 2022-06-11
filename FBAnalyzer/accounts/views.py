@@ -6,10 +6,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .models import Player
+from .models import Player, Live
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from accounts.forms import AddNewPlayer
+from .serializers import LiveSerializer
+from rest_framework import viewsets
 
 
 @login_required
@@ -57,3 +59,7 @@ def add_new_player(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     #  return render(request, 'accounts/myteam.html', context)
+
+class LiveViewSet(viewsets.ModelViewSet):
+    queryset = Live.objects.all()
+    serializer_class = LiveSerializer

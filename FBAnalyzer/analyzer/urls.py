@@ -1,21 +1,12 @@
-"""FBAnalyzer URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""Floorball Scanner URL Configuration
 """
+
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+
+import analyzer
+from analyzer import views
+from accounts import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
@@ -34,17 +25,18 @@ class UserViewSet(viewsets.ModelViewSet):
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'live', views.LiveViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage, name="frontpage"),
+    path('', analyzer.views.homepage, name="frontpage"),
     path('login/', views.login),
-    path('about/', views.about),
+    path('about/', analyzer.views.about),
     path('', include("accounts.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('live/', views.live),
-    path('signup/', views.signup, name="sign-up"),
-    path('sitemap', views.sitemap, name="sitemap"),
+    path('live/', analyzer.views.live),
+    path('signup/', analyzer.views.signup, name="sign-up"),
+    path('sitemap', analyzer.views.sitemap, name="sitemap"),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
