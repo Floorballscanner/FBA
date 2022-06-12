@@ -5,4 +5,4 @@ from .models import Live
 class LiveSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Live
-        fields = 'data'
+        fields = ('data',)
