@@ -1,10 +1,7 @@
 
 // This file contains the script for pulling and pushing live data from/to the Azure backend
 
-const data = { home: 'home',
-               away: 'away' };
-
-fetch('https://floorballscanner.herokuapp.com/live/', {
+fetch('https://fbscanner.io/live/', {
 
       method: 'POST', // or 'PUT'
       headers: {
