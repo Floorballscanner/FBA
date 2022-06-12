@@ -246,7 +246,7 @@ function updateLive() {
       ]
     }
 
-  fetch('https://fbscanner.io/live/', {
+  fetch('https://fbscanner.io/livejson/', {
 
           method: 'POST', // or 'PUT'
           headers: {
