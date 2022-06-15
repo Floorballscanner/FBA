@@ -168,4 +168,5 @@ CSRF_TRUSTED_ORIGINS = [
     'http://192.168.0.50:3000',  # for network
     'http://localhost:8080',  # for localhost (Developlemt)
     'http://192.168.0.50:8080',  # for network (Development)
+    'https://*.fbscanner.io'
 ]
