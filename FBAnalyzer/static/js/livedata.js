@@ -251,12 +251,14 @@ function updateLive() {
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json'
+            "X-Requested-With": "XMLHttpRequest"
           },
           body: JSON.stringify(data),
     })
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
+          console.log(JSON.stringify(data));
     })
         .catch((error) => {
           console.error('Error:', error);
