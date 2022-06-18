@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from models import Live, Team
+from . models import Live, Team
 from django.contrib.auth.models import User
 
 # Serializers define the API representation.
