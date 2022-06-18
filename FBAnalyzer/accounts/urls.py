@@ -7,9 +7,16 @@ Views.function is called when a html - page is rendered
 
 """
 
-from django.contrib import admin
 from django.urls import path
 from . import views
+from rest_framework import routers
+
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'livejson', LiveViewSet)
+router.register(r'teams', TeamViewSet)
 
 urlpatterns = [
     path('accounts', views.index, name="home"),
