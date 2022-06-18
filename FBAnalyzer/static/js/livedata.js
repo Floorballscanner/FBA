@@ -1,6 +1,8 @@
 
 // This file contains the JSON for live data
 
+from django.views.decorators.csrf import csrf_exempt
+
 function updateLive() {
 
     data = {
@@ -245,14 +247,14 @@ function updateLive() {
         }
       ]
     }
-    {% csrf_token %}
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    @csrf_exempt
+    // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     fetch('https://fbscanner.io/livejson/', {
 
           method: 'POST', // or 'PUT'
           headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
+            'Content-Type': 'application/json'
+            //'X-CSRFToken': csrftoken
           },
           body: JSON.stringify(data),
     })
