@@ -16,12 +16,15 @@ class Player(models.Model):
         return f'{self.last_name} ({self.first_name})'
 
 class Live(models.Model):
+    objects = models.Manager()
     data = models.JSONField()
 
     def __str__(self):
         return self.task
 
 class Team(models.Model):
+    objects = models.Manager()
+
     name = models.CharField(max_length=100)
     lineOn = models.IntegerField()
     possessionPeriod = models.IntegerField()
