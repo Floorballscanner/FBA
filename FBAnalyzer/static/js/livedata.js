@@ -245,7 +245,7 @@ function updateLive() {
         }
       ]
     }
-    const csrftoken = document.querySelector('[name=csrf-token]').value;
+    const csrftoken = Cookies.get('csrftoken');
     fetch('https://fbscanner.io/livejson/', {
 
           method: 'POST', // or 'PUT'
