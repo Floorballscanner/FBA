@@ -8,7 +8,8 @@ Views.function is called when a html - page is rendered
 """
 
 from django.urls import path
-from . import views
+from accounts import views
+from .views import UserViewSet, LiveViewSet, TeamViewSet
 from rest_framework import routers
 
 
