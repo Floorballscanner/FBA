@@ -245,13 +245,13 @@ function updateLive() {
         }
       ]
     }
-
-  fetch('https://fbscanner.io/livejson/', {
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    fetch('https://fbscanner.io/livejson/', {
 
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
-            "X-Requested-With": "XMLHttpRequest"
+            'X-CSRFToken': csrftoken
           },
           body: JSON.stringify(data),
     })
