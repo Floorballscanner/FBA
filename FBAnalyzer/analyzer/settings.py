@@ -168,3 +168,5 @@ CSRF_TRUSTED_ORIGINS = [
     'https://fbscanner.io/livejson',
     'https://*.fbscanner.io'
 ]
+
+CSRF_COOKIE_DOMAIN = '.fbscanner.io'
