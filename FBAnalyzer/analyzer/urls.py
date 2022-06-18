@@ -28,7 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 class LiveViewSet(viewsets.ModelViewSet):
-    queryset = Live.data
+    queryset = Live.objects.all()
     serializer_class = LiveSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.
