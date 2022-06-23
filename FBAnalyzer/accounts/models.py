@@ -17,7 +17,8 @@ class Player(models.Model):
 
 class Live(models.Model):
     objects = models.Manager()
-    data = models.JSONField()
+    # data = models.JSONField()
+    data = models.IntegerField()
 
     def __str__(self):
         return self.task

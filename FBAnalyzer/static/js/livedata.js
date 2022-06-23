@@ -246,17 +246,19 @@ function updateLive() {
       ]
     }
 
+    dataDemo = 2;
+
     fetch('https://fbscanner.io/livejson/', {
 
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(dataDemo),
     })
         .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
+        .then(dataDemo => {
+          console.log('Success:', dataDemo);
     })
         .catch((error) => {
           console.error('Error:', error);
