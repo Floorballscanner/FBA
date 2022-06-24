@@ -257,7 +257,7 @@ function updateLive() {
                 "xgGame": xGf_g[7],
                 }
 
-    fetch('https://fbscanner.io/teams/', {
+    fetch('https://fbscanner.io/teams/1', {
 
           method: 'PUT', // or 'POST'
           headers: {
