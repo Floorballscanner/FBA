@@ -17,5 +17,5 @@ class LiveSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ['name', 'lineOn', 'possessionPeriod', 'possessionGame', 'goalsPeriod', 'goalsGame', 'xgPeriod',
+        fields = ['url', 'name', 'lineOn', 'possessionPeriod', 'possessionGame', 'goalsPeriod', 'goalsGame', 'xgPeriod',
                   'xgGame']
