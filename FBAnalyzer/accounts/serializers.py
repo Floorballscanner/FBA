@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 class LiveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Live
-        fields = ['data', ]
+        fields = ('data', )
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
