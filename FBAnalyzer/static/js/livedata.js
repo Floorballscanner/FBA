@@ -246,20 +246,29 @@ function updateLive() {
       ]
     }
 
-    dataDemo = 2;
+    teamData = {
+                "name": name_t1,
+                "lineOn": line_on,
+                "possessionPeriod": Pos_p[7],
+                "possessionGame": Pos_g[7],
+                "goalsPeriod": ~~gfTeamp.innerHTML,
+                "goalsGame": ~~gfTeamg.innerHTML,
+                "xgPeriod": xGf_p[7],
+                "xgGame": xGf_g[7],
+                }
 
-    fetch('https://fbscanner.io/livejson/', {
+    fetch('https://fbscanner.io/teams/', {
 
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(teamData),
     })
         .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
+        .then(teamData => {
+          console.log('Success:', teamData);
     })
         .catch((error) => {
           console.error('Error:', error);
