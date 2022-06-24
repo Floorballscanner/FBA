@@ -21,7 +21,7 @@ class Live(models.Model):
     #data = models.IntegerField()
 
     def __str__(self):
-        return self.task
+        return self.data
 
 class Team(models.Model):
     objects = models.Manager()
@@ -36,7 +36,7 @@ class Team(models.Model):
     xgGame = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return self.task
+        return self.name
 
 class Game(models.Model):
     date = models.DateTimeField(auto_now = True, blank = True)
@@ -45,7 +45,7 @@ class Game(models.Model):
     periodClock = models.IntegerField()
 
     def __str__(self):
-        return self.task
+        return self.date
 
 class Line(models.Model):
     name = models.CharField(max_length=20)
