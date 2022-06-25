@@ -15,14 +15,6 @@ class Player(models.Model):
         """String for representing the Model object."""
         return f'{self.last_name} ({self.first_name})'
 
-class Live(models.Model):
-    objects = models.Manager()
-    data = models.JSONField()
-    #data = models.IntegerField()
-
-    def __str__(self):
-        return self.data
-
 class Team(models.Model):
     objects = models.Manager()
 

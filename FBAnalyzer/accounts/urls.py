@@ -9,14 +9,13 @@ Views.function is called when a html - page is rendered
 
 from django.urls import path, include
 from accounts import views
-from .views import UserViewSet, LiveViewSet, TeamViewSet, GameViewSet
+from .views import UserViewSet, TeamViewSet, GameViewSet
 from rest_framework import routers
 
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'livejson', LiveViewSet)
 router.register(r'teams', TeamViewSet)
 router.register(r'games', GameViewSet)
 

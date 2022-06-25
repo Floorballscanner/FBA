@@ -4,11 +4,11 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Player, Team, Live, Game
+from .models import Player, Team, Game
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets
-from .serializers import UserSerializer, LiveSerializer, TeamSerializer, GameSerializer
+from .serializers import UserSerializer, TeamSerializer, GameSerializer
 
 
 @login_required
@@ -61,10 +61,6 @@ def add_new_player(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-class LiveViewSet(viewsets.ModelViewSet):
-    queryset = Live.objects.all()
-    serializer_class = LiveSerializer
 
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all()

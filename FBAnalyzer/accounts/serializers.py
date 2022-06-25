@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from . models import Live, Team, Game
+from . models import Team, Game
 from django.contrib.auth.models import User
 
 # Serializers define the API representation.
@@ -8,11 +8,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'is_staff']
-
-class LiveSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Live
-        fields = ['url', 'data']
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
