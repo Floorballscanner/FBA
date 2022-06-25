@@ -214,7 +214,7 @@ function updateLive() {
                 "xgGame": xGf_g[7],
                 }
 
-    fetch("http://www.fbscanner.io/livejson/" {
+    fetch("http://www.fbscanner.io/livejson/", {
 
           method: 'POST', // or 'PUT'
           headers: {
