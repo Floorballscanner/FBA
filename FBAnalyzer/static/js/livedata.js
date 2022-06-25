@@ -4,7 +4,7 @@
 function updateLive() {
 
     data = {
-        "url": "http://fbscanner.io/apis/livejson/4/",
+        "url": "https://fbscanner.io/apis/livejson/4/",
         "date": today,
         "periodNr": periodN,
         "gameClock": gameCounter,
@@ -214,7 +214,7 @@ function updateLive() {
                 "xgGame": xGf_g[7],
                 }
 
-    fetch("http://fbscanner.io/apis/livejson/4/", {
+    fetch("https://fbscanner.io/apis/livejson/4/", {
 
           method: 'PUT', // or 'PUSH'
           headers: {
