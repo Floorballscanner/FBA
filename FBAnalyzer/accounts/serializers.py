@@ -37,7 +37,7 @@ class GameSerializer(serializers.ModelSerializer):
             'xGaPeriodT2L3', 'xGaGameT2L3', 'nameL4', 'possessionPeriodT1L4', 'possessionGameT1L4', 'gfPeriodT1L4',
             'gfGameT1L4', 'gaPeriodT1L4', 'gaGameT1L4', 'TOCPeriodT1L4', 'TOCGameT1L4', 'xGfPeriodT1L4', 'xGfGameT1L4',
             'xGaPeriodT1L4', 'xGaGameT1L4', 'possessionPeriodT2L4', 'possessionGameT2L4', 'gfPeriodT2L4', 'gfGameT2L4',
-            'gaPeriodT2L4', 'gaGameT2L4', 'TOCPeriodT2L4', 'TOCGameT2L4', 'xGfPeriodT2L4', 'xGfGameT2L4', 'xGaPeriodT2L4' 
+            'gaPeriodT2L4', 'gaGameT2L4', 'TOCPeriodT2L4', 'TOCGameT2L4', 'xGfPeriodT2L4', 'xGfGameT2L4', 'xGaPeriodT2L4',
             'xGaGameT2L4', 'nameL5', 'possessionPeriodT1L5', 'possessionGameT1L5', 'gfPeriodT1L5', 'gfGameT1L5', 'gaPeriodT1L5',
             'gaGameT1L5', 'TOCPeriodT1L5', 'TOCGameT1L5', 'xGfPeriodT1L5', 'xGfGameT1L5', 'xGaPeriodT1L5', 'xGaGameT1L5',
             'possessionPeriodT2L5', 'possessionGameT2L5', 'gfPeriodT2L5', 'gfGameT2L5', 'gaPeriodT2L5', 'gaGameT2L5',

@@ -214,18 +214,18 @@ function updateLive() {
                 "xgGame": xGf_g[7],
                 }
 
-    fetch("http://www.fbscanner.io/apis/teams/12/", {
+    fetch("http://www.fbscanner.io/livejson/, {
 
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
           },
-          body: JSON.stringify(teamData),
+          body: JSON.stringify(data),
     })
         .then(response => response.json())
-        .then(teamData => {
-          console.log('Success:', teamData);
+        .then(data => {
+          console.log('Success:', data);
     })
         .catch((error) => {
           console.error('Error:', error);
