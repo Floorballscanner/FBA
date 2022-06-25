@@ -216,7 +216,7 @@ function updateLive() {
 
     fetch("http://www.fbscanner.io/apis/teams/12/", {
 
-          method: 'PUT', // or 'POST'
+          method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
