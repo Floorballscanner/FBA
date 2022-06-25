@@ -4,6 +4,7 @@
 function updateLive() {
 
     data = {
+        "url": "http://www.fbscanner.io/apis/games/12/",
         "date": today,
         "periodNr": periodN,
         "gameClock": gameCounter,
@@ -213,18 +214,18 @@ function updateLive() {
                 "xgGame": xGf_g[7],
                 }
 
-    fetch('https://fbscanner.io/livejson/', {
+    fetch("http://www.fbscanner.io/apis/teams/12/", {
 
-          method: 'POST', // or 'PUT'
+          method: 'PUT', // or 'POST'
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(teamData),
     })
         .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
+        .then(teamData => {
+          console.log('Success:', teamData);
     })
         .catch((error) => {
           console.error('Error:', error);
