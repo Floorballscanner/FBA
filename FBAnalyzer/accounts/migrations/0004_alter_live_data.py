@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='live',
             name='data',
-            field=models.JSONField(),
+            field=models.IntegerField(),
         ),
     ]
