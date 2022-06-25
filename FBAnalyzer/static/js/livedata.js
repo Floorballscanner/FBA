@@ -247,6 +247,7 @@ function updateLive() {
     }
 
     teamData = {
+                "url": "http://www.fbscanner.io/apis/teams/12/",
                 "name": name_t1,
                 "lineOn": line_on,
                 "possessionPeriod": Pos_p[7],
@@ -257,7 +258,7 @@ function updateLive() {
                 "xgGame": xGf_g[7],
                 }
 
-    fetch('https://fbscanner.io/apis/teams/12', {
+    fetch('https://fbscanner.io/apis/teams/12/', {
 
           method: 'PUT', // or 'POST'
           headers: {
