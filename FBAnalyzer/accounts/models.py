@@ -30,7 +30,7 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
-class Game(models.Model):
+class Live(models.Model):
     objects = models.Manager()
     
     # Game variables

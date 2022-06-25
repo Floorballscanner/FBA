@@ -9,7 +9,7 @@ Views.function is called when a html - page is rendered
 
 from django.urls import path, include
 from accounts import views
-from .views import UserViewSet, TeamViewSet, GameViewSet
+from .views import UserViewSet, TeamViewSet, LiveViewSet
 from rest_framework import routers
 
 
@@ -17,7 +17,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'teams', TeamViewSet)
-router.register(r'games', GameViewSet)
+router.register(r'livejson', LiveViewSet)
 
 urlpatterns = [
     path('accounts', views.index, name="home"),
