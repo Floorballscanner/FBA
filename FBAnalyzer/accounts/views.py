@@ -4,11 +4,11 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Player, Team, Live
+from .models import Player, Team, Live, Game
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets
-from .serializers import UserSerializer, LiveSerializer, TeamSerializer
+from .serializers import UserSerializer, LiveSerializer, TeamSerializer, GameSerializer
 
 
 @login_required
@@ -69,3 +69,7 @@ class LiveViewSet(viewsets.ModelViewSet):
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+
+class GameViewSet(viewsets.ModelViewSet):
+    queryset = Game.objects.all()
+    serializer_class = GameSerializer
