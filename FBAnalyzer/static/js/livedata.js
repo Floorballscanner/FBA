@@ -217,13 +217,11 @@ function initializeLive() {
     })
         .then(response => response.json())
         .then(data =>  {
-          console.log('Success:', data.url);
+          console.log('Success:', data_url = data.url);
     })
         .catch((error) => {
           console.error('Error:', error);
     });
-
-    console.log(data.url);
 
 }
 
@@ -232,7 +230,7 @@ function initializeLive() {
 function updateLive() {
 
     data = {
-        "url": "https://fbscanner.io/apis/livejson/4/",
+        "url": data_url,
         "date": today,
         "periodNr": periodN,
         "gameClock": gameCounter,
@@ -430,7 +428,7 @@ function updateLive() {
         "xGaGameT2L7": xGaT2_g[6],
     }
 
-    fetch("https://fbscanner.io/apis/livejson/4/", {
+    fetch(data_url, {
 
           method: 'PUT', // or 'PUSH'
           headers: {
