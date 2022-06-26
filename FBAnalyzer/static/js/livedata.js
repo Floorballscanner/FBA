@@ -229,6 +229,8 @@ function initializeLive() {
 
 function updateLive() {
 
+    console.log(data_url)
+
     data = {
         "url": data_url,
         "date": today,
