@@ -216,8 +216,8 @@ function initializeLive() {
           body: JSON.stringify(data),
     })
         .then(response => response.json())
-        .then(data => console.log(data)) {
-          console.log('Success:', response);
+        .then(data =>  {
+          console.log('Success:', data);
     })
         .catch((error) => {
           console.error('Error:', error);
