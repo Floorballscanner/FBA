@@ -206,7 +206,7 @@ function initializeLive() {
 
     console.log(data);
 
-    fetch("https://fbscanner.io/livejson/", {
+    let response = fetch("https://fbscanner.io/livejson/", {
 
           method: 'POST', // or 'PUT'
           headers: {
@@ -217,7 +217,7 @@ function initializeLive() {
     })
         .then(response => response.json())
         .then(data => {
-          console.log('Success:', data);
+          console.log('Success:', response);
           console.log(response.url);
     })
         .catch((error) => {
