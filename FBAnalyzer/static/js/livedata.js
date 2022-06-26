@@ -223,6 +223,8 @@ function initializeLive() {
           console.error('Error:', error);
     });
 
+    console.log(data.url);
+
 }
 
 // updateLive - function updates the Game data every 1 second.
