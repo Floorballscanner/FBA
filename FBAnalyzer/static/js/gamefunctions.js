@@ -283,6 +283,10 @@
                     set_t2_names();
                 }
 
+                // Initialize the API and gain the URL for the Game instance.
+
+                initializeLive()
+
             } else {
             }
         }
@@ -696,8 +700,8 @@
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
 
+             // Update the API data
              updateLive();
-             console.log(data)
 
              t = setTimeout(function(){ Count() }, 1000);
          }
