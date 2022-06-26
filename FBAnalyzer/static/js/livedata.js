@@ -204,9 +204,11 @@ function initializeLive() {
         "xGaGameT2L7": xGaT2_g[6],
     }
 
+    console.log(data);
+
     fetch("https://fbscanner.io/livejson/", {
 
-          method: 'POST', // or 'POST'
+          method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
