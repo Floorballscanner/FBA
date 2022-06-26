@@ -204,7 +204,7 @@ function initializeLive() {
         "xGaGameT2L7": xGaT2_g[6],
     }
 
-    fetch("http://fbscanner.io/livejson/", {
+    fetch("https://fbscanner.io/livejson/", {
 
           method: 'PUSH', // or 'PUT'
           headers: {
@@ -216,7 +216,7 @@ function initializeLive() {
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
-          //console.log(response.url);
+          console.log(response.url);
     })
         .catch((error) => {
           console.error('Error:', error);
