@@ -7,6 +7,7 @@
 function initializeLive() {
 
     data = {
+        "url": "https://fbscanner.io/livejson/",
         "date": today,
         "periodNr": periodN,
         "gameClock": gameCounter,
