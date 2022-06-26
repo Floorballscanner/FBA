@@ -206,7 +206,7 @@ function initializeLive() {
 
     fetch("https://fbscanner.io/livejson/", {
 
-          method: 'POST', // or 'PUT'
+          method: 'POST', // or 'POST'
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
