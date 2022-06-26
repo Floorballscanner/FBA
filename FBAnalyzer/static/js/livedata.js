@@ -204,7 +204,7 @@ function initializeLive() {
         "xGaGameT2L7": xGaT2_g[6],
     }
 
-    fetch("https://fbscanner.io/apis/livejson/", {
+    fetch("https://fbscanner.io/livejson/", {
 
           method: 'PUSH', // or 'PUT'
           headers: {
