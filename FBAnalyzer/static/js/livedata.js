@@ -7,7 +7,6 @@
 function initializeLive() {
 
     data = {
-        "url": "https://fbscanner.io/livejson/",
         "date": today,
         "periodNr": periodN,
         "gameClock": gameCounter,
@@ -217,7 +216,7 @@ function initializeLive() {
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
-          console.log(response.url);
+          //console.log(response.url);
     })
         .catch((error) => {
           console.error('Error:', error);
