@@ -17,6 +17,7 @@ urlpatterns = [
     path('signup/', views.signup, name="sign-up"),
     path('sitemap', views.sitemap, name="sitemap"),
     path('apis/', include(accounts_urls)),
+    path('live/', views.live, name="livepage"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
