@@ -24,7 +24,7 @@ window.onload = function() {
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
                 div2.appendChild(h);
-                h.appendChild(div2);
+                div2.appendChild(h2);
 
             }
 
