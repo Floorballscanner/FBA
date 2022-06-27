@@ -19,13 +19,16 @@ window.onload = function() {
                 div2.setAttribute('class', 'col-sm-12');
                 const h = document.createElement('h3');
                 const h2 = document.createElement('h3');
-                var date = new Date(data[i].gameClock * 1000);
+                const h3 = document.createElement('h3');
+                var date = new Date(data[i].periodClock * 1000);
                 var display = date.toISOString().substr(11, 8);
                 const disp = document.createElement('h3');
 
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
                 h2.innerText = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
                 h2.style.paddingTop = "5px";
+                h3.innerText = "Period " + data[i].periodNr;
+                h3.style.paddingTop = "5px";
                 disp.innerText = display;
                 disp.style.paddingTop = "5px";
 
@@ -34,6 +37,7 @@ window.onload = function() {
                 div.appendChild(div2);
                 div2.appendChild(h);
                 div2.appendChild(h2);
+                div2.appendChild(h3);
                 div2.appendChild(disp);
 
             }
