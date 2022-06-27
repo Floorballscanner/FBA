@@ -18,10 +18,10 @@ window.onload = function() {
                 const div2 = document.createElement('div');
                 div2.setAttribute('class', 'col-sm-12');
                 const h = document.createElement('h1');
-                h1.innerText = data[i].nameT1 + " - " + data[i].nameT2;
+                h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
-                div2.appendChild(h1);
+                div2.appendChild(h);
 
             }
 
