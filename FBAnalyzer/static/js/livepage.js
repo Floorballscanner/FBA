@@ -25,6 +25,7 @@ window.onload = function() {
                 const disp = document.createElement('h3');
 
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
+                h.style.paddingTop = "15px";
                 h2.innerText = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
                 h2.style.paddingTop = "5px";
                 h3.innerText = "Period " + data[i].periodNr;
