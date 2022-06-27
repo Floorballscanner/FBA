@@ -8,8 +8,26 @@ window.onload = function() {
     fetch("https://fbscanner.io/livejson/")
         .then(response => response.json())
         .then(data => {
-          console.log('Success:', data);
-    })
+
+            let rows = data.length;
+
+            for (let i = 0; i < rows; i++) {
+
+                const div = document.createElement('div');
+                div.setAttribute('class', 'row');
+                const div2 = document.createElement('div');
+                div2.setAttribute('class', 'col-sm-12');
+                const h = document.createElement('h1');
+                h1.innerText = data[i].nameT1 + " - " + data[i].nameT2;
+                document.getElementById("head").appendChild(div);
+                div.appendChild(div2);
+                div2.appendChild(h1);
+
+            }
+
+            console.log('Success:', data);
+        })
+
         .catch((error) => {
           console.error('Error:', error);
     });
