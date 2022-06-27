@@ -31,6 +31,7 @@ window.onload = function() {
                 h3.style.paddingTop = "5px";
                 disp.innerText = display;
                 disp.style.paddingTop = "5px";
+                disp.style.paddingBottom = "25px";
 
 
                 document.getElementById("head").appendChild(div);
