@@ -18,10 +18,13 @@ window.onload = function() {
                 const div2 = document.createElement('div');
                 div2.setAttribute('class', 'col-sm-12');
                 const h = document.createElement('h1');
+                const h2 = document.createElement('h1');
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
+                h2.innerText = data[i].goalsGameT1 + " - " + data[i].goalsGameT2
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
                 div2.appendChild(h);
+                h.appendChild(h2);
 
             }
 
