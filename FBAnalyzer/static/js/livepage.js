@@ -14,7 +14,7 @@ window.onload = function() {
             for (let i = 0; i < rows; i++) {
 
                 const img = document.createElement('img');
-                img.setAttribute('src',"{% static 'live.png' %}");
+                img.setAttribute('src',"/static/live.png");
                 img.setAttribute('width', '30px');
                 img.style.paddingTop = "55px";
 
