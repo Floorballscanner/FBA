@@ -16,10 +16,12 @@ window.onload = function() {
                 const img = document.createElement('img');
                 img.setAttribute('src',"{% static 'live.png' %}");
                 img.setAttribute('width', '30px');
+                img.style.paddingTop = "55px";
                 const div = document.createElement('div');
                 div.setAttribute('class', 'row');
                 const div2 = document.createElement('div');
                 div2.setAttribute('class', 'col-sm-12');
+                div2.innerText("{% load static %}");
                 const h = document.createElement('h1');
                 const h2 = document.createElement('h1');
                 const h3 = document.createElement('h3');
@@ -28,7 +30,7 @@ window.onload = function() {
                 const disp = document.createElement('h3');
 
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
-                h.style.paddingTop = "55px";
+                h.style.paddingTop = "5px";
                 h.style.fontWeight = "bold"
                 h2.innerText = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
                 h2.style.paddingTop = "5px";
