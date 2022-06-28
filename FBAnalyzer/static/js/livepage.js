@@ -21,7 +21,7 @@ window.onload = function() {
                 div.setAttribute('class', 'row');
                 const div2 = document.createElement('div');
                 div2.setAttribute('class', 'col-sm-12');
-                div2.innerHTML = "{% load static %}";
+                div2.innerHTML = {% load static %};
                 const h = document.createElement('h1');
                 const h2 = document.createElement('h1');
                 const h3 = document.createElement('h3');
