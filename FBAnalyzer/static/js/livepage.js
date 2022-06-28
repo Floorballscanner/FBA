@@ -42,7 +42,6 @@ window.onload = function() {
                 const disp = document.createElement('h3');
                 disp.innerText = display;
                 disp.style.paddingTop = "5px";
-                disp.style.paddingBottom = "25px";
 
                 const button = document.createElement('a');
                 button.setAttribute('class', 'btn btn-primary');
@@ -50,6 +49,7 @@ window.onload = function() {
                 button.setAttribute('role', 'button');
                 button.style.paddingTop = "5px";
                 button.innerText = "Open live";
+                button.style.paddingBottom = "25px";
 
 
                 document.getElementById("head").appendChild(div);
