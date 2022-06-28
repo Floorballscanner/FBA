@@ -15,7 +15,7 @@ window.onload = function() {
 
                 const img = document.createElement('img');
                 img.setAttribute('src',"/static/live.png");
-                img.setAttribute('width', '50px');
+                img.setAttribute('width', '70px');
                 img.style.paddingTop = "55px";
 
                 const div = document.createElement('div');
@@ -26,7 +26,7 @@ window.onload = function() {
 
                 const h = document.createElement('h1');
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
-                h.style.paddingTop = "5px";
+                h.style.paddingTop = "10px";
                 h.style.fontWeight = "bold"
 
                 const h2 = document.createElement('h1');
@@ -44,6 +44,13 @@ window.onload = function() {
                 disp.style.paddingTop = "5px";
                 disp.style.paddingBottom = "25px";
 
+                const button = document.createElement('a');
+                button.setAttribute('class', 'btn btn-primary');
+                button.setAttribute('href', '/live/game');
+                button.setAttribute('role', 'button');
+                button.style.paddingTop = "5px";
+                button.innerText = "Open live";
+
 
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
@@ -52,6 +59,7 @@ window.onload = function() {
                 div2.appendChild(h2);
                 div2.appendChild(h3);
                 div2.appendChild(disp);
+                div2.appendChild(button);
 
             }
 
