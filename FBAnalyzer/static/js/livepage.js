@@ -49,7 +49,7 @@ window.onload = function() {
                 button.setAttribute('role', 'button');
                 button.style.paddingTop = "5px";
                 button.innerText = "Open live";
-                button.style.paddingBottom = "25px";
+                button.style.paddingBottom = "5px";
 
 
                 document.getElementById("head").appendChild(div);
