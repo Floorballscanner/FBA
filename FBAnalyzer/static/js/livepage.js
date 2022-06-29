@@ -3,6 +3,8 @@
 
 const csrftoken = getCookie('csrftoken');
 
+// Creates the HTML - page when the window is loaded
+
 window.onload = function() {
 
     fetch("https://fbscanner.io/livejson/")
@@ -99,6 +101,8 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+// Function updates the Live page every second
 
 function updatePage() {
 
