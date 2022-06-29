@@ -7,7 +7,7 @@ const csrftoken = getCookie('csrftoken');
 window.onload = function() {
 
     // Get the game nr from the url
-    var currentLocation = window.location;
+    var currentLocation = window.location.pathname;
     //const locArray = currentLocation.split("/");
     //const nr = locArray[locArray.length-2];
 
