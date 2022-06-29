@@ -11,11 +11,8 @@ window.onload = function() {
     const locArray = currentLocation.split("/");
     const nr = locArray[locArray.length-1];
 
-    console.log(currentLocation);
-    console.log(locArray);
-    console.log(nr);
 
-    fetch("https://fbscanner.io/livejson/")
+    fetch("https://fbscanner.io/apis/livejson/" + nr)
         .then(response => response.json())
         .then(data => {
 
@@ -49,7 +46,7 @@ function getCookie(name) {
 
 function updatePage() {
 
-    fetch("https://fbscanner.io/livejson/")
+    fetch("https://fbscanner.io/apis/livejson/" + nr)
         .then(response => response.json())
         .then(data => {
 
