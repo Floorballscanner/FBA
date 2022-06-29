@@ -11,7 +11,7 @@ window.onload = function() {
 
             let rows = data.length;
 
-            for (let i = rows; i > 0 ; i--) {
+            for (let i = 0; i < rows ; i++) {
 
                 const div = document.createElement('div');
                 div.setAttribute('class', 'row');
