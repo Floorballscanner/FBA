@@ -12,12 +12,6 @@ window.onload = function() {
         .then(data => {
 
             data.sort(GetSortOrder("date"))
-            const text = data[0].url;
-            const nrArray = text.split("/");
-            const nr = nrArray[nrArray.length-1];
-            console.log(text);
-            console.log(nrArray);
-            console.log(nr);
             let rows = data.length;
 
             for (let i = 0; i < rows ; i++) {
@@ -50,9 +44,12 @@ window.onload = function() {
                 disp.style.paddingTop = "5px";
                 disp.setAttribute('id', 'time' + i);
 
+                const text = data[i].url;
+                const nrArray = text.split("/");
+                const nr = nrArray[nrArray.length-2];
                 const button = document.createElement('a');
                 button.setAttribute('class', 'btn btn-primary');
-                button.setAttribute('href', '/live/game');
+                button.setAttribute('href', '/live/game' + nr);
                 button.setAttribute('role', 'button');
                 button.style.paddingTop = "5px";
                 button.innerText = "Open live";
