@@ -11,7 +11,7 @@ window.onload = function() {
 
             let rows = data.length;
 
-            for (let i = 0; i < rows; i++) {
+            for (let i = rows; i > 0 ; i--) {
 
                 const div = document.createElement('div');
                 div.setAttribute('class', 'row');
@@ -50,9 +50,9 @@ window.onload = function() {
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
 
-                console.log(Date.now - data[i].date);
+                console.log(Date.now() - data[i].date);
 
-                if (Date.now - data[i].date <= 3600000) { // max 1 hour from last update
+                if (Date.now() - data[i].date <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
                     img.setAttribute('src',"/static/live.png");
                     img.setAttribute('width', '70px');
