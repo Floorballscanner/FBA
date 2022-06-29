@@ -49,7 +49,7 @@ window.onload = function() {
                 const nr = nrArray[nrArray.length-2];
                 const button = document.createElement('a');
                 button.setAttribute('class', 'btn btn-primary');
-                button.setAttribute('href', '/live/game' + nr);
+                button.setAttribute('href', '/live/game/' + nr);
                 button.setAttribute('role', 'button');
                 button.style.paddingTop = "5px";
                 button.innerText = "Open live";
