@@ -12,8 +12,11 @@ window.onload = function() {
         .then(data => {
 
             data.sort(GetSortOrder("date"))
-            const nrArray = data.url.split("/");
-            const nr = nrArray(nrArray.length-1);
+            const text = data.url;
+            const nrArray = text.split("/");
+            const nr = nrArray[nrArray.length-1];
+            console.log(text);
+            console.log(nrArray);
             console.log(nr);
             let rows = data.length;
 
@@ -55,12 +58,8 @@ window.onload = function() {
                 button.innerText = "Open live";
                 button.style.paddingBottom = "5px";
 
-
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
-
-                console.log(Date.now());
-                console.log(Date.parse(data[i].date));
 
                 if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
