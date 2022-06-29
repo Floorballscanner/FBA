@@ -57,6 +57,7 @@ window.onload = function() {
                     img.style.paddingTop = "55px";
                     div2.appendChild(img);
                 }
+                else {h.style.paddingTop = "55px";}
 
                 div2.appendChild(h);
                 div2.appendChild(h2);
