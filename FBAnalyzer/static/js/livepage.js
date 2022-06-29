@@ -13,11 +13,6 @@ window.onload = function() {
 
             for (let i = 0; i < rows; i++) {
 
-                const img = document.createElement('img');
-                img.setAttribute('src',"/static/live.png");
-                img.setAttribute('width', '70px');
-                img.style.paddingTop = "55px";
-
                 const div = document.createElement('div');
                 div.setAttribute('class', 'row');
 
@@ -54,7 +49,15 @@ window.onload = function() {
 
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
-                div2.appendChild(img);
+
+                if (Date.now - data[i].date <= 3600000) { // max 1 hour from last update
+                    const img = document.createElement('img');
+                    img.setAttribute('src',"/static/live.png");
+                    img.setAttribute('width', '70px');
+                    img.style.paddingTop = "55px";
+                    div2.appendChild(img);
+                }
+
                 div2.appendChild(h);
                 div2.appendChild(h2);
                 div2.appendChild(h3);
