@@ -1,5 +1,4 @@
-
-// This file contains the script for updating the livepage with live game data
+// This file contains the script for updating the live game stream page with live game data
 
 const csrftoken = getCookie('csrftoken');
 
@@ -12,9 +11,6 @@ window.onload = function() {
         .then(data => {
 
             data.sort(GetSortOrder("date"))
-            const nrArray = data.url.split("/");
-            const nr = nrArray(nrArray.length-1);
-            console.log(nr);
             let rows = data.length;
 
             for (let i = 0; i < rows ; i++) {
@@ -49,7 +45,7 @@ window.onload = function() {
 
                 const button = document.createElement('a');
                 button.setAttribute('class', 'btn btn-primary');
-                button.setAttribute('href', '/live/game');
+                button.setAttribute('href', '/live/game/');
                 button.setAttribute('role', 'button');
                 button.style.paddingTop = "5px";
                 button.innerText = "Open live";
