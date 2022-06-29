@@ -13,11 +13,11 @@ window.onload = function() {
 
             data.sort(GetSortOrder("date"))
             const text = data[0].url;
-            //const nrArray = text.split("/");
-            //const nr = nrArray[nrArray.length-1];
+            const nrArray = text.split("/");
+            const nr = nrArray[nrArray.length-1];
             console.log(text);
-            //console.log(nrArray);
-           // console.log(nr);
+            console.log(nrArray);
+            console.log(nr);
             let rows = data.length;
 
             for (let i = 0; i < rows ; i++) {
