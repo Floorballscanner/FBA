@@ -51,9 +51,9 @@ window.onload = function() {
                 div.appendChild(div2);
 
                 console.log(Date.now());
-                console.log(data[i].date);
+                console.log(Date.parse(data[i].date));
 
-                if (Date.now() - data[i].date <= 3600000) { // max 1 hour from last update
+                if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
                     img.setAttribute('src',"/static/live.png");
                     img.setAttribute('width', '70px');
