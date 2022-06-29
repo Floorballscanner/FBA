@@ -18,8 +18,7 @@ urlpatterns = [
     path('sitemap', views.sitemap, name="sitemap"),
     path('apis/', include(accounts_urls)),
     path('live/', views.live, name="livepage"),
-    path('live/game/', views.game, name="gamepage"),
-    path('live/game/<int:nr>', views.game, name="gamepage"),
+    path('live/<nr>', views.game, name="gamepage"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
