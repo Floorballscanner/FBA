@@ -26,3 +26,6 @@ def sitemap(request):
 def live(request):
     return render(request, 'live.html')
 
+def game(request):
+    return render(request, 'game.html')
+
