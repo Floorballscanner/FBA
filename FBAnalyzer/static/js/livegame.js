@@ -8,12 +8,12 @@ window.onload = function() {
 
     // Get the game nr from the url
     var currentLocation = window.location;
-    const locArray = currentLocation.split("/");
-    const nr = locArray[locArray.length-2];
+    //const locArray = currentLocation.split("/");
+    //const nr = locArray[locArray.length-2];
 
     console.log(currentLocation);
-    console.log(locArray);
-    console.log(nr);
+    //console.log(locArray);
+    //console.log(nr);
 
     fetch("https://fbscanner.io/livejson/")
         .then(response => response.json())
