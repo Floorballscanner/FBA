@@ -19,8 +19,6 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
 
-            }
-
             console.log('Success:', data);
         })
 
@@ -54,8 +52,6 @@ function updatePage() {
     fetch("https://fbscanner.io/livejson/")
         .then(response => response.json())
         .then(data => {
-
-            }
 
             console.log('Success:', data);
         })
