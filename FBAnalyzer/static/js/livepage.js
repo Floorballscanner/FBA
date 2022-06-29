@@ -9,6 +9,7 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
 
+            data.sort(GetSortOrder("date"))
             let rows = data.length;
 
             for (let i = 0; i < rows ; i++) {
@@ -105,6 +106,7 @@ function updatePage() {
         .then(response => response.json())
         .then(data => {
 
+            data.sort(GetSortOrder("date"))
             let rows = data.length;
 
             for (let i = 0; i < rows ; i++) {
@@ -125,4 +127,17 @@ function updatePage() {
     });
 
     t = setTimeout(function(){ updatePage() }, 1000);
+}
+
+// Sort JSON array by date, sorting function
+
+function GetSortOrder(prop) {
+    return function(a, b) {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
+        }
+        return 0;
+    }
 }
