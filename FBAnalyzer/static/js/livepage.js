@@ -30,7 +30,7 @@ window.onload = function() {
                 h2.style.paddingTop = "5px";
                 h2.setAttribute('id', 'goals' + i);
 
-                const h3 = document.createElement('h3');
+                const h3 = document.createElement('h5');
                 h3.innerText = "Period " + data[i].periodNr;
                 h3.style.paddingTop = "5px";
                 h3.setAttribute('id', 'period' + i);
