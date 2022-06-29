@@ -12,7 +12,7 @@ window.onload = function() {
         .then(data => {
 
             data.sort(GetSortOrder("date"))
-            const text = data.url;
+            const text = data[0].url;
             //const nrArray = text.split("/");
             //const nr = nrArray[nrArray.length-1];
             console.log(text);
