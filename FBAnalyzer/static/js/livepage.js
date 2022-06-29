@@ -50,7 +50,8 @@ window.onload = function() {
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
 
-                console.log(Date.now() - data[i].date);
+                console.log(Date.now());
+                console.log(data[i].date);
 
                 if (Date.now() - data[i].date <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
