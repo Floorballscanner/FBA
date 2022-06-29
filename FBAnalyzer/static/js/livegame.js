@@ -15,6 +15,22 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
 
+            document.getElementById('homeTeam').innerHTML = data.nameT1;
+            document.getElementById('awayTeam').innerHTML = data.nameT2;
+            document.getElementById('periodNr').innerHTML = "Period " + data.periodNr;
+
+            var date = new Date(data.periodClock * 1000);
+            var display = date.toISOString().substr(11, 8);
+            document.getElementById('label').innerHTML = display;
+
+            document.getElementById('homeGoals').innerHTML = data.goalsGameT1;
+            document.getElementById('awayGoals').innerHTML = data.goalsGameT2;
+            document.getElementById('homeGoalsP').innerHTML = data.goalsPeriodT1;
+            document.getElementById('homexG').innerHTML = data.xGGameT1;
+            document.getElementById('awayxG').innerHTML = data.xGGameT2;
+            document.getElementById('homexGP').innerHTML = data.xGPeriodT1;
+            document.getElementById('awayxGP').innerHTML = data.xGPeriodT2;
+
             console.log('Success:', data);
         })
 
@@ -48,6 +64,22 @@ function updatePage() {
     fetch("https://fbscanner.io/apis/livejson/" + nr)
         .then(response => response.json())
         .then(data => {
+
+            document.getElementById('homeTeam').innerHTML = data.nameT1;
+            document.getElementById('awayTeam').innerHTML = data.nameT2;
+            document.getElementById('periodNr').innerHTML = "Period " + data.periodNr;
+
+            var date = new Date(data.periodClock * 1000);
+            var display = date.toISOString().substr(11, 8);
+            document.getElementById('label').innerHTML = display;
+
+            document.getElementById('homeGoals').innerHTML = data.goalsGameT1;
+            document.getElementById('awayGoals').innerHTML = data.goalsGameT2;
+            document.getElementById('homeGoalsP').innerHTML = data.goalsPeriodT1;
+            document.getElementById('homexG').innerHTML = data.xGGameT1;
+            document.getElementById('awayxG').innerHTML = data.xGGameT2;
+            document.getElementById('homexGP').innerHTML = data.xGPeriodT1;
+            document.getElementById('awayxGP').innerHTML = data.xGPeriodT2;
 
             console.log('Success:', data);
         })
