@@ -2,15 +2,14 @@
 
 const csrftoken = getCookie('csrftoken');
 
+// Get the game nr from the url
+var currentLocation = window.location.pathname;
+var locArray = currentLocation.split("/");
+var nr = locArray[locArray.length-1];
+
 // Creates the HTML - page when the window is loaded
 
 window.onload = function() {
-
-    // Get the game nr from the url
-    var currentLocation = window.location.pathname;
-    const locArray = currentLocation.split("/");
-    const nr = locArray[locArray.length-1];
-
 
     fetch("https://fbscanner.io/apis/livejson/" + nr)
         .then(response => response.json())
