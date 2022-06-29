@@ -27,16 +27,19 @@ window.onload = function() {
                 const h2 = document.createElement('h1');
                 h2.innerText = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
                 h2.style.paddingTop = "5px";
+                h2.setAttribute('id', 'goals' + i);
 
                 const h3 = document.createElement('h3');
                 h3.innerText = "Period " + data[i].periodNr;
                 h3.style.paddingTop = "5px";
+                h3.setAttribute('id', 'period' + i);
 
                 var date = new Date(data[i].periodClock * 1000);
                 var display = date.toISOString().substr(11, 8);
                 const disp = document.createElement('h3');
                 disp.innerText = display;
                 disp.style.paddingTop = "5px";
+                disp.setAttribute('id', 'time' + i);
 
                 const button = document.createElement('a');
                 button.setAttribute('class', 'btn btn-primary');
@@ -77,6 +80,7 @@ window.onload = function() {
           console.error('Error:', error);
     });
 
+    t = setTimeout(function(){ updatePage() }, 1000);
 }
 
 function getCookie(name) {
@@ -93,4 +97,32 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function updatePage() {
+
+    fetch("https://fbscanner.io/livejson/")
+        .then(response => response.json())
+        .then(data => {
+
+            let rows = data.length;
+
+            for (let i = 0; i < rows ; i++) {
+
+                document.getElementById('goals' + i).innerHTML = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
+                document.getElementById('period' + i).innerHTML = "Period " + data[i].periodNr;
+
+                var date = new Date(data[i].periodClock * 1000);
+                var display = date.toISOString().substr(11, 8);
+                document.getElementById('time' + i).innerHTML = display;
+            }
+
+            console.log('Success:', data);
+        })
+
+        .catch((error) => {
+          console.error('Error:', error);
+    });
+
+    t = setTimeout(function(){ updatePage() }, 1000);
 }
