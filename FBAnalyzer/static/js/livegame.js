@@ -22,7 +22,7 @@ window.onload = function() {
                     img.setAttribute('src',"/static/live.png");
                     img.setAttribute('width', '80px');
                     img.style.paddingTop = "55px";
-                    document.getElementById('gStats').appendChild(img);
+                    document.getElementById('gstats').appendChild(img);
                     console.log("inside if")
             }
             else {
