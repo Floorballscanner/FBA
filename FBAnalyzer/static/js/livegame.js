@@ -2,9 +2,6 @@
 
 const csrftoken = getCookie('csrftoken');
 
-google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(updateCharts(jsonData));
-
 // Get the game nr from the url
 var currentLocation = window.location.pathname;
 var locArray = currentLocation.split("/");
