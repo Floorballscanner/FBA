@@ -167,7 +167,7 @@ function updateCharts(jsonData) {
     // xG Game Chart
 
     console.log(jsonData.nameT1);
-    console.log(~~jsonData.xGfGameT1L1)
+    console.log(jsonData.xGfGameT1L1);
 
     var data = google.visualization.arrayToDataTable([
          ['Line', jsonData.nameT1, { role: 'style' }, { role: 'annotation' }, jsonData.nameT2, { role: 'style' }, { role: 'annotation' } ],
