@@ -167,15 +167,15 @@ function updateCharts(jsonData) {
     // xG Game Chart
 
     console.log(jsonData.nameT1);
-    console.log(jsonData.xGfGameT1L1)
+    console.log(~~jsonData.xGfGameT1L1)
 
     var data = google.visualization.arrayToDataTable([
          ['Line', jsonData.nameT1, jsonData.nameT2],
-         ['Line 1', jsonData.xGfGameT1L1, jsonData.xGfGameT2L1],
-         ['Line 2', jsonData.xGfGameT1L2, jsonData.xGfGameT2L2],
-         ['Line 3', jsonData.xGfGameT1L3, jsonData.xGfGameT2L3],
-         ['Powerplay', jsonData.xGfGameT1L4 + jsonData.xGfGameT1L5, jsonData.xGfGameT2L4 + jsonData.xGfGameT2L5],
-         ['Shorthanded', jsonData.xGfGameT1L6 + jsonData.xGfGameT1L7, jsonData.xGfGameT2L6 + jsonData.xGfGameT2L7]
+         ['Line 1', Number(jsonData.xGfGameT1L1), Number(jsonData.xGfGameT2L1)],
+         ['Line 2', Number(jsonData.xGfGameT1L2), Number(jsonData.xGfGameT2L2)],
+         ['Line 3', Number(jsonData.xGfGameT1L3), Number(jsonData.xGfGameT2L3)],
+         ['Powerplay', Number(jsonData.xGfGameT1L4) + Number(jsonData.xGfGameT1L5), Number(jsonData.xGfGameT2L4) + Number(jsonData.xGfGameT2L5)],
+         ['Shorthanded', ~~jsonData.xGfGameT1L6 + ~~jsonData.xGfGameT1L7, ~~jsonData.xGfGameT2L6 + ~~jsonData.xGfGameT2L7]
       ]);
 
 
