@@ -62,5 +62,9 @@ This is the live result page for a game stream
 
 <script type="text/javascript" src="/static/js/livegame.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+</script>
 
 {% endblock %}
