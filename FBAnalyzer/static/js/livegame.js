@@ -2,6 +2,9 @@
 
 const csrftoken = getCookie('csrftoken');
 
+google.load('visualization', '1.0', {'packages':['corechart']});
+google.setOnLoadCallback(drawChart);
+
 // Get the game nr from the url
 var currentLocation = window.location.pathname;
 var locArray = currentLocation.split("/");
