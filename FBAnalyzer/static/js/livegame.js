@@ -44,6 +44,29 @@ window.onload = function() {
             document.getElementById('homexGP').innerHTML = data.xGPeriodT1;
             document.getElementById('awayxGP').innerHTML = data.xGPeriodT2;
 
+            document.getElementById('homeTeamLine').innerHTML = data.nameT1;
+            document.getElementById('awayTeamLine').innerHTML = data.nameT2;
+            document.getElementById('TocL1T1g').innerHTML = convertTime(data.TOCGameT1L1);
+            document.getElementById('TocL1T1p').innerHTML = convertTime(data.TOCPeriodT1L1);
+            document.getElementById('TocL1T2g').innerHTML = convertTime(data.TOCGameT2L1);
+            document.getElementById('TocL1T2p').innerHTML = convertTime(data.TOCPeriodT2L1);
+            document.getElementById('PosL1T1g').innerHTML = data.PossessionGameT1L1;
+            document.getElementById('PosL1T1p').innerHTML = data.PossessionPeriodT1L1;
+            document.getElementById('PosL1T2g').innerHTML = data.PossessionGameT2L1;
+            document.getElementById('PosL1T2p').innerHTML = data.PossessionPeriodT2L1;
+            document.getElementById('PML1T1g').innerHTML = data.GfGameT1L1 - data.GaGameT1L1;
+            document.getElementById('PML1T1p').innerHTML = data.GfPeriodT1L1 - data.GaPeriodT1L1;
+            document.getElementById('PML1T2g').innerHTML = data.GfGameT1L1 - data.GaGameT1L1;
+            document.getElementById('PML1T2p').innerHTML = data.GfPeriodT2L1 - data.GaPeriodT2L1;
+            document.getElementById('xGfL1T1g').innerHTML = data.XGfGameT1L1;
+            document.getElementById('xGfL1T1p').innerHTML = data.XGfPeriodT1L1;
+            document.getElementById('xGaL1T1g').innerHTML = data.XGaGameT1L1;
+            document.getElementById('xGaL1T1p').innerHTML = data.XGaPeriodT1L1;
+            document.getElementById('xGfL1T2g').innerHTML = data.XGfGameT2L1;
+            document.getElementById('xGfL1T2p').innerHTML = data.XGfPeriodT2L1;
+            document.getElementById('xGaL1T2g').innerHTML = data.XGaGameT2L1;
+            document.getElementById('xGaL1T2p').innerHTML = data.XGaPeriodT2L1;
+
             console.log('Success:', data);
         })
 
@@ -94,6 +117,27 @@ function updatePage() {
             document.getElementById('homexGP').innerHTML = data.xGPeriodT1;
             document.getElementById('awayxGP').innerHTML = data.xGPeriodT2;
 
+            document.getElementById('TocL1T1g').innerHTML = convertTime(data.TOCGameT1L1);
+            document.getElementById('TocL1T1p').innerHTML = convertTime(data.TOCPeriodT1L1);
+            document.getElementById('TocL1T2g').innerHTML = convertTime(data.TOCGameT2L1);
+            document.getElementById('TocL1T2p').innerHTML = convertTime(data.TOCPeriodT2L1);
+            document.getElementById('PosL1T1g').innerHTML = data.PossessionGameT1L1;
+            document.getElementById('PosL1T1p').innerHTML = data.PossessionPeriodT1L1;
+            document.getElementById('PosL1T2g').innerHTML = data.PossessionGameT2L1;
+            document.getElementById('PosL1T2p').innerHTML = data.PossessionPeriodT2L1;
+            document.getElementById('PML1T1g').innerHTML = data.GfGameT1L1 - data.GaGameT1L1;
+            document.getElementById('PML1T1p').innerHTML = data.GfPeriodT1L1 - data.GaPeriodT1L1;
+            document.getElementById('PML1T2g').innerHTML = data.GfGameT1L1 - data.GaGameT1L1;
+            document.getElementById('PML1T2p').innerHTML = data.GfPeriodT2L1 - data.GaPeriodT2L1;
+            document.getElementById('xGfL1T1g').innerHTML = data.XGfGameT1L1;
+            document.getElementById('xGfL1T1p').innerHTML = data.XGfPeriodT1L1;
+            document.getElementById('xGaL1T1g').innerHTML = data.XGaGameT1L1;
+            document.getElementById('xGaL1T1p').innerHTML = data.XGaPeriodT1L1;
+            document.getElementById('xGfL1T2g').innerHTML = data.XGfGameT2L1;
+            document.getElementById('xGfL1T2p').innerHTML = data.XGfPeriodT2L1;
+            document.getElementById('xGaL1T2g').innerHTML = data.XGaGameT2L1;
+            document.getElementById('xGaL1T2p').innerHTML = data.XGaPeriodT2L1;
+
             console.log('Success:', data);
         })
 
@@ -103,3 +147,10 @@ function updatePage() {
 
     t = setTimeout(function(){ updatePage() }, 1000);
 }
+
+function convertTime(arg) {
+    var date = new Date(arg * 1000);
+    var res = date.toISOString().substr(11, 8);
+    return res;
+}
+
