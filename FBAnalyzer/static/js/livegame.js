@@ -186,6 +186,8 @@ function updateCharts(jsonData) {
          ['Shorthanded', jsonData.xGfGameT1L6 + jsonData.xGfGameT1L7, 'color: #3046FB', jsonData.xGfGameT1L6 + jsonData.xGfGameT1L7, jsonData.xGfGameT2L6 + jsonData.xGfGameT2L7 , 'color: #59D9EB', jsonData.xGfGameT2L6 + jsonData.xGfGameT2L7 ]
       ]);
 
+    console.log(data);
+
     var options = {
         title: 'xG by Line',
         bar: {groupWidth: "95%"},
