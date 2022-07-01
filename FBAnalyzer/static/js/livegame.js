@@ -19,8 +19,8 @@ window.onload = function() {
                     const img = document.createElement('img');
                     img.setAttribute('src',"/static/live.png");
                     img.setAttribute('width', '100px');
-                    img.style.paddingTop = "55px";
-                    img.style.paddingBottom = "5px"
+                    img.style.paddingTop = "35px";
+                    img.style.paddingBottom = "10px"
                     document.getElementById('gstats').prepend(img);
             }
             else {
