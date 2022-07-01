@@ -313,6 +313,6 @@ textarea {
     margin: 8px 0;
     box-sizing: border-box;
 }
-.gamestats {
+.gamestats, .linestats {
 	text-align: center;
 }

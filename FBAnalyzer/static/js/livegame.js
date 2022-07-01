@@ -150,7 +150,7 @@ function updatePage() {
 
 function convertTime(arg) {
     var date = new Date(arg * 1000);
-    var res = date.toISOString().substr(11, 8);
+    var res = date.toISOString().substr(14, 5);
     return res;
 }
 
