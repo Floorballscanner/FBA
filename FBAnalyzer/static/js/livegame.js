@@ -15,6 +15,17 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
 
+            if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
+                    const img = document.createElement('img');
+                    img.setAttribute('src',"/static/live.png");
+                    img.setAttribute('width', '80px');
+                    img.style.paddingTop = "55px";
+                    document.getElementById('gStats').appendChild(img);
+            }
+            else {
+            document.getElementById('h1').style.paddingTop = "55px";
+            }
+
             document.getElementById('homeTeam').innerHTML = data.nameT1;
             document.getElementById('awayTeam').innerHTML = data.nameT2;
             document.getElementById('periodNr').innerHTML = "Period " + data.periodNr;
