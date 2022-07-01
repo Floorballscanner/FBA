@@ -167,13 +167,23 @@ function updateCharts(jsonData) {
     // xG Game Chart
 
     var data = google.visualization.arrayToDataTable([
+         ['Line', jsonData.nameT1, jsonData.nameT2],
+         ['Line 1', jsonData.xGfGameT1L1, jsonData.xGfGameT2L1],
+         ['Line 2', jsonData.xGfGameT1L2, jsonData.xGfGameT2L2],
+         ['Line 3', jsonData.xGfGameT1L3, jsonData.xGfGameT2L3],
+         ['Powerplay', jsonData.xGfGameT1L4 + jsonData.xGfGameT1L5, jsonData.xGfGameT2L4 + jsonData.xGfGameT2L5],
+         ['Shorthanded', jsonData.xGfGameT1L6 + jsonData.xGfGameT1L7, jsonData.xGfGameT2L6 + jsonData.xGfGameT2L7]
+      ]);
+
+
+    /*[
          ['Line', jsonData.nameT1, { role: 'style' }, { role: 'annotation' }, jsonData.nameT2, { role: 'style' }, { role: 'annotation' } ],
          ['Line 1', jsonData.xGfGameT1L1, 'color: #3046FB', jsonData.xGfGameT1L1, jsonData.xGfGameT2L1, 'color: #59D9EB', jsonData.xGfGameT2L1 ],
          ['Line 2', jsonData.xGfGameT1L2, 'color: #3046FB', jsonData.xGfGameT1L2, jsonData.xGfGameT2L2, 'color: #59D9EB', jsonData.xGfGameT2L2 ],
          ['Line 3', jsonData.xGfGameT1L3, 'color: #3046FB', jsonData.xGfGameT1L3, jsonData.xGfGameT2L3, 'color: #59D9EB', jsonData.xGfGameT2L3 ],
          ['Powerplay', jsonData.xGfGameT1L4 + jsonData.xGfGameT1L5, 'color: #3046FB', jsonData.xGfGameT1L4 + jsonData.xGfGameT1L5, jsonData.xGfGameT2L4 + jsonData.xGfGameT2L5 , 'color: #59D9EB', jsonData.xGfGameT2L4 + jsonData.xGfGameT2L5 ],
          ['Shorthanded', jsonData.xGfGameT1L6 + jsonData.xGfGameT1L7, 'color: #3046FB', jsonData.xGfGameT1L6 + jsonData.xGfGameT1L7, jsonData.xGfGameT2L6 + jsonData.xGfGameT2L7 , 'color: #59D9EB', jsonData.xGfGameT2L6 + jsonData.xGfGameT2L7 ]
-      ]);
+      ]); */
 
     console.log(data);
 
