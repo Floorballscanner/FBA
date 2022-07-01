@@ -15,7 +15,7 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
 
-            if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
+            if (Date.now() - Date.parse(data.date) <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
                     img.setAttribute('src',"/static/live.png");
                     img.setAttribute('width', '80px');
