@@ -18,8 +18,9 @@ window.onload = function() {
             if (Date.now() - Date.parse(data.date) <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
                     img.setAttribute('src',"/static/live.png");
-                    img.setAttribute('width', '80px');
+                    img.setAttribute('width', '100px');
                     img.style.paddingTop = "55px";
+                    img.style.paddingBottom = "5px"
                     document.getElementById('gstats').prepend(img);
             }
             else {
