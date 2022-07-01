@@ -27,6 +27,7 @@ window.onload = function() {
             document.getElementById('h1').style.paddingTop = "55px";
             }
 
+            document.getElementById('h1').style.fontWeight = "bold"
             document.getElementById('homeTeam').innerHTML = data.nameT1;
             document.getElementById('awayTeam').innerHTML = data.nameT2;
             document.getElementById('periodNr').innerHTML = "Period " + data.periodNr;
