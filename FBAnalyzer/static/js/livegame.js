@@ -51,10 +51,10 @@ window.onload = function() {
             document.getElementById('TocL1T1p').innerHTML = convertTime(data.TOCPeriodT1L1);
             document.getElementById('TocL1T2g').innerHTML = convertTime(data.TOCGameT2L1);
             document.getElementById('TocL1T2p').innerHTML = convertTime(data.TOCPeriodT2L1);
-            document.getElementById('PosL1T1g').innerHTML = data.possessionGameT1L1;
-            document.getElementById('PosL1T1p').innerHTML = data.possessionPeriodT1L1;
-            document.getElementById('PosL1T2g').innerHTML = data.possessionGameT2L1;
-            document.getElementById('PosL1T2p').innerHTML = data.possessionPeriodT2L1;
+            document.getElementById('PosL1T1g').innerHTML = convertPos(data.possessionGameT1L1, data.gameClock);
+            document.getElementById('PosL1T1p').innerHTML = convertPos(data.possessionPeriodT1L1, data.periodClock);
+            document.getElementById('PosL1T2g').innerHTML = convertPos(data.possessionGameT2L1;, data.gameClock);
+            document.getElementById('PosL1T2p').innerHTML = convertPos(data.possessionPeriodT2L1, data.periodClock);
             document.getElementById('PML1T1g').innerHTML = data.gfGameT1L1 - data.gaGameT1L1;
             document.getElementById('PML1T1p').innerHTML = data.gfPeriodT1L1 - data.gaPeriodT1L1;
             document.getElementById('PML1T2g').innerHTML = data.gfGameT1L1 - data.gaGameT1L1;
@@ -152,6 +152,11 @@ function updatePage() {
 function convertTime(arg) {
     var date = new Date(arg * 1000);
     var res = date.toISOString().substr(14, 5);
+    return res;
+}
+
+function convertPos(lPos, counter) {
+    res = Math.round(100 * lPos / counter);
     return res;
 }
 
