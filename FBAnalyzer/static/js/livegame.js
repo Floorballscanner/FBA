@@ -15,19 +15,15 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
 
-            console.log(Date.now() - Date.parse(data.date));
-            console.log(Date.parse(data.date));
             if (Date.now() - Date.parse(data.date) <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
                     img.setAttribute('src',"/static/live.png");
                     img.setAttribute('width', '80px');
                     img.style.paddingTop = "55px";
-                    document.getElementById('gstats').appendChild(img);
-                    console.log("inside if")
+                    document.getElementById('gstats').prepend(img);
             }
             else {
             document.getElementById('h1').style.paddingTop = "55px";
-            console.log("not inside if")
             }
 
             document.getElementById('homeTeam').innerHTML = data.nameT1;
