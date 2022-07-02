@@ -117,6 +117,7 @@ function updateCharts() {
         title: 'xG by Line',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
+        colors: ['#3046FB', '#59D9EB']
         };
 
     var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
