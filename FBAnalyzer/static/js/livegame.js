@@ -106,18 +106,18 @@ function updateCharts() {
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', Number(data.xGfGameT1L1), 'color: #3046FB', Number(data.xGfGameT1L1), Number(data.xGfGameT2L1), 'color: #59D9EB', Number(data.xGfGameT2L1) ],
-         ['Line 2', Number(data.xGfGameT1L2), 'color: #3046FB', Number(data.xGfGameT1L2), Number(data.xGfGameT2L2), 'color: #59D9EB', Number(data.xGfGameT2L2) ],
-         ['Line 3', Number(data.xGfGameT1L3), 'color: #3046FB', Number(data.xGfGameT1L3), Number(data.xGfGameT2L3), 'color: #59D9EB', Number(data.xGfGameT2L3) ],
-         ['Powerplay', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), 'color: #3046FB', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5), 'color: #59D9EB', Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5) ],
-         ['Shorthanded', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), 'color: #3046FB', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7), 'color: #59D9EB', Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7) ]
+         ['Line 1', Number(data.xGfGameT1L1), 'color: #002072', Number(data.xGfGameT1L1), Number(data.xGfGameT2L1), 'color: #3046FB', Number(data.xGfGameT2L1) ],
+         ['Line 2', Number(data.xGfGameT1L2), 'color: #002072', Number(data.xGfGameT1L2), Number(data.xGfGameT2L2), 'color: #3046FB', Number(data.xGfGameT2L2) ],
+         ['Line 3', Number(data.xGfGameT1L3), 'color: #002072', Number(data.xGfGameT1L3), Number(data.xGfGameT2L3), 'color: #3046FB', Number(data.xGfGameT2L3) ],
+         ['Powerplay', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), 'color: #002072', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5), 'color: #3046FB', Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5) ],
+         ['Shorthanded', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), 'color: #002072', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7), 'color: #3046FB', Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7) ]
       ]);
 
     var options = {
         title: 'xG by Line',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
-        colors: ['#3046FB', '#59D9EB']
+        colors: ['#002072', '#3046FB']
         };
 
     var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
