@@ -49,12 +49,12 @@ This is the live result page for a game stream
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGPeriod_chart" style="height: 300px"></div>
+                <div id="xGPeriod_chart" style="height: 200px"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Period_chart" style="height: 300px"></div>
+                <div id="xG%Period_chart" style="height: 200px"></div>
             </div>
         </div>
     </div>
@@ -64,7 +64,9 @@ This is the live result page for a game stream
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'bar']});
-    google.charts.setOnLoadCallback(updateCharts());
+
 </script>
+
+<!-- google.charts.setOnLoadCallback(updateCharts()); -->
 
 {% endblock %}

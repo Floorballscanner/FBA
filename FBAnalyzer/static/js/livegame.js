@@ -116,6 +116,7 @@ function updateCharts() {
     var options = {
         title: 'xG by Line',
         bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
         };
 
     var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
