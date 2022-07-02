@@ -147,11 +147,11 @@ function updateCharts() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
-        vAxis: {
+        hAxis: {
             viewWindowMode:'explicit',
             viewWindow: {
-              max:3000,
-              min:500
+              max:1,
+              min:0
             }
         },
         };
