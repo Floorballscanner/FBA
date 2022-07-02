@@ -102,7 +102,7 @@ function updateCharts() {
 
     // xG Game Chart
 
-    console.log('updateCharts():', data);
+    console.log('updateCharts():', ~~data.xGfGameT1L1);
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
