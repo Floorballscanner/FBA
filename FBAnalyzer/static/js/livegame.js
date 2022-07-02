@@ -98,29 +98,58 @@ function convertPos(lPos, counter) {
     return res;
 }
 
+function calcPercent(xGa, xGb) {
+    res = Math.round(xGa / (xGa + xGb) * 100) / 100;
+    return res;
+}
+
 function updateCharts() {
 
     // xG Game Chart
 
-    console.log('updateCharts():', data.xGfGameT1L1);
-
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', Number(data.xGfGameT1L1), 'color: #002072', Number(data.xGfGameT1L1), Number(data.xGfGameT2L1), 'color: #3046FB', Number(data.xGfGameT2L1) ],
-         ['Line 2', Number(data.xGfGameT1L2), 'color: #002072', Number(data.xGfGameT1L2), Number(data.xGfGameT2L2), 'color: #3046FB', Number(data.xGfGameT2L2) ],
-         ['Line 3', Number(data.xGfGameT1L3), 'color: #002072', Number(data.xGfGameT1L3), Number(data.xGfGameT2L3), 'color: #3046FB', Number(data.xGfGameT2L3) ],
-         ['Powerplay', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), 'color: #002072', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5), 'color: #3046FB', Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5) ],
-         ['Shorthanded', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), 'color: #002072', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7), 'color: #3046FB', Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7) ]
+         ['Line 1', Number(data.xGfGameT1L1), 'color: #002072', Number(data.xGfGameT1L1), Number(data.xGfGameT2L1), 'color: #59D9EB', Number(data.xGfGameT2L1) ],
+         ['Line 2', Number(data.xGfGameT1L2), 'color: #002072', Number(data.xGfGameT1L2), Number(data.xGfGameT2L2), 'color: #59D9EB', Number(data.xGfGameT2L2) ],
+         ['Line 3', Number(data.xGfGameT1L3), 'color: #002072', Number(data.xGfGameT1L3), Number(data.xGfGameT2L3), 'color: #59D9EB', Number(data.xGfGameT2L3) ],
+         ['Powerplay', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), 'color: #002072', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5), 'color: #59D9EB', Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5) ],
+         ['Shorthanded', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), 'color: #002072', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7), 'color: #59D9EB', Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7) ]
       ]);
 
     var options = {
         title: 'xG by Line',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
-        colors: ['#002072', '#3046FB']
+        colors: ['#002072', '#59D9EB']
         };
 
     var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
+    chart.draw(chartData, options);
+
+    // xG% Game Chart
+
+    xG%L1T1 = calcPercent(Number(data.xGfGameT1L1), Number(data.xGaGameT1L1));
+    xG%L1T2 = calcPercent(Number(data.xGfGameT2L1), Number(data.xGaGameT2L1));
+    xG%L2T1 = calcPercent(Number(data.xGfGameT1L2), Number(data.xGaGameT1L2));
+    xG%L2T2 = calcPercent(Number(data.xGfGameT2L2), Number(data.xGaGameT2L2));
+    xG%L3T1 = calcPercent(Number(data.xGfGameT1L3), Number(data.xGaGameT1L3));
+    xG%L3T2 = calcPercent(Number(data.xGfGameT2L3), Number(data.xGaGameT2L3));
+
+    var chartData = google.visualization.arrayToDataTable([
+         ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
+         ['Line 1', xG%L1T1, 'color: #002072', xG%L1T1, xG%L1T2, 'color: #59D9EB', xG%L1T2 ],
+         ['Line 2', xG%L2T1, 'color: #002072', xG%L2T1, xG%L2T2, 'color: #59D9EB', xG%L2T2 ],
+         ['Line 3', xG%L3T1, 'color: #002072', xG%L3T1, xG%L3T2, 'color: #59D9EB', xG%L3T2 ]
+      ]);
+
+    var options = {
+        title: 'xG% by Line',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB']
+        };
+
+    var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
     chart.draw(chartData, options);
 
 }
