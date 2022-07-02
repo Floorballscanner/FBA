@@ -17,6 +17,7 @@ window.onload = function() {
         .then(jsonData => {
 
             data = jsonData;
+            console.log('window.onload:', data);
 
             if (Date.now() - Date.parse(data.date) <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
@@ -72,7 +73,7 @@ function updatePage() {
         .then(jsonData => {
 
             data = jsonData;
-
+            console.log('updatePage():', data);
             updateData();
             updateCharts();
 
