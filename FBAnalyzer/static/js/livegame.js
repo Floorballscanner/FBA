@@ -75,7 +75,7 @@ function updatePage() {
             data = jsonData;
             console.log('updatePage():', data);
             updateData();
-            // updateCharts();
+            updateCharts();
 
             console.log('Success:', data);
         })
@@ -106,11 +106,11 @@ function updateCharts() {
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', ~~data.xGfGameT1L1, 'color: #3046FB', ~~data.xGfGameT1L1, ~~data.xGfGameT2L1, 'color: #59D9EB', ~~data.xGfGameT2L1 ],
-         ['Line 2', ~~data.xGfGameT1L2, 'color: #3046FB', ~~data.xGfGameT1L2, ~~data.xGfGameT2L2, 'color: #59D9EB', ~~data.xGfGameT2L2 ],
-         ['Line 3', ~~data.xGfGameT1L3, 'color: #3046FB', ~~data.xGfGameT1L3, ~~data.xGfGameT2L3, 'color: #59D9EB', ~~data.xGfGameT2L3 ],
-         ['Powerplay', ~~data.xGfGameT1L4 + ~~data.xGfGameT1L5, 'color: #3046FB', ~~data.xGfGameT1L4 + ~~data.xGfGameT1L5, ~~data.xGfGameT2L4 + ~~data.xGfGameT2L5 , 'color: #59D9EB', ~~data.xGfGameT2L4 + ~~data.xGfGameT2L5 ],
-         ['Shorthanded', ~~data.xGfGameT1L6 + ~~data.xGfGameT1L7, 'color: #3046FB', ~~data.xGfGameT1L6 + ~~data.xGfGameT1L7, ~~data.xGfGameT2L6 + ~~data.xGfGameT2L7 , 'color: #59D9EB', ~~data.xGfGameT2L6 + ~~data.xGfGameT2L7 ]
+         ['Line 1', Number(data.xGfGameT1L1,) 'color: #3046FB', Number(data.xGfGameT1L1,) Number(data.xGfGameT2L1,) 'color: #59D9EB', Number(data.xGfGameT2L1 ],
+         ['Line 2', Number(data.xGfGameT1L2,) 'color: #3046FB', Number(data.xGfGameT1L2,) Number(data.xGfGameT2L2,) 'color: #59D9EB', Number(data.xGfGameT2L2 ],
+         ['Line 3', Number(data.xGfGameT1L3,) 'color: #3046FB', Number(data.xGfGameT1L3,) Number(data.xGfGameT2L3,) 'color: #59D9EB', Number(data.xGfGameT2L3 ],
+         ['Powerplay', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), 'color: #3046FB', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5) , 'color: #59D9EB', Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5) ],
+         ['Shorthanded', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), 'color: #3046FB', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7) , 'color: #59D9EB', Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7) ]
       ]);
 
     var options = {
