@@ -128,18 +128,18 @@ function updateCharts() {
 
     // xG% Game Chart
 
-    xG%L1T1 = calcPercent(Number(data.xGfGameT1L1), Number(data.xGaGameT1L1));
-    xG%L1T2 = calcPercent(Number(data.xGfGameT2L1), Number(data.xGaGameT2L1));
-    xG%L2T1 = calcPercent(Number(data.xGfGameT1L2), Number(data.xGaGameT1L2));
-    xG%L2T2 = calcPercent(Number(data.xGfGameT2L2), Number(data.xGaGameT2L2));
-    xG%L3T1 = calcPercent(Number(data.xGfGameT1L3), Number(data.xGaGameT1L3));
-    xG%L3T2 = calcPercent(Number(data.xGfGameT2L3), Number(data.xGaGameT2L3));
+    xGL1T1 = calcPercent(Number(data.xGfGameT1L1), Number(data.xGaGameT1L1));
+    xGL1T2 = calcPercent(Number(data.xGfGameT2L1), Number(data.xGaGameT2L1));
+    xGL2T1 = calcPercent(Number(data.xGfGameT1L2), Number(data.xGaGameT1L2));
+    xGL2T2 = calcPercent(Number(data.xGfGameT2L2), Number(data.xGaGameT2L2));
+    xGL3T1 = calcPercent(Number(data.xGfGameT1L3), Number(data.xGaGameT1L3));
+    xGL3T2 = calcPercent(Number(data.xGfGameT2L3), Number(data.xGaGameT2L3));
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', xG%L1T1, 'color: #002072', xG%L1T1, xG%L1T2, 'color: #59D9EB', xG%L1T2 ],
-         ['Line 2', xG%L2T1, 'color: #002072', xG%L2T1, xG%L2T2, 'color: #59D9EB', xG%L2T2 ],
-         ['Line 3', xG%L3T1, 'color: #002072', xG%L3T1, xG%L3T2, 'color: #59D9EB', xG%L3T2 ]
+         ['Line 1', xGL1T1, 'color: #002072', xGL1T1, xGL1T2, 'color: #59D9EB', xGL1T2 ],
+         ['Line 2', xGL2T1, 'color: #002072', xGL2T1, xGL2T2, 'color: #59D9EB', xGL2T2 ],
+         ['Line 3', xGL3T1, 'color: #002072', xGL3T1, xGL3T2, 'color: #59D9EB', xGL3T2 ]
       ]);
 
     var options = {
