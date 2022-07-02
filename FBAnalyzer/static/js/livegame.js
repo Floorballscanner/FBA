@@ -75,7 +75,7 @@ function updatePage() {
             data = jsonData;
             console.log('updatePage():', data);
             updateData();
-            updateCharts();
+            // updateCharts();
 
             console.log('Success:', data);
         })
