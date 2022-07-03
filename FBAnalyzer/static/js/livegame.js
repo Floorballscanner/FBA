@@ -193,14 +193,14 @@ function updateCharts() {
 
     // TOC Game Chart
 
-    TOCL1T1 = convertTime(data.possessionGameT1L1);
-    TOCL1T2 = convertTime(data.possessionGameT2L1);
-    TOCL2T1 = convertTime(data.possessionGameT1L2);
-    TOCL2T2 = convertTime(data.possessionGameT2L2);
-    TOCL3T1 = convertTime(data.possessionGameT1L3);
-    TOCL3T2 = convertTime(data.possessionGameT2L3);
-    TOCPPT1 = convertTime(data.possessionGameT1L4 + data.possessionGameT1L5);
-    TOCPPT2 = convertTime(data.possessionGameT2L4 + data.possessionGameT2L5);
+    TOCL1T1 = new Date(data.possessionGameT1L1 * 1000);
+    TOCL1T2 = new Date(data.possessionGameT2L1 * 1000);
+    TOCL2T1 = new Date(data.possessionGameT1L2 * 1000);
+    TOCL2T2 = new Date(data.possessionGameT2L2 * 1000);
+    TOCL3T1 = new Date(data.possessionGameT1L3 * 1000);
+    TOCL3T2 = new Date(data.possessionGameT2L3 * 1000);
+    TOCPPT1 = new Date((data.possessionGameT1L4 + data.possessionGameT1L5) * 1000);
+    TOCPPT2 = new Date((data.possessionGameT2L4 + data.possessionGameT2L5) * 1000);
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
@@ -215,13 +215,6 @@ function updateCharts() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
-        hAxis: {
-            viewWindowMode:'explicit',
-            viewWindow: {
-              max:100,
-              min:0
-            }
-        },
         };
 
     var chart = new google.visualization.BarChart(document.getElementById('TOCGame_chart'));
