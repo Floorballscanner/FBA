@@ -158,6 +158,39 @@ function updateCharts() {
     var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
     chart.draw(chartData, options);
 
+    // Possession Game Chart
+
+    PosL1T1 = convertPos(data.possessionGameT1L1, data.gameClock);
+    PosL1T2 = convertPos(data.possessionGameT2L1, data.gameClock);
+    PosL2T1 = convertPos(data.possessionGameT1L2, data.gameClock);
+    PosL2T2 = convertPos(data.possessionGameT2L2, data.gameClock);
+    PosL3T1 = convertPos(data.possessionGameT1L3, data.gameClock);
+    PosL3T2 = convertPos(data.possessionGameT2L3, data.gameClock);
+
+    var chartData = google.visualization.arrayToDataTable([
+         ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
+         ['Line 1', PosL1T1, 'color: #002072', PosL1T1, PosL1T2, 'color: #59D9EB', PosL1T2 ],
+         ['Line 2', PosL2T1, 'color: #002072', PosL2T1, PosL2T2, 'color: #59D9EB', PosL2T2 ],
+         ['Line 3', PosL3T1, 'color: #002072', PosL3T1, PosL3T2, 'color: #59D9EB', PosL3T2 ]
+      ]);
+
+    var options = {
+        title: 'Possession % by Line',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: {
+            viewWindowMode:'explicit',
+            viewWindow: {
+              max:100,
+              min:0
+            }
+        },
+        };
+
+    var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
+    chart.draw(chartData, options);
+
 }
 
 function updateData() {
