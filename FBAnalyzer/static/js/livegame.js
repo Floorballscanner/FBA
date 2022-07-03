@@ -193,54 +193,14 @@ function updateCharts() {
 
     // TOC Game Chart
 
-    TOCL1T1 = new Date(data.possessionGameT1L1 * 1000).toLocaleTimeString('en-GB', {
-                timeZone:'Etc/UTC',
-                hour12: false,
-                minute: '2-digit',
-                second: '2-digit'
-              });;
-    TOCL1T2 = new Date(data.possessionGameT2L1 * 1000).toLocaleTimeString('en-GB', {
-                timeZone:'Etc/UTC',
-                hour12: false,
-                minute: '2-digit',
-                second: '2-digit'
-              });;
-    TOCL2T1 = new Date(data.possessionGameT1L2 * 1000).toLocaleTimeString('en-GB', {
-                timeZone:'Etc/UTC',
-                hour12: false,
-                minute: '2-digit',
-                second: '2-digit'
-              });;
-    TOCL2T2 = new Date(data.possessionGameT2L2 * 1000).toLocaleTimeString('en-GB', {
-                timeZone:'Etc/UTC',
-                hour12: false,
-                minute: '2-digit',
-                second: '2-digit'
-              });;
-    TOCL3T1 = new Date(data.possessionGameT1L3 * 1000).toLocaleTimeString('en-GB', {
-                timeZone:'Etc/UTC',
-                hour12: false,
-                minute: '2-digit',
-                second: '2-digit'
-              });;
-    TOCL3T2 = new Date(data.possessionGameT2L3 * 1000).toLocaleTimeString('en-GB', {
-                timeZone:'Etc/UTC',
-                hour12: false,
-                minute: '2-digit',
-                second: '2-digit'
-              });;
-    TOCPPT1 = new Date((data.possessionGameT1L4 + data.possessionGameT1L5) * 1000).toLocaleTimeString('en-GB', {
-                timeZone:'Etc/UTC',
-                hour12: false,
-                minute: '2-digit',
-                second: '2-digit'
-              });;
-    TOCPPT2 = new Date((data.possessionGameT2L4 + data.possessionGameT2L5) * 1000).toLocaleTimeString('en-GB', {
-                timeZone:'Etc/UTC',
-                hour12: false,
-                minute: '2-digit',
-                second: '2-digit'
-              });;
+    TOCL1T1 = convertPos(data.TOCGameT1L1, gameClock);
+    TOCL1T2 = convertPos(data.TOCGameT2L1, gameClock);
+    TOCL2T1 = convertPos(data.TOCGameT1L2, gameClock);
+    TOCL2T2 = convertPos(data.TOCGameT2L2, gameClock);
+    TOCL3T1 = convertPos(data.TOCGameT1L3, gameClock);
+    TOCL3T2 = convertPos(data.TOCGameT2L3, gameClock);
+    TOCPPT1 = convertPos(data.TOCGameT1L4 + data.TOCGameT1L5, gameClock);
+    TOCPPT2 = convertPos(data.TOCGameT2L4 + data.TOCGameT2L5, gameClock);
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
