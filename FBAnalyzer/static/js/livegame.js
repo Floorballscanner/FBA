@@ -193,14 +193,14 @@ function updateCharts() {
 
     // TOC Game Chart
 
-    TOCL1T1 = convertPos(data.TOCGameT1L1, gameClock);
-    TOCL1T2 = convertPos(data.TOCGameT2L1, gameClock);
-    TOCL2T1 = convertPos(data.TOCGameT1L2, gameClock);
-    TOCL2T2 = convertPos(data.TOCGameT2L2, gameClock);
-    TOCL3T1 = convertPos(data.TOCGameT1L3, gameClock);
-    TOCL3T2 = convertPos(data.TOCGameT2L3, gameClock);
-    TOCPPT1 = convertPos(data.TOCGameT1L4 + data.TOCGameT1L5, gameClock);
-    TOCPPT2 = convertPos(data.TOCGameT2L4 + data.TOCGameT2L5, gameClock);
+    TOCL1T1 = convertPos(data.TOCGameT1L1, data.gameClock);
+    TOCL1T2 = convertPos(data.TOCGameT2L1, data.gameClock);
+    TOCL2T1 = convertPos(data.TOCGameT1L2, data.gameClock);
+    TOCL2T2 = convertPos(data.TOCGameT2L2, data.gameClock);
+    TOCL3T1 = convertPos(data.TOCGameT1L3, data.gameClock);
+    TOCL3T2 = convertPos(data.TOCGameT2L3, data.gameClock);
+    TOCPPT1 = convertPos(data.TOCGameT1L4 + data.TOCGameT1L5, data.gameClock);
+    TOCPPT2 = convertPos(data.TOCGameT2L4 + data.TOCGameT2L5, data.gameClock);
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
