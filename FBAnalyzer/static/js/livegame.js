@@ -220,7 +220,7 @@ function updateCharts() {
       ]);
 
     var options = {
-        title: 'Time On Court % by Line',
+        title: 'Time On Court by Line',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
