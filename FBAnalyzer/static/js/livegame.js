@@ -119,7 +119,8 @@ function updateCharts() {
         title: 'xG by Line',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
-        colors: ['#002072', '#59D9EB']
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
         };
 
     var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
@@ -152,6 +153,7 @@ function updateCharts() {
               max:1,
               min:0
             }
+            textPosition: 'none'
         },
         };
 
@@ -181,6 +183,7 @@ function updateCharts() {
         colors: ['#002072', '#59D9EB'],
         hAxis: {
             viewWindowMode:'explicit',
+            textPosition: 'none',
             viewWindow: {
               max:100,
               min:0
@@ -224,7 +227,7 @@ function updateCharts() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
-        hAxis: { textPosition: 'none' },
+        hAxis: { textPosition: 'none' }
         };
 
     var chart = new google.visualization.BarChart(document.getElementById('TOCGame_chart'));
