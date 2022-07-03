@@ -224,6 +224,7 @@ function updateCharts() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' },
         };
 
     var chart = new google.visualization.BarChart(document.getElementById('TOCGame_chart'));
