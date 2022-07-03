@@ -188,7 +188,43 @@ function updateCharts() {
         },
         };
 
-    var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
+    var chart = new google.visualization.BarChart(document.getElementById('posGame_chart'));
+    chart.draw(chartData, options);
+
+    // TOC Game Chart
+
+    TOCL1T1 = convertTime(data.possessionGameT1L1);
+    TOCL1T2 = convertTime(data.possessionGameT2L1);
+    TOCL2T1 = convertTime(data.possessionGameT1L2);
+    TOCL2T2 = convertTime(data.possessionGameT2L2);
+    TOCL3T1 = convertTime(data.possessionGameT1L3);
+    TOCL3T2 = convertTime(data.possessionGameT2L3);
+    TOCPPT1 = convertTime(data.possessionGameT1L4 + data.possessionGameT1L5);
+    TOCPPT2 = convertTime(data.possessionGameT2L4 + data.possessionGameT2L5);
+
+    var chartData = google.visualization.arrayToDataTable([
+         ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
+         ['Line 1', TOCL1T1, 'color: #002072', TOCL1T1, TOCL1T2, 'color: #59D9EB', TOCL1T2 ],
+         ['Line 2', TOCL2T1, 'color: #002072', TOCL2T1, TOCL2T2, 'color: #59D9EB', TOCL2T2 ],
+         ['Line 3', TOCL3T1, 'color: #002072', TOCL3T1, TOCL3T2, 'color: #59D9EB', TOCL3T2 ],
+         ['PP', TOCPPT1, 'color: #002072', TOCPPT1, TOCPPT2, 'color: #59D9EB', TOCPPT2 ]
+      ]);
+
+    var options = {
+        title: 'Possession % by Line',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: {
+            viewWindowMode:'explicit',
+            viewWindow: {
+              max:100,
+              min:0
+            }
+        },
+        };
+
+    var chart = new google.visualization.BarChart(document.getElementById('TOCGame_chart'));
     chart.draw(chartData, options);
 
 }
