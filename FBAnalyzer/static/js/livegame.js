@@ -202,12 +202,21 @@ function updateCharts() {
     TOCPPT1 = convertPos(data.TOCGameT1L4 + data.TOCGameT1L5, data.gameClock);
     TOCPPT2 = convertPos(data.TOCGameT2L4 + data.TOCGameT2L5, data.gameClock);
 
+    TOCL1T1a = new Date(data.TOCGameT1L1 * 1000).toISOString().substr(14, 5);
+    TOCL1T2a = new Date(data.TOCGameT2L1 * 1000).toISOString().substr(14, 5);
+    TOCL2T1a = new Date(data.TOCGameT1L2 * 1000).toISOString().substr(14, 5);
+    TOCL2T2a = new Date(data.TOCGameT2L2 * 1000).toISOString().substr(14, 5);
+    TOCL3T1a = new Date(data.TOCGameT1L3 * 1000).toISOString().substr(14, 5);
+    TOCL3T2a = new Date(data.TOCGameT2L3 * 1000).toISOString().substr(14, 5);
+    TOCPPT1a = new Date((data.TOCGameT1L4 + data.TOCGameT1L5) * 1000).toISOString().substr(14, 5);
+    TOCPPT2a = new Date((data.TOCGameT2L4 + data.TOCGameT2L5) * 1000).toISOString().substr(14, 5);
+
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', TOCL1T1, 'color: #002072', TOCL1T1, TOCL1T2, 'color: #59D9EB', TOCL1T2 ],
-         ['Line 2', TOCL2T1, 'color: #002072', TOCL2T1, TOCL2T2, 'color: #59D9EB', TOCL2T2 ],
-         ['Line 3', TOCL3T1, 'color: #002072', TOCL3T1, TOCL3T2, 'color: #59D9EB', TOCL3T2 ],
-         ['PP', TOCPPT1, 'color: #002072', TOCPPT1, TOCPPT2, 'color: #59D9EB', TOCPPT2 ]
+         ['Line 1', TOCL1T1, 'color: #002072', TOCL1T1a, TOCL1T2, 'color: #59D9EB', TOCL1T2a ],
+         ['Line 2', TOCL2T1, 'color: #002072', TOCL2T1a, TOCL2T2, 'color: #59D9EB', TOCL2T2a ],
+         ['Line 3', TOCL3T1, 'color: #002072', TOCL3T1a, TOCL3T2, 'color: #59D9EB', TOCL3T2a ],
+         ['PP', TOCPPT1, 'color: #002072', TOCPPT1a, TOCPPT2, 'color: #59D9EB', TOCPPT2a ]
       ]);
 
     var options = {
