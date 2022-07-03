@@ -176,25 +176,9 @@ function updateData() {
             document.getElementById('awayxG').innerHTML = data.xGGameT2;
             document.getElementById('homexGP').innerHTML = data.xGPeriodT1;
             document.getElementById('awayxGP').innerHTML = data.xGPeriodT2;
+            document.getElementById('homePos').innerHTML = convertPos(data.possessionGameT1, data.gameClock);
+            document.getElementById('awayPos').innerHTML = convertPos(data.possessionGameT2, data.gameClock);
+            document.getElementById('homePosP').innerHTML = convertPos(data.possessionPeriodT1, data.periodClock);
+            document.getElementById('awayPosP').innerHTML = convertPos(data.possessionPeriodT2, data.periodClock);
 
-            document.getElementById('TocL1T1g').innerHTML = convertTime(data.TOCGameT1L1);
-            document.getElementById('TocL1T1p').innerHTML = convertTime(data.TOCPeriodT1L1);
-            document.getElementById('TocL1T2g').innerHTML = convertTime(data.TOCGameT2L1);
-            document.getElementById('TocL1T2p').innerHTML = convertTime(data.TOCPeriodT2L1);
-            document.getElementById('PosL1T1g').innerHTML = convertPos(data.possessionGameT1L1, data.gameClock);
-            document.getElementById('PosL1T1p').innerHTML = convertPos(data.possessionPeriodT1L1, data.periodClock);
-            document.getElementById('PosL1T2g').innerHTML = convertPos(data.possessionGameT2L1, data.gameClock);
-            document.getElementById('PosL1T2p').innerHTML = convertPos(data.possessionPeriodT2L1, data.periodClock);
-            document.getElementById('PML1T1g').innerHTML = data.gfGameT1L1 - data.gaGameT1L1;
-            document.getElementById('PML1T1p').innerHTML = data.gfPeriodT1L1 - data.gaPeriodT1L1;
-            document.getElementById('PML1T2g').innerHTML = data.gfGameT2L1 - data.gaGameT2L1;
-            document.getElementById('PML1T2p').innerHTML = data.gfPeriodT2L1 - data.gaPeriodT2L1;
-            document.getElementById('xGfL1T1g').innerHTML = data.xGfGameT1L1;
-            document.getElementById('xGfL1T1p').innerHTML = data.xGfPeriodT1L1;
-            document.getElementById('xGaL1T1g').innerHTML = data.xGaGameT1L1;
-            document.getElementById('xGaL1T1p').innerHTML = data.xGaPeriodT1L1;
-            document.getElementById('xGfL1T2g').innerHTML = data.xGfGameT2L1;
-            document.getElementById('xGfL1T2p').innerHTML = data.xGfPeriodT2L1;
-            document.getElementById('xGaL1T2g').innerHTML = data.xGaGameT2L1;
-            document.getElementById('xGaL1T2p').innerHTML = data.xGaPeriodT2L1;
 }
