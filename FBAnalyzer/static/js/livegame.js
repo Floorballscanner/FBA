@@ -151,7 +151,7 @@ function updateCharts() {
             viewWindowMode:'explicit',
             textPosition: 'none',
             viewWindow: {
-              max:1,
+              max:100,
               min:0
             }
         },
