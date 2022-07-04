@@ -82,7 +82,7 @@ window.onload = function() {
           console.error('Error:', error);
     });
 
-    t = setTimeout(function(){ updatePage() }, 1000);
+    t = setTimeout(function(){ updatePage() }, 10000);
 }
 
 function getCookie(name) {
