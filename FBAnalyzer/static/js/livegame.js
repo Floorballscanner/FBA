@@ -98,7 +98,7 @@ function convertPos(lPos, counter) {
 }
 
 function calcPercent(xGa, xGb) {
-    res = Math.round(xGa / (xGa + xGb) * 100) / 100;
+    res = Math.round(xGa / (xGa + xGb) * 100);
     return res;
 }
 
@@ -137,9 +137,9 @@ function updateCharts() {
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', xGL1T1, 'color: #002072', xGL1T1, xGL1T2, 'color: #59D9EB', xGL1T2 ],
-         ['Line 2', xGL2T1, 'color: #002072', xGL2T1, xGL2T2, 'color: #59D9EB', xGL2T2 ],
-         ['Line 3', xGL3T1, 'color: #002072', xGL3T1, xGL3T2, 'color: #59D9EB', xGL3T2 ]
+         ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
+         ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
+         ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
       ]);
 
     var options = {
