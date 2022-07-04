@@ -233,6 +233,30 @@ function updateCharts() {
     var chart = new google.visualization.BarChart(document.getElementById('TOCGame_chart'));
     chart.draw(chartData, options);
 
+    // Plusminus Game Chart
+
+    pmPPT1 = data.gfGameT1L4+data.gfGameT1L5-data.gaGameT1L4+data.gaGameT1L5;
+    pmPPT2 = data.gfGameT2L4+data.gfGameT2L5-data.gaGameT2L4+data.gaGameT2L5;
+
+    var chartData = google.visualization.arrayToDataTable([
+         ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
+         ['Line 1', data.gfGameT1L1-data.gaGameT1L1, 'color: #002072', data.gfGameT1L1-data.gaGameT1L1, data.gfGameT2L1-data.gaGameT2L1, 'color: #59D9EB', data.gfGameT2L1-data.gaGameT2L1 ],
+         ['Line 2', data.gfGameT1L2-data.gaGameT1L2, 'color: #002072', data.gfGameT1L2-data.gaGameT1L2, data.gfGameT2L2-data.gaGameT2L2, 'color: #59D9EB', data.gfGameT2L2-data.gaGameT2L2 ],
+         ['Line 3', data.gfGameT1L3-data.gaGameT1L3, 'color: #002072', data.gfGameT1L3-data.gaGameT1L3, data.gfGameT2L3-data.gaGameT2L3, 'color: #59D9EB', data.gfGameT2L3-data.gaGameT2L3 ],
+         ['PP', pmPPT1, 'color: #002072', pmPPT1, pmPPT2, 'color: #59D9EB', pmPPT2 ]
+      ]);
+
+    var options = {
+        title: '+- by Line',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+    var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart'));
+    chart.draw(chartData, options);
+
 }
 
 function updateData() {
