@@ -700,8 +700,10 @@
              var display = date.toISOString().substr(11, 8);
              document.getElementById("label").innerHTML = display;
 
-             // Update the API data
-             updateLive();
+             // Update the API data every 10 seconds
+             if (gameCounter % 10 == 0) {
+                updateLive();
+             }
 
              t = setTimeout(function(){ Count() }, 1000);
          }
