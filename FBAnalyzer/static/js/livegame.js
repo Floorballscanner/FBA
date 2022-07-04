@@ -162,12 +162,12 @@ function updateCharts() {
 
     // Possession Game Chart
 
-    PosL1T1 = convertPos(data.possessionGameT1L1, data.gameClock);
-    PosL1T2 = convertPos(data.possessionGameT2L1, data.gameClock);
-    PosL2T1 = convertPos(data.possessionGameT1L2, data.gameClock);
-    PosL2T2 = convertPos(data.possessionGameT2L2, data.gameClock);
-    PosL3T1 = convertPos(data.possessionGameT1L3, data.gameClock);
-    PosL3T2 = convertPos(data.possessionGameT2L3, data.gameClock);
+    PosL1T1 = convertPos(data.possessionGameT1L1, data.TOCGameT1L1);
+    PosL1T2 = convertPos(data.possessionGameT2L1, data.TOCGameT2L1);
+    PosL2T1 = convertPos(data.possessionGameT1L2, data.TOCGameT1L2);
+    PosL2T2 = convertPos(data.possessionGameT2L2, data.TOCGameT2L2);
+    PosL3T1 = convertPos(data.possessionGameT1L3, data.TOCGameT1L3);
+    PosL3T2 = convertPos(data.possessionGameT2L3, data.TOCGameT2L3);
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
