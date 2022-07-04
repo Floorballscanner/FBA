@@ -149,7 +149,7 @@ function updateCharts() {
         colors: ['#002072', '#59D9EB'],
         hAxis: {
             viewWindowMode:'explicit',
-            textPosition: 'none'
+            textPosition: 'none',
             viewWindow: {
               max:1,
               min:0
