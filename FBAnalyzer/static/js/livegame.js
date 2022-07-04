@@ -171,9 +171,9 @@ function updateCharts() {
 
     var chartData = google.visualization.arrayToDataTable([
          ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', PosL1T1, 'color: #002072', PosL1T1, PosL1T2, 'color: #59D9EB', PosL1T2 ],
-         ['Line 2', PosL2T1, 'color: #002072', PosL2T1, PosL2T2, 'color: #59D9EB', PosL2T2 ],
-         ['Line 3', PosL3T1, 'color: #002072', PosL3T1, PosL3T2, 'color: #59D9EB', PosL3T2 ]
+         ['Line 1', PosL1T1, 'color: #002072', PosL1T1 + "%", PosL1T2, 'color: #59D9EB', PosL1T2 + "%" ],
+         ['Line 2', PosL2T1, 'color: #002072', PosL2T1 + "%", PosL2T2, 'color: #59D9EB', PosL2T2 + "%" ],
+         ['Line 3', PosL3T1, 'color: #002072', PosL3T1 + "%", PosL3T2, 'color: #59D9EB', PosL3T2 + "%" ]
       ]);
 
     var options = {
