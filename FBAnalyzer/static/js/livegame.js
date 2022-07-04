@@ -349,14 +349,14 @@ function updateCharts() {
 
     // TOC Period Chart
 
-    TOCL1T1 = convertPos(data.TOCPeriodT1L1, data.PeriodClock);
-    TOCL1T2 = convertPos(data.TOCPeriodT2L1, data.PeriodClock);
-    TOCL2T1 = convertPos(data.TOCPeriodT1L2, data.PeriodClock);
-    TOCL2T2 = convertPos(data.TOCPeriodT2L2, data.PeriodClock);
-    TOCL3T1 = convertPos(data.TOCPeriodT1L3, data.PeriodClock);
-    TOCL3T2 = convertPos(data.TOCPeriodT2L3, data.PeriodClock);
-    TOCPPT1 = convertPos(data.TOCPeriodT1L4 + data.TOCPeriodT1L5, data.PeriodClock);
-    TOCPPT2 = convertPos(data.TOCPeriodT2L4 + data.TOCPeriodT2L5, data.PeriodClock);
+    TOCL1T1 = convertPos(data.TOCPeriodT1L1, data.periodClock);
+    TOCL1T2 = convertPos(data.TOCPeriodT2L1, data.periodClock);
+    TOCL2T1 = convertPos(data.TOCPeriodT1L2, data.periodClock);
+    TOCL2T2 = convertPos(data.TOCPeriodT2L2, data.periodClock);
+    TOCL3T1 = convertPos(data.TOCPeriodT1L3, data.periodClock);
+    TOCL3T2 = convertPos(data.TOCPeriodT2L3, data.periodClock);
+    TOCPPT1 = convertPos(data.TOCPeriodT1L4 + data.TOCPeriodT1L5, data.periodClock);
+    TOCPPT2 = convertPos(data.TOCPeriodT2L4 + data.TOCPeriodT2L5, data.periodClock);
 
     TOCL1T1a = new Date(data.TOCPeriodT1L1 * 1000).toISOString().substr(14, 5);
     TOCL1T2a = new Date(data.TOCPeriodT2L1 * 1000).toISOString().substr(14, 5);
