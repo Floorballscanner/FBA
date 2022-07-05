@@ -270,6 +270,7 @@
                 document.getElementById("away_team").disabled = true;
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
+                document.getElementById("ck1a").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 
@@ -285,7 +286,9 @@
 
                 // Initialize the API and gain the URL for the Game instance.
 
-                initializeLive()
+                if (live == 1) {
+                    initializeLive()
+                }
 
             } else {
             }
@@ -701,7 +704,7 @@
              document.getElementById("label").innerHTML = display;
 
              // Update the API data every 10 seconds
-             if (gameCounter % 10 == 0) {
+             if (gameCounter % 10 == 0 && live == 1) {
                 updateLive();
              }
 
