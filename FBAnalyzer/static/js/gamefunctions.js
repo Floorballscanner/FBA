@@ -2068,3 +2068,11 @@
             name_t2_id[i].innerHTML = name_t2;
         }
     }
+
+    function checkLive() {
+
+        if (live == 1) {live = 0}
+
+        else if (live == 0) {live = 1}
+
+    }

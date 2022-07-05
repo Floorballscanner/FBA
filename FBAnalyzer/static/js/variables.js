@@ -37,6 +37,7 @@
     var data = {}; // Live data object
     var data_url = "null"; // Live data url
     var today = new Date();
+    var live = 1; // If live updates are sent to API 1 yes / 0 no
     
     // Team 1 and Team 2 name elements
     
