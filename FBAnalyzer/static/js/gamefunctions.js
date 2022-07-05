@@ -348,6 +348,10 @@
                 document.getElementById("start").style.background='#002072';
                 is_on = 0;
                 drawChart(); // Update charts
+
+             if (live == 1) {
+                updateLive(); // Update the API
+             }
             }
         }
     }
@@ -440,6 +444,9 @@
                     atocT2_p[i].innerHTML = "00:00";
                     avgT2_p[i].innerHTML = "00:00";
                     avgnoT2_p[i].innerHTML = "00:00";
+                }
+                if (live == 1) {
+                    updateLive(); // Update the API
                 }
 
             } else {
