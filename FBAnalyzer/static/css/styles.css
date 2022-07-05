@@ -277,22 +277,6 @@ body {
     background-color: #65CD00;
 }
 
-.my-custom-input-label-box input[type="checkbox"] {
-	display:none;
-}
-
-.my-custom-input-label-box input + label {
-	display: inline-block;
-	width: 60px;
-	height: 30px;
-	cursor: pointer;
-	background-image: url(/static/live.png);
-}
-
-.my-custom-input-label-box input[type="checkbox"]:checked + label {
-	background-image: url(/static/logo.png)
-}
-
 /* myteam.html styling */
 
 .my-roster {
