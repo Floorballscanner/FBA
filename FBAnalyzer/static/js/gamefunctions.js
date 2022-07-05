@@ -349,9 +349,9 @@
                 is_on = 0;
                 drawChart(); // Update charts
 
-             if (live == 1) {
-                updateLive(); // Update the API
-             }
+                 if (live == 1) {
+                    updateLive(); // Update the API
+                 }
             }
         }
     }
@@ -2081,8 +2081,10 @@
 
     function checkLive() {
 
-        if (live == 1) {live = 0}
+        if (!document.getElementById("ck1a").disabled) {
+            if (live == 1) {live = 0}
 
-        else if (live == 0) {live = 1}
+            else if (live == 0) {live = 1}
+        }
 
     }
