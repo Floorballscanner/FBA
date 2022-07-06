@@ -28,6 +28,7 @@ class Team(models.Model):
 class Player(models.Model):
     objects = models.Manager()
 
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     jersey_number = models.IntegerField()
