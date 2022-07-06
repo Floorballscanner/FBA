@@ -5,30 +5,52 @@ import uuid
 
 # Create your models here
 
-class Player(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    jersey_number = models.IntegerField()
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+class Level(models.Model):
+    objects = models.Manager()
+
+    name = models.CharField(max_length=100)
+    country = models.CharField(max_length=50)
+    isSenior = models.BooleanField()
+    isMale = models.BooleanField()
 
     def __str__(self):
-        """String for representing the Model object."""
-        return f'{self.last_name} ({self.first_name})'
+        return self.name
 
 class Team(models.Model):
     objects = models.Manager()
 
     name = models.CharField(max_length=100)
-    lineOn = models.IntegerField()
-    possessionPeriod = models.IntegerField()
-    possessionGame = models.IntegerField()
-    goalsPeriod = models.IntegerField()
-    goalsGame = models.IntegerField()
-    xgPeriod = models.DecimalField(max_digits=5, decimal_places=2)
-    xgGame = models.DecimalField(max_digits=5, decimal_places=2)
+    level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
+
+class Player(models.Model):
+    objects = models.Manager()
+
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    jersey_number = models.IntegerField()
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'#{self.jersey_number} {self.first_name} {self.last_name}'
+
+class Shot(models.Model):
+    objects = models.Manager()
+    time = models.IntegerField()
+    player = models.ForeignKey(Player, on_delete=models.SET_NULL, null=True)
+    result = models.IntegerField()
+    type = models.IntegerField()
+    distance = models.DecimalField(max_digits=5, decimal_places=2)
+    angle = models.DecimalField(max_digits=5, decimal_places=2)
+    xG = models.DecimalField(max_digits=5, decimal_places=2)
+    isPP = models.BooleanField()
+    isSH = models.BooleanField()
+
+    def __str__(self):
+        return f'{self.type}, {self.result}'
 
 class Game(models.Model):
     objects = models.Manager()
