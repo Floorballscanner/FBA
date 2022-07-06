@@ -265,21 +265,3 @@ class Game(models.Model):
 
     def __str__(self):
         return f'{self.nameT1} - {self.nameT2}'
-
-class Line(models.Model):
-    name = models.CharField(max_length=20)
-    possessionPeriod = models.IntegerField()
-    possessionGame = models.IntegerField()
-    gfPeriod = models.IntegerField()
-    gfGame = models.IntegerField()
-    gaPeriod = models.IntegerField()
-    gaGame = models.IntegerField()
-    TOCPeriod = models.IntegerField()
-    TOCGame = models.IntegerField()
-    xGfPeriod = models.DecimalField(max_digits=5, decimal_places=2)
-    xGfGame = models.DecimalField(max_digits=5, decimal_places=2)
-    xGaPeriod = models.DecimalField(max_digits=5, decimal_places=2)
-    xGaGame = models.DecimalField(max_digits=5, decimal_places=2)
-
-    def __str__(self):
-        return self.name
