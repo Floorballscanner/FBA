@@ -286,7 +286,7 @@
 
                 // Initialize the API and gain the URL for the Game instance.
 
-                if (live == 1) {
+                if (document.getElementById("ck1a").checked) {
                     initializeLive()
                 }
 
@@ -349,7 +349,7 @@
                 is_on = 0;
                 drawChart(); // Update charts
 
-                 if (live == 1) {
+                 if (document.getElementById("ck1a").checked) {
                     updateLive(); // Update the API
                  }
             }
@@ -445,7 +445,7 @@
                     avgT2_p[i].innerHTML = "00:00";
                     avgnoT2_p[i].innerHTML = "00:00";
                 }
-                if (live == 1) {
+                if (document.getElementById("ck1a").checked) {
                     updateLive(); // Update the API
                 }
 
@@ -711,7 +711,7 @@
              document.getElementById("label").innerHTML = display;
 
              // Update the API data every 10 seconds
-             if (gameCounter % 10 == 0 && live == 1) {
+             if (gameCounter % 10 == 0 && document.getElementById("ck1a").checked) {
                 updateLive();
              }
 
