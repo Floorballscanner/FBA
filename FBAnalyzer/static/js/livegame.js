@@ -423,6 +423,7 @@ function updateData() {
             document.getElementById('homeGoals').innerHTML = data.goalsGameT1;
             document.getElementById('awayGoals').innerHTML = data.goalsGameT2;
             document.getElementById('homeGoalsP').innerHTML = data.goalsPeriodT1;
+            document.getElementById('awayGoalsP').innerHTML = data.goalsPeriodT2;
             document.getElementById('homexG').innerHTML = data.xGGameT1;
             document.getElementById('awayxG').innerHTML = data.xGGameT2;
             document.getElementById('homexGP').innerHTML = data.xGPeriodT1;
