@@ -461,36 +461,32 @@
 
              Toc_p[line_on - 1]++;
              Toc_g[line_on - 1]++;
-             if (line_on < 4) {
-                 Toc_p[7]++;
-                 Toc_g[7]++;
+             Toc_p[7]++;
+             Toc_g[7]++;
              }
              
              TocT2_p[line_on_2 - 1]++;
              TocT2_g[line_on_2 - 1]++;
-             if (line_on_2 < 4) {
-                 TocT2_p[7]++;
-                 TocT2_g[7]++;
+             TocT2_p[7]++;
+             TocT2_g[7]++;
              }
 
              if (Ball_pos == 1) {
                 Pos_p[line_on - 1]++;
                 Pos_g[line_on - 1]++;
                 shiftPos++;
-                if (line_on < 4) {
-                    Pos_g[7]++;
-                    Pos_p[7]++;
+                Pos_g[7]++;
+                 Pos_p[7]++;
                 }
-             }
+
              
              if (Ball_pos == 2) {
                 PosT2_p[line_on_2 - 1]++;
                 PosT2_g[line_on_2 - 1]++;
                 shiftPos_2++;
-                if (line_on_2 < 4) {
-                    PosT2_g[7]++;
-                    PosT2_p[7]++;
-                }
+                PosT2_g[7]++;
+                PosT2_p[7]++;
+
 
              }
          else {
@@ -802,40 +798,40 @@
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
-                }
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
-                }
+
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
                 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
-                }
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
                 xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
-                }
+
+                xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
 
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
-                if (line_on < 4) {
-                    xf_p[7].innerHTML = xGf_p[7];
-                }
+
+                xf_p[7].innerHTML = xGf_p[7];
+
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
-                if (line_on < 4) {
-                    xf_g[7].innerHTML = xGf_g[7];
-                }
+
+                xf_g[7].innerHTML = xGf_g[7];
+
                 
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
-                if (line_on_2 < 4) {
-                    xaT2_p[7].innerHTML = xGaT2_p[7];
-                }
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
                 xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
-                if (line_on_2 < 4) {
-                    xaT2_g[7].innerHTML = xGaT2_g[7];
-                }
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
                 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
@@ -878,40 +874,40 @@
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
-                }
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
-                }
+
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
                 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
-                }
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
                 xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
-                }
+
+                 xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
                 
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
-                if (line_on < 4) {
-                    xf_p[7].innerHTML = xGf_p[7];
-                }
+
+                xf_p[7].innerHTML = xGf_p[7];
+
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
-                if (line_on < 4) {
-                    xf_g[7].innerHTML = xGf_g[7];
-                }
+
+                xf_g[7].innerHTML = xGf_g[7];
+
                 
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
-                if (line_on_2 < 4) {
-                    xaT2_p[7].innerHTML = xGaT2_p[7];
-                }
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
                 xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
-                if (line_on_2 < 4) {
-                    xaT2_g[7].innerHTML = xGaT2_g[7];
-                }
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
                 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
@@ -954,40 +950,40 @@
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
-                }
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
-                }
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
                 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
-                }
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
-                }
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
                 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
-                if (line_on < 4) {
-                    xa_p[7].innerHTML = xGa_p[7];
-                }
+
+                xa_p[7].innerHTML = xGa_p[7];
+
                 xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
-                if (line_on < 4) {
-                    xa_g[7].innerHTML = xGa_g[7];
-                }
+
+                xa_g[7].innerHTML = xGa_g[7];
+
                 
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
-                if (line_on_2 < 4) {
-                    xfT2_p[7].innerHTML = xGfT2_p[7];
-                }
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
                 xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
-                if (line_on_2 < 4) {
-                    xfT2_g[7].innerHTML = xGfT2_g[7];
-                }
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
                 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
@@ -1031,40 +1027,40 @@
 
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
-                }
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
-                }
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
                 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
-                }
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
-                }
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
                 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
-                if (line_on < 4) {
-                    xa_p[7].innerHTML = xGa_p[7];
-                }
+
+                xa_p[7].innerHTML = xGa_p[7];
+
                 xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
-                if (line_on < 4) {
-                    xa_g[7].innerHTML = xGa_g[7];
-                }
+
+                xa_g[7].innerHTML = xGa_g[7];
+
                 
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
-                if (line_on_2 < 4) {
-                    xfT2_p[7].innerHTML = xGfT2_p[7];
-                }
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
                 xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
-                if (line_on_2 < 4) {
-                    xfT2_g[7].innerHTML = xGfT2_g[7];
-                }
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
                 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
@@ -1114,40 +1110,40 @@
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
-                }
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
-                }
+
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
                 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
-                }
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
                 xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
-                }
+
+                xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
 
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
-                if (line_on < 4) {
-                    xf_p[7].innerHTML = xGf_p[7];
-                }
+
+                xf_p[7].innerHTML = xGf_p[7];
+
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
-                if (line_on < 4) {
-                    xf_g[7].innerHTML = xGf_g[7];
-                }
+
+                xf_g[7].innerHTML = xGf_g[7];
+
                 
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
-                if (line_on_2 < 4) {
-                    xaT2_p[7].innerHTML = xGaT2_p[7];
-                }
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
                 xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
-                if (line_on_2 < 4) {
-                    xaT2_g[7].innerHTML = xGaT2_g[7];
-                }
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
                 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
@@ -1220,40 +1216,40 @@
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
-                }
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
-                }
+
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
-                }
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
                 xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
-                }
+
+                xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
 
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
-                if (line_on < 4) {
-                    xf_p[7].innerHTML = xGf_p[7];
-                }
+
+                xf_p[7].innerHTML = xGf_p[7];
+
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
-                if (line_on < 4) {
-                    xf_g[7].innerHTML = xGf_g[7];
-                }
+
+                xf_g[7].innerHTML = xGf_g[7];
+
 
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
-                if (line_on_2 < 4) {
-                    xaT2_p[7].innerHTML = xGaT2_p[7];
-                }
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
                 xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
-                if (line_on_2 < 4) {
-                    xaT2_g[7].innerHTML = xGaT2_g[7];
-                }
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
@@ -1326,40 +1322,40 @@
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
-                }
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
-                }
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
-                }
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
-                }
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
-                if (line_on < 4) {
-                    xa_p[7].innerHTML = xGa_p[7];
-                }
+
+                xa_p[7].innerHTML = xGa_p[7];
+
                 xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
-                if (line_on < 4) {
-                    xa_g[7].innerHTML = xGa_g[7];
-                }
+
+                xa_g[7].innerHTML = xGa_g[7];
+
 
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
-                if (line_on_2 < 4) {
-                    xfT2_p[7].innerHTML = xGfT2_p[7];
-                }
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
                 xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
-                if (line_on_2 < 4) {
-                    xfT2_g[7].innerHTML = xGfT2_g[7];
-                }
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
@@ -1432,40 +1428,40 @@
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
-                }
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
-                if (line_on < 4) {
-                    xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
-                }
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
-                }
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                if (line_on_2 < 4) {
-                    xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
-                }
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
-                if (line_on < 4) {
-                    xa_p[7].innerHTML = xGa_p[7];
-                }
+
+                xa_p[7].innerHTML = xGa_p[7];
+
                 xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
-                if (line_on < 4) {
-                    xa_g[7].innerHTML = xGa_g[7];
-                }
+
+                xa_g[7].innerHTML = xGa_g[7];
+
 
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
-                if (line_on_2 < 4) {
-                    xfT2_p[7].innerHTML = xGfT2_p[7];
-                }
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
                 xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
-                if (line_on_2 < 4) {
-                    xfT2_g[7].innerHTML = xGfT2_g[7];
-                }
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
