@@ -8,6 +8,7 @@ import uuid
 class Level(models.Model):
     objects = models.Manager()
 
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=50)
     isSenior = models.BooleanField(default=True)
@@ -20,8 +21,9 @@ class Level(models.Model):
 class Team(models.Model):
     objects = models.Manager()
 
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     name = models.CharField(max_length=100)
-    level = models.ForeignKey(Level, on_delete=models.SET_NULL)
+    level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
     isSenior = models.BooleanField(default=True)
     isMen = models.BooleanField(default=True)
     isNational = models.BooleanField(default=False)
@@ -33,6 +35,7 @@ class Team(models.Model):
 class Line(models.Model):
     objects = models.Manager()
 
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     NAME = (
         ('L1', 'Line 1'),
         ('L2', 'Line 2'),
@@ -49,6 +52,7 @@ class Line(models.Model):
 class Position(models.Model):
     objects = models.Manager()
 
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     NAME = (
         ('LW', 'Left Wing'),
         ('C', 'Center'),
@@ -78,6 +82,7 @@ class Player(models.Model):
 class Shot(models.Model):
     objects = models.Manager()
 
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     time = models.IntegerField()
     type = models.IntegerField()
     result = models.IntegerField()
