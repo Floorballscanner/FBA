@@ -8,7 +8,6 @@ import uuid
 class Level(models.Model):
     objects = models.Manager()
 
-    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=50)
     isSenior = models.BooleanField(default=True)
