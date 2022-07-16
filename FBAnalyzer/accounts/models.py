@@ -10,8 +10,9 @@ class Level(models.Model):
 
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=50)
-    isSenior = models.BooleanField()
-    isMale = models.BooleanField()
+    isSenior = models.BooleanField(default=True)
+    isMale = models.BooleanField(default=True)
+    isNational = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.name}, {self.country}'
@@ -20,26 +21,45 @@ class Team(models.Model):
     objects = models.Manager()
 
     name = models.CharField(max_length=100)
-    level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
-    isNational = models.BooleanField()
-    'l1c = models.ManyToManyField("Player", null=True)'
-    'l1lw = models.ManyToManyField("Player", null=True)'
-    'l1rw = models.ManyToManyField("Player", null=True)'
-    'l1ld = models.ManyToManyField("Player", null=True)'
-    'l1rd = models.ManyToManyField("Player", null=True)'
-    'l2c = models.ManyToManyField("Player", null=True)'
-    'l2lw = models.ManyToManyField("Player", null=True)'
-    'l2rw = models.ManyToManyField("Player", null=True)'
-    'l2ld = models.ManyToManyField("Player", null=True)'
-    'l2rd = models.ManyToManyField("Player", null=True)'
-    'l3c = models.ManyToManyField("Player", null=True)'
-    'l3lw = models.ManyToManyField("Player", null=True)'
-    'l3rw = models.ManyToManyField("Player", null=True)'
-    'l3rd = models.ManyToManyField("Player", null=True)'
-    'goalie = models.ManyToManyField("Player", null=True)'
+    level = models.ForeignKey(Level, on_delete=models.SET_NULL)
+    isSenior = models.BooleanField(default=True)
+    isMen = models.BooleanField(default=True)
+    isNational = models.BooleanField(default=False)
+    line = models.ManyToManyField("Line")
 
     def __str__(self):
         return f'{self.name}, {self.level}'
+
+class Line(models.Model):
+    objects = models.Manager()
+
+    NAME = (
+        ('L1', 'Line 1'),
+        ('L2', 'Line 2'),
+        ('L3', 'Line 3'),
+        ('PP1', 'Powerplay 1'),
+        ('PP2', 'Powerplay 2'),
+        ('SH1', 'Shorthanded 1'),
+        ('SH2', 'Shorthanded 2'),
+    )
+
+    def __str__(self):
+        return self.NAME
+
+class Position(models.Model):
+    objects = models.Manager()
+
+    NAME = (
+        ('LW', 'Left Wing'),
+        ('C', 'Center'),
+        ('RW', 'Right Wing'),
+        ('LD', 'Left Defender'),
+        ('RD', 'Right Defender'),
+        ('G', 'Goalie'),
+    )
+
+    def __str__(self):
+        return self.NAME
 
 class Player(models.Model):
     objects = models.Manager()
@@ -47,9 +67,9 @@ class Player(models.Model):
     id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    jersey_number = models.IntegerField()
+    jersey_number = models.IntegerField(null=True)
     team = models.ManyToManyField(Team, null=True)
-    'nationalTeam = models.ManyToManyField(Team, null=True)'
+    position = models.ManyToManyField(Position, null=True)
 
     def __str__(self):
         """String for representing the Model object."""
@@ -59,27 +79,13 @@ class Shot(models.Model):
     objects = models.Manager()
 
     time = models.IntegerField()
-    'shooter = models.ManyToManyField(Player, null=True)'
-    'passer = models.ManyToManyField(Player, null=True)'
     type = models.IntegerField()
+    result = models.IntegerField()
     distance = models.DecimalField(max_digits=5, decimal_places=2)
     angle = models.DecimalField(max_digits=5, decimal_places=2)
     xG = models.DecimalField(max_digits=5, decimal_places=2)
     isPP = models.BooleanField()
     isSH = models.BooleanField()
-
-    """ Players on field sf = shot for , sa = shot against """
-    'sfc = models.ManyToManyField(Player, null=True)'
-    'sflw = models.ManyToManyField(Player, null=True)'
-    'sfrw = models.ManyToManyField(Player, null=True)'
-    'sfld = models.ManyToManyField(Player, null=True)'
-    'sfrd = models.ManyToManyField(Player, null=True)'
-    'sac = models.ManyToManyField(Player, null=True)'
-    'salw = models.ManyToManyField(Player, null=True)'
-    'sarw = models.ManyToManyField(Player, null=True)'
-    'sald = models.ManyToManyField(Player, null=True)'
-    'sard = models.ManyToManyField(Player, null=True)'
-    'sag = models.ManyToManyField(Player, null=True)'''
 
     def __str__(self):
         return f'{self.type}, {self.result}'
