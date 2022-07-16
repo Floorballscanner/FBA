@@ -44,7 +44,7 @@ class Line(models.Model):
     )
 
     def __str__(self):
-        return self.NAME
+        return f'{self.NAME}'
 
 class Position(models.Model):
     objects = models.Manager()
@@ -59,7 +59,7 @@ class Position(models.Model):
     )
 
     def __str__(self):
-        return self.NAME
+        return f'{self.NAME}'
 
 class Player(models.Model):
     objects = models.Manager()
