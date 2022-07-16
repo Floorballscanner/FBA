@@ -299,44 +299,37 @@
                 if (counter == 0 && Ball_pos == 1) {
                     Not_p[line_on - 1]++;
                     Not_g[line_on - 1]++;
-                    if (line_on < 4) {
-                        Not_p[7]++;
-                        Not_g[7]++;
-                    }
+                    Not_p[7]++;
+                    Not_g[7]++;
+
                     NotnoT2_p[line_on_2 - 1]++;
                     NotnoT2_g[line_on_2 - 1]++;
-                    if (line_on_2 < 4) {
-                        NotnoT2_p[7]++;
-                        NotnoT2_g[7]++;
-                    }
+                    NotnoT2_p[7]++;
+                    NotnoT2_g[7]++;
                 }
                 if (counter == 0 && Ball_pos == 2) {
                     Notno_p[line_on - 1]++;
                     Notno_g[line_on - 1]++;
-                    if (line_on < 4) {
-                        Notno_p[7]++;
-                        Notno_g[7]++;
-                    }
+                    Notno_p[7]++;
+                    Notno_g[7]++;
+
                     NotT2_p[line_on_2 - 1]++;
                     NotT2_g[line_on_2 - 1]++;
-                    if (line_on_2 < 4) {
-                        NotT2_p[7]++;
-                        NotT2_g[7]++;
-                    }
+                    NotT2_p[7]++;
+                    NotT2_g[7]++;
+
                 }
                 if (counter == 0) {
                     Nos_p[line_on - 1]++;
                     Nos_g[line_on - 1]++;
-                    if (line_on < 4) {
-                        Nos_p[7]++;
-                        Nos_g[7]++;
-                    }
+                    Nos_p[7]++;
+                    Nos_g[7]++;
+
                     NosT2_p[line_on_2 - 1]++;
                     NosT2_g[line_on_2 - 1]++;
-                    if (line_on_2 < 4) {
-                        NosT2_p[7]++;
-                        NosT2_g[7]++;
-                    }
+                    NosT2_p[7]++;
+                    NosT2_g[7]++;
+
                 }
                 document.getElementById("start").innerHTML = "Stop";
                 document.getElementById("start").style.background='#3046FB';
@@ -463,22 +456,19 @@
              Toc_g[line_on - 1]++;
              Toc_p[7]++;
              Toc_g[7]++;
-             }
              
              TocT2_p[line_on_2 - 1]++;
              TocT2_g[line_on_2 - 1]++;
              TocT2_p[7]++;
              TocT2_g[7]++;
-             }
 
              if (Ball_pos == 1) {
                 Pos_p[line_on - 1]++;
                 Pos_g[line_on - 1]++;
                 shiftPos++;
                 Pos_g[7]++;
-                 Pos_p[7]++;
-                }
-
+                Pos_p[7]++;
+            }
              
              if (Ball_pos == 2) {
                 PosT2_p[line_on_2 - 1]++;
@@ -486,9 +476,8 @@
                 shiftPos_2++;
                 PosT2_g[7]++;
                 PosT2_p[7]++;
-
-
              }
+
          else {
 
          }
@@ -496,16 +485,16 @@
              // Possession
 
              p_p[line_on - 1].innerHTML = Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
-             p_p[7].innerHTML = Math.round(100 * Pos_p[7] / (Toc_p[0] + Toc_p[1] + Toc_p[2]));
+             p_p[7].innerHTML = Math.round(100 * Pos_p[7] / Toc_p[7]);
 
              p_g[line_on - 1].innerHTML = Math.round(100 * Pos_g[line_on - 1] / Toc_g[line_on - 1]);
-             p_g[7].innerHTML = Math.round(100 * Pos_g[7] / (Toc_g[0] + Toc_g[1] + Toc_g[2]));
+             p_g[7].innerHTML = Math.round(100 * Pos_g[7] / Toc_g[7]);
              
              pT2_p[line_on_2 - 1].innerHTML = Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
-             pT2_p[7].innerHTML = Math.round(100 * PosT2_p[7] / (TocT2_p[0] + TocT2_p[1] + TocT2_p[2]));
+             pT2_p[7].innerHTML = Math.round(100 * PosT2_p[7] / TocT2_p[7]);
 
              pT2_g[line_on_2 - 1].innerHTML = Math.round(100 * PosT2_g[line_on_2 - 1] / TocT2_g[line_on_2 - 1]);
-             pT2_g[7].innerHTML = Math.round(100 * PosT2_g[7] / (TocT2_g[0] + TocT2_g[1] + TocT2_g[2]));
+             pT2_g[7].innerHTML = Math.round(100 * PosT2_g[7] / TocT2_g[7]);
 
              // Time on Court
 
