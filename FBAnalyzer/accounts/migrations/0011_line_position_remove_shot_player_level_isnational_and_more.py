@@ -50,11 +50,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='level',
-            name='id',
-            field=models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False),
-        ),
-        migrations.AlterField(
-            model_name='level',
             name='isMale',
             field=models.BooleanField(default=True),
         ),
