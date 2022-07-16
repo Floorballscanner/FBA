@@ -33,33 +33,20 @@ class Team(models.Model):
 class Line(models.Model):
     objects = models.Manager()
 
-    NAME = (
-        ('L1', 'Line 1'),
-        ('L2', 'Line 2'),
-        ('L3', 'Line 3'),
-        ('PP1', 'Powerplay 1'),
-        ('PP2', 'Powerplay 2'),
-        ('SH1', 'Shorthanded 1'),
-        ('SH2', 'Shorthanded 2'),
-    )
+    abbr = models.CharField(max_length=10, null=True)
+    name = models.CharField(max_length=20, null=True)
 
     def __str__(self):
-        return f'{self.NAME}'
+        return f'{self.abbr}, {self.name}'
 
 class Position(models.Model):
     objects = models.Manager()
 
-    NAME = (
-        ('LW', 'Left Wing'),
-        ('C', 'Center'),
-        ('RW', 'Right Wing'),
-        ('LD', 'Left Defender'),
-        ('RD', 'Right Defender'),
-        ('G', 'Goalie'),
-    )
+    abbr = models.CharField(max_length=10, null=True)
+    name = models.CharField(max_length=20, null=True)
 
     def __str__(self):
-        return f'{self.NAME}'
+        return f'{self.abbr}, {self.name}'
 
 class Player(models.Model):
     objects = models.Manager()
