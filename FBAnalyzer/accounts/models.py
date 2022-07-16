@@ -21,11 +21,10 @@ class Team(models.Model):
     objects = models.Manager()
 
     name = models.CharField(max_length=100)
-    level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
+    level = models.ForeignKey(Level, on_delete=models.PROTECT)
     isSenior = models.BooleanField(default=True)
     isMen = models.BooleanField(default=True)
     isNational = models.BooleanField(default=False)
-    line = models.ManyToManyField("Line")
 
     def __str__(self):
         return f'{self.name}, {self.level}'
@@ -54,9 +53,10 @@ class Player(models.Model):
     id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    jersey_number = models.IntegerField(null=True)
-    team = models.ManyToManyField(Team, null=True)
-    position = models.ManyToManyField(Position, null=True)
+    jersey_number = models.IntegerField(blank=True)
+    team = models.ManyToManyField(Team, blank=True)
+    line = models.ManyToManyField(Line, blank=True)
+    position = models.ManyToManyField(Position, blank=True)
 
     def __str__(self):
         """String for representing the Model object."""
