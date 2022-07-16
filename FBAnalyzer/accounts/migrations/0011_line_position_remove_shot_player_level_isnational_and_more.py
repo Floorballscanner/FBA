@@ -12,18 +12,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Line',
-            fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Position',
-            fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-            ],
-        ),
         migrations.RemoveField(
             model_name='shot',
             name='player',
@@ -71,16 +59,6 @@ class Migration(migrations.Migration):
             model_name='player',
             name='team',
             field=models.ManyToManyField(null=True, to='accounts.team'),
-        ),
-        migrations.AlterField(
-            model_name='shot',
-            name='id',
-            field=models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False),
-        ),
-        migrations.AlterField(
-            model_name='team',
-            name='id',
-            field=models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False),
         ),
         migrations.AlterField(
             model_name='team',
