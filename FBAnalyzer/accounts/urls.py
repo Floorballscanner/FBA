@@ -22,6 +22,7 @@ router.register(r'livejson', GameViewSet)
 urlpatterns = [
     path('accounts', views.index, name="home"),
     path('accounts/new_game/', views.new_game, name="new-game"),
+    path('accounts/new_game/select_team/', views.select_team, name="select-team"),
     path('accounts/my_team/', views.my_team, name="my-team"),
     path('accounts/my_team/add_new_player/', views.add_new_player, name="add-new-player"),
     path('', include(router.urls)),

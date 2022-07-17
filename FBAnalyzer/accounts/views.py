@@ -70,7 +70,7 @@ class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
 
-def selectTeam(request):
+def select_team(request):
     teams = Team.objects.all().order_by('name')
     context = {
         'teams': teams,

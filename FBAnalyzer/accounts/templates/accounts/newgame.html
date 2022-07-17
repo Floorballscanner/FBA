@@ -20,7 +20,7 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 0px;">
                 <div class="team-selection">
                     <h2>Team 1</h2>
-                    <form method="GET">
+                    <form action='/select_team/' method="GET">
                         <select name="team_id">
                             {% for team in teams %}
                                 <option value="{{ team.id }}">{{ team.name }}</option>
