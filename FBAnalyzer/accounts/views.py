@@ -69,3 +69,11 @@ class TeamViewSet(viewsets.ModelViewSet):
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+def selectTeam(request):
+    teams = Team.objects.all().order_by('name')
+    context = {
+        'teams': teams,
+    }
+
+    return render(request, 'accounts/newgame.html', context=context)
