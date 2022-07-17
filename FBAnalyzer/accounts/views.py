@@ -75,5 +75,4 @@ def select_team(request):
     context = {
         'teams': teams,
     }
-
     return render(request, 'accounts/newgame.html', context=context)
