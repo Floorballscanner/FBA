@@ -4,7 +4,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Player, Team, Game
+from .models import Player, Team, Game, Level
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets
@@ -71,8 +71,10 @@ class GameViewSet(viewsets.ModelViewSet):
 
 def premium_game(request):
     teams = Team.objects.all().order_by('name')
+    levels = Level.objects.all().order_by('name')
 
     context = {
         'teams': teams,
+        'levels': levels,
     }
     return render(request, 'accounts/premiumgame.html', context=context)
