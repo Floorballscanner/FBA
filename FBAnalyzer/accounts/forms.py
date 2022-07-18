@@ -61,6 +61,3 @@ class changeTeam(forms.Form):
     position = forms.ChoiceField(label='Player position', widget=forms.Select(choices=Positions))
     player_name = forms.ChoiceField(label='Player', widget=forms.Select(choices=context))
 
-class SelectTeam(forms.ModelForm):
-
-    teams = forms.ModelChoiceField(queryset=Team.objects.all(), initial=0)
