@@ -20,7 +20,7 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 0px;">
                 <div class="team-selection">
                     <h2>Team 1</h2>
-                    <form method="POST" enctype="multipart/form-data">
+                    <form action="select_team/" method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
                     </form>
