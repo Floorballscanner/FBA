@@ -20,10 +20,12 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 0px;">
                 <div class="team-selection">
                     <h2>Team 1</h2>
-                    <form action="select_team/" method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                    </form>
+                    <select id="select-team" class="form-control-sm custom-select">
+                        <option selected disabled>Choose a team</option>
+                        {% for team in Teams %}
+                            <option value="{{team.id}}">{{team.name}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
             <div class="row justify-content-center" style="Padding-top: 10px;">
