@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets
 from .serializers import UserSerializer, TeamSerializer, GameSerializer
+from .forms import SelectTeam
 
 
 @login_required
@@ -74,8 +75,9 @@ class GameViewSet(viewsets.ModelViewSet):
     serializer_class = GameSerializer
 
 def select_team(request):
-    teams = Team.objects.all().order_by('name')
+    teams = SelectTeam(request.POST or None)
+
     context = {
         'teams': teams,
     }
-    return render(request, 'accounts/newgame.html', context=context)
+    return render(request, 'accounts/premiumgame.html', context=context)
