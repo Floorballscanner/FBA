@@ -63,4 +63,4 @@ class changeTeam(forms.Form):
 
 class SelectTeam(forms.ModelForm):
 
-    team = forms.ModelChoiceField(queryset=Team.objects.all(), initial=0)
+    teams = forms.ModelChoiceField(queryset=Team.objects.all(), initial=0)
