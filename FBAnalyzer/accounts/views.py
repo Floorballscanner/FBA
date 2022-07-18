@@ -9,8 +9,6 @@ from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets
 from .serializers import UserSerializer, TeamSerializer, GameSerializer
-from .forms import SelectTeam
-
 
 @login_required
 def index(request):
