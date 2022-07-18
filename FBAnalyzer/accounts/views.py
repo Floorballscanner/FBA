@@ -70,7 +70,7 @@ class GameViewSet(viewsets.ModelViewSet):
     serializer_class = GameSerializer
 
 def premium_game(request):
-    teams = Team.objects.all()
+    teams = Team.objects.all().order_by('name')
 
     context = {
         'teams': teams,

@@ -20,10 +20,10 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 0px;">
                 <div class="team-selection">
                     <h2>Team 1</h2>
-                    <select id="select-team" class="form-control-sm custom-select">
-                        <option>Choose a team</option>
+                    <select id="select-team-1" class="form-control-sm custom-select">
+                        <option selected disabled>Choose a team</option>
                         {% for team in teams %}
-                            <option value="{{team.id}}">{{team.name}}</option>
+                            <option value="{{team.id}}">{{team.name}}, {{team.level}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -73,9 +73,12 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 10px;">
                 <div class="team-selection">
                     <h2>Team 2</h2>
-                    <form>
-                        <textarea id="away_team" name="awayteam" rows="1" placeholder="Opponent team name" maxlength="20" wrap="off"></textarea>
-                    </form>
+                    <select id="select-team-2" class="form-control-sm custom-select">
+                        <option selected disabled>Choose a team</option>
+                        {% for team in teams %}
+                            <option value="{{team.id}}">{{team.name}}, {{team.level}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
             <div class="row justify-content-center" style="Padding-top: 30px;">
