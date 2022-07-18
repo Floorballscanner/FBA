@@ -18,6 +18,9 @@ def index(request):
 def new_game(request):
     return render(request, 'accounts/newgame.html')
 
+def premium_game(request):
+    return render(request, 'accounts/premiumgame.html')
+
 def my_team(request):
     players = Player.objects.all().order_by('jersey_number')
     context = {
