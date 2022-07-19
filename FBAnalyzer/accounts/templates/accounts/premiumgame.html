@@ -15,7 +15,7 @@ It extends app_layout.html with Django
             <div class="team-selection">
                 <h2>Serie</h2>
                 <select id="select-level" class="form-control-sm custom-select">
-                    <option selected disabled>Select a level</option>
+                    <option selected disabled>Select a level...</option>
                     {% for level in levels %}
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
@@ -26,7 +26,7 @@ It extends app_layout.html with Django
             <div class="team-selection">
                 <h2>Team 1</h2>
                 <select id="select-team-1" class="form-control-sm custom-select">
-                    <option selected disabled>Select a team</option>
+                    <option selected disabled>Select a team...</option>
                     {% for team in teams %}
                         <option value="{{team.id}}">{{team.name}}</option>
                     {% endfor %}
@@ -37,7 +37,7 @@ It extends app_layout.html with Django
             <div class="team-selection">
                 <h2>Team 2</h2>
                 <select id="select-team-2" class="form-control-sm custom-select">
-                    <option selected disabled>Select a team</option>
+                    <option selected disabled>Select a team...</option>
                     {% for team in teams %}
                         <option value="{{team.id}}">{{team.name}}</option>
                     {% endfor %}
@@ -123,6 +123,71 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <h4>Team Lineups</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div class="col-sm-6">
+            <h5><span id="name_t1_20">Team 1</span></h5>
+            <p>Goalie: </p><option selected disabled>Select a player...</option>
+        </div>
+        <div class="col-sm-6">
+            <h5><span id="name_t1_21">Team 2</span></h5>
+            <p>Goalie: </p><option selected disabled>Select a player...</option>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div class="col-sm-2">
+            <h5>Line 1</h5>
+            <p>LW: </p><option selected disabled>Select a player...</option>
+            <p>C: </p><option selected disabled>Select a player...</option>
+            <p>RW: </p><option selected disabled>Select a player...</option>
+            <p>LD: </p><option selected disabled>Select a player...</option>
+            <p>RD: </p><option selected disabled>Select a player...</option>
+        </div>
+        <div class="col-sm-2">
+            <h5>Line 2</h5>
+            <p>LW: </p><option selected disabled>Select a player...</option>
+            <p>C: </p><option selected disabled>Select a player...</option>
+            <p>RW: </p><option selected disabled>Select a player...</option>
+            <p>LD: </p><option selected disabled>Select a player...</option>
+            <p>RD: </p><option selected disabled>Select a player...</option>
+        </div>
+        <div class="col-sm-2">
+            <h5>Line 3</h5>
+            <p>LW: </p><option selected disabled>Select a player...</option>
+            <p>C: </p><option selected disabled>Select a player...</option>
+            <p>RW: </p><option selected disabled>Select a player...</option>
+            <p>LD: </p><option selected disabled>Select a player...</option>
+            <p>RD: </p><option selected disabled>Select a player...</option>
+        </div>
+        <div class="col-sm-2">
+            <h5>Line 1</h5>
+            <p>LW: </p><option selected disabled>Select a player...</option>
+            <p>C: </p><option selected disabled>Select a player...</option>
+            <p>RW: </p><option selected disabled>Select a player...</option>
+            <p>LD: </p><option selected disabled>Select a player...</option>
+            <p>RD: </p><option selected disabled>Select a player...</option>
+        </div>
+        <div class="col-sm-2">
+            <h5>Line 2</h5>
+            <p>LW: </p><option selected disabled>Select a player...</option>
+            <p>C: </p><option selected disabled>Select a player...</option>
+            <p>RW: </p><option selected disabled>Select a player...</option>
+            <p>LD: </p><option selected disabled>Select a player...</option>
+            <p>RD: </p><option selected disabled>Select a player...</option>
+        </div>
+        <div class="col-sm-2">
+            <h5>Line 3</h5>
+            <p>LW: </p><option selected disabled>Select a player...</option>
+            <p>C: </p><option selected disabled>Select a player...</option>
+            <p>RW: </p><option selected disabled>Select a player...</option>
+            <p>LD: </p><option selected disabled>Select a player...</option>
+            <p>RD: </p><option selected disabled>Select a player...</option>
+        </div>
+    </div>
+
     <div class="row justify-content-center" style="Padding-top: 100px;">
         <h4><span id="name_t1_3">Team 1</span></h4>
     </div>
