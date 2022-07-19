@@ -2075,7 +2075,8 @@
     }
 
     function changeLevel() {
-
+        document.getElementById("select-team-1").selectedIndex = "0";
+        document.getElementById("select-team-2").selectedIndex = "0";
     }
 
     function changeTeam1() {
