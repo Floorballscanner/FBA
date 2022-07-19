@@ -20,13 +20,6 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 0px;">
                 <div class="team-selection">
                     <h2>Team 1</h2>
-                    <!-- <form action='accounts/new_game/select_team' method="GET">
-                        <select name="team_id">
-                            {% for team in teams %}
-                                <option value="{{ team.id }}">{{ team.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </form> -->
                     <form>
                         <textarea id="home_team" name="hometeam" rows="1" placeholder="Your team name" maxlength="20" wrap="off"></textarea>
                     </form>
@@ -85,7 +78,7 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 30px;">
                 <div class="pos-input">
                     <p>Position</p>
-                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="20px" height="20px" alt="order" style="Padding: 0px">
+                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" alt="order" style="Padding: 0px">
                     <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
                         <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary"><span id="name_t2_2">Team 2</span></button>
                     </div>
