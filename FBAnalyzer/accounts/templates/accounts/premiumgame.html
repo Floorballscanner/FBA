@@ -14,7 +14,7 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="team-selection">
                 <h2>Serie</h2>
-                <select id="select-level" class="form-control-sm custom-select">
+                <select onchange="changeLevel()" id="select-level" class="form-control-sm custom-select">
                     <option selected disabled>Select a level...</option>
                     {% for level in levels %}
                         <option value="{{level.id}}">{{level.name}}</option>
@@ -25,7 +25,7 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="team-selection">
                 <h2>Team 1</h2>
-                <select id="select-team-1" class="form-control-sm custom-select">
+                <select onchange="changeTeam1() "id="select-team-1" class="form-control-sm custom-select">
                     <option selected disabled>Select a team...</option>
                     {% for team in teams %}
                         <option value="{{team.id}}">{{team.name}}</option>
@@ -36,7 +36,7 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="team-selection">
                 <h2>Team 2</h2>
-                <select id="select-team-2" class="form-control-sm custom-select">
+                <select onchange="changeTeam2()" id="select-team-2" class="form-control-sm custom-select">
                     <option selected disabled>Select a team...</option>
                     {% for team in teams %}
                         <option value="{{team.id}}">{{team.name}}</option>
@@ -130,13 +130,13 @@ It extends app_layout.html with Django
         <div class="row justify-content-center" style="Padding-top: 10px;">
             <div class="col-sm-6">
                 <h5><span id="name_t1_20">Team 1</span></h5>
-                <select id="sT1g" class="form-control-sm custom-select">
+                <select onchange="changePlayer('sT1g')" id="sT1g" class="form-control-sm custom-select">
                     <option selected disabled>Select a goalie...</option>
                 </select>
             </div>
             <div class="col-sm-6">
                 <h5><span id="name_t1_21">Team 2</span></h5>
-                <select id="sT2g" class="form-control-sm custom-select">
+                <select onchange="changePlayer('sT2g')" id="sT2g" class="form-control-sm custom-select">
                     <option selected disabled>Select a goalie...</option>
                 </select>
             </div>
@@ -144,19 +144,19 @@ It extends app_layout.html with Django
         <div class="row justify-content-center" style="Padding-top: 10px;">
             <div class="col-sm-2">
                 <h5>Line 1</h5>
-                <select id="sT1L1lw" class="form-control-sm custom-select">
+                <select onchange="changePlayer('sT1L1lw')" id="sT1L1lw" class="form-control-sm custom-select">
                     <option selected disabled>Select LW...</option>
                 </select>
-                <select id="sT1L1c" class="form-control-sm custom-select">
+                <select onchange="changePlayer('sT1L1c')" id="sT1L1c" class="form-control-sm custom-select">
                     <option selected disabled>Select C...</option>
                 </select>
-                <select id="sT1L1rw" class="form-control-sm custom-select">
+                <select onchange="changePlayer('sT1L1rw')" id="sT1L1rw" class="form-control-sm custom-select">
                     <option selected disabled>Select RW...</option>
                 </select>
-                <select id="sT1L1ld" class="form-control-sm custom-select">
+                <select onchange="changePlayer('sT1L1ld')" id="sT1L1ld" class="form-control-sm custom-select">
                     <option selected disabled>Select LD...</option>
                 </select>
-                <select id="sT1L1rd" class="form-control-sm custom-select">
+                <select onchange="changePlayer('sT1L1rd')" id="sT1L1rd" class="form-control-sm custom-select">
                     <option selected disabled>Select RD...</option>
                 </select>
             </div>
@@ -713,7 +713,7 @@ It extends app_layout.html with Django
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/static/js/variables.js"></script>
-<script type="text/javascript" src="/static/js/gamefunctions.js"></script>
+<script type="text/javascript" src="/static/js/premiumfunctions.js"></script>
 <script type="text/javascript" src="/static/js/livedata.js"></script>
 
 {% endblock %}

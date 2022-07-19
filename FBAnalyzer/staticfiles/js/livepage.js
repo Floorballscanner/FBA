@@ -3,20 +3,18 @@
 
 const csrftoken = getCookie('csrftoken');
 
+// Creates the HTML - page when the window is loaded
+
 window.onload = function() {
 
     fetch("https://fbscanner.io/livejson/")
         .then(response => response.json())
         .then(data => {
 
+            data.sort(GetSortOrder("date"))
             let rows = data.length;
 
-            for (let i = 0; i < rows; i++) {
-
-                const img = document.createElement('img');
-                img.setAttribute('src',"{% static 'live.png' %}");
-                img.setAttribute('width', '30px');
-                img.style.paddingTop = "55px";
+            for (let i = 0; i < rows ; i++) {
 
                 const div = document.createElement('div');
                 div.setAttribute('class', 'row');
@@ -26,32 +24,54 @@ window.onload = function() {
 
                 const h = document.createElement('h1');
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
-                h.style.paddingTop = "5px";
+                h.style.paddingTop = "10px";
                 h.style.fontWeight = "bold"
 
                 const h2 = document.createElement('h1');
                 h2.innerText = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
                 h2.style.paddingTop = "5px";
+                h2.setAttribute('id', 'goals' + i);
 
-                const h3 = document.createElement('h3');
+                const h3 = document.createElement('h5');
                 h3.innerText = "Period " + data[i].periodNr;
                 h3.style.paddingTop = "5px";
+                h3.setAttribute('id', 'period' + i);
 
                 var date = new Date(data[i].periodClock * 1000);
                 var display = date.toISOString().substr(11, 8);
                 const disp = document.createElement('h3');
                 disp.innerText = display;
                 disp.style.paddingTop = "5px";
-                disp.style.paddingBottom = "25px";
+                disp.setAttribute('id', 'time' + i);
 
+                const text = data[i].url;
+                const nrArray = text.split("/");
+                const nr = nrArray[nrArray.length-2];
+                const button = document.createElement('a');
+                button.setAttribute('class', 'btn btn-primary');
+                button.setAttribute('href', '/live/' + nr);
+                button.setAttribute('role', 'button');
+                button.style.paddingTop = "5px";
+                button.innerText = "Open live";
+                button.style.paddingBottom = "5px";
 
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
-                div2.appendChild(img);
+
+                if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
+                    const img = document.createElement('img');
+                    img.setAttribute('src',"/static/live.png");
+                    img.setAttribute('width', '70px');
+                    img.style.paddingTop = "55px";
+                    div2.appendChild(img);
+                }
+                else {h.style.paddingTop = "55px";}
+
                 div2.appendChild(h);
                 div2.appendChild(h2);
                 div2.appendChild(h3);
                 div2.appendChild(disp);
+                div2.appendChild(button);
 
             }
 
@@ -62,6 +82,7 @@ window.onload = function() {
           console.error('Error:', error);
     });
 
+    t = setTimeout(function(){ updatePage() }, 10000);
 }
 
 function getCookie(name) {
@@ -78,4 +99,48 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+// Function updates the Live page every second
+
+function updatePage() {
+
+    fetch("https://fbscanner.io/livejson/")
+        .then(response => response.json())
+        .then(data => {
+
+            data.sort(GetSortOrder("date"))
+            let rows = data.length;
+
+            for (let i = 0; i < rows ; i++) {
+
+                document.getElementById('goals' + i).innerHTML = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
+                document.getElementById('period' + i).innerHTML = "Period " + data[i].periodNr;
+
+                var date = new Date(data[i].periodClock * 1000);
+                var display = date.toISOString().substr(11, 8);
+                document.getElementById('time' + i).innerHTML = display;
+            }
+
+            console.log('Success:', data);
+        })
+
+        .catch((error) => {
+          console.error('Error:', error);
+    });
+
+    t = setTimeout(function(){ updatePage() }, 1000);
+}
+
+// Sort JSON array by date, sorting function
+
+function GetSortOrder(prop) {
+    return function(a, b) {
+        if (a[prop] < b[prop]) {
+            return 1;
+        } else if (a[prop] > b[prop]) {
+            return -1;
+        }
+        return 0;
+    }
 }

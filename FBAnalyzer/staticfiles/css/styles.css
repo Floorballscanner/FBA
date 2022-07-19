@@ -189,6 +189,10 @@ body {
     font-size: 25px;
 }
 
+.lineup-selection {
+    text-align: center;
+}
+
 .game-btn {
 	text-align: center;
 }
@@ -265,9 +269,6 @@ body {
 	margin-left: 0px;
 }
 
-.pos-input input {
-      margin-left: 10px;
-}
 .stats-L1, .stats-L2, .stats-L3, .stats-Team, .stats-PP1, .stats-PP2, .stats-SH1, .stats-SH2,
 .stats-L1T2, .stats-L2T2, .stats-L3T2, .stats-TeamT2, .stats-PP1T2, .stats-PP2T2, .stats-SH1T2, .stats-SH2T2  {
     text-align: center;
@@ -312,4 +313,7 @@ textarea {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+}
+.gamestats, .linestats {
+	text-align: center;
 }

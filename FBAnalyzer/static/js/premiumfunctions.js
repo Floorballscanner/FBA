@@ -2073,3 +2073,19 @@
         }
 
     }
+
+    function changeLevel() {
+
+    }
+
+    function changeTeam1() {
+
+    }
+
+    function changeTeam2() {
+
+    }
+
+    function changePlayer(player) {
+
+    }
