@@ -189,6 +189,10 @@ body {
     font-size: 25px;
 }
 
+.lineup-selection {
+    text-align: center;
+}
+
 .game-btn {
 	text-align: center;
 }

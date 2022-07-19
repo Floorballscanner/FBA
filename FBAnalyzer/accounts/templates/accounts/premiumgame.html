@@ -128,126 +128,131 @@ It extends app_layout.html with Django
         <h4>Team Lineups</h4>
     </div>
     <div class="row justify-content-center" style="Padding-top: 10px;">
-        <div class="col-sm-6">
-            <h5><span id="name_t1_20">Team 1</span></h5>
-            <select id="sT1g" class="form-control-sm custom-select">
-                <option selected disabled>Select a goalie...</option>
-            </select>
-        </div>
-        <div class="col-sm-6">
-            <h5><span id="name_t1_21">Team 2</span></h5>
-            <select id="sT2g" class="form-control-sm custom-select">
-                <option selected disabled>Select a goalie...</option>
-            </select>
+        <div class="lineup-selection">
+            <div class="col-sm-6">
+                <h5><span id="name_t1_20">Team 1</span></h5>
+                <select id="sT1g" class="form-control-sm custom-select">
+                    <option selected disabled>Select a goalie...</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <h5><span id="name_t1_21">Team 2</span></h5>
+                <select id="sT2g" class="form-control-sm custom-select">
+                    <option selected disabled>Select a goalie...</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 10px;">
-        <div class="col-sm-2">
-            <h5>Line 1</h5>
-            <select id="sT1L1lw" class="form-control-sm custom-select">
-                <option selected disabled>Select LW...</option>
-            </select>
-            <select id="sT1L1c" class="form-control-sm custom-select">
-                <option selected disabled>Select C...</option>
-            </select>
-            <select id="sT1L1rw" class="form-control-sm custom-select">
-                <option selected disabled>Select RW...</option>
-            </select>
-            <select id="sT1L1ld" class="form-control-sm custom-select">
-                <option selected disabled>Select LD...</option>
-            </select>
-            <select id="sT1L1rd" class="form-control-sm custom-select">
-                <option selected disabled>Select RD...</option>
-            </select>
-        </div>
-        <div class="col-sm-2">
-            <h5>Line 2</h5>
-            <select id="sT1L2lw" class="form-control-sm custom-select">
-                <option selected disabled>Select LW...</option>
-            </select>
-            <select id="sT1L2c" class="form-control-sm custom-select">
-                <option selected disabled>Select C...</option>
-            </select>
-            <select id="sT1L2rw" class="form-control-sm custom-select">
-                <option selected disabled>Select RW...</option>
-            </select>
-            <select id="sT1L2ld" class="form-control-sm custom-select">
-                <option selected disabled>Select LD...</option>
-            </select>
-            <select id="sT1L2rd" class="form-control-sm custom-select">
-                <option selected disabled>Select RD...</option>
-            </select>
-        </div>
-        <div class="col-sm-2">
-            <select id="sT1L3lw" class="form-control-sm custom-select">
-                <option selected disabled>Select LW...</option>
-            </select>
-            <select id="sT1L3c" class="form-control-sm custom-select">
-                <option selected disabled>Select C...</option>
-            </select>
-            <select id="sT1L3rw" class="form-control-sm custom-select">
-                <option selected disabled>Select RW...</option>
-            </select>
-            <select id="sT1L3ld" class="form-control-sm custom-select">
-                <option selected disabled>Select LD...</option>
-            </select>
-            <select id="sT1L3rd" class="form-control-sm custom-select">
-                <option selected disabled>Select RD...</option>
-            </select>
-        </div>
-        <div class="col-sm-2">
-            <h5>Line 1</h5>
-            <select id="sT2L1lw" class="form-control-sm custom-select">
-                <option selected disabled>Select LW...</option>
-            </select>
-            <select id="sT2L1c" class="form-control-sm custom-select">
-                <option selected disabled>Select C...</option>
-            </select>
-            <select id="sT2L1rw" class="form-control-sm custom-select">
-                <option selected disabled>Select RW...</option>
-            </select>
-            <select id="sT2L1ld" class="form-control-sm custom-select">
-                <option selected disabled>Select LD...</option>
-            </select>
-            <select id="sT2L1rd" class="form-control-sm custom-select">
-                <option selected disabled>Select RD...</option>
-            </select>
-        </div>
-        <div class="col-sm-2">
-            <h5>Line 2</h5>
-            <select id="sT2L2lw" class="form-control-sm custom-select">
-                <option selected disabled>Select LW...</option>
-            </select>
-            <select id="sT2L2c" class="form-control-sm custom-select">
-                <option selected disabled>Select C...</option>
-            </select>
-            <select id="sT2L2rw" class="form-control-sm custom-select">
-                <option selected disabled>Select RW...</option>
-            </select>
-            <select id="sT2L2ld" class="form-control-sm custom-select">
-                <option selected disabled>Select LD...</option>
-            </select>
-            <select id="sT2L2rd" class="form-control-sm custom-select">
-                <option selected disabled>Select RD...</option>
-            </select>
-        </div>
-        <div class="col-sm-2">
-            <h5>Line 3</h5>
-            <select id="sT2L3lw" class="form-control-sm custom-select">
-                <option selected disabled>Select LW...</option>
-            </select>
-            <select id="sT2L3c" class="form-control-sm custom-select">
-                <option selected disabled>Select C...</option>
-            </select>
-            <select id="sT2L3rw" class="form-control-sm custom-select">
-                <option selected disabled>Select RW...</option>
-            </select>
-            <select id="sT2L3ld" class="form-control-sm custom-select">
-                <option selected disabled>Select LD...</option>
-            </select>
-            <select id="sT2L3rd" class="form-control-sm custom-select">
-                <option selected disabled>Select RD...</option>
-            </select>
+        <div class="lineup-selection">
+            <div class="col-sm-2">
+                <h5>Line 1</h5>
+                <select id="sT1L1lw" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select id="sT1L1c" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select id="sT1L1rw" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select id="sT1L1ld" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select id="sT1L1rd" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 2</h5>
+                <select id="sT1L2lw" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select id="sT1L2c" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select id="sT1L2rw" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select id="sT1L2ld" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select id="sT1L2rd" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 3</h5>
+                <select id="sT1L3lw" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select id="sT1L3c" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select id="sT1L3rw" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select id="sT1L3ld" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select id="sT1L3rd" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 1</h5>
+                <select id="sT2L1lw" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select id="sT2L1c" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select id="sT2L1rw" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select id="sT2L1ld" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select id="sT2L1rd" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 2</h5>
+                <select id="sT2L2lw" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select id="sT2L2c" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select id="sT2L2rw" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select id="sT2L2ld" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select id="sT2L2rd" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 3</h5>
+                <select id="sT2L3lw" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select id="sT2L3c" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select id="sT2L3rw" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select id="sT2L3ld" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select id="sT2L3rd" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
         </div>
     </div>
 
