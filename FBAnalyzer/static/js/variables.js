@@ -39,6 +39,52 @@
     var today = new Date();
     var live = 1; // If live updates are sent to API 1 yes / 0 no
     
+    // Premium game level, team, and player select box elements
+
+    var s_level = document.getElementById("select-level");
+    var s_T1 = document.getElementById("select-team-1");
+    var s_T2 = document.getElementById("select-team-2");
+    var s_T1g = document.getElementById("sT1g");
+    var s_T2g = document.getElementById("sT2g");
+    var s_T1L1lw = document.getElementById("sT1L1lw");
+    var s_T1L1c = document.getElementById("sT1L1c");
+    var s_T1L1rw = document.getElementById("sT1L1rw");
+    var s_T1L1ld = document.getElementById("sT1L1ld");
+    var s_T1L1rd = document.getElementById("sT1L1rd");
+    var s_T1L2lw = document.getElementById("sT1L2lw");
+    var s_T1L2c = document.getElementById("sT1L2c");
+    var s_T1L2rw = document.getElementById("sT1L2rw");
+    var s_T1L2ld = document.getElementById("sT1L2ld");
+    var s_T1L2rd = document.getElementById("sT1L2rd");
+    var s_T1L3lw = document.getElementById("sT1L3lw");
+    var s_T1L3c = document.getElementById("sT1L3c");
+    var s_T1L3rw = document.getElementById("sT1L3rw");
+    var s_T1L3ld = document.getElementById("sT1L3ld");
+    var s_T1L3rd = document.getElementById("sT1L3rd");
+    var s_T2L1lw = document.getElementById("sT2L1lw");
+    var s_T2L1c = document.getElementById("sT2L1c");
+    var s_T2L1rw = document.getElementById("sT2L1rw");
+    var s_T2L1ld = document.getElementById("sT2L1ld");
+    var s_T2L1rd = document.getElementById("sT2L1rd");
+    var s_T2L2lw = document.getElementById("sT2L2lw");
+    var s_T2L2c = document.getElementById("sT2L2c");
+    var s_T2L2rw = document.getElementById("sT2L2rw");
+    var s_T2L2ld = document.getElementById("sT2L2ld");
+    var s_T2L2rd = document.getElementById("sT2L2rd");
+    var s_T2L3lw = document.getElementById("sT2L3lw");
+    var s_T2L3c = document.getElementById("sT2L3c");
+    var s_T2L3rw = document.getElementById("sT2L3rw");
+    var s_T2L3ld = document.getElementById("sT2L3ld");
+    var s_T2L3rd = document.getElementById("sT2L3rd");
+    
+    var s_T1_p = [s_T1g, s_T1L1lw, s_T1L1c, s_T1L1rw, s_T1L1ld, s_T1L1rd,
+                    s_T1L2lw, s_T1L2c, s_T1L2rw, s_T1L2ld, s_T1L2rd, 
+                    s_T1L3lw, s_T1L3c, s_T1L3rw, s_T1L3ld, s_T1L3rd];
+                    
+    var s_T2_p = [s_T2g, s_T2L1lw, s_T2L1c, s_T2L1rw, s_T2L1ld, s_T2L1rd,
+                    s_T2L2lw, s_T2L2c, s_T2L2rw, s_T2L2ld, s_T2L2rd, 
+                    s_T2L3lw, s_T2L3c, s_T2L3rw, s_T2L3ld, s_T2L3rd];
+
     // Team 1 and Team 2 name elements
     
     var name_t1 = "Team 1"; // Team 1 name variable

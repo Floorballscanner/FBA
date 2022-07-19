@@ -2052,7 +2052,6 @@
 
         console.log(name_t1);
         for (let i = 0; i < 19; i++) {
-        console.log(i);
             name_t1_id[i].innerHTML = name_t1;
         }
     }
@@ -2075,8 +2074,16 @@
     }
 
     function changeLevel() {
-        document.getElementById("select-team-1").selectedIndex = "0";
-        document.getElementById("select-team-2").selectedIndex = "0";
+
+        // Deselect Teams and Positions
+        s_T1.selectedIndex = "0";
+        s_T2.selectedIndex = "0";
+
+        for (let i = 0; i < s_T1_p.length; i++) {
+            s_T1_p[i].selectedIndex = "0";
+            s_T2_p[i].selectedIndex = "0";
+        }
+
     }
 
     function changeTeam1() {
