@@ -72,7 +72,7 @@ class GameViewSet(viewsets.ModelViewSet):
 def premium_game(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
-    players = Player.objects.all().order_by('name')
+    players = Player.objects.all().order_by('jersey_number')
 
     context = {
         'teams': teams,
