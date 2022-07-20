@@ -2075,6 +2075,8 @@
 
     function changeLevel() {
 
+        console.log(s_Level.value)
+        console.log(s_Level.name)
         // Deselect Teams and Positions
         s_T1.selectedIndex = "0";
         s_T2.selectedIndex = "0";
@@ -2084,16 +2086,61 @@
             s_T2_p[i].selectedIndex = "0";
         }
 
+        /*fetch('accounts/premium_game/get_teams/', {
+
+           data = s_Level.value
+
+            method: 'PUT', // or 'PUSH'
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+*/
     }
 
     function changeTeam1() {
 
+        for (let i = 0; i < s_T1_p.length; i++) {
+            s_T1_p[i].selectedIndex = "0";
+        }
+
     }
 
     function changeTeam2() {
+
+        for (let i = 0; i < s_T2_p.length; i++) {
+            s_T2_p[i].selectedIndex = "0";
+        }
 
     }
 
     function changePlayer(player) {
 
     }
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');

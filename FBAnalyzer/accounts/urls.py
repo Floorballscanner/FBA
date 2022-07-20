@@ -23,6 +23,8 @@ urlpatterns = [
     path('accounts', views.index, name="home"),
     path('accounts/new_game/', views.new_game, name="new-game"),
     path('accounts/premium_game/', views.premium_game, name="new-game-premium"),
+    path('accounts/premium_game/get_teams/', views.get_teams, name="get-teams"),
+    path('accounts/premium_game/get_players', views.get_players, name="get-players"),
     path('accounts/my_team/', views.my_team, name="my-team"),
     path('accounts/my_team/add_new_player/', views.add_new_player, name="add-new-player"),
     path('', include(router.urls)),

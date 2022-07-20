@@ -72,9 +72,30 @@ class GameViewSet(viewsets.ModelViewSet):
 def premium_game(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
+    players = Player.objects.all().order_by('name')
 
     context = {
         'teams': teams,
         'levels': levels,
+        'players': players,
     }
+    return render(request, 'accounts/premiumgame.html', context=context)
+
+def get_teams(request, level):
+    teams = Team.objects.filter(level__id=level).order_by('name')
+
+    context = {
+        'teams': teams,
+    }
+
+    return render(request, 'accounts/premiumgame.html', context=context)
+
+
+def get_players(request, team):
+    players = Player.objects.filter(team__id=team).order_by('jersey_number')
+
+    context = {
+        'players': players,
+    }
+
     return render(request, 'accounts/premiumgame.html', context=context)
