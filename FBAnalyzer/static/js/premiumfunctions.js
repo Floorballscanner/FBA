@@ -2086,7 +2086,7 @@
             s_T2_p[i].selectedIndex = "0";
         }
 
-        fetch("https://fbscanner.io/apis/teams?level_id=" + s_Level.options[s_Level.selectedIndex].value)
+        fetch("https://fbscanner.io/apis/teamlist?level_id=" + s_Level.options[s_Level.selectedIndex].value)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
