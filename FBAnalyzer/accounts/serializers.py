@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from . models import Team, Game
+from . models import Team, Game, Player
 from django.contrib.auth.models import User
 
 # Serializers define the API representation.
@@ -12,8 +12,12 @@ class UserSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ['url', 'name', 'lineOn', 'possessionPeriod', 'possessionGame', 'goalsPeriod', 'goalsGame', 'xgPeriod',
-                  'xgGame']
+        fields = ['url', 'name', 'level', 'isSenior', 'isMale', 'isNational']
+
+class PlayerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Player
+        fields = ['url', 'id', 'first_name', 'last_name', 'jersey_number', 'team', 'line', 'position']
 
 class GameSerializer(serializers.ModelSerializer):
     class Meta:

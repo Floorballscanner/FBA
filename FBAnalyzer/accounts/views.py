@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Player, Team, Game, Level
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
-from rest_framework import viewsets
-from .serializers import UserSerializer, TeamSerializer, GameSerializer
+from rest_framework import viewsets, generics
+from .serializers import UserSerializer, TeamSerializer, GameSerializer, PlayerSerializer
 
 @login_required
 def index(request):
@@ -68,6 +68,24 @@ class TeamViewSet(viewsets.ModelViewSet):
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+class PlayerViewSet(viewsets.ModelViewSet):
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+
+class TeamList(generics.ListAPIView):
+    serializer_class = TeamSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a 'level_id` query parameter in the URL.
+        """
+        queryset = Team.objects.all()
+        level = self.request.query_params.get('level_id')
+        if level is not None:
+            queryset = queryset.filter(level__id=level)
+        return queryset
 
 def premium_game(request):
     teams = Team.objects.all().order_by('name')

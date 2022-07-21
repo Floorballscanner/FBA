@@ -2086,17 +2086,7 @@
             s_T2_p[i].selectedIndex = "0";
         }
 
-        /*fetch('accounts/premium_game/get_teams/', {
-
-           data = s_Level.value
-
-            method: 'PUT', // or 'PUSH'
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken,
-            },
-            body: JSON.stringify(data),
-        })
+        fetch("https://fbscanner.io/apis/teams?level_id=" + s_Level.options[s_Level.selectedIndex].value)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -2104,7 +2094,7 @@
             .catch((error) => {
                 console.error('Error:', error);
         });
-*/
+
     }
 
     function changeTeam1() {
