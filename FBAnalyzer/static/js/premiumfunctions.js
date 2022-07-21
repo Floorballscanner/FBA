@@ -2076,7 +2076,9 @@
     function changeLevel() {
 
         console.log(s_Level.options[s_Level.value])
-        console.log(s_Level[s_Level.value].value)
+        console.log(s_Level.options)
+        console.log(s_Level.options[selectedIndex].value)
+
         // Deselect Teams and Positions
         s_T1.selectedIndex = "0";
         s_T2.selectedIndex = "0";
