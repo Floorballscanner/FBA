@@ -19,7 +19,6 @@ router.register(r'users', UserViewSet)
 router.register(r'teams', TeamViewSet)
 router.register(r'players', PlayerViewSet)
 router.register(r'livejson', GameViewSet)
-router.register(r'teamlist', TeamList, basename='Team')
 
 urlpatterns = [
     path('accounts', views.index, name="home"),
@@ -28,6 +27,7 @@ urlpatterns = [
     path('accounts/premium_game/get_teams/', views.get_teams, name="get-teams"),
     path('accounts/premium_game/get_players', views.get_players, name="get-players"),
     path('accounts/my_team/', views.my_team, name="my-team"),
+    path('apis/teamlist/', views.TeamList.as_view(), name="team-list"),
     path('accounts/my_team/add_new_player/', views.add_new_player, name="add-new-player"),
     path('', include(router.urls)),
 ]
