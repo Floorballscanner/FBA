@@ -2090,10 +2090,10 @@
                 console.log('Success:', data);
 
                 removeOptions(s_T1);
-                removeOptions(s_T2)
+                removeOptions(s_T2);
 
                 for (let i=0; i<data.length; i++) {
-                    var option = new Option(data[i].url, data[i].name);
+                    var option = new Option(data[i].name, data[i].url);
                     s_T1.appendChild(option);
                     s_T2.appendChild(option);
                 }
