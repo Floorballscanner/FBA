@@ -2075,8 +2075,6 @@
 
     function changeLevel() {
 
-        console.log(s_Level.options[s_Level.selectedIndex].value)
-
         // Deselect Teams and Positions
         s_T1.selectedIndex = "0";
         s_T2.selectedIndex = "0";
@@ -2086,10 +2084,15 @@
             s_T2_p[i].selectedIndex = "0";
         }
 
-        fetch("https://fbscanner.io/apis/teamlist?level_id=" + s_Level.options[s_Level.selectedIndex].value)
+        fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level.options[s_Level.selectedIndex].value)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+
+                removeOptions(s_T1);
+                removeOptions(s_T2);
+
+
         })
             .catch((error) => {
                 console.error('Error:', error);
@@ -2115,4 +2118,11 @@
 
     function changePlayer(player) {
 
+    }
+
+    function removeOptions(selectElement) {
+       var i, L = selectElement.options.length - 1;
+       for(i = L; i >= 0; i--) {
+          selectElement.remove(i);
+       }
     }
