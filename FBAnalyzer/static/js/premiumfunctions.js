@@ -2095,11 +2095,7 @@
                 for (let i=0; i<data.length; i++) {
                     var opt = new Option(data[i].name, data[i].url);
                     s_T1.appendChild(opt);
-                    console.log(opt);
-                    console.log(s_T1);
                     s_T2.appendChild(opt);
-                    console.log(opt);
-                    console.log(s_T2);
                 }
 
         })
