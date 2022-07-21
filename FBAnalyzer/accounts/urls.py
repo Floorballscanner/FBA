@@ -19,7 +19,7 @@ router.register(r'users', UserViewSet)
 router.register(r'teams', TeamViewSet)
 router.register(r'players', PlayerViewSet)
 router.register(r'livejson', GameViewSet)
-router.register(r'teamlist', TeamList)
+router.register(r'teamlist', TeamList, basename='Team')
 
 urlpatterns = [
     path('accounts', views.index, name="home"),
