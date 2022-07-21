@@ -2092,11 +2092,11 @@
                 removeOptions(s_T1);
                 removeOptions(s_T2);
 
-                console.log(data(0).url)
-                console.log(data(0).name)
+                console.log(data[0].url)
+                console.log(data[0].name)
 
                 for (let i=0; i<=data.length; i++) {
-                    var option = new Option(data(i).url, data(i).name);
+                    var option = new Option(data[i].url, data[i].name);
                     s_T1.appendChild(option);
                     s_T2.appendChild(option);
                 }
