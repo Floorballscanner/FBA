@@ -2082,7 +2082,12 @@
         for (let i = 0; i < s_T1_p.length; i++) {
             s_T1_p[i].selectedIndex = "0";
             s_T2_p[i].selectedIndex = "0";
+            s_T1_p[i].disabled = true;
+            s_T2_p[i].disabled = true;
         }
+
+        s_T1.disabled = false;
+        s_T2.disabled = false;
 
         fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level.options[s_Level.selectedIndex].value)
             .then(response => response.json())
@@ -2108,11 +2113,9 @@
 
     function changeTeam1() {
 
-        console.log(s_T1.options[s_T1.selectedIndex].name)
-        console.log(s_T1.options[s_T1.selectedIndex])
-
         for (let i = 0; i < s_T1_p.length; i++) {
             s_T1_p[i].selectedIndex = "0";
+            s_T1_p[i].disabled = false;
         }
 
         fetch("https://fbscanner.io/apis/playerlist/?team_id=" + s_T1.options[s_T1.selectedIndex].value)
@@ -2143,7 +2146,30 @@
 
         for (let i = 0; i < s_T2_p.length; i++) {
             s_T2_p[i].selectedIndex = "0";
+            s_T2_p[i].disabled = false;
         }
+
+        fetch("https://fbscanner.io/apis/playerlist/?team_id=" + s_T2.options[s_T2.selectedIndex].value)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+
+                for (let i=0; i<s_T2_p.length; i++) {
+                    removeOptions(s_T2_p[i]);
+                }
+
+                for (let i=0; i<data.length; i++) {
+
+                    for (let j=0; j<s_T2_p.length; j++) {
+                        opt = new Option(data[i].jersey_number + " " + data[i].last_name, data[i].id);
+                        s_T2_p[j].appendChild(opt);
+                    }
+                }
+
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
 
     }
 
