@@ -77,11 +77,11 @@
     var s_T2L3LD = document.getElementById("sT2L3LD");
     var s_T2L3RD = document.getElementById("sT2L3RD");
     
-    var s_T1_p = [s_T1g, s_T1L1LW, s_T1L1C, s_T1L1RW, s_T1L1LD, s_T1L1RD,
+    var s_T1_p = [s_T1G, s_T1L1LW, s_T1L1C, s_T1L1RW, s_T1L1LD, s_T1L1RD,
                     s_T1L2LW, s_T1L2C, s_T1L2RW, s_T1L2LD, s_T1L2RD, 
                     s_T1L3LW, s_T1L3C, s_T1L3RW, s_T1L3LD, s_T1L3RD];
                     
-    var s_T2_p = [s_T2g, s_T2L1LW, s_T2L1C, s_T2L1RW, s_T2L1LD, s_T2L1RD,
+    var s_T2_p = [s_T2G, s_T2L1LW, s_T2L1C, s_T2L1RW, s_T2L1LD, s_T2L1RD,
                     s_T2L2LW, s_T2L2C, s_T2L2RW, s_T2L2LD, s_T2L2RD, 
                     s_T2L3LW, s_T2L3C, s_T2L3RW, s_T2L3LD, s_T2L3RD];
 
