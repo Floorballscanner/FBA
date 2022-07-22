@@ -25,11 +25,8 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="team-selection">
                 <h2>Team 1</h2>
-                <select onchange="changeTeam1() "id="select-team-1" class="form-control-sm custom-select">
+                <select onchange="changeTeam1()" id="select-team-1" class="form-control-sm custom-select">
                     <option selected disabled>Select a team...</option>
-                    {% for team in teams %}
-                        <option value="{{team.id}}">{{team.name}}</option>
-                    {% endfor %}
                 </select>
             </div>
         </div>
@@ -38,9 +35,6 @@ It extends app_layout.html with Django
                 <h2>Team 2</h2>
                 <select onchange="changeTeam2()" id="select-team-2" class="form-control-sm custom-select">
                     <option selected disabled>Select a team...</option>
-                    {% for team in teams %}
-                        <option value="{{team.id}}">{{team.name}}</option>
-                    {% endfor %}
                 </select>
             </div>
         </div>

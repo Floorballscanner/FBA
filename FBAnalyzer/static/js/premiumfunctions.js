@@ -2093,9 +2093,10 @@
                 removeOptions(s_T2);
 
                 for (let i=0; i<data.length; i++) {
-                    var opt = new Option(data[i].name, data[i].url);
-                    s_T1.appendChild(opt);
-                    s_T2.appendChild(opt);
+                    var opt1 = new Option(data[i].name, data[i].url);
+                    var opt2 = new Option(data[i].name, data[i].url);
+                    s_T1.appendChild(opt1);
+                    s_T2.appendChild(opt2);
                 }
 
         })
