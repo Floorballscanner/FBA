@@ -2127,8 +2127,8 @@
                 for (let i=0; i<data.length; i++) {
 
                     for (let j=0; j<s_T1_p.length; j++) {
-                        opt[j] = new Option(data[i].jersey_number + " " + data[i].last_name, data[i].id);
-                        s_T1_p[j].appendChild(opt[j]);
+                        opt = new Option(data[i].jersey_number + " " + data[i].last_name, data[i].id);
+                        s_T1_p[j].appendChild(opt);
                     }
                 }
 
