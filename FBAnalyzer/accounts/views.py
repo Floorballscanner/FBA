@@ -87,6 +87,20 @@ class TeamList(generics.ListAPIView):
             queryset = queryset.filter(level__id=level)
         return queryset
 
+class PlayerList(generics.ListAPIView):
+    serializer_class = PlayerSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a 'level_id` query parameter in the URL.
+        """
+        queryset = Player.objects.all()
+        team = self.request.query_params.get('team_id')
+        if team is not None:
+            queryset = queryset.filter(team__id=team)
+        return queryset
+
 def premium_game(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')

@@ -2112,6 +2112,30 @@
             s_T1_p[i].selectedIndex = "0";
         }
 
+        fetch("https://fbscanner.io/apis/playerlist/?team_id=" + s_T1.options[s_T1.selectedIndex].value)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+
+                for (let i=0; i<s_T1_p.length; i++) {
+                    removeOptions(s_T1_p[i]);
+                }
+
+                for (let i=0; i<data.length; i++) {
+                    var opt = new Option(data[i].jersey_number + " " + data[i].name, data[i].url);
+
+                    for (let j=0; j<s_T1_p.length; j++) {
+                        s_T1_p[j].appendChild(opt);
+                    }
+                }
+
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+
+    }
+
     }
 
     function changeTeam2() {
