@@ -2140,13 +2140,13 @@
                     console.log(line)
 
                     if (pos.length > 0 && line.length > 0) {
-                        document.getElementById("sT1"+line+pos).value = data[i].id);
+                        document.getElementById("sT1"+line+pos).value = data[i].id;
                         console.log("sT1"+line+pos)
                         console.log(document.getElementById("sT1"+line+pos).value)
 
                     }
                     else if (pos = "G") {
-                        document.getElementById("sT1G").value = data[i].id);
+                        document.getElementById("sT1G").value = data[i].id;
                     }
                 }
 
