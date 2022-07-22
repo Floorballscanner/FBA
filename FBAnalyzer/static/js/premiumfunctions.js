@@ -2136,8 +2136,6 @@
 
     }
 
-    }
-
     function changeTeam2() {
 
         for (let i = 0; i < s_T2_p.length; i++) {
