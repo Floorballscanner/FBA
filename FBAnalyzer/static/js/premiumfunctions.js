@@ -2108,6 +2108,8 @@
 
     function changeTeam1() {
 
+        console.log(s_T1.options[s_T1.selectedIndex].value)
+
         for (let i = 0; i < s_T1_p.length; i++) {
             s_T1_p[i].selectedIndex = "0";
         }
