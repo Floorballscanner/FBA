@@ -2094,6 +2094,7 @@
 
                 for (let i=0; i<data.length; i++) {
                     var opt1 = new Option(data[i].name, data[i].id);
+                    console.log(data[i].id);
                     var opt2 = new Option(data[i].name, data[i].id);
                     s_T1.appendChild(opt1);
                     s_T2.appendChild(opt2);
