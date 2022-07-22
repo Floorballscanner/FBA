@@ -2134,8 +2134,8 @@
                         s_T1_p[j].appendChild(opt);
                     }
 
-                    var pos = data[i].position.abbr;
-                    var line = data[i].line.abbr;
+                    var pos = data[i].position;
+                    var line = data[i].line;
                     console.log(pos)
                     console.log(line)
 
