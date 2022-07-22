@@ -2133,6 +2133,16 @@
                         opt = new Option(data[i].jersey_number + " " + data[i].last_name, data[i].id);
                         s_T1_p[j].appendChild(opt);
                     }
+
+                    var pos = data[i].position.abbr;
+                    var line = data[i].line.abbr;
+
+                    if (pos.length > 0 && line.length > 0) {
+                        document.getElementById("sT1"+line+pos).value = data[i].id);
+                    }
+                    else if (pos = "G") {
+                        document.getElementById("sT1G").value = data[i].id);
+                    }
                 }
 
         })

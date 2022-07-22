@@ -44,46 +44,46 @@
     var s_Level = document.getElementById("select-level");
     var s_T1 = document.getElementById("select-team-1");
     var s_T2 = document.getElementById("select-team-2");
-    var s_T1g = document.getElementById("sT1g");
-    var s_T2g = document.getElementById("sT2g");
-    var s_T1L1lw = document.getElementById("sT1L1lw");
-    var s_T1L1c = document.getElementById("sT1L1c");
-    var s_T1L1rw = document.getElementById("sT1L1rw");
-    var s_T1L1ld = document.getElementById("sT1L1ld");
-    var s_T1L1rd = document.getElementById("sT1L1rd");
-    var s_T1L2lw = document.getElementById("sT1L2lw");
-    var s_T1L2c = document.getElementById("sT1L2c");
-    var s_T1L2rw = document.getElementById("sT1L2rw");
-    var s_T1L2ld = document.getElementById("sT1L2ld");
-    var s_T1L2rd = document.getElementById("sT1L2rd");
-    var s_T1L3lw = document.getElementById("sT1L3lw");
-    var s_T1L3c = document.getElementById("sT1L3c");
-    var s_T1L3rw = document.getElementById("sT1L3rw");
-    var s_T1L3ld = document.getElementById("sT1L3ld");
-    var s_T1L3rd = document.getElementById("sT1L3rd");
-    var s_T2L1lw = document.getElementById("sT2L1lw");
-    var s_T2L1c = document.getElementById("sT2L1c");
-    var s_T2L1rw = document.getElementById("sT2L1rw");
-    var s_T2L1ld = document.getElementById("sT2L1ld");
-    var s_T2L1rd = document.getElementById("sT2L1rd");
-    var s_T2L2lw = document.getElementById("sT2L2lw");
-    var s_T2L2c = document.getElementById("sT2L2c");
-    var s_T2L2rw = document.getElementById("sT2L2rw");
-    var s_T2L2ld = document.getElementById("sT2L2ld");
-    var s_T2L2rd = document.getElementById("sT2L2rd");
-    var s_T2L3lw = document.getElementById("sT2L3lw");
-    var s_T2L3c = document.getElementById("sT2L3c");
-    var s_T2L3rw = document.getElementById("sT2L3rw");
-    var s_T2L3ld = document.getElementById("sT2L3ld");
-    var s_T2L3rd = document.getElementById("sT2L3rd");
+    var s_T1G = document.getElementById("sT1G");
+    var s_T2G = document.getElementById("sT2G");
+    var s_T1L1LW = document.getElementById("sT1L1LW");
+    var s_T1L1C = document.getElementById("sT1L1C");
+    var s_T1L1RW = document.getElementById("sT1L1RW");
+    var s_T1L1LD = document.getElementById("sT1L1LD");
+    var s_T1L1RD = document.getElementById("sT1L1RD");
+    var s_T1L2LW = document.getElementById("sT1L2LW");
+    var s_T1L2C = document.getElementById("sT1L2C");
+    var s_T1L2RW = document.getElementById("sT1L2RW");
+    var s_T1L2LD = document.getElementById("sT1L2LD");
+    var s_T1L2RD = document.getElementById("sT1L2RD");
+    var s_T1L3LW = document.getElementById("sT1L3LW");
+    var s_T1L3C = document.getElementById("sT1L3C");
+    var s_T1L3RW = document.getElementById("sT1L3RW");
+    var s_T1L3LD = document.getElementById("sT1L3LD");
+    var s_T1L3RD = document.getElementById("sT1L3RD");
+    var s_T2L1LW = document.getElementById("sT2L1LW");
+    var s_T2L1C = document.getElementById("sT2L1C");
+    var s_T2L1RW = document.getElementById("sT2L1RW");
+    var s_T2L1LD = document.getElementById("sT2L1LD");
+    var s_T2L1RD = document.getElementById("sT2L1RD");
+    var s_T2L2LW = document.getElementById("sT2L2LW");
+    var s_T2L2C = document.getElementById("sT2L2C");
+    var s_T2L2RW = document.getElementById("sT2L2RW");
+    var s_T2L2LD = document.getElementById("sT2L2LD");
+    var s_T2L2RD = document.getElementById("sT2L2RD");
+    var s_T2L3LW = document.getElementById("sT2L3LW");
+    var s_T2L3C = document.getElementById("sT2L3C");
+    var s_T2L3RW = document.getElementById("sT2L3RW");
+    var s_T2L3LD = document.getElementById("sT2L3LD");
+    var s_T2L3RD = document.getElementById("sT2L3RD");
     
-    var s_T1_p = [s_T1g, s_T1L1lw, s_T1L1c, s_T1L1rw, s_T1L1ld, s_T1L1rd,
-                    s_T1L2lw, s_T1L2c, s_T1L2rw, s_T1L2ld, s_T1L2rd, 
-                    s_T1L3lw, s_T1L3c, s_T1L3rw, s_T1L3ld, s_T1L3rd];
+    var s_T1_p = [s_T1g, s_T1L1LW, s_T1L1C, s_T1L1RW, s_T1L1LD, s_T1L1RD,
+                    s_T1L2LW, s_T1L2C, s_T1L2RW, s_T1L2LD, s_T1L2RD, 
+                    s_T1L3LW, s_T1L3C, s_T1L3RW, s_T1L3LD, s_T1L3RD];
                     
-    var s_T2_p = [s_T2g, s_T2L1lw, s_T2L1c, s_T2L1rw, s_T2L1ld, s_T2L1rd,
-                    s_T2L2lw, s_T2L2c, s_T2L2rw, s_T2L2ld, s_T2L2rd, 
-                    s_T2L3lw, s_T2L3c, s_T2L3rw, s_T2L3ld, s_T2L3rd];
+    var s_T2_p = [s_T2g, s_T2L1LW, s_T2L1C, s_T2L1RW, s_T2L1LD, s_T2L1RD,
+                    s_T2L2LW, s_T2L2C, s_T2L2RW, s_T2L2LD, s_T2L2RD, 
+                    s_T2L3LW, s_T2L3C, s_T2L3RW, s_T2L3LD, s_T2L3RD];
 
     // Team 1 and Team 2 name elements
     
