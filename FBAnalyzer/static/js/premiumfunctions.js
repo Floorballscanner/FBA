@@ -2137,7 +2137,10 @@
                     var pos = data[i].position;
                     var line = data[i].line;
                     console.log("Position " + pos)
+                    console.log("Position " + convPos(pos))
                     console.log("Line " + line)
+                    console.log("Line " + convLine(line))
+
 
                     if (pos.length > 0 && line.length > 0) {
                        // document.getElementById("sT1"+line+pos).value = data[i].id;
@@ -2196,3 +2199,6 @@
           selectElement.remove(i);
        }
     }
+
+    var convLine = {"L1": 2, "L2": 3, "L3": 4};
+    var convPos = {"LW": 3, "C": 4, "RW": 5, "LD": 6, "RD": 7};
