@@ -2134,20 +2134,15 @@
                         s_T1_p[j].appendChild(opt);
                     }
 
-                    var pos = data[i].position;
-                    var line = data[i].line;
-                    console.log("Position " + pos)
-                    console.log("Position " + convPos(pos))
-                    console.log("Line " + line)
-                    console.log("Line " + convLine(line))
-
+                    var pos = convPos(data[i].position);
+                    var line = convLine(data[i].line);
 
                     if (pos.length > 0 && line.length > 0) {
-                       // document.getElementById("sT1"+line+pos).value = data[i].id;
+                        document.getElementById("sT1"+line+pos).value = data[i].id;
 
                     }
                     else if (pos = "G") {
-                      //  document.getElementById("sT1G").value = data[i].id;
+                        document.getElementById("sT1G").value = data[i].id;
                     }
                 }
 
@@ -2228,4 +2223,8 @@
         else if (pos == 7) {
             return "RD"
         }
+        else if (pos == 8) {
+            return "G"
+        }
+
     }
