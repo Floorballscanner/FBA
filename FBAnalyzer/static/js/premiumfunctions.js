@@ -2175,6 +2175,17 @@
                         opt = new Option(data[i].jersey_number + " " + data[i].last_name, data[i].id);
                         s_T2_p[j].appendChild(opt);
                     }
+
+                    var pos = convPos(data[i].position);
+                    var line = convLine(data[i].line);
+
+                    if (typeof pos !== 'undefined' && typeof line !== 'undefined') {
+                        document.getElementById("sT2"+line+pos).value = data[i].id;
+
+                    }
+                    else if (pos = "G") {
+                        document.getElementById("sT2G").value = data[i].id;
+                    }
                 }
 
         })
