@@ -2200,7 +2200,7 @@
        }
     }
 
-    function convLine(line) {"L1": 2, "L2": 3, "L3": 4
+    function convLine(line) {
         if (line == 2) {
             return "L1"
         }
