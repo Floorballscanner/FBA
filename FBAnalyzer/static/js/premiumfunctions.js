@@ -2200,5 +2200,32 @@
        }
     }
 
-    var convLine = {"L1": 2, "L2": 3, "L3": 4};
-    var convPos = {"LW": 3, "C": 4, "RW": 5, "LD": 6, "RD": 7};
+    function convLine(line) {"L1": 2, "L2": 3, "L3": 4
+        if (line == 2) {
+            return "L1"
+        }
+        else if (line == 3) {
+            return "L2"
+        }
+        else if (line == 4) {
+            return "L3"
+        }
+    }
+
+    function convPos(pos) {
+        if (pos == 3) {
+            return "LW"
+        }
+        else if (pos == 4) {
+            return "C"
+        }
+        else if (pos == 5) {
+            return "RW"
+        }
+        else if (pos == 6) {
+            return "LD"
+        }
+        else if (pos == 7) {
+            return "RD"
+        }
+    }
