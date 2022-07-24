@@ -2207,6 +2207,8 @@
         };
 
         console.log(data);
+        console.log("https://fbscanner.io/accounts/players/update/" + player_id);
+        console.log("https://fbscanner.io/accounts/players/update/c1cf76c4-9db8-4f95-80de-53540f79cc33/");
 
          fetch("https://fbscanner.io/accounts/players/update/" + player_id, {
 
