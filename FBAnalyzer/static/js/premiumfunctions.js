@@ -2203,7 +2203,7 @@
         var line = l;
 
         data = {"position" : pos,
-                "line" : line
+                "line" : line,
         }
 
          fetch("https://fbscanner.io/accounts/players/update/" + player_id, {
