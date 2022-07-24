@@ -2145,11 +2145,12 @@
                         console.log("Adding player to roster: " + "sT1"+line+pos)
 
                     }
-                    else if (pos = "G") {
+                    else if (pos == "G") {
                         document.getElementById("sT1G").value = data[i].id;
                         console.log("Player is a goalie.")
 
                     }
+                    else {}
                 }
 
         })
