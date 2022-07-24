@@ -20,8 +20,8 @@ class PlayerSerializer(serializers.ModelSerializer):
         fields = ['url', 'id', 'first_name', 'last_name', 'jersey_number', 'team', 'line', 'position']
 
 class PlayerUpdateSerializer(serializers.ModelSerializer):
-    line = serializers.PrimaryKeyRelatedField(many=True)
-    position = serializers.PrimaryKeyRelatedField(many=True)
+    line = serializers.PrimaryKeyRelatedField(queryset=Player.objects.all())
+    position = serializers.PrimaryKeyRelatedField(queryset=Player.objects.all())
 
     class Meta:
         model = Player
