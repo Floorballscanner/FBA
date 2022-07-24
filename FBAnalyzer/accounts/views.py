@@ -4,6 +4,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from rest_framework.response import Response
+
 from .models import Player, Team, Game, Level
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
@@ -116,3 +118,12 @@ def premium_game(request):
 class UpdatePlayer(generics.UpdateAPIView):
     serializer_class = PlayerUpdateSerializer
     queryset = Player.objects.all()
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        data = {'status': request.data.get('status')}
+        serializer = self.get_serializer(instance, data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
