@@ -5,10 +5,10 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Player, Team, Game, Level
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets, generics
-from .serializers import UserSerializer, TeamSerializer, GameSerializer, PlayerSerializer
+from .serializers import UserSerializer, TeamSerializer, GameSerializer, PlayerSerializer, PlayerUpdateSerializer
 
 @login_required
 def index(request):
@@ -114,5 +114,5 @@ def premium_game(request):
     return render(request, 'accounts/premiumgame.html', context=context)
 
 class UpdatePlayer(generics.UpdateAPIView):
-    serializer_class = PlayerSerializer
+    serializer_class = PlayerUpdateSerializer
     queryset = Player.objects.all()
