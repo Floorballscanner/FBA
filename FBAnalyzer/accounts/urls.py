@@ -28,6 +28,6 @@ urlpatterns = [
     path('apis/teamlist/', views.TeamList.as_view(), name="team-list"),
     path('apis/playerlist/', views.PlayerList.as_view(), name="player-list"),
     path('accounts/my_team/add_new_player/', views.add_new_player, name="add-new-player"),
-    path('accounts/players/update/<int:pk>/', views.UpdatePlayer.as_view(), name='player-update'),
+    path('accounts/players/update/<uuid:pk>/', views.UpdatePlayer.as_view(), name='player-update'),
     path('', include(router.urls)),
 ]
