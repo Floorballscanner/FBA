@@ -2202,8 +2202,8 @@
         var pos = p;
         var line = l;
 
-        data = {"position" : pos,
-                "line" : line,
+        data = {"line" : line,
+                "position" : pos,
         };
 
         console.log(data);
