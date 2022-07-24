@@ -2204,7 +2204,7 @@
 
         data = {"position" : pos,
                 "line" : line,
-        }
+        };
 
          fetch("https://fbscanner.io/accounts/players/update/" + player_id, {
 
