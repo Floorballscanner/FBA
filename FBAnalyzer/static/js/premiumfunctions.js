@@ -2208,7 +2208,7 @@
 
         console.log(data);
 
-         fetch(/accounts/players/update/c1cf76c4-9db8-4f95-80de-53540f79cc33/, {
+         fetch("/accounts/players/update/c1cf76c4-9db8-4f95-80de-53540f79cc33/", {
 //"https://fbscanner.io/accounts/players/update/" + player_id
 
           method: 'PUT', // or 'PUT'
