@@ -2208,7 +2208,7 @@
 
         console.log(data);
 
-         fetch("accounts/players/update/" + player_id, {
+         fetch("https://fbscanner.io/accounts/players/update/" + player_id, {
 
           method: 'PUT', // or 'PUT'
           headers: {
