@@ -2208,8 +2208,7 @@
 
         console.log(data);
 
-         fetch("/accounts/players/update/c1cf76c4-9db8-4f95-80de-53540f79cc33/", {
-//"https://fbscanner.io/accounts/players/update/" + player_id
+         fetch("accounts/players/update/" + player_id, {
 
           method: 'PUT', // or 'PUT'
           headers: {
@@ -2225,7 +2224,7 @@
         .catch((error) => {
           console.error('Error:', error);
     });
-       // https://fbscanner.io/accounts/players/update/e6618a53-1021-4e40-a46c-513545984a0f/
+
     }
 
     function removeOptions(selectElement) {
