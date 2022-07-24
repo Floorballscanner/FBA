@@ -2147,7 +2147,7 @@
                     }
                     else if (pos = "G") {
                         document.getElementById("sT1G").value = data[i].id;
-                        console.log("Player is a goalie.)
+                        console.log("Player is a goalie.")
 
                     }
                 }
