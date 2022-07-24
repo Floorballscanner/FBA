@@ -2196,7 +2196,32 @@
 
     }
 
-    function changePlayer(player) {
+    function changePlayer(position, l, p) {
+
+        var player_id = document.getElementById(position).value;
+        var pos = p;
+        var line = l;
+
+        data = {"position" : pos,
+                "line" : line
+        }
+
+         fetch("https://fbscanner.io/accounts/players/update" + player_id, {
+
+          method: 'PUSH', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+          },
+          body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+    })
+        .catch((error) => {
+          console.error('Error:', error);
+    });
 
     }
 

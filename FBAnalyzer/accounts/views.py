@@ -62,7 +62,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 class TeamViewSet(viewsets.ModelViewSet):
-    queryset = Team.objects.all()
+    queryset = Team.objects.all().order_by('name')
     serializer_class = TeamSerializer
 
 class GameViewSet(viewsets.ModelViewSet):
@@ -70,7 +70,7 @@ class GameViewSet(viewsets.ModelViewSet):
     serializer_class = GameSerializer
 
 class PlayerViewSet(viewsets.ModelViewSet):
-    queryset = Player.objects.all()
+    queryset = Player.objects.all().order_by('jersey_number')
     serializer_class = PlayerSerializer
 
 class TeamList(generics.ListAPIView):
@@ -81,7 +81,7 @@ class TeamList(generics.ListAPIView):
         Optionally restricts the returned purchases to a given user,
         by filtering against a 'level_id` query parameter in the URL.
         """
-        queryset = Team.objects.all()
+        queryset = Team.objects.all().order_by('name')
         level = self.request.query_params.get('level_id')
         if level is not None:
             queryset = queryset.filter(level__id=level)
@@ -95,7 +95,7 @@ class PlayerList(generics.ListAPIView):
         Optionally restricts the returned purchases to a given user,
         by filtering against a 'level_id` query parameter in the URL.
         """
-        queryset = Player.objects.all()
+        queryset = Player.objects.all().order_by('jersey_number')
         team = self.request.query_params.get('team_id')
         if team is not None:
             queryset = queryset.filter(team__id=team)
@@ -113,21 +113,6 @@ def premium_game(request):
     }
     return render(request, 'accounts/premiumgame.html', context=context)
 
-def get_teams(request, level):
-    teams = Team.objects.filter(level__id=level).order_by('name')
-
-    context = {
-        'teams': teams,
-    }
-
-    return render(request, 'accounts/premiumgame.html', context=context)
-
-
-def get_players(request, team):
-    players = Player.objects.filter(team__id=team).order_by('jersey_number')
-
-    context = {
-        'players': players,
-    }
-
-    return render(request, 'accounts/premiumgame.html', context=context)
+class UpdatePlayer(generics.UpdateAPIView):
+    serializer_class = PlayerSerializer
+    queryset = Player.objects.all()
