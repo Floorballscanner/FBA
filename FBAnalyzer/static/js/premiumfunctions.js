@@ -2206,7 +2206,7 @@
                 "line" : line,
         }
 
-         fetch("https://fbscanner.io/accounts/players/update/" + player_id, {
+         fetch("https://fbscanner.io/accounts/players/update/" + player_id {
 
           method: 'POST', // or 'PUT'
           headers: {
