@@ -2134,15 +2134,21 @@
                         s_T1_p[j].appendChild(opt);
                     }
 
+                    console.log("Reading player: " + data[i].last_name)
                     var pos = convPos(data[i].position);
+                    console.log("Player position: " + pos)
                     var line = convLine(data[i].line);
+                    console.log("Player line: " + line)
 
                     if (typeof pos !== 'undefined' && typeof line !== 'undefined') {
                         document.getElementById("sT1"+line+pos).value = data[i].id;
+                        console.log("Adding player to roster: " + "sT1"+line+pos)
 
                     }
                     else if (pos = "G") {
                         document.getElementById("sT1G").value = data[i].id;
+                        console.log("Player is a goalie.)
+
                     }
                 }
 
