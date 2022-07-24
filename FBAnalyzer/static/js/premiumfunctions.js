@@ -2208,7 +2208,7 @@
 
          fetch("https://fbscanner.io/accounts/players/update/" + player_id, {
 
-          method: 'PUT', // or 'PUT'
+          method: 'PATCH', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,

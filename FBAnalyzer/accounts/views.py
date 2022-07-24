@@ -116,15 +116,3 @@ def premium_game(request):
 class UpdatePlayer(generics.UpdateAPIView):
     serializer_class = PlayerSerializer
     queryset = Player.objects.all()
-    lookup_field = 'pk'
-
-    def update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return HttpResponse({"message": "player line and position updated successfully"})
-
-        else:
-            return HttpResponse({"message": "failed", "details": serializer.errors})

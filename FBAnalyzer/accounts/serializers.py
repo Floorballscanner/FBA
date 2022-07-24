@@ -19,12 +19,6 @@ class PlayerSerializer(serializers.ModelSerializer):
         model = Player
         fields = ['url', 'id', 'first_name', 'last_name', 'jersey_number', 'team', 'line', 'position']
 
-        def update(self, instance, validated_data):
-            instance.line = validated_data.get('line', instance.line)
-            instance.position = validated_data.get('position', instance.position)
-            instance.save()
-            return instance
-
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
