@@ -124,13 +124,13 @@ It extends app_layout.html with Django
         <div class="row justify-content-center" style="Padding-top: 10px;">
             <div class="col-sm-6">
                 <h5><span id="name_t1_20">Team 1</span></h5>
-                <select disabled onchange="changePlayer('sT1g',,8)" id="sT1G" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT1g',0,8)" id="sT1G" class="form-control-sm custom-select">
                     <option selected disabled>Select a goalie...</option>
                 </select>
             </div>
             <div class="col-sm-6">
                 <h5><span id="name_t1_21">Team 2</span></h5>
-                <select disabled onchange="changePlayer('sT2g',,8)" id="sT2G" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2g',0,8)" id="sT2G" class="form-control-sm custom-select">
                     <option selected disabled>Select a goalie...</option>
                 </select>
             </div>
@@ -192,55 +192,55 @@ It extends app_layout.html with Django
             </div>
             <div class="col-sm-2">
                 <h5>Line 1</h5>
-                <select disabled onchange="changePlayer('sT2L1LW')" id="sT2L1LW" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L1LW',2,3)" id="sT2L1LW" class="form-control-sm custom-select">
                     <option selected disabled>Select LW...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L1C')" id="sT2L1C" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L1C',2,4)" id="sT2L1C" class="form-control-sm custom-select">
                     <option selected disabled>Select C...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L1RW')" id="sT2L1RW" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L1RW',2,5)" id="sT2L1RW" class="form-control-sm custom-select">
                     <option selected disabled>Select RW...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L1LD')" id="sT2L1LD" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L1LD',2,6)" id="sT2L1LD" class="form-control-sm custom-select">
                     <option selected disabled>Select LD...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L1RD')" id="sT2L1RD" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L1RD',2,7)" id="sT2L1RD" class="form-control-sm custom-select">
                     <option selected disabled>Select RD...</option>
                 </select>
             </div>
             <div class="col-sm-2">
                 <h5>Line 2</h5>
-                <select disabled onchange="changePlayer('sT2L2LW')" id="sT2L2LW" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L2LW',3,3)" id="sT2L2LW" class="form-control-sm custom-select">
                     <option selected disabled>Select LW...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L2C')" id="sT2L2C" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L2C',3,4)" id="sT2L2C" class="form-control-sm custom-select">
                     <option selected disabled>Select C...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L2RW')" id="sT2L2RW" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L2RW',3,5)" id="sT2L2RW" class="form-control-sm custom-select">
                     <option selected disabled>Select RW...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L2LD')" id="sT2L2LD" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L2LD',3,6)" id="sT2L2LD" class="form-control-sm custom-select">
                     <option selected disabled>Select LD...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L2RD')" id="sT2L2RD" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L2RD',3,7)" id="sT2L2RD" class="form-control-sm custom-select">
                     <option selected disabled>Select RD...</option>
                 </select>
             </div>
             <div class="col-sm-2">
                 <h5>Line 3</h5>
-                <select disabled onchange="changePlayer('sT2L3LW')" id="sT2L3LW" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L3LW'4,3)" id="sT2L3LW" class="form-control-sm custom-select">
                     <option selected disabled>Select LW...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L3C')" id="sT2L3C" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L3C',4,4)" id="sT2L3C" class="form-control-sm custom-select">
                     <option selected disabled>Select C...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L3RW')" id="sT2L3RW" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L3RW',4,5)" id="sT2L3RW" class="form-control-sm custom-select">
                     <option selected disabled>Select RW...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L3LD')" id="sT2L3LD" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L3LD'4,6)" id="sT2L3LD" class="form-control-sm custom-select">
                     <option selected disabled>Select LD...</option>
                 </select>
-                <select disabled onchange="changePlayer('sT2L3RD')" id="sT2L3RD" class="form-control-sm custom-select">
+                <select disabled onchange="changePlayer('sT2L3RD',4,7)" id="sT2L3RD" class="form-control-sm custom-select">
                     <option selected disabled>Select RD...</option>
                 </select>
             </div>
