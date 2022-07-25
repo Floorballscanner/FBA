@@ -6,11 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 
-from .models import Player, Team, Game, Level
+from .models import Player, Team, Game, Level, Position, Line
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets, generics
-from .serializers import UserSerializer, TeamSerializer, GameSerializer, PlayerSerializer, PlayerUpdateSerializer
+from .serializers import UserSerializer, TeamSerializer,LineSerializer, PositionSerializer, GameSerializer, PlayerSerializer, PlayerUpdateSerializer
 
 @login_required
 def index(request):
@@ -66,6 +66,14 @@ class UserViewSet(viewsets.ModelViewSet):
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all().order_by('name')
     serializer_class = TeamSerializer
+
+class PositionViewSet(viewsets.ModelViewSet):
+    queryset = Position.objects.all().order_by("id")
+    serializer_class = PositionSerializer
+
+class LineViewSet(viewsets.ModelViewSet):
+    queryset = Line.objects.all().order_by("id")
+    serializer_class = LineSerializer
 
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all()
