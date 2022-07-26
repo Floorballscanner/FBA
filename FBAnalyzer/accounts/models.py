@@ -2,6 +2,7 @@
 
 from django.db import models
 import uuid
+from django.contrib.auth.models import User
 
 # Create your models here
 
@@ -47,6 +48,17 @@ class Position(models.Model):
     def __str__(self):
         return f'{self.abbr}, {self.name}'
 
+class Game(models.Model):
+    objects = models.Manager()
+
+    date = models.DateField()
+    user = models.ManyToManyField(User)
+    teams = models.ManyToManyField(Team)
+
+
+    def __str__(self):
+        return f'{self.teams}, {self.date}'
+
 class Player(models.Model):
     objects = models.Manager()
 
@@ -77,7 +89,7 @@ class Shot(models.Model):
     def __str__(self):
         return f'{self.type}, {self.result}'
 
-class Game(models.Model):
+class LiveData(models.Model):
     objects = models.Manager()
     
     # Game variables

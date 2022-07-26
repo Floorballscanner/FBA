@@ -1898,6 +1898,9 @@
 
         menu.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        //premShotData.push(['User', 'Game', gameCounter, Ball_pos, dataRes, dataType, dataDis,
+        //                    dataAngle, 'Shooter', 'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G',
+        //                    'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G', dataPp, dataSh]);
     }
 
     function shotTurnover() {
