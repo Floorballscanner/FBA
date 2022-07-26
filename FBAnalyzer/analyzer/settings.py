@@ -169,7 +169,7 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://fbscanner.io/livejson',
+    'https://fbscanner.io/livedata',
     'https://*.fbscanner.io'
 ]
 
