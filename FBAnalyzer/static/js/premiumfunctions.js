@@ -3,7 +3,7 @@
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
     ctx.drawImage(myImg,0,0,fWidth,fLength);
-    document.getElementById('select-date').value = moment().format('YYYY-MM-DD');
+    document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
     }
 
     // When the change team order button is changed, the teams switch sides
