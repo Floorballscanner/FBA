@@ -242,24 +242,24 @@ body {
     border: 1px solid darkgray;
 }
 
-.shot-menu ul, .shot-type ul {
+.shot-menu ul, .shot-type ul, .shooter-type ul, .passer-type ul {
     padding: 0px;
     margin: 0px;
     min-width: 150px;
     list-style: none;
 }
 
-.shot-menu ul li, .shot-type ul li {
+.shot-menu ul li, .shot-type ul li, .shooter-type ul li, .passer-type ulli {
     padding-bottom: 7px;
     padding-top: 7px;
 }
 
-.shot-menu ul li a, .shot-type ul li a {
+.shot-menu ul li a, .shot-type ul li a, .shooter-type ul li a, .passer-type ul li a {
     text-decoration: none;
     color: black;
 }
 
-.shot-menu ul li:hover, .shot-type ul li:hover {
+.shot-menu ul li:hover, .shot-type ul li:hover, .shooter-type ul li:hover, .passer-type ul li:hover {
     background: darkgray;
 }
 

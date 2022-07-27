@@ -38,6 +38,8 @@
     var data_url = "null"; // Live data url
     var today = new Date();
     var live = 1; // If live updates are sent to API 1 yes / 0 no
+    var user_id = JSON.parse(document.getElementById('user_id').textContent); // user id number
+    var game_id = 0; // game id number
     
     // Premium game level, team, and player select box elements
 
@@ -161,6 +163,8 @@
     var dataAngle = 0;
     var dataPp = 0;
     var dataSh = 0;
+    var shooter_id = 0;
+    var passer_id = 0;
 
     // Data arrays for xG charts
 
@@ -488,6 +492,10 @@
     var menu = document.getElementById("shotmenu");
     // html id shottype to variable
     var stype = document.getElementById("shottype");
+    // premium html id shooter type to variable
+    var shootertype = document.getElementById("shooter");
+    // premium html id passer type to variable
+    var passertype = document.getElementById("passer");
     // home and away team textfields to variables
     var hTeam = document.getElementById("home_team");
     var aTeam = document.getElementById("away_team");

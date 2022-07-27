@@ -8,6 +8,7 @@ It extends app_layout.html with Django
 {% extends 'app_layout.html' %}
 {% block content %}
 {% load static %}
+{{ request.user.id|json_script:"user_id" }}
 
 <div class="container" style="Padding-top: 60px;">
     <div class="row justify-content-center">
@@ -709,6 +710,26 @@ It extends app_layout.html with Django
     <li class="menu-option" onclick="shotOnetimer()">One-timer</li>
     <li class="menu-option" onclick="shotRebound()">Rebound</li>
     <li class="menu-option" onclick="shotDirect()">Direct</li>
+  </ul>
+</div>
+<div id="shooter" class="shooter-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotTaker('1')"><span id="shooter-1">LW</span></li>
+    <li class="menu-option" onclick="shotTaker('2')"><span id="shooter-2">C</span></li>
+    <li class="menu-option" onclick="shotTaker('3')"><span id="shooter-3">RW</span></li>
+    <li class="menu-option" onclick="shotTaker('4')"><span id="shooter-4">LD</span></li>
+    <li class="menu-option" onclick="shotTaker('5')"><span id="shooter-5">RD</span></li>
+  </ul>
+</div>
+<div id="passer" class="passer-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotPasser('1')"><span id="passer-1">LW</span></li>
+    <li class="menu-option" onclick="shotPasser('2')"><span id="passer-2">C</span></li>
+    <li class="menu-option" onclick="shotPasser('3')"><span id="passer-3">RW</span></li>
+    <li class="menu-option" onclick="shotPasser('4')"><span id="passer-4">LD</span></li>
+    <li class="menu-option" onclick="shotPasser('5')"><span id="passer-5">RD</span></li>
+    <li class="menu-option" onclick="shotPasser('6')"><span id="passer-6">G</span></li>
+    <li class="menu-option" onclick="shotPasser('7')"><span id="passer-7">No passer</span></li>
   </ul>
 </div>
 

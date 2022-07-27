@@ -267,23 +267,21 @@
         if (started == 0) {   // Start game and disable teams etc.
             var r = confirm("Do you want to start the game,\n changing teams will be disabled?");
             if (r == true) {
-                document.getElementById("home_team").disabled = true;
-                document.getElementById("away_team").disabled = true;
+                document.getElementById("select-level-t1").disabled = true;
+                document.getElementById("select-level-t2").disabled = true;
+                document.getElementById("select-team-1").disabled = true;
+                document.getElementById("select-team-2").disabled = true;
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 
-                if (document.getElementById("home_team").value !== "") {
-                    name_t1 = document.getElementById("home_team").value;
-                    set_t1_names();
-                }
+                name_t1 = document.getElementById("select-team-1").text;
+                set_t1_names();
 
-                if (document.getElementById("away_team").value !== "") {
-                    name_t2 = document.getElementById("away_team").value;
-                    set_t2_names();
-                }
+                name_t2 = document.getElementById("select-team-2").text;
+                set_t2_names();
 
                 // Initialize the API and gain the URL for the Game instance.
 
@@ -1895,13 +1893,116 @@
             }
         }
 
-        // Shot menu
+        // Shot menu hidden, shooter menu visible
 
         menu.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
-        //premShotData.push(['User', 'Game', gameCounter, Ball_pos, dataRes, dataType, dataDis,
-        //                    dataAngle, 'Shooter', 'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G',
-        //                    'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G', dataPp, dataSh]);
+
+        if ((Ball_pos == 1 && line_on <= 3) || (Ball_pos == 2 && line_on_2 <= 3)) {
+
+            // Set menu items according to players on field
+            if (Ball_pos == 1) {
+                l = line_on;
+            }
+            else if (Ball_pos == 2) {
+                l = line_on_2;
+            }
+            document.getElementById("shooter-1").value = document.getElementById("sT"+Ball_pos+"L"+l+"LW").text;
+            document.getElementById("shooter-2").value = document.getElementById("sT"+Ball_pos+"L"+l+"C").text;
+            document.getElementById("shooter-3").value = document.getElementById("sT"+Ball_pos+"L"+l+"RW").text;
+            document.getElementById("shooter-4").value = document.getElementById("sT"+Ball_pos+"L"+l+"LD").text;
+            document.getElementById("shooter-5").value = document.getElementById("sT"+Ball_pos+"L"+l+"RD").text;
+            shootertype.style.display = "block";
+
+        }
+    }
+
+    function shotTaker(s_position) {
+
+        if (Ball_pos == 1) {
+            l = line_on;
+        }
+        else if (Ball_pos == 2) {
+            l = line_on_2;
+        }
+
+        if (s_position == "1") {
+            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"LW").value;
+        }
+        else if (s_position == "2") {
+            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"C").value;
+        }
+        else if (s_position == "3") {
+            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"RW").value;
+        }
+        else if (s_position == "4") {
+            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"LD").value;
+        }
+        else if (s_position == "5") {
+            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"RD").value;
+        }
+
+        shootertype.style.display = "none";
+        // Set menu items according to players on field
+        document.getElementById("passer-1").value = document.getElementById("sT"+Ball_pos+"L"+l+"LW").text;
+        document.getElementById("passer-2").value = document.getElementById("sT"+Ball_pos+"L"+l+"C").text;
+        document.getElementById("passer-3").value = document.getElementById("sT"+Ball_pos+"L"+l+"RW").text;
+        document.getElementById("passer-4").value = document.getElementById("sT"+Ball_pos+"L"+l+"LD").text;
+        document.getElementById("passer-5").value = document.getElementById("sT"+Ball_pos+"L"+l+"RD").text;
+        document.getElementById("passer-6").value = document.getElementById("sT"+Ball_pos+"G").text;
+        passertype.style.display = "block";
+    }
+
+    function shotPasser(p_position) {
+
+        if (Ball_pos == 1) {
+            l = line_on;
+        }
+        else if (Ball_pos == 2) {
+            l = line_on_2;
+        }
+
+        if (p_position == "1") {
+            passer_id = document.getElementById("sT"+Ball_pos+"L"+l+"LW").value;
+        }
+        else if (p_position == "2") {
+            passer_id = document.getElementById("sT"+Ball_pos+"L"+l+"C").value;
+        }
+        else if (p_position == "3") {
+            passer_id = document.getElementById("sT"+Ball_pos+"L"+l+"RW").value;
+        }
+        else if (p_position == "4") {
+            passer_id = document.getElementById("sT"+Ball_pos+"L"+l+"LD").value;
+        }
+        else if (p_position == "5") {
+            passer_id = document.getElementById("sT"+Ball_pos+"L"+l+"RD").value;
+        }
+        else if (p_position == "6") {
+            passer_id = document.getElementById("sT"+Ball_pos+"G").value;
+        }
+        else if (p_position == "7") {
+            passer_id = "";
+        }
+
+        p_T1LW = document.getElementById("sT1L"+line_on+"LW").value;
+        p_T1C = document.getElementById("sT1L"+line_on+"C").value;
+        p_T1RW = document.getElementById("sT1L"+line_on+"RW").value;
+        p_T1LD = document.getElementById("sT1L"+line_on+"LD").value;
+        p_T1RD = document.getElementById("sT1L"+line_on+"RD").value;
+        p_T1G = document.getElementById("sT1G").value;
+
+        p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").value;
+        p_T2C = document.getElementById("sT2L"+line_on_2+"C").value;
+        p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").value;
+        p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").value;
+        p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").value;
+        p_T2G = document.getElementById("sT2G").value;
+        
+        passertype.style.display = "none";
+        premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis,
+                            dataAngle, shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
+                            p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+        console.log(premShotData)
     }
 
     function shotTurnover() {
