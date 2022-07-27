@@ -13,18 +13,19 @@ It extends app_layout.html with Django
     <div class="row justify-content-center">
         <div class="col-sm-4">
             <div class="team-selection">
-                <h2>Serie</h2>
-                <select onchange="changeLevel()" id="select-level" class="form-control-sm custom-select">
-                    <option selected disabled>Select a level...</option>
-                    {% for level in levels %}
-                        <option value="{{level.id}}">{{level.name}}</option>
-                    {% endfor %}
-                </select>
+                <h2>Date</h2>
+                <input id="select-date" type="date">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="team-selection">
                 <h2>Team 1</h2>
+                <select onchange="changeLevel('T1')" id="select-level-t1" class="form-control-sm custom-select">
+                    <option selected disabled>Select a level...</option>
+                    {% for level in levels %}
+                        <option value="{{level.id}}">{{level.name}}</option>
+                    {% endfor %}
+                </select>
                 <select disabled onchange="changeTeam1()" id="select-team-1" class="form-control-sm custom-select">
                     <option selected disabled>Select a team...</option>
                 </select>
@@ -33,6 +34,12 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="team-selection">
                 <h2>Team 2</h2>
+                <select onchange="changeLevel('T2')" id="select-level-t2" class="form-control-sm custom-select">
+                    <option selected disabled>Select a level...</option>
+                    {% for level in levels %}
+                        <option value="{{level.id}}">{{level.name}}</option>
+                    {% endfor %}
+                </select>
                 <select disabled onchange="changeTeam2()" id="select-team-2" class="form-control-sm custom-select">
                     <option selected disabled>Select a team...</option>
                 </select>

@@ -3,6 +3,7 @@
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
     ctx.drawImage(myImg,0,0,fWidth,fLength);
+    document.getElementById('select-date').value = moment().format('YYYY-MM-DD');
     }
 
     // When the change team order button is changed, the teams switch sides
@@ -2076,41 +2077,66 @@
 
     }
 
-    function changeLevel() {
+    function changeLevel(t) {
 
-        // Deselect Teams and Positions
-        s_T1.selectedIndex = "0";
-        s_T2.selectedIndex = "0";
+        if (t == "T1") {
+            // Deselect Teams and Positions
+            s_T1.selectedIndex = "0";
 
-        for (let i = 0; i < s_T1_p.length; i++) {
-            s_T1_p[i].selectedIndex = "0";
-            s_T2_p[i].selectedIndex = "0";
-            s_T1_p[i].disabled = true;
-            s_T2_p[i].disabled = true;
+            for (let i = 0; i < s_T1_p.length; i++) {
+                s_T1_p[i].selectedIndex = "0";
+                s_T1_p[i].disabled = true;
+            }
+
+            s_T1.disabled = false;
+
+            fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level_T1.options[s_Level_T1.selectedIndex].value)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+
+                    removeOptions(s_T1);
+
+                    for (let i=0; i<data.length; i++) {
+                        var opt = new Option(data[i].name, data[i].id);
+                        s_T1.appendChild(opt);
+                    }
+
+            })
+                .catch((error) => {
+                    console.error('Error:', error);
+            });
         }
 
-        s_T1.disabled = false;
-        s_T2.disabled = false;
+        if (t == "T2") {
 
-        fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level.options[s_Level.selectedIndex].value)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
+            // Deselect Teams and Positions
+            s_T2.selectedIndex = "0";
 
-                removeOptions(s_T1);
-                removeOptions(s_T2);
+            for (let i = 0; i < s_T2_p.length; i++) {
+                s_T2_p[i].selectedIndex = "0";
+                s_T2_p[i].disabled = true;
+            }
 
-                for (let i=0; i<data.length; i++) {
-                    var opt1 = new Option(data[i].name, data[i].id);
-                    var opt2 = new Option(data[i].name, data[i].id);
-                    s_T1.appendChild(opt1);
-                    s_T2.appendChild(opt2);
-                }
+            s_T2.disabled = false;
 
-        })
-            .catch((error) => {
-                console.error('Error:', error);
-        });
+            fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level_T2.options[s_Level_T2.selectedIndex].value)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+
+                    removeOptions(s_T2);
+
+                    for (let i=0; i<data.length; i++) {
+                        var opt = new Option(data[i].name, data[i].id);
+                        s_T2.appendChild(opt);
+                    }
+
+            })
+                .catch((error) => {
+                    console.error('Error:', error);
+            });
+        }
 
     }
 

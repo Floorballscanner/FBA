@@ -41,7 +41,8 @@
     
     // Premium game level, team, and player select box elements
 
-    var s_Level = document.getElementById("select-level");
+    var s_Level_T1 = document.getElementById("select-level-t1");
+    var s_Level_T2 = document.getElementById("select-level-t2");
     var s_T1 = document.getElementById("select-team-1");
     var s_T2 = document.getElementById("select-team-2");
     var s_T1G = document.getElementById("sT1G");
