@@ -271,6 +271,7 @@
                 document.getElementById("select-level-t2").disabled = true;
                 document.getElementById("select-team-1").disabled = true;
                 document.getElementById("select-team-2").disabled = true;
+                document.getElementById("select-date").disabled = true;
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
