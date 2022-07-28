@@ -2092,8 +2092,9 @@
     function sendData() {
 
         var r = confirm("Are you sure you want to send data,\n do this when your game is over?");
+
         if (r == true) {
-            let today = new Date().toLocaleDateString()
+            /*let today = new Date().toLocaleDateString()
 
             Email.send({
                 SecureToken : "3b145e7d-a832-4993-b00e-15a5d25b5b98",
@@ -2103,7 +2104,10 @@
                 Body : "<html><h2>"+ today +": "+ hTeam.value +" - "+ aTeam.value +"</h2><p>"+ shotData +"</p></br><p>"+ timeData +"</html>",
                 }).then(
                     message => alert(message)
-            );
+            );*/
+
+        downloadCsv()
+
         }
 
         console.log("sendData pressed");
@@ -2440,3 +2444,37 @@
         }
 
     }
+
+/** Convert a 2D array into a CSV string
+ */
+function arrayToCsv(data){
+  return data.map(row =>
+    row
+    .map(String)  // convert every value to String
+    .map(v => v.replaceAll('"', '""'))  // escape double colons
+    .map(v => `"${v}"`)  // quote it
+    .join(',')  // comma-separated
+  ).join('\r\n');  // rows starting on new lines
+}
+
+/** Download contents as a file
+ * Source: https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+ */
+function downloadBlob(content, filename, contentType) {
+  // Create a blob
+  var blob = new Blob([content], { type: contentType });
+  var url = URL.createObjectURL(blob);
+
+  // Create a link to download it
+  var pom = document.createElement('a');
+  pom.href = url;
+  pom.setAttribute('download', filename);
+  pom.click();
+}
+
+function downloadCsv() {
+    name = name_t1+"_"+name_t2+".csv";
+    name = name.replace(/\s/g, "");
+    csv = arrayToCsv(premShotData);
+    downloadBlob(csv, name, 'text/csv;charset=utf-8;')
+}
