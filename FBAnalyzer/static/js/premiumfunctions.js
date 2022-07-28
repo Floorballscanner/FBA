@@ -2439,8 +2439,9 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
-          document.getElementById(s_team+line+pos).selectedIndex = "0";
           console.log(document.getElementById(s_team+line+pos))
+          document.getElementById(s_team+line+pos).selectedIndex = "0";
+
     })
         .catch((error) => {
           console.error('Error:', error);
