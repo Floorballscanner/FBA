@@ -1912,15 +1912,15 @@
             else if (Ball_pos == 2) {
                 l = line_on_2;
             }
-            document.getElementById("shooter-1").value = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+            document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
-            document.getElementById("shooter-2").value = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+            document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
-            document.getElementById("shooter-3").value = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+            document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
-            document.getElementById("shooter-4").value = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+            document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
-            document.getElementById("shooter-5").value = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+            document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
             shootertype.style.display = "block";
             shootertype.style.left = stype.style.left;
@@ -1962,17 +1962,17 @@
 
         shootertype.style.display = "none";
         // Set menu items according to players on field
-        document.getElementById("passer-1").value = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+        document.getElementById("passer-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
-        document.getElementById("passer-2").value = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+        document.getElementById("passer-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
-        document.getElementById("passer-3").value = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+        document.getElementById("passer-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
-        document.getElementById("passer-4").value = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+        document.getElementById("passer-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
-        document.getElementById("passer-5").value = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+        document.getElementById("passer-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
-        document.getElementById("passer-6").value = document.getElementById("sT"+Ball_pos+"G").options
+        document.getElementById("passer-6").innerHTML = document.getElementById("sT"+Ball_pos+"G").options
                                                 [document.getElementById("sT"+Ball_pos+"G").selectedIndex].text;
         passertype.style.display = "block";
         passertype.style.left = stype.style.left;
