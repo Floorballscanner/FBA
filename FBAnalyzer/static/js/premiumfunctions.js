@@ -2419,9 +2419,9 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                old_pos = convPos(data.pos);
+                old_pos = convPos(data.position);
                 old_line = convLine(data.line);
-                console.log("Data.pos " + data.pos)
+                console.log("Data.pos " + data.position)
                 console.log("Data.line " + data.line)
         })
 
