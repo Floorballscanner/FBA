@@ -2421,6 +2421,8 @@
                 console.log('Success:', data);
                 old_pos = convPos(data.pos);
                 old_line = convLine(data.line);
+                console.log("Data.pos " + data.pos)
+                console.log("Data.line " + data.line)
         })
 
         data = {"line" : [line],
@@ -2439,6 +2441,7 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
+          console.log(s_team+old_line+old_pos)
           document.getElementById(s_team+old_line+old_pos).selectedIndex = "0";
 
     })
