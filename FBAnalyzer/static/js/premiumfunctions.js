@@ -2439,7 +2439,7 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
-          console.log(document.getElementById(s_team+line+pos))
+          console.log(s_team+line+pos)
           document.getElementById(s_team+line+pos).selectedIndex = "0";
 
     })
