@@ -281,7 +281,7 @@
                 name_t1 = s_T1.options[s_T1.selectedIndex].text
                 set_t1_names();
 
-                name_t2 = s_T2.options[s_T1.selectedIndex].text;
+                name_t2 = s_T2.options[s_T2.selectedIndex].text;
                 set_t2_names();
 
                 // Initialize the API and gain the URL for the Game instance.
@@ -1923,6 +1923,8 @@
             document.getElementById("shooter-5").value = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
             shootertype.style.display = "block";
+            shootertype.style.left = stype.style.left;
+            shootertype.style.top = stype.style.top;
 
         }
     }
@@ -1972,6 +1974,8 @@
         document.getElementById("passer-6").value = document.getElementById("sT"+Ball_pos+"G").options
                                                 [document.getElementById("sT"+Ball_pos+"G").selectedIndex].text;
         passertype.style.display = "block";
+        passertype.style.left = stype.style.left;
+        passertype.style.top = stype.style.top;
     }
 
     function shotPasser(p_position) {
@@ -2194,10 +2198,10 @@
 
     function set_t1_names() {
 
-        console.log(name_t1);
         for (let i = 0; i < 19; i++) {
             name_t1_id[i].innerHTML = name_t1;
         }
+        document.getElementById("name_t1_20").innerHTML = name_t1;
     }
 
     function set_t2_names() {
@@ -2205,6 +2209,7 @@
         for (let i = 0; i < 19; i++) {
             name_t2_id[i].innerHTML = name_t2;
         }
+        document.getElementById("name_t2_20").innerHTML = name_t2;
     }
 
     function checkLive() {
