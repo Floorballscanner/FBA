@@ -1925,6 +1925,7 @@
             shootertype.style.display = "block";
             shootertype.style.left = stype.style.left;
             shootertype.style.top = stype.style.top;
+            console.log("Shooter menu open")
 
         }
     }
