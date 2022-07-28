@@ -2412,8 +2412,8 @@
         var pos = p;
         var line = l;
 
-        data = {"line" : line,
-                "position" : pos,
+        data = {"line" : [line],
+                "position" : [pos],
         };
 
          fetch("https://fbscanner.io/apis/players/" + player_id + "/", {
