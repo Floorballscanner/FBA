@@ -2347,7 +2347,6 @@
                     var line = convLine(data[i].line);
 
                     if (typeof pos !== 'undefined' && typeof line !== 'undefined') {
-                        for (let j=0;j<line.length)
                         document.getElementById("sT1"+line+pos).value = data[i].id;
                     }
                     else if (pos == "G") {
