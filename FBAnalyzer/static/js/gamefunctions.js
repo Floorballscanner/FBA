@@ -1944,6 +1944,7 @@
 
         var r = confirm("Are you sure you want to send data,\n do this when your game is over?");
         if (r == true) {
+
             let today = new Date().toLocaleDateString()
 
             Email.send({
@@ -1955,6 +1956,8 @@
                 }).then(
                     message => alert(message)
             );
+
+            downloadCsv()
         }
 
         console.log("sendData pressed");
@@ -2073,3 +2076,41 @@
         }
 
     }
+
+/** Convert a 2D array into a CSV string
+ */
+function arrayToCsv(data){
+  return data.map(row =>
+    row
+    .map(String)  // convert every value to String
+    .map(v => v.replaceAll('"', '""'))  // escape double colons
+    .map(v => `"${v}"`)  // quote it
+    .join(',')  // comma-separated
+  ).join('\r\n');  // rows starting on new lines
+}
+
+/** Download contents as a file
+ * Source: https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+ */
+function downloadBlob(content, filename, contentType) {
+  // Create a blob
+  var blob = new Blob([content], { type: contentType });
+  var url = URL.createObjectURL(blob);
+
+  // Create a link to download it
+  var pom = document.createElement('a');
+  pom.href = url;
+  pom.setAttribute('download', filename);
+  pom.click();
+}
+
+function downloadCsv() {
+    name_shot = name_t1+"_"+name_t2+"_shots.csv";
+    name_shot = name_shot.replace(/\s/g, "");
+    name_time = name_t1+"_"+name_t2+"_positions.csv";
+    name_time = name_time.replace(/\s/g, "");
+    csv_shot = arrayToCsv(shotData);
+    csv_time = arrayToCsv(timeData);
+    downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
+    downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');
+}

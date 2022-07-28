@@ -2473,8 +2473,12 @@ function downloadBlob(content, filename, contentType) {
 }
 
 function downloadCsv() {
-    name = name_t1+"_"+name_t2+".csv";
-    name = name.replace(/\s/g, "");
-    csv = arrayToCsv(premShotData);
-    downloadBlob(csv, name, 'text/csv;charset=utf-8;')
+    name_shot = name_t1+"_"+name_t2+"_shots.csv";
+    name_shot = name_shot.replace(/\s/g, "");
+    //name_time = name_t1+"_"+name_t2+"_positions.csv";
+    //name_time = name_time.replace(/\s/g, "");
+    csv_shot = arrayToCsv(shotData);
+    //csv_time = arrayToCsv(timeData);
+    downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
+    //downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');
 }
