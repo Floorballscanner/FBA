@@ -2347,6 +2347,7 @@
                     var line = convLine(data[i].line);
 
                     if (typeof pos !== 'undefined' && typeof line !== 'undefined') {
+                        for (let j=0;j<line.length)
                         document.getElementById("sT1"+line+pos).value = data[i].id;
                     }
                     else if (pos == "G") {
@@ -2411,6 +2412,17 @@
                         [document.getElementById(position).selectedIndex].value;
         var pos = p;
         var line = l;
+        var old_pos;
+        var old_line;
+        var s_team = position.substring(0, 3);
+
+        fetch("https://fbscanner.io/apis/players/" + player_id + "/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                old_pos = convPos(data.pos);
+                old_line = convLine(data.line);
+        })
 
         data = {"line" : [line],
                 "position" : [pos],
@@ -2428,6 +2440,7 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
+          document.getElementById(s_team+line+pos).selectedIndex = "0";
     })
         .catch((error) => {
           console.error('Error:', error);
