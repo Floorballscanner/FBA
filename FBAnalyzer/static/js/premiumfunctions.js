@@ -2439,8 +2439,7 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
-          console.log(s_team+convLine(line)+convPos(pos))
-          document.getElementById(s_team+line+pos).selectedIndex = "0";
+          document.getElementById(s_team+convLine(line)+convPos(pos)).selectedIndex = "0";
 
     })
         .catch((error) => {
