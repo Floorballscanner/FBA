@@ -2440,10 +2440,10 @@
     })
         .then(response => response.json())
         .then(data => {
-          console.log('Success:', data);
-          console.log(s_team+old_line+old_pos)
-          document.getElementById(s_team+old_line+old_pos).selectedIndex = "0";
-
+            console.log('Success:', data);
+            if (!old_line == undefined && !old_pos == undefined) {
+                document.getElementById(s_team+old_line+old_pos).selectedIndex = "0";
+            }
     })
         .catch((error) => {
           console.error('Error:', error);
