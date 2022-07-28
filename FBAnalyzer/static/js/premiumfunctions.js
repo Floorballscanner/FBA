@@ -290,6 +290,8 @@
                     initializeLive()
                 }
 
+
+
             } else {
             }
         }
@@ -2405,7 +2407,8 @@
 
     function changePlayer(position, l, p) {
 
-        var player_id = document.getElementById(position).value;
+        var player_id = document.getElementById(position).options
+                        [document.getElementById(position).selectedIndex].value;
         var pos = p;
         var line = l;
 
@@ -2413,7 +2416,7 @@
                 "position" : pos,
         };
 
-         fetch("https://fbscanner.io/accounts/players/update/" + player_id + "/", {
+         fetch("https://fbscanner.io/apis/players/" + player_id + "/", {
 
           method: 'PUT', // or 'PUT'
           headers: {

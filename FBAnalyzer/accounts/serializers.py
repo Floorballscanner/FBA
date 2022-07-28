@@ -30,6 +30,7 @@ class GameSerializer(serializers.ModelSerializer):
         fields = ['url', 'id', 'date', 'user', 'teams']
 
 class PlayerSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Player
         fields = ['url', 'id', 'first_name', 'last_name', 'jersey_number', 'team', 'line', 'position']

@@ -92,10 +92,7 @@ class TeamList(generics.ListAPIView):
     serializer_class = TeamSerializer
 
     def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a 'level_id` query parameter in the URL.
-        """
+
         queryset = Team.objects.all().order_by('name')
         level = self.request.query_params.get('level_id')
         if level is not None:
@@ -106,10 +103,7 @@ class PlayerList(generics.ListAPIView):
     serializer_class = PlayerSerializer
 
     def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a 'level_id` query parameter in the URL.
-        """
+
         queryset = Player.objects.all().order_by('jersey_number')
         team = self.request.query_params.get('team_id')
         if team is not None:
