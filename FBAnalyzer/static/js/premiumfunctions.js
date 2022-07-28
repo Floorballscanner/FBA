@@ -1899,6 +1899,10 @@
         menu.style.display = "none";
         shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
 
+            console.log((Ball_pos == 1 && line_on <= 3) || (Ball_pos == 2 && line_on_2 <= 3));
+            console.log(Ball_pos == 1 && line_on <= 3)
+            console.log(Ball_pos == 2 && line_on_2 <= 3)
+
         if ((Ball_pos == 1 && line_on <= 3) || (Ball_pos == 2 && line_on_2 <= 3)) {
             console.log("inside")
             // Set menu items according to players on field
