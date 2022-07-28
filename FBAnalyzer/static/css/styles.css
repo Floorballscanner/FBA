@@ -234,7 +234,7 @@ body {
 	text-align: center;
 	padding: 0 0 0 0;
 }
-.shot-menu, .shot-type {
+.shot-menu, .shot-type, .shooter-type, .passer-type {
     position: absolute;
     display: none;
     text-align: center;
