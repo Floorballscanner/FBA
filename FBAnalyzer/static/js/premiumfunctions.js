@@ -2089,9 +2089,9 @@
         // console.log(shotData);
     }
 
-    function sendData() {
+    function saveData() {
 
-        var r = confirm("Are you sure you want to send data,\n do this when your game is over?");
+        var r = confirm("Are you sure you want to save data,\n do this when your game is over?");
 
         if (r == true) {
             /*let today = new Date().toLocaleDateString()
@@ -2110,7 +2110,7 @@
 
         }
 
-        console.log("sendData pressed");
+        console.log("saveData pressed");
     }
 
     function drawChart() {
