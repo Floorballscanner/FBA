@@ -2418,7 +2418,6 @@
         var old_line;
         var old_id;
         var s_team = position.substring(1, 3);
-        console.log("s_team "+s_team)
 
         // GET all players from the team, empty position of the previous player
         fetch("https://fbscanner.io/apis/playerlist/?team_id=" + eval("s_"+s_team+".options[s_"+s_team+".selectedIndex].value"))
@@ -2439,8 +2438,8 @@
                         }
                     }
                     if (typeof old_id !== 'undefined') {
-                        data = {"line" : [0],
-                                "position" : [0],};
+                        data = {"line" : [],
+                                "position" : [],};
                         console.log("Setting old player line and position as zero")
                         fetch("https://fbscanner.io/apis/players/" + old_id + "/", {
 
@@ -2471,14 +2470,17 @@
                 old_pos = convPos(data.position);
                 old_line = convLine(data.line);
                 console.log("Old line: "+old_line+" Old position: "+old_pos)
-        });
+            });
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
         data = {"line" : [line],
                 "position" : [pos],
         };
 
         console.log("Set the new player line and position")
-         fetch("https://fbscanner.io/apis/players/" + player_id + "/", {
+        fetch("https://fbscanner.io/apis/players/" + player_id + "/", {
 
           method: 'PATCH', // or 'PUT'
           headers: {
@@ -2486,7 +2488,8 @@
             'X-CSRFToken': csrftoken,
           },
           body: JSON.stringify(data),
-    })
+        });
+
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
@@ -2494,10 +2497,10 @@
                 console.log("Player has old line and position")
                 document.getElementById("s"+s_team+old_line+old_pos).selectedIndex = "0";
             }
-    })
+        })
         .catch((error) => {
           console.error('Error:', error);
-    });
+        });
 
     }
 
