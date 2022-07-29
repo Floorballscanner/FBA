@@ -5,6 +5,9 @@
     ctx.drawImage(myImg,0,0,fWidth,fLength);
     document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
     }
+    window.onbeforeunload = function() {
+      return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
 
     // When the change team order button is changed, the teams switch sides
     function ChangeOrder() {
@@ -2422,18 +2425,24 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                    console.log("Looking if there is a player with same position and line")
                     for (let i=0;i<data.length;i++) {
+                        console.log(i+" line: "+data[i].line+" position: "+data[i].position)
+                        console.log("Comparing with: "+ pos + " ," + line)
                         if (data[i].position == pos && data[i].line == line) {
                             old_id = data[i].id; // Player found
+                            console.log("Found a player: " data[i].last_name)
                         }
                         else if (pos == 8 && data[i].position == 8) {
                             old_id = data[i].id; // Goalie
+                            console.log("Found a goalie: " data[i].last_name)
                         }
+                        console.log("Did not find any players")
                     }
                     if (!old_id == undefined) {
                         data = {"line" : [0],
                                 "position" : [0],};
-
+                        console.log("Setting old player line and position as zero")
                         fetch("https://fbscanner.io/apis/players/" + old_id + "/", {
 
                           method: 'PATCH', // or 'PUT'
