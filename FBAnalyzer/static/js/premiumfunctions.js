@@ -2463,20 +2463,21 @@
                 });
 
         // GET the new player old line and position, if on the roster then the position is zeroed
+        console.log("Find the new player old line and set the old position to zero")
         fetch("https://fbscanner.io/apis/players/" + player_id + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
                 old_pos = convPos(data.position);
                 old_line = convLine(data.line);
-                console.log("Data.pos " + data.position)
-                console.log("Data.line " + data.line)
-        })
+                console.log("Old line: "+old_line+" Old position: "+old_pos)
+        });
 
         data = {"line" : [line],
                 "position" : [pos],
         };
 
+        console.log("Set the new player line and position")
          fetch("https://fbscanner.io/apis/players/" + player_id + "/", {
 
           method: 'PATCH', // or 'PUT'
@@ -2489,7 +2490,8 @@
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            if (!old_line == undefined && !old_pos == undefined) {
+            if (typeof old_line !== 'undefined' && typeof old_pos !== 'undefined') {
+                console.log("Player has old line and position")
                 document.getElementById("s"+s_team+old_line+old_pos).selectedIndex = "0";
             }
     })
