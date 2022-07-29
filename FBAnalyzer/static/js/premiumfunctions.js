@@ -2431,11 +2431,11 @@
                         console.log("Comparing with: "+ pos + " ," + line)
                         if (data[i].position == pos && data[i].line == line) {
                             old_id = data[i].id; // Player found
-                            console.log("Found a player: " data[i].last_name)
+                            console.log("Found a player: " + data[i].last_name)
                         }
                         else if (pos == 8 && data[i].position == 8) {
                             old_id = data[i].id; // Goalie
-                            console.log("Found a goalie: " data[i].last_name)
+                            console.log("Found a goalie: " + data[i].last_name)
                         }
                         console.log("Did not find any players")
                     }
