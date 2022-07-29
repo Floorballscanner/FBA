@@ -2413,8 +2413,47 @@
         var line = l;
         var old_pos;
         var old_line;
-        var s_team = position.substring(0, 3);
+        var old_id;
+        var s_team = position.substring(1, 2);
 
+        // GET all players from the team, empty position of the previous player
+        fetch("https://fbscanner.io/apis/playerlist/?team_id=" + eval("s_"+s_team+".options[s_"+s_team+".selectedIndex].value"))
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                    for (let i=0;i<data.length;i++) {
+                        if (data[i].position == pos && data[i].line == line) {
+                            old_id = data[i].id; // Player found
+                        }
+                        else if (pos == 8 && data[i].position == 8) {
+                            old_id = data[i].id; // Goalie
+                        }
+                    }
+                    if (!old_id == undefined) {
+                        data = {"line" : [0],
+                                "position" : [0],};
+
+                        fetch("https://fbscanner.io/apis/players/" + old_id + "/", {
+
+                          method: 'PATCH', // or 'PUT'
+                          headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                          },
+                          body: JSON.stringify(data),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data);
+                            console.log("Previous player data emptied")
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                    }
+                });
+
+        // GET the new player old line and position, if on the roster then the position is zeroed
         fetch("https://fbscanner.io/apis/players/" + player_id + "/")
             .then(response => response.json())
             .then(data => {
@@ -2442,7 +2481,7 @@
         .then(data => {
             console.log('Success:', data);
             if (!old_line == undefined && !old_pos == undefined) {
-                document.getElementById(s_team+old_line+old_pos).selectedIndex = "0";
+                document.getElementById("s"+s_team+old_line+old_pos).selectedIndex = "0";
             }
     })
         .catch((error) => {
