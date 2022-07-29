@@ -2414,7 +2414,7 @@
         var old_pos;
         var old_line;
         var old_id;
-        var s_team = position.substring(1, 2);
+        var s_team = position.substring(1, 3);
         console.log("s_team "+s_team)
 
         // GET all players from the team, empty position of the previous player
