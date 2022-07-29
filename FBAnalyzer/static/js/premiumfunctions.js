@@ -2417,7 +2417,7 @@
         var s_team = position.substring(1, 2);
 
         // GET all players from the team, empty position of the previous player
-        fetch("https://fbscanner.io/apis/playerlist/?team_id=" + eval("s_"+s_team+".options[s_"+s_team+".selectedIndex].value"))
+        fetch("https://fbscanner.io/apis/playerlist/?team_id=" + eval("s_"+s_team+".options[s"+s_team+".selectedIndex].value"))
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);

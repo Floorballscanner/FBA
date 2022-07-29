@@ -7,7 +7,7 @@ It extends app_layout.html with Django
 
 {% extends 'app_layout.html' %}
 {% block content %}
-
+{% load static %}
 <div class="container" style="Padding-top: 40px;">
 	<div class="frontpage-choices">
 		<div class="row">
@@ -18,20 +18,24 @@ It extends app_layout.html with Django
 				<p>Edit your team</p>
 				<a class="btn btn-primary" href="/accounts/my_team" role="button">Select</a>
 			</div-->
-			<div class="col-sm-12">
-				{% load static %}
+			<div class="col-sm-6">
 				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
-				<h2>New game analysis</h2>
+				<h2>Line-based game analysis</h2>
 				<p>Start analyzing a new game</p>
+				<p>Collect data based on line performance, no individual players</p>
+				<p>Live - game possibility</p>
+				<p>Save data as .csv-file</p>
 				<a class="btn btn-primary" href="/accounts/new_game" role="button">Select</a>
 			</div>
-			<!--div class="col-sm-4">
-				{% load static %}
-				<img src="{% static 'analytics.png' %}" width="40px" height="40px">
-				<h2>Statistics</h2>
-				<p>View statistics of your games</p>
-				<a class="btn btn-primary" href="#" role="button">Select</a>
-			</div-->
+			<div class="col-sm-6">
+				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
+				<h2>Player-based game analysis</h2>
+				<p>Start analyzing a new game</p>
+				<p>Collect data based on individual player performance</p>
+				<p>Live - game possibility</p>
+				<p>Save data as .csv-file</p>
+				<a class="btn btn-primary" href="/accounts/premium_game" role="button">Select</a>
+			</div>
 		</div>
 	</div>
 </div>
