@@ -2438,7 +2438,7 @@
                             console.log("Found a goalie: " + data[i].last_name)
                         }
                     }
-                    if (typeof old_line !== 'undefined') {
+                    if (typeof old_id !== 'undefined') {
                         data = {"line" : [0],
                                 "position" : [0],};
                         console.log("Setting old player line and position as zero")
