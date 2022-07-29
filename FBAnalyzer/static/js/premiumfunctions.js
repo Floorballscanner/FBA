@@ -2428,7 +2428,7 @@
                     console.log("Looking if there is a player with same position and line")
                     for (let i=0;i<data.length;i++) {
                         console.log(i+" line: "+data[i].line+" position: "+data[i].position)
-                        console.log("Comparing with: "+ pos + " ," + line)
+                        console.log("Comparing with: "+ line + " ," + pos)
                         if (data[i].position == pos && data[i].line == line) {
                             old_id = data[i].id; // Player found
                             console.log("Found a player: " + data[i].last_name)
@@ -2437,9 +2437,8 @@
                             old_id = data[i].id; // Goalie
                             console.log("Found a goalie: " + data[i].last_name)
                         }
-                        console.log("Did not find any players")
                     }
-                    if (!old_id == undefined) {
+                    if (old_id.length > 0) {
                         data = {"line" : [0],
                                 "position" : [0],};
                         console.log("Setting old player line and position as zero")
