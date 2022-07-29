@@ -2459,6 +2459,9 @@
                             console.error('Error:', error);
                         });
                     }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
                 });
 
         // GET the new player old line and position, if on the roster then the position is zeroed
@@ -2470,7 +2473,7 @@
                 old_pos = convPos(data.position);
                 old_line = convLine(data.line);
                 console.log("Old line: "+old_line+" Old position: "+old_pos)
-            });
+            })
             .catch((error) => {
                 console.error('Error:', error);
             });
