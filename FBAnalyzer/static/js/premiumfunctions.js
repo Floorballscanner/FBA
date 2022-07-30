@@ -2421,62 +2421,62 @@
 
         // GET all players from the team, empty position of the previous player
         fetch("https://fbscanner.io/apis/playerlist/?team_id=" + eval("s_"+s_team+".options[s_"+s_team+".selectedIndex].value"))
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                    console.log("Looking if there is a player with same position and line")
-                    for (let i=0;i<data.length;i++) {
-                        console.log("Player: "+ data[i].last_name +" line: "+data[i].line+" position: "+data[i].position)
-                        console.log("Comparing with: "+ line + " ," + pos)
-                        if (data[i].position == pos && data[i].line == line) {
-                            old_id = data[i].id; // Player found
-                            console.log("Found a player: " + data[i].last_name)
-                        }
-                        else if (pos == 8 && data[i].position == 8) {
-                            old_id = data[i].id; // Goalie
-                            console.log("Found a goalie: " + data[i].last_name)
-                        }
-                    }
-                    if (typeof old_id !== 'undefined') {
-                        data = {"line" : [],
-                                "position" : [],};
-                        console.log("Setting old player line and position as zero")
-                        fetch("https://fbscanner.io/apis/players/" + old_id + "/", {
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            console.log("Looking if there is a player with same position and line")
+            for (let i=0;i<data.length;i++) {
+                console.log("Player: "+ data[i].last_name +" line: "+data[i].line+" position: "+data[i].position)
+                console.log("Comparing with: "+ line + " ," + pos)
+                if (data[i].position == pos && data[i].line == line) {
+                    old_id = data[i].id; // Player found
+                    console.log("Found a player: " + data[i].last_name)
+                }
+                else if (pos == 8 && data[i].position == 8) {
+                    old_id = data[i].id; // Goalie
+                    console.log("Found a goalie: " + data[i].last_name)
+                }
+            }
+            if (typeof old_id !== 'undefined') {
+                data = {"line" : [],
+                        "position" : [],};
+                console.log("Setting old player line and position as zero")
+                fetch("https://fbscanner.io/apis/players/" + old_id + "/", {
 
-                          method: 'PATCH', // or 'PUT'
-                          headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': csrftoken,
-                          },
-                          body: JSON.stringify(data),
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Success:', data);
-                            console.log("Previous player data emptied")
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error);
-                        });
-                    }
+                  method: 'PATCH', // or 'PUT'
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                  },
+                  body: JSON.stringify(data),
+                });
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    console.log("Previous player data emptied")
                 })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 
         // GET the new player old line and position, if on the roster then the position is zeroed
         console.log("Find the new player old line and set the old position to zero")
         fetch("https://fbscanner.io/apis/players/" + player_id + "/")
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                old_pos = convPos(data.position);
-                old_line = convLine(data.line);
-                console.log("Old line: "+old_line+" Old position: "+old_pos)
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            old_pos = convPos(data.position);
+            old_line = convLine(data.line);
+            console.log("Old line: "+old_line+" Old position: "+old_pos)
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 
         data = {"line" : [line],
                 "position" : [pos],
@@ -2500,7 +2500,7 @@
                 console.log("Player has old line and position")
                 document.getElementById("s"+s_team+old_line+old_pos).selectedIndex = "0";
             }
-        })
+        });
         .catch((error) => {
           console.error('Error:', error);
         });
