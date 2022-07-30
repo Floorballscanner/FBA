@@ -2423,7 +2423,7 @@
         fetch("https://fbscanner.io/apis/playerlist/?team_id=" + eval("s_"+s_team+".options[s_"+s_team+".selectedIndex].value"))
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
+            console.log('Success:', data)
             console.log("Looking if there is a player with same position and line")
             for (let i=0;i<data.length;i++) {
                 console.log("Player: "+ data[i].last_name +" line: "+data[i].line+" position: "+data[i].position)
@@ -2449,7 +2449,7 @@
                     'X-CSRFToken': csrftoken,
                   },
                   body: JSON.stringify(data),
-                });
+                })
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
@@ -2491,7 +2491,7 @@
             'X-CSRFToken': csrftoken,
           },
           body: JSON.stringify(data),
-        });
+        })
 
         .then(response => response.json())
         .then(data => {
@@ -2500,7 +2500,7 @@
                 console.log("Player has old line and position")
                 document.getElementById("s"+s_team+old_line+old_pos).selectedIndex = "0";
             }
-        });
+        })
         .catch((error) => {
           console.error('Error:', error);
         });
