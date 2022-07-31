@@ -2155,7 +2155,6 @@
 
         if (r == true) {
 
-            s_data_array = [];
             // Create shot data Array
             for (let i=1;i<premShotData.length;i++) {
                 s_data = {
@@ -2185,31 +2184,26 @@
                     "isPP" : premShotData[i][23],
                     "isSH" : premShotData[i][24],
                 }
-                console.log(s_data)
-                s_data_array.push(s_data);
-            }
-            console.log(s_data_array);
 
-            // Save data to database
-
-            fetch('https://fbscanner.io/apis/shots/', {
+                // Save data to database
+                fetch('https://fbscanner.io/apis/shots/', {
 
                 method: 'POST', // or 'PUSH'
                 headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
                 },
-                body: JSON.stringify(s_data_array),
+                body: JSON.stringify(s_data),
                 })
 
-            .then(response => response.json())
-            .then(data => {
-            console.log('Success:', data);
-            console.log("Data saved")
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });
+                .then(response => response.json())
+                .then(data => {
+                console.log('Success:', data);
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+                });
+            }
 
             downloadCsv()
 
