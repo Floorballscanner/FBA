@@ -59,7 +59,7 @@ class Game(models.Model):
 
 
     def __str__(self):
-        return " vs ".join(list(self.teams))
+        return f'Date: {self.date}, User: {self.user}'
 
 class Player(models.Model):
     objects = models.Manager()
