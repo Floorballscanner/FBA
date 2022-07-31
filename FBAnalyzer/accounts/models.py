@@ -76,8 +76,8 @@ class Player(models.Model):
 
 class Shot(models.Model):
     objects = models.Manager()
-    user = models.ForeignKey(User, on_delete=models.SET_NULL)
-    game = models.ForeignKey(Game, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    game = models.ForeignKey(Game, null=True, on_delete=models.SET_NULL)
     time = models.IntegerField()
     position = models.IntegerField()
     result = models.IntegerField()
