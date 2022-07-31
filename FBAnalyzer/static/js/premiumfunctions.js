@@ -287,13 +287,36 @@
                 name_t2 = s_T2.options[s_T2.selectedIndex].text;
                 set_t2_names();
 
-                // Initialize the API and gain the URL for the Game instance.
+                // Initialize the API and gain the URL for the Live Data instance.
 
                 if (document.getElementById("ck1a").checked) {
                     initializeLive()
                 }
 
+                // Crate a new Game instance
 
+                data = { "date" : document.getElementById("select-date").value,
+                        "user" : user_id,
+                        "teams" : [s_T1.value, s_T2.value]
+                };
+
+                fetch("https://fbscanner.io/apis/games/" , {
+
+                  method: 'PUT', // or 'PUT'
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                  },
+                  body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    console.log("New Game instance created")
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
 
             } else {
             }

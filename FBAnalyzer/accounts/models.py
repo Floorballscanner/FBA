@@ -52,7 +52,7 @@ class Game(models.Model):
     objects = models.Manager()
 
     date = models.DateField()
-    user = models.ManyToManyField(User)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     teams = models.ManyToManyField(Team)
 
 
