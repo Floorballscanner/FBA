@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from . models import Team, Game, Player, Position, Line, LiveData, Level
+from . models import Team, Game, Player, Position, Line, LiveData, Level, Shot
 from django.contrib.auth.models import User
 
 # Serializers define the API representation.
@@ -40,6 +40,12 @@ class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Level
         fields = ['url', 'id', 'name', 'country', 'isSenior', 'isMale', 'isNational']
+
+class ShotSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Shot
+        fields = '__all__'
 
 class PlayerUpdateSerializer(serializers.ModelSerializer):
     line = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
