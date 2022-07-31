@@ -2194,7 +2194,7 @@
 
             fetch('https://fbscanner.io/apis/shots/', {
 
-                method: 'PUSH', // or 'PUSH'
+                method: 'POST', // or 'PUSH'
                 headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
