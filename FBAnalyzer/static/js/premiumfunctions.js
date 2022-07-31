@@ -2154,7 +2154,7 @@
 
         if (r == true) {
 
-            s_data_array = {};
+            s_data_array = [];
             // Create shot data Array
             for (let i=1;i<premShotData.length;i++) {
                 s_data = {
@@ -2184,6 +2184,7 @@
                     "isPP" : premShotData[i][23],
                     "isSH" : premShotData[i][24],
                 }
+                console.log(s_data)
                 s_data_array.push(s_data);
             }
             console.log(s_data_array);
