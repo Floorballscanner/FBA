@@ -2153,19 +2153,12 @@
         var r = confirm("Are you sure you want to save data,\n do this when your game is over?");
 
         if (r == true) {
-            /*let today = new Date().toLocaleDateString()
 
-            Email.send({
-                SecureToken : "3b145e7d-a832-4993-b00e-15a5d25b5b98",
-                To : 'floorballscanner@gmail.com',
-                From : "floorballscanner@gmail.com",
-                Subject : "Game Data",
-                Body : "<html><h2>"+ today +": "+ hTeam.value +" - "+ aTeam.value +"</h2><p>"+ shotData +"</p></br><p>"+ timeData +"</html>",
-                }).then(
-                    message => alert(message)
-            );*/
+            for (let i=1;i<premShotData.length;i++) {
 
-        downloadCsv()
+            }
+
+            downloadCsv()
 
         }
 

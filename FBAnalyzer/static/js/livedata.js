@@ -7,6 +7,7 @@
 function initializeLive() {
 
     data = {
+        "created": user_id,
         "date": today,
         "periodNr": periodN,
         "gameClock": gameCounter,
@@ -232,6 +233,7 @@ function updateLive() {
     console.log(data_url)
 
     data = {
+        "created": user_id,
         "url": data_url,
         "date": today,
         "periodNr": periodN,

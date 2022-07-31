@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ['url', 'id', 'name', 'level', 'isSenior', 'isMen', 'isNational']
+        fields = ['url', 'id', 'name', 'level', 'isSenior', 'isMen', 'isNational', 'created']
 
 class PositionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,13 +33,13 @@ class PlayerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Player
-        fields = ['url', 'id', 'first_name', 'last_name', 'jersey_number', 'team', 'line', 'position']
+        fields = ['url', 'id', 'first_name', 'last_name', 'jersey_number', 'team', 'line', 'position', 'created']
 
 class LevelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Level
-        fields = ['url', 'id', 'name', 'country', 'isSenior', 'isMale', 'isNational']
+        fields = ['url', 'id', 'name', 'country', 'isSenior', 'isMale', 'isNational', 'created']
 
 class ShotSerializer(serializers.ModelSerializer):
 
@@ -60,7 +60,7 @@ class LiveDataSerializer(serializers.ModelSerializer):
         model = LiveData
         fields = [
 
-            'url', 'date', 'periodNr', 'gameClock', 'periodClock', 'nameT1', 'lineOnT1', 'possessionPeriodT1',
+            'created','url', 'date', 'periodNr', 'gameClock', 'periodClock', 'nameT1', 'lineOnT1', 'possessionPeriodT1',
             'possessionGameT1', 'goalsPeriodT1', 'goalsGameT1', 'xGPeriodT1', 'xGGameT1', 'nameT2', 'lineOnT2',
             'possessionPeriodT2', 'possessionGameT2', 'goalsPeriodT2', 'goalsGameT2', 'xGPeriodT2', 'xGGameT2',
             'nameL1', 'possessionPeriodT1L1', 'possessionGameT1L1', 'gfPeriodT1L1', 'gfGameT1L1', 'gaPeriodT1L1',

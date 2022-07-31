@@ -14,6 +14,7 @@ class Level(models.Model):
     isSenior = models.BooleanField(default=True)
     isMale = models.BooleanField(default=True)
     isNational = models.BooleanField(default=False)
+    created = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.name}, {self.country}'
@@ -26,6 +27,7 @@ class Team(models.Model):
     isSenior = models.BooleanField(default=True)
     isMen = models.BooleanField(default=True)
     isNational = models.BooleanField(default=False)
+    created = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.name}, {self.level}'
@@ -69,6 +71,7 @@ class Player(models.Model):
     team = models.ManyToManyField(Team, blank=True)
     line = models.ManyToManyField(Line, blank=True)
     position = models.ManyToManyField(Position, blank=True)
+    created = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         """String for representing the Model object."""
@@ -109,6 +112,7 @@ class LiveData(models.Model):
     objects = models.Manager()
     
     # Game variables
+    created = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     date = models.DateTimeField(auto_now=True, blank=True)
     periodNr = models.IntegerField(null=True)
     gameClock = models.IntegerField(null=True)
