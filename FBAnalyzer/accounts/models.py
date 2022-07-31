@@ -59,7 +59,7 @@ class Game(models.Model):
 
 
     def __str__(self):
-        return f'{self.user}, {self.date}'
+        return " vs ".join(list(self.teams))
 
 class Player(models.Model):
     objects = models.Manager()
@@ -106,7 +106,7 @@ class Shot(models.Model):
     isSH = models.BooleanField()
 
     def __str__(self):
-        return f'{self.type}, {self.result}'
+        return f'Shot type: {self.type}, Shot result: {self.result}'
 
 class LiveData(models.Model):
     objects = models.Manager()
