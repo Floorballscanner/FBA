@@ -302,7 +302,7 @@
 
                 fetch("https://fbscanner.io/apis/games/" , {
 
-                  method: 'PUT', // or 'PUT'
+                  method: 'POST', // or 'PUT'
                   headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrftoken,
