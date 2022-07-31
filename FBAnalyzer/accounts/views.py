@@ -10,7 +10,7 @@ from .models import Player, Team, Game, Level, Position, Line, LiveData
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets, generics
-from .serializers import UserSerializer, TeamSerializer,LineSerializer, PositionSerializer
+from .serializers import UserSerializer, TeamSerializer,LineSerializer, PositionSerializer, LevelSerializer
 from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerializer, LiveDataSerializer
 
 @login_required
@@ -83,6 +83,10 @@ class GameViewSet(viewsets.ModelViewSet):
 class LiveDataViewSet(viewsets.ModelViewSet):
     queryset = LiveData.objects.all()
     serializer_class = LiveDataSerializer
+
+class LevelViewSet(viewsets.ModelViewSet):
+    queryset = Level.objects.all()
+    serializer_class = LevelSerializer
 
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all().order_by('jersey_number')

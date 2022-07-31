@@ -313,6 +313,7 @@
                 .then(data => {
                     console.log('Success:', data);
                     console.log("New Game instance created")
+                    game_id = data.id;
                 })
                 .catch((error) => {
                     console.error('Error:', error);
