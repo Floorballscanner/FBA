@@ -2107,7 +2107,7 @@
         
         passertype.style.display = "none";
         premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis,
-                            dataAngle, dataxG, shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
+                            dataAngle, dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
         console.log(premShotData)
     }
