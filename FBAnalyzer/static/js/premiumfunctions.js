@@ -737,10 +737,6 @@
                  xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
              }
 
-             dataShot = 0;
-             dataRes = 0;
-             dataxG = 0;
-
              counter++;
              gameCounter++;
              PosTime++;
@@ -2106,8 +2102,9 @@
                 [document.getElementById("sT2G").selectedIndex].value;
         
         passertype.style.display = "none";
+        console.log("Data xg: " + dataxG)
         premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis,
-                            dataAngle, dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
+                            dataAngle, dataxG, shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
         console.log(premShotData)
     }

@@ -680,10 +680,6 @@
                  xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
              }
 
-             dataShot = 0;
-             dataRes = 0;
-             dataxG = 0;
-
              counter++;
              gameCounter++;
              PosTime++;
