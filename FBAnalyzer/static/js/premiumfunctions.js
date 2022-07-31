@@ -705,15 +705,15 @@
             [document.getElementById("sT1G").selectedIndex].value;
 
             p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
-            [document.getElementById("sT1L"+line_on_2+"LW").selectedIndex].value;
+            [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
             p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
-            [document.getElementById("sT1L"+line_on_2+"C").selectedIndex].value;
+            [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
             p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
-            [document.getElementById("sT1L"+line_on_2+"RW").selectedIndex].value;
+            [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
             p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
-            [document.getElementById("sT1L"+line_on_2+"LD").selectedIndex].value;
+            [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
             p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
-            [document.getElementById("sT1L"+line_on_2+"RD").selectedIndex].value;
+            [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
             p_T2G = document.getElementById("sT2G").options
             [document.getElementById("sT2G").selectedIndex].value;
 
@@ -2091,13 +2091,13 @@
         p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
                 [document.getElementById("sT1L"+line_on_2+"LW").selectedIndex].value;
         p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
-                [document.getElementById("sT1L"+line_on_2+"C").selectedIndex].value;
+                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
         p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
-                [document.getElementById("sT1L"+line_on_2+"RW").selectedIndex].value;
+                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
         p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
-                [document.getElementById("sT1L"+line_on_2+"LD").selectedIndex].value;
+                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
         p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
-                [document.getElementById("sT1L"+line_on_2+"RD").selectedIndex].value;
+                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
         p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
         
@@ -2154,9 +2154,39 @@
 
         if (r == true) {
 
+            s_data_array = {};
+            // Create shot data Array
             for (let i=1;i<premShotData.length;i++) {
-
+                s_data = {
+                    "user" : premShotData[i][0],
+                    "game" : premShotData[i][1],
+                    "time" : premShotData[i][2],
+                    "position" : premShotData[i][3],
+                    "result" : premShotData[i][4],
+                    "type" : premShotData[i][5],
+                    "distance" : premShotData[i][6],
+                    "angle" : premShotData[i][7],
+                    "xG" : premShotData[i][8],
+                    "shooter" : premShotData[i][9],
+                    "passer" : premShotData[i][10],
+                    "T1LW" : premShotData[i][11],
+                    "T1C" : premShotData[i][12],
+                    "T1RW" : premShotData[i][13],
+                    "T1LD" : premShotData[i][14],
+                    "T1RD" : premShotData[i][15],
+                    "T1G" : premShotData[i][16],
+                    "T2LW" : premShotData[i][17],
+                    "T2C" : premShotData[i][18],
+                    "T2RW" : premShotData[i][19],
+                    "T2LD" : premShotData[i][20],
+                    "T2RD" : premShotData[i][21],
+                    "T2G" : premShotData[i][22],
+                    "isPP" : premShotData[i][23],
+                    "isSH" : premShotData[i][24],
+                }
+                s_data_array.push(s_data);
             }
+            console.log(s_data_array);
 
             downloadCsv()
 
