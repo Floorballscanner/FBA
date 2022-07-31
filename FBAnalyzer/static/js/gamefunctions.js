@@ -4,6 +4,9 @@
     var ctx = cnvs.getContext("2d");
     ctx.drawImage(myImg,0,0,fWidth,fLength);
     }
+    window.onbeforeunload = function() {
+      return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
 
     // When the change team order button is changed, the teams switch sides
     function ChangeOrder() {
