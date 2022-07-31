@@ -59,7 +59,7 @@ class Game(models.Model):
 
 
     def __str__(self):
-        return f'{self.teams}, {self.date}'
+        return f'{self.user}, {self.date}'
 
 class Player(models.Model):
     objects = models.Manager()

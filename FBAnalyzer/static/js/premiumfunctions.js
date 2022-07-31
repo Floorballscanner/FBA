@@ -882,6 +882,7 @@
 
                 
                 dataxG = dxG;
+                console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -958,6 +959,7 @@
 
                 
                 dataxG = dxG;
+                console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -1034,6 +1036,7 @@
 
                 
                 dataxG = dxG;
+                console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -1111,6 +1114,7 @@
 
                 
                 dataxG = dxG;
+                console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -2188,6 +2192,27 @@
                 s_data_array.push(s_data);
             }
             console.log(s_data_array);
+
+            // Save data to database
+
+            fetch('https://fbscanner.io/apis/shots/', {
+
+                method: 'PUSH', // or 'PUSH'
+                headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify(s_data_array),
+                })
+
+            .then(response => response.json())
+            .then(data => {
+            console.log('Success:', data);
+            console.log("Data saved")
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
 
             downloadCsv()
 
