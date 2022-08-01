@@ -2366,7 +2366,7 @@
 
             else if (shooter_select == 0) {shooter_select = 1;}
         }
-
+        console.log(shooter_select)
     }
 
     function changeLevel(t) {
