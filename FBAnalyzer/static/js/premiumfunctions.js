@@ -279,7 +279,6 @@
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
                 document.getElementById("ck2a").disabled = true;
-                document.getElementById("ck3a").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 

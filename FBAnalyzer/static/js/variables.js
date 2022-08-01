@@ -39,7 +39,6 @@
     var today = new Date();
     var live = 1; // If live updates are sent to API 1 yes / 0 no
     var shooter_select = 1; // If user wants to tag shooter
-    var passer_select = 1; // If user wants to tag passer
     var user_id = JSON.parse(document.getElementById('user_id').textContent); // user id number
     var game_id = 0; // game id number
     
