@@ -108,6 +108,29 @@ class Shot(models.Model):
     def __str__(self):
         return f'Time: {self.time}, Shot type: {self.type}, Shot result: {self.result}, xG: {self.xG}'
 
+class Time(models.Model):
+    objects = models.Manager()
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    game = models.ForeignKey(Game, null=True, on_delete=models.SET_NULL)
+    time = models.IntegerField()
+    position = models.IntegerField()
+    lines = models.ManyToManyField(Line)
+    T1LW = models.CharField(max_length=50, blank=True)
+    T1C = models.CharField(max_length=50, blank=True)
+    T1RW = models.CharField(max_length=50, blank=True)
+    T1LD = models.CharField(max_length=50, blank=True)
+    T1RD = models.CharField(max_length=50, blank=True)
+    T1G = models.CharField(max_length=50, blank=True)
+    T2LW = models.CharField(max_length=50, blank=True)
+    T2C = models.CharField(max_length=50, blank=True)
+    T2RW = models.CharField(max_length=50, blank=True)
+    T2LD = models.CharField(max_length=50, blank=True)
+    T2RD = models.CharField(max_length=50, blank=True)
+    T2G = models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        return f'Time: {self.time}, Position: T{self.position}, User: {self.user}, Game: {self.game}'
+
 class LiveData(models.Model):
     objects = models.Manager()
     

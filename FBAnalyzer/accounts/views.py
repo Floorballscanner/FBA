@@ -6,11 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 
-from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot
+from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets, generics
-from .serializers import UserSerializer, TeamSerializer,LineSerializer, PositionSerializer, LevelSerializer
+from .serializers import UserSerializer, TeamSerializer, LineSerializer, PositionSerializer, LevelSerializer, TimeSerializer
 from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerializer, LiveDataSerializer, ShotSerializer
 
 @login_required
@@ -91,6 +91,10 @@ class LevelViewSet(viewsets.ModelViewSet):
 class ShotViewSet(viewsets.ModelViewSet):
     queryset = Shot.objects.all()
     serializer_class = ShotSerializer
+
+class TimeViewSet(viewsets.ModelViewSet):
+    queryset = Time.objects.all()
+    serializer_class = TimeSerializer
 
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all().order_by('jersey_number')

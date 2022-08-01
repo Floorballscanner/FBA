@@ -10,7 +10,7 @@ Views.function is called when a html - page is rendered
 from django.urls import path, include
 from accounts import views
 from .views import UserViewSet, TeamViewSet, GameViewSet, PlayerViewSet, PositionViewSet
-from .views import LevelViewSet, LineViewSet, LiveDataViewSet, ShotViewSet
+from .views import LevelViewSet, LineViewSet, LiveDataViewSet, ShotViewSet, TimeViewSet
 from rest_framework import routers
 
 
@@ -23,6 +23,7 @@ router.register(r'lines', LineViewSet)
 router.register(r'games', GameViewSet)
 router.register(r'levels', LevelViewSet)
 router.register(r'shots', ShotViewSet)
+router.register(r'times', TimeViewSet)
 router.register(r'positions', PositionViewSet)
 router.register(r'livedata', LiveDataViewSet)
 
