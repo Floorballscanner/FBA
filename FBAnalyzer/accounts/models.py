@@ -106,7 +106,7 @@ class Shot(models.Model):
     isSH = models.BooleanField()
 
     def __str__(self):
-        return f'Time: {self.time}, Shot type: {self.type}, Shot result: {self.result}, xG: {self.xG}'
+        return f'Game: {self.game} Time: {self.time}, Shot type: {self.type}, Shot result: {self.result}, xG: {self.xG}'
 
 class Time(models.Model):
     objects = models.Manager()
