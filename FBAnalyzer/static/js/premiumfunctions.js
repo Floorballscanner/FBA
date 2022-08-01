@@ -706,11 +706,13 @@
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
             }
+
             else if (line_on > 3) {
                 p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
             }
+
             if (line_on_2 <= 3) {
                 p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
                 [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
@@ -725,10 +727,12 @@
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
             }
+
             else if (line_on_2 > 3) {
                 p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+            }
 
              // Add one row to timeData - array
              counter++;
@@ -1577,8 +1581,7 @@
         }
     }
 
-    function Draw(x,y,type)
-    {
+    function Draw(x,y,type) {
         var ctx = cnvs.getContext("2d");
         menu.style.display = "none";
         ctx.font = "12px Arial";
