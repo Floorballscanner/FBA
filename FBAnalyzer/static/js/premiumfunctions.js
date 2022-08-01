@@ -2055,57 +2055,23 @@
 
         shootertype.style.display = "none";
 
-        if (passer_select == 1) { // If passer is on
+        // Set menu items according to players on field
+        document.getElementById("passer-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+                                                [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
+        document.getElementById("passer-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+                                                [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
+        document.getElementById("passer-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+                                                [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
+        document.getElementById("passer-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+                                                [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
+        document.getElementById("passer-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+                                                [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
+        document.getElementById("passer-6").innerHTML = document.getElementById("sT"+Ball_pos+"G").options
+                                                [document.getElementById("sT"+Ball_pos+"G").selectedIndex].text;
+        passertype.style.display = "block";
+        passertype.style.left = stype.style.left;
+        passertype.style.top = stype.style.top;
 
-            // Set menu items according to players on field
-            document.getElementById("passer-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
-                                                    [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
-            document.getElementById("passer-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
-                                                    [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
-            document.getElementById("passer-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
-                                                    [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
-            document.getElementById("passer-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
-                                                    [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
-            document.getElementById("passer-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
-                                                    [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
-            document.getElementById("passer-6").innerHTML = document.getElementById("sT"+Ball_pos+"G").options
-                                                    [document.getElementById("sT"+Ball_pos+"G").selectedIndex].text;
-            passertype.style.display = "block";
-            passertype.style.left = stype.style.left;
-            passertype.style.top = stype.style.top;
-        }
-        else if (passer_select == 0) { // If only shooter is on
-
-            p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
-                    [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
-            p_T1C = document.getElementById("sT1L"+line_on+"C").options
-                    [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
-            p_T1RW = document.getElementById("sT1L"+line_on+"RW").options
-                    [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
-            p_T1LD = document.getElementById("sT1L"+line_on+"LD").options
-                    [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
-            p_T1RD = document.getElementById("sT1L"+line_on+"RD").options
-                    [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
-            p_T1G = document.getElementById("sT1G").options
-                    [document.getElementById("sT1G").selectedIndex].value;
-
-            p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
-                    [document.getElementById("sT1L"+line_on_2+"LW").selectedIndex].value;
-            p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
-                    [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
-            p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
-                    [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
-            p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
-                    [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
-            p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
-                    [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
-            p_T2G = document.getElementById("sT2G").options
-                    [document.getElementById("sT2G").selectedIndex].value;
-
-            premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
-                            dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
-                            p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
-        }
     }
 
     function shotPasser(p_position) {
@@ -2387,28 +2353,19 @@
     function checkLive() {
 
         if (!document.getElementById("ck1a").disabled) {
-            if (live == 1) {live = 0}
+            if (live == 1) {live = 0;}
 
-            else if (live == 0) {live = 1}
+            else if (live == 0) {live = 1;}
         }
 
     }
+
     function checkShooter() {
 
         if (!document.getElementById("ck2a").disabled) {
-            if (shooter_select == 1) {shooter_select= 0}
+            if (shooter_select == 1) {shooter_select= 0;}
 
-            else if (shooter_select == 0) {shooter_select = 1}
-        }
-
-    }
-
-    function checkPasser() {
-
-        if (!document.getElementById("ck3a").disabled) {
-            if (passer_select == 1) {passer_select= 0}
-
-            else if (passer_select == 0) {passer_select = 1}
+            else if (shooter_select == 0) {shooter_select = 1;}
         }
 
     }
@@ -2701,40 +2658,40 @@
 
     }
 
-/** Convert a 2D array into a CSV string
- */
-function arrayToCsv(data){
-  return data.map(row =>
-    row
-    .map(String)  // convert every value to String
-    .map(v => v.replaceAll('"', '""'))  // escape double colons
-    .map(v => `"${v}"`)  // quote it
-    .join(',')  // comma-separated
-  ).join('\r\n');  // rows starting on new lines
-}
+    /** Convert a 2D array into a CSV string
+     */
+    function arrayToCsv(data){
+      return data.map(row =>
+        row
+        .map(String)  // convert every value to String
+        .map(v => v.replaceAll('"', '""'))  // escape double colons
+        .map(v => `"${v}"`)  // quote it
+        .join(',')  // comma-separated
+      ).join('\r\n');  // rows starting on new lines
+    }
 
-/** Download contents as a file
- * Source: https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
- */
-function downloadBlob(content, filename, contentType) {
-  // Create a blob
-  var blob = new Blob([content], { type: contentType });
-  var url = URL.createObjectURL(blob);
+    /** Download contents as a file
+     * Source: https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+     */
+    function downloadBlob(content, filename, contentType) {
+      // Create a blob
+      var blob = new Blob([content], { type: contentType });
+      var url = URL.createObjectURL(blob);
 
-  // Create a link to download it
-  var pom = document.createElement('a');
-  pom.href = url;
-  pom.setAttribute('download', filename);
-  pom.click();
-}
+      // Create a link to download it
+      var pom = document.createElement('a');
+      pom.href = url;
+      pom.setAttribute('download', filename);
+      pom.click();
+    }
 
-function downloadCsv() {
-    name_shot = name_t1+"_"+name_t2+"_shots.csv";
-    name_shot = name_shot.replace(/\s/g, "");
-    name_time = name_t1+"_"+name_t2+"_positions.csv";
-    name_time = name_time.replace(/\s/g, "");
-    csv_shot = arrayToCsv(premShotData);
-    csv_time = arrayToCsv(premTimeData);
-    downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
-    downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');
-}
+    function downloadCsv() {
+        name_shot = name_t1+"_"+name_t2+"_shots.csv";
+        name_shot = name_shot.replace(/\s/g, "");
+        name_time = name_t1+"_"+name_t2+"_positions.csv";
+        name_time = name_time.replace(/\s/g, "");
+        csv_shot = arrayToCsv(premShotData);
+        csv_time = arrayToCsv(premTimeData);
+        downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
+        downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');
+    }
