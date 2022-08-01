@@ -692,37 +692,49 @@
                 atocT2_g[7].innerHTML = a;
              }
 
-            p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
-            [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
-            p_T1C = document.getElementById("sT1L"+line_on+"C").options
-            [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
-            p_T1RW = document.getElementById("sT1L"+line_on+"RW").options
-            [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
-            p_T1LD = document.getElementById("sT1L"+line_on+"LD").options
-            [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
-            p_T1RD = document.getElementById("sT1L"+line_on+"RD").options
-            [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
-            p_T1G = document.getElementById("sT1G").options
-            [document.getElementById("sT1G").selectedIndex].value;
-
-            p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
-            [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
-            p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
-            [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
-            p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
-            [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
-            p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
-            [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
-            p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
-            [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
-            p_T2G = document.getElementById("sT2G").options
-            [document.getElementById("sT2G").selectedIndex].value;
+            if (line_on <= 3) {
+                p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
+                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
+                p_T1C = document.getElementById("sT1L"+line_on+"C").options
+                [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
+                p_T1RW = document.getElementById("sT1L"+line_on+"RW").options
+                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
+                p_T1LD = document.getElementById("sT1L"+line_on+"LD").options
+                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
+                p_T1RD = document.getElementById("sT1L"+line_on+"RD").options
+                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
+                p_T1G = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].value;
+            }
+            else if (line_on > 3) {
+                p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
+                p_T1G = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].value;
+            }
+            if (line_on_2 <= 3) {
+                p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
+                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
+                p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
+                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
+                p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
+                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
+                p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
+                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
+                p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
+                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
+                p_T2G = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].value;
+            }
+            else if (line_on_2 > 3) {
+                p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
+                p_T2G = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].value;
 
              // Add one row to timeData - array
              counter++;
              gameCounter++;
              timeData.push([gameCounter, Ball_pos, line_on, line_on_2, dataShot, dataRes, dataxG]);
-             premTimeData.push([user_id, game_id, gameCounter, Ball_pos, line_on, line_on_2, p_T1LW, p_T1C, p_T1RW,
+             premTimeData.push([user_id, game_id, gameCounter, Ball_pos, line_on+1, line_on_2+1, p_T1LW, p_T1C, p_T1RW,
                         p_T1LD, p_T1RD, p_T1G, p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G]);
 
              // Add one row to the xG arrays every minute
@@ -1990,31 +2002,47 @@
         }
         else if (shooter_select == 0) {
 
-            p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
-                    [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
-            p_T1C = document.getElementById("sT1L"+line_on+"C").options
-                    [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
-            p_T1RW = document.getElementById("sT1L"+line_on+"RW").options
-                    [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
-            p_T1LD = document.getElementById("sT1L"+line_on+"LD").options
-                    [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
-            p_T1RD = document.getElementById("sT1L"+line_on+"RD").options
-                    [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
-            p_T1G = document.getElementById("sT1G").options
-                    [document.getElementById("sT1G").selectedIndex].value;
+            if (line_on <= 3) {
+                p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
+                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
+                p_T1C = document.getElementById("sT1L"+line_on+"C").options
+                [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
+                p_T1RW = document.getElementById("sT1L"+line_on+"RW").options
+                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
+                p_T1LD = document.getElementById("sT1L"+line_on+"LD").options
+                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
+                p_T1RD = document.getElementById("sT1L"+line_on+"RD").options
+                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
+                p_T1G = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].value;
+            }
 
-            p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
-                    [document.getElementById("sT1L"+line_on_2+"LW").selectedIndex].value;
-            p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
-                    [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
-            p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
-                    [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
-            p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
-                    [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
-            p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
-                    [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
-            p_T2G = document.getElementById("sT2G").options
-                    [document.getElementById("sT2G").selectedIndex].value;
+            else if (line_on > 3) {
+                p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
+                p_T1G = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].value;
+            }
+
+            if (line_on_2 <= 3) {
+                p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
+                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
+                p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
+                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
+                p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
+                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
+                p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
+                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
+                p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
+                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
+                p_T2G = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].value;
+            }
+
+            else if (line_on_2 > 3) {
+                p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
+                p_T2G = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].value;
+            }
 
             premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
