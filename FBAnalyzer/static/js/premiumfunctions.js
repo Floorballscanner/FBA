@@ -2356,7 +2356,6 @@
 
             else if (live == 0) {live = 1;}
         }
-
     }
 
     function checkShooter() {
