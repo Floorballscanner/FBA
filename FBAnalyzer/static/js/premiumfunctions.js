@@ -2323,11 +2323,11 @@
 
         var chartData = google.visualization.arrayToDataTable([
              ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-             ['Line 1', Number(xGf_g[0]), 'color: #002072', Number(data.xGfGameT1L1), Number(data.xGfGameT2L1), 'color: #59D9EB', Number(data.xGfGameT2L1) ],
-             ['Line 2', Number(data.xGfGameT1L2), 'color: #002072', Number(data.xGfGameT1L2), Number(data.xGfGameT2L2), 'color: #59D9EB', Number(data.xGfGameT2L2) ],
-             ['Line 3', Number(data.xGfGameT1L3), 'color: #002072', Number(data.xGfGameT1L3), Number(data.xGfGameT2L3), 'color: #59D9EB', Number(data.xGfGameT2L3) ],
-             ['PP', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), 'color: #002072', Number(data.xGfGameT1L4) + Number(data.xGfGameT1L5), Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5), 'color: #59D9EB', Number(data.xGfGameT2L4) + Number(data.xGfGameT2L5) ],
-             ['SH', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), 'color: #002072', Number(data.xGfGameT1L6) + Number(data.xGfGameT1L7), Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7), 'color: #59D9EB', Number(data.xGfGameT2L6) + Number(data.xGfGameT2L7) ]
+             ['Line 1', Number(xGf_g[0]), 'color: #002072', Number(xGf_g[0]), Number(xGfT2_g[0]), 'color: #59D9EB', Number(xGfT2_g[0]) ],
+             ['Line 2', Number(xGf_g[1]), 'color: #002072', Number(xGf_g[1]), Number(xGfT2_g[1]), 'color: #59D9EB', Number(xGfT2_g[1]) ],
+             ['Line 3', Number(xGf_g[2]), 'color: #002072', Number(xGf_g[2]), Number(xGfT2_g[2]), 'color: #59D9EB', Number(xGfT2_g[2]) ],
+             ['PP', Number(xGf_g[3]) + Number(xGf_g[4]), 'color: #002072', Number(xGf_g[3]) + Number(xGf_g[4]), Number(xGfT2_g[3]) + Number(xGfT2_g[4]), 'color: #59D9EB', Number(xGfT2_g[3]) + Number(xGfT2_g[4]) ],
+             ['SH', Number(xGf_g[5]) + Number(xGf_g[6]), 'color: #002072', Number(xGf_g[5]) + Number(xGf_g[6]), Number(xGfT2_g[5]) + Number(xGfT2_g[6]), 'color: #59D9EB', Number(xGfT2_g[5]) + Number(xGfT2_g[6]) ]
           ]);
 
         var options = {
