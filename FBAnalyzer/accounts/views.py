@@ -17,6 +17,7 @@ from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerialize
 def index(request):
     return render(request,'accounts/index.html')
 
+@login_required
 def new_game(request):
     return render(request, 'accounts/newgame.html')
 
@@ -60,6 +61,7 @@ def add_new_player(request):
     #  return render(request, 'accounts/myteam.html', context)
 
 # ViewSets define the view behavior.
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -122,6 +124,7 @@ class PlayerList(generics.ListAPIView):
             queryset = queryset.filter(team__id=team)
         return queryset
 
+@login_required
 def premium_game(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
