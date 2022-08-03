@@ -137,6 +137,11 @@ def premium_game(request):
     }
     return render(request, 'accounts/premiumgame.html', context=context)
 
+@login_required
+def edit_data(request):
+
+    return render(request, 'accounts/editdata.html')
+
 class UpdatePlayer(generics.UpdateAPIView):
     serializer_class = PlayerUpdateSerializer
     queryset = Player.objects.all()

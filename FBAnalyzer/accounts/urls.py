@@ -32,6 +32,7 @@ urlpatterns = [
     path('accounts/new_game/', views.new_game, name="new-game"),
     path('accounts/premium_game/', views.premium_game, name="new-game-premium"),
     path('accounts/my_team/', views.my_team, name="my-team"),
+    path('accounts/edit_data/', views.edit_data, name="edit-data"),
     path('apis/teamlist/', views.TeamList.as_view(), name="team-list"),
     path('apis/playerlist/', views.PlayerList.as_view(), name="player-list"),
     path('accounts/my_team/add_new_player/', views.add_new_player, name="add-new-player"),
