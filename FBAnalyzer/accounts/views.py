@@ -40,8 +40,18 @@ def edit_players(request):
 def edit_levels(request):
     levels = Level.objects.all().order_by('name')
 
+    LevelFormSet = modelformset_factory(Level, fields=('name', 'country', 'isSenior', 'isMale', 'isNational'))
+    if request.method == 'POST':
+        formset = LevelFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+            # do something.
+    else:
+        formset = LevelFormSet()
+
     context = {
         'levels': levels,
+        'formset': formset,
     }
 
     return render(request, 'accounts/edit_levels.html', context=context)
@@ -183,14 +193,3 @@ class UpdatePlayer(generics.UpdateAPIView):
         self.perform_update(serializer)
 
         return Response(serializer.data)
-
-def edit_levels(request):
-    LevelFormSet = modelformset_factory(Level, fields=('name', 'country', 'isSenior', 'isMale', 'isNational'))
-    if request.method == 'POST':
-        formset = LevelFormSet(request.POST, request.FILES)
-        if formset.is_valid():
-            formset.save()
-            # do something.
-    else:
-        formset = LevelFormSet()
-    return render(request, 'edit_levels.html', {'formset': formset})
