@@ -6,11 +6,11 @@
 {% load static %}
 
 <div class="container" style="Padding-top: 80px;">
-    <h2>Edit Series</h2>
+    <h2>Edit Levels</h2>
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <div class="team-selection">
-                <select onchange="changeLevel()" id="change-level" class="form-control-sm custom-select">
+                <select onchange="editLevel()" id="edit-level" class="form-control-sm custom-select">
                     <option selected disabled>Select a level...</option>
                     <option value="new_level">Add new level...</option>
                     {% for level in levels %}
@@ -21,10 +21,14 @@
         </div>
         <div class="col-sm-6">
             <div class="team-selection">
-
+                <form method="post">
+                    {{ formset }}
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 {% endblock %}
+
+<script type="text/javascript" src="/static/js/editfunctions.js"></script>

@@ -10,6 +10,7 @@ from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, T
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets, generics
+from django.forms import modelformset_factory
 from .serializers import UserSerializer, TeamSerializer, LineSerializer, PositionSerializer, LevelSerializer, TimeSerializer
 from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerializer, LiveDataSerializer, ShotSerializer
 
@@ -182,3 +183,14 @@ class UpdatePlayer(generics.UpdateAPIView):
         self.perform_update(serializer)
 
         return Response(serializer.data)
+
+def edit_levels(request):
+    LevelFormSet = modelformset_factory(Level, fields=('name', 'country', 'isSenior', 'isMale', 'isNational'))
+    if request.method == 'POST':
+        formset = LevelFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+            # do something.
+    else:
+        formset = LevelFormSet()
+    return render(request, 'edit_levels.html', {'formset': formset})
