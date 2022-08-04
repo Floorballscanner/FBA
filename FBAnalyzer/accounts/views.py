@@ -36,14 +36,14 @@ def edit_players(request):
     return render(request, 'accounts/edit_players.html', context=context)
 
 @login_required
-def edit_series(request):
+def edit_levels(request):
     levels = Level.objects.all().order_by('name')
 
     context = {
         'levels': levels,
     }
 
-    return render(request, 'accounts/edit_level.html', context=context)
+    return render(request, 'accounts/edit_levels.html', context=context)
 
 @login_required
 def edit_teams(request):
