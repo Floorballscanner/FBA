@@ -43,7 +43,7 @@ def edit_series(request):
         'levels': levels,
     }
 
-    return render(request, 'accounts/edit_series.html', context=context)
+    return render(request, 'accounts/edit_level.html', context=context)
 
 @login_required
 def edit_teams(request):

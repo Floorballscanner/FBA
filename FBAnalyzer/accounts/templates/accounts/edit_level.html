@@ -1,0 +1,30 @@
+<!-- This is the Edit Series - page where users can add, delete, and edit
+ series data -->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container" style="Padding-top: 80px;">
+    <h2>Edit Series</h2>
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="team-selection">
+                <select onchange="changeLevel()" id="change-level" class="form-control-sm custom-select">
+                    <option selected disabled>Select a level...</option>
+                    <option value="new_level">Add new level...</option>
+                    {% for level in levels %}
+                        <option value="{{level.id}}">{{level.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="team-selection">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
