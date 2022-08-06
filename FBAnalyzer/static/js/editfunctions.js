@@ -110,9 +110,6 @@ function editLevel() {
 
             e_level_name.value = "";
             e_level_id.value = "";
-            for (let i=e_level_country.length -1; i>0; i--) {
-                    e_level_country.remove(i);
-                }
             e_level_country.selectedIndex = "0";
             e_level_isMale.checked = true
             e_level_isSenior.checked = true
