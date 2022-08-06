@@ -13,8 +13,8 @@ function editLevel() {
 
     if (s_level.options[s_level.selectedIndex].value == "new_level") {
 
-            e_level.name.disabled = false;
-            e_level.country.disabled = false;
+            e_level_name.disabled = false;
+            e_level_country.disabled = false;
             e_level_isSenior.disabled = false;
             e_level_isMale.disabled = false;
             e_level_isNational.disabled = false;
@@ -34,8 +34,8 @@ function editLevel() {
                 e_level_isSenior.value = data.isSenior;
                 e_level_isMale.value = data.isMale;
                 e_level_isNational.value = data.isNational;
-                e_level.name.disabled = false;
-                e_level.country.disabled = false;
+                e_level_name.disabled = false;
+                e_level_country.disabled = false;
                 e_level_isSenior.disabled = false;
                 e_level_isMale.disabled = false;
                 e_level_isNational.disabled = false;
