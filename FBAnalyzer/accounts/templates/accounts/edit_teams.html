@@ -42,6 +42,7 @@
                     <label style="Padding-top: 20px;" class="form-check-label" for="edit_team_isMale">Men's Team?:</label><br><br>
                     <input class="form-check-input" type="checkbox" id="edit_team_isNational" name="edit_team_isNational" disabled>
                     <label style="Padding-top: 20px;" class="form-check-label" for="edit_team_isNational">National Team?:</label><br><br>
+                    <img src="{% static 'delete.png' %}" height="30px" onclick="deleteTeamButton()"><br><br>
                     <input class="btn btn-primary" type="button" id="edit_team_button" onclick="editTeamButton()" value="Save" disabled><br><br>
                 </form>
             </div>
