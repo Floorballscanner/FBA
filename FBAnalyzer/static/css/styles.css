@@ -184,6 +184,16 @@ body {
     text-align: center;
     padding: 0 0 0 0;
 }
+.team-selection input {
+    width: 100%;
+    text-align: center;
+    padding: 0 0 0 0;
+}
+.team-selection label {
+    width: 100%;
+    text-align: center;
+    padding: 0 0 0 0;
+}
 
 .team-selection h2 {
     font-size: 25px;
