@@ -32,7 +32,7 @@
                 <form>
                     <label class="form-label" for="edit_team_name">Team Name:</label><br>
                     <input class="form-label" type="text" id="edit_team_name" name="edit_team_name" disabled>
-                    <img src="{% static 'delete.png' %}" style="Padding-left: 5px;" height="30px" onclick="deleteTeamButton()"><br><br>
+                    <img src="{% static 'delete.png' %}" id="edit_team_delete" style="Padding-left: 5px;" height="30px" onclick="deleteTeamButton()"><br><br>
                     <label class="form-label" style="Padding-top: 20px;" for="edit_team_level">Level:</label><br><br>
                     <select class="form-control-sm custom-select" id="edit_team_level" name="edit_team_level">
                         <option selected disabled>Select a level...</option>
