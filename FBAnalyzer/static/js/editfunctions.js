@@ -30,6 +30,12 @@ function editLevel() {
 
     if (s_level.options[s_level.selectedIndex].value == "new_level") {
 
+            e_level_name.value = "";
+            e_level_id.value = "";
+            for (let i=e_level_country.length -1; i>0; i--) {
+                    e_level_country.remove(i);
+                }
+            e_level_country.selectedIndex = "0";
             e_level_name.disabled = false;
             e_level_country.disabled = false;
             e_level_isSenior.disabled = false;
@@ -49,9 +55,9 @@ function editLevel() {
                 e_level_name.value = data.name;
                 e_level_id.value = data.id;
                 e_level_country.value = data.country;
-                e_level_isSenior = data.isSenior;
-                e_level_isMale = data.isMale;
-                e_level_isNational = data.isNational;
+                if (data.isSenior == true) {e_level_isSenior.checked = true};
+                if (data.isMale == true) {e_level_isMale.checked = true};
+                if (data.isNational == true) {e_level_isNational.checked = true};
                 e_level_name.disabled = false;
                 e_level_country.disabled = false;
                 e_level_isSenior.disabled = false;
