@@ -19,6 +19,7 @@ function editLevel() {
 
     s_level = document.getElementById("edit-level");
     e_level_name = document.getElementById("edit_level_name");
+    e_level_id = document.getElementById("edit_level_id");
     e_level_delete = document.getElementById("edit_level_delete");
     e_level_country = document.getElementById("edit_level_country");
     e_level_isSenior = document.getElementById("edit_level_isSenior");
@@ -46,6 +47,7 @@ function editLevel() {
             .then(data => {
                 console.log('Success:', data);
                 e_level_name.value = data.name;
+                e_level_id.value = data.id;
                 e_level_country.value = data.country;
                 e_level_isSenior = data.isSenior;
                 e_level_isMale = data.isMale;
@@ -67,6 +69,50 @@ function editLevel() {
 
 function editLevelButton() {
 
+    var r = confirm("Do you want to save data?");
+    if (r == true) {
+        data = {
+            "name": e_level_name.value,
+            "country": e_level_country.value,
+            "isSenior": e_level_isSenior,
+            "isMale": e_level_isMale,
+            "isNational": e_level_isNational,
+        }
+
+        fetch("https://fbscanner.io/apis/levels/" + e_level_id + "/", {
+
+          method: 'PATCH', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+          },
+          body: JSON.stringify(data),
+        })
+
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            window.alert("Data saved!");
+            e_level_name.value = "";
+            e_level_id.value = "";
+            for (let i=e_level_country.length -1; i>0; i--) {
+                    e_level_country.remove(i);
+                }
+            e_level_country.selectedIndex = "0";
+            e_level_isSenior = false;
+            e_level_isMale = false;
+            e_level_isNational = false;
+            e_level_name.disabled = true;
+            e_level_country.disabled = true;
+            e_level_isSenior.disabled = true;
+            e_level_isMale.disabled = true;
+            e_level_isNational.disabled = true;
+            e_level_delete.disabled = true;
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
 
 }
 
