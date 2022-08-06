@@ -1,3 +1,19 @@
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
 
 function editLevel() {
 
@@ -31,9 +47,9 @@ function editLevel() {
                 console.log('Success:', data);
                 e_level_name.value = data.name;
                 e_level_country.value = data.country;
-                e_level_isSenior.value = data.isSenior;
-                e_level_isMale.value = data.isMale;
-                e_level_isNational.value = data.isNational;
+                e_level_isSenior = data.isSenior;
+                e_level_isMale = data.isMale;
+                e_level_isNational = data.isNational;
                 e_level_name.disabled = false;
                 e_level_country.disabled = false;
                 e_level_isSenior.disabled = false;
