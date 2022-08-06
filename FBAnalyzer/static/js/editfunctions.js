@@ -1,3 +1,72 @@
+const countryList = [
+	"Albania",
+	"Argentina",
+	"Armenia",
+	"Australia",
+	"Austria",
+	"Azerbaijan",
+	"Belarus",
+	"Belgium",
+	"Bosnia and Herzegovina",
+	"Brazil",
+	"Bulgaria",
+	"Canada",
+	"China",
+	"Costa Rica",
+	"Croatia",
+	"Cyprus",
+	"Czech",
+	"Denmark",
+	"Estonia",
+	"Finland",
+	"France",
+	"Georgia",
+	"Germany",
+	"Greece",
+	"Greenland",
+	"Hong Kong",
+	"Hungary",
+	"India",
+	"Indonesia",
+	"Ireland",
+	"Italy",
+	"Japan",
+	"South Korea",
+	"Latvia",
+	"Liechtenstein",
+	"Lithuania",
+	"Malaysia",
+	"Malta",
+	"Mexico",
+	"Netherlands",
+	"Norway",
+	"Poland",
+	"Portugal",
+	"Republic of North Macedonia",
+	"Romania",
+	"Russian Federation",
+	"Serbia",
+	"Singapore",
+	"Slovakia",
+	"Slovenia",
+	"South Africa",
+	"Spain",
+	"Sri Lanka",
+	"Sweden",
+	"Switzerland",
+	"Taiwan",
+	"Thailand",
+	"Ukraine",
+	"United Kingdom",
+	"United States of America",
+	"Viet Nam",
+];
+
+window.onload = function() {
+
+
+}
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -25,6 +94,14 @@ function editLevel() {
     e_level_isSenior = document.getElementById("edit_level_isSenior");
     e_level_isMale = document.getElementById("edit_level_isMale");
     e_level_isNational = document.getElementById("edit_level_isNational");
+
+    if (countryList.length > 1) {
+        for (let i=1;i<countryList.length;i++) {
+
+            var opt = new Option(countryList[i], countryList[i]);
+            e_level_country.appendChild(opt);
+        }
+    }
 
     // If user wants to create a new level
 
