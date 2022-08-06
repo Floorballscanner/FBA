@@ -95,7 +95,7 @@ function editLevel() {
     e_level_isMale = document.getElementById("edit_level_isMale");
     e_level_isNational = document.getElementById("edit_level_isNational");
 
-    if (countryList.length < 2) {
+    if (e_level_country.length < 2) {
         for (let i=1;i<countryList.length;i++) {
 
             var opt = new Option(countryList[i], countryList[i]);
