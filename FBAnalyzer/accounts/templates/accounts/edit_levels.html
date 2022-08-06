@@ -21,8 +21,20 @@
         </div>
         <div class="col-sm-6">
             <div class="team-selection">
-                <form method="post">
-                    {{ formset }}
+                <form>
+                    <label for="edit_level_name">Level Name:</label><br>
+                    <input type="text" id="edit_level_name" name="edit_level_name"><br>
+                    <label for="edit_level_country">Last name:</label><br>
+                    <select id="edit_level_country" name="edit_level_country">
+                        <option selected disabled>Select a country...</option>
+                    </select>
+                    <label for="edit_level_isSenior">Senior (Adult) Level?:</label><br>
+                    <input type="checkbox" id="edit_level_isSenior" name="edit_level_isSenior"><br>
+                    <label for="edit_level_isMale">Male Leve?l:</label><br>
+                    <input type="checkbox" id="edit_level_isMale" name="edit_level_isMale"><br>
+                    <label for="edit_level_isNational">National Team Level?:</label><br>
+                    <input type="checkbox" id="edit_level_isNational" name="edit_level_isNational"><br>
+                    <input type="button" id="edit_level_button" onclick="editLevelButton()"><br>
                 </form>
             </div>
         </div>
