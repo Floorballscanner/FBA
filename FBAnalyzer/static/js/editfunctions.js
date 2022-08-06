@@ -36,6 +36,9 @@ function editLevel() {
                     e_level_country.remove(i);
                 }
             e_level_country.selectedIndex = "0";
+            e_level_isMale.checked = true
+            e_level_isSenior.checked = true
+            e_level_isNational.checked = true
             e_level_name.disabled = false;
             e_level_country.disabled = false;
             e_level_isSenior.disabled = false;
