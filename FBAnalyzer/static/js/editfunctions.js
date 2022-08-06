@@ -25,7 +25,7 @@ function editLevel() {
 
     else {
 
-       fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_level.options[s_level.selectedIndex].value)
+       fetch("https://fbscanner.io/apis/levels/" + s_level.options[s_level.selectedIndex].value)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
