@@ -162,9 +162,9 @@ function editLevelButton() {
         data = {
             "name": e_level_name.value,
             "country": e_level_country.value,
-            "isSenior": e_level_isSenior,
-            "isMale": e_level_isMale,
-            "isNational": e_level_isNational,
+            "isSenior": e_level_isSenior.checked,
+            "isMale": e_level_isMale.checked,
+            "isNational": e_level_isNational.checked,
             "created": user_id,
         }
 
