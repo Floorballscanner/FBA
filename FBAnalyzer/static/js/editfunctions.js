@@ -46,11 +46,11 @@ function editLevel() {
                 e_level_name.value = data.name;
                 e_level_id.value = data.id;
                 e_level_country.value = data.country;
-                if (data.isSenior == true) {e_level_isSenior.checked = true;}
+                if (data.isSenior) {e_level_isSenior.checked = true;}
                 else {e_level_isSenior.checked = false;}
-                if (data.isMale == true) {e_level_isMale.checked = true;}
+                if (data.isMale) {e_level_isMale.checked = true;}
                 else {e_level_isMale.checked = false;}
-                if (data.isNational == true) {e_level_isNational.checked = true;}
+                if (data.isNational) {e_level_isNational.checked = true;}
                 else {e_level_isNational.checked = false;}
                 e_level_name.disabled = false;
                 e_level_country.disabled = false;
