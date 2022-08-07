@@ -158,7 +158,7 @@ function deleteLevelButton() {
     var r = confirm("Are you sure you want to delete Level, all saved information will be lost?");
     if (r == true) {
 
-        fetch("https://fbscanner.io/apis/levels/" + e_level_id + "/", {
+        fetch("https://fbscanner.io/apis/levels/" + e_level_id.value + "/", {
 
               method: 'DELETE', // or 'PUT'
               headers: {

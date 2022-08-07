@@ -4,6 +4,8 @@
 {% extends 'app_layout.html' %}
 {% block content %}
 {% load static %}
+{{ request.user.id|json_script:"user_id" }}
+
 <div class="container" style="Padding-top: 40px;">
 	<div class="frontpage-choices">
 		<div class="row justify-content-center">
