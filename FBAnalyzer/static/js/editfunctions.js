@@ -203,6 +203,69 @@ function deleteLevelButton() {
 
 }
 
+function editTeam() {
+    
+    if (e_team_level.length < 2) {
+        fetch("https://fbscanner.io/apis/levels/")
+                .then(response => response.json())
+                .then(levels => {
+                    console.log('Success:', levels);
+                    for (let i=1;i<levels.length;i++) {
+                        var opt = new Option(levels[i].name, levels[i].id);
+                        e_team_level.appendChild(opt);
+                    }
+                })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+    }
+
+    // If user wants to create a new team
+
+    if (e_team.options[e_team.selectedIndex].value == "new_team") {
+
+            e_team_name.value = "";
+            e_team_id.value = "";
+            e_team_level.selectedIndex = "0";
+            e_team_isMale.checked = false
+            e_team_isSenior.checked = false
+            e_team_isNational.checked = false
+            e_team_name.disabled = false;
+            e_team_level.disabled = false;
+            e_team_delete.disabled = true;
+            e_team_button.disabled = false;
+    }
+
+    // If selected value exists, fetch data for editing
+
+    else {
+
+       fetch("https://fbscanner.io/apis/teams/" + e_team.options[e_team.selectedIndex].value + "/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                e_team_name.value = data.name;
+                e_team_id.value = data.id;
+                e_team_level.value = data.level;
+                if (data.isSenior) {e_team_isSenior.checked = true;}
+                else {e_team_isSenior.checked = false;}
+                if (data.isMale) {e_team_isMale.checked = true;}
+                else {e_team_isMale.checked = false;}
+                if (data.isNational) {e_team_isNational.checked = true;}
+                else {e_team_isNational.checked = false;}
+                e_team_name.disabled = false;
+                e_team_level.disabled = false;
+                e_team_delete.disabled = false;
+                e_team_button.disabled = false;
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+
+    }
+    
+}
+
 function updateLevels() {
 
     fetch("https://fbscanner.io/apis/levels/")
