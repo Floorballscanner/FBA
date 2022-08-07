@@ -9,6 +9,16 @@ function selectLevel() {
     level_id = s_level.options[s_level.selectedIndex].value;
     e_team.disabled = false;
     updateTeams(level_id);
+    e_team_name.value = "";
+    e_team_id.value = "";
+    e_team_level.selectedIndex = "0";
+    e_team_isMale.checked = false
+    e_team_isSenior.checked = false
+    e_team_isNational.checked = false
+    e_team_name.disabled = false;
+    e_team_level.disabled = false;
+    e_team_delete.disabled = true;
+    e_team_button.disabled = false;
 }
 
 function editLevel() {
@@ -249,7 +259,7 @@ function editTeam() {
                 e_team_level.value = data.level;
                 if (data.isSenior) {e_team_isSenior.checked = true;}
                 else {e_team_isSenior.checked = false;}
-                if (data.isMale) {e_team_isMale.checked = true;}
+                if (data.isMen) {e_team_isMale.checked = true;}
                 else {e_team_isMale.checked = false;}
                 if (data.isNational) {e_team_isNational.checked = true;}
                 else {e_team_isNational.checked = false;}
@@ -264,6 +274,25 @@ function editTeam() {
 
     }
     
+}
+
+function changeTeamLevel() {
+
+    fetch("https://fbscanner.io/apis/levels/" e_team_level.options[e_team_level.selectedIndex].value + "/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                if (data.isSenior) {e_team_isSenior.checked = true;}
+                else {e_team_isSenior.checked = false;}
+                if (data.isMen) {e_team_isMale.checked = true;}
+                else {e_team_isMale.checked = false;}
+                if (data.isNational) {e_team_isNational.checked = true;}
+                else {e_team_isNational.checked = false;}
+
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
 }
 
 function updateLevels() {
