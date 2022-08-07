@@ -59,10 +59,6 @@ function editLevel() {
                 e_level_isNational.disabled = false;
                 e_level_delete.disabled = false;
                 e_level_button.disabled = false;
-                console.log("data.isSenior: " + data.isSenior + " e_level_isSenior: " + e_level_isSenior.checked)
-                console.log("data.isMale: " + data.isMale + " e_level_isMale: " + e_level_isMale.checked)
-                console.log("data.isNational: " + data.isNational + " e_level_isNational: " + e_level_isNational.checked)
-
         })
             .catch((error) => {
                 console.error('Error:', error);
@@ -76,7 +72,7 @@ function editLevelButton() {
     var r = confirm("Do you want to save data?");
     if (r == true) {
 
-        data = {
+        newdata = {
             "name": e_level_name.value,
             "country": e_level_country.value,
             "isSenior": e_level_isSenior.checked,
@@ -95,7 +91,7 @@ function editLevelButton() {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
               },
-              body: JSON.stringify(data),
+              body: JSON.stringify(newdata),
             })
 
             .then(response => response.json())
@@ -105,9 +101,9 @@ function editLevelButton() {
                 e_level_name.value = "";
                 e_level_id.value = "";
                 e_level_country.selectedIndex = "0";
-                e_level_isSenior = false;
-                e_level_isMale = false;
-                e_level_isNational = false;
+                e_level_isSenior.checked = false;
+                e_level_isMale.checked = false;
+                e_level_isNational.checked = false;
                 e_level_name.disabled = true;
                 e_level_country.disabled = true;
                 e_level_isSenior.disabled = true;
@@ -142,9 +138,9 @@ function editLevelButton() {
                 e_level_name.value = "";
                 e_level_id.value = "";
                 e_level_country.selectedIndex = "0";
-                e_level_isSenior = false;
-                e_level_isMale = false;
-                e_level_isNational = false;
+                e_level_isSenior.checked = false;
+                e_level_isMale.checked = false;
+                e_level_isNational.checked = false;
                 e_level_name.disabled = true;
                 e_level_country.disabled = true;
                 e_level_isSenior.disabled = true;
@@ -182,9 +178,9 @@ function deleteLevelButton() {
                 e_level_name.value = "";
                 e_level_id.value = "";
                 e_level_country.selectedIndex = "0";
-                e_level_isSenior = false;
-                e_level_isMale = false;
-                e_level_isNational = false;
+                e_level_isSenior.checked = false;
+                e_level_isMale.checked = false;
+                e_level_isNational.checked = false;
                 e_level_name.disabled = true;
                 e_level_country.disabled = true;
                 e_level_isSenior.disabled = true;
