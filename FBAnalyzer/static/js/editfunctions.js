@@ -128,7 +128,7 @@ function editLevelButton() {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken,
               },
-              body: JSON.stringify(data),
+              body: JSON.stringify(newdata),
             })
 
             .then(response => response.json())
