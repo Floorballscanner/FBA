@@ -278,7 +278,7 @@ function editTeam() {
 
 function changeTeamLevel() {
 
-    fetch("https://fbscanner.io/apis/levels/" e_team_level.options[e_team_level.selectedIndex].value + "/")
+    fetch("https://fbscanner.io/apis/levels/" + e_team_level.options[e_team_level.selectedIndex].value + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
