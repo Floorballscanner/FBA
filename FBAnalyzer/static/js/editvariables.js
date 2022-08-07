@@ -9,23 +9,6 @@ e_level_isMale = document.getElementById("edit_level_isMale");
 e_level_isNational = document.getElementById("edit_level_isNational");
 e_level_button = document.getElementById("edit_level_button");
 
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
-
 var user_id = JSON.parse(document.getElementById('user_id').textContent); // user id number
 
 const countryList = [
