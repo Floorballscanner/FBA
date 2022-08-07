@@ -284,7 +284,7 @@ function changeTeamLevel() {
                 console.log('Success:', data);
                 if (data.isSenior) {e_team_isSenior.checked = true;}
                 else {e_team_isSenior.checked = false;}
-                if (data.isMen) {e_team_isMale.checked = true;}
+                if (data.isMale) {e_team_isMale.checked = true;}
                 else {e_team_isMale.checked = false;}
                 if (data.isNational) {e_team_isNational.checked = true;}
                 else {e_team_isNational.checked = false;}
