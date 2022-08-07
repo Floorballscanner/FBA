@@ -210,7 +210,7 @@ function editTeam() {
                 .then(response => response.json())
                 .then(levels => {
                     console.log('Success:', levels);
-                    for (let i=1;i<=levels.length;i++) {
+                    for (let i=0;i<levels.length;i++) {
                         var opt = new Option(levels[i].name, levels[i].id);
                         e_team_level.appendChild(opt);
                     }
