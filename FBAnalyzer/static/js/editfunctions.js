@@ -96,6 +96,7 @@ function editLevel() {
     e_level_isSenior = document.getElementById("edit_level_isSenior");
     e_level_isMale = document.getElementById("edit_level_isMale");
     e_level_isNational = document.getElementById("edit_level_isNational");
+    e_level_button = document.getElementById("edit_level_button");
 
     if (e_level_country.length < 2) {
         for (let i=1;i<countryList.length;i++) {
@@ -121,6 +122,7 @@ function editLevel() {
             e_level_isMale.disabled = false;
             e_level_isNational.disabled = false;
             e_level_delete.disabled = true;
+            e_level_button.disabled = false;
     }
 
     // If selected value exists, fetch data for editing
@@ -143,6 +145,7 @@ function editLevel() {
                 e_level_isMale.disabled = false;
                 e_level_isNational.disabled = false;
                 e_level_delete.disabled = false;
+                e_level_button.disabled = false;
 
         })
             .catch((error) => {
@@ -194,6 +197,7 @@ function editLevelButton() {
                 e_level_isMale.disabled = true;
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
+                e_level_button.disabled = true;
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -228,6 +232,7 @@ function editLevelButton() {
                 e_level_isMale.disabled = true;
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
+                e_level_button.disabled = true;
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -265,6 +270,7 @@ function deleteLevelButton() {
                 e_level_isMale.disabled = true;
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
+                e_level_button.disabled = true;
             })
             .catch((error) => {
               console.error('Error:', error);
