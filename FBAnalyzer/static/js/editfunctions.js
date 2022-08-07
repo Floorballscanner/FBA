@@ -203,7 +203,7 @@ function updateLevels() {
             .then(data => {
                 console.log('Success:', data);
                 for (let i=s_level.length-1;i>1;i--) {
-                    s_level[i].remove
+                    s_level.remove(i);
                 }
                 for (let i=0;i<data.length;i++) {
                     var opt = new Option(data[i].name, data[i].id);
