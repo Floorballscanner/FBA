@@ -109,6 +109,7 @@ function editLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
+                updateLevels(); // Update level option box
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -144,6 +145,7 @@ function editLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
+                updateLevels(); // Update level option box
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -182,10 +184,31 @@ function deleteLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
+                updateLevels(); // Update Level selection box, remove removed option
             })
             .catch((error) => {
               console.error('Error:', error);
             });
     }
 
+}
+
+function updateLevels() {
+
+    fetch("https://fbscanner.io/apis/levels/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                for (let i=s_level.length-1;i>1;i--) {
+                    s_level[i].remove
+                }
+                for (let i=0;i<data.length;i++) {
+                    var opt = new Option(data[i].id, data[i].name);
+                    s_level.append(opt);
+                }
+
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
 }
