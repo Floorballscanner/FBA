@@ -159,12 +159,17 @@ function editLevelButton() {
 
     var r = confirm("Do you want to save data?");
     if (r == true) {
+
+        isS = e_level.isSenior.checked;
+        isM = e_level_isMale.checked;
+        isN = e_level_isNational.checked;
+
         data = {
             "name": e_level_name.value,
             "country": e_level_country.value,
-            "isSenior": Boolean(e_level_isSenior),
-            "isMale": Boolean(e_level_isMale),
-            "isNational": Boolean(e_level_isNational),
+            "isSenior": isS,
+            "isMale": isM,
+            "isNational": isN,
             "created": user_id,
         }
 
