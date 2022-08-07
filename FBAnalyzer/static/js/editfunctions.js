@@ -59,6 +59,9 @@ function editLevel() {
                 e_level_isNational.disabled = false;
                 e_level_delete.disabled = false;
                 e_level_button.disabled = false;
+                console.log("data.isSenior: " + data.isSenior + " e_level_isSenior: " + e_level_isSenior.checked)
+                console.log("data.isMale: " + data.isMale + " e_level_isMale: " + e_level_isMale.checked)
+                console.log("data.isNational: " + data.isNational + " e_level_isNational: " + e_level_isNational.checked)
 
         })
             .catch((error) => {
