@@ -109,6 +109,7 @@ function editLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
+                s_level.selectedIndex = "0";
                 updateLevels(); // Update level option box
             })
             .catch((error) => {
@@ -145,6 +146,7 @@ function editLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
+                s_level.selectedIndex = "0";
                 updateLevels(); // Update level option box
             })
             .catch((error) => {
@@ -184,6 +186,7 @@ function deleteLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
+                s_level.selectedIndex = "0";
                 updateLevels(); // Update Level selection box, remove removed option
             })
             .catch((error) => {
