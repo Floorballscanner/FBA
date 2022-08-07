@@ -15,7 +15,8 @@ function getCookie(name) {
 }
 const csrftoken = getCookie('csrftoken');
 
-s_level = document.getElementById("edit-level");
+e_level = document.getElementById("edit-level");
+s_level = document.getElementById("select-level");
 e_level_name = document.getElementById("edit_level_name");
 e_level_id = document.getElementById("edit_level_id");
 e_level_delete = document.getElementById("edit_level_delete");
@@ -24,6 +25,17 @@ e_level_isSenior = document.getElementById("edit_level_isSenior");
 e_level_isMale = document.getElementById("edit_level_isMale");
 e_level_isNational = document.getElementById("edit_level_isNational");
 e_level_button = document.getElementById("edit_level_button");
+
+e_team = document.getElementById("edit-team");
+e_team_name = document.getElementById("edit_team_name");
+e_team_id = document.getElementById("edit_team_id");
+e_team_delete = document.getElementById("edit_team_delete");
+e_team_country = document.getElementById("edit_team_country");
+e_team_isSenior = document.getElementById("edit_team_isSenior");
+e_team_isMale = document.getElementById("edit_team_isMale");
+e_team_isNational = document.getElementById("edit_team_isNational");
+e_team_button = document.getElementById("edit_team_button");
+
 
 var user_id = JSON.parse(document.getElementById('user_id').textContent); // user id number
 

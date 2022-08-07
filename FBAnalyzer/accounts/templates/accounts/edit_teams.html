@@ -19,12 +19,9 @@
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
                 </select>
-                <select onchange="editTeam()" id="edit-team" class="form-control-sm custom-select">
+                <select onchange="editTeam()" id="edit-team" class="form-control-sm custom-select" disabled>
                     <option selected disabled>Select a team..</option>
                     <option value="new_team">Add new team...</option>
-                    {% for team in teams %}
-                        <option value="{{team.id}}">{{team.name}}</option>
-                    {% endfor %}
                 </select>
             </div>
         </div>

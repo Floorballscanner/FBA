@@ -4,7 +4,12 @@ window.onload = function() {
 
 
 }
+function selectLevel() {
 
+    level_id = s_level.options[s_level.selectedIndex].value;
+    e_team.disabled = false;
+    updateTeams(level_id);
+}
 
 function editLevel() {
 
@@ -18,7 +23,7 @@ function editLevel() {
 
     // If user wants to create a new level
 
-    if (s_level.options[s_level.selectedIndex].value == "new_level") {
+    if (e_level.options[e_level.selectedIndex].value == "new_level") {
 
             e_level_name.value = "";
             e_level_id.value = "";
@@ -39,7 +44,7 @@ function editLevel() {
 
     else {
 
-       fetch("https://fbscanner.io/apis/levels/" + s_level.options[s_level.selectedIndex].value + "/")
+       fetch("https://fbscanner.io/apis/levels/" + e_level.options[e_level.selectedIndex].value + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -82,7 +87,7 @@ function editLevelButton() {
         }
 
         // New level - Create new Level - instance
-        if (s_level.options[s_level.selectedIndex].value == "new_level") {
+        if (e_level.options[e_level.selectedIndex].value == "new_level") {
 
             fetch("https://fbscanner.io/apis/levels/", {
 
@@ -111,7 +116,7 @@ function editLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
-                s_level.selectedIndex = "0";
+                e_level.selectedIndex = "0";
                 updateLevels(); // Update level option box
             })
             .catch((error) => {
@@ -148,7 +153,7 @@ function editLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
-                s_level.selectedIndex = "0";
+                e_level.selectedIndex = "0";
                 updateLevels(); // Update level option box
             })
             .catch((error) => {
@@ -188,7 +193,7 @@ function deleteLevelButton() {
                 e_level_isNational.disabled = true;
                 e_level_delete.disabled = true;
                 e_level_button.disabled = true;
-                s_level.selectedIndex = "0";
+                e_level.selectedIndex = "0";
                 updateLevels(); // Update Level selection box, remove removed option
             })
             .catch((error) => {
@@ -204,16 +209,39 @@ function updateLevels() {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                for (let i=s_level.length-1;i>1;i--) {
-                    s_level.remove(i);
+                for (let i=e_level.length-1;i>1;i--) {
+                    e_level.remove(i);
                 }
                 for (let i=0;i<data.length;i++) {
                     var opt = new Option(data[i].name, data[i].id);
-                    s_level.append(opt);
+                    e_level.append(opt);
                 }
 
         })
             .catch((error) => {
                 console.error('Error:', error);
         });
+}
+
+function updateTeams(level_id) {
+
+    fetch("https://fbscanner.io/apis/teams/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                for (let i=e_team.length-1;i>1;i--) {
+                    e_team.remove(i);
+                }
+                for (let i=0;i<data.length;i++) {
+                    if (data[i].level == level_id) {
+                        var opt = new Option(data[i].name, data[i].id);
+                        e_team.append(opt);
+                    }
+                }
+
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+
 }
