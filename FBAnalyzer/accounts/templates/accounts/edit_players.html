@@ -5,6 +5,8 @@ This is the Edit Players - page where users can add, delete, and edit
 
 {% extends 'app_layout.html' %}
 {% block content %}
+{% load static %}
+{{ request.user.id|json_script:"user_id" }}
 
 <div class="container" style="Padding-top: 80px;">
     <h2>Edit Players</h2>

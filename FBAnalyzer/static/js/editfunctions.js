@@ -84,6 +84,7 @@ function getCookie(name) {
     return cookieValue;
 }
 const csrftoken = getCookie('csrftoken');
+var user_id = JSON.parse(document.getElementById('user_id').textContent); // user id number
 
 function editLevel() {
 
@@ -111,9 +112,9 @@ function editLevel() {
             e_level_name.value = "";
             e_level_id.value = "";
             e_level_country.selectedIndex = "0";
-            e_level_isMale.checked = true
-            e_level_isSenior.checked = true
-            e_level_isNational.checked = true
+            e_level_isMale.checked = false
+            e_level_isSenior.checked = false
+            e_level_isNational.checked = false
             e_level_name.disabled = false;
             e_level_country.disabled = false;
             e_level_isSenior.disabled = false;
@@ -161,45 +162,113 @@ function editLevelButton() {
             "isSenior": e_level_isSenior,
             "isMale": e_level_isMale,
             "isNational": e_level_isNational,
+            "created": user_id,
         }
 
-        fetch("https://fbscanner.io/apis/levels/" + e_level_id + "/", {
+        // New level - Create new Level - instance
+        if (s_level.options[s_level.selectedIndex].value == "new_level") {
 
-          method: 'PATCH', // or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken,
-          },
-          body: JSON.stringify(data),
-        })
+            fetch("https://fbscanner.io/apis/levels/", {
 
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            window.alert("Data saved!");
-            e_level_name.value = "";
-            e_level_id.value = "";
-            for (let i=e_level_country.length -1; i>0; i--) {
-                    e_level_country.remove(i);
-                }
-            e_level_country.selectedIndex = "0";
-            e_level_isSenior = false;
-            e_level_isMale = false;
-            e_level_isNational = false;
-            e_level_name.disabled = true;
-            e_level_country.disabled = true;
-            e_level_isSenior.disabled = true;
-            e_level_isMale.disabled = true;
-            e_level_isNational.disabled = true;
-            e_level_delete.disabled = true;
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+              method: 'POST', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+              },
+              body: JSON.stringify(data),
+            })
+
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.alert("Data saved!");
+                e_level_name.value = "";
+                e_level_id.value = "";
+                e_level_country.selectedIndex = "0";
+                e_level_isSenior = false;
+                e_level_isMale = false;
+                e_level_isNational = false;
+                e_level_name.disabled = true;
+                e_level_country.disabled = true;
+                e_level_isSenior.disabled = true;
+                e_level_isMale.disabled = true;
+                e_level_isNational.disabled = true;
+                e_level_delete.disabled = true;
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+
+        }
+        else {
+
+            fetch("https://fbscanner.io/apis/levels/" + e_level_id + "/", {
+
+              method: 'PATCH', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+              },
+              body: JSON.stringify(data),
+            })
+
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.alert("Data saved!");
+                e_level_name.value = "";
+                e_level_id.value = "";
+                e_level_country.selectedIndex = "0";
+                e_level_isSenior = false;
+                e_level_isMale = false;
+                e_level_isNational = false;
+                e_level_name.disabled = true;
+                e_level_country.disabled = true;
+                e_level_isSenior.disabled = true;
+                e_level_isMale.disabled = true;
+                e_level_isNational.disabled = true;
+                e_level_delete.disabled = true;
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        }
     }
 
 }
 
 function deleteLevelButton() {
+
+    var r = confirm("Are you sure you want to delete Level, all saved information will be lost?");
+    if (r == true) {
+
+        fetch("https://fbscanner.io/apis/levels/" + e_level_id + "/", {
+
+              method: 'DELETE', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+
+            .then(() => {
+                console.log('removed');
+                window.alert("Level deleted.");
+                e_level_name.value = "";
+                e_level_id.value = "";
+                e_level_country.selectedIndex = "0";
+                e_level_isSenior = false;
+                e_level_isMale = false;
+                e_level_isNational = false;
+                e_level_name.disabled = true;
+                e_level_country.disabled = true;
+                e_level_isSenior.disabled = true;
+                e_level_isMale.disabled = true;
+                e_level_isNational.disabled = true;
+                e_level_delete.disabled = true;
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+    }
 
 }

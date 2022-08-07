@@ -4,6 +4,7 @@
 {% extends 'app_layout.html' %}
 {% block content %}
 {% load static %}
+{{ request.user.id|json_script:"user_id" }}
 
 <div class="container" style="Padding-top: 80px;">
     <a href="/accounts/edit_data"><img src="{% static 'back.png' %}" height="30px"></a>
