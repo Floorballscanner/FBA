@@ -2359,7 +2359,7 @@
         xGL1T2 = calcPercent(Number(xGfT2_g[0]), Number(xGaT2_g[0]));
         xGL2T1 = calcPercent(Number(xGf_g[1]), Number(xGa_g[1]));
         xGL2T2 = calcPercent(Number(xGfT2_g[1]), Number(xGaT2_g[1]));
-        xGL3T1 = calcPercent(Number(xGf_g[2]), Number(xGa_g[2]);
+        xGL3T1 = calcPercent(Number(xGf_g[2]), Number(xGa_g[2]));
         xGL3T2 = calcPercent(Number(xGfT2_g[2]), Number(xGfT2_g[2]));
 
         var chartData = google.visualization.arrayToDataTable([
