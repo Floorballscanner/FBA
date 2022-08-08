@@ -1203,3 +1203,13 @@
         [ 5, 7,9,11,13,15,17,15,13,11,9, 7, 5],
 
         ];
+
+        // Lasketaan joukkueen / ketjun prosentuaalinen xG
+
+    function calcPercent(xGa, xGb) {
+        res = Math.round(xGa / (xGa + xGb) * 100);
+        return res;
+    }
+
+
+
