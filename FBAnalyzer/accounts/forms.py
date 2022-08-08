@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Player, Team
+from .models import Player, Team, Level
+from django.forms import ModelForm
 
 class AddNewPlayer(forms.Form):
 
@@ -61,3 +62,17 @@ class changeTeam(forms.Form):
     position = forms.ChoiceField(label='Player position', widget=forms.Select(choices=Positions))
     player_name = forms.ChoiceField(label='Player', widget=forms.Select(choices=context))
 
+class LevelForm(ModelForm):
+    class Meta:
+        model = Level
+        fields = ['name', 'country', 'isSenior', 'isMale', 'isNational']
+
+class PlayerForm(ModelForm):
+    class Meta:
+        model = Player
+        fields = ['first_name', 'last_name', 'jersey_number', 'team', 'line', 'position']
+
+class TeamForm(ModelForm):
+    class Meta:
+        model = Team
+        fields = ['name', 'level', 'isSenior', 'isMen', 'isNational']

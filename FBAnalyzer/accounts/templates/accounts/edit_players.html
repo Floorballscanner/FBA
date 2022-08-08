@@ -1,19 +1,17 @@
 <!--
 
-This is the My Team - html - page content file. It is shown when the user is logged in and
-presses the My Team - button at the index - page.
-
-It extends app_layout.html with Django
-
--->
+This is the Edit Players - page where users can add, delete, and edit
+ player data -->
 
 {% extends 'app_layout.html' %}
 {% block content %}
+{% load static %}
+{{ request.user.id|json_script:"user_id" }}
 
-<div class="container">
-    <h2>Edit your team</h2>
-    <div class="row">
-		<div class="my-roster">
+<div class="container" style="Padding-top: 80px;">
+    <h2>Edit Players</h2>
+	<div class="frontpage-choices">
+		<div class="row justify-content-center">
 			<div class="col-sm-6">
                 <h3>My Roster</h3>
                 {% if players %}
@@ -37,9 +35,6 @@ It extends app_layout.html with Django
                   </form>
                 </div>
             </div>
-        </div>
-
-        <div class="my-team">
             <div class="col-sm-6">
                 <h3>My Team</h3></br>
                 <h5>1st Line</h5></br>
@@ -96,5 +91,9 @@ It extends app_layout.html with Django
     }
 
 </script>
+
+<script type="text/javascript" src="/static/js/editvariables.js"></script>
+<script type="text/javascript" src="/static/js/editfunctions.js"></script>
+
 
 {% endblock %}

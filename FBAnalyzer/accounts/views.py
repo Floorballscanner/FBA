@@ -10,6 +10,7 @@ from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, T
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from rest_framework import viewsets, generics
+from django.forms import modelformset_factory
 from .serializers import UserSerializer, TeamSerializer, LineSerializer, PositionSerializer, LevelSerializer, TimeSerializer
 from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerializer, LiveDataSerializer, ShotSerializer
 
@@ -17,16 +18,55 @@ from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerialize
 def index(request):
     return render(request,'accounts/index.html')
 
+@login_required
 def new_game(request):
     return render(request, 'accounts/newgame.html')
 
-def my_team(request):
+@login_required
+def edit_players(request):
+    teams = Team.objects.all().order_by('name')
+    levels = Level.objects.all().order_by('name')
     players = Player.objects.all().order_by('jersey_number')
+
     context = {
+        'teams': teams,
+        'levels': levels,
         'players': players,
     }
 
-    return render(request, 'accounts/myteam.html', context = context)
+    return render(request, 'accounts/edit_players.html', context=context)
+
+@login_required
+def edit_levels(request):
+    levels = Level.objects.all().order_by('name')
+
+    LevelFormSet = modelformset_factory(Level, fields=('name', 'country', 'isSenior', 'isMale', 'isNational'))
+    if request.method == 'POST':
+        formset = LevelFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+            # do something.
+    else:
+        formset = LevelFormSet()
+
+    context = {
+        'levels': levels,
+        'formset': formset,
+    }
+
+    return render(request, 'accounts/edit_levels.html', context=context)
+
+@login_required
+def edit_teams(request):
+    teams = Team.objects.all().order_by('name')
+    levels = Level.objects.all().order_by('name')
+
+    context = {
+        'teams': teams,
+        'levels': levels,
+    }
+
+    return render(request, 'accounts/edit_teams.html', context=context)
 
 def add_new_player(request):
 
@@ -57,9 +97,10 @@ def add_new_player(request):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    #  return render(request, 'accounts/myteam.html', context)
+    #  return render(request, 'accounts/edit_playersedit_players.html', context)
 
 # ViewSets define the view behavior.
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -122,6 +163,7 @@ class PlayerList(generics.ListAPIView):
             queryset = queryset.filter(team__id=team)
         return queryset
 
+@login_required
 def premium_game(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -133,6 +175,11 @@ def premium_game(request):
         'players': players,
     }
     return render(request, 'accounts/premiumgame.html', context=context)
+
+@login_required
+def edit_data(request):
+
+    return render(request, 'accounts/editdata.html')
 
 class UpdatePlayer(generics.UpdateAPIView):
     serializer_class = PlayerUpdateSerializer
