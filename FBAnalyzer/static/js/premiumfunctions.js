@@ -2353,6 +2353,40 @@
         var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
         chart.draw(chartData, options);
 
+        //xG% GameChart
+
+    xGL1T1 = calcPercent(Number(xGf_g[0]), Number(xGa_g[0]));
+    xGL1T2 = calcPercent(Number(xGfT2_g[0]), Number(xGaT2_g[0]));
+    xGL2T1 = calcPercent(Number(xGf_g[1]), Number(xGa_g[1]));
+    xGL2T2 = calcPercent(Number(xGfT2_g[1]), Number(xGaT2_g[1]));
+    xGL3T1 = calcPercent(Number(xGf_g[2]), Number(xGa_g[2]);
+    xGL3T2 = calcPercent(Number(xGfT2_g[2]), Number(xGfT2_g[2]));
+
+    var chartData = google.visualization.arrayToDataTable([
+         ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+         ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
+         ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
+         ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
+      ]);
+
+    var options = {
+        title: 'xG% by Line',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: {
+            viewWindowMode:'explicit',
+            textPosition: 'none',
+            viewWindow: {
+              max:100,
+              min:0
+            }
+        },
+        };
+
+    var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
+    chart.draw(chartData, options);
+
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
 
