@@ -1102,6 +1102,13 @@
     var xGa_SH2T2g = document.getElementById("xGa_SH2T2g");
     var xGa_TeamT2g = document.getElementById("xGa_TeamT2g");
 
+    // Lasketaan joukkueen / ketjun prosentuaalinen xG
+
+    function calcPercent(xGa, xGb) {
+        res = Math.round(xGa / (xGa + xGb) * 100);
+        return res;
+    }
+
     // Arrays for easy access to variables
     // Team 1
 
@@ -1204,12 +1211,7 @@
 
         ];
 
-        // Lasketaan joukkueen / ketjun prosentuaalinen xG
 
-    function calcPercent(xGa, xGb) {
-        res = Math.round(xGa / (xGa + xGb) * 100);
-        return res;
-    }
 
 
 
