@@ -242,10 +242,10 @@ function editTeam() {
             e_team_isNational.checked = false
             e_team_name.disabled = false;
             e_team_level.disabled = false;
-            e_team_level.value = s_level.value;
+            // e_team_level.value = s_level.value;
             e_team_delete.disabled = true;
             e_team_button.disabled = false;
-            changeTeamLevel();
+            // changeTeamLevel();
     }
 
     // If selected value exists, fetch data for editing
