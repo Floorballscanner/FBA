@@ -236,7 +236,7 @@ function editTeam() {
 
             e_team_name.value = "";
             e_team_id.value = "";
-            e_team_level.selectedIndex = "0";
+            e_team_level.value = s_level.options[s_level.selectedIndex].value;
             e_team_isMale.checked = false
             e_team_isSenior.checked = false
             e_team_isNational.checked = false
