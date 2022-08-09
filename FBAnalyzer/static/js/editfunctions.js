@@ -237,15 +237,12 @@ function editTeam() {
 
             e_team_name.value = "";
             e_team_id.value = "";
-            console.log("s_level.value " + s_level.value)
-            e_team_level.value = s_level.value;
-            console.log("After: s_level.value " + s_level.value)
-            console.log("After: e_team_level.value " + e_team_level.value)
             e_team_isMale.checked = false
             e_team_isSenior.checked = false
             e_team_isNational.checked = false
             e_team_name.disabled = false;
             e_team_level.disabled = false;
+            e_team_level.value = s_level.value;
             e_team_delete.disabled = true;
             e_team_button.disabled = false;
     }
