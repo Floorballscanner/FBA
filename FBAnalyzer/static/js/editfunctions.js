@@ -245,7 +245,7 @@ function editTeam() {
             e_team_level.value = s_level.value;
             e_team_delete.disabled = true;
             e_team_button.disabled = false;
-            e_team_level.value = s_level.value;
+            changeTeamLevel();
     }
 
     // If selected value exists, fetch data for editing
