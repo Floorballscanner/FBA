@@ -10,7 +10,7 @@ This is the Edit Players - page where users can add, delete, and edit
 
 <div class="container" style="Padding-top: 80px;">
     <a href="/accounts/edit_data"><img src="{% static 'back.png' %}" height="30px"></a>
-    <h2>Edit Players</h2>
+    <h2 style="Padding-top:20px;" >Edit Players</h2>
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <div class="team-selection" style="Padding-top: 40px;">
@@ -20,10 +20,10 @@ This is the Edit Players - page where users can add, delete, and edit
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
                 </select>
-                <select onchange="selectTeam()" id="select-team" class="form-control-sm custom-select" disabled>
+                <select style="Padding-top:10px;" onchange="selectTeam()" id="select-team" class="form-control-sm custom-select" disabled>
                     <option selected disabled>Select a team..</option>
                 </select>
-                <select onchange="editPlayer()" id="edit-player" class="form-control-sm custom-select" disabled>
+                <select style="Padding-top:10px;" onchange="editPlayer()" id="edit-player" class="form-control-sm custom-select" disabled>
                     <option selected disabled>Select a player..</option>
                     <option value="new_player">Add new player...</option>
                 </select>
@@ -31,24 +31,25 @@ This is the Edit Players - page where users can add, delete, and edit
         </div>
         <div class="col-sm-6">
             <div class="team-selection">
-                <!--<form>
-                    <label for="edit_level_name">Level Name:</label><br>
-                    <input class="form-label" type="text" id="edit_level_name" name="edit_level_name" disabled>
-                    <img src="{% static 'delete.png' %}" id="edit_level_delete" style="Padding-left: 5px;" height="30px" onclick="deleteLevelButton()"><br><br>
-                    <label for="edit_level_id">ID:</label><br>
-                    <input class="form-label" type="text" id="edit_level_id" name="edit_level_id" disabled>
-                    <label style="Padding-top: 20px;" for="edit_level_country">Country:</label><br><br>
-                    <select class="form-control-sm custom-select" id="edit_level_country" name="edit_level_country">
-                        <option selected disabled>Select a country...</option>
+                <form>
+                    <label for="edit_player_firstname">First Name:</label><br>
+                    <input class="form-label" type="text" id="edit_player_firstname" name="edit_player_firstname" disabled>
+                    <label for="edit_player_lastname">Last Name:</label><br>
+                    <input class="form-label" type="text" id="edit_player_lastname" name="edit_player_lastname" disabled>
+                    <img src="{% static 'delete.png' %}" id="edit_player_delete" style="Padding-left: 5px;" height="30px" onclick="deletePlayerButton()"><br><br>
+                    <label for="edit_player_number">Jersey Number:</label><br>
+                    <input class="form-label" type="text" id="edit_player_number" name="edit_player_number" disabled>
+                    <label for="edit_player_id">ID:</label><br>
+                    <input class="form-label" type="text" id="edit_player_id" name="edit_player_id" disabled>
+                    <label style="Padding-top: 20px;" for="edit_player_team">Team:</label><br><br>
+                    <select class="form-control-sm custom-select" id="edit_player_level" name="edit_player_level">
+                        <option selected disabled>Select a level...</option>
                     </select><br><br>
-                    <input class="form-check-input" type="checkbox" id="edit_level_isSenior" name="edit_level_isSenior" disabled>
-                    <label style="Padding-top: 20px;" class="form-check-label" for="edit_level_isSenior">Senior (Adult) Level?:</label><br><br>
-                    <input class="form-check-input" type="checkbox" id="edit_level_isMale" name="edit_level_isMale" disabled>
-                    <label style="Padding-top: 20px;" class="form-check-label" for="edit_level_isMale">Men's Level?:</label><br><br>
-                    <input class="form-check-input" type="checkbox" id="edit_level_isNational" name="edit_level_isNational" disabled>
-                    <label style="Padding-top: 20px;" class="form-check-label" for="edit_level_isNational">National Team Level?:</label><br><br>
-                    <input class="btn btn-primary" type="button" id="edit_level_button" onclick="editLevelButton()" value="Save" disabled><br><br>
-                </form>-->
+                    <select style="Padding-top: 10px;" class="form-control-sm custom-select" id="edit_player_team" name="edit_player_team">
+                        <option selected disabled>Select a team...</option>
+                    </select><br><br>
+                    <input class="btn btn-primary" type="button" id="edit_player_button" onclick="editPlayerButton()" value="Save" disabled><br><br>
+                </form>
             </div>
         </div>
     </div>
