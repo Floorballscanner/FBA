@@ -502,7 +502,7 @@ function editPlayer() {
                 e_player_id.value = data.id;
                 e_player_number.value = data.jersey_number;
                 e_player_level.value = s_player_level.value;
-                e_player_team.value = e_player.value;
+                e_player_team.value = s_team.value;
                 e_player_firstname.disabled = false;
                 e_player_lastname.disabled = false;
                 e_player_number.disabled = false;
