@@ -445,6 +445,7 @@ function editPlayer() {
     }
 
     level_id = s_player_level.value
+    console.log("Level id: " + level_id);
 
     fetch("https://fbscanner.io/apis/teams/")
             .then(response => response.json())
