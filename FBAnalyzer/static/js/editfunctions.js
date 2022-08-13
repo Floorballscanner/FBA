@@ -37,6 +37,20 @@ function selectTeam() {
     team_id = s_team.options[s_team.selectedIndex].value;
     e_player.disabled = false;
     updatePlayers(team_id);
+    e_player_firstname.value = "";
+    e_player_lastname.value = "";
+    e_player_number.value = "";
+    e_player_id.value = "";
+    e_player_level.selectedIndex = "0";
+    e_player_team.selectedIndex = "0";
+
+    e_player_firstname.disabled = true;
+    e_player_lastname.disabled = true;
+    e_player_number.disabled = true;
+    e_player_level.disabled = true;
+    e_player_team.disabled = true;
+    e_player_delete.disabled = true;
+    e_player_button.disabled = true;
 }
 
 function editLevel() {
