@@ -36,7 +36,7 @@ function selectTeam() {
 
     team_id = s_team.options[s_team.selectedIndex].value;
     e_player.disabled = false;
-    updatePlayers(team_id);
+    updatePlayers();
     e_player_firstname.value = "";
     e_player_lastname.value = "";
     e_player_number.value = "";
@@ -481,7 +481,7 @@ function editPlayer() {
             console.error('Error:', error);
     });
 
-    // If user wants to create a new team
+    // If user wants to create a new player
 
     if (e_player.options[e_player.selectedIndex].value == "new_player") {
 
@@ -540,7 +540,7 @@ function editPlayerButton() {
             "first_name": e_player_firstname.value,
             "last_name": e_player_lastname.value,
             "jersey_number": e_player_number.value,
-            "team": e_player_team.value,
+            "team": [e_player_team.value],
             "created": user_id,
         }
 
@@ -664,7 +664,6 @@ function deletePlayerButton() {
 
 }
 
-
 function changeTeamLevel() {
 
     fetch("https://fbscanner.io/apis/levels/" + e_team_level.options[e_team_level.selectedIndex].value + "/")
@@ -771,7 +770,7 @@ function updatePlayers() {
                     console.log("Teams: " + data[i].team)
                     console.log("Team 1: " + data[i].team[0])
                     console.log(data[i].team.length)
-                    if (data[i].team == team_id) {
+                    if (data[i].team[0] == team_id) {
                         var opt = new Option("#" + data[i].jersey_number + " " + data[i].first_name + " " + data[i].last_name, data[i].id);
                         e_player.append(opt);
                     }
