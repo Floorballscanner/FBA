@@ -185,9 +185,10 @@ body {
     padding: 0 0 0 0;
 }
 .team-selection input {
-    width: 80%;
+    width: 70%;
+    height: 20px;
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 10 0 0 0;
 }
 .team-selection input [type=checkbox] {
     border-radius: 2em;
@@ -195,14 +196,15 @@ body {
     width: 100px;
 }
 .team-selection label {
-    width: 80%;
+    width: 70%;
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 10 0 0 0;
 }
 .team-selection select {
-    width: 80%;
+    width: 70%;
+    height: 20px;
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 10 0 0 0;
 }
 
 .team-selection h2 {
