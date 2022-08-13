@@ -28,6 +28,8 @@ function selectPlayerLevel() {
     s_team.disabled = false;
     updateTeams(s_team, level_id);
     e_player.disabled = true;
+    e_player.selectedIndex = "0";
+    s_team.selectedIndex = "0";
 }
 
 function selectTeam() {
@@ -553,11 +555,18 @@ function updateLevels() {
 
 function updateTeams(s_box, level_id) {
 
+    if (s_box == e_team) {
+        nr = 1;
+    }
+    else if (s_box == s_team) {
+        nr = 0;
+    }
+
     fetch("https://fbscanner.io/apis/teams/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                for (let i=s_box.length-1;i>1;i--) {
+                for (let i=s_box.length-1;i>nr;i--) {
                     s_box.remove(i);
                 }
                 for (let i=0;i<data.length;i++) {
