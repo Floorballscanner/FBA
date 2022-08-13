@@ -182,7 +182,7 @@ body {
 
 .team-selection {
     text-align: center;
-    padding: 20px 0 0 0;
+    padding: 30px 0 0 0;
 }
 .team-selection input {
     width: 70%;
@@ -195,6 +195,7 @@ body {
     height: 30px;
     width: 60px;
     text-align: center;
+    padding: 10px 0 0 0;
 }
 .team-selection label {
     width: 70%;
@@ -204,6 +205,10 @@ body {
 .team-selection select {
     width: 70%;
     height: 40px;
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+.team-selection img {
     text-align: center;
     padding: 10px 0 0 0;
 }
