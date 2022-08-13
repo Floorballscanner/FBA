@@ -19,6 +19,7 @@
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
                 </select>
+                <br>
             </div>
         </div>
         <div class="col-sm-6">
@@ -41,6 +42,7 @@
                     <input class="btn btn-primary" type="button" id="edit_level_button" onclick="editLevelButton()" value="Save" disabled>
                     <img src="{% static 'delete.png' %}" id="edit_level_delete" onclick="deleteLevelButton()">
                 </form>
+                <br><br>
             </div>
         </div>
     </div>

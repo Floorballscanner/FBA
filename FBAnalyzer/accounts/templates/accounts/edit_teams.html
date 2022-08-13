@@ -19,10 +19,12 @@
                             <option value="{{level.id}}">{{level.name}}</option>
                         {% endfor %}
                     </select>
+                    <br>
                     <select onchange="editTeam()" id="edit-team" class="form-control-sm custom-select" disabled>
                         <option selected disabled>Select a team..</option>
                         <option value="new_team">Add new team...</option>
                     </select>
+                    <br><br>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -45,6 +47,7 @@
                         <input class="btn btn-primary" type="button" id="edit_team_button" onclick="editTeamButton()" value="Save" disabled>
                         <img src="{% static 'delete.png' %}" id="edit_team_delete" onclick="deleteTeamButton()">
                     </form>
+                    <br><br>
                 </div>
             </div>
         </div>

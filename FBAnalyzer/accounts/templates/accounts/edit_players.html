@@ -20,13 +20,16 @@ This is the Edit Players - page where users can add, delete, and edit
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
                 </select>
+                <br>
                 <select onchange="selectTeam()" id="select-team" class="form-control-sm custom-select" disabled>
                     <option selected disabled>Select a team..</option>
                 </select>
+                <br>
                 <select onchange="editPlayer()" id="edit-player" class="form-control-sm custom-select" disabled>
                     <option selected disabled>Select a player..</option>
                     <option value="new_player">Add new player...</option>
                 </select>
+                <br><br>
             </div>
         </div>
         <div class="col-sm-6">
@@ -50,6 +53,7 @@ This is the Edit Players - page where users can add, delete, and edit
                     <input class="btn btn-primary" type="button" id="edit_player_button" onclick="editPlayerButton()" value="Save" disabled>
                     <img src="{% static 'delete.png' %}" id="edit_player_delete" onclick="deletePlayerButton()" disabled>
                 </form>
+                <br><br>
             </div>
         </div>
     </div>
