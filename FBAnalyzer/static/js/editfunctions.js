@@ -767,6 +767,7 @@ function updatePlayers() {
                     e_player.remove(i);
                 }
                 for (let i=0;i<data.length;i++) {
+                    console.log("Player: " + data[i].first_name + " " + data[i].last_name)
                     console.log("Teams: " + data[i].team)
                     console.log(data[i].team.length)
                     if (data[i].team == team_id) {
