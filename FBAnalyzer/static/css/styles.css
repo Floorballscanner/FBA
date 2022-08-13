@@ -188,29 +188,30 @@ body {
     width: 70%;
     height: 40px;
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 10px 0 10px 0;
 }
 .team-selection input [type=checkbox] {
     border-radius: 2em;
     height: 30px;
     width: 60px;
     text-align: center;
-    padding: 10px 0 0 0;
+    padding: 10px 0 10px 0;
 }
 .team-selection label {
     width: 70%;
     text-align: center;
-    padding: 10px 0 0 0;
+    padding: 10px 0 10px 0;
 }
 .team-selection select {
     width: 70%;
     height: 40px;
     text-align: center;
-    padding: 10px 0 0 0;
+    padding: 10px 0 10px 0;
 }
 .team-selection img {
     text-align: center;
-    padding: 10px 0 0 0;
+    padding: 10px 0 10px 0;
+    height: 30px;
 }
 
 .team-selection h2 {
