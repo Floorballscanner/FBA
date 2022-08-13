@@ -188,12 +188,12 @@ body {
     width: 70%;
     height: 40px;
     text-align: center;
-    padding: 10px 0 0 0;
+    padding: 0 0 0 0;
 }
 .team-selection input [type=checkbox] {
     border-radius: 2em;
-    height: 50px;
-    width: 100px;
+    height: 30px;
+    width: 60px;
 }
 .team-selection label {
     width: 70%;
