@@ -471,8 +471,6 @@ function editPlayer() {
             .then(teams => {
                 console.log('Success:', teams);
                 for (let i=0;i<teams.length;i++) {
-                    console.log("teams.level: " + teams[i].level)
-                    console.log("level_id: " + level_id)
                     if (teams[i].level == level_id) {
                         var opt = new Option(teams[i].name, teams[i].id);
                         e_player_team.appendChild(opt);
@@ -550,6 +548,28 @@ function changeTeamLevel() {
             .catch((error) => {
                 console.error('Error:', error);
         });
+}
+
+function changePlayerLevel() {
+
+    for (let i=e_player_team.length-1;i>0;i--) {
+        e_player_team.remove(i);
+    }
+
+    fetch("https://fbscanner.io/apis/teams/")
+            .then(response => response.json())
+            .then(teams => {
+                console.log('Success:', teams);
+                for (let i=0;i<teams.length;i++) {
+                    if (teams[i].level == e_player_level.value) {
+                        var opt = new Option(teams[i].name, teams[i].id);
+                        e_player_team.appendChild(opt);
+                    }
+                }
+            })
+        .catch((error) => {
+            console.error('Error:', error);
+    });
 }
 
 function updateLevels() {
