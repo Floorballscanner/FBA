@@ -766,10 +766,6 @@ function updatePlayers() {
                     e_player.remove(i);
                 }
                 for (let i=0;i<data.length;i++) {
-                    console.log("Player: " + data[i].first_name + " " + data[i].last_name)
-                    console.log("Teams: " + data[i].team)
-                    console.log("Team 1: " + data[i].team[0])
-                    console.log(data[i].team.length)
                     if (data[i].team[0] == team_id) {
                         var opt = new Option("#" + data[i].jersey_number + " " + data[i].first_name + " " + data[i].last_name, data[i].id);
                         e_player.append(opt);
