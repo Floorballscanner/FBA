@@ -182,11 +182,11 @@ body {
 
 .team-selection {
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 20 0 0 0;
 }
 .team-selection input {
     width: 70%;
-    height: 20px;
+    height: 50px;
     text-align: center;
     padding: 10 0 0 0;
 }
@@ -202,7 +202,7 @@ body {
 }
 .team-selection select {
     width: 70%;
-    height: 20px;
+    height: 50px;
     text-align: center;
     padding: 10 0 0 0;
 }
