@@ -13,7 +13,7 @@
 		<div class="row justify-content-center">
             <div class="col-sm-6">
                 <div class="team-selection">
-                    <select onchange="selectLevel()" id="select-level" class="form-control-sm custom-select">
+                    <select onchange="selectTeamLevel()" id="select-team-level" class="form-control-sm custom-select">
                         <option selected disabled>Select a level...</option>
                         {% for level in levels %}
                             <option value="{{level.id}}">{{level.name}}</option>

@@ -4,11 +4,11 @@ window.onload = function() {
 
 
 }
-function selectLevel() {
+function selectTeamLevel() {
 
-    level_id = s_level.options[s_level.selectedIndex].value;
+    level_id = s_team_level.options[s_team_level.selectedIndex].value;
     e_team.disabled = false;
-    updateTeams(level_id);
+    updateTeams(e_team, level_id);
     e_team_name.value = "";
     e_team_id.value = "";
     e_team_level.selectedIndex = "0";
@@ -20,6 +20,21 @@ function selectLevel() {
     e_team_level.disabled = false;
     e_team_delete.disabled = true;
     e_team_button.disabled = false;
+}
+
+function selectPlayerLevel() {
+
+    level_id = s_player_level.options[s_player_level.selectedIndex].value;
+    s_team.disabled = false;
+    updateTeams(s_team, level_id);
+    e_player.disabled = true;
+}
+
+function selectTeam() {
+
+    team_id = s_team.options[s_team.selectedIndex].value;
+    e_player.disabled = false;
+    updatePlayers(team_id);
 }
 
 function editLevel() {
@@ -242,7 +257,7 @@ function editTeam() {
             e_team_isNational.checked = false
             e_team_name.disabled = false;
             e_team_level.disabled = false;
-            // e_team_level.value = s_level.value;
+            // e_team_level.value = s_team_level.value;
             e_team_delete.disabled = true;
             e_team_button.disabled = false;
             // changeTeamLevel();
@@ -323,8 +338,8 @@ function editTeamButton() {
                 e_team_delete.disabled = true;
                 e_team_button.disabled = true;
                 e_team.selectedIndex = "0";
-                level_id = s_level.options[s_level.selectedIndex].value;
-                updateTeams(level_id); // Update level option box
+                level_id = s_team_level.options[s_team_level.selectedIndex].value;
+                updateTeams(e_team, level_id); // Update level option box
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -361,8 +376,8 @@ function editTeamButton() {
                 e_team_delete.disabled = true;
                 e_team_button.disabled = true;
                 e_team.selectedIndex = "0";
-                level_id = s_level.options[s_level.selectedIndex].value;
-                updateTeams(level_id); // Update level option box
+                level_id = s_team_level.options[s_team_level.selectedIndex].value;
+                updateTeams(e_team, level_id); // Update level option box
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -402,8 +417,8 @@ function deleteTeamButton() {
             e_team_delete.disabled = true;
             e_team_button.disabled = true;
             e_team.selectedIndex = "0";
-            level_id = s_level.options[s_level.selectedIndex].value;
-            updateTeams(level_id); // Update level option box
+            level_id = s_team_level.options[s_team_level.selectedIndex].value;
+            updateTeams(e_team, level_id); // Update level option box
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -451,19 +466,42 @@ function updateLevels() {
         });
 }
 
-function updateTeams(level_id) {
+function updateTeams(s_box, level_id) {
 
     fetch("https://fbscanner.io/apis/teams/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                for (let i=e_team.length-1;i>1;i--) {
-                    e_team.remove(i);
+                for (let i=s_box.length-1;i>1;i--) {
+                    s_box.remove(i);
                 }
                 for (let i=0;i<data.length;i++) {
                     if (data[i].level == level_id) {
                         var opt = new Option(data[i].name, data[i].id);
-                        e_team.append(opt);
+                        s_box.append(opt);
+                    }
+                }
+
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+
+}
+
+function updatePlayers() {
+
+        fetch("https://fbscanner.io/apis/players/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                for (let i=e_player.length-1;i>1;i--) {
+                    e_player.remove(i);
+                }
+                for (let i=0;i<data.length;i++) {
+                    if (data[i].team == team_id) {
+                        var opt = new Option("#" + data[i].jersey_number + " " + data[i].name, data[i].id);
+                        e_player.append(opt);
                     }
                 }
 
