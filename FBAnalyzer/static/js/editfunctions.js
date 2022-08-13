@@ -446,13 +446,15 @@ function editPlayer() {
 
     level_id = s_player_level.value
 
-    fetch("https://fbscanner.io/apis/teams/" + level_id + "/")
+    fetch("https://fbscanner.io/apis/teams/")
             .then(response => response.json())
             .then(teams => {
                 console.log('Success:', teams);
                 for (let i=0;i<teams.length;i++) {
-                    var opt = new Option(teams[i].name, teams[i].id);
-                    e_player_team.appendChild(opt);
+                    if (teams.level == level_id) {
+                        var opt = new Option(teams[i].name, teams[i].id);
+                        e_player_team.appendChild(opt);
+                    }
                 }
             })
         .catch((error) => {
