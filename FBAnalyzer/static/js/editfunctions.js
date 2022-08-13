@@ -16,10 +16,10 @@ function selectTeamLevel() {
     e_team_isMale.checked = false
     e_team_isSenior.checked = false
     e_team_isNational.checked = false
-    e_team_name.disabled = false;
-    e_team_level.disabled = false;
+    e_team_name.disabled = true;
+    e_team_level.disabled = true;
     e_team_delete.disabled = true;
-    e_team_button.disabled = false;
+    e_team_button.disabled = true;
 }
 
 function selectPlayerLevel() {
@@ -500,7 +500,7 @@ function updatePlayers() {
                 }
                 for (let i=0;i<data.length;i++) {
                     if (data[i].team == team_id) {
-                        var opt = new Option("#" + data[i].jersey_number + " " + data[i].name, data[i].id);
+                        var opt = new Option("#" + data[i].jersey_number + " " + data[i].last_name, data[i].id);
                         e_player.append(opt);
                     }
                 }
