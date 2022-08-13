@@ -36,7 +36,6 @@ This is the Edit Players - page where users can add, delete, and edit
                     <input class="form-label" type="text" id="edit_player_firstname" name="edit_player_firstname" disabled>
                     <label for="edit_player_lastname">Last Name:</label><br>
                     <input class="form-label" type="text" id="edit_player_lastname" name="edit_player_lastname" style="width=60%;" disabled>
-                    <img src="{% static 'delete.png' %}" id="edit_player_delete" style="Padding-left: 5px;" height="30px" onclick="deletePlayerButton()" disabled><br><br>
                     <label for="edit_player_number">Jersey Number:</label><br>
                     <input class="form-label" type="text" id="edit_player_number" name="edit_player_number" disabled>
                     <label for="edit_player_id">ID:</label><br>
@@ -49,6 +48,7 @@ This is the Edit Players - page where users can add, delete, and edit
                         <option selected disabled>Select a team...</option>
                     </select><br><br>
                     <input class="btn btn-primary" type="button" id="edit_player_button" onclick="editPlayerButton()" value="Save" disabled><br><br>
+                    <img src="{% static 'delete.png' %}" id="edit_player_delete" style="Padding-left: 5px;" height="30px" onclick="deletePlayerButton()" disabled><br><br>
                 </form>
             </div>
         </div>

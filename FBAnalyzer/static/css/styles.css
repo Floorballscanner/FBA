@@ -194,6 +194,7 @@ body {
     border-radius: 2em;
     height: 30px;
     width: 60px;
+    text-align: center;
 }
 .team-selection label {
     width: 70%;
