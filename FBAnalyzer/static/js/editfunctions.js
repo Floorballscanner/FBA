@@ -566,6 +566,7 @@ function changePlayerLevel() {
                         e_player_team.appendChild(opt);
                     }
                 }
+                e_player_team.selectedIndex = "0";
             })
         .catch((error) => {
             console.error('Error:', error);
