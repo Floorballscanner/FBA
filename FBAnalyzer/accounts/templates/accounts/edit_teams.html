@@ -29,20 +29,20 @@
         <div class="col-sm-6">
             <div class="team-selection">
                 <form>
-                    <label class="form-check-label" for="edit_team_name">Team Name:</label><br>
-                    <input class="form-check-input" type="text" id="edit_team_name" name="edit_team_name" disabled><br>
-                    <label class="form-check-label" for="edit_team_id">ID:</label><br>
-                    <input class="form-check-input" type="text" id="edit_team_id" name="edit_team_id" disabled><br>
-                    <label class="form-check-label" for="edit_team_level">Level:</label><br>
+                    <label class="form-label" for="edit_team_name">Team Name:</label><br>
+                    <input type="text" id="edit_team_name" name="edit_team_name" disabled><br>
+                    <label class="form-label" for="edit_team_id">ID:</label><br>
+                    <input type="text" id="edit_team_id" name="edit_team_id" disabled><br>
+                    <label class="form-label" for="edit_team_level">Level:</label><br>
                     <select class="form-control-sm custom-select" onchange="changeTeamLevel()" id="edit_team_level" name="edit_team_level" disabled><br>
                         <option selected disabled>Select a level...</option>
                     </select><br><br>
-                    <input class="form-check-input" type="checkbox" id="edit_team_isSenior" name="edit_team_isSenior" disabled><br><br>
-                    <label class="form-check-label" for="edit_team_isSenior">Senior (Adult) Team?:</label><br><br>
-                    <input class="form-check-input" type="checkbox" id="edit_team_isMale" name="edit_team_isMale" disabled><br><br>
-                    <label class="form-check-label" for="edit_team_isMale">Men's Team?:</label><br><br>
-                    <input class="form-check-input" type="checkbox" id="edit_team_isNational" name="edit_team_isNational" disabled><br><br>
-                    <label class="form-check-label" for="edit_team_isNational">National Team?:</label><br><br>
+                    <input type="checkbox" id="edit_team_isSenior" name="edit_team_isSenior" disabled><br><br>
+                    <label class="form-label" for="edit_team_isSenior">Senior (Adult) Team?:</label><br><br>
+                    <input type="checkbox" id="edit_team_isMale" name="edit_team_isMale" disabled><br><br>
+                    <label class="form-label" for="edit_team_isMale">Men's Team?:</label><br><br>
+                    <input type="checkbox" id="edit_team_isNational" name="edit_team_isNational" disabled><br><br>
+                    <label class="form-label" for="edit_team_isNational">National Team?:</label><br><br>
                     <input class="btn btn-primary" type="button" id="edit_team_button" onclick="editTeamButton()" value="Save" disabled><br><br>
                     <img src="{% static 'delete.png' %}" id="edit_team_delete" onclick="deleteTeamButton()">
                 </form>
