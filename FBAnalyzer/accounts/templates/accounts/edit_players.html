@@ -20,11 +20,11 @@ This is the Edit Players - page where users can add, delete, and edit
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
                 </select>
-                <br>
+                <br><br>
                 <select onchange="selectTeam()" id="select-team" class="form-control-sm custom-select" disabled>
                     <option selected disabled>Select a team..</option>
                 </select>
-                <br>
+                <br><br>
                 <select onchange="editPlayer()" id="edit-player" class="form-control-sm custom-select" disabled>
                     <option selected disabled>Select a player..</option>
                     <option value="new_player">Add new player...</option>
@@ -35,20 +35,20 @@ This is the Edit Players - page where users can add, delete, and edit
         <div class="col-sm-6">
             <div class="team-selection">
                 <form>
-                    <label for="edit_player_firstname">First Name:</label>
-                    <input class="form-label" type="text" id="edit_player_firstname" name="edit_player_firstname" disabled>
-                    <label for="edit_player_lastname">Last Name:</label>
-                    <input class="form-label" type="text" id="edit_player_lastname" name="edit_player_lastname" style="width=60%;" disabled>
-                    <label for="edit_player_number">Jersey Number:</label>
-                    <input class="form-label" type="text" id="edit_player_number" name="edit_player_number" disabled>
-                    <label for="edit_player_id">ID:</label>
-                    <input class="form-label" type="text" id="edit_player_id" name="edit_player_id" disabled>
-                    <label for="edit_player_team">Team:</label>
-                    <select class="form-control-sm custom-select" onchange="changePlayerLevel()" id="edit_player_level" name="edit_player_level" disabled>
+                    <label for="edit_player_firstname">First Name:</label><br>
+                    <input class="form-label" type="text" id="edit_player_firstname" name="edit_player_firstname" disabled><br>
+                    <label for="edit_player_lastname">Last Name:</label><br>
+                    <input class="form-label" type="text" id="edit_player_lastname" name="edit_player_lastname" style="width=60%;" disabled><br>
+                    <label for="edit_player_number">Jersey Number:</label><br>
+                    <input class="form-label" type="text" id="edit_player_number" name="edit_player_number" disabled><br>
+                    <label for="edit_player_id">ID:</label><br>
+                    <input class="form-label" type="text" id="edit_player_id" name="edit_player_id" disabled><br>
+                    <label for="edit_player_team">Team:</label><br>
+                    <select class="form-control-sm custom-select" onchange="changePlayerLevel()" id="edit_player_level" name="edit_player_level" disabled><br>
                         <option selected disabled>Select a level...</option>
                     </select>
-                    <br>
-                    <select class="form-control-sm custom-select" id="edit_player_team" name="edit_player_team" disabled>
+                    <br><br>
+                    <select class="form-control-sm custom-select" id="edit_player_team" name="edit_player_team" disabled><br>
                         <option selected disabled>Select a team...</option>
                     </select>
                     <input class="btn btn-primary" type="button" id="edit_player_button" onclick="editPlayerButton()" value="Save" disabled><br>

@@ -25,20 +25,20 @@
         <div class="col-sm-6">
             <div class="team-selection">
                 <form>
-                    <label for="edit_level_name">Level Name:</label>
-                    <input class="form-label" type="text" id="edit_level_name" name="edit_level_name" disabled>
-                    <label for="edit_level_id">ID:</label>
-                    <input class="form-label" type="text" id="edit_level_id" name="edit_level_id" disabled>
-                    <label for="edit_level_country">Country:</label>
-                    <select class="form-control-sm custom-select" id="edit_level_country" name="edit_level_country">
+                    <label for="edit_level_name">Level Name:</label><br>
+                    <input class="form-label" type="text" id="edit_level_name" name="edit_level_name" disabled><br>
+                    <label for="edit_level_id">ID:</label><br>
+                    <input class="form-label" type="text" id="edit_level_id" name="edit_level_id" disabled><br>
+                    <label for="edit_level_country">Country:</label><br>
+                    <select class="form-control-sm custom-select" id="edit_level_country" name="edit_level_country"><br>
                         <option selected disabled>Select a country...</option>
                     </select><br><br>
-                    <input class="form-check-input" type="checkbox" id="edit_level_isSenior" name="edit_level_isSenior" disabled>
-                    <label class="form-check-label" for="edit_level_isSenior">Senior (Adult) Level?:</label>
-                    <input class="form-check-input" type="checkbox" id="edit_level_isMale" name="edit_level_isMale" disabled>
-                    <label class="form-check-label" for="edit_level_isMale">Men's Level?:</label>
-                    <input class="form-check-input" type="checkbox" id="edit_level_isNational" name="edit_level_isNational" disabled>
-                    <label class="form-check-label" for="edit_level_isNational">National Team Level?:</label>
+                    <input class="form-check-input" type="checkbox" id="edit_level_isSenior" name="edit_level_isSenior" disabled><br>
+                    <label class="form-check-label" for="edit_level_isSenior">Senior (Adult) Level?:</label><br>
+                    <input class="form-check-input" type="checkbox" id="edit_level_isMale" name="edit_level_isMale" disabled><br>
+                    <label class="form-check-label" for="edit_level_isMale">Men's Level?:</label><br>
+                    <input class="form-check-input" type="checkbox" id="edit_level_isNational" name="edit_level_isNational" disabled><br>
+                    <label class="form-check-label" for="edit_level_isNational">National Team Level?:</label><br>
                     <input class="btn btn-primary" type="button" id="edit_level_button" onclick="editLevelButton()" value="Save" disabled><br>
                     <img src="{% static 'delete.png' %}" id="edit_level_delete" onclick="deleteLevelButton()">
                 </form>
