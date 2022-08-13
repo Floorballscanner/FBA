@@ -13,28 +13,31 @@ It extends app_layout.html with Django
 		<div class="row">
 			<div class="col-sm-4">
 				{% load static %}
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
+				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
 				<h2>Edit data</h2>
+				<a class="btn btn-primary" href="/accounts/edit_data" role="button">Select</a><br>
 				<p>Edit level / team / player data</p>
-				<a class="btn btn-primary" href="/accounts/edit_data" role="button">Select</a>
+				<br><br>
 			</div>
 			<div class="col-sm-4">
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
+				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
 				<h2>Line-based analysis</h2>
+				<a class="btn btn-primary" href="/accounts/new_game" role="button">Select</a><br>
 				<p>Start analyzing a new game</p>
 				<p>Collect data based on line <br>performance, no individual players</p>
 				<p>Live - game possibility</p>
 				<p>Save data as .csv-file</p>
-				<a class="btn btn-primary" href="/accounts/new_game" role="button">Select</a><br>
+				<br><br>
 			</div>
 			<div class="col-sm-4">
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
+				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
 				<h2>Player-based analysis</h2>
+				<a class="btn btn-primary" href="/accounts/premium_game" role="button">Select</a><br>
 				<p>Start analyzing a new game</p>
 				<p>Collect data based on <br>individual player performance</p>
 				<p>Live - game possibility</p>
 				<p>Save data as .csv-file</p>
-				<a class="btn btn-primary" href="/accounts/premium_game" role="button">Select</a><br>
+				<br><br>
 			</div>
 		</div>
 	</div>
