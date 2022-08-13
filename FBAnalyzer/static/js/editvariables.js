@@ -42,6 +42,7 @@ e_player = document.getElementById("edit-player");
 e_player_firstname = document.getElementById("edit_player_firstname");
 e_player_lastname = document.getElementById("edit_player_lastname");
 e_player_number = document.getElementById("edit_player_number");
+e_player_id = document.getElementById("edit_player_id");
 e_player_level = document.getElementById("edit_player_level");
 e_player_team = document.getElementById("edit_player_team");
 e_player_button = document.getElementById("edit_player_button");

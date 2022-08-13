@@ -483,7 +483,7 @@ function editPlayer() {
 
     else {
 
-       fetch("https://fbscanner.io/apis/players/" + e_player.options[e_player.selectedIndex].value + "/")
+       fetch("https://fbscanner.io/apis/players/" + e_player.value + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
