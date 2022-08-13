@@ -454,9 +454,9 @@ function editPlayer() {
             .then(teams => {
                 console.log('Success:', teams);
                 for (let i=0;i<teams.length;i++) {
-                    console.log("teams.level: " + teams.level)
+                    console.log("teams.level: " + teams[i].level)
                     console.log("level_id: " + level_id)
-                    if (teams.level == level_id) {
+                    if (teams[i].level == level_id) {
                         var opt = new Option(teams[i].name, teams[i].id);
                         e_player_team.appendChild(opt);
                     }
