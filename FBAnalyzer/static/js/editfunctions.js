@@ -449,7 +449,7 @@ function editPlayer() {
     level_id = s_player_level.value
     console.log("Level id: " + level_id);
     for (let i=e_player_team.length-1;i>0;i--) {
-        s_box.remove(i);
+        e_player_team.remove(i);
     }
 
     fetch("https://fbscanner.io/apis/teams/")
