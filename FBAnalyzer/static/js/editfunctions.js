@@ -427,6 +427,88 @@ function deleteTeamButton() {
 
 }
 
+function editPlayer() {
+
+    if (e_player_level.length < 2) {
+        fetch("https://fbscanner.io/apis/levels/")
+                .then(response => response.json())
+                .then(levels => {
+                    console.log('Success:', levels);
+                    for (let i=0;i<levels.length;i++) {
+                        var opt = new Option(levels[i].name, levels[i].id);
+                        e_player_level.appendChild(opt);
+                    }
+                })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+    }
+
+    level_id = s_player_level.value
+
+    fetch("https://fbscanner.io/apis/teams/" + level_id + "/")
+            .then(response => response.json())
+            .then(teams => {
+                console.log('Success:', teams);
+                for (let i=0;i<teams.length;i++) {
+                    var opt = new Option(teams[i].name, teams[i].id);
+                    e_player_team.appendChild(opt);
+                }
+            })
+        .catch((error) => {
+            console.error('Error:', error);
+    });
+
+    // If user wants to create a new team
+
+    if (e_player.options[e_player.selectedIndex].value == "new_player") {
+
+            e_player_firstname.value = "";
+            e_player_lastname.value = "";
+            e_player_number.value = "";
+            e_player_id.value = "";
+            e_player_level.value = s_player_level.value;
+            e_player_team.value = e_player.value;
+
+            e_player_firstname.disabled = false;
+            e_player_lastname.disabled = false;
+            e_player_number.disabled = false;
+            e_player_level.disabled = false;
+            e_player_team.disabled = false;
+            e_player_delete.disabled = true;
+            e_player_button.disabled = false;
+    }
+
+    // If selected value exists, fetch data for editing
+
+    else {
+
+       fetch("https://fbscanner.io/apis/players/" + e_player.options[e_player.selectedIndex].value + "/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                e_player_firstname.value = data.first_name;
+                e_player_lastname.value = data.last_name;
+                e_player_id.value = data.id;
+                e_player_number.value = data.jersey_number;
+                e_player_level.value = s_player_level.value;
+                e_player_team.value = s_player_team.value;
+                e_player_firstname.disabled = false;
+                e_player_lastname.disabled = false;
+                e_player_number.disabled = false;
+                e_player_level.disabled = false;
+                e_player_team.disabled = false;
+                e_player_delete.disabled = false;
+                e_player_button.disabled = false;
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+
+    }
+
+}
+
 function changeTeamLevel() {
 
     fetch("https://fbscanner.io/apis/levels/" + e_team_level.options[e_team_level.selectedIndex].value + "/")
@@ -500,7 +582,7 @@ function updatePlayers() {
                 }
                 for (let i=0;i<data.length;i++) {
                     if (data[i].team == team_id) {
-                        var opt = new Option("#" + data[i].jersey_number + " " + data[i].last_name, data[i].id);
+                        var opt = new Option("#" + data[i].jersey_number + " " + data[i].first_name + " " + data[i].last_name, data[i].id);
                         e_player.append(opt);
                     }
                 }
