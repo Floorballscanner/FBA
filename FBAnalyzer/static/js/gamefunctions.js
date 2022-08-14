@@ -1943,6 +1943,57 @@
         // console.log(shotData);
     }
 
+    function changeLevel(t) {
+
+    if (t == "T1") {
+        // Deselect Teams
+        s_T1.selectedIndex = "0";
+        s_T1.disabled = false;
+
+        fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level_T1.options[s_Level_T1.selectedIndex].value)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+
+                removeOptions(s_T1);
+
+                for (let i=0; i<data.length; i++) {
+                    var opt = new Option(data[i].name, data[i].id);
+                    s_T1.appendChild(opt);
+                }
+
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+    }
+
+    if (t == "T2") {
+
+        // Deselect Teams
+        s_T2.selectedIndex = "0";
+        s_T2.disabled = false;
+
+        fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level_T2.options[s_Level_T2.selectedIndex].value)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+
+                removeOptions(s_T2);
+
+                for (let i=0; i<data.length; i++) {
+                    var opt = new Option(data[i].name, data[i].id);
+                    s_T2.appendChild(opt);
+                }
+
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
+    }
+
+}
+
     function sendData() {
 
         var r = confirm("Are you sure you want to send data,\n do this when your game is over?");
@@ -2104,4 +2155,11 @@ function downloadCsv() {
     csv_time = arrayToCsv(timeData);
     downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
     downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');
+}
+
+function removeOptions(selectElement) {
+   var i, L = selectElement.options.length - 1;
+   for(i = L; i > 0; i--) {
+      selectElement.remove(i);
+   }
 }
