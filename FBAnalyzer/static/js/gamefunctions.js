@@ -269,23 +269,21 @@
         if (started == 0) {   // Start game and disable teams etc.
             var r = confirm("Do you want to start the game,\n changing teams will be disabled?");
             if (r == true) {
-                document.getElementById("home_team").disabled = true;
-                document.getElementById("away_team").disabled = true;
+                document.getElementById("select-level-t1").disabled = true;
+                document.getElementById("select-level-t2").disabled = true;
+                document.getElementById("select-team-1").disabled = true;
+                document.getElementById("select-team-2").disabled = true;
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 
-                if (document.getElementById("home_team").value !== "") {
-                    name_t1 = document.getElementById("home_team").value;
-                    set_t1_names();
-                }
+                name_t1 = s_T1.options[s_T1.selectedIndex].text
+                set_t1_names();
 
-                if (document.getElementById("away_team").value !== "") {
-                    name_t2 = document.getElementById("away_team").value;
-                    set_t2_names();
-                }
+                name_t2 = s_T2.options[s_T2.selectedIndex].text;
+                set_t2_names();
 
                 // Initialize the API and gain the URL for the Game instance.
 
