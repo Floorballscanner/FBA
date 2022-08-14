@@ -291,6 +291,32 @@
                     initializeLive()
                 }
 
+                // Crate a new Game instance
+
+                /*data = { "date" : document.getElementById("select-date").value,
+                        "user" : user_id,
+                        "teams" : [s_T1.value, s_T2.value]
+                };
+
+                fetch("https://fbscanner.io/apis/games/" , {
+
+                  method: 'POST', // or 'PUT'
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                  },
+                  body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    console.log("New Game instance created")
+                    game_id = data.id;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });*/
+
             } else {
             }
         }
