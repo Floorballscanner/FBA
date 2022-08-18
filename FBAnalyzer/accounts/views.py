@@ -20,7 +20,12 @@ def index(request):
 
 @login_required
 def new_game(request):
-    return render(request, 'accounts/newgame.html')
+    levels = Level.objects.all().order_by('name')
+
+    context = {
+        'levels': levels,
+    }
+    return render(request, 'accounts/newgame.html', context=context)
 
 @login_required
 def edit_players(request):

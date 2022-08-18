@@ -149,6 +149,7 @@ body {
 	text-align: center;
 	margin: 100px 0 30px 0;
 	color: #4CAF50;
+	width: 100%;
 }
 .frontpage-choices h2{
     font-size: 35px;
@@ -182,27 +183,36 @@ body {
 
 .team-selection {
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 30px 0 0 0;
 }
 .team-selection input {
-    width: 80%;
+    width: 70%;
+    height: 40px;
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 10px 0 10px 0;
 }
 .team-selection input [type=checkbox] {
     border-radius: 2em;
-    height: 50px;
-    width: 100px;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    padding: 10px 0 10px 0;
 }
 .team-selection label {
-    width: 80%;
+    width: 70%;
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 10px 0 10px 0;
 }
 .team-selection select {
-    width: 80%;
+    width: 70%;
+    height: 40px;
     text-align: center;
-    padding: 0 0 0 0;
+    padding: 10px 0 10px 0;
+}
+.team-selection img {
+    text-align: center;
+    padding: 10px 0 10px 0;
+    width: 35px;
 }
 
 .team-selection h2 {

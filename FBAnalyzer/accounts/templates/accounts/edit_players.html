@@ -9,88 +9,59 @@ This is the Edit Players - page where users can add, delete, and edit
 {{ request.user.id|json_script:"user_id" }}
 
 <div class="container" style="Padding-top: 80px;">
-    <h2>Edit Players</h2>
-	<div class="frontpage-choices">
-		<div class="row justify-content-center">
-			<div class="col-sm-6">
-                <h3>My Roster</h3>
-                {% if players %}
-                    {% for player in players %}
-                        <li class="player-list">
-                        {{ player.jersey_number }} &emsp; {{ player.first_name }} {{ player.last_name }}
-                        </li>
+    <a href="/accounts/edit_data"><img src="{% static 'back.png' %}" height="30px"></a>
+    <h2 style="Padding-top:20px;" >Edit Players</h2>
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="team-selection">
+                <select onchange="selectPlayerLevel()" id="select-player-level" class="form-control-sm custom-select">
+                    <option selected disabled>Select a level...</option>
+                    {% for level in levels %}
+                        <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
-                {% else %}
-                    <p>No players in your roster.</p>
-                {% endif %}
-                </br>
-                <button id="AddPlayer" type="button" onclick="addPlayer()" class="btn btn-secondary">Add Player...</button>
-                <div id="addplayerform" class="addplayer-form">
-                  <form action="add_new_player/" method="post">
-                      {% csrf_token %}
-                      Jersey number: &emsp; <input type = "number" name = "jersey_number" /> <br/><br/>
-                      First name: &emsp; <input type = "text" name = "first_name" /> <br/><br/>
-                      Last name: &emsp; <input type = "text" name = "last_name" /> <br/><br/>
-                      <input type = "submit" value = "Submit"/>
-                  </form>
-                </div>
+                </select>
+                <br><br>
+                <select onchange="selectTeam()" id="select-team" class="form-control-sm custom-select" disabled>
+                    <option selected disabled>Select a team..</option>
+                </select>
+                <br><br>
+                <select onchange="editPlayer()" id="edit-player" class="form-control-sm custom-select" disabled>
+                    <option selected disabled>Select a player..</option>
+                    <option value="new_player">Add new player...</option>
+                </select>
+                <br><br>
+                <img src="{% static 'symbol_transparent.png' %}">
+                <br><br>
             </div>
-            <div class="col-sm-6">
-                <h3>My Team</h3></br>
-                <h5>1st Line</h5></br>
-                <h5>2nd Line</h5></br>
-                <h5>3rd Line</h5></br>
-                <h5>Goalies</h5></br>
-                <h5>Others</h5></br>
-                <button id="changeTeam" type="button" onclick="changeTeam()" class="btn btn-secondary">Change Team...</button>
-
-                <div id="changeteamform" class="changeteam-form">
-                    <form action="change_team/" method="post">
-                        {% csrf_token %}
-                        {% for Line_choices in changeTeam.line_choice %}
-                            <div class="linechoice">
-                                {{ Line_choices }}
-                            </div>
-                        {% endfor %}
-                        Line nr: &emsp; <input type = "number" name = "line_choice" /> <br/><br/>
-                        Position: &emsp; <input type = "text" name = "position" /> <br/><br/>
-                        Player: &emsp; <input type = "text" name = "player_name" /> <br/><br/>
-                        <input type = "submit" value = "Submit"/>
-                    </form>
-                </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="team-selection">
+                <form>
+                    <label for="edit_player_firstname">First Name:</label><br>
+                    <input class="form-label" type="text" id="edit_player_firstname" name="edit_player_firstname" disabled><br>
+                    <label for="edit_player_lastname">Last Name:</label><br>
+                    <input class="form-label" type="text" id="edit_player_lastname" name="edit_player_lastname" style="width=60%;" disabled><br>
+                    <label for="edit_player_number">Jersey Number:</label><br>
+                    <input class="form-label" type="text" id="edit_player_number" name="edit_player_number" disabled><br>
+                    <label for="edit_player_id">ID:</label><br>
+                    <input class="form-label" type="text" id="edit_player_id" name="edit_player_id" disabled><br>
+                    <label for="edit_player_team">Team:</label><br>
+                    <select class="form-control-sm custom-select" onchange="changePlayerLevel()" id="edit_player_level" name="edit_player_level" disabled><br>
+                        <option selected disabled>Select a level...</option>
+                    </select>
+                    <br><br>
+                    <select class="form-control-sm custom-select" id="edit_player_team" name="edit_player_team" disabled><br>
+                        <option selected disabled>Select a team...</option>
+                    </select>
+                    <br><br>
+                    <input class="btn btn-primary" type="button" id="edit_player_button" onclick="editPlayerButton()" value="Save" disabled><br><br>
+                    <img src="{% static 'delete.png' %}" id="edit_player_delete" onclick="deletePlayerButton()" disabled>
+                </form>
+                <br><br>
             </div>
         </div>
     </div>
 </div>
-
-<!-- The JavaScript - code that describes the game analysis functionality -->
-
-<script>
-
-
-
-
-    function addPlayer() {
-
-        // html id addplayerform to variable
-        var form = document.getElementById("addplayerform");
-        form.style.display = "block";
-        form.style.left = 30 + "px";
-        form.style.top = 30 + "px";
-
-
-    }
-
-    function changeTeam() {
-
-        var form = document.getElementById("changeteamform");
-        form.style.display = "block";
-        form.style.left = 30 + "px";
-        form.style.top = 30 + "px";
-
-    }
-
-</script>
 
 <script type="text/javascript" src="/static/js/editvariables.js"></script>
 <script type="text/javascript" src="/static/js/editfunctions.js"></script>
