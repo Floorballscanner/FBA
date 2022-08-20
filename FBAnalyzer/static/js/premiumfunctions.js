@@ -2220,6 +2220,13 @@
 
     function shotTOnetimer() {
         dataType = 0;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -2230,6 +2237,13 @@
 
     function shotTDirect() {
         dataType = 1;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -2240,6 +2254,13 @@
 
     function shotOnetimer() {
         dataType = 2;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -2250,6 +2271,13 @@
 
     function shotRebound() {
         dataType = 3;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -2260,6 +2288,13 @@
 
     function shotDirect() {
         dataType = 4;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;

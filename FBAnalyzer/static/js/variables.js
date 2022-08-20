@@ -185,8 +185,27 @@
 
     // Data arrays for players charts
 
-    var player_t1 = [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
-    var player_t2 = [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
+    var plT1_array = [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
+    var plT2_array = [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
+    
+    // Data arrays for shot type charts
+
+    var stT1Teamg_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT2Teamg_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT1Teamp_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT2Teamp_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT1L1g_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT2L1g_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT1L1p_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT2L1p_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT1L2g_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT2L2g_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT1L2p_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT2L2p_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT1L3g_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT2L3g_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT1L3p_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
+    var stT2L3p_array = [['TO | One-timer', 'TO | Direct', 'One-timer', 'Rebound', 'Direct']];
 
     // Time on court by line period/game (in counters)
     // Team 1
