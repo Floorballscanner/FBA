@@ -2575,7 +2575,7 @@
             hAxis: { textPosition: 'none' }
             };
 
-        var chart = new google.visualization.BarChart(document.getElementById('TOGame_chart'));
+        var chart = new google.visualization.BarChart(document.getElementById('toGame_chart'));
         chart.draw(chartData, options);
 
     }

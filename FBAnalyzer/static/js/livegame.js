@@ -257,6 +257,26 @@ function updateCharts() {
     var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart'));
     chart.draw(chartData, options);
     
+    // Turnover Game chart
+
+         var chartData = google.visualization.arrayToDataTable([
+             ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', data.toGameT1L1, 'color: #002072', data.toGameT1L1, data.toGameT2L1, 'color: #59D9EB', data.toGameT2L1],
+             ['Line 2', data.toGameT1L2, 'color: #002072', data.toGameT1L2, data.toGameT2L2, 'color: #59D9EB', data.toGameT2L2],
+             ['Line 3', data.toGameT1L3, 'color: #002072', data.toGameT1L3, data.toGameT2L3, 'color: #59D9EB', data.toGameT2L3]
+          ]);
+
+        var options = {
+            title: 'Turnovers by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('toGame_chart'));
+        chart.draw(chartData, options);
+    
     // xG Period Chart
 
     var chartData = google.visualization.arrayToDataTable([
@@ -409,6 +429,26 @@ function updateCharts() {
 
     var chart = new google.visualization.BarChart(document.getElementById('pmPeriod_chart'));
     chart.draw(chartData, options);
+    
+    // Turnover Period chart
+
+         var chartData = google.visualization.arrayToDataTable([
+             ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', data.toPeriodT1L1, 'color: #002072', data.toPeriodT1L1, data.toPeriodT2L1, 'color: #59D9EB', data.toPeriodT2L1],
+             ['Line 2', data.toPeriodT1L2, 'color: #002072', data.toPeriodT1L2, data.toPeriodT2L2, 'color: #59D9EB', data.toPeriodT2L2],
+             ['Line 3', data.toPeriodT1L3, 'color: #002072', data.toPeriodT1L3, data.toPeriodT2L3, 'color: #59D9EB', data.toPeriodT2L3]
+          ]);
+
+        var options = {
+            title: 'Turnovers by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('toPeriod_chart'));
+        chart.draw(chartData, options);
 
 }
 
