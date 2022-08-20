@@ -304,6 +304,13 @@ body {
     text-align: center;
 }
 
+.stats-L1 p, .stats-L2 p, .stats-L3 p, .stats-Team p, .stats-PP1 p, .stats-PP2 p, .stats-SH1 p, .stats-SH2 p,
+.stats-L1T2 p, .stats-L2T2 p, .stats-L3T2 p, .stats-TeamT2 p, .stats-PP1T2 p, .stats-PP2T2 p, .stats-SH1T2 p, .stats-SH2T2 p  {
+    font-size: 12px;
+    margin: 0px 0px 8px;
+    text-align: center;
+}
+
 .underline {
     display: inline-block;
     width: 160px;
