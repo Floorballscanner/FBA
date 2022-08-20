@@ -185,8 +185,8 @@
 
     // Data arrays for players charts
 
-    var player_t1 [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
-    var player_t2 [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
+    var player_t1 = [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
+    var player_t2 = [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
 
     // Time on court by line period/game (in counters)
     // Team 1
