@@ -7,7 +7,7 @@ const csrftoken = getCookie('csrftoken');
 
 window.onload = function() {
 
-    fetch("https://fbscanner.io/livedata/")
+    fetch("https://fbscanner.io/apis/livedata/")
         .then(response => response.json())
         .then(data => {
 
@@ -105,7 +105,7 @@ function getCookie(name) {
 
 function updatePage() {
 
-    fetch("https://fbscanner.io/livedata/")
+    fetch("https://fbscanner.io/apis/livedata/")
         .then(response => response.json())
         .then(data => {
 
