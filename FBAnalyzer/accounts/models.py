@@ -158,6 +158,10 @@ class LiveData(models.Model):
     goalsGameT2 = models.IntegerField(null=True)
     xGPeriodT2 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     xGGameT2 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    toPeriodT1 = models.IntegerField(null=True)
+    toPeriodT2 = models.IntegerField(null=True)
+    toGameT1 = models.IntegerField(null=True)
+    toGameT2 = models.IntegerField(null=True)
     
     # Line variables
     nameL1 = models.CharField(max_length=50, null=True)
@@ -185,6 +189,10 @@ class LiveData(models.Model):
     xGfGameT2L1 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     xGaPeriodT2L1 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     xGaGameT2L1 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    toPeriodT1L1 = models.IntegerField(null=True)
+    toPeriodT2L1 = models.IntegerField(null=True)
+    toGameT1L1 = models.IntegerField(null=True)
+    toGameT2L1 = models.IntegerField(null=True)
 
     nameL2 = models.CharField(max_length=50, null=True)
     possessionPeriodT1L2 = models.IntegerField(null=True)
@@ -211,6 +219,10 @@ class LiveData(models.Model):
     xGfGameT2L2 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     xGaPeriodT2L2 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     xGaGameT2L2 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    toPeriodT1L2 = models.IntegerField(null=True)
+    toPeriodT2L2 = models.IntegerField(null=True)
+    toGameT1L2 = models.IntegerField(null=True)
+    toGameT2L2 = models.IntegerField(null=True)
 
     nameL3 = models.CharField(max_length=50, null=True)
     possessionPeriodT1L3 = models.IntegerField(null=True)
@@ -237,6 +249,10 @@ class LiveData(models.Model):
     xGfGameT2L3 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     xGaPeriodT2L3 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     xGaGameT2L3 = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    toPeriodT1L3 = models.IntegerField(null=True)
+    toPeriodT2L3 = models.IntegerField(null=True)
+    toGameT1L3 = models.IntegerField(null=True)
+    toGameT2L3 = models.IntegerField(null=True)
 
     nameL4 = models.CharField(max_length=50, null=True)
     possessionPeriodT1L4 = models.IntegerField(null=True)
