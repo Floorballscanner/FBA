@@ -2208,7 +2208,7 @@
                 [document.getElementById("sT1G").selectedIndex].value;
 
         p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
-                [document.getElementById("sT1L"+line_on_2+"LW").selectedIndex].value;
+                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
         p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
                 [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
         p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
