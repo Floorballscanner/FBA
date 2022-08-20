@@ -845,7 +845,10 @@
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
-                if (dataType == 1) { // turnover x 1,25 xG
+                if (dataType == 0) { // Turnover one-timer x 1,6 xG
+                    dxG = dxG * 1.6;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.25;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
@@ -922,7 +925,10 @@
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
-                if (dataType == 1) { // turnover x 1,25 xG
+                if (dataType == 0) { // Turnover one-timer x 1,6 xG
+                    dxG = dxG * 1.6;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.25;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
@@ -999,7 +1005,10 @@
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
-                if (dataType == 1) { // turnover x 1,25 xG
+                if (dataType == 0) { // Turnover one-timer x 1,6 xG
+                    dxG = dxG * 1.6;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.25;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
@@ -1076,7 +1085,10 @@
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
-                if (dataType == 1) { // turnover x 1,25 xG
+                if (dataType == 0) { // Turnover one-timer x 1,6 xG
+                    dxG = dxG * 1.6;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.25;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
@@ -1088,7 +1100,6 @@
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
                 }
-
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
 
