@@ -183,6 +183,11 @@
     var posTeam_array = [['Shift nr','Line 1','Line 2','Line 3','PP Line','SH Line', 'Team']];
     var posTeamT2_array = [['Shift nr','Line 1','Line 2','Line 3','PP Line','SH Line', 'Team']];
 
+    // Data arrays for players charts
+
+    var player_t1 [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
+    var player_t2 [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
+
     // Time on court by line period/game (in counters)
     // Team 1
     
@@ -1194,8 +1199,8 @@
 
     let xG_matrix = [
 
-        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0, 0, 0],
+        [ 0, 0, 0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0, 0, 0],
         [ 2, 2,13,14,15,35,99,35,15,14, 13, 2, 2],
         [ 4, 5,15,19,29,54,55,54,29,19,15, 5, 4],
         [ 5, 8,18,20,23,32,38,32,23,20,18, 8, 5],
