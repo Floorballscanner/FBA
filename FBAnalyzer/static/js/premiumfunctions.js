@@ -409,6 +409,14 @@
                 dataRes = 0;
                 dataxG = 0;
                 shiftPos_2 = 0;
+                stT1Teamp_array = [0,0,0,0,0];
+                stT2Teamp_array = [0,0,0,0,0];
+                stT1L1p_array = [0,0,0,0,0];
+                stT2L1p_array = [0,0,0,0,0];
+                stT1L2p_array = [0,0,0,0,0];
+                stT2L2p_array = [0,0,0,0,0];
+                stT1L3p_array = [0,0,0,0,0];
+                stT2L3p_array = [0,0,0,0,0];
 
                 for (let i = 0; i < 8; i++) {
 
@@ -2238,7 +2246,7 @@
     function shotTDirect() {
         dataType = 1;
         if (line_on < 4 && line_on_2 < 4) {
-            cconsole.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
@@ -2548,6 +2556,27 @@
 
         var chart = new google.visualization.ComboChart(document.getElementById('posTeam_chart'));
         chart.draw(data, options);
+
+        // Turnover chart
+
+         var chartData = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', stT1L1g_array[0] + stT1L1g_array[1], 'color: #002072', stT1L1g_array[0] + stT1L1g_array[1], stT2L1g_array[0] + stT2L1g_array[1], 'color: #59D9EB', stT2L1g_array[0] + stT2L1g_array[1]],
+             ['Line 2', stT1L2g_array[0] + stT1L2g_array[1], 'color: #002072', stT1L2g_array[0] + stT1L2g_array[1], stT2L2g_array[0] + stT2L2g_array[1], 'color: #59D9EB', stT2L2g_array[0] + stT2L2g_array[1]],
+             ['Line 3', stT1L3g_array[0] + stT1L3g_array[1], 'color: #002072', stT1L3g_array[0] + stT1L3g_array[1], stT2L3g_array[0] + stT2L3g_array[1], 'color: #59D9EB', stT2L3g_array[0] + stT2L3g_array[1]
+             ]
+          ]);
+
+        var options = {
+            title: 'Turnovers by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('TOGame_chart'));
+        chart.draw(chartData, options);
 
     }
 

@@ -406,6 +406,14 @@
                 dataRes = 0;
                 dataxG = 0;
                 shiftPos_2 = 0;
+                stT1Teamp_array = [0,0,0,0,0];
+                stT2Teamp_array = [0,0,0,0,0];
+                stT1L1p_array = [0,0,0,0,0];
+                stT2L1p_array = [0,0,0,0,0];
+                stT1L2p_array = [0,0,0,0,0];
+                stT2L2p_array = [0,0,0,0,0];
+                stT1L3p_array = [0,0,0,0,0];
+                stT2L3p_array = [0,0,0,0,0];
 
                 for (let i = 0; i < 8; i++) {
 
@@ -1960,6 +1968,13 @@
 
     function shotTOnetimer() {
         dataType = 0;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -1970,6 +1985,13 @@
 
     function shotTDirect() {
         dataType = 1;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -1980,6 +2002,13 @@
 
     function shotOnetimer() {
         dataType = 2;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -1990,6 +2019,13 @@
 
     function shotRebound() {
         dataType = 3;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -2000,6 +2036,13 @@
 
     function shotDirect() {
         dataType = 4;
+        if (line_on < 4 && line_on_2 < 4) {
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+        }
         stype.style.display = "none";
         menu.style.display = "block";
         menu.style.left = stype.style.left;
@@ -2071,6 +2114,62 @@
     }
 
     function drawChart() {
+
+       // xG Game Chart
+
+        var chartData = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', Number(xGf_g[0]), 'color: #002072', Number(xGf_g[0]), Number(xGfT2_g[0]), 'color: #59D9EB', Number(xGfT2_g[0]) ],
+             ['Line 2', Number(xGf_g[1]), 'color: #002072', Number(xGf_g[1]), Number(xGfT2_g[1]), 'color: #59D9EB', Number(xGfT2_g[1]) ],
+             ['Line 3', Number(xGf_g[2]), 'color: #002072', Number(xGf_g[2]), Number(xGfT2_g[2]), 'color: #59D9EB', Number(xGfT2_g[2]) ],
+             ['PP', Number(xGf_g[3]) + Number(xGf_g[4]), 'color: #002072', Number(xGf_g[3]) + Number(xGf_g[4]), Number(xGfT2_g[3]) + Number(xGfT2_g[4]), 'color: #59D9EB', Number(xGfT2_g[3]) + Number(xGfT2_g[4]) ],
+             ['SH', Number(xGf_g[5]) + Number(xGf_g[6]), 'color: #002072', Number(xGf_g[5]) + Number(xGf_g[6]), Number(xGfT2_g[5]) + Number(xGfT2_g[6]), 'color: #59D9EB', Number(xGfT2_g[5]) + Number(xGfT2_g[6]) ]
+          ]);
+
+        var options = {
+            title: 'xG by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
+        chart.draw(chartData, options);
+
+        //xG% GameChart
+
+        xGL1T1 = calcPercent(Number(xGf_g[0]), Number(xGa_g[0]));
+        xGL1T2 = calcPercent(Number(xGfT2_g[0]), Number(xGaT2_g[0]));
+        xGL2T1 = calcPercent(Number(xGf_g[1]), Number(xGa_g[1]));
+        xGL2T2 = calcPercent(Number(xGfT2_g[1]), Number(xGaT2_g[1]));
+        xGL3T1 = calcPercent(Number(xGf_g[2]), Number(xGa_g[2]));
+        xGL3T2 = calcPercent(Number(xGfT2_g[2]), Number(xGfT2_g[2]));
+
+        var chartData = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
+             ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
+             ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
+          ]);
+
+        var options = {
+            title: 'xG% by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: {
+                viewWindowMode:'explicit',
+                textPosition: 'none',
+                viewWindow: {
+                  max:100,
+                  min:0
+                }
+            },
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
+        chart.draw(chartData, options);
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
@@ -2155,6 +2254,27 @@
 
         var chart = new google.visualization.ComboChart(document.getElementById('posTeam_chart'));
         chart.draw(data, options);
+
+        // Turnover chart
+
+        var chartData = google.visualization.arrayToDataTable([
+            ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+            ['Line 1', stT1L1g_array[0] + stT1L1g_array[1], 'color: #002072', stT1L1g_array[0] + stT1L1g_array[1], stT2L1g_array[0] + stT2L1g_array[1], 'color: #59D9EB', stT2L1g_array[0] + stT2L1g_array[1]],
+            ['Line 2', stT1L2g_array[0] + stT1L2g_array[1], 'color: #002072', stT1L2g_array[0] + stT1L2g_array[1], stT2L2g_array[0] + stT2L2g_array[1], 'color: #59D9EB', stT2L2g_array[0] + stT2L2g_array[1]],
+            ['Line 3', stT1L3g_array[0] + stT1L3g_array[1], 'color: #002072', stT1L3g_array[0] + stT1L3g_array[1], stT2L3g_array[0] + stT2L3g_array[1], 'color: #59D9EB', stT2L3g_array[0] + stT2L3g_array[1]
+            ]
+        ]);
+
+        var options = {
+            title: 'Turnovers by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('TOGame_chart'));
+        chart.draw(chartData, options);
 
     }
 
