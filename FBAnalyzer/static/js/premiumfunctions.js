@@ -2221,11 +2221,11 @@
     function shotTOnetimer() {
         dataType = 0;
         if (line_on < 4 && line_on_2 < 4) {
-            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++");
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2238,11 +2238,11 @@
     function shotTDirect() {
         dataType = 1;
         if (line_on < 4 && line_on_2 < 4) {
-            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++");
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2255,11 +2255,11 @@
     function shotOnetimer() {
         dataType = 2;
         if (line_on < 4 && line_on_2 < 4) {
-            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++");
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2272,11 +2272,11 @@
     function shotRebound() {
         dataType = 3;
         if (line_on < 4 && line_on_2 < 4) {
-            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++");
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2289,11 +2289,11 @@
     function shotDirect() {
         dataType = 4;
         if (line_on < 4 && line_on_2 < 4) {
-            console.log("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamg["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"g["+dataType+"]++");
-            eval("stT"+Ball_pos+"Teamp["+dataType+"]++");
-            eval("stT"+Ball_pos+"L"+line_on+"p["+dataType+"]++");
+            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++");
+            eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++");
         }
         stype.style.display = "none";
         menu.style.display = "block";
