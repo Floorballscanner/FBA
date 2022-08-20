@@ -135,7 +135,6 @@ class LiveData(models.Model):
     objects = models.Manager()
     
     # Game variables
-    url = models.URLField()
     created = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     date = models.DateTimeField(auto_now=True, blank=True)
     periodNr = models.IntegerField(null=True)
