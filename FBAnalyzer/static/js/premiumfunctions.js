@@ -1161,7 +1161,10 @@
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
-                if (dataType == 1) { // turnover x 1,25 xG
+                if (dataType == 0) { // Turnover one-timer x 1,6 xG
+                    dxG = dxG * 1.6;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.25;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
@@ -1267,7 +1270,10 @@
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
-                if (dataType == 1) { // turnover x 1,25 xG
+                if (dataType == 0) { // Turnover one-timer x 1,6 xG
+                    dxG = dxG * 1.6;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.25;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
@@ -1373,7 +1379,10 @@
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
-                if (dataType == 1) { // turnover x 1,25 xG
+                if (dataType == 0) { // Turnover one-timer x 1,6 xG
+                    dxG = dxG * 1.6;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.25;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
@@ -1479,7 +1488,10 @@
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
-                if (dataType == 1) { // turnover x 1,25 xG
+                if (dataType == 0) { // Turnover one-timer x 1,6 xG
+                    dxG = dxG * 1.6;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.25;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
@@ -1590,6 +1602,11 @@
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
+
+            if (dataType == 0 || dataType == 1) {
+                ctx.fillStyle = "green";
+            }
+
             dataShot = 1;
 
             if (type == 1) {    // Shot Missed
@@ -1752,6 +1769,11 @@
         }
         else if (Ball_pos == 2) {
             ctx.fillStyle = "red";
+
+            if (dataType == 0 || dataType == 1) {
+                ctx.fillStyle = "orange";
+            }
+
             dataShot = 2;
 
             if (type == 1) {    // Shot Missed
@@ -2185,7 +2207,17 @@
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
     }
 
-    function shotTurnover() {
+    function shotTOnetimer() {
+        dataType = 0;
+        stype.style.display = "none";
+        menu.style.display = "block";
+        menu.style.left = stype.style.left;
+        menu.style.top = stype.style.top;
+        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // console.log(shotData);
+    }
+
+    function shotTDirect() {
         dataType = 1;
         stype.style.display = "none";
         menu.style.display = "block";
