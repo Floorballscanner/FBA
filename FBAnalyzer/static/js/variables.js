@@ -165,6 +165,8 @@
     var dataSh = 0;
     var shooter_id = 0;
     var passer_id = 0;
+    var shooter_str = "";
+    var passer_str = "";
 
     // Data arrays for xG charts
 
@@ -185,8 +187,8 @@
 
     // Data arrays for players charts
 
-    var plT1_array = [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
-    var plT2_array = [['Name', 'TOC','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']];
+    var plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists']];
+    var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists']];
     
     // Data arrays for shot type charts
 
