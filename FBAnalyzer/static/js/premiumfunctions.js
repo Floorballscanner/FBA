@@ -2254,28 +2254,37 @@
         found_p = 0;
         if (Ball_pos == 1) {
             for (let i=0;i<plT1_array.length;i++) {
+                console.log(i)
                 if (shooter_id == plT1_array[i][0]) {
+                    console.log("Found shooter: " + shooter_str)
+                    console.log("Adding xG: " + dataxG)
                     plT1_array[i][2] = plT1_array[i][2] + dataxG; // Add xG to shooter id
                     found_s = 1;
                     if (dataRes == 4) { // if Goal
                         plT1_array[i][4]++;
+                        console.log("Goal, adding 1 to goals: " + plT1_array[i][4])
                     }
                 }
                 if (passer_id == plT1_array[i][0]) {
+                    console.log("Found passer: " + passer_str)
+                    console.log("Adding xG: " + dataxG)
                     plT1_array[i][3] = plT1_array[i][3] + dataxG; // Add xG to passer id
                     found_p = 1;
                     if (dataRes == 4) { // if Goal
                         plT1_array[i][5]++;
+                        console.log("Goal, adding 1 to goals: " + plT1_array[i][5])
                     }
                 }
                 if (found_s == 0) { // Shooter not found, adding new row to the array
                     gxG = 0;
                     if (dataRes == 4) {gxG = dataxG};
+                    console.log("Did not find a shooter, adding row: [" + shooter_str + "," + dataxG + ",0", + gxG + "0]")
                     plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
                 }
                 if (found_p == 0) { // Passer not found, adding new row to the array
                     pxG = 0;
                     if (dataRes == 4) {pxG = dataxG};
+                    console.log("Did not find a passer, adding row: [" + passer_str + "," + ",0" + dataxG + ",0"+ gxG + "]")
                     plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
                 }
                 plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
