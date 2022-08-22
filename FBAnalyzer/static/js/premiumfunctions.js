@@ -2280,7 +2280,8 @@
                 }
                 plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
             }
-        if (Ball_pos == 2) {
+        }
+        else if (Ball_pos == 2) {
             for (let i=0;i<plT2_array.length;i++) {
                 if (shooter_id == plT2_array[i][0]) {
                     plT2_array[i][2] = plT2_array[i][2] + dataxG; // Add xG to shooter id
