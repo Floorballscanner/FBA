@@ -2275,20 +2275,20 @@
                         console.log("Goal, adding 1 to goals: " + plT1_array[i][5])
                     }
                 }
-                if (found_s == 0) { // Shooter not found, adding new row to the array
-                    gxG = 0;
-                    if (dataRes == 4) {gxG = dataxG};
-                    console.log("Did not find a shooter, adding row: [" + shooter_str + "," + dataxG + ",0", + gxG + "0]")
-                    plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
-                }
-                if (found_p == 0) { // Passer not found, adding new row to the array
-                    pxG = 0;
-                    if (dataRes == 4) {pxG = dataxG};
-                    console.log("Did not find a passer, adding row: [" + passer_str + "," + ",0" + dataxG + ",0"+ gxG + "]")
-                    plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
-                }
-                plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
             }
+            if (found_s == 0) { // Shooter not found, adding new row to the array
+                gxG = 0;
+                if (dataRes == 4) {gxG = dataxG};
+                console.log("Did not find a shooter, adding row: [" + shooter_str + "," + dataxG + ",0", + gxG + "0]")
+                plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
+            }
+            if (found_p == 0) { // Passer not found, adding new row to the array
+                pxG = 0;
+                if (dataRes == 4) {pxG = dataxG};
+                console.log("Did not find a passer, adding row: [" + passer_str + "," + ",0" + dataxG + ",0"+ gxG + "]")
+                plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
+            }
+            plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
         else if (Ball_pos == 2) {
             for (let i=0;i<plT2_array.length;i++) {
@@ -2306,18 +2306,18 @@
                         plT2_array[i][5]++;
                     }
                 }
-                if (found_s == 0) { // Shooter not found, adding new row to the array
-                    gxG = 0;
-                    if (dataRes == 4) {gxG = dataxG};
-                    plT2_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
-                }
-                if (found_p == 0) { // Passer not found, adding new row to the array
-                    pxG = 0;
-                    if (dataRes == 4) {pxG = dataxG};
-                    plT2_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
-                }
-                plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
             }
+            if (found_s == 0) { // Shooter not found, adding new row to the array
+                gxG = 0;
+                if (dataRes == 4) {gxG = dataxG};
+                plT2_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
+            }
+            if (found_p == 0) { // Passer not found, adding new row to the array
+                pxG = 0;
+                if (dataRes == 4) {pxG = dataxG};
+                plT2_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
+            }
+            plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
     }
 
