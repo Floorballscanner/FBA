@@ -2596,8 +2596,8 @@
 
 
         // Create and draw the visualization.
-        new google.visualization.Table(document.getElementById('T1plstats')).
-        draw(pldata, options);
+        var chart = new google.visualization.Table(document.getElementById('T1plstats'));
+        chart.draw(pldata, options);
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
