@@ -2576,7 +2576,7 @@
 
         // Player xG chart
 
-        var pldata = new google.visualization.DataTable();
+        /*var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
         pldata.addColumn('float', 'Shot xG');
         pldata.addColumn('float', 'Passed xG');
@@ -2597,7 +2597,7 @@
 
         // Create and draw the visualization.
         new google.visualization.Table(document.getElementById('T1plstats')).
-        draw(pldata, options);
+        draw(pldata, options);*/
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
