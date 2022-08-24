@@ -782,6 +782,7 @@
          }
     }
 
+// Etsii mihin kohtaa canvasia painetaan
     function FindPosition(oElement)
     {
       if(typeof( oElement.offsetParent ) != "undefined")
@@ -831,7 +832,7 @@
         PosX = PosX - ImgPos[0];
         PosY = PosY - ImgPos[1];
     }
-
+// Tässä välissä saadaan result
     function shotMissed() {
         Draw(PosX,PosY,1);
         dataxG = 0;
@@ -2319,8 +2320,13 @@
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
-    }
 
+        // plT1_array = [['Name','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']
+
+
+        // Name = shooter_id
+    }
+// TÄSSÄ VAIHEESSA MEILLÄ ON KAIKKI DATA
     function shotTOnetimer() {
         dataType = 0;
         if (line_on < 4 && line_on_2 < 4) {
@@ -2567,6 +2573,33 @@
 
         var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
         chart.draw(chartData, options);
+
+        // Player xG chart
+
+        var pldata = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('float', 'Shot xG');
+        data.addColumn('float', 'Passed xG');
+        data.addColumn('integer', 'Goals');
+        data.addColumn('integer', 'Assists')
+
+        for(i = 1; i < plT1_array.length; i++){
+            data.addRow([plT1_array[i]]);
+        }
+        var options = {
+            title: 'Individual stats Team 1',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+
+        // Create and draw the visualization.
+        new google.visualization.Table(document.getElementById('T1plstats')).
+        draw(pldata, options);
+}
+
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
