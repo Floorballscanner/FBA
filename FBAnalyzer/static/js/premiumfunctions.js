@@ -2584,7 +2584,7 @@
         pldata.addColumn('number', 'Assists')
 
         for(i = 1; i < plT1_array.length; i++){
-            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4]plT1_array[i][5]]);
+            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5]]);
         }
         var options = {
             title: 'Individual stats Team 1',
