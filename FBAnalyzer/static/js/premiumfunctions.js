@@ -2576,15 +2576,15 @@
 
         // Player xG chart
 
-        /*var pldata = new google.visualization.DataTable();
+        var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
-        pldata.addColumn('float', 'Shot xG');
-        pldata.addColumn('float', 'Passed xG');
-        pldata.addColumn('integer', 'Goals');
-        pldata.addColumn('integer', 'Assists')
+        pldata.addColumn('number', 'Shot xG');
+        pldata.addColumn('number', 'Passed xG');
+        pldata.addColumn('number', 'Goals');
+        pldata.addColumn('number', 'Assists')
 
         for(i = 1; i < plT1_array.length; i++){
-            pldata.addRow([plT1_array[i]]);
+            pldata.addRow(plT1_array[i]);
         }
         var options = {
             title: 'Individual stats Team 1',
@@ -2597,7 +2597,7 @@
 
         // Create and draw the visualization.
         new google.visualization.Table(document.getElementById('T1plstats')).
-        draw(pldata, options);*/
+        draw(pldata, options);
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
