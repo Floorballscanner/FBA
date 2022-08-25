@@ -2255,38 +2255,29 @@
         found_p = 0;
         if (Ball_pos == 1) {
             for (let i=0;i<plT1_array.length;i++) {
-                console.log(i)
                 if (shooter_id == plT1_array[i][0]) {
-                    console.log("Found shooter: " + shooter_str)
-                    console.log("Adding xG: " + dataxG)
                     plT1_array[i][2] = plT1_array[i][2] + dataxG; // Add xG to shooter id
                     found_s = 1;
                     if (dataRes == 4) { // if Goal
                         plT1_array[i][4]++;
-                        console.log("Goal, adding 1 to goals: " + plT1_array[i][4])
                     }
                 }
                 if (passer_id == plT1_array[i][0]) {
-                    console.log("Found passer: " + passer_str)
-                    console.log("Adding xG: " + dataxG)
                     plT1_array[i][3] = plT1_array[i][3] + dataxG; // Add xG to passer id
                     found_p = 1;
                     if (dataRes == 4) { // if Goal
                         plT1_array[i][5]++;
-                        console.log("Goal, adding 1 to goals: " + plT1_array[i][5])
                     }
                 }
             }
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
-                if (dataRes == 4) {gxG = dataxG};
-                console.log("Did not find a shooter, adding row: [" + shooter_str + "," + dataxG + ",0", + gxG + "0]")
+                if (dataRes == 4) {gxG = 1};
                 plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
-                if (dataRes == 4) {pxG = dataxG};
-                console.log("Did not find a passer, adding row: [" + passer_str + "," + ",0" + dataxG + ",0"+ gxG + "]")
+                if (dataRes == 4) {pxG = 1};
                 plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
             }
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -2310,21 +2301,16 @@
             }
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
-                if (dataRes == 4) {gxG = dataxG};
+                if (dataRes == 4) {gxG = 1};
                 plT2_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
-                if (dataRes == 4) {pxG = dataxG};
+                if (dataRes == 4) {pxG = 1};
                 plT2_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
-
-        // plT1_array = [['Name','Shot_xG','Passed_xG','Goals','Assists','xGF','xGA']
-
-
-        // Name = shooter_id
     }
 // TÄSSÄ VAIHEESSA MEILLÄ ON KAIKKI DATA
     function shotTOnetimer() {
@@ -2574,7 +2560,7 @@
         var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
         chart.draw(chartData, options);
 
-        // Player xG chart
+        // Team 1 Player xG chart
 
         var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
@@ -2598,6 +2584,47 @@
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T1plstats'));
         chart.draw(pldata, options);
+
+        // Add sort listener
+
+        google.visualization.events.addListener(chart, 'sort',
+        function(event) {
+            pldata.sort([{column: event.column, desc: event.ascending}]);
+            chart.draw(pldata, options);
+        });
+
+        // Team 2 Player xG chart
+
+        var pldata = new google.visualization.DataTable();
+        pldata.addColumn('string', 'Name');
+        pldata.addColumn('number', 'Shot xG');
+        pldata.addColumn('number', 'Passed xG');
+        pldata.addColumn('number', 'Goals');
+        pldata.addColumn('number', 'Assists')
+
+        for(i = 1; i < plT2_array.length; i++){
+            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5]]);
+        }
+        var options = {
+            title: 'Individual stats Team 2',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('T2plstats'));
+        chart.draw(pldata, options);
+
+        // Add sort listener
+
+        google.visualization.events.addListener(chart, 'sort',
+        function(event) {
+            pldata.sort([{column: event.column, desc: event.ascending}]);
+            chart.draw(pldata, options);
+        });
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
@@ -2701,8 +2728,8 @@
             hAxis: { textPosition: 'none' }
             };
 
-        var chart = new google.visualization.BarChart(document.getElementById('toGame_chart'));
-        chart.draw(chartData, options);
+        var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
+        chart1.draw(chartData, options);
 
     }
 
