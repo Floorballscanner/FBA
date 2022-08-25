@@ -2589,7 +2589,7 @@
 
         google.visualization.events.addListener(chart, 'sort',
         function(event) {
-            pldata.sort([{column: event.column, desc: !event.ascending}]);
+            pldata.sort([{column: event.column, desc: event.ascending}]);
             chart.draw(pldata, options);
         });
 
@@ -2622,7 +2622,7 @@
 
         google.visualization.events.addListener(chart, 'sort',
         function(event) {
-            pldata.sort([{column: event.column, desc: !event.ascending}]);
+            pldata.sort([{column: event.column, desc: event.ascending}]);
             chart.draw(pldata, options);
         });
 
@@ -2728,8 +2728,8 @@
             hAxis: { textPosition: 'none' }
             };
 
-        var chart = new google.visualization.BarChart(document.getElementById('toGame_chart'));
-        chart.draw(chartData, options);
+        var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
+        chart1.draw(chartData, options);
 
     }
 
