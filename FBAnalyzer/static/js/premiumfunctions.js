@@ -2404,6 +2404,49 @@
 
         if (r == true) {
 
+
+            // Create time data Array
+            for (let i=1;i<premTimeData.length;i++) {
+                t_data = {
+                    "user" : premTimeData[i][0],
+                    "game" : premTimeData[i][1],
+                    "time" : premTimeData[i][2],
+                    "position" : premTimeData[i][3],
+                    "lines" : [premTimeData[i][4],premTimeData[i][5]],
+                    "T1LW" : premTimeData[i][6],
+                    "T1C" : premTimeData[i][7],
+                    "T1RW" : premTimeData[i][8],
+                    "T1LD" : premTimeData[i][9],
+                    "T1RD" : premTimeData[i][10],
+                    "T1G" : premTimeData[i][11],
+                    "T2LW" : premTimeData[i][12],
+                    "T2C" : premTimeData[i][13],
+                    "T2RW" : premTimeData[i][14],
+                    "T2LD" : premTimeData[i][15],
+                    "T2RD" : premTimeData[i][16],
+                    "T2G" : premTimeData[i][17],
+                }
+
+                // Save data to database
+                fetch('https://fbscanner.io/apis/times/', {
+
+                method: 'POST', // or 'PUSH'
+                headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify(t_data),
+                })
+
+                .then(response => response.json())
+                .then(data => {
+                console.log('Success:', data);
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+                });
+            }
+
             // Create shot data Array
             for (let i=1;i<premShotData.length;i++) {
                 s_data = {
@@ -2454,47 +2497,8 @@
                 });
             }
 
-            // Create time data Array
-            for (let i=1;i<premTimeData.length;i++) {
-                t_data = {
-                    "user" : premTimeData[i][0],
-                    "game" : premTimeData[i][1],
-                    "time" : premTimeData[i][2],
-                    "position" : premTimeData[i][3],
-                    "lines" : [premTimeData[i][4],premTimeData[i][5]],
-                    "T1LW" : premTimeData[i][6],
-                    "T1C" : premTimeData[i][7],
-                    "T1RW" : premTimeData[i][8],
-                    "T1LD" : premTimeData[i][9],
-                    "T1RD" : premTimeData[i][10],
-                    "T1G" : premTimeData[i][11],
-                    "T2LW" : premTimeData[i][12],
-                    "T2C" : premTimeData[i][13],
-                    "T2RW" : premTimeData[i][14],
-                    "T2LD" : premTimeData[i][15],
-                    "T2RD" : premTimeData[i][16],
-                    "T2G" : premTimeData[i][17],
-                }
 
-                // Save data to database
-                fetch('https://fbscanner.io/apis/times/', {
 
-                method: 'POST', // or 'PUSH'
-                headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken,
-                },
-                body: JSON.stringify(t_data),
-                })
-
-                .then(response => response.json())
-                .then(data => {
-                console.log('Success:', data);
-                })
-                .catch((error) => {
-                console.error('Error:', error);
-                });
-            }
 
             downloadCsv()
 
