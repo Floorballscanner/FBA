@@ -31,33 +31,71 @@ body {
     background-color: #002072;
 
 }
-.fixed-nav-bar ul{
+.fixed-nav-bar {
     list-style-type: none;
     overflow: hidden;
-
 }
 
-.fixed-nav-bar ul li a {
+.fixed-nav-bar a {
     display: block;
     color: white;
     text-align: center;
     text-decoration: none;
 }
-.fixed-nav-bar ul li a img {
+.fixed-nav-bar a img {
     display: block;
     color: white;
     text-align: center;
     padding: 0px 0px;
     text-decoration: none;
 }
-.fixed-nav-bar ul li a:hover {
+.fixed-nav-bar a:hover {
     background-color: #3046FB;
 }
-.fixed-nav-bar ul li a:not([href]){
+.fixed-nav-bar a:not([href]){
     display: none;
     color: white;
     text-align: center;
     text-decoration: none;
+}
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+.dropdown .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+/* Add a grey background to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #3046FB;
+}
+
+/* Show the dropdown menu when the user moves the mouse over the dropdown button */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .active{

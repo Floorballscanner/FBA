@@ -32,7 +32,7 @@ when there is not a logged in user.
 </head>
 <body>
     <div class="header">
-        <nav class="fixed-nav-bar">
+        <!--<nav class="fixed-nav-bar">
             <ul>
                 {% load static %}
                 <li style="float:left;padding: 10px 10px"><a href="/"><img src="{% static 'logo_transparent.png' %}" height="34px"></a></li>
@@ -42,7 +42,22 @@ when there is not a logged in user.
                 <li style="float:right;padding: 15px 10px"><a href="https://holvi.com/shop/fbscanner/">Buy Licence</a></li>
                 <li style="float:right;padding: 15px 50px"><a href="/live">LIVE</a></li>
             </ul>
-        </nav>
+        </nav>-->
+        <div class="fixed-nav-bar">
+            <a href="/"><img src="{% static 'logo_transparent.png' %}" height="34px"></a>
+            <div class="dropdown">
+                <button class="dropbtn">
+                  <i class="icon"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="/live">LIVE</a>
+                    <a href="https://holvi.com/shop/fbscanner/">Buy Licence</a>
+                    <a href="/about">About</a>
+                    <a href="/signup">Contact Us</a>
+                    <a href="/accounts/login/">Login</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- This is where the extended content is placed -->
