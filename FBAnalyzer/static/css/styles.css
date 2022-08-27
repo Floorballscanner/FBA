@@ -32,6 +32,9 @@ body {
 .nav-link {
     color: white;
 }
+.navbar-toggler {
+    color: white;
+}
 .nav-link:hover {
     background-color: #3046FB;
 }
