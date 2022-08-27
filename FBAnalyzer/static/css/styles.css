@@ -33,8 +33,7 @@ body {
     color: white;
 }
 .nav-item {
-    float:left;
-    padding: 10px 10px;
+    float:right;
 }
 .navbar-toggler-icon {
     background-color: white;

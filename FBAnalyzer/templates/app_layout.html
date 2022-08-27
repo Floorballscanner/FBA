@@ -34,7 +34,7 @@ when the user has logged in successfully.
         <nav class="navbar sticky-top navbar-expand-lg " style="background-color: #002072;">
             <a class="navbar-brand" href="/"><img src="{% static 'logo_transparent.png' %}" height="34px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="" role="button" ><i class="fa fa-bars" aria-hidden="true" style="color:#ffffff"></i></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -57,15 +57,6 @@ when the user has logged in successfully.
                 </ul>
             </div>
         </nav>
-        <!--<nav class="fixed-nav-bar">
-            <ul>
-                {% load static %}
-                <li style="float:left;padding: 10px 10px" ><a href="/accounts" class="frontpage"><img src="{% static 'logo_transparent.png' %}" height="34px"></a></li>
-                <li style="float:right;padding: 15px 10px"><a href="/accounts/logout/">Logout</a></li>
-                <li style="float:right;padding: 15px 10px"><a class="sendData" id="sData" onclick="saveData()">Save Data</a></li>
-                <li style="float:right;padding: 15px 10px"><a href="/accounts/new_game" class="newgame">New Game</a></li>
-            </ul>
-        </nav>-->
     </div>
     <!-- This is where the extended content is placed -->
     {% block content %}
