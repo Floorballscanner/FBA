@@ -32,6 +32,10 @@ body {
 .nav-link {
     color: white;
 }
+.nav-item {
+    float:left;
+    padding: 10px 10px;
+}
 .navbar-toggler .line {
     color: white;
 }
