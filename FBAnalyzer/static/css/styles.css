@@ -37,7 +37,7 @@ body {
     padding: 10px 10px;
 }
 .navbar-toggler .line {
-    color: white;
+    background-color: white;
 }
 .nav-link:hover {
     background-color: #3046FB;
