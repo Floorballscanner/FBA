@@ -700,7 +700,7 @@
              }
 
              // Add one row to timeData - array
-             timeData.push([user_id, game_id, gameCounter, Ball_pos, line_on, line_on_2]);
+             timeData.push([user_id, game_id, gameCounter, Ball_pos, line_on+1, line_on_2+1]);
 
              // Add one row to the xG arrays every minute
              if (gameCounter % 60 == 0) {
@@ -2165,6 +2165,8 @@
                         "distance" : shotData[i][6],
                         "angle" : shotData[i][7],
                         "xG" : shotData[i][8],
+                        "isPP" : shotData[i][9],
+                        "isSH" : shotData[i][10],
                     }
                     // Save data to database
                     fetch('https://fbscanner.io/apis/shots/', {

@@ -745,7 +745,7 @@
              // Add one row to timeData - array
              counter++;
              gameCounter++;
-             timeData.push([user_id, game_id, gameCounter, Ball_pos, line_on, line_on_2]);
+             timeData.push([user_id, game_id, gameCounter, Ball_pos, line_on+1, line_on_2+1]);
              premTimeData.push([user_id, game_id, gameCounter, Ball_pos, line_on+1, line_on_2+1, p_T1LW, p_T1C, p_T1RW,
                         p_T1LD, p_T1RD, p_T1G, p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G]);
 
