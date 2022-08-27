@@ -2104,9 +2104,9 @@
 
 }
 
-    function sendData() {
+    function saveData() {
 
-        var r = confirm("Are you sure you want to send data,\n do this when your game is over?");
+        var r = confirm("Are you sure you want to save data,\n do this when your game is over?");
         if (r == true) {
         
             // Possession data
