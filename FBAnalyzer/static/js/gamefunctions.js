@@ -700,7 +700,7 @@
              }
 
              // Add one row to timeData - array
-             timeData.push([gameCounter, Ball_pos, line_on, line_on_2, dataShot, dataRes, dataxG]);
+             timeData.push([user_id, game_id, gameCounter, Ball_pos, line_on, line_on_2]);
 
              // Add one row to the xG arrays every minute
              if (gameCounter % 60 == 0) {
@@ -1965,7 +1965,7 @@
         // Shot menu
 
         menu.style.display = "none";
-        shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        shotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2), dataAngle.toFixed(2), dataxG.toFixed(2), dataPp, dataSh]);
     }
 
     function shotTOnetimer() {
@@ -1981,7 +1981,7 @@
         menu.style.display = "block";
         menu.style.left = stype.style.left;
         menu.style.top = stype.style.top;
-        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // shotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2), dataAngle.toFixed(2), dataxG.toFixed(2), dataPp, dataSh]);
         // console.log(shotData);
     }
 
@@ -1998,7 +1998,7 @@
         menu.style.display = "block";
         menu.style.left = stype.style.left;
         menu.style.top = stype.style.top;
-        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // shotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2), dataAngle.toFixed(2), dataxG.toFixed(2), dataPp, dataSh]);
         // console.log(shotData);
     }
 
@@ -2015,7 +2015,7 @@
         menu.style.display = "block";
         menu.style.left = stype.style.left;
         menu.style.top = stype.style.top;
-        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // shotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2), dataAngle.toFixed(2), dataxG.toFixed(2), dataPp, dataSh]);
         // console.log(shotData);
     }
 
@@ -2032,7 +2032,7 @@
         menu.style.display = "block";
         menu.style.left = stype.style.left;
         menu.style.top = stype.style.top;
-        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // shotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2), dataAngle.toFixed(2), dataxG.toFixed(2), dataPp, dataSh]);
         // console.log(shotData);
     }
 
@@ -2049,7 +2049,7 @@
         menu.style.display = "block";
         menu.style.left = stype.style.left;
         menu.style.top = stype.style.top;
-        // shotData.push([gameCounter, Ball_pos, dataRes, dataType, dataDis, dataAngle, dataPp, dataSh]);
+        // shotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2), dataAngle.toFixed(2), dataxG.toFixed(2), dataPp, dataSh]);
         // console.log(shotData);
     }
 
@@ -2108,7 +2108,87 @@
 
         var r = confirm("Are you sure you want to send data,\n do this when your game is over?");
         if (r == true) {
+        
+            // Possession data
 
+            i = 1;
+            saveNextT(i);
+
+            function saveNextT(i) {
+
+                if (i<timeData.length) {
+                    t_data = {
+                        "user" : timeData[i][0],
+                        "game" : timeData[i][1],
+                        "time" : timeData[i][2],
+                        "position" : timeData[i][3],
+                        "lines" : [timeData[i][4],timeData[i][5]],
+                    }
+
+                    // Save data to database
+                    fetch('https://fbscanner.io/apis/times/', {
+
+                    method: 'POST', // or 'PUSH'
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify(t_data),
+                    })
+
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        i++;
+                        saveNextT(i);
+                    })
+                    .catch((error) => {
+                    console.error('Error:', error);
+                    });
+                }
+            }
+
+            // Shot data
+            i = 1;
+            saveNextS(i);
+
+            function saveNextS(i) {
+
+                if (i<shotData.length) {
+                    s_data = {
+                        "user" : shotData[i][0],
+                        "game" : shotData[i][1],
+                        "time" : shotData[i][2],
+                        "position" : shotData[i][3],
+                        "result" : shotData[i][4],
+                        "type" : shotData[i][5],
+                        "distance" : shotData[i][6],
+                        "angle" : shotData[i][7],
+                        "xG" : shotData[i][8],
+                    }
+                    // Save data to database
+                    fetch('https://fbscanner.io/apis/shots/', {
+
+                    method: 'POST', // or 'PUSH'
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify(s_data),
+                    })
+
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        i++;
+                        saveNextS(i);
+                    })
+                    .catch((error) => {
+                    console.error('Error:', error);
+                    });
+                }
+            }
+        
             downloadCsv()
         }
 
