@@ -29,6 +29,12 @@ body {
     height: 54px;
     background-color: #002072;
 }
+.nav-link {
+    color: white;
+}
+.nav-link:hover {
+    background-color: #3046FB;
+}
 @media screen and (max-width: 600px) {
   .fixed-nav-bar {
     position: fixed;
