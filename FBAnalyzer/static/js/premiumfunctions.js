@@ -2459,7 +2459,7 @@
             i = 1;
             saveNextS(i);
 
-            function saveNexts(i) {
+            function saveNextS(i) {
 
                 if (i<premShotData.length) {
                     s_data = {
