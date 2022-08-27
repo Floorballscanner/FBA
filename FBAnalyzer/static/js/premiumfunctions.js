@@ -2706,26 +2706,6 @@
         var chart = new google.visualization.ComboChart(document.getElementById('xGL3_chart'));
         chart.draw(data, options);
 
-        // Position Chart
-        var data = google.visualization.arrayToDataTable(posTeam_array);
-
-        var options = {
-          title: 'Possession by Line',
-          curveType: 'function',
-          legend: { position: 'bottom' },
-          seriesType: 'bars',
-          series: {
-              0:{color: 'blue'},
-              1:{color: 'purple'},
-              2:{color: 'yellow'},
-              3:{color: 'green'},
-              4:{color: 'red'},
-              5:{type: 'line', color: 'black'}}
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('posTeam_chart'));
-        chart.draw(data, options);
-
         // Turnover chart
 
          var chartData = google.visualization.arrayToDataTable([
