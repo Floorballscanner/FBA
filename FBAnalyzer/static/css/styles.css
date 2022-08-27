@@ -23,7 +23,7 @@ body {
     display: none;
     color: white;
 }
-.navbar-dark .navbar-nav .nav-link {
+.navbar-dark navbar-nav nav-link {
     color: #ffffff;
 }
 .nav-link:hover {
