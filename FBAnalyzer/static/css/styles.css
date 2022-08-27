@@ -23,8 +23,8 @@ body {
     display: none;
     color: #fff;
 }
-.navbar-dark navbar-nav nav-link {
-    color: #fff;
+.nav-link {
+    color: #fff !important;
 }
 .nav-link:hover {
     background-color: #3046FB;
