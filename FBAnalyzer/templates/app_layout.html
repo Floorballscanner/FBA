@@ -31,7 +31,33 @@ when the user has logged in successfully.
 {% load static %}
 <body>
     <div class="header">
-        <nav class="fixed-nav-bar">
+        <nav class="navbar sticky-top navbar-expand-lg " style="background-color: #002072;">
+            <a class="navbar-brand" href="/"><img src="{% static 'logo_transparent.png' %}" height="34px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/accounts/edit_data">Edit data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/accounts/new_game">New Line-Based Game</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/accounts/premium_game">New Player-Based Game</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="sData" onclick="saveData()">Save Game Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/accounts/logout/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--<nav class="fixed-nav-bar">
             <ul>
                 {% load static %}
                 <li style="float:left;padding: 10px 10px" ><a href="/accounts" class="frontpage"><img src="{% static 'logo_transparent.png' %}" height="34px"></a></li>
@@ -39,7 +65,7 @@ when the user has logged in successfully.
                 <li style="float:right;padding: 15px 10px"><a class="sendData" id="sData" onclick="saveData()">Save Data</a></li>
                 <li style="float:right;padding: 15px 10px"><a href="/accounts/new_game" class="newgame">New Game</a></li>
             </ul>
-        </nav>
+        </nav>-->
     </div>
     <!-- This is where the extended content is placed -->
     {% block content %}
