@@ -171,13 +171,7 @@ CORS_ORIGIN_WHITELIST = (
 
 CSRF_TRUSTED_ORIGINS = [
     'https://fbscanner.io/livedata',
-    'https://fbscanner.io/livedata/*',
-    'https://*.fbscanner.io'
-]
-
-CORS_ALLOWED_ORIGINS = [
-    'https://fbscanner.io/livedata',
-    'https://fbscanner.io/livedata/*',
+    'https://www.fbscanner.io/livedata',
     'https://*.fbscanner.io'
 ]
 
