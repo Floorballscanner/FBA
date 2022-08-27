@@ -26,8 +26,8 @@ body {
     display: none;
     color: white;
 }
-.nav-item a{
-    color: white;
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff;
 }
 .nav-link:hover {
     background-color: #3046FB;
