@@ -21,10 +21,10 @@ body {
 }
 #sData {
     display: none;
-    color: white;
+    color: #fff;
 }
 .navbar-dark navbar-nav nav-link {
-    color: #ffffff;
+    color: #fff;
 }
 .nav-link:hover {
     background-color: #3046FB;
