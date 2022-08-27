@@ -29,19 +29,6 @@ body {
 .nav-item {
     float: right;
 }
-.navbar-btn {
-    border-color: #fff;
-    text-transform: uppercase;
-    color: #fff;
-    background-color: #ae142a;
-    padding: 6px 12px !important;
-    margin: 0px 0px 0px 10px;
-}
-.navbar-btn:hover {
-    color: #FFF;
-    background-color: #3046FB !important;
-    border-color: #fff !important;
-}
 .nav-link:hover {
     background-color: #3046FB;
 }

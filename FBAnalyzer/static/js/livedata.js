@@ -226,6 +226,7 @@ function initializeLive() {
     let response = fetch("https://fbscanner.io/apis/livedata/", {
 
           method: 'POST', // or 'PUT'
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
@@ -466,6 +467,7 @@ function updateLive() {
     fetch(data_url, {
 
           method: 'PUT', // or 'PUSH'
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
