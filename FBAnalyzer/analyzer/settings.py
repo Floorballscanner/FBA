@@ -175,6 +175,12 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.fbscanner.io'
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'https://fbscanner.io/livedata',
+    'https://fbscanner.io/livedata/*',
+    'https://*.fbscanner.io'
+]
+
 CSRF_COOKIE_DOMAIN = '.fbscanner.io'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
