@@ -2404,101 +2404,113 @@
 
         if (r == true) {
 
+            // Possession data
 
-            // Create time data Array
-            for (let i=1;i<premTimeData.length;i++) {
-                t_data = {
-                    "user" : premTimeData[i][0],
-                    "game" : premTimeData[i][1],
-                    "time" : premTimeData[i][2],
-                    "position" : premTimeData[i][3],
-                    "lines" : [premTimeData[i][4],premTimeData[i][5]],
-                    "T1LW" : premTimeData[i][6],
-                    "T1C" : premTimeData[i][7],
-                    "T1RW" : premTimeData[i][8],
-                    "T1LD" : premTimeData[i][9],
-                    "T1RD" : premTimeData[i][10],
-                    "T1G" : premTimeData[i][11],
-                    "T2LW" : premTimeData[i][12],
-                    "T2C" : premTimeData[i][13],
-                    "T2RW" : premTimeData[i][14],
-                    "T2LD" : premTimeData[i][15],
-                    "T2RD" : premTimeData[i][16],
-                    "T2G" : premTimeData[i][17],
+            i = 1;
+            saveNextT(i);
+
+            function saveNextT(i) {
+
+                if (i<premTimeData.length) {
+                    t_data = {
+                        "user" : premTimeData[i][0],
+                        "game" : premTimeData[i][1],
+                        "time" : premTimeData[i][2],
+                        "position" : premTimeData[i][3],
+                        "lines" : [premTimeData[i][4],premTimeData[i][5]],
+                        "T1LW" : premTimeData[i][6],
+                        "T1C" : premTimeData[i][7],
+                        "T1RW" : premTimeData[i][8],
+                        "T1LD" : premTimeData[i][9],
+                        "T1RD" : premTimeData[i][10],
+                        "T1G" : premTimeData[i][11],
+                        "T2LW" : premTimeData[i][12],
+                        "T2C" : premTimeData[i][13],
+                        "T2RW" : premTimeData[i][14],
+                        "T2LD" : premTimeData[i][15],
+                        "T2RD" : premTimeData[i][16],
+                        "T2G" : premTimeData[i][17],
+                    }
+
+                    // Save data to database
+                    fetch('https://fbscanner.io/apis/times/', {
+
+                    method: 'POST', // or 'PUSH'
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify(t_data),
+                    })
+
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        i++;
+                        saveNextT(i);
+                    })
+                    .catch((error) => {
+                    console.error('Error:', error);
+                    });
                 }
-
-                // Save data to database
-                fetch('https://fbscanner.io/apis/times/', {
-
-                method: 'POST', // or 'PUSH'
-                headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken,
-                },
-                body: JSON.stringify(t_data),
-                })
-
-                .then(response => response.json())
-                .then(data => {
-                console.log('Success:', data);
-                })
-                .catch((error) => {
-                console.error('Error:', error);
-                });
             }
 
-            // Create shot data Array
-            for (let i=1;i<premShotData.length;i++) {
-                s_data = {
-                    "user" : premShotData[i][0],
-                    "game" : premShotData[i][1],
-                    "time" : premShotData[i][2],
-                    "position" : premShotData[i][3],
-                    "result" : premShotData[i][4],
-                    "type" : premShotData[i][5],
-                    "distance" : premShotData[i][6],
-                    "angle" : premShotData[i][7],
-                    "xG" : premShotData[i][8],
-                    "shooter" : premShotData[i][9],
-                    "passer" : premShotData[i][10],
-                    "T1LW" : premShotData[i][11],
-                    "T1C" : premShotData[i][12],
-                    "T1RW" : premShotData[i][13],
-                    "T1LD" : premShotData[i][14],
-                    "T1RD" : premShotData[i][15],
-                    "T1G" : premShotData[i][16],
-                    "T2LW" : premShotData[i][17],
-                    "T2C" : premShotData[i][18],
-                    "T2RW" : premShotData[i][19],
-                    "T2LD" : premShotData[i][20],
-                    "T2RD" : premShotData[i][21],
-                    "T2G" : premShotData[i][22],
-                    "isPP" : premShotData[i][23],
-                    "isSH" : premShotData[i][24],
+            // Shot data
+            i = 1;
+            saveNextS(i);
+
+            function saveNextT(i) {
+
+                if (i<premShotData.length) {
+                    s_data = {
+                        "user" : premShotData[i][0],
+                        "game" : premShotData[i][1],
+                        "time" : premShotData[i][2],
+                        "position" : premShotData[i][3],
+                        "result" : premShotData[i][4],
+                        "type" : premShotData[i][5],
+                        "distance" : premShotData[i][6],
+                        "angle" : premShotData[i][7],
+                        "xG" : premShotData[i][8],
+                        "shooter" : premShotData[i][9],
+                        "passer" : premShotData[i][10],
+                        "T1LW" : premShotData[i][11],
+                        "T1C" : premShotData[i][12],
+                        "T1RW" : premShotData[i][13],
+                        "T1LD" : premShotData[i][14],
+                        "T1RD" : premShotData[i][15],
+                        "T1G" : premShotData[i][16],
+                        "T2LW" : premShotData[i][17],
+                        "T2C" : premShotData[i][18],
+                        "T2RW" : premShotData[i][19],
+                        "T2LD" : premShotData[i][20],
+                        "T2RD" : premShotData[i][21],
+                        "T2G" : premShotData[i][22],
+                        "isPP" : premShotData[i][23],
+                        "isSH" : premShotData[i][24],
+                    }
+                    // Save data to database
+                    fetch('https://fbscanner.io/apis/shots/', {
+
+                    method: 'POST', // or 'PUSH'
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify(s_data),
+                    })
+
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        i++;
+                        saveNextS(i);
+                    })
+                    .catch((error) => {
+                    console.error('Error:', error);
+                    });
                 }
-
-                // Save data to database
-                fetch('https://fbscanner.io/apis/shots/', {
-
-                method: 'POST', // or 'PUSH'
-                headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken,
-                },
-                body: JSON.stringify(s_data),
-                })
-
-                .then(response => response.json())
-                .then(data => {
-                console.log('Success:', data);
-                })
-                .catch((error) => {
-                console.error('Error:', error);
-                });
             }
-
-
-
 
             downloadCsv()
 
