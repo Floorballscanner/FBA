@@ -3,6 +3,7 @@
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
     ctx.drawImage(myImg,0,0,fWidth,fLength);
+    document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
     }
     window.onbeforeunload = function() {
       return "Dude, are you sure you want to leave? Think of the kittens!";
@@ -273,6 +274,7 @@
                 document.getElementById("select-level-t2").disabled = true;
                 document.getElementById("select-team-1").disabled = true;
                 document.getElementById("select-team-2").disabled = true;
+                document.getElementById("select-date").disabled = true;
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
@@ -293,7 +295,7 @@
 
                 // Crate a new Game instance
 
-                /*data = { "date" : document.getElementById("select-date").value,
+                data = { "date" : document.getElementById("select-date").value,
                         "user" : user_id,
                         "teams" : [s_T1.value, s_T2.value]
                 };
@@ -315,7 +317,7 @@
                 })
                 .catch((error) => {
                     console.error('Error:', error);
-                });*/
+                });
 
             } else {
             }
