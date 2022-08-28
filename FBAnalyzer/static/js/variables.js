@@ -187,8 +187,8 @@
 
     // Data arrays for players charts
 
-    var plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists']];
-    var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists']];
+    var plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
+    var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
     
     // Data arrays for shot type charts
 

@@ -2257,6 +2257,7 @@
             for (let i=0;i<plT1_array.length;i++) {
                 if (shooter_id == plT1_array[i][0]) {
                     plT1_array[i][2] = plT1_array[i][2] + dataxG; // Add xG to shooter id
+                    plT1_array[i][6]++;
                     found_s = 1;
                     if (dataRes == 4) { // if Goal
                         plT1_array[i][4]++;
@@ -2264,6 +2265,7 @@
                 }
                 if (passer_id == plT1_array[i][0]) {
                     plT1_array[i][3] = plT1_array[i][3] + dataxG; // Add xG to passer id
+                    plT1_array[i][7]++;
                     found_p = 1;
                     if (dataRes == 4) { // if Goal
                         plT1_array[i][5]++;
@@ -2273,12 +2275,12 @@
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
+                plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0]);
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
+                plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1]);
             }
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
@@ -2286,6 +2288,7 @@
             for (let i=0;i<plT2_array.length;i++) {
                 if (shooter_id == plT2_array[i][0]) {
                     plT2_array[i][2] = plT2_array[i][2] + dataxG; // Add xG to shooter id
+                    plT2_array[i][6]++;
                     found_s = 1;
                     if (dataRes == 4) { // if Goal
                         plT2_array[i][4]++;
@@ -2293,6 +2296,7 @@
                 }
                 if (passer_id == plT2_array[i][0]) {
                     plT2_array[i][3] = plT2_array[i][3] + dataxG; // Add xG to passer id
+                    plT2_array[i][7]++;
                     found_p = 1;
                     if (dataRes == 4) { // if Goal
                         plT2_array[i][5]++;
@@ -2302,12 +2306,12 @@
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT2_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0]);
+                plT2_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0]);
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT2_array.push([passer_id, passer_str, 0, dataxG, 0, pxG]);
+                plT2_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1]);
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
@@ -2583,10 +2587,12 @@
         pldata.addColumn('number', 'Shot xG');
         pldata.addColumn('number', 'Passed xG');
         pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Assists')
+        pldata.addColumn('number', 'Assists');
+        pldata.addColumn('number', 'Shots');
+        pldata.addColumn('number', 'Shot assists');
 
         for(i = 1; i < plT1_array.length; i++){
-            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5]]);
+            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7]]);
         }
         var options = {
             title: 'Individual stats Team 1',
@@ -2616,10 +2622,12 @@
         pldata.addColumn('number', 'Shot xG');
         pldata.addColumn('number', 'Passed xG');
         pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Assists')
+        pldata.addColumn('number', 'Assists');
+        pldata.addColumn('number', 'Shots');
+        pldata.addColumn('number', 'Shot assists');
 
         for(i = 1; i < plT2_array.length; i++){
-            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5]]);
+            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7]]);
         }
         var options = {
             title: 'Individual stats Team 2',
