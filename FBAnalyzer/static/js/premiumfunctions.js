@@ -3093,12 +3093,12 @@
     function downloadCsv() {
         name_shot = name_t1+"_"+name_t2+"_shots.csv";
         name_shot = name_shot.replace(/\s/g, "");
-       // name_time = name_t1+"_"+name_t2+"_positions.csv";
-       // name_time = name_time.replace(/\s/g, "");
+        name_time = name_t1+"_"+name_t2+"_positions.csv";
+        name_time = name_time.replace(/\s/g, "");
 
         csv_shot = arrayToCsv(premShotData);
         downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
 
-       // csv_time = arrayToCsv(premTimeData);
-       // downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');
+        csv_time = arrayToCsv(premTimeData);
+        downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');
     }
