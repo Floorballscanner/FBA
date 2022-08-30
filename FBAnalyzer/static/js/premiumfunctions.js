@@ -2411,13 +2411,13 @@
             // Possession data
 
             i = 1;
-            console.log("i: " = i + " outside function");
+            console.log("i: " + i + " outside function");
             console.log(premShotData);
             saveNextS(i);
 
             function saveNextS(i) {
                 console.log("inside function saveNextS(i)")
-                console.log("i: " = i + " inside function")
+                console.log("i: " + i + " inside function")
                 if (i<premShotData.length) {
                     s_data = {
                         "user" : premShotData[i][0],
