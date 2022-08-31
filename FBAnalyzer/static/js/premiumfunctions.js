@@ -2663,7 +2663,7 @@
         pldata1.addColumn('number', 'xGoals agains');
         pldata1.addColumn('number', 'Plus');
         pldata1.addColumn('number', 'Minus');
-        pldata1.addColumn('number', 'Corsi For');
+        pldata1.addColumn('string', 'Corsi For');
         pldata1.addColumn('number', 'Corsi Against');
         pldata1.addColumn('number', 'Posession%');
 
