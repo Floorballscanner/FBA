@@ -2654,6 +2654,46 @@
             chart.draw(pldata, options);
         });
 
+        // Linechart Team 1
+
+        var pldata1 = new google.visualization.DataTable();
+        pldata1.addColumn('string', 'Line');
+        pldata1.addColumn('number', 'ToC');
+        pldata1.addColumn('number', 'xGf');
+        pldata1.addColumn('number', 'xGa');
+        pldata1.addColumn('number', '+');
+        pldata1.addColumn('number', '-');
+        pldata1.addColumn('number', 'CF');
+        pldata1.addColumn('number', 'CA');
+        pldata1.addColumn('number', 'Pos%');
+
+        pldata1.addRows([
+            ['Line 1', Toc_g[0], xf_g[0],xa_g[0],gf_g[0], ga_g[0], sf_g[0], sa_g[0], p_g[0]],
+            ['Line 2', Toc_g[1], xf_g[1],xa_g[1],gf_g[1], ga_g[1], sf_g[1], sa_g[1], p_g[1]],
+            ['Line 3', Toc_g[2], xf_g[2],xa_g[2],gf_g[2], ga_g[2], sf_g[2], sa_g[2], p_g[2]],
+            ['Powerplay', Toc_g[3], xf_g[3],xa_g[3],gf_g[3], ga_g[3], sf_g[3], sa_g[3], p_g[3]],
+            ['6vs5', Toc_g[4], xf_g[4],xa_g[4],gf_g[4], ga_g[4], sf_g[4], sa_g[4], p_g[4]],
+            ['Penalty Kill', Toc_g[5], xf_g[5],xa_g[5],gf_g[5], ga_g[5], sf_g[5], sa_g[5], p_g[5]],
+            ['5vs6', Toc_g[6], xf_g[6],xa_g[6],gf_g[6], ga_g[6], sf_g[6], sa_g[6], p_g[6]],
+            ['Team', Toc_g[7], xf_g[7],xa_g[7],gf_g[7], ga_g[7], sf_g[7], sa_g[7], p_g[7]]
+
+            ]);
+
+
+
+        var options = {
+            title: 'Line stats, ${name_t1}',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('T1linestats'));
+        chart.draw(pldata1, options);
+
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
 
