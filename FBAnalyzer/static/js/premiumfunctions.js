@@ -2743,7 +2743,7 @@
        // Team 1 typechart
 
         var chartDataX = google.visualization.arrayToDataTable([
-            ['Type', name_t1, {role: 'style'}, {role: 'annotation'}, name_t2, {role:'style'}, {role: 'annotation '} ],
+            ['Type', name_t1, {role: 'style'}, {role: 'annotation'}, name_t2, {role:'style'}, {role: 'annotation '}, name_t1, {role: 'style'}, {role: 'annotation'}, name_t1, {role: 'style'}, {role: 'annotation'}],
             ['Line1', stT1L1g_array[0], 'color: #002072', stT1L1g_array[0], stT1L1g_array[1], 'color: #59D9EB', stT1L1g_array[1], stT1L1g_array[2], 'color: #002072', stT1L1g_array[2], stT1L1g_array[4], 'color: #59D9EB', stT1L1g_array[4]],
             ['Line2', stT1L2g_array[0], 'color: #002072', stT1L2g_array[0], stT1L2g_array[1], 'color: #59D9EB', stT1L2g_array[1], stT1L2g_array[2], 'color: #002072', stT1L2g_array[2], stT1L2g_array[4], 'color: #59D9EB', stT1L2g_array[4]],
             ['Line3', stT1L3g_array[0], 'color: #002072', stT1L3g_array[0], stT1L3g_array[1], 'color: #59D9EB', stT1L3g_array[1], stT1L3g_array[2], 'color: #002072', stT1L3g_array[2], stT1L3g_array[4], 'color: #59D9EB', stT1L3g_array[4]
