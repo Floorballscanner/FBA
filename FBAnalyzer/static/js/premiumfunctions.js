@@ -2759,7 +2759,7 @@
             };
 
         var chart2 = new google.visualization.BarChart(document.getElementById('T1_typechart'));
-        chart1.draw(chartDataX, options);
+        chart2.draw(chartDataX, options);
 
     }
 
