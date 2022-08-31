@@ -2668,14 +2668,14 @@
         pldata1.addColumn('number', 'Posession%');
 
         pldata1.addRows([
-            ['Line 1', Toc_g[0], Number(xf_g[0].textContent), Number(xa_g[0]. textContent), Number(gf_g[0].textContent), Number(ga_g[0]. textContent), Number(sf_g[0].textContent), Number(sa_g[0].textContent)), Number(p_g[0].textContent)],
-            ['Line 2', Toc_g[1], Number(xf_g[1].textContent), Number(xa_g[1]. textContent), Number(gf_g[1].textContent), Number(ga_g[1]. textContent), Number(sf_g[1].textContent), Number(sa_g[1].textContent)), Number(p_g[1].textContent)],
-            ['Line 3', Toc_g[2], Number(xf_g[2].textContent), Number(xa_g[2]. textContent), Number(gf_g[2].textContent), Number(ga_g[2]. textContent), Number(sf_g[2].textContent), Number(sa_g[2].textContent)), Number(p_g[2].textContent)],
-            ['Powerplay', Toc_g[3], Number(xf_g[3].textContent), Number(xa_g[3]. textContent), Number(gf_g[3].textContent), Number(ga_g[3]. textContent), Number(sf_g[3].textContent), Number(sa_g[3].textContent)), Number(p_g[3].textContent)],
-            ['Pen. Kill', Toc_g[5], Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent)), Number(p_g[5].textContent)],
-            ['6vs5', Toc_g[4], Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4]. textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent)), Number(p_g[4].textContent)],
-            ['5vs6', Toc_g[6], Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6]. textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent)), Number(p_g[6].textContent)],
-            ['Team', Toc_g[7], Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7]. textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent)), Number(p_g[7].textContent)]
+            ['Line 1', Toc_g[0], Number(xf_g[0].textContent), Number(xa_g[0]. textContent), Number(gf_g[0].textContent), Number(ga_g[0]. textContent), Number(sf_g[0].textContent), Number(sa_g[0].textContent), Number(p_g[0].textContent)],
+            ['Line 2', Toc_g[1], Number(xf_g[1].textContent), Number(xa_g[1]. textContent), Number(gf_g[1].textContent), Number(ga_g[1]. textContent), Number(sf_g[1].textContent), Number(sa_g[1].textContent), Number(p_g[1].textContent)],
+            ['Line 3', Toc_g[2], Number(xf_g[2].textContent), Number(xa_g[2]. textContent), Number(gf_g[2].textContent), Number(ga_g[2]. textContent), Number(sf_g[2].textContent), Number(sa_g[2].textContent), Number(p_g[2].textContent)],
+            ['Powerplay', Toc_g[3], Number(xf_g[3].textContent), Number(xa_g[3]. textContent), Number(gf_g[3].textContent), Number(ga_g[3]. textContent), Number(sf_g[3].textContent), Number(sa_g[3].textContent), Number(p_g[3].textContent)],
+            ['Pen. Kill', Toc_g[5], Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent)],
+            ['6vs5', Toc_g[4], Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent)],
+            ['5vs6', Toc_g[6], Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent)],
+            ['Team', Toc_g[7], Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent)]
 
             ]);
 
