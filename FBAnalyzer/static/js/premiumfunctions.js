@@ -2668,7 +2668,7 @@
         pldata1.addColumn('number', 'Posession%');
 
         pldata1.addRows([
-            ['Line 1', Toc_g[0].value, Number(xf_g[0]), stT1Teamg_array[0], gf_g[0], ga_g[0], sf_g[0], 0.82, p_g[0]],
+            ['Line 1', Toc_g[0].value, Number(xf_g[0].textContent), stT1Teamg_array[0], gf_g[0], ga_g[0], sf_g[0], 0.82, p_g[0]],
             ['Line 2', Toc_g[1].value, xf_g[1],xa_g[1],gf_g[1], ga_g[1], sf_g[1], sa_g[1], p_g[1]],
             ['Line 3', Toc_g[2].value, xf_g[2],xa_g[2],gf_g[2], ga_g[2], sf_g[2], sa_g[2], p_g[2]],
             ['Powerplay', Toc_g[3].value, xf_g[3],xa_g[3],gf_g[3], ga_g[3], sf_g[3], sa_g[3], p_g[3]],
