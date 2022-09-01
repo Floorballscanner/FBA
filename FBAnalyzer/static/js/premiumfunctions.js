@@ -2817,8 +2817,8 @@
             hAxis: { textPosition: 'none' }
             };
 
-        var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
-        chart1.draw(chartData, options);
+        // var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
+         // chart1.draw(chartData, options);
 
 
        // Team 1 typechart
@@ -2844,7 +2844,7 @@
 
         // Team 2 typechart
 
-        var chartDataX = google.visualization.arrayToDataTable([
+        var chartDataY = google.visualization.arrayToDataTable([
             ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
             ['Line1', stT2L1g_array[0], 'color: #EDA137', stT2L1g_array[0], stT2L1g_array[1], 'color: #EB4F07', stT2L1g_array[1], stT2L1g_array[2], 'color: #D10808', stT2L1g_array[2], stT2L1g_array[4], 'color: #663D3D', stT2L1g_array[4]],
             ['Line2', stT2L2g_array[0], 'color: #EDA137', stT2L2g_array[0], stT2L2g_array[1], 'color: #EB4F07', stT2L2g_array[1], stT2L2g_array[2], 'color: #D10808', stT2L2g_array[2], stT2L2g_array[4], 'color: #663D3D', stT2L2g_array[4]],
@@ -2861,7 +2861,7 @@
             };
 
         var chartX = new google.visualization.BarChart(document.getElementById('T2_typechart'));
-        chartX.draw(chartDataX, options);
+        chartX.draw(chartDataY, options);
 
     }
 
