@@ -2689,10 +2689,51 @@
             hAxis: { textPosition: 'none' }
             };
 
-
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T1linestats'));
         chart.draw(pldata1, options);
+
+        // Linestats T2
+
+        var pldata2 = new google.visualization.DataTable();
+        pldata2.addColumn('string', 'Line');
+        pldata2.addColumn('number', 'Time on Court');
+        pldata2.addColumn('number', 'xGoals for');
+        pldata2.addColumn('number', 'xGoals agains');
+        pldata2.addColumn('number', 'Plus');
+        pldata2.addColumn('number', 'Minus');
+        pldata2.addColumn('number', 'Corsi For');
+        pldata2.addColumn('number', 'Corsi Against');
+        pldata2.addColumn('number', 'Posession%');
+
+        pldata2.addRows([
+            ['Line 1', TocT2_g[0], Number(xfT2_g[0].textContent), Number(xaT2_g[0]. textContent), Number(gfT2_g[0].textContent), Number(gaT2_g[0]. textContent), Number(sfT2_g[0].textContent), Number(saT2_g[0].textContent), Number(pT2_g[0].textContent)],
+            ['Line 2', TocT2_g[1], Number(xfT2_g[1].textContent), Number(xaT2_g[1]. textContent), Number(gfT2_g[1].textContent), Number(gaT2_g[1]. textContent), Number(sfT2_g[1].textContent), Number(saT2_g[1].textContent), Number(pT2_g[1].textContent)],
+            ['Line 3', TocT2_g[2], Number(xfT2_g[2].textContent), Number(xaT2_g[2]. textContent), Number(gfT2_g[2].textContent), Number(gaT2_g[2]. textContent), Number(sfT2_g[2].textContent), Number(saT2_g[2].textContent), Number(pT2_g[2].textContent)],
+            ['Powerplay', TocT2_g[3], Number(xfT2_g[3].textContent), Number(xaT2_g[3]. textContent), Number(gfT2_g[3].textContent), Number(gaT2_g[3]. textContent), Number(sfT2_g[3].textContent), Number(saT2_g[3].textContent), Number(pT2_g[3].textContent)],
+            ['Pen. Kill', TocT2_g[5], Number(xfT2_g[5].textContent), Number(xaT2_g[5]. textContent), Number(gfT2_g[5].textContent), Number(gaT2_g[5]. textContent), Number(sfT2_g[5].textContent), Number(saT2_g[5].textContent), Number(pT2_g[5].textContent)],
+            ['6vs5', TocT2_g[4], Number(xfT2_g[4].textContent), Number(xaT2_g[4]. textContent), Number(gfT2_g[4].textContent), Number(gaT2_g[4].textContent), Number(sfT2_g[4].textContent), Number(saT2_g[4].textContent), Number(pT2_g[4].textContent)],
+            ['5vs6', TocT2_g[6], Number(xfT2_g[6].textContent), Number(xaT2_g[6]. textContent), Number(gfT2_g[6].textContent), Number(gaT2_g[6].textContent), Number(sfT2_g[6].textContent), Number(saT2_g[6].textContent), Number(pT2_g[6].textContent)],
+            ['Team', TocT2_g[7], Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent)]
+
+            ]);
+
+
+
+        var options = {
+            title: 'Line stats, Team 2',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('T2linestats'));
+        chart.draw(pldata2, options);
+
+
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
