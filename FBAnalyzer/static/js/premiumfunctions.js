@@ -2658,14 +2658,14 @@
 
         var pldata1 = new google.visualization.DataTable();
         pldata1.addColumn('string', 'Line');
-        pldata1.addColumn('number', 'Time on Court');
-        pldata1.addColumn('number', 'xGoals for');
-        pldata1.addColumn('number', 'xGoals agains');
+        pldata1.addColumn('number', 'ToC');
+        pldata1.addColumn('number', 'xGf');
+        pldata1.addColumn('number', 'xGa');
         pldata1.addColumn('number', 'Plus');
         pldata1.addColumn('number', 'Minus');
-        pldata1.addColumn('number', 'Corsi For');
-        pldata1.addColumn('number', 'Corsi Against');
-        pldata1.addColumn('number', 'Posession%');
+        pldata1.addColumn('number', 'CF');
+        pldata1.addColumn('number', 'CA');
+        pldata1.addColumn('number', 'Pos%');
 
         pldata1.addRows([
             ['Line 1', Toc_g[0], Number(xf_g[0].textContent), Number(xa_g[0]. textContent), Number(gf_g[0].textContent), Number(ga_g[0]. textContent), Number(sf_g[0].textContent), Number(sa_g[0].textContent), Number(p_g[0].textContent)],
@@ -2697,14 +2697,14 @@
 
         var pldata2 = new google.visualization.DataTable();
         pldata2.addColumn('string', 'Line');
-        pldata2.addColumn('number', 'Time on Court');
-        pldata2.addColumn('number', 'xGoals for');
-        pldata2.addColumn('number', 'xGoals agains');
+        pldata2.addColumn('number', 'ToC');
+        pldata2.addColumn('number', 'xGf');
+        pldata2.addColumn('number', 'xGa');
         pldata2.addColumn('number', 'Plus');
         pldata2.addColumn('number', 'Minus');
-        pldata2.addColumn('number', 'Corsi For');
-        pldata2.addColumn('number', 'Corsi Against');
-        pldata2.addColumn('number', 'Posession%');
+        pldata2.addColumn('number', 'CF');
+        pldata2.addColumn('number', 'CA');
+        pldata2.addColumn('number', 'Pos%');
 
         pldata2.addRows([
             ['Line 1', TocT2_g[0], Number(xfT2_g[0].textContent), Number(xaT2_g[0]. textContent), Number(gfT2_g[0].textContent), Number(gaT2_g[0]. textContent), Number(sfT2_g[0].textContent), Number(saT2_g[0].textContent), Number(pT2_g[0].textContent)],
