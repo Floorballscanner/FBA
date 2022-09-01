@@ -1086,6 +1086,8 @@
                 b = Number(txGp_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_2.innerHTML = a;
+
+                console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]" = "stT"+Ball_pos+"Teamg_array["+dataType+"]" + dataxG );
             }
         }
 
