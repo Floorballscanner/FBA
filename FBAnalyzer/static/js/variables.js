@@ -209,6 +209,25 @@
     var stT1L3p_array = [0,0,0,0,0];
     var stT2L3p_array = [0,0,0,0,0];
 
+    // Data arrays for shot type xG charts
+
+    var stxGT1Teamg_array = [0,0,0,0,0];
+    var stxGT2Teamg_array = [0,0,0,0,0];
+    var stxGT1Teamp_array = [0,0,0,0,0];
+    var stxGT2Teamp_array = [0,0,0,0,0];
+    var stxGT1L1g_array = [0,0,0,0,0];
+    var stxGT2L1g_array = [0,0,0,0,0];
+    var stxGT1L1p_array = [0,0,0,0,0];
+    var stxGT2L1p_array = [0,0,0,0,0];
+    var stxGT1L2g_array = [0,0,0,0,0];
+    var stxGT2L2g_array = [0,0,0,0,0];
+    var stxGT1L2p_array = [0,0,0,0,0];
+    var stxGT2L2p_array = [0,0,0,0,0];
+    var stxGT1L3g_array = [0,0,0,0,0];
+    var stxGT2L3g_array = [0,0,0,0,0];
+    var stxGT1L3p_array = [0,0,0,0,0];
+    var stxGT2L3p_array = [0,0,0,0,0];
+
     // Time on court by line period/game (in counters)
     // Team 1
     

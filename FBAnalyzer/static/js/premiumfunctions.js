@@ -2359,6 +2359,9 @@
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+            console.log("stxgT"+Ball_pos+"Teamg_array["+dataType+"]+dataxG;");
+
+
         }
         stype.style.display = "none";
         menu.style.display = "block";
