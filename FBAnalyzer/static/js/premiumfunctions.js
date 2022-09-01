@@ -2825,22 +2825,43 @@
 
         var chartDataX = google.visualization.arrayToDataTable([
             ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT1L1g_array[0], 'color: #002072', stT1L1g_array[0], stT1L1g_array[1], 'color: #59D9EB', stT1L1g_array[1], stT1L1g_array[2], 'color: #688282', stT1L1g_array[2], stT1L1g_array[4], 'color: #747878', stT1L1g_array[4]],
-            ['Line2', stT1L2g_array[0], 'color: #002072', stT1L2g_array[0], stT1L2g_array[1], 'color: #59D9EB', stT1L2g_array[1], stT1L2g_array[2], 'color: #688282', stT1L2g_array[2], stT1L2g_array[4], 'color: #747878', stT1L2g_array[4]],
-            ['Line3', stT1L3g_array[0], 'color: #002072', stT1L3g_array[0], stT1L3g_array[1], 'color: #59D9EB', stT1L3g_array[1], stT1L3g_array[2], 'color: #688282', stT1L3g_array[2], stT1L3g_array[4], 'color: #747878', stT1L3g_array[4]
+            ['Line1', stT1L1g_array[0], 'color: #20AB4E', stT1L1g_array[0], stT1L1g_array[1], 'color: #295738', stT1L1g_array[1], stT1L1g_array[2], 'color: #002072', stT1L1g_array[2], stT1L1g_array[4], 'color: #59D9EB', stT1L1g_array[4]],
+            ['Line2', stT1L2g_array[0], 'color: #20AB4E', stT1L2g_array[0], stT1L2g_array[1], 'color: #295738', stT1L2g_array[1], stT1L2g_array[2], 'color: #002072', stT1L2g_array[2], stT1L2g_array[4], 'color: #59D9EB', stT1L2g_array[4]],
+            ['Line3', stT1L3g_array[0], 'color: #20AB4E', stT1L3g_array[0], stT1L3g_array[1], 'color: #295738', stT1L3g_array[1], stT1L3g_array[2], 'color: #002072', stT1L3g_array[2], stT1L3g_array[4], 'color: #59D9EB', stT1L3g_array[4]
             ]
          ]);
 
         var options = {
-            title: 'Shot types by line',
+            title: 'Shot types, Team 1',
             bar: {groupWidth: "75%"},
             legend: { position: 'bottom'},
-            colors: ['#002072', '#59D9EB','#688282','#747878'],
+            colors: ['#20AB4E', '#295738','#002072','#59D9EB'],
             hAxis: { textPosition: 'none' }
             };
 
         var chart2 = new google.visualization.BarChart(document.getElementById('T1_typechart'));
         chart2.draw(chartDataX, options);
+
+        // Team 2 typechart
+
+        var chartDataX = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', stT2L1g_array[0], 'color: #EDA137', stT2L1g_array[0], stT2L1g_array[1], 'color: #EB4F07', stT2L1g_array[1], stT2L1g_array[2], 'color: #D10808', stT2L1g_array[2], stT2L1g_array[4], 'color: #663D3D', stT2L1g_array[4]],
+            ['Line2', stT2L2g_array[0], 'color: #EDA137', stT2L2g_array[0], stT2L2g_array[1], 'color: #EB4F07', stT2L2g_array[1], stT2L2g_array[2], 'color: #D10808', stT2L2g_array[2], stT2L2g_array[4], 'color: #663D3D', stT2L2g_array[4]],
+            ['Line3', stT2L3g_array[0], 'color: #EDA137', stT2L3g_array[0], stT2L3g_array[1], 'color: #EB4F07', stT2L3g_array[1], stT2L3g_array[2], 'color: #D10808', stT2L3g_array[2], stT2L3g_array[4], 'color: #663D3D', stT2L3g_array[4]
+            ]
+         ]);
+
+        var options = {
+            title: 'Shot types, Team 2',
+            bar: {groupWidth: "75%"},
+            legend: { position: 'bottom'},
+            colors: ['#EDA137', '#EB4F07','#D10808','#663D3D'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chartX = new google.visualization.BarChart(document.getElementById('T2_typechart'));
+        chartX.draw(chartDataX, options);
 
     }
 
