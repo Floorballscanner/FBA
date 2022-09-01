@@ -2730,7 +2730,7 @@
 
 
         // Create and draw the visualization.
-        var chart = new google.visualization.Table(document.getElementById('T2linestats'));
+        var chart2 = new google.visualization.Table(document.getElementById('T2linestats'));
         chart2.draw(pldata2, options);
 
 
