@@ -2589,11 +2589,11 @@
         var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
         pldata.addColumn('number', 'Shot xG');
-        pldata.addColumn('number', 'Passed xG');
+        pldata.addColumn('number', 'Pass xG');
         pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Assists');
+        pldata.addColumn('number', 'Ass.');
         pldata.addColumn('number', 'Shots');
-        pldata.addColumn('number', 'Shot assists');
+        pldata.addColumn('number', 'Shotass.');
 
         for(i = 1; i < plT1_array.length; i++){
             pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7]]);
@@ -2624,11 +2624,11 @@
         var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
         pldata.addColumn('number', 'Shot xG');
-        pldata.addColumn('number', 'Passed xG');
+        pldata.addColumn('number', 'Pass xG');
         pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Assists');
+        pldata.addColumn('number', 'Ass.');
         pldata.addColumn('number', 'Shots');
-        pldata.addColumn('number', 'Shot assists');
+        pldata.addColumn('number', 'Shotass.');
 
         for(i = 1; i < plT2_array.length; i++){
             pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7]]);
@@ -2658,14 +2658,14 @@
 
         var pldata1 = new google.visualization.DataTable();
         pldata1.addColumn('string', 'Line');
-        pldata1.addColumn('number', 'ToC');
-        pldata1.addColumn('number', 'xGf');
-        pldata1.addColumn('number', 'xGa');
+        pldata1.addColumn('number', 'Time on Court');
+        pldata1.addColumn('number', 'xGoals for');
+        pldata1.addColumn('number', 'xGoals against');
         pldata1.addColumn('number', 'Plus');
         pldata1.addColumn('number', 'Minus');
-        pldata1.addColumn('number', 'CF');
-        pldata1.addColumn('number', 'CA');
-        pldata1.addColumn('number', 'Pos%');
+        pldata1.addColumn('number', 'Corsi for');
+        pldata1.addColumn('number', 'Corsi against');
+        pldata1.addColumn('number', 'Possession%');
 
         pldata1.addRows([
             ['Line 1', Toc_g[0], Number(xf_g[0].textContent), Number(xa_g[0]. textContent), Number(gf_g[0].textContent), Number(ga_g[0]. textContent), Number(sf_g[0].textContent), Number(sa_g[0].textContent), Number(p_g[0].textContent)],
@@ -2697,14 +2697,14 @@
 
         var pldata2 = new google.visualization.DataTable();
         pldata2.addColumn('string', 'Line');
-        pldata2.addColumn('number', 'ToC');
-        pldata2.addColumn('number', 'xGf');
-        pldata2.addColumn('number', 'xGa');
+        pldata2.addColumn('number', 'Time on Court');
+        pldata2.addColumn('number', 'xGoals for');
+        pldata2.addColumn('number', 'xGoals against');
         pldata2.addColumn('number', 'Plus');
         pldata2.addColumn('number', 'Minus');
-        pldata2.addColumn('number', 'CF');
-        pldata2.addColumn('number', 'CA');
-        pldata2.addColumn('number', 'Pos%');
+        pldata2.addColumn('number', 'Corsi for');
+        pldata2.addColumn('number', 'Corsi Against');
+        pldata2.addColumn('number', 'Possession%');
 
         pldata2.addRows([
             ['Line 1', TocT2_g[0], Number(xfT2_g[0].textContent), Number(xaT2_g[0]. textContent), Number(gfT2_g[0].textContent), Number(gaT2_g[0]. textContent), Number(sfT2_g[0].textContent), Number(saT2_g[0].textContent), Number(pT2_g[0].textContent)],
