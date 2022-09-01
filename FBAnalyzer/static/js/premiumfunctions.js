@@ -2786,7 +2786,7 @@
         // Line 3 xG Chart
         var data = google.visualization.arrayToDataTable(xGL3_array);
 
-        var options = {
+        var options1 = {
           title: 'xG by Line 3',
           curveType: 'function',
           legend: { position: 'bottom' },
@@ -2797,7 +2797,7 @@
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGL3_chart'));
-        chart.draw(data, options);
+        chart.draw(data, options1);
 
         // Turnover chart
 
