@@ -920,7 +920,7 @@
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
 
-                eval("stxGT"+Ball_pos+"Teamg_array["+dataType+"]+=dataxG;");
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
