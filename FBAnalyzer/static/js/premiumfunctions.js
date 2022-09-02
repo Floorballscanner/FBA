@@ -2790,14 +2790,17 @@
 
         var daata = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
-        ['Turnovers', stxGT1Teamg_array[0] + stxGT1Teamg_array[1]],
-        ['Organized attacks', stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]]
+        ['Turnovers, one-timer', stxGT1Teamg_array[0]],
+        ['Turnovers, direct', stxGT1Teamg_array[1]],
+        ['Org.attack, one-timer', stxGT1Teamg_array[2]],
+        ['Org.attack, direct', stxGT1Teamg_array[4]],
+        ['Others',  stxGT1Teamg_array[3]]
 
         ]);
 
         var options2 = {
         title: 'Share of xG by attack types',
-        colors: ['#20AB4E', '#002072'],
+        colors: ['#20AB4E', '#295738','#002072','#59D9EB'],
         is3D: true,
         };
 
@@ -2808,14 +2811,17 @@
 
         var data2 = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
-        ['Turnovers', stxGT2Teamg_array[0] + stxGT2Teamg_array[1]],
-        ['Organized attacks', stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+        ['Turnover, one-timer', stxGT2Teamg_array[0],
+        ['Turnover, direct', + stxGT2Teamg_array[1]],
+        ['Org. attack, one-timer', stxGT2Teamg_array[2]],
+        ['Org. attack, direct', stxGT2Teamg_array[4]],
+        ['Other', stxGT2Teamg_array[3]]
 
         ]);
 
         var options2 = {
-        title: 'Share of xG by attack types',
-        colors: ['#EB4F07','#D10808',],
+        title: 'Share of xG by attack/shot types',
+        colors: ['#EDA137', '#EB4F07','#D10808','#663D3D'],
         is3D: true,
         };
 
