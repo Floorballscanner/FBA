@@ -2763,10 +2763,10 @@
             ['Line 1', TocT2_g[0], Number(xfT2_g[0].textContent), Number(xaT2_g[0]. textContent), Number(gfT2_g[0].textContent), Number(gaT2_g[0]. textContent), Number(sfT2_g[0].textContent), Number(saT2_g[0].textContent), Number(pT2_g[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
             ['Line 2', TocT2_g[1], Number(xfT2_g[1].textContent), Number(xaT2_g[1]. textContent), Number(gfT2_g[1].textContent), Number(gaT2_g[1]. textContent), Number(sfT2_g[1].textContent), Number(saT2_g[1].textContent), Number(pT2_g[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
             ['Line 3', TocT2_g[2], Number(xfT2_g[2].textContent), Number(xaT2_g[2]. textContent), Number(gfT2_g[2].textContent), Number(gaT2_g[2]. textContent), Number(sfT2_g[2].textContent), Number(saT2_g[2].textContent), Number(pT2_g[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
-            ['Powerplay', TocT2_g[3], Number(xfT2_g[3].textContent), Number(xaT2_g[3]. textContent), Number(gfT2_g[3].textContent), Number(gaT2_g[3]. textContent), Number(sfT2_g[3].textContent), Number(saT2_g[3].textContent), Number(pT2_g[3].textContent)],
-            ['Pen. Kill', TocT2_g[5], Number(xfT2_g[5].textContent), Number(xaT2_g[5]. textContent), Number(gfT2_g[5].textContent), Number(gaT2_g[5]. textContent), Number(sfT2_g[5].textContent), Number(saT2_g[5].textContent), Number(pT2_g[5].textContent)],
-            ['6vs5', TocT2_g[4], Number(xfT2_g[4].textContent), Number(xaT2_g[4]. textContent), Number(gfT2_g[4].textContent), Number(gaT2_g[4].textContent), Number(sfT2_g[4].textContent), Number(saT2_g[4].textContent), Number(pT2_g[4].textContent)],
-            ['5vs6', TocT2_g[6], Number(xfT2_g[6].textContent), Number(xaT2_g[6]. textContent), Number(gfT2_g[6].textContent), Number(gaT2_g[6].textContent), Number(sfT2_g[6].textContent), Number(saT2_g[6].textContent), Number(pT2_g[6].textContent)],
+            ['Powerplay', TocT2_g[3], Number(xfT2_g[3].textContent), Number(xaT2_g[3]. textContent), Number(gfT2_g[3].textContent), Number(gaT2_g[3]. textContent), Number(sfT2_g[3].textContent), Number(saT2_g[3].textContent), Number(pT2_g[3].textContent), 0, 0],
+            ['Pen. Kill', TocT2_g[5], Number(xfT2_g[5].textContent), Number(xaT2_g[5]. textContent), Number(gfT2_g[5].textContent), Number(gaT2_g[5]. textContent), Number(sfT2_g[5].textContent), Number(saT2_g[5].textContent), Number(pT2_g[5].textContent), 0, 0],
+            ['6vs5', TocT2_g[4], Number(xfT2_g[4].textContent), Number(xaT2_g[4]. textContent), Number(gfT2_g[4].textContent), Number(gaT2_g[4].textContent), Number(sfT2_g[4].textContent), Number(saT2_g[4].textContent), Number(pT2_g[4].textContent), 0, 0],
+            ['5vs6', TocT2_g[6], Number(xfT2_g[6].textContent), Number(xaT2_g[6]. textContent), Number(gfT2_g[6].textContent), Number(gaT2_g[6].textContent), Number(sfT2_g[6].textContent), Number(saT2_g[6].textContent), Number(pT2_g[6].textContent), 0, 0],
             ['Team', TocT2_g[7], Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
 
             ]);
@@ -2788,20 +2788,20 @@
 
         // Pie Chart, xG per type Team 1
 
-        // daata = new google.visualization.arrayToDataTable([
-        // ['Type', 'xG'],
-        //['Turnovers', stxGT1Teamg_array[0] + stxGT1Teamg_array[1]],
-        //['Organized attacks', stxGT1Teamg_array[2] + stxGT2Teamg_array[3] + stxGT1Teamg_array[4]]
+        daata = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnovers', stxGT1Teamg_array[0] + stxGT1Teamg_array[1]],
+        ['Organized attacks', stxGT1Teamg_array[2] + stxGT2Teamg_array[3] + stxGT1Teamg_array[4]]
 
-        //]);
+        ]);
 
-        //var options2 = {
-        //title: 'Share of xG by attack types',
-        //is3D: true,
-        //};
+        var options2 = {
+        title: 'Share of xG by attack types',
+        is3D: true,
+        };
 
-        //var chaart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
-        //chaart.draw = (daata, options2);
+        var chaart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
+        chaart.draw = (daata, options2);
 
 
 
