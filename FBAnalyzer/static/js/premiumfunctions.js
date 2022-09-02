@@ -2798,6 +2798,7 @@
         var options2 = {
         title: 'Share of xG by attack types',
         colors: ['#20AB4E', '#002072'],
+        is3D: true,
         };
 
         var chaart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
@@ -2815,6 +2816,7 @@
         var options2 = {
         title: 'Share of xG by attack types',
         colors: ['#EB4F07','#D10808',],
+        is3D: true,
         };
 
         var charty = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
