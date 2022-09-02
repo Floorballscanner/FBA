@@ -2811,7 +2811,7 @@
 
         var data2 = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
-        ['Turnover, one-timer', stxGT2Teamg_array[0],
+        ['Turnover, one-timer', stxGT2Teamg_array[0]],
         ['Turnover, direct', + stxGT2Teamg_array[1]],
         ['Org. attack, one-timer', stxGT2Teamg_array[2]],
         ['Org. attack, direct', stxGT2Teamg_array[4]],
