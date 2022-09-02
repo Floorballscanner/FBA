@@ -2791,16 +2791,34 @@
         var daata = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
         ['Turnovers', stxGT1Teamg_array[0] + stxGT1Teamg_array[1]],
-        ['Organized attacks', stxGT1Teamg_array[2] + stxGT2Teamg_array[3] + stxGT1Teamg_array[4]]
+        ['Organized attacks', stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]]
 
         ]);
 
         var options2 = {
         title: 'Share of xG by attack types',
+        colors: ['#20AB4E', '#002072'],
         };
 
         var chaart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
         chaart.draw(daata, options2);
+
+        // Pie Chart, xG per type Team 2
+
+        var data2 = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnovers', stxGT2Teamg_array[0] + stxGT2Teamg_array[1]],
+        ['Organized attacks', stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+
+        ]);
+
+        var options2 = {
+        title: 'Share of xG by attack types',
+        colors: ['#EB4F07','#D10808',],
+        };
+
+        var charty = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
+        charty.draw(data2, options2);
 
 
 
