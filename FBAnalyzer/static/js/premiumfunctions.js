@@ -2797,7 +2797,6 @@
 
         var options2 = {
         title: 'Share of xG by attack types',
-        is3D: true,
         };
 
         var chaart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
