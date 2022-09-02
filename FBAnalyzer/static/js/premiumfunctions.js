@@ -919,6 +919,9 @@
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
+
+                eval("stxGT"+Ball_pos+"Teamg_array["+dataType+"]+=dataxG;");
+
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
@@ -2327,8 +2330,8 @@
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
-            console.log(dataxG)
-            eval("stxGT"+Ball_pos+"Teamg_array["+dataType+"]+=dataxG;");
+
+
 
         }
         stype.style.display = "none";
