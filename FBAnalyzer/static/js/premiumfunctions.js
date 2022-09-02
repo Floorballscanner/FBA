@@ -2788,7 +2788,7 @@
 
         // Pie Chart, xG per type Team 1
 
-        daata = new google.visualization.arrayToDataTable([
+        var daata = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
         ['Turnovers', stxGT1Teamg_array[0] + stxGT1Teamg_array[1]],
         ['Organized attacks', stxGT1Teamg_array[2] + stxGT2Teamg_array[3] + stxGT1Teamg_array[4]]
@@ -2800,7 +2800,7 @@
         };
 
         var chaart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
-        chaart.draw = (daata, options2);
+        chaart.draw(daata, options2);
 
 
 
