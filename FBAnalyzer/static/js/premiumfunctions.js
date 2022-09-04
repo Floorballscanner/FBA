@@ -921,14 +921,7 @@
 
 
 
-                console.log(window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG);
-                console.log(window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG);
-                console.log(window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG);
-                console.log(window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG);
-                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -937,6 +930,11 @@
                 b = Number(txGp_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
             }
         }
 
@@ -1010,10 +1008,7 @@
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
-                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1022,6 +1017,11 @@
                 b = Number(txGp_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
             }
         }
 
@@ -1095,10 +1095,7 @@
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
-                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1107,6 +1104,11 @@
                 b = Number(txGp_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
 
             }
@@ -1182,10 +1184,7 @@
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
-                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1194,6 +1193,11 @@
                 b = Number(txGp_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
             }
         }
     }
@@ -1267,10 +1271,7 @@
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
 
-                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1279,6 +1280,11 @@
                 c = Number(txGp_1.innerHTML);
                 d = Math.round((c + dxG) * 100) / 100;
                 txGp_1.innerHTML = d;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -1381,10 +1387,7 @@
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
 
-                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1393,6 +1396,11 @@
                 c = Number(txGp_1.innerHTML);
                 d = Math.round((c + dxG) * 100) / 100;
                 txGp_1.innerHTML = d;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -1495,10 +1503,7 @@
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, xGaT2_g[7]]);
 
-                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1507,6 +1512,11 @@
                 c = Number(txGp_2.innerHTML);
                 d = Math.round((c + dxG) * 100) / 100;
                 txGp_2.innerHTML = d;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
@@ -1609,10 +1619,7 @@
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, xGaT2_g[7]]);
 
-                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1621,6 +1628,11 @@
                 b = Number(txGp_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
