@@ -920,6 +920,11 @@
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
 
+
+                console.log(window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG);
+                console.log(window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG);
+                console.log(window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG);
+                console.log(window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG);
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
@@ -2691,9 +2696,13 @@
             };
 
 
+
+
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T2plstats'));
         chart.draw(pldata, options);
+
+
 
         // Add sort listener
 
@@ -2702,6 +2711,9 @@
             pldata.sort([{column: event.column, desc: event.ascending}]);
             chart.draw(pldata, options);
         });
+
+        
+
 
         // Linechart Team 1
 
@@ -2800,7 +2812,7 @@
 
         var options2 = {
         title: 'Share of xG by attack types',
-        colors: ['#20AB4E', '#295738','#002072','#59D9EB'],
+        colors: ['#20AB4E', '#295738','#002072','#59D9EB','#F7FAFA'],
         is3D: true,
         };
 
@@ -2821,7 +2833,7 @@
 
         var options2 = {
         title: 'Share of xG by attack/shot types',
-        colors: ['#EDA137', '#EB4F07','#D10808','#663D3D'],
+        colors: ['#EDA137', '#EB4F07','#D10808','#663D3D', '#F7FAFA'],
         is3D: true,
         };
 
