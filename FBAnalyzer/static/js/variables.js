@@ -2,7 +2,7 @@
 
 
 
-  var tgt_1 = document.getElementById("totg_1");
+    var tgt_1 = document.getElementById("totg_1");
     var tgt_2 = document.getElementById("totg_2");
     var txG_1 = document.getElementById("totxG_1");
     var txG_2 = document.getElementById("totxG_2");
