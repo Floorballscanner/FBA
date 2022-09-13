@@ -230,6 +230,44 @@
     var stxGT1L3p_array = [0,0,0,0,0];
     var stxGT2L3p_array = [0,0,0,0,0];
 
+    // Data arrays for shot type against charts
+
+    var staT1Teamg_array = [0,0,0,0,0];
+    var staT2Teamg_array = [0,0,0,0,0];
+    var staT1Teamp_array = [0,0,0,0,0];
+    var staT2Teamp_array = [0,0,0,0,0];
+    var staT1L1g_array = [0,0,0,0,0];
+    var staT2L1g_array = [0,0,0,0,0];
+    var staT1L1p_array = [0,0,0,0,0];
+    var staT2L1p_array = [0,0,0,0,0];
+    var staT1L2g_array = [0,0,0,0,0];
+    var staT2L2g_array = [0,0,0,0,0];
+    var staT1L2p_array = [0,0,0,0,0];
+    var staT2L2p_array = [0,0,0,0,0];
+    var staT1L3g_array = [0,0,0,0,0];
+    var staT2L3g_array = [0,0,0,0,0];
+    var staT1L3p_array = [0,0,0,0,0];
+    var staT2L3p_array = [0,0,0,0,0];
+
+    // Data arrays for shot type xG against charts
+
+    var staxGT1Teamg_array = [0,0,0,0,0];
+    var staxGT2Teamg_array = [0,0,0,0,0];
+    var staxGT1Teamp_array = [0,0,0,0,0];
+    var staxGT2Teamp_array = [0,0,0,0,0];
+    var staxGT1L1g_array = [0,0,0,0,0];
+    var staxGT2L1g_array = [0,0,0,0,0];
+    var staxGT1L1p_array = [0,0,0,0,0];
+    var staxGT2L1p_array = [0,0,0,0,0];
+    var staxGT1L2g_array = [0,0,0,0,0];
+    var staxGT2L2g_array = [0,0,0,0,0];
+    var staxGT1L2p_array = [0,0,0,0,0];
+    var staxGT2L2p_array = [0,0,0,0,0];
+    var staxGT1L3g_array = [0,0,0,0,0];
+    var staxGT2L3g_array = [0,0,0,0,0];
+    var staxGT1L3p_array = [0,0,0,0,0];
+    var staxGT2L3p_array = [0,0,0,0,0];
+
     // Time on court by line period/game (in counters)
     // Team 1
     
