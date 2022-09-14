@@ -3217,7 +3217,6 @@
                         [document.getElementById(position).selectedIndex].value;
         var pos = p;
         var line = l;
-        if (line == 0) {line = []}; //Goalie
         var old_pos;
         var old_line;
         var old_id;
@@ -3282,9 +3281,16 @@
             console.error('Error:', error);
         });
 
-        data = {"line" : [line],
+        if (line == 0) {
+            data = {"line" : [],
                 "position" : [pos],
-        };
+            };
+        }
+        else {
+            data = {"line" : [line],
+                    "position" : [pos],
+            };
+        }
 
         console.log("Set the new player line and position")
         fetch("https://fbscanner.io/apis/players/" + player_id + "/", {
