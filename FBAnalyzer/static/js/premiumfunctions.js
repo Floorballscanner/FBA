@@ -3217,6 +3217,7 @@
                         [document.getElementById(position).selectedIndex].value;
         var pos = p;
         var line = l;
+        if (line == 0) {line = ""}; //Goalie
         var old_pos;
         var old_line;
         var old_id;
