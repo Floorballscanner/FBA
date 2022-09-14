@@ -2410,14 +2410,14 @@
         dataType = 1;
         if (line_on < 4 && Ball_pos == 1) {
             console.log("stT1Teamg_array["+dataType+"]++;");
-            window["stT1Teamg_array"][dataType] += dataxG;
-            window["stT1L"+line_on+"g_array"][dataType] += dataxG;
-            window["stT1Teamp_array"][dataType] += dataxG;
-            window["stT1L"+line_on+"p_array"][dataType] += dataxG;
-            window["staT2Teamg_array"][dataType] += dataxG;
-            window["staT2L"+line_on_2+"g_array"][dataType] += dataxG;
-            window["staT2Teamp_array"][dataType] += dataxG;
-            window["staT2L"+line_on_2+"p_array"][dataType] += dataxG;
+            window["stT1Teamg_array"][dataType] ++;
+            window["stT1L"+line_on+"g_array"][dataType] ++;
+            window["stT1Teamp_array"][dataType] ++;
+            window["stT1L"+line_on+"p_array"][dataType] ++;
+            window["staT2Teamg_array"][dataType] ++;
+            window["staT2L"+line_on_2+"g_array"][dataType] ++;
+            window["staT2Teamp_array"][dataType] ++;
+            window["staT2L"+line_on_2+"p_array"][dataType] ++;
             // xG arrayt
             window["stxGT1Teamg_array"][dataType] += dataxG;
             window["stxGT1L"+line_on+"g_array"][dataType] += dataxG;
