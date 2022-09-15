@@ -2409,6 +2409,7 @@
     function shotTDirect() {
         dataType = 1;
         if (line_on < 4 && Ball_pos == 1) {
+            //Määrä -arrayt
             console.log("stT1Teamg_array["+dataType+"]++;");
             window["stT1Teamg_array"][dataType] ++;
             window["stT1L"+line_on+"g_array"][dataType] ++;
@@ -2446,9 +2447,9 @@
         window["stxGT2Teamp_array"][dataType] += dataxG;
         window["stxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
         window["staxGT1Teamg_array"][dataType] += dataxG;
-        window["staxGT1L"+line_on_1+"g_array"][dataType] += dataxG;
+        window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
         window["staxGT1Teamp_array"][dataType] += dataxG;
-        window["staxGT1L"+line_on_1+"p_array"][dataType] += dataxG;
+        window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
 
         }
         stype.style.display = "none";
