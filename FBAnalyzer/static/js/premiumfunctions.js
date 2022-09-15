@@ -425,6 +425,8 @@
                 stT2L2p_array = [0,0,0,0,0];
                 stT1L3p_array = [0,0,0,0,0];
                 stT2L3p_array = [0,0,0,0,0];
+                plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
+                plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
 
                 for (let i = 0; i < 8; i++) {
 
@@ -486,14 +488,6 @@
                 }
                 if (document.getElementById("ck1a").checked) {
                     updateLive(); // Update the API
-                }
-
-                for (let i=plT1p_array.length-1;i>0;i--) {
-                    plT1p_array.remove(i);
-                }
-
-                for (let i=plT2p_array.length-1;i>0;i--) {
-                    plT2p_array.remove(i);
                 }
 
             } else {
