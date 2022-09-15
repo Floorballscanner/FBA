@@ -1691,22 +1691,30 @@
 
     function Draw(x,y,type) {
         var ctx = cnvs.getContext("2d");
+        if (periodN == 1) {ctx_p = cnvs_1.getContext("2d");}
+        else if (periodN == 2) {ctx_p = cnvs_2.getContext("2d");}
+        else if (periodN == 3) {ctx_p = cnvs_3.getContext("2d");}
+        else if (periodN == 4) {ctx_p = cnvs_4.getContext("2d");}
         menu.style.display = "none";
         ctx.font = "12px Arial";
+        ctx_p.font = "12px Arial";
         shooter_id = "";
         passer_id = "";
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
+            ctx_p.fillStyle = "blue";
 
             if (dataType == 0 || dataType == 1) {
                 ctx.fillStyle = "green";
+                ctx_p.fillStyle = "green";
             }
 
             dataShot = 1;
 
             if (type == 1) {    // Shot Missed
                 ctx.fillText("M", x, y);
+                ctx_p.fillText("M", x, y);
                 dataRes = 1;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -1745,6 +1753,7 @@
             }
             else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
+                ctx_p.fillText("B", x, y);
                 dataRes = 3;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -1783,6 +1792,7 @@
             }
             else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
+                ctx_p.fillText("S", x, y);
                 dataRes = 2;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -1821,6 +1831,7 @@
             }
             else if (type == 4) {   // Shot Goal
                 ctx.fillText("G", x, y);
+                ctx_p.fillText("G", x, y);
                 dataRes = 4;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -1865,15 +1876,18 @@
         }
         else if (Ball_pos == 2) {
             ctx.fillStyle = "red";
+            ctx_p.fillStyle = "red";
 
             if (dataType == 0 || dataType == 1) {
                 ctx.fillStyle = "orange";
+                ctx_p.fillStyle = "orange";
             }
 
             dataShot = 2;
 
             if (type == 1) {    // Shot Missed
                 ctx.fillText("M", x, y);
+                ctx_p.fillText("M", x, y);
                 dataRes = 1;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -1900,6 +1914,7 @@
             }
             else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
+                ctx_p.fillText("B", x, y);
                 dataRes = 3;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -1926,6 +1941,7 @@
             }
             else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
+                ctx_p.fillText("S", x, y);
                 dataRes = 2;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -1952,6 +1968,7 @@
             }
             else if (type == 4) {   // Shot Goal
                 ctx.fillText("G", x, y);
+                ctx_p.fillText("G", x, y);
                 dataRes = 4;
 
                 sa_p[line_on - 1].innerHTML++;
