@@ -2615,6 +2615,16 @@
              ['SH', Number(xGf_g[5]) + Number(xGf_g[6]), 'color: #002072', Number(xGf_g[5]) + Number(xGf_g[6]), Number(xGfT2_g[5]) + Number(xGfT2_g[6]), 'color: #59D9EB', Number(xGfT2_g[5]) + Number(xGfT2_g[6]) ]
           ]);
 
+        // Period data
+        var chartData_p = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', Number(xGf_p[0]), 'color: #002072', Number(xGf_p[0]), Number(xGfT2_p[0]), 'color: #59D9EB', Number(xGfT2_p[0]) ],
+             ['Line 2', Number(xGf_p[1]), 'color: #002072', Number(xGf_p[1]), Number(xGfT2_p[1]), 'color: #59D9EB', Number(xGfT2_p[1]) ],
+             ['Line 3', Number(xGf_p[2]), 'color: #002072', Number(xGf_p[2]), Number(xGfT2_p[2]), 'color: #59D9EB', Number(xGfT2_p[2]) ],
+             ['PP', Number(xGf_p[3]) + Number(xGf_p[4]), 'color: #002072', Number(xGf_p[3]) + Number(xGf_p[4]), Number(xGfT2_p[3]) + Number(xGfT2_p[4]), 'color: #59D9EB', Number(xGfT2_p[3]) + Number(xGfT2_p[4]) ],
+             ['SH', Number(xGf_p[5]) + Number(xGf_p[6]), 'color: #002072', Number(xGf_p[5]) + Number(xGf_p[6]), Number(xGfT2_p[5]) + Number(xGfT2_p[6]), 'color: #59D9EB', Number(xGfT2_p[5]) + Number(xGfT2_p[6]) ]
+          ]);
+
         var options = {
             title: 'xG by Line',
             bar: {groupWidth: "95%"},
@@ -2627,7 +2637,7 @@
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
-        chart_per.draw(chartData, options);
+        chart_per.draw(chartData_p, options);
 
         //xG% GameChart
 
@@ -2643,7 +2653,22 @@
              ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
              ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
              ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
-          ]);
+        ]);
+
+        // Period data
+        xGL1T1 = calcPercent(Number(xGf_p[0]), Number(xGa_p[0]));
+        xGL1T2 = calcPercent(Number(xGfT2_p[0]), Number(xGaT2_p[0]));
+        xGL2T1 = calcPercent(Number(xGf_p[1]), Number(xGa_p[1]));
+        xGL2T2 = calcPercent(Number(xGfT2_p[1]), Number(xGaT2_p[1]));
+        xGL3T1 = calcPercent(Number(xGf_p[2]), Number(xGa_p[2]));
+        xGL3T2 = calcPercent(Number(xGfT2_p[2]), Number(xGfT2_p[2]));
+
+        var chartData_p = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
+             ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
+             ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
+        ]);
 
         var options = {
             title: 'xG% by Line',
@@ -2662,6 +2687,9 @@
 
         var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
         chart.draw(chartData, options);
+
+        var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
+        chart_per.draw(chartData_p, options);
 
         // Team 1 Player xG chart
 
