@@ -2627,7 +2627,7 @@
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
-        chart.draw(chartData, options);
+        chart_per.draw(chartData, options);
 
         //xG% GameChart
 
