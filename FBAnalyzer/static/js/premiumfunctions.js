@@ -2498,9 +2498,6 @@
         // console.log(shotData);
     }
 
-
-
-
     function shotTDirect() {
         dataType = 1;
         if (line_on < 4 && line_on_2 < 4) {
@@ -2927,6 +2924,32 @@
             ['Team', Toc_g[7], Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
             ]);
+            
+        var pldata1_p = new google.visualization.DataTable();
+        pldata1_p.addColumn('string', 'Line');
+        pldata1_p.addColumn('number', 'ToC');
+        pldata1_p.addColumn('number', 'xG for');
+        pldata1_p.addColumn('number', 'xG ag.');
+        pldata1_p.addColumn('number', 'Plus');
+        pldata1_p.addColumn('number', 'Minus');
+        pldata1_p.addColumn('number', 'CF');
+        pldata1_p.addColumn('number', 'CA');
+        pldata1_p.addColumn('number', 'Pos%');
+        pldata1_p.addColumn('number', 'xG Turnov.');
+        pldata1_p.addColumn('number', 'xG org.att. ');
+
+        pldata1_p.addRows([
+            ['Line 1', Toc_p[0], Number(xf_p[0].textContent), Number(xa_p[0]. textContent), Number(gf_p[0].textContent), Number(ga_p[0]. textContent), Number(sf_p[0].textContent), Number(sa_p[0].textContent), Number(p_p[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
+            ['Line 2', Toc_p[1], Number(xf_p[1].textContent), Number(xa_p[1]. textContent), Number(gf_p[1].textContent), Number(ga_p[1]. textContent), Number(sf_p[1].textContent), Number(sa_p[1].textContent), Number(p_p[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
+            ['Line 3', Toc_p[2], Number(xf_p[2].textContent), Number(xa_p[2]. textContent), Number(gf_p[2].textContent), Number(ga_p[2]. textContent), Number(sf_p[2].textContent), Number(sa_p[2].textContent), Number(p_p[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
+            ['Powerplay', Toc_p[3], Number(xf_p[3].textContent), Number(xa_p[3]. textContent), Number(gf_p[3].textContent), Number(ga_p[3]. textContent), Number(sf_p[3].textContent), Number(sa_p[3].textContent), Number(p_p[3].textContent), 0, 0],
+            ['Pen. Kill', Toc_p[5], Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
+            ['6vs5', Toc_p[4], Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
+            ['5vs6', Toc_p[6], Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0],
+            ['Team', Toc_p[7], Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+
+            ]);
+
 
         var options = {
             title: 'Line stats, Team 1',
@@ -2939,6 +2962,9 @@
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T1linestats'));
         chart.draw(pldata1, options);
+        
+        var chart_per = new google.visualization.Table(document.getElementById('T1linestats_' + periodN));
+        chart_per.draw(pldata1_p, options);
 
         // Linestats T2
 
@@ -2966,6 +2992,31 @@
             ['Team', TocT2_g[7], Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
 
             ]);
+            
+        var pldata2_p = new google.visualization.DataTable();
+        pldata2_p.addColumn('string', 'Line');
+        pldata2_p.addColumn('number', 'ToC');
+        pldata2_p.addColumn('number', 'xG for');
+        pldata2_p.addColumn('number', 'xG ag.');
+        pldata2_p.addColumn('number', 'Plus');
+        pldata2_p.addColumn('number', 'Minus');
+        pldata2_p.addColumn('number', 'CF');
+        pldata2_p.addColumn('number', 'CA');
+        pldata2_p.addColumn('number', 'Pos%');
+        pldata2_p.addColumn('number', 'xG Turnov.');
+        pldata2_p.addColumn('number', 'xG org.att. ');
+
+        pldata2_p.addRows([
+            ['Line 1', TocT2_p[0], Number(xfT2_p[0].textContent), Number(xaT2_p[0]. textContent), Number(gfT2_p[0].textContent), Number(gaT2_p[0]. textContent), Number(sfT2_p[0].textContent), Number(saT2_p[0].textContent), Number(pT2_p[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
+            ['Line 2', TocT2_p[1], Number(xfT2_p[1].textContent), Number(xaT2_p[1]. textContent), Number(gfT2_p[1].textContent), Number(gaT2_p[1]. textContent), Number(sfT2_p[1].textContent), Number(saT2_p[1].textContent), Number(pT2_p[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
+            ['Line 3', TocT2_p[2], Number(xfT2_p[2].textContent), Number(xaT2_p[2]. textContent), Number(gfT2_p[2].textContent), Number(gaT2_p[2]. textContent), Number(sfT2_p[2].textContent), Number(saT2_p[2].textContent), Number(pT2_p[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
+            ['Powerplay', TocT2_p[3], Number(xfT2_p[3].textContent), Number(xaT2_p[3]. textContent), Number(gfT2_p[3].textContent), Number(gaT2_p[3]. textContent), Number(sfT2_p[3].textContent), Number(saT2_p[3].textContent), Number(pT2_p[3].textContent), 0, 0],
+            ['Pen. Kill', TocT2_p[5], Number(xfT2_p[5].textContent), Number(xaT2_p[5]. textContent), Number(gfT2_p[5].textContent), Number(gaT2_p[5]. textContent), Number(sfT2_p[5].textContent), Number(saT2_p[5].textContent), Number(pT2_p[5].textContent), 0, 0],
+            ['6vs5', TocT2_p[4], Number(xfT2_p[4].textContent), Number(xaT2_p[4]. textContent), Number(gfT2_p[4].textContent), Number(gaT2_p[4].textContent), Number(sfT2_p[4].textContent), Number(saT2_p[4].textContent), Number(pT2_p[4].textContent), 0, 0],
+            ['5vs6', TocT2_p[6], Number(xfT2_p[6].textContent), Number(xaT2_p[6]. textContent), Number(gfT2_p[6].textContent), Number(gaT2_p[6].textContent), Number(sfT2_p[6].textContent), Number(saT2_p[6].textContent), Number(pT2_p[6].textContent), 0, 0],
+            ['Team', TocT2_p[7], Number(xfT2_p[7].textContent), Number(xaT2_p[7]. textContent), Number(gfT2_p[7].textContent), Number(gaT2_p[7].textContent), Number(sfT2_p[7].textContent), Number(saT2_p[7].textContent), Number(pT2_p[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+
+            ]);
 
         var options = {
             title: 'Line stats, Team 2',
@@ -2978,16 +3029,29 @@
         // Create and draw the visualization.
         var chart2 = new google.visualization.Table(document.getElementById('T2linestats'));
         chart2.draw(pldata2, options);
+        
+        var chart2_per = new google.visualization.Table(document.getElementById('T2linestats_' + periodN));
+        chart2_per.draw(pldata2_p, options);
 
         // Pie Chart, xG per type Team 1
 
-        var daata = new google.visualization.arrayToDataTable([
+        var data = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
         ['Turnovers, one-timer', stxGT1Teamg_array[0]],
         ['Turnovers, direct', stxGT1Teamg_array[1]],
         ['Org.attack, one-timer', stxGT1Teamg_array[2]],
         ['Org.attack, direct', stxGT1Teamg_array[4]],
         ['Others',  stxGT1Teamg_array[3]]
+
+        ]);
+        
+        var data_p = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnovers, one-timer', stxGT1Teamp_array[0]],
+        ['Turnovers, direct', stxGT1Teamp_array[1]],
+        ['Org.attack, one-timer', stxGT1Teamp_array[2]],
+        ['Org.attack, direct', stxGT1Teamp_array[4]],
+        ['Others',  stxGT1Teamp_array[3]]
 
         ]);
 
@@ -2997,8 +3061,11 @@
         is3D: true,
         };
 
-        var chaart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
-        chaart.draw(daata, options2);
+        var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
+        chart.draw(data, options2);
+        
+        var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
+        chart_per.draw(data_p, options2);
 
         // Pie Chart, xG per type Team 2
 
@@ -3011,6 +3078,16 @@
         ['Other', stxGT2Teamg_array[3]]
 
         ]);
+        
+        var data2_p = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnover, one-timer', stxGT2Teamp_array[0]],
+        ['Turnover, direct', + stxGT2Teamp_array[1]],
+        ['Org. attack, one-timer', stxGT2Teamp_array[2]],
+        ['Org. attack, direct', stxGT2Teamp_array[4]],
+        ['Other', stxGT2Teamp_array[3]]
+
+        ]);
 
         var options2 = {
         title: 'Share of xG by attack/shot types',
@@ -3018,8 +3095,11 @@
         is3D: true,
         };
 
-        var charty = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
-        charty.draw(data2, options2);
+        var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
+        chart.draw(data2, options2);
+        
+        var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
+        chart_per.draw(data2_p, options2);
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
@@ -3116,6 +3196,14 @@
             ['Line3', stT1L3g_array[0], 'color: #20AB4E', stT1L3g_array[0], stT1L3g_array[1], 'color: #295738', stT1L3g_array[1], stT1L3g_array[2], 'color: #002072', stT1L3g_array[2], stT1L3g_array[4], 'color: #59D9EB', stT1L3g_array[4]
             ]
          ]);
+         
+        var chartDataX_p = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', stT1L1p_array[0], 'color: #20AB4E', stT1L1p_array[0], stT1L1p_array[1], 'color: #295738', stT1L1p_array[1], stT1L1p_array[2], 'color: #002072', stT1L1p_array[2], stT1L1p_array[4], 'color: #59D9EB', stT1L1p_array[4]],
+            ['Line2', stT1L2p_array[0], 'color: #20AB4E', stT1L2p_array[0], stT1L2p_array[1], 'color: #295738', stT1L2p_array[1], stT1L2p_array[2], 'color: #002072', stT1L2p_array[2], stT1L2p_array[4], 'color: #59D9EB', stT1L2p_array[4]],
+            ['Line3', stT1L3p_array[0], 'color: #20AB4E', stT1L3p_array[0], stT1L3p_array[1], 'color: #295738', stT1L3p_array[1], stT1L3p_array[2], 'color: #002072', stT1L3p_array[2], stT1L3p_array[4], 'color: #59D9EB', stT1L3p_array[4]
+            ]
+         ]);
 
         var options = {
             title: 'Shot types, Team 1',
@@ -3127,6 +3215,9 @@
 
         var chart2 = new google.visualization.BarChart(document.getElementById('T1_typechart'));
         chart2.draw(chartDataX, options);
+        
+        var chart2_per = new google.visualization.BarChart(document.getElementById('T1_typechart_' + periodN));
+        chart2_per.draw(chartDataX_p, options);
 
         // Team 2 typechart
 
@@ -3135,6 +3226,14 @@
             ['Line1', stT2L1g_array[0], 'color: #EDA137', stT2L1g_array[0], stT2L1g_array[1], 'color: #EB4F07', stT2L1g_array[1], stT2L1g_array[2], 'color: #D10808', stT2L1g_array[2], stT2L1g_array[4], 'color: #663D3D', stT2L1g_array[4]],
             ['Line2', stT2L2g_array[0], 'color: #EDA137', stT2L2g_array[0], stT2L2g_array[1], 'color: #EB4F07', stT2L2g_array[1], stT2L2g_array[2], 'color: #D10808', stT2L2g_array[2], stT2L2g_array[4], 'color: #663D3D', stT2L2g_array[4]],
             ['Line3', stT2L3g_array[0], 'color: #EDA137', stT2L3g_array[0], stT2L3g_array[1], 'color: #EB4F07', stT2L3g_array[1], stT2L3g_array[2], 'color: #D10808', stT2L3g_array[2], stT2L3g_array[4], 'color: #663D3D', stT2L3g_array[4]
+            ]
+         ]);
+         
+        var chartDataY_p = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', stT2L1p_array[0], 'color: #EDA137', stT2L1p_array[0], stT2L1p_array[1], 'color: #EB4F07', stT2L1p_array[1], stT2L1p_array[2], 'color: #D10808', stT2L1p_array[2], stT2L1p_array[4], 'color: #663D3D', stT2L1p_array[4]],
+            ['Line2', stT2L2p_array[0], 'color: #EDA137', stT2L2p_array[0], stT2L2p_array[1], 'color: #EB4F07', stT2L2p_array[1], stT2L2p_array[2], 'color: #D10808', stT2L2p_array[2], stT2L2p_array[4], 'color: #663D3D', stT2L2p_array[4]],
+            ['Line3', stT2L3p_array[0], 'color: #EDA137', stT2L3p_array[0], stT2L3p_array[1], 'color: #EB4F07', stT2L3p_array[1], stT2L3p_array[2], 'color: #D10808', stT2L3p_array[2], stT2L3p_array[4], 'color: #663D3D', stT2L3p_array[4]
             ]
          ]);
 
@@ -3148,6 +3247,9 @@
 
         var chartX = new google.visualization.BarChart(document.getElementById('T2_typechart'));
         chartX.draw(chartDataY, options);
+
+        var chartX_per = new google.visualization.BarChart(document.getElementById('T2_typechart_' + periodN));
+        chartX_per.draw(chartDataY_p, options);
 
     }
 
