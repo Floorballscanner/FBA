@@ -488,6 +488,14 @@
                     updateLive(); // Update the API
                 }
 
+                for (let i=plT1p_array.length-1;i>0;i--) {
+                    plT1p_array.remove(i);
+                }
+
+                for (let i=plT2p_array.length-1;i>0;i--) {
+                    plT2p_array.remove(i);
+                }
+
             } else {
             }
     }
