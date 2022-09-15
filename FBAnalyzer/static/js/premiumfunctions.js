@@ -2626,6 +2626,9 @@
         var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
         chart.draw(chartData, options);
 
+        var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
+        chart.draw(chartData, options);
+
         //xG% GameChart
 
         xGL1T1 = calcPercent(Number(xGf_g[0]), Number(xGa_g[0]));
@@ -2764,8 +2767,6 @@
 
             ]);
 
-
-
         var options = {
             title: 'Line stats, Team 1',
             bar: {groupWidth: "95%"},
@@ -2805,8 +2806,6 @@
 
             ]);
 
-
-
         var options = {
             title: 'Line stats, Team 2',
             bar: {groupWidth: "95%"},
@@ -2814,7 +2813,6 @@
             colors: ['#002072', '#59D9EB'],
             hAxis: { textPosition: 'none' }
             };
-
 
         // Create and draw the visualization.
         var chart2 = new google.visualization.Table(document.getElementById('T2linestats'));
@@ -2861,8 +2859,6 @@
 
         var charty = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
         charty.draw(data2, options2);
-
-
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable(xGTeam_array);
