@@ -3,6 +3,14 @@
     window.onload = function() {
     var ctx = cnvs.getContext("2d");
     ctx.drawImage(myImg,0,0,fWidth,fLength);
+    var ctx1 = cnvs_1.getContext("2d");
+    ctx1.drawImage(myImg,0,0,fWidth,fLength);
+    var ctx2 = cnvs_2.getContext("2d");
+    ctx2.drawImage(myImg,0,0,fWidth,fLength);
+    var ctx3 = cnvs_3.getContext("2d");
+    ctx3.drawImage(myImg,0,0,fWidth,fLength);
+    var ctx4 = cnvs_4.getContext("2d");
+    ctx4.drawImage(myImg,0,0,fWidth,fLength);
     document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
     }
     window.onbeforeunload = function() {
@@ -2381,7 +2389,75 @@
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
+        
+        // Add shot xG and passed xG to player period charts
+        
+        found_s = 0;
+        found_p = 0;
+        if (Ball_pos == 1) {
+            for (let i=0;i<plT1p_array.length;i++) {
+                if (shooter_id == plT1p_array[i][0]) {
+                    plT1p_array[i][2] = plT1p_array[i][2] + dataxG; // Add xG to shooter id
+                    plT1p_array[i][6]++;
+                    found_s = 1;
+                    if (dataRes == 4) { // if Goal
+                        plT1p_array[i][4]++;
+                    }
+                }
+                if (passer_id == plT1p_array[i][0]) {
+                    plT1p_array[i][3] = plT1p_array[i][3] + dataxG; // Add xG to passer id
+                    plT1p_array[i][7]++;
+                    found_p = 1;
+                    if (dataRes == 4) { // if Goal
+                        plT1p_array[i][5]++;
+                    }
+                }
+            }
+            if (found_s == 0) { // Shooter not found, adding new row to the array
+                gxG = 0;
+                if (dataRes == 4) {gxG = 1};
+                plT1p_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0]);
+            }
+            if (found_p == 0) { // Passer not found, adding new row to the array
+                pxG = 0;
+                if (dataRes == 4) {pxG = 1};
+                plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1]);
+            }
+            plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
+        }
+        else if (Ball_pos == 2) {
+            for (let i=0;i<plT2p_array.length;i++) {
+                if (shooter_id == plT2p_array[i][0]) {
+                    plT2p_array[i][2] = plT2p_array[i][2] + dataxG; // Add xG to shooter id
+                    plT2p_array[i][6]++;
+                    found_s = 1;
+                    if (dataRes == 4) { // if Goal
+                        plT2p_array[i][4]++;
+                    }
+                }
+                if (passer_id == plT2p_array[i][0]) {
+                    plT2p_array[i][3] = plT2p_array[i][3] + dataxG; // Add xG to passer id
+                    plT2p_array[i][7]++;
+                    found_p = 1;
+                    if (dataRes == 4) { // if Goal
+                        plT2p_array[i][5]++;
+                    }
+                }
+            }
+            if (found_s == 0) { // Shooter not found, adding new row to the array
+                gxG = 0;
+                if (dataRes == 4) {gxG = 1};
+                plT2p_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0]);
+            }
+            if (found_p == 0) { // Passer not found, adding new row to the array
+                pxG = 0;
+                if (dataRes == 4) {pxG = 1};
+                plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1]);
+            }
+            plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
+        }
     }
+    
 // TÄSSÄ VAIHEESSA MEILLÄ ON KAIKKI DATA
     function shotTOnetimer() {
         dataType = 0;
@@ -2705,6 +2781,20 @@
         for(i = 1; i < plT1_array.length; i++){
             pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7]]);
         }
+        
+        var pldata_p = new google.visualization.DataTable();
+        pldata_p.addColumn('string', 'Name');
+        pldata_p.addColumn('number', 'Shot xG');
+        pldata_p.addColumn('number', 'Pass xG');
+        pldata_p.addColumn('number', 'Goals');
+        pldata_p.addColumn('number', 'Ass.');
+        pldata_p.addColumn('number', 'Shots');
+        pldata_p.addColumn('number', 'Shotass.');
+
+        for(i = 1; i < plT1p_array.length; i++){
+            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7]]);
+        }
+        
         var options = {
             title: 'Individual stats Team 1',
             bar: {groupWidth: "95%"},
@@ -2717,6 +2807,9 @@
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T1plstats'));
         chart.draw(pldata, options);
+        
+        var chart_per = new google.visualization.Table(document.getElementById('T1plstats_' + periodN));
+        chart_per.draw(pldata_p, options);
 
         // Add sort listener
 
@@ -2724,6 +2817,12 @@
         function(event) {
             pldata.sort([{column: event.column, desc: event.ascending}]);
             chart.draw(pldata, options);
+        });
+        
+        google.visualization.events.addListener(chart_per, 'sort',
+        function(event) {
+            pldata_p.sort([{column: event.column, desc: event.ascending}]);
+            chart_per.draw(pldata_p, options);
         });
 
         // Team 2 Player xG chart
@@ -2740,6 +2839,20 @@
         for(i = 1; i < plT2_array.length; i++){
             pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7]]);
         }
+        
+        var pldata_p = new google.visualization.DataTable();
+        pldata_p.addColumn('string', 'Name');
+        pldata_p.addColumn('number', 'Shot xG');
+        pldata_p.addColumn('number', 'Pass xG');
+        pldata_p.addColumn('number', 'Goals');
+        pldata_p.addColumn('number', 'Ass.');
+        pldata_p.addColumn('number', 'Shots');
+        pldata_p.addColumn('number', 'Shotass.');
+
+        for(i = 1; i < plT2p_array.length; i++){
+            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7]]);
+        }
+        
         var options = {
             title: 'Individual stats Team 2',
             bar: {groupWidth: "95%"},
@@ -2748,14 +2861,12 @@
             hAxis: { textPosition: 'none' }
             };
 
-
-
-
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T2plstats'));
         chart.draw(pldata, options);
 
-
+        var chart_per = new google.visualization.Table(document.getElementById('T2plstats_' + periodN));
+        chart_per.draw(pldata_p, options);
 
         // Add sort listener
 
@@ -2765,8 +2876,11 @@
             chart.draw(pldata, options);
         });
 
-        
-
+        google.visualization.events.addListener(chart_per, 'sort',
+        function(event) {
+            pldata_p.sort([{column: event.column, desc: event.ascending}]);
+            chart_per.draw(pldata_p, options);
+        });
 
         // Linechart Team 1
 

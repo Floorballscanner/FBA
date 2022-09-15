@@ -191,6 +191,8 @@
 
     var plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
     var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
+    var plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
+    var plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
     
     // Data arrays for shot type charts
 
@@ -573,6 +575,10 @@
 
     // html id myCanvas to variable
     var cnvs = document.getElementById("myCanvas");
+    var cnvs_1 = document.getElementById("myCanvas_1");
+    var cnvs_2 = document.getElementById("myCanvas_2");
+    var cnvs_3 = document.getElementById("myCanvas_3");
+    var cnvs_4 = document.getElementById("myCanvas_4");
     // html id shotmenu to variable
     var menu = document.getElementById("shotmenu");
     // html id shottype to variable
