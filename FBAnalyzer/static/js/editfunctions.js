@@ -342,7 +342,7 @@ function editTeamButton() {
                 window.alert("Data saved!");
                 e_team_name.value = "";
                 e_team_id.value = "";
-                e_team_level.selectedIndex = "0";
+                e_team_level.selectedIndex = 0;
                 e_team_isSenior.checked = false;
                 e_team_isMale.checked = false;
                 e_team_isNational.checked = false;
@@ -353,7 +353,7 @@ function editTeamButton() {
                 e_team_isNational.disabled = true;
                 e_team_delete.disabled = true;
                 e_team_button.disabled = true;
-                e_team.selectedIndex = "0";
+                e_team.selectedIndex = 0;
                 level_id = s_team_level.options[s_team_level.selectedIndex].value;
                 updateTeams(e_team, level_id); // Update level option box
             })
@@ -569,7 +569,6 @@ function editPlayerButton() {
                 e_player_id.value = "";
                 e_player_level.selectedIndex = 0;
                 e_player_team.selectedIndex = 0;
-                e_player.selectedIndex = 0;
 
                 e_player_firstname.disabled = true;
                 e_player_lastname.disabled = true;
@@ -608,7 +607,6 @@ function editPlayerButton() {
                 e_player_id.value = "";
                 e_player_level.selectedIndex = 0;
                 e_player_team.selectedIndex = 0;
-                e_player.selectedIndex = 0;
 
                 e_player_firstname.disabled = true;
                 e_player_lastname.disabled = true;
@@ -774,6 +772,7 @@ function updatePlayers() {
                         e_player.append(opt);
                     }
                 }
+                e_player.selectedIndex = 0;
 
         })
             .catch((error) => {
