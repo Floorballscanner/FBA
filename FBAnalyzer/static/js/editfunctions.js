@@ -772,11 +772,11 @@ function updatePlayers() {
                         e_player.append(opt);
                     }
                 }
-                e_player.selectedIndex = 0;
 
         })
             .catch((error) => {
                 console.error('Error:', error);
         });
 
+        e_player.selectedIndex = 0;
 }
