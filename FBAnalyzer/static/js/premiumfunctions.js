@@ -3612,3 +3612,10 @@
 /*        csv_time = arrayToCsv(premTimeData);
         downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');*/
     }
+
+    function t1n() {
+        document.write(name_t1);
+    }
+    function t2n() {
+        document.write(name_t2);
+    }
