@@ -3249,6 +3249,7 @@
         for (let i = 0; i < 20; i++) {
             name_t1_id[i].innerHTML = name_t1;
         }
+        document.getElementById("TeamL").innerHTML = name_t1;
     }
 
     function set_t2_names() {
@@ -3256,6 +3257,7 @@
         for (let i = 0; i < 20; i++) {
             name_t2_id[i].innerHTML = name_t2;
         }
+        document.getElementById("TeamR").innerHTML = name_t2;
     }
 
     function checkLive() {
