@@ -143,7 +143,7 @@
     var n_t2_18 = document.getElementById("name_t2_18");
     var n_t2_19 = document.getElementById("name_t2_19");
     var n_t2_20 = document.getElementById("name_t2_20");
-    var n_t2_20 = document.getElementById("name_t2_21");
+    var n_t2_21 = document.getElementById("name_t2_21");
     
     var name_t2_id = [n_t2_1, n_t2_2, n_t2_3, n_t2_4, n_t2_5, n_t2_6, n_t2_7, n_t2_8,
                  n_t2_9, n_t2_10, n_t2_11, n_t2_12, n_t2_13, n_t2_14, n_t2_15,
