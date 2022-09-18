@@ -286,7 +286,7 @@
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
-                document.getElementById("ck2a").disabled = true;
+                // document.getElementById("ck2a").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 
@@ -828,19 +828,23 @@
             + document.documentElement.scrollTop;
         }
 
-        stype.style.display = "block";
-        if (PosY <= 4*fLength/5)
-        {
-            stype.style.top = PosY + "px";
-        }
-        else
-        {
-            stype.style.top = (PosY-(fLength/4)) + "px";
-        }
-        stype.style.left = PosX + "px";
+        if (shot_on == 0) { // If shot tag process is not on
 
-        PosX = PosX - ImgPos[0];
-        PosY = PosY - ImgPos[1];
+            shot_on = 1; // Shot tag process on
+            stype.style.display = "block";
+            if (PosY <= 4*fLength/5)
+            {
+                stype.style.top = PosY + "px";
+            }
+            else
+            {
+                stype.style.top = (PosY-(fLength/4)) + "px";
+            }
+            stype.style.left = PosX + "px";
+
+            PosX = PosX - ImgPos[0];
+            PosY = PosY - ImgPos[1];
+        }
     }
 // Tässä välissä saadaan result
     function shotMissed() {
@@ -929,10 +933,6 @@
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
-
-
-
-
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
@@ -940,10 +940,6 @@
                 b = Number(txGp_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_1.innerHTML = a;
-
-
-
-
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
@@ -1022,8 +1018,6 @@
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
-
-
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1110,8 +1104,6 @@
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
-
-
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_2.innerHTML = a;
@@ -1124,7 +1116,6 @@
                 window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
-
 
             }
         }
@@ -1185,7 +1176,6 @@
 
                 xfT2_g[7].innerHTML = xGfT2_g[7];
 
-                
                 dataxG = dxG;
                 console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
@@ -1198,8 +1188,6 @@
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
-
-
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -2107,7 +2095,6 @@
         }
 
         // Shot menu hidden, shooter menu visible
-        console.log("Hide shot menu")
         menu.style.display = "none";
         shotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2), dataAngle.toFixed(2), dataxG.toFixed(2), dataPp, dataSh]);
 
@@ -2197,6 +2184,8 @@
             premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+
+            shot_on = 0; // End the shot tag process
         }
     }
 
@@ -2342,8 +2331,10 @@
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
+        shot_on = 0; // End the shot tag process
+
         // Add shot xG and passed xG to player charts
-        // var plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists']];
+
         found_s = 0;
         found_p = 0;
         if (Ball_pos == 1) {

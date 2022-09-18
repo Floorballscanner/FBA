@@ -43,6 +43,7 @@
     var shooter_select = 1; // If user wants to tag shooter
     var user_id = JSON.parse(document.getElementById('user_id').textContent); // user id number
     var game_id = 0; // game id number
+    var shot_on = 0; // Shot tag process on/off
     
     // Premium game level, team, and player select box elements
 
