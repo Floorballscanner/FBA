@@ -116,10 +116,12 @@
     var n_t1_17 = document.getElementById("name_t1_17");
     var n_t1_18 = document.getElementById("name_t1_18");
     var n_t1_19 = document.getElementById("name_t1_19");
+    var n_t1_20 = document.getElementById("name_t1_20");
+    var n_t1_21 = document.getElementById("name_t1_21");
     
     var name_t1_id = [n_t1_1, n_t1_2, n_t1_3, n_t1_4, n_t1_5, n_t1_6, n_t1_7, n_t1_8,
                  n_t1_9, n_t1_10, n_t1_11, n_t1_12, n_t1_13, n_t1_14, n_t1_15,
-                 n_t1_16, n_t1_17, n_t1_18, n_t1_19];
+                 n_t1_16, n_t1_17, n_t1_18, n_t1_19, n_t1_20, n_t1_21];
 
     var n_t2_1 = document.getElementById("name_t2_1");
     var n_t2_2 = document.getElementById("name_t2_2");
@@ -140,10 +142,12 @@
     var n_t2_17 = document.getElementById("name_t2_17");
     var n_t2_18 = document.getElementById("name_t2_18");
     var n_t2_19 = document.getElementById("name_t2_19");
+    var n_t2_20 = document.getElementById("name_t2_20");
+    var n_t2_21 = document.getElementById("name_t2_21");
     
     var name_t2_id = [n_t2_1, n_t2_2, n_t2_3, n_t2_4, n_t2_5, n_t2_6, n_t2_7, n_t2_8,
                  n_t2_9, n_t2_10, n_t2_11, n_t2_12, n_t2_13, n_t2_14, n_t2_15,
-                 n_t2_16, n_t2_17, n_t2_18, n_t2_19];
+                 n_t2_16, n_t2_17, n_t2_18, n_t2_19, n_t2_20, n_t2_21];
 
     // Google charts
 

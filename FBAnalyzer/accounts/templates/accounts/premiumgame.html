@@ -50,7 +50,9 @@ It extends app_layout.html with Django
     <div class="row justify-content-center">
         <div class="col-sm-4">
             <div class="shot-map">
+                <p><span id="name_t1_21">Team 1 attack</span> line on court</p>
                 <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
+                <p><span id="name_t2_21">Team 2 attack</span> line on court</p>
             </div>
         </div>
         <div class="col-sm-4" style="Padding-top: 10px;">
@@ -99,7 +101,7 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 30px;">
                 <div class="pos-input">
                     <p>Position</p>
-                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" alt="order" style="Padding: 0px">
+                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="50" alt="order" style="Padding: 0px">
                     <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
                         <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary"><span id="name_t2_2">Team 2</span></button>
                     </div>
