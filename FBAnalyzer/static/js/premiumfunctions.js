@@ -812,25 +812,25 @@
 
     function GetCoordinates(e)
     {
-        var ImgPos;
-        ImgPos = FindPosition(cnvs);
-        if (!e) var e = window.event;
-        if (e.pageX || e.pageY)
-        {
-        PosX = e.pageX;
-        PosY = e.pageY;
-        }
-        else if (e.clientX || e.clientY)
-        {
-          PosX = e.clientX + document.body.scrollLeft
-            + document.documentElement.scrollLeft;
-          PosY = e.clientY + document.body.scrollTop
-            + document.documentElement.scrollTop;
-        }
-
         if (shot_on == 0) { // If shot tag process is not on
 
             shot_on = 1; // Shot tag process on
+            var ImgPos;
+            ImgPos = FindPosition(cnvs);
+            if (!e) var e = window.event;
+            if (e.pageX || e.pageY)
+            {
+            PosX = e.pageX;
+            PosY = e.pageY;
+            }
+            else if (e.clientX || e.clientY)
+            {
+              PosX = e.clientX + document.body.scrollLeft
+                + document.documentElement.scrollLeft;
+              PosY = e.clientY + document.body.scrollTop
+                + document.documentElement.scrollTop;
+            }
+
             stype.style.display = "block";
             if (PosY <= 4*fLength/5)
             {
