@@ -3625,3 +3625,6 @@
     function t2n() {
         document.write(name_t2);
     }
+    function Print() {
+        window.print();
+    }
