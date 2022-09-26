@@ -889,31 +889,36 @@
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+                undo_array.push([xGf_p[line_on - 1],dxG])
 
                 xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+                undo_array.push([xGf_p[7],dxG])
 
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+                undo_array.push([xGf_g[line_on - 1],dxG])
 
-                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
-
+                xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
+                undo_array.push([xGf_g[7],dxG])
                 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+                undo_array.push([xGaT2_p[line_on_2 - 1],dxG])
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+                undo_array.push([xGaT2_p[7],dxG])
 
                 xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                undo_array.push([xGaT2_g[line_on_2 - 1],dxG])
 
-                xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
-
+                xGaT2_g[7] = Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+                undo_array.push([xGaT2_g[7],dxG])
 
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
 
                 xf_p[7].innerHTML = xGf_p[7];
 
-                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];;
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
 
                 xf_g[7].innerHTML = xGf_g[7];
-
                 
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
@@ -925,7 +930,6 @@
 
                 
                 dataxG = dxG;
-                console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -949,6 +953,11 @@
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
+                undo_array.push([window["stxGT"+Ball_pos+"Teamg_array"][dataType],dataxG])
+                undo_array.push([window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType],dataxG])
+                undo_array.push([window["stxGT"+Ball_pos+"Teamp_array"][dataType],dataxG])
+                undo_array.push([window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType],dataxG])
 
             }
         }
@@ -2482,14 +2491,15 @@
     function shotTOnetimer() {
         dataType = 0;
         if (line_on < 4 && line_on_2 < 4) {
-            console.log("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamg_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-
-
+            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2507,6 +2517,11 @@
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+
+            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
 
         }
         stype.style.display = "none";
@@ -2526,7 +2541,10 @@
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-
+            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
 
         }
         stype.style.display = "none";
@@ -2545,6 +2563,12 @@
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+
+            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
+
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2562,6 +2586,12 @@
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
+
+            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
+
         }
         stype.style.display = "none";
         menu.style.display = "block";
