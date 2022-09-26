@@ -889,28 +889,28 @@
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
-                undo_array.push([xGf_p[line_on - 1],dxG])
+                // undo_array.push([xGf_p[line_on - 1],dxG])
 
                 xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
-                undo_array.push([xGf_p[7],dxG])
+                // undo_array.push([xGf_p[7],dxG])
 
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
-                undo_array.push([xGf_g[line_on - 1],dxG])
+                // undo_array.push([xGf_g[line_on - 1],dxG])
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
-                undo_array.push([xGf_g[7],dxG])
+                // undo_array.push([xGf_g[7],dxG])
                 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                undo_array.push([xGaT2_p[line_on_2 - 1],dxG])
+                // undo_array.push([xGaT2_p[line_on_2 - 1],dxG])
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
-                undo_array.push([xGaT2_p[7],dxG])
+                // undo_array.push([xGaT2_p[7],dxG])
 
                 xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                undo_array.push([xGaT2_g[line_on_2 - 1],dxG])
+                // undo_array.push([xGaT2_g[line_on_2 - 1],dxG])
 
                 xGaT2_g[7] = Math.round((xGaT2_g[7] + dxG) * 100) / 100;
-                undo_array.push([xGaT2_g[7],dxG])
+                // undo_array.push([xGaT2_g[7],dxG])
 
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
 
@@ -954,10 +954,10 @@
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
-                undo_array.push([window["stxGT"+Ball_pos+"Teamg_array"][dataType],dataxG])
-                undo_array.push([window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType],dataxG])
-                undo_array.push([window["stxGT"+Ball_pos+"Teamp_array"][dataType],dataxG])
-                undo_array.push([window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType],dataxG])
+                // undo_array.push([window["stxGT"+Ball_pos+"Teamg_array"][dataType],dataxG])
+                // undo_array.push([window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType],dataxG])
+                // undo_array.push([window["stxGT"+Ball_pos+"Teamp_array"][dataType],dataxG])
+                // undo_array.push([window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType],dataxG])
 
             }
         }
@@ -2496,10 +2496,11 @@
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
+            temp = Object.keys({eval("stT"+Ball_pos+"Teamg_array["+dataType+"]")})[0];
+            // undo_array.push([,1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2518,10 +2519,10 @@
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
 
         }
         stype.style.display = "none";
@@ -2541,10 +2542,10 @@
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
 
         }
         stype.style.display = "none";
@@ -2564,10 +2565,10 @@
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
 
         }
         stype.style.display = "none";
@@ -2587,10 +2588,10 @@
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-            undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
+            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
 
         }
         stype.style.display = "none";
