@@ -310,7 +310,8 @@
 
                 data = { "date" : document.getElementById("select-date").value,
                         "user" : user_id,
-                        "teams" : [s_T1.value, s_T2.value]
+                        "teams" : [s_T1.value, s_T2.value],
+                        "game_data" : data_object,
                 };
 
                 fetch("https://fbscanner.io/apis/games/" , {
@@ -889,28 +890,20 @@
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
-                // undo_array.push([xGf_p[line_on - 1],dxG])
 
                 xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
-                // undo_array.push([xGf_p[7],dxG])
 
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
-                // undo_array.push([xGf_g[line_on - 1],dxG])
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
-                // undo_array.push([xGf_g[7],dxG])
                 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
-                // undo_array.push([xGaT2_p[line_on_2 - 1],dxG])
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
-                // undo_array.push([xGaT2_p[7],dxG])
 
                 xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
-                // undo_array.push([xGaT2_g[line_on_2 - 1],dxG])
 
                 xGaT2_g[7] = Math.round((xGaT2_g[7] + dxG) * 100) / 100;
-                // undo_array.push([xGaT2_g[7],dxG])
 
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
 
@@ -953,11 +946,6 @@
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
-
-                // undo_array.push([window["stxGT"+Ball_pos+"Teamg_array"][dataType],dataxG])
-                // undo_array.push([window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType],dataxG])
-                // undo_array.push([window["stxGT"+Ball_pos+"Teamp_array"][dataType],dataxG])
-                // undo_array.push([window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType],dataxG])
 
             }
         }
@@ -1279,14 +1267,12 @@
                 xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
-
                 
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
-
 
 
                 b = Number(txG_1.innerHTML);
@@ -1396,14 +1382,11 @@
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
-
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
-
-
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -2495,12 +2478,6 @@
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
-
-            temp = Object.keys({eval("stT"+Ball_pos+"Teamg_array["+dataType+"]")})[0];
-            // undo_array.push([,1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2518,11 +2495,6 @@
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
-
-            // undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
 
         }
         stype.style.display = "none";
@@ -2542,11 +2514,6 @@
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-            // undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
-
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2565,11 +2532,6 @@
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
 
-            // undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
-
         }
         stype.style.display = "none";
         menu.style.display = "block";
@@ -2587,11 +2549,6 @@
             eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"Teamp_array["+dataType+"]++;");
             eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]++;");
-
-            // undo_array.push([eval("stT"+Ball_pos+"Teamg_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"g_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"Teamp_array["+dataType+"]"),1])
-            // undo_array.push([eval("stT"+Ball_pos+"L"+line_on+"p_array["+dataType+"]"),1])
 
         }
         stype.style.display = "none";
@@ -3658,4 +3615,373 @@
     }
     function Print() {
         window.print();
+    }
+    function updateSaveData() {
+    
+        undo_object = data_object;
+
+        data_object = {
+
+            "created": user_id,
+            "tgt_1" : tgt_1.innerHTML,
+            "tgt_2" : tgt_2.innerHTML,
+            "txG_1" : txG_1.innerHTML,
+            "txG_2" : txG_2.innerHTML,
+            "tgtp_1" : tgtp_1.innerHTML,
+            "tgtp_2" : tgtp_2.innerHTML,
+            "txGp_1" : txGp_1.innerHTML,
+            "txGp_2" : txGp_2.innerHTML,
+            "line_on" : line_on,
+            "line_on_2" : line_on_2,
+            "started" : started,
+            "is_on" : is_on,
+            "counter" : counter,
+            "gameCounter" : gameCounter,
+            "periodN" : periodN,
+            "Ball_pos" : Ball_pos,
+            "Order" : Order,
+            "PosTime" : PosTime,
+            "PosTime_2" : PosTime_2,
+            "LineTime" : LineTime,
+            "LineTime_2" : LineTime_2,
+            "shiftNo" : shiftNo,
+            "shiftNo_2" : shiftNo_2,
+            "shiftPos" : shiftPos,
+            "shiftPos_2" : shiftPos_2,
+            "data_url" : data_url,
+            "today" : today,
+            "live" : live,
+            "shooter_select" : shooter_select,
+            "user_id" : user_id,
+            "game_id" : game_id,
+            "shot_on" : shot_on,
+            "name_t1" : name_t1,
+            "name_t2" : name_t2,
+            "shotData" : shotData,
+            "premShotData" : premShotData,
+            "dataShot" : dataShot,
+            "dataRes" : dataRes,
+            "dataxG" : dataxG,
+            "dataType" : dataType,
+            "dataDis" : dataDis,
+            "dataAngle" : dataAngle,
+            "dataPp" : dataPp,
+            "dataSh" : dataSh,
+            "shooter_id" : shooter_id,
+            "passer_id" : passer_id,
+            "shooter_str" : shooter_str,
+            "passer_str" : passer_str,
+            "xGTeam_array" : xGTeam_array,
+            "xGL1_array" : xGL1_array,
+            "xGL2_array" : xGL2_array,
+            "xGL3_array" : xGL3_array,
+            "xGTeamT2_array" : xGTeamT2_array,
+            "xGL1T2_array" : xGL1T2_array,
+            "xGL2T2_array" : xGL2T2_array,
+            "xGL3T2_array" : xGL3T2_array,
+            "posTeam_array" : posTeam_array,
+            "posTeamT2_array" : posTeamT2_array,
+            "plT1_array" : plT1_array,
+            "plT2_array" : plT2_array,
+            "plT1p_array" : plT1p_array,
+            "plT2p_array" : plT2p_array,
+            "stT1Teamg_array" : stT1Teamg_array,
+            "stT2Teamg_array" : stT2Teamg_array,
+            "stT1Teamp_array" : stT1Teamp_array,
+            "stT2Teamp_array" : stT2Teamp_array,
+            "stT1L1g_array" : stT1L1g_array,
+            "stT2L1g_array" : stT2L1g_array,
+            "stT1L1p_array" : stT1L1p_array,
+            "stT2L1p_array" : stT2L1p_array,
+            "stT1L2g_array" : stT1L2g_array,
+            "stT2L2g_array" : stT2L2g_array,
+            "stT1L2p_array" : stT1L2p_array,
+            "stT2L2p_array" : stT2L2p_array,
+            "stT1L3g_array" : stT1L3g_array,
+            "stT2L3g_array" : stT2L3g_array,
+            "stT1L3p_array" : stT1L3p_array,
+            "stT2L3p_array" : stT2L3p_array,
+            "stxGT1Teamg_array" : stxGT1Teamg_array,
+            "stxGT2Teamg_array" : stxGT2Teamg_array,
+            "stxGT1Teamp_array" : stxGT1Teamp_array,
+            "stxGT2Teamp_array" : stxGT2Teamp_array,
+            "stxGT1L1g_array" : stxGT1L1g_array,
+            "stxGT2L1g_array" : stxGT2L1g_array,
+            "stxGT1L1p_array" : stxGT1L1p_array,
+            "stxGT2L1p_array" : stxGT2L1p_array,
+            "stxGT1L2g_array" : stxGT1L2g_array,
+            "stxGT2L2g_array" : stxGT2L2g_array,
+            "stxGT1L2p_array" : stxGT1L2p_array,
+            "stxGT2L2p_array" : stxGT2L2p_array,
+            "stxGT1L3g_array" : stxGT1L3g_array,
+            "stxGT2L3g_array" : stxGT2L3g_array,
+            "stxGT1L3p_array" : stxGT1L3p_array,
+            "stxGT2L3p_array" : stxGT2L3p_array,
+            "staT1Teamg_array" : staT1Teamg_array,
+            "staT2Teamg_array" : staT2Teamg_array,
+            "staT1Teamp_array" : staT1Teamp_array,
+            "staT2Teamp_array" : staT2Teamp_array,
+            "staT1L1g_array" : staT1L1g_array,
+            "staT2L1g_array" : staT2L1g_array,
+            "staT1L1p_array" : staT1L1p_array,
+            "staT2L1p_array" : staT2L1p_array,
+            "staT1L2g_array" : staT1L2g_array,
+            "staT2L2g_array" : staT2L2g_array,
+            "staT1L2p_array" : staT1L2p_array,
+            "staT2L2p_array" : staT2L2p_array,
+            "staT1L3g_array" : staT1L3g_array,
+            "staT2L3g_array" : staT2L3g_array,
+            "staT1L3p_array" : staT1L3p_array,
+            "staT2L3p_array" : staT2L3p_array,
+            "staxGT1Teamg_array" : staxGT1Teamg_array,
+            "staxGT2Teamg_array" : staxGT2Teamg_array,
+            "staxGT1Teamp_array" : staxGT1Teamp_array,
+            "staxGT2Teamp_array" : staxGT2Teamp_array,
+            "staxGT1L1g_array" : staxGT1L1g_array,
+            "staxGT2L1g_array" : staxGT2L1g_array,
+            "staxGT1L1p_array" : staxGT1L1p_array,
+            "staxGT2L1p_array" : staxGT2L1p_array,
+            "staxGT1L2g_array" : staxGT1L2g_array,
+            "staxGT2L2g_array" : staxGT2L2g_array,
+            "staxGT1L2p_array" : staxGT1L2p_array,
+            "staxGT2L2p_array" : staxGT2L2p_array,
+            "staxGT1L3g_array" : staxGT1L3g_array,
+            "staxGT2L3g_array" : staxGT2L3g_array,
+            "staxGT1L3p_array" : staxGT1L3p_array,
+            "staxGT2L3p_array" : staxGT2L3p_array,
+            "TocL1p" : TocL1p,
+            "TocL2" : TocL2p,
+            "TocL3p" : TocL3p,
+            "TocL1g" : TocL1g,
+            "TocL2g" : TocL2g,
+            "TocL3g" : TocL3g,
+            "TocPP1p" : TocPP1p,
+            "TocPP2p" : TocPP2p,
+            "TocSH1p" : TocSH1p,
+            "TocSH2p" : TocSH2p,
+            "TocPP1g" : TocPP1g,
+            "TocPP2g" : TocPP2g,
+            "TocSH1g" : TocSH1g,
+            "TocSH2g" : TocSH2g,
+            "TocTeam_g" : TocTeam_g,
+            "TocTeam_p" : TocTeam_p,
+            "TocL1T2p" : TocL1T2p,
+            "TocL2T2p" : TocL2T2p,
+            "TocL3T2p" : TocL3T2p,
+            "TocL1T2g" : TocL1T2g,
+            "TocL2T2g" : TocL2T2g,
+            "TocL3T2g" : TocL3T2g,
+            "TocPP1T2p" : TocPP1T2p,
+            "TocPP2T2p" : TocPP2T2p,
+            "TocSH1T2p" : TocSH1T2p,
+            "TocSH2T2p" : TocSH2T2p,
+            "TocPP1T2g" : TocPP1T2g,
+            "TocPP2T2g" : TocPP2T2g,
+            "TocSH1T2g" : TocSH1T2g,
+            "TocSH2T2g" : TocSH2T2g,
+            "TocTeamT2_g" : TocTeamT2_g,
+            "TocTeamT2_p" : TocTeamT2_p,
+            "NotL1p" : NotL1p,
+            "NotL2p" : NotL2p,
+            "NotL3p" : NotL3p,
+            "NotL1g" : NotL1g,
+            "NotL2g" : NotL2g,
+            "NotL3g" : NotL3g,
+            "NotPP1p" : NotPP1p,
+            "NotPP2p" : NotPP2p,
+            "NotSH1p" : NotSH1p,
+            "NotSH2p" : NotSH2p,
+            "NotPP1g" : NotPP1g,
+            "NotPP2g" : NotPP2g,
+            "NotSH1g" : NotSH1g,
+            "NotSH2g" : NotSH2g,
+            "NotTeam_g" : NotTeam_g,
+            "NotTeam_p" : NotTeam_p,
+            "NotL1T2p" : NotL1T2p,
+            "NotL2T2p" : NotL2T2p,
+            "NotL3T2p" : NotL3T2p,
+            "NotL1T2g" : NotL1T2g,
+            "NotL2T2g" : NotL2T2g,
+            "NotL3T2g" : NotL3T2g,
+            "NotPP1T2p" : NotPP1T2p,
+            "NotPP2T2p" : NotPP2T2p,
+            "NotSH1T2p" : NotSH1T2p,
+            "NotSH2T2p" : NotSH2T2p,
+            "NotPP1T2g" : NotPP1T2g,
+            "NotPP2T2g" : NotPP2T2g,
+            "NotPP2T2g" : NotSH1T2g,
+            "NotSH2T2g" : NotSH2T2g,
+            "NotTeamT2_g" : NotTeamT2_g,
+            "NotTeamT2_p" : NotTeamT2_p,
+            "NotnoL1p" : NotnoL1p,
+            "NotnoL2p" : NotnoL2p,
+            "NotnoL3p" : NotnoL3p,
+            "NotnoL1g" : NotnoL1g,
+            "NotnoL2g" : NotnoL2g,
+            "NotnoL3g" : NotnoL3g,
+            "NotnoPP1p" : NotnoPP1p,
+            "NotnoPP2p" : NotnoPP2p,
+            "NotnoSH1p" : NotnoSH1p,
+            "NotnoSH2p" : NotnoSH2p,
+            "NotnoPP1g" : NotnoPP1g,
+            "NotnoPP2g" : NotnoPP2g,
+            "NotnoSH1g" : NotnoSH1g,
+            "NotnoSH2g" : NotnoSH2g,
+            "NotnoTeam_g" : NotnoTeam_g,
+            "NotnoTeam_p" : NotnoTeam_p,
+            "NotnoL1T2p" : NotnoL1T2p,
+            "NotnoL2T2p" : NotnoL2T2p,
+            "NotnoL3T2p" : NotnoL3T2p,
+            "NotnoL1T2g" : NotnoL1T2g,
+            "NotnoL2T2g" : NotnoL2T2g,
+            "NotnoL3T2g" : NotnoL3T2g,
+            "NotnoPP1T2p" : NotnoPP1T2p,
+            "NotnoPP2T2p" : NotnoPP2T2p,
+            "NotnoSH1T2p" : NotnoSH1T2p,
+            "NotnoSH2T2p" : NotnoSH2T2p,
+            "NotnoPP1T2g" : NotnoPP1T2g,
+            "NotnoPP2T2g" : NotnoPP2T2g,
+            "NotnoSH1T2g" : NotnoSH1T2g,
+            "NotnoSH2T2g" : NotnoSH2T2g,
+            "NotnoTeamT2_g" : NotnoTeamT2_g,
+            "NotnoTeamT2_p" : NotnoTeamT2_p,
+            "PosL1p" : PosL1p,
+            "PosL2p" : PosL2p,
+            "PosL3p" : PosL3p,
+            "PosTeam_p" : PosTeam_p,
+            "PosL1g" : PosL1g,
+            "PosL2g" : PosL2g,
+            "PosL3g" : PosL3g,
+            "PosTeam_g" : PosTeam_g,
+            "PosPP1g" : PosPP1g,
+            "PosPP1p" : PosPP1p,
+            "PosSH1p" : PosSH1p,
+            "PosSH1g" : PosSH1g,
+            "PosPP2g" : PosPP2g,
+            "PosPP2p" : PosPP2p,
+            "PosSH2p" : PosSH2p,
+            "PosSH2g" : PosSH2g,
+            "PosL1T2p" : PosL1T2p,
+            "PosL2T2p" : PosL2T2p,
+            "PosL3T2p" : PosL3T2p,
+            "PosTeamT2_p" : PosTeamT2_p,
+            "PosL1T2g" : PosL1T2g,
+            "PosL2T2g" : PosL2T2g,
+            "PosL3T2g" : PosL3T2g,
+            "PosTeamT2_g" : PosTeamT2_g,
+            "PosPP1T2g" : PosPP1T2g,
+            "PosPP1T2p" : PosPP1T2p,
+            "PosSH1T2p" : PosSH1T2p,
+            "PosSH1T2g" : PosSH1T2g,
+            "PosPP2T2g" : PosPP2T2g,
+            "PosPP2T2p" : PosPP2T2p,
+            "PosSH2T2p" : PosSH2T2p,
+            "PosSH2T2g" : PosSH2T2g,
+            "NosL1p" : NosL1p,
+            "NosL2p" : NosL2p,
+            "NosL3p" : NosL3p,
+            "NosTeam_p" : NosTeam_p,
+            "NosL1g" : NosL1g,
+            "NosL2g" : NosL2g,
+            "NosL3g" : NosL3g,
+            "NosTeam_g" : NosTeam_g,
+            "NosPP1g" : NosPP1g,
+            "NosPP1p" : NosPP1p,
+            "NosSH1p" : NosSH1p,
+            "NosSH1g" : NosSH1g,
+            "NosPP2g" : NosPP2g,
+            "NosPP2p" : NosPP2p,
+            "NosSH2p" : NosSH2p,
+            "NosSH2g" : NosSH2g,
+            "NosL1T2p" : NosL1T2p,
+            "NosL2T2p" : NosL2T2p,
+            "NosL3T2p" : NosL3T2p,
+            "NosTeamT2_p" : NosTeamT2_p,
+            "NosL1T2g" : NosL1T2g,
+            "NosL2T2g" : NosL2T2g,
+            "NosL3T2g" : NosL3T2g,
+            "NosTeamT2_g" : NosTeamT2_g,
+            "NosPP1T2g" : NosPP1T2g,
+            "NosPP1T2p" : NosPP1T2p,
+            "NosSH1T2p" : NosSH1T2p,
+            "NosSH1T2g" : NosSH1T2g,
+            "NosPP2T2g" : NosPP2T2g,
+            "NosPP2T2p" : NosPP2T2p,
+            "NosSH2T2p" : NosSH2T2p,
+            "NosSH2T2g" : NosSH2T2g,
+            "xGfL1p" : xGfL1p,
+            "xGfL2p" : xGfL2p,
+            "xGfL3p" : xGfL3p,
+            "xGfTeam_p" : xGfTeam_p,
+            "xGfL1g" : xGfL1g,
+            "xGfL2g" : xGfL2g,
+            "xGfL3g" : xGfL3g,
+            "xGfTeam_g" : xGfTeam_g,
+            "xGfPP1g" : xGfPP1g,
+            "xGfPP1p" : xGfPP1p,
+            "xGfSH1p" : xGfSH1p,
+            "xGfSH1g" : xGfSH1g,
+            "xGfPP2g" : xGfPP2g,
+            "xGfPP2p" : xGfPP2p,
+            "xGfSH2p" : xGfSH2p,
+            "xGfSH2g" : xGfSH2g,
+            "xGaL1p" : xGaL1p,
+            "xGaL2p" : xGaL2p,
+            "xGaL3p" : xGaL3p,
+            "xGaTeam_p" : xGaTeam_p,
+            "xGaL1g" : xGaL1g,
+            "xGaL2g" : xGaL2g,
+            "xGaL3g" : xGaL3g,
+            "xGaTeam_g" : xGaTeam_g,
+            "xGaPP1g" : xGaPP1g,
+            "xGaPP1p" : xGaPP1p,
+            "xGaSH1p" : xGaSH1p,
+            "xGaSH1g" : xGaSH1g,
+            "xGaPP2g" : xGaPP2g,
+            "xGaPP2p" : xGaPP2p,
+            "xGaSH2p" : xGaSH2p,
+            "xGaSH2g" : xGaSH2g,
+            "xGfL1T2p" : xGfL1T2p,
+            "xGfL2T2p" : xGfL2T2p,
+            "xGfL3T2p" : xGfL3T2p,
+            "xGfTeamT2_p" : xGfTeamT2_p,
+            "xGfL1T2g" : xGfL1T2g,
+            "xGfL2T2g" : xGfL2T2g,
+            "xGfL3T2g" : xGfL3T2g,
+            "xGfTeamT2_g" : xGfTeamT2_g,
+            "xGfPP1T2g" : xGfPP1T2g,
+            "xGfPP1T2p" : xGfPP1T2p,
+            "xGfSH1T2p" : xGfSH1T2p,
+            "xGfSH1T2g" : xGfSH1T2g,
+            "xGfPP2T2g" : xGfPP2T2g,
+            "xGfPP2T2p" : xGfPP2T2p,
+            "xGfSH2T2p" : xGfSH2T2p,
+            "xGfSH2T2g" : xGfSH2T2g,
+            "xGaL1T2p" : xGaL1T2p,
+            "xGaL2T2p" : xGaL2T2p,
+            "xGaL3T2p" : xGaL3T2p,
+            "xGaTeamT2_p" : xGaTeamT2_p,
+            "xGaL1T2g" : xGaL1T2g,
+            "xGaL2T2g" : xGaL2T2g,
+            "xGaL3T2g" : xGaL3T2g,
+            "xGaTeamT2_g" : xGaTeamT2_g,
+            "xGaPP1T2g" : xGaPP1T2g,
+            "xGaPP1T2p" : xGaPP1T2p,
+            "xGaSH1T2p" : xGaSH1T2p,
+            "xGaSH1T2g" : xGaSH1T2g,
+            "xGaPP2T2g" : xGaPP2T2g,
+            "xGaPP2T2p" : xGaPP2T2p,
+            "xGaSH2T2p" : xGaSH2T2p,
+            "xGaSH2T2g" : xGaSH2T2g,
+            "cnvs_url" : cnvs.toDataURL();
+            "cnvs_1_url" : cnvs_1.toDataURL();
+            "cnvs_2_url" : cnvs_2.toDataURL();
+            "cnvs_3_url" : cnvs_3.toDataURL();
+            "cnvs_4_url" : cnvs_4.toDataURL();
+        
+        }
+    
+    }
+    function undoButton() {
+    
     }

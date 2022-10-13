@@ -56,6 +56,7 @@ class Game(models.Model):
     date = models.DateField()
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     teams = models.ManyToManyField(Team)
+    game_data = models.JSONField()
 
 
     def __str__(self):
