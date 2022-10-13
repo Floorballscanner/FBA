@@ -2333,6 +2333,8 @@
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
+        updateSaveData(); // Update data and save to background
+
         shot_on = 0; // End the shot tag process
 
         // Add shot xG and passed xG to player charts
@@ -3980,6 +3982,26 @@
             "cnvs_4_url" : cnvs_4.toDataURL(),
         
         }
+
+        data = {"game_data" : data_object}
+
+        fetch("https://fbscanner.io/apis/games/" + game_id + "/", {
+
+          method: 'PATCH', // or 'PUSH'
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+          },
+          body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+    })
+        .catch((error) => {
+          console.error('Error:', error);
+    });
     
     }
     function undoButton() {
