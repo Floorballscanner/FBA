@@ -3973,11 +3973,11 @@
             "xGaPP2T2p" : xGaPP2T2p,
             "xGaSH2T2p" : xGaSH2T2p,
             "xGaSH2T2g" : xGaSH2T2g,
-            "cnvs_url" : cnvs.toDataURL();
-            "cnvs_1_url" : cnvs_1.toDataURL();
-            "cnvs_2_url" : cnvs_2.toDataURL();
-            "cnvs_3_url" : cnvs_3.toDataURL();
-            "cnvs_4_url" : cnvs_4.toDataURL();
+            "cnvs_url" : cnvs.toDataURL(),
+            "cnvs_1_url" : cnvs_1.toDataURL(),
+            "cnvs_2_url" : cnvs_2.toDataURL(),
+            "cnvs_3_url" : cnvs_3.toDataURL(),
+            "cnvs_4_url" : cnvs_4.toDataURL(),
         
         }
     
