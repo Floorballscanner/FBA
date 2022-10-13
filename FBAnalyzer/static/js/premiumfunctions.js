@@ -2333,7 +2333,7 @@
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
-        updateSaveData(); // Update data and save to background
+       // updateSaveData(); // Update data and save to background
 
         shot_on = 0; // End the shot tag process
 
