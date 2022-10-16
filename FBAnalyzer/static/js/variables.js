@@ -24,11 +24,6 @@
     var PosY = 0;
     var myImg = new Image();
     myImg.src = "/static/field.png";
-    var ctx = cnvs.getContext("2d");
-    var ctx1 = cnvs_1.getContext("2d");
-    var ctx2 = cnvs_2.getContext("2d");
-    var ctx3 = cnvs_3.getContext("2d");
-    var ctx4 = cnvs_4.getContext("2d");
     var PosTime = 0; // Possession time in counters Team 1
     var PosTime_2 = 0; // Possession time in counters Team 2
     var LineTime = 0; // Line on court time in counters Team 1
@@ -589,6 +584,11 @@
     var cnvs_2 = document.getElementById("myCanvas_2");
     var cnvs_3 = document.getElementById("myCanvas_3");
     var cnvs_4 = document.getElementById("myCanvas_4");
+    var ctx = cnvs.getContext("2d");
+    var ctx1 = cnvs_1.getContext("2d");
+    var ctx2 = cnvs_2.getContext("2d");
+    var ctx3 = cnvs_3.getContext("2d");
+    var ctx4 = cnvs_4.getContext("2d");
     // html id shotmenu to variable
     var menu = document.getElementById("shotmenu");
     // html id shottype to variable
