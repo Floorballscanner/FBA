@@ -24,6 +24,7 @@
     var PosY = 0;
     var myImg = new Image();
     myImg.src = "/static/field.png";
+    var img,img1,img2,img3,img4 = new Image();
     var PosTime = 0; // Possession time in counters Team 1
     var PosTime_2 = 0; // Possession time in counters Team 2
     var LineTime = 0; // Line on court time in counters Team 1
