@@ -1,17 +1,12 @@
 
     // Load and draw the shot map image when the html-page is loaded
     window.onload = function() {
-    var ctx = cnvs.getContext("2d");
-    ctx.drawImage(myImg,0,0,fWidth,fLength);
-    var ctx1 = cnvs_1.getContext("2d");
-    ctx1.drawImage(myImg,0,0,fWidth,fLength);
-    var ctx2 = cnvs_2.getContext("2d");
-    ctx2.drawImage(myImg,0,0,fWidth,fLength);
-    var ctx3 = cnvs_3.getContext("2d");
-    ctx3.drawImage(myImg,0,0,fWidth,fLength);
-    var ctx4 = cnvs_4.getContext("2d");
-    ctx4.drawImage(myImg,0,0,fWidth,fLength);
-    document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
+        ctx.drawImage(myImg,0,0,fWidth,fLength);
+        ctx1.drawImage(myImg,0,0,fWidth,fLength);
+        ctx2.drawImage(myImg,0,0,fWidth,fLength);
+        ctx3.drawImage(myImg,0,0,fWidth,fLength);
+        ctx4.drawImage(myImg,0,0,fWidth,fLength);
+        document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
     }
     window.onbeforeunload = function() {
       return "Dude, are you sure you want to leave? Think of the kittens!";
@@ -1670,7 +1665,6 @@
     }
 
     function Draw(x,y,type) {
-        var ctx = cnvs.getContext("2d");
         if (periodN == 1) {ctx_p = cnvs_1.getContext("2d");}
         else if (periodN == 2) {ctx_p = cnvs_2.getContext("2d");}
         else if (periodN == 3) {ctx_p = cnvs_3.getContext("2d");}
@@ -3881,7 +3875,6 @@
 
         var img = new Image;
         img.src = undo_object.cnvs_url;
-        var ctx = cnvs.getContext("2d");
         ctx.clearRect(0,0,fWidth,fLength);
         ctx.drawImage(img,0,0,fWidth,fLength);
         document.getElementById("undo").disabled = true;

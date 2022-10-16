@@ -1,7 +1,5 @@
     // Variables file for New Game - html
 
-
-
     var tgt_1 = document.getElementById("totg_1");
     var tgt_2 = document.getElementById("totg_2");
     var txG_1 = document.getElementById("totxG_1");
@@ -26,6 +24,11 @@
     var PosY = 0;
     var myImg = new Image();
     myImg.src = "/static/field.png";
+    var ctx = cnvs.getContext("2d");
+    var ctx1 = cnvs_1.getContext("2d");
+    var ctx2 = cnvs_2.getContext("2d");
+    var ctx3 = cnvs_3.getContext("2d");
+    var ctx4 = cnvs_4.getContext("2d");
     var PosTime = 0; // Possession time in counters Team 1
     var PosTime_2 = 0; // Possession time in counters Team 2
     var LineTime = 0; // Line on court time in counters Team 1
