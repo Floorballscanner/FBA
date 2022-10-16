@@ -3874,7 +3874,6 @@
     function undoButton() {
 
         myImg.src = undo_object.cnvs_url;
-        ctx.clearRect(0,0,fWidth,fLength);
         ctx.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById("undo").disabled = true;
     }
