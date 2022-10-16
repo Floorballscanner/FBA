@@ -3879,9 +3879,10 @@
     }
     function undoButton() {
 
+        var img = new Image;
+        img.src = undo_object.cnvs_url;
         var ctx = cnvs.getContext("2d");
         ctx.clearRect(0,0,fWidth,fLength);
-        myImg.src = undo_object.cnvs_url;
-        ctx.drawImage(myImg,0,0,fWidth,fLength);
+        ctx.drawImage(img,0,0,fWidth,fLength);
         document.getElementById("undo").disabled = true;
     }
