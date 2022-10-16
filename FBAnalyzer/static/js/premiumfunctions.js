@@ -3880,14 +3880,19 @@
     function undoButton() {
 
         myImg.src = undo_object.cnvs_url;
+        var ctx = cnvs.getContext("2d");
         ctx.drawImage(myImg,0,0,fWidth,fLength);
         myImg.src = undo_object.cnvs_1_url;
+        var ctx1 = cnvs_1.getContext("2d");
         ctx1.drawImage(myImg,0,0,fWidth,fLength);
         myImg.src = undo_object.cnvs_2_url;
+        var ctx2 = cnvs_2.getContext("2d");
         ctx2.drawImage(myImg,0,0,fWidth,fLength);
         myImg.src = undo_object.cnvs_3_url;
+        var ctx3 = cnvs_3.getContext("2d");
         ctx3.drawImage(myImg,0,0,fWidth,fLength);
         myImg.src = undo_object.cnvs_4_url;
+        var ctx4 = cnvs_4.getContext("2d");
         ctx4.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById("undo").disabled = true;
     }
