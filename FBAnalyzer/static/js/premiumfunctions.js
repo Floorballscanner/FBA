@@ -3880,14 +3880,13 @@
     function undoButton() {
 
         console.log("Picture now equals undo picture: " + cnvs.toDataURL() == undo_object.cnvs_url);
-        var img = new Image;
-        img.src = undo_object.cnvs_url;
+        myImg.src = undo_object.cnvs_url;
         var ctx = cnvs.getContext("2d");
-        ctx.drawImage(img,0,0,fWidth,fLength);
+        ctx.drawImage(myImg,0,0,fWidth,fLength);
         myImg.src = undo_object.cnvs_1_url;
         var ctx1 = cnvs_1.getContext("2d");
         ctx1.drawImage(myImg,0,0,fWidth,fLength);
-        myImg.src = undo_object.cnvs_2_url;
+        myImg.src = undo_object.cnvs_url;
         var ctx2 = cnvs_2.getContext("2d");
         ctx2.drawImage(myImg,0,0,fWidth,fLength);
         myImg.src = undo_object.cnvs_3_url;
