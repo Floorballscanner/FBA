@@ -3877,19 +3877,19 @@
         img.onload = function() {
             ctx.drawImage(img,0,0,fWidth,fLength);
         };
-        img1.src = undo_object_cnvs_1_url;
+        img1.src = undo_object.cnvs_1_url;
         img1.onload = function() {
             ctx1.drawImage(img1,0,0,fWidth,fLength);
         };
-        img2.src = undo_object_cnvs_2_url;
+        img2.src = undo_object.cnvs_2_url;
         img2.onload = function() {
             ctx2.drawImage(img2,0,0,fWidth,fLength);
         };
-        img3.src = undo_object_cnvs_3_url;
+        img3.src = undo_object.cnvs_3_url;
         img3.onload = function() {
             ctx3.drawImage(img3,0,0,fWidth,fLength);
         };
-        img4.src = undo_object_cnvs_4_url;
+        img4.src = undo_object.cnvs_4_url;
         img4.onload = function() {
             ctx4.drawImage(img4,0,0,fWidth,fLength);
         };
