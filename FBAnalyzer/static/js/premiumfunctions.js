@@ -3873,7 +3873,7 @@
     }
     function undoButton() {
 
-        var img,img1,img2,img3,img4 as Image();
+        var img,img1,img2,img3,img4 = new Image();
         img.src = undo_object.cnvs_url;
         img.onload = function() {
             ctx.drawImage(img,0,0,fWidth,fLength);
