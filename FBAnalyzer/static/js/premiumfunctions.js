@@ -3877,5 +3877,21 @@
         myImg.onload = function() {
             ctx.drawImage(myImg,0,0,fWidth,fLength);
         };
+        myImg.src = undo_object_cnvs_1_url;
+        myImg.onload = function() {
+            ctx1.drawImage(myImg,0,0,fWidth,fLength);
+        };
+        myImg.src = undo_object_cnvs_2_url;
+        myImg.onload = function() {
+            ctx2.drawImage(myImg,0,0,fWidth,fLength);
+        };
+        myImg.src = undo_object_cnvs_3_url;
+        myImg.onload = function() {
+            ctx3.drawImage(myImg,0,0,fWidth,fLength);
+        };
+        myImg.src = undo_object_cnvs_4_url;
+        myImg.onload = function() {
+            ctx4.drawImage(myImg,0,0,fWidth,fLength);
+        };
         document.getElementById("undo").disabled = true;
     }

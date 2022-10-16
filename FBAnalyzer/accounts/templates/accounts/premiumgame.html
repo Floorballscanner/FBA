@@ -17,9 +17,6 @@ It extends app_layout.html with Django
                 <h2>Date</h2>
                 <input id="select-date" type="date">
             </div>
-            <div class="row justify-content-center">
-                <button id="undo" type="button" onclick="undoButton()" disabled="true" class="btn btn-secondary btn-sm">Undo</button>
-            </div>
         </div>
         <div class="col-sm-4">
             <div class="team-selection">
@@ -52,6 +49,7 @@ It extends app_layout.html with Django
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-4">
+            <button id="undo" type="button" onclick="undoButton()" disabled="true" class="btn btn-secondary btn-sm">Undo</button>
             <div class="shot-map">
                 <p style="margin:0px;"><span id="name_t1_21">Team 1</span> attack</p>
                 <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
