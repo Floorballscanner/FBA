@@ -3873,25 +3873,26 @@
     }
     function undoButton() {
 
-        myImg.src = undo_object.cnvs_url;
-        myImg.onload = function() {
-            ctx.drawImage(myImg,0,0,fWidth,fLength);
+        var img,img1,img2,img3,img4 as Image();
+        img.src = undo_object.cnvs_url;
+        img.onload = function() {
+            ctx.drawImage(img,0,0,fWidth,fLength);
         };
-        myImg.src = undo_object_cnvs_1_url;
-        myImg.onload = function() {
-            ctx1.drawImage(myImg,0,0,fWidth,fLength);
+        img1.src = undo_object_cnvs_1_url;
+        img1.onload = function() {
+            ctx1.drawImage(img1,0,0,fWidth,fLength);
         };
-        myImg.src = undo_object_cnvs_2_url;
-        myImg.onload = function() {
-            ctx2.drawImage(myImg,0,0,fWidth,fLength);
+        img2.src = undo_object_cnvs_2_url;
+        img2.onload = function() {
+            ctx2.drawImage(img2,0,0,fWidth,fLength);
         };
-        myImg.src = undo_object_cnvs_3_url;
-        myImg.onload = function() {
-            ctx3.drawImage(myImg,0,0,fWidth,fLength);
+        img3.src = undo_object_cnvs_3_url;
+        img3.onload = function() {
+            ctx3.drawImage(img3,0,0,fWidth,fLength);
         };
-        myImg.src = undo_object_cnvs_4_url;
-        myImg.onload = function() {
-            ctx4.drawImage(myImg,0,0,fWidth,fLength);
+        img4.src = undo_object_cnvs_4_url;
+        img4.onload = function() {
+            ctx4.drawImage(img4,0,0,fWidth,fLength);
         };
         document.getElementById("undo").disabled = true;
     }
