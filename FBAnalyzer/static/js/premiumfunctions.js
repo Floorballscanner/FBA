@@ -3879,8 +3879,7 @@
     }
     function undoButton() {
 
-        console.log("Picture now: " + cnvs.toDataURL());
-        console.log("Picture after undo: " + undo_object.cnvs_url);
+        console.log("Picture now equals undo picture: " + cnvs.toDataURL() == undo_object.cnvs_url);
         myImg.src = undo_object.cnvs_url;
         var ctx = cnvs.getContext("2d");
         ctx.drawImage(myImg,0,0,fWidth,fLength);
