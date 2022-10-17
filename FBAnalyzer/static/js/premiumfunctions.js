@@ -4069,5 +4069,7 @@
         xfT2_g = undo_object.xfT2_g;
         xaT2_g = undo_object.xaT2_g;
 
+        updateSaveData();
+
         document.getElementById("undo").disabled = true; // Disable Undo-button
     }
