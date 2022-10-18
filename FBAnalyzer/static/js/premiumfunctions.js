@@ -3921,6 +3921,21 @@
         passer_id = undo_object.passer_id;
         shooter_str = undo_object.shooter_str;
         passer_str = undo_object.passer_str;
+
+        xGTeam_array = undo_object.xGTeam_array;
+        xGL1_array = undo_object.xGL1_array;
+        xGL2_array = undo_object.xGL2_array;
+        xGL3_array = undo_object.xGL3_array;
+        xGTeamT2_array = undo_object.xGTeamT2_array;
+        xGL1T2_array = undo_object.xGL1T2_array;
+        xGL2T2_array = undo_object.xGL2T2_array;
+        xGL3T2_array = undo_object.xGL3T2_array;
+        posTeam_array = undo_object.posTeam_array;
+        posTeamT2_array = undo_object.posTeamT2_array;
+        plT1_array = undo_object.plT1_array;
+        plT2_array = undo_object.plT2_array;
+        plT1p_array = undo_object.plT1p_array;
+        plT2p_array = undo_object.plT2p_array;
         
         stT1Teamg_array = undo_object.stT1Teamg_array;
         stT2Teamg_array = undo_object.stT2Teamg_array;
