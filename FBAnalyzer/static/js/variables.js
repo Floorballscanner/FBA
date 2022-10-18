@@ -49,6 +49,7 @@
     var shot_on = 0; // Shot tag process on/off
     var data_object = {}; // Save data object contains all saved/loaded data
     var undo_object = {}; // Undo object contains previous state data
+    var data_object_stringified = {} // Deep copy of a data_object
     
     // Premium game level, team, and player select box elements
 

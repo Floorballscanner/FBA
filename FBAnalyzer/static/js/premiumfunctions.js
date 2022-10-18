@@ -3612,8 +3612,7 @@
     }
     function updateSaveData() {
 
-        console.log(data_object)
-        undo_object = JSON.parse(JSON.stringify(data_object));
+        undo_object = JSON.parse(JSON.stringify(data_object_stringified));
 
         data_object = {
 
@@ -3850,6 +3849,8 @@
             "xfT2_g" : xfT2_g,
             "xaT2_g" : xaT2_g,
         }
+
+        data_object_stringified = JSON.parse(JSON.stringify(data_object));
 
         data = {"game_data" : data_object}
 
