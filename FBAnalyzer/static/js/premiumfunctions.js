@@ -3611,7 +3611,8 @@
         window.print();
     }
     function updateSaveData() {
-    
+
+        console.log(data_object)
         undo_object = JSON.parse(JSON.stringify(data_object));
 
         data_object = {
@@ -4069,7 +4070,7 @@
         xfT2_g = undo_object.xfT2_g;
         xaT2_g = undo_object.xaT2_g;
 
-        // updateSaveData();
+        updateSaveData();
 
         document.getElementById("undo").disabled = true; // Disable Undo-button
     }
