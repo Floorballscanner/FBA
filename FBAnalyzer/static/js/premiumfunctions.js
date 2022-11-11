@@ -2467,7 +2467,9 @@
         }
 
         updateSaveData(); // Update data and save to background
-        document.getElementById("undo").disabled = false;
+        if (premShotData.length > 2) {
+            document.getElementById("undo").disabled = false;
+        }
     }
     
 // TÄSSÄ VAIHEESSA MEILLÄ ON KAIKKI DATA
@@ -2723,7 +2725,7 @@
         xGL2T1 = calcPercent(Number(xGf_g[1]), Number(xGa_g[1]));
         xGL2T2 = calcPercent(Number(xGfT2_g[1]), Number(xGaT2_g[1]));
         xGL3T1 = calcPercent(Number(xGf_g[2]), Number(xGa_g[2]));
-        xGL3T2 = calcPercent(Number(xGfT2_g[2]), Number(xGfT2_g[2]));
+        xGL3T2 = calcPercent(Number(xGfT2_g[2]), Number(xGaT2_g[2]));
 
         var chartData = google.visualization.arrayToDataTable([
              ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
