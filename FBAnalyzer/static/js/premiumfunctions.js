@@ -2179,7 +2179,9 @@
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
             updateSaveData(); // Update data and save to background
-            document.getElementById("undo").disabled = false;
+            if (premShotData.length > 2) {
+                document.getElementById("undo").disabled = false;
+            }
             shot_on = 0; // End the shot tag process
 
         }
