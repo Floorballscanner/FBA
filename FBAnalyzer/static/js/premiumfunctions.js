@@ -489,6 +489,7 @@
                 if (document.getElementById("ck1a").checked) {
                     updateLive(); // Update the API
                 }
+                document.getElementById("undo").disabled = true;
 
             } else {
             }
@@ -2123,7 +2124,9 @@
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
                 updateSaveData(); // Update data and save to background
-                document.getElementById("undo").disabled = false;
+                if (premShotData.length > 2) {
+                    document.getElementById("undo").disabled = false;
+                }
                 shot_on = 0; // End the shot tag process
             }
         }
@@ -2733,7 +2736,7 @@
         xGL2T1 = calcPercent(Number(xGf_p[1]), Number(xGa_p[1]));
         xGL2T2 = calcPercent(Number(xGfT2_p[1]), Number(xGaT2_p[1]));
         xGL3T1 = calcPercent(Number(xGf_p[2]), Number(xGa_p[2]));
-        xGL3T2 = calcPercent(Number(xGfT2_p[2]), Number(xGfT2_p[2]));
+        xGL3T2 = calcPercent(Number(xGfT2_p[2]), Number(xGaT2_p[2]));
 
         var chartData_p = google.visualization.arrayToDataTable([
              ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
