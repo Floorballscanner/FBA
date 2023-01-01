@@ -396,6 +396,7 @@
             if (r == true) {
                 periodN++
                 counter = 0;
+                shotCounter = 0;
                 document.getElementById("periodNr").innerHTML = "Period " + periodN;
                 document.getElementById("label").innerHTML = "00:00:00";
                 tgtp_2.innerHTML = "0";
@@ -2124,10 +2125,11 @@
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
                 updateSaveData(); // Update data and save to background
-                if (premShotData.length > 2) {
+                if (shotCounter > 1) {
                     document.getElementById("undo").disabled = false;
                 }
                 shot_on = 0; // End the shot tag process
+                shotCounter++;
             }
         }
         else if (shooter_select == 0) {
@@ -2179,11 +2181,11 @@
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
             updateSaveData(); // Update data and save to background
-            if (premShotData.length > 2) {
+            if (shotCounter > 1) {
                 document.getElementById("undo").disabled = false;
             }
             shot_on = 0; // End the shot tag process
-
+            shotCounter++;
         }
 
     }
@@ -2467,9 +2469,10 @@
         }
 
         updateSaveData(); // Update data and save to background
-        if (premShotData.length > 2) {
+        if (shotCounter > 1) {
             document.getElementById("undo").disabled = false;
         }
+        shotCounter++;
     }
     
 // TÄSSÄ VAIHEESSA MEILLÄ ON KAIKKI DATA

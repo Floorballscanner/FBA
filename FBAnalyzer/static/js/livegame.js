@@ -468,9 +468,9 @@ function updateData() {
             document.getElementById('awayxG').innerHTML = data.xGGameT2;
             document.getElementById('homexGP').innerHTML = data.xGPeriodT1;
             document.getElementById('awayxGP').innerHTML = data.xGPeriodT2;
-            document.getElementById('homePos').innerHTML = convertPos(data.possessionGameT1, data.gameClock);
-            document.getElementById('awayPos').innerHTML = convertPos(data.possessionGameT2, data.gameClock);
-            document.getElementById('homePosP').innerHTML = convertPos(data.possessionPeriodT1, data.periodClock);
-            document.getElementById('awayPosP').innerHTML = convertPos(data.possessionPeriodT2, data.periodClock);
+            document.getElementById('homePos').innerHTML = convertPos(data.possessionGameT1, data.possessionGameT1+data.possessionGameT2);
+            document.getElementById('awayPos').innerHTML = convertPos(data.possessionGameT2, data.possessionGameT1+data.possessionGameT2);
+            document.getElementById('homePosP').innerHTML = convertPos(data.possessionPeriodT1, data.possessionPeriodT1+data.possessionPeriodT2);
+            document.getElementById('awayPosP').innerHTML = convertPos(data.possessionPeriodT2, data.possessionPeriodT1+data.possessionPeriodT2);
 
 }

@@ -180,6 +180,7 @@
     var passer_id = 0;
     var shooter_str = "";
     var passer_str = "";
+    var shotCounter = 0;
 
     // Data arrays for xG charts
 
