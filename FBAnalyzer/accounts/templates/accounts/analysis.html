@@ -12,20 +12,21 @@ It extends app_layout.html with Django
 {% load static %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div class="container">
-    <h2>Analyse your data</h2>
-    <div class="row">
-		<div class="my-data">
-			<div class="col-sm-6">
-                <h2>Analyse your data</h2>
+<div class="container" style="Padding-top: 80px;">
+    <h2 style="Padding-top:20px;">Analyse your data</h2>
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="team-selection">
+                <h2 style="Padding-top:20px;">First Column</h2>
             </div>
         </div>
-        <div class="my-data">
-            <div class="col-sm-6">
-                <h2>Analyse your data</h2>
+        <div class="col-sm-6">
+            <div class="team-selection">
+                <h2 style="Padding-top:20px;">Second Column</h2>
             </div>
         </div>
     </div>
 </div>
+
 
 {% endblock %}
