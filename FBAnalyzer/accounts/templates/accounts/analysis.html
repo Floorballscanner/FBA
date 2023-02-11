@@ -18,6 +18,12 @@ It extends app_layout.html with Django
         <div class="col-sm-6">
             <div class="team-selection">
                 <h2 style="Padding-top:20px;">First Column</h2>
+                <select id="select-game" class="form-control-sm custom-select">
+                    <option selected disabled>Select a game...</option>
+                    {% for game in games %}
+                        <option value="{{game.id}}">{{game.date}}</option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
         <div class="col-sm-6">

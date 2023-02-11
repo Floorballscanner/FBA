@@ -74,9 +74,17 @@ def edit_teams(request):
     return render(request, 'accounts/edit_teams.html', context=context)
 
 def analyse(request):
+
+    games = Game.objects.filter(user=request.user)
+    teams = Team.objects.all().order_by('name')
+    levels = Level.objects.all().order_by('name')
     players = Player.objects.all().order_by('jersey_number')
+
     context = {
+        'teams': teams,
+        'levels': levels,
         'players': players,
+        'games': games,
     }
 
     return render(request, 'accounts/analysis.html', context = context)
