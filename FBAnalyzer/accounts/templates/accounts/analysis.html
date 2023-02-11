@@ -9,6 +9,8 @@ It extends app_layout.html with Django
 
 {% extends 'app_layout.html' %}
 {% block content %}
+{% load static %}
+{{ request.user.id|json_script:"user_id" }}
 
 <div class="container">
     <h2>Analyse your data</h2>
@@ -25,3 +27,5 @@ It extends app_layout.html with Django
         </div>
     </div>
 </div>
+
+{% endblock %}
