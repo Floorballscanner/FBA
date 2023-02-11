@@ -37,6 +37,14 @@ def my_team(request):
 
     return render(request, 'accounts/myteam.html', context = context)
 
+def analyse(request):
+    players = Player.objects.all().order_by('jersey_number')
+    context = {
+        'players': players,
+    }
+
+    return render(request, 'accounts/analysis.html', context = context)
+
 def add_new_player(request):
 
     """View function for adding a new player to the team."""
