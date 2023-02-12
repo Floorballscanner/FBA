@@ -24,24 +24,22 @@
                 document.getElementById('sttotxG_1').innerHTML = game_data.txG_1;
                 document.getElementById('sttotxG_2').innerHTML = game_data.txG_2;
 
+                fetch("https://fbscanner.io/apis/teams/" + team_1+ "/")
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('stteam_1').innerHTML = data.name;
+                })
+
+                fetch("https://fbscanner.io/apis/teams/" + team_2+ "/")
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('stteam_2').innerHTML = data.name;
+                })
+
         })
             .catch((error) => {
                 console.error('Error:', error);
         });
-
-        // Fetch teams
-
-        fetch("https://fbscanner.io/apis/teams/" + team_1+ "/")
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('stteam_1').innerHTML = data.name;
-        })
-
-        fetch("https://fbscanner.io/apis/teams/" + team_2+ "/")
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('stteam_2').innerHTML = data.name;
-        })
 
         // xG Game Chart
 
