@@ -8,6 +8,8 @@
         // Set Game Stats
 
         game_id = s_game.options[s_game.selectedIndex].value;
+        team_1 = 0;
+        team_2 = 0;
 
         fetch("https://fbscanner.io/apis/games/" + game_id + "/")
             .then(response => response.json())
@@ -15,8 +17,8 @@
                 console.log('Success:', data);
                 game_data = data.game_data;
                 document.getElementById('stdate').innerHTML = data.date;
-                document.getElementById('stteam_1').innerHTML = data.teams[0];
-                document.getElementById('stteam_2').innerHTML = data.teams[1];
+                team_1 = data.teams[0];
+                team_2 = data.teams[1];
                 document.getElementById('sttotg_1').innerHTML = game_data.tgt_1;
                 document.getElementById('sttotg_2').innerHTML = game_data.tgt_2;
                 document.getElementById('sttotxG_1').innerHTML = game_data.txG_1;
@@ -26,6 +28,20 @@
             .catch((error) => {
                 console.error('Error:', error);
         });
+
+        // Fetch teams
+
+        fetch("https://fbscanner.io/apis/teams/" + team_1+ "/")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('stteam_1').innerHTML = data.name;
+        })
+
+        fetch("https://fbscanner.io/apis/teams/" + team_2+ "/")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('stteam_2').innerHTML = data.name;
+        })
 
         // xG Game Chart
 
