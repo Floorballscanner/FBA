@@ -89,7 +89,7 @@
                 },
                 };
 
-            var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
+            var chart = new google.visualization.BarChart(document.getElementById('stxG%Game_chart'));
             chart.draw(chartData, options);
 
             // Team 1 Player xG chart
@@ -117,7 +117,7 @@
 
 
             // Create and draw the visualization.
-            var chart = new google.visualization.Table(document.getElementById('T1plstats'));
+            var chart = new google.visualization.Table(document.getElementById('stT1plstats'));
             chart.draw(pldata, options);
 
             // Add sort listener
@@ -152,7 +152,7 @@
                 };
 
             // Create and draw the visualization.
-            var chart = new google.visualization.Table(document.getElementById('T2plstats'));
+            var chart = new google.visualization.Table(document.getElementById('stT2plstats'));
             chart.draw(pldata, options);
 
             // Add sort listener
@@ -199,7 +199,7 @@
                 };
 
             // Create and draw the visualization.
-            var chart = new google.visualization.Table(document.getElementById('T1linestats'));
+            var chart = new google.visualization.Table(document.getElementById('stT1linestats'));
             chart.draw(pldata1, options);
 
             // Linestats T2
@@ -238,7 +238,7 @@
                 };
 
             // Create and draw the visualization.
-            var chart2 = new google.visualization.Table(document.getElementById('T2linestats'));
+            var chart2 = new google.visualization.Table(document.getElementById('stT2linestats'));
             chart2.draw(pldata2, options);
 
             // Pie Chart, xG per type Team 1
@@ -259,7 +259,7 @@
             is3D: true,
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
+            var chart = new google.visualization.PieChart(document.getElementById('stT1_st_piechart'));
             chart.draw(data, options2);
 
             // Pie Chart, xG per type Team 2
@@ -280,7 +280,7 @@
             is3D: true,
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
+            var chart = new google.visualization.PieChart(document.getElementById('stT2_st_piechart'));
             chart.draw(data2, options2);
 
             // Team xG Chart
@@ -296,7 +296,7 @@
                   3:{type: 'bars', color: 'red'}}
             };
 
-            var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
+            var chart = new google.visualization.ComboChart(document.getElementById('stxGTeam_chart'));
             chart.draw(data, options);
 
             // Line 1 xG Chart
@@ -312,7 +312,7 @@
                   3:{type: 'bars', color: 'red'}}
             };
 
-            var chart = new google.visualization.ComboChart(document.getElementById('xGL1_chart'));
+            var chart = new google.visualization.ComboChart(document.getElementById('stxGL1_chart'));
             chart.draw(data, options);
 
             // Line 2 xG Chart
@@ -328,7 +328,7 @@
                   3:{type: 'bars', color: 'red'}}
             };
 
-            var chart = new google.visualization.ComboChart(document.getElementById('xGL2_chart'));
+            var chart = new google.visualization.ComboChart(document.getElementById('stxGL2_chart'));
             chart.draw(data, options);
 
             // Line 3 xG Chart
@@ -344,7 +344,7 @@
                   3:{type: 'bars', color: 'red'}}
             };
 
-            var chart = new google.visualization.ComboChart(document.getElementById('xGL3_chart'));
+            var chart = new google.visualization.ComboChart(document.getElementById('stxGL3_chart'));
             chart.draw(data, options1);
 
             // Turnover chart
@@ -387,7 +387,7 @@
                 hAxis: { textPosition: 'none' }
                 };
 
-            var chart2 = new google.visualization.BarChart(document.getElementById('T1_typechart'));
+            var chart2 = new google.visualization.BarChart(document.getElementById('stT1_typechart'));
             chart2.draw(chartDataX, options);
 
             // Team 2 typechart
@@ -408,7 +408,7 @@
                 hAxis: { textPosition: 'none' }
                 };
 
-            var chartX = new google.visualization.BarChart(document.getElementById('T2_typechart'));
+            var chartX = new google.visualization.BarChart(document.getElementById('stT2_typechart'));
             chartX.draw(chartDataY, options);
 
         })
