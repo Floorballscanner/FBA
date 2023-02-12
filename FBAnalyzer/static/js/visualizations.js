@@ -14,13 +14,13 @@
             .then(data => {
                 console.log('Success:', data);
                 game_data = data.game_data;
-                document.getElementById('stdate').value = data.date;
-                document.getElementById('stteam_1').value = data.teams[0];
-                document.getElementById('stteam_2').value = data.teams[1];
-                document.getElementById('sttotg_1').value = game_data.tgt_1;
-                document.getElementById('sttotg_2').value = game_data.tgt_2;
-                document.getElementById('sttotxG_1').value = game_data.txG_1;
-                document.getElementById('sttotxG_2').value = game_data.txG_2;
+                document.getElementById('stdate').innerHTML = data.date;
+                document.getElementById('stteam_1').innerHTML = data.teams[0];
+                document.getElementById('stteam_2').innerHTML = data.teams[1];
+                document.getElementById('sttotg_1').innerHTML = game_data.tgt_1;
+                document.getElementById('sttotg_2').innerHTML = game_data.tgt_2;
+                document.getElementById('sttotxG_1').innerHTML = game_data.txG_1;
+                document.getElementById('sttotxG_2').innerHTML = game_data.txG_2;
 
         })
             .catch((error) => {
