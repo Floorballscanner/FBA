@@ -13,17 +13,21 @@ It extends app_layout.html with Django
 {{ request.user.id|json_script:"user_id" }}
 
 <div class="container" style="Padding-top: 80px;">
-    <h2 style="Padding-top:20px;">Analyse your data</h2>
+    <div class="col-sm-6">
+        <h2 style="Padding-top:20px;">Analyse your data</h2>
+    </div>
+    <div class="col-sm-6">
+        <select id="select-game" class="form-control-sm custom-select">
+            <option selected disabled>Select a game...</option>
+            {% for game in games %}
+                <option value="{{game.id}}">{{game.date}}: {{game.teams.all|join:" - " }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <div class="team-selection">
                 <h2 style="Padding-top:20px;">First Column</h2>
-                <select id="select-game" class="form-control-sm custom-select">
-                    <option selected disabled>Select a game...</option>
-                    {% for game in games %}
-                        <option value="{{game.id}}">{{game.date}}: {{game.teams.all|join:" - " }}</option>
-                    {% endfor %}
-                </select>
             </div>
         </div>
         <div class="col-sm-6">
