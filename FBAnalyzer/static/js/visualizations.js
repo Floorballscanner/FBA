@@ -113,7 +113,7 @@
                  ]);
 
                 var options = {
-                    title: 'Shot types, Team 1',
+                    title: 'Shot types, ' + gd.name_t1,
                     bar: {groupWidth: "75%"},
                     legend: { position: 'bottom'},
                     colors: ['#20AB4E', '#295738','#002072','#59D9EB'],
@@ -134,7 +134,7 @@
                  ]);
 
                 var options = {
-                    title: 'Shot types, Team 2',
+                    title: 'Shot types, ' + gd.name_t2,
                     bar: {groupWidth: "75%"},
                     legend: { position: 'bottom'},
                     colors: ['#EDA137', '#EB4F07','#D10808','#663D3D'],
@@ -160,7 +160,7 @@
                 }
 
                 var options = {
-                    title: 'Individual stats Team 1',
+                    title: 'Individual stats '+ gd.name_t1,
                     bar: {groupWidth: "95%"},
                     legend: { position: 'bottom'},
                     colors: ['#002072', '#59D9EB'],
@@ -196,7 +196,7 @@
                 }
 
                 var options = {
-                    title: 'Individual stats Team 2',
+                    title: 'Individual stats '+ gd.name_t2,
                     bar: {groupWidth: "95%"},
                     legend: { position: 'bottom'},
                     colors: ['#002072', '#59D9EB'],
@@ -243,7 +243,7 @@
                     ]);
 
                 var options = {
-                    title: 'Line stats, Team 1',
+                    title: 'Line stats, ' + gd.name_t1,
                     bar: {groupWidth: "95%"},
                     legend: { position: 'bottom'},
                     colors: ['#002072', '#59D9EB'],
@@ -282,7 +282,7 @@
                     ]);
 
                 var options = {
-                    title: 'Line stats, Team 2',
+                    title: 'Line stats, ' + gd.name_t2,
                     bar: {groupWidth: "95%"},
                     legend: { position: 'bottom'},
                     colors: ['#002072', '#59D9EB'],
