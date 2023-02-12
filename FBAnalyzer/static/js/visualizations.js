@@ -417,3 +417,8 @@
         });
 
     }
+
+    function calcPercent(xGa, xGb) {
+        res = Math.round(xGa / (xGa + xGb) * 100);
+        return res;
+    }
