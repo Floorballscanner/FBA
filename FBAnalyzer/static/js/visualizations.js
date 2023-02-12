@@ -219,7 +219,7 @@
 
                 var pldata1 = new google.visualization.DataTable();
                 pldata1.addColumn('string', 'Line');
-                pldata1.addColumn('number', 'ToC');
+                pldata1.addColumn('string', 'ToC');
                 pldata1.addColumn('number', 'xG for');
                 pldata1.addColumn('number', 'xG ag.');
                 pldata1.addColumn('number', 'Plus');
@@ -258,7 +258,7 @@
 
                 var pldata2 = new google.visualization.DataTable();
                 pldata2.addColumn('string', 'Line');
-                pldata2.addColumn('number', 'ToC');
+                pldata2.addColumn('string', 'ToC');
                 pldata2.addColumn('number', 'xG for');
                 pldata2.addColumn('number', 'xG ag.');
                 pldata2.addColumn('number', 'Plus');
