@@ -3,6 +3,8 @@
     var img = new Image();
     var cnvs = document.getElementById("stmyCanvas");
     var ctx = cnvs.getContext("2d");
+    var fWidth = 300; // Width of the shotmap field in pixels
+    var fLength = 500; // Length of the shotmap field in pixels
 
     // Function for Analysis.html - game chart visualization
 
