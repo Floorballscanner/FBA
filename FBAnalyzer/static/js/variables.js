@@ -8,7 +8,6 @@
     var tgtp_2 = document.getElementById("totp_2");
     var txGp_1 = document.getElementById("totxGp_1");
     var txGp_2 = document.getElementById("totxGp_2");
-    var s_game = document.getElementById("select-game");
     var line_on = 1; // Line on court Team 1
     var line_on_2 = 1; // Line on court Team 2
     var started = 0; // Game started 0/1
