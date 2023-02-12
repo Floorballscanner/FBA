@@ -39,7 +39,7 @@
                         document.getElementById('stteam_2').innerHTML = data.name;
                 })
 
-                img.src = bd.cnvs_url;
+                img.src = gd.cnvs_url;
                 img.onload = function() {
                     ctx.drawImage(img,0,0,fWidth,fLength);
                  };
