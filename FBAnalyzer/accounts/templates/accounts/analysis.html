@@ -21,7 +21,7 @@ It extends app_layout.html with Django
                 <select id="select-game" class="form-control-sm custom-select">
                     <option selected disabled>Select a game...</option>
                     {% for game in games %}
-                        <option value="{{game.id}}">{{game.teams[0]}}</option>
+                        <option value="{{game.id}}">{{game.teams.all|join:", " }}</option>
                     {% endfor %}
                 </select>
             </div>
