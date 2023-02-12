@@ -33,12 +33,20 @@
                     .then(response => response.json())
                     .then(data => {
                         document.getElementById('stteam_1').innerHTML = data.name;
+                        document.getElementById('stt1name1').innerHTML = data.name;
+                        document.getElementById('stt1name2').innerHTML = data.name;
+                        gd.xGTeam_array[0][1] = 'xG ' + data.name;
+                        gd.xGTeam_array[0][3] = 'Goal ' + data.name;
                 })
 
                 fetch("https://fbscanner.io/apis/teams/" + team_2+ "/")
                     .then(response => response.json())
                     .then(data => {
                         document.getElementById('stteam_2').innerHTML = data.name;
+                        document.getElementById('stt2name1').innerHTML = data.name;
+                        document.getElementById('stt2name2').innerHTML = data.name;
+                        gd.xGTeam_array[0][2] = 'xG ' + data.name;
+                        gd.xGTeam_array[0][4] = 'Goal ' + data.name;
                 })
 
                 img.src = gd.cnvs_url;
