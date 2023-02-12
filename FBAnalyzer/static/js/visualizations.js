@@ -9,7 +9,7 @@
 
         game_id = s_game.options[s_game.selectedIndex].value;
 
-        fetch("https://fbscanner.io/apis/games/604") // + game_id + "/")
+        fetch("https://fbscanner.io/apis/games/" + game_id + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
