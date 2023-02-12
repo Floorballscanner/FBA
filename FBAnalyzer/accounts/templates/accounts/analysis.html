@@ -18,10 +18,10 @@ It extends app_layout.html with Django
             <h2 style="Padding-top:20px;">Analyse your data</h2>
         </div>
         <div class="col-sm-6">
-            <select id="select-game" class="form-control-sm custom-select">
+            <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
                 <option selected disabled>Select a game...</option>
                 {% for game in games %}
-                    <option value="{{game.id}}">{{game.date|date:"d m Y"}}: {{game.teams.all|join:" - " }}</option>
+                    <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.teams.all|join:" - " }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -30,10 +30,18 @@ It extends app_layout.html with Django
         <div class="col-sm-12">
             <div class="team-selection">
                 <h2 style="Padding-top:20px;">Game Statistics</h2>
-                <h3>{{game.date|date:"d m Y"}}</h3>
-                <h4 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span> (<span id="totp_1">0</span> - <span id="totp_2">0</span>)</h4>
-                <h5 id="gxG">xG <span id="totxG_1">0</span> - <span id="totxG_2">0</span> (<span id="totxGp_1">0</span> - <span id="totxGp_2">0</span>)</h5>
+                <h3 id="stdate"></h3>
+                <h4><span id="stteam_1"></span> - <span id="stteam_2"></span></h4>
+                <h4><span id="sttotg_1">0</span> - <span id="sttotg_2">0</span></h4>
+                <h5>xG <span id="sttotxG_1">0</span> - <span id="sttotxG_2">0</span></h5>
+            </div>
+        </div>
+    </div>
 
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div class="col-sm-12">
+            <div class="shot-map">
+                <canvas id="stmyCanvas" width="300" height="500"></canvas>
             </div>
         </div>
     </div>
@@ -41,12 +49,12 @@ It extends app_layout.html with Django
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart" style="height: 200px"></div>
+                <div id="stxGGame_chart" style="height: 200px"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart" style="height: 200px"></div>
+                <div id="stxG%Game_chart" style="height: 200px"></div>
             </div>
         </div>
     </div>
@@ -54,12 +62,12 @@ It extends app_layout.html with Django
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="T1_typechart" style="height: 200px"></div>
+                <div id="stT1_typechart" style="height: 200px"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="T2_typechart" style="height: 200px"></div>
+                <div id="stT2_typechart" style="height: 200px"></div>
             </div>
         </div>
     </div>
@@ -68,13 +76,13 @@ It extends app_layout.html with Django
         <div class="col-sm-6">
             <div class="linestats">
                 <h5>Team 1 player stats</h5>
-                <div  id="T1plstats" style="height: 600px"></div>
+                <div  id="stT1plstats" style="height: 600px"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
                 <h5>Team 2 player stats</h5>
-                <div  id="T2plstats" style="height: 600px"></div>
+                <div  id="stT2plstats" style="height: 600px"></div>
             </div>
         </div>
     </div>
@@ -86,7 +94,7 @@ It extends app_layout.html with Django
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="linestats">
-                <div id="T1linestats" style="height: 300px"></div>
+                <div id="stT1linestats" style="height: 300px"></div>
             </div>
         </div>
     </div>
@@ -98,7 +106,7 @@ It extends app_layout.html with Django
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="linestats">
-                <div id="T2linestats" style="height: 300px"></div>
+                <div id="stT2linestats" style="height: 300px"></div>
             </div>
         </div>
     </div>
@@ -106,25 +114,25 @@ It extends app_layout.html with Django
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <div class="linestats" style="Padding-top: 50px">
-                <div  id="T1_st_piechart" style="height: 300px"></div>
+                <div  id="stT1_st_piechart" style="height: 300px"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats" style="Padding-top: 50px" >
-                <div id="T2_st_piechart" style="height: 300px"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center" style="Padding-top: 10px;">
-        <h4>Period 1 statistics</h4>
-        <div class="col-sm-12">
-            <div class="shot-map">
-                <canvas id="myCanvas_1" width="300" height="500"></canvas>
+                <div id="stT2_st_piechart" style="height: 300px"></div>
             </div>
         </div>
     </div>
 </div>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/static/js/variables.js"></script>
+<script type="text/javascript" src="/static/js/premiumfunctions.js"></script>
+<script type="text/javascript" src="/static/js/visualizations.js"></script>
+<script type="text/javascript" src="/static/js/livedata.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['table']});
+</script>
 
 {% endblock %}
