@@ -14,10 +14,8 @@ It extends app_layout.html with Django
 
 <div class="container" style="Padding-top: 80px;">
     <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <h2 style="Padding-top:20px;">Analyse your data</h2>
-        </div>
-        <div class="col-sm-6">
+        <div class="col-sm-12">
+            <h2 style="Padding-top:20px;">Analyse your Game</h2>
             <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
                 <option selected disabled>Select a game...</option>
                 {% for game in games %}
