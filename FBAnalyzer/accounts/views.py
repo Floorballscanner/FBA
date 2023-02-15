@@ -75,7 +75,7 @@ def edit_teams(request):
 
 def analyse(request):
 
-    if request.user.id == 3:
+    if request.user.id == 3 or request.user.id == 2:
         games = Game.objects.order_by('date')
     else:
         games = Game.objects.filter(user=request.user).order_by('date')
