@@ -15,13 +15,15 @@ It extends app_layout.html with Django
 <div class="container" style="Padding-top: 80px;">
     <div class="row justify-content-center">
         <div class="col-sm-12">
-            <h2 style="Padding-top:20px;">Analyse your Game</h2>
-            <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
-                <option selected disabled>Select a game...</option>
-                {% for game in games %}
-                    <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.teams.all|join:" - " }}</option>
-                {% endfor %}
-            </select>
+            <div class="team-selection">
+                <h2 style="Padding-top:20px;">Analyse your Game</h2><br>
+                <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
+                    <option selected disabled>Select a game...</option>
+                    {% for game in games %}
+                        <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.teams.all|join:" - " }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
     </div>
     <div class="row justify-content-center">
