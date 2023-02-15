@@ -79,6 +79,7 @@ def analyse(request):
         games = Game.objects.order_by('date')
     else:
         games = Game.objects.filter(user=request.user).order_by('date')
+
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
     players = Player.objects.all().order_by('jersey_number')
