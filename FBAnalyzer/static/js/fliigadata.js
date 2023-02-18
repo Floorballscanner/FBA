@@ -39,10 +39,12 @@ function getGameData(selectObject) {
             'Accept': '*/*',
             'Accept-Language': 'fi-FI,fi;q=0.9,en-US;q=0.8,en;q=0.7',
             'Connection': 'keep-alive',
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'Content-Type, Authorization',
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Cookie': '_ga=GA1.2.140022197.1671133104; c4912372421e1e6f206a78cd84a3c469=16rgohq4cn90juvn5m5uk8rv70; _gid=GA1.2.882911161.1676665995; _gat=1',
             'Origin': 'http://www.tilastopalvelu.fi',
-            'Referer': 'http://www.tilastopalvelu.fi/fb/gameshootingmap/?gid=' + gameID + '&lang=',
+            'Referer': 'http://www.tilastopalvelu.fi/fb/gameshootingmap/?gid=3436&lang=',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
             'X-Requested-With': 'XMLHttpRequest'
         },
