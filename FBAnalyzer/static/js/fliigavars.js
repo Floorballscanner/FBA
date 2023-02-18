@@ -1,30 +1,20 @@
 
 let men_teams = [
 
-    [OLS, 2758],
-    [EräViikingit, 17907],
-    [Classic, 2993],
-    [FBC Turku, 11033],
-    [Indians, 3587],
-    [Jymy, 3503],
-    [Oilers, 1974],
-    [Happee, 2126],
-    [TPS, 3438],
-    [Nokian KrP, 2682],
-    [LASB, 17808],
-    [SPV, 3266],
+    ["OLS", 2758],
+    ["EräViikingit", 17907],
+    ["Classic", 2993],
+    ["FBC Turku", 11033],
+    ["Indians", 3587],
+    ["Jymy", 3503],
+    ["Oilers", 1974],
+    ["Happee", 2126],
+    ["TPS", 3438],
+    ["Nokian KrP", 2682],
+    ["LASB", 17808],
+    ["SPV", 3266],
 
 ];
-
-function getTeam(nr) {
-    temp = "";
-    for (i=0;i<men_teams.length;i++) {
-        if (men_teams[i,1].value == nr) {
-            temp = men_teams[i,0];
-        }
-    }
-    return temp
-}
 
 let xG_matrix = [
 

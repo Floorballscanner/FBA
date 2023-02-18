@@ -14,6 +14,16 @@ function calcxG(x, y) {
   return [xGOT, xG];
 }
 
+function getTeam(nr) {
+    temp = "";
+    for (i=0;i<men_teams.length;i++) {
+        if (men_teams[i,1].value == nr) {
+            temp = men_teams[i,0];
+        }
+    }
+    return temp
+}
+
 function getGameData(selectObject) {
 
     let gameID = selectObject.value;
