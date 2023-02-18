@@ -1,0 +1,49 @@
+<!--
+
+This is the analysis - html - page content file. It is shown when the user is logged in and
+presses Analyse data - button at the index - page.
+
+It extends app_layout.html with Django
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+{% load static %}
+{{ request.user.id|json_script:"user_id" }}
+
+<div class="container" style="Padding-top: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="team-selection">
+                <select onchange="getGameData(this)" id="get-game-data" class="form-control-sm custom-select">
+                    <option selected disabled>Select a game...</option>
+                    <option value=3436>18.2.2023 Indians - Nokian KrP</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="team-selection">
+                <h5 id="fldate"></h5>
+                <h3><span id="flteam_1"></span> - <span id="flteam_2"></span></h3>
+                <h3><span id="fltotg_1">0</span> - <span id="fltotg_2">0</span></h3>
+                <h5>xG <span id="fltotxG_1">0</span> - <span id="fltotxG_2">0</span></h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/static/js/fliigadata.js"></script>
+<script type="text/javascript" src="/static/js/fliigavars.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['table']});
+</script>
+
+{% endblock %}

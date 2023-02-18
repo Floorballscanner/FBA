@@ -93,6 +93,10 @@ def analyse(request):
 
     return render(request, 'accounts/analysis.html', context = context)
 
+def fliiga(request):
+
+    return render(request, 'accounts/fliiga.html')
+
 def add_new_player(request):
 
     """View function for adding a new player to the team."""
