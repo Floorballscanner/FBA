@@ -33,7 +33,7 @@ function getGameData(selectObject) {
     let team1name = getTeam(team1nr);
     let team2name = getTeam(team2nr);
 
-    fetch('http://www.tilastopalvelu.fi/fb/gameshootingmap/helper/getshootings.php', {
+    fetch('https://www.tilastopalvelu.fi/fb/gameshootingmap/helper/getshootings.php', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
