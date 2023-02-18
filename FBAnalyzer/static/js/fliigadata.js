@@ -35,7 +35,6 @@ function getGameData(selectObject) {
 
     fetch('https://www.tilastopalvelu.fi/fb/gameshootingmap/helper/getshootings.php', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
             'Accept': '*/*',
             'Accept-Language': 'fi-FI,fi;q=0.9,en-US;q=0.8,en;q=0.7',
