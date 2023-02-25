@@ -1,5 +1,6 @@
 
     var s_game = document.getElementById("select-game");
+    var game_delete = document.getElementById("analyse_delete");
     var img = new Image();
     var cnvs = document.getElementById("stmyCanvas");
     var ctx = cnvs.getContext("2d");
@@ -21,6 +22,7 @@
             .then(data => {
                 console.log('Success:', data);
                 gd = data.game_data;
+                game_delete.disabled = false;
                 document.getElementById('stdate').innerHTML = data.date;
                 team_1 = data.teams[0];
                 team_2 = data.teams[1];
@@ -390,4 +392,31 @@
     function calcPercent(xGa, xGb) {
         res = Math.round(xGa / (xGa + xGb) * 100);
         return res;
+    }
+
+    function deleteGameButton() {
+
+        var r = confirm("Are you sure you want to delete game data, all saved information will be lost?");
+        if (r == true) {
+
+            fetch("https://fbscanner.io/apis/games/" + s_game.options[s_game.selectedIndex].value + "/", {
+
+              method: 'DELETE', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+
+            .then(() => {
+                console.log('removed');
+                window.alert("Game data deleted.");
+                game_delete.disabled = true;
+                s_game.selectedIndex = "0";
+
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        }
+
     }

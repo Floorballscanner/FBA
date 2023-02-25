@@ -23,6 +23,7 @@ It extends app_layout.html with Django
                         <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.teams.all|join:" - " }}</option>
                     {% endfor %}
                 </select>
+                <img src="{% static 'delete.png' %}" id="analyse_delete" onclick="deleteGameButton()" disabled>
             </div>
         </div>
     </div>
