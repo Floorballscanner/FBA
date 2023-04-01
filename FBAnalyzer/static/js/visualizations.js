@@ -33,8 +33,8 @@
 
                 var date = new Date(gd.gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
-                document.getElementById("stlabel").innerHTML = display;
-                document.getElementById("stperiodNr").innerHTML = "Period " + gd.periodN;
+                document.getElementById('stlabel').innerHTML = display;
+                document.getElementById('stperiodNr').innerHTML = "Period " + gd.periodN;
 
                 fetch("https://fbscanner.io/apis/teams/" + team_1+ "/")
                     .then(response => response.json())
