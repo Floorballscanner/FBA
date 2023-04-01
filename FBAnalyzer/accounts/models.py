@@ -63,7 +63,7 @@ class Game(models.Model):
         return f'Date: {self.date}, User: {self.user}'
 
     def get_time(self):
-        seconds = self.game_data.gameCounter
+        seconds = self.game_data_gameCounter
         minutes = seconds // 60
         hours = minutes // 60
 
