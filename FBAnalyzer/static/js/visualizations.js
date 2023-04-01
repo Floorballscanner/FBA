@@ -31,6 +31,11 @@
                 document.getElementById('sttotxG_1').innerHTML = gd.txG_1;
                 document.getElementById('sttotxG_2').innerHTML = gd.txG_2;
 
+                var date = new Date(gd.gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                document.getElementById("stlabel").innerHTML = display;
+                document.getElementById("stperiodNr").innerHTML = "Period " + gd.periodN;
+
                 fetch("https://fbscanner.io/apis/teams/" + team_1+ "/")
                     .then(response => response.json())
                     .then(data => {
@@ -280,14 +285,14 @@
                 pldata2.addColumn('number', 'xG org.att. ');
 
                 pldata2.addRows([
-                    ['Line 1', gd.tocT2_g[0], Number(gd.xf_g[0]), Number(gd.xa_g[0]), Number(gd.gf_g[0]), Number(gd.ga_g[0]), Number(gd.sf_g[0]), Number(gd.sa_g[0]), Number(gd.p_g[0]), gd.stxGT2L1g_array[0] + gd.stxGT2L1g_array[1], gd.stxGT2L1g_array[2] + gd.stxGT2L1g_array[3] + gd.stxGT2L1g_array[4]],
-                    ['Line 2', gd.tocT2_g[1], Number(gd.xf_g[1]), Number(gd.xa_g[1]), Number(gd.gf_g[1]), Number(gd.ga_g[1]), Number(gd.sf_g[1]), Number(gd.sa_g[1]), Number(gd.p_g[1]), gd.stxGT2L2g_array[0] + gd.stxGT2L2g_array[1], gd.stxGT2L2g_array[2] + gd.stxGT2L2g_array[3] + gd.stxGT2L2g_array[4]],
-                    ['Line 3', gd.tocT2_g[2], Number(gd.xf_g[2]), Number(gd.xa_g[2]), Number(gd.gf_g[2]), Number(gd.ga_g[2]), Number(gd.sf_g[2]), Number(gd.sa_g[2]), Number(gd.p_g[2]), gd.stxGT2L3g_array[0] + gd.stxGT2L3g_array[1], gd.stxGT2L3g_array[2] + gd.stxGT2L3g_array[3] + gd.stxGT2L3g_array[4]],
-                    ['Powerplay', gd.tocT2_g[3], Number(gd.xf_g[3]), Number(gd.xa_g[3]), Number(gd.gf_g[3]), Number(gd.ga_g[3]), Number(gd.sf_g[3]), Number(gd.sa_g[3]), Number(gd.p_g[3]), 0, 0],
-                    ['Pen. Kill', gd.tocT2_g[5], Number(gd.xf_g[5]), Number(gd.xa_g[5]), Number(gd.gf_g[5]), Number(gd.ga_g[5]), Number(gd.sf_g[5]), Number(gd.sa_g[5]), Number(gd.p_g[5]), 0, 0],
-                    ['6vs5', gd.tocT2_g[4], Number(gd.xf_g[4]), Number(gd.xa_g[4]), Number(gd.gf_g[4]), Number(gd.ga_g[4]), Number(gd.sf_g[4]), Number(gd.sa_g[4]), Number(gd.p_g[4]), 0, 0],
-                    ['5vs6', gd.tocT2_g[6], Number(gd.xf_g[6]), Number(gd.xa_g[6]), Number(gd.gf_g[6]), Number(gd.ga_g[6]), Number(gd.sf_g[6]), Number(gd.sa_g[6]), Number(gd.p_g[6]), 0, 0],
-                    ['Team', gd.tocT2_g[7], Number(gd.xf_g[7]), Number(gd.xa_g[7]), Number(gd.gf_g[7]), Number(gd.ga_g[7]), Number(gd.sf_g[7]), Number(gd.sa_g[7]), Number(gd.p_g[7]), gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1], gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4]],
+                    ['Line 1', gd.tocT2_g[0], Number(gd.xfT2_g[0]), Number(gd.xaT2_g[0]), Number(gd.gfT2_g[0]), Number(gd.gaT2_g[0]), Number(gd.sfT2_g[0]), Number(gd.saT2_g[0]), Number(gd.pT2_g[0]), gd.stxGT2L1g_array[0] + gd.stxGT2L1g_array[1], gd.stxGT2L1g_array[2] + gd.stxGT2L1g_array[3] + gd.stxGT2L1g_array[4]],
+                    ['Line 2', gd.tocT2_g[1], Number(gd.xfT2_g[1]), Number(gd.xaT2_g[1]), Number(gd.gfT2_g[1]), Number(gd.gaT2_g[1]), Number(gd.sfT2_g[1]), Number(gd.saT2_g[1]), Number(gd.pT2_g[1]), gd.stxGT2L2g_array[0] + gd.stxGT2L2g_array[1], gd.stxGT2L2g_array[2] + gd.stxGT2L2g_array[3] + gd.stxGT2L2g_array[4]],
+                    ['Line 3', gd.tocT2_g[2], Number(gd.xfT2_g[2]), Number(gd.xaT2_g[2]), Number(gd.gfT2_g[2]), Number(gd.gaT2_g[2]), Number(gd.sfT2_g[2]), Number(gd.saT2_g[2]), Number(gd.pT2_g[2]), gd.stxGT2L3g_array[0] + gd.stxGT2L3g_array[1], gd.stxGT2L3g_array[2] + gd.stxGT2L3g_array[3] + gd.stxGT2L3g_array[4]],
+                    ['Powerplay', gd.tocT2_g[3], Number(gd.xfT2_g[3]), Number(gd.xaT2_g[3]), Number(gd.gfT2_g[3]), Number(gd.gaT2_g[3]), Number(gd.sfT2_g[3]), Number(gd.saT2_g[3]), Number(gd.pT2_g[3]), 0, 0],
+                    ['Pen. Kill', gd.tocT2_g[5], Number(gd.xfT2_g[5]), Number(gd.xaT2_g[5]), Number(gd.gfT2_g[5]), Number(gd.gaT2_g[5]), Number(gd.sfT2_g[5]), Number(gd.saT2_g[5]), Number(gd.pT2_g[5]), 0, 0],
+                    ['6vs5', gd.tocT2_g[4], Number(gd.xfT2_g[4]), Number(gd.xaT2_g[4]), Number(gd.gfT2_g[4]), Number(gd.gaT2_g[4]), Number(gd.sfT2_g[4]), Number(gd.saT2_g[4]), Number(gd.pT2_g[4]), 0, 0],
+                    ['5vs6', gd.tocT2_g[6], Number(gd.xfT2_g[6]), Number(gd.xaT2_g[6]), Number(gd.gfT2_g[6]), Number(gd.gaT2_g[6]), Number(gd.sfT2_g[6]), Number(gd.saT2_g[6]), Number(gd.pT2_g[6]), 0, 0],
+                    ['Team', gd.tocT2_g[7], Number(gd.xfT2_g[7]), Number(gd.xaT2_g[7]), Number(gd.gfT2_g[7]), Number(gd.gaT2_g[7]), Number(gd.sfT2_g[7]), Number(gd.saT2_g[7]), Number(gd.pT2_g[7]), gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1], gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4]],
 
                     ]);
 
