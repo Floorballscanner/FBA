@@ -62,6 +62,13 @@ class Game(models.Model):
     def __str__(self):
         return f'Date: {self.date}, User: {self.user}'
 
+    def get_time(self):
+        seconds = self.game_data.gameCounter
+        minutes = seconds // 60
+        hours = minutes // 60
+
+        return "%02d:%02d:%02d" % (hours, minutes % 60, seconds % 60)
+
 
 class Player(models.Model):
     objects = models.Manager()
