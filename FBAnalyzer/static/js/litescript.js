@@ -1,5 +1,7 @@
-const canvas = document.querySelector("floorball-canvas");
-const context = canvas.getContext("2d");
+// Get the canvas element
+		const canvas = document.getElementById("floorball-canvas");
+		// Get the canvas context for drawing
+		const context = canvas.getContext("2d");
 
 // Draw the floorball game
 function drawGame() {
