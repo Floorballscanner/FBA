@@ -17,18 +17,16 @@ It extends app_layout.html with Django
     <!-- Floorball canvas -->
 	<canvas id="floorball-canvas" width="600" height="400"></canvas>
 
-	<!-- Shot form -->
-	<form id="shot-form">
-		<div class="form-group">
-			<label for="shot-type">Shot type:</label>
-			<select class="form-control" id="shot-type">
-				<option value="wrist shot">Wrist shot</option>
-				<option value="slap shot">Slap shot</option>
-				<option value="snap shot">Snap shot</option>
-			</select>
-		</div>
-		<button type="submit" class="btn btn-primary">Tag Shot</button>
-	</form>
+	<!-- Shot Form Popup Window -->
+    <div id="shot-form" class="bg-light p-3" style="display: none; position: absolute;">
+      <h3>Select Shot Type</h3>
+      <ul>
+        <li><button type="button" class="btn btn-link" data-type="wrist">Wrist Shot</button></li>
+        <li><button type="button" class="btn btn-link" data-type="slap">Slap Shot</button></li>
+        <li><button type="button" class="btn btn-link" data-type="snap">Snap Shot</button></li>
+      </ul>
+    </div>
+
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
