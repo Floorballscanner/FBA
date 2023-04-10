@@ -1,102 +1,51 @@
-// Get the canvas element
-		const canvas = document.getElementById("floorball-canvas");
-		// Get the canvas context for drawing
-		const context = canvas.getContext("2d");
 
-// Draw the floorball game
-function drawGame() {
-    // Draw the rink
-    context.fillStyle = "#FFF";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = "#B2B2B2";
-    context.fillRect(20, 20, canvas.width - 40, canvas.height - 40);
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var img = new Image();
+img.onload = function() {
+    ctx.drawImage(img, 0, 0, 300, 500);
+};
+img.src = "/static/field.png";
 
-    // Draw the net
-    context.fillStyle = "#F00";
-    context.fillRect(20, canvas.height / 2 - 30, 20, 60);
-    context.fillRect(canvas.width - 40, canvas.height / 2 - 30, 20, 60);
-    context.fillStyle = "#FFF";
-    context.fillRect(40, canvas.height / 2 - 20, canvas.width - 80, 40);
-
-    // Draw the ball
-    context.fillStyle = "#000";
-    context.beginPath();
-    context.arc(canvas.width / 2, canvas.height / 2, 10, 0, 2 * Math.PI);
-    context.fill();
-}
-
-// Draw the initial game state
-drawGame();
-
-// Handle canvas click event
-canvas.addEventListener("click", function(event) {
-  // Calculate the click position relative to the canvas
-  const rect = canvas.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-
-  // Create the popup window as a div element
-  const popup = document.createElement("div");
-  popup.classList.add("popup");
-  popup.style.position = "absolute";
-  popup.style.left = `${x}px`;
-  popup.style.top = `${y}px`;
-
-  // Create the list of shot types as an unordered list
-  const shotList = document.createElement("ul");
-  shotList.classList.add("shot-list");
-
-  // Add the shot types to the list as list items
-  const wristShot = document.createElement("li");
-  wristShot.classList.add("shot-type");
-  wristShot.textContent = "Wrist Shot";
-  wristShot.addEventListener("click", function() {
-    recordShot(x, y, "Wrist Shot");
-    popup.remove();
-  });
-  shotList.appendChild(wristShot);
-
-  const slapShot = document.createElement("li");
-  slapShot.classList.add("shot-type");
-  slapShot.textContent = "Slap Shot";
-  slapShot.addEventListener("click", function() {
-    recordShot(x, y, "Slap Shot");
-    popup.remove();
-  });
-  shotList.appendChild(slapShot);
-
-  const snapShot = document.createElement("li");
-  snapShot.classList.add("shot-type");
-  snapShot.textContent = "Snap Shot";
-  snapShot.addEventListener("click", function() {
-    recordShot(x, y, "Snap Shot");
-    popup.remove();
-  });
-  shotList.appendChild(snapShot);
-
-  // Add the shot list to the popup window and append it to the document
-  popup.appendChild(shotList);
-  document.body.appendChild(popup);
-
-  // Close the popup window when user clicks outside of it
-  window.addEventListener("click", function(event) {
-    if (event.target !== popup && !popup.contains(event.target)) {
-      popup.remove();
-    }
-  });
+// Get the input values and update the table
+$("#input1").keyup(function() {
+    var value = $(this).val();
+    $("#player1").text(value);
 });
-
-// Function to record a shot on the canvas
-function recordShot(x, y, shotType) {
-  // Draw the shot on the canvas
-  context.fillStyle = "#00F";
-  context.beginPath();
-  context.arc(x, y, 10, 0, 2 * Math.PI);
-  context.fill();
-  // Display a success message
-  const successMessage = document.createElement("div");
-  successMessage.classList.add("alert", "alert-success", "mt-3");
-  successMessage.textContent = `${playerName} made a ${shotType} from (${x}, ${y})!`;
-  document.body.appendChild(successMessage);
-}
-
+$("#input2").keyup(function() {
+    var value = $(this).val();
+    $("#player2").text(value);
+});
+$("#input3").keyup(function() {
+    var value = $(this).val();
+    $("#player3").text(value);
+});
+$("#input4").keyup(function() {
+    var value = $(this).val();
+    $("#player4").text(value);
+});
+$("#input5").keyup(function() {
+    var value = $(this).val();
+    $("#player5").text(value);
+});
+$("#input6").keyup(function() {
+    var value = $(this).val();
+    $("#player6").text(value);
+});
+$("#input7").keyup(function() {
+    var value = $(this).val();
+    $("#player7").text(value);
+});
+$("#input8").keyup(function() {
+    var value = $(this).val();
+    $("#player8").text(value);
+});
+$("#input9").keyup(function() {
+    var value = $(this).val();
+    $("#player9").text(value);
+});
+$("#input10").keyup(function() {
+    var value = $(this).val();
+    $("#player10").text(value);
+});
+// Add more keyup functions as needed

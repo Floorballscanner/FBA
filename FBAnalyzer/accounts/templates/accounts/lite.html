@@ -12,19 +12,157 @@ It extends app_layout.html with Django
 {% load static %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div class="container mt-5">
+<div class="container-fluid">
 
-    <!-- Floorball canvas -->
-	<canvas id="floorball-canvas" width="600" height="400"></canvas>
+    <!-- First Row -->
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="myCanvas" width="300" height="500"></canvas>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="input1">Player 1:</label>
+                <input type="text" class="form-control" id="input1">
+            </div>
+            <div class="form-group">
+                <label for="input2">Player 2:</label>
+                <input type="text" class="form-control" id="input2">
+            </div>
+            <div class="form-group">
+                <label for="input3">Player 3:</label>
+                <input type="text" class="form-control" id="input3">
+            </div>
+            <div class="form-group">
+                <label for="input4">Player 4:</label>
+                <input type="text" class="form-control" id="input4">
+            </div>
+            <div class="form-group">
+                <label for="input5">Player 5:</label>
+                <input type="text" class="form-control" id="input5">
+            </div>
+            <div class="form-group">
+                <label for="input6">Player 6:</label>
+                <input type="text" class="form-control" id="input6">
+            </div>
+            <div class="form-group">
+                <label for="input7">Player 7:</label>
+                <input type="text" class="form-control" id="input7">
+            </div>
+            <div class="form-group">
+                <label for="input8">Player 8:</label>
+                <input type="text" class="form-control" id="input8">
+            </div>
+            <div class="form-group">
+                <label for="input9">Player 9:</label>
+                <input type="text" class="form-control" id="input9">
+            </div>
+            <div class="form-group">
+                <label for="input10">Player 10:</label>
+                <input type="text" class="form-control" id="input10">
+            </div>
+            <!-- Add more input boxes as needed -->
+        </div>
+    </div>
 
-	<!-- Shot Form Popup Window -->
-    <div id="shot-form" class="bg-light p-3" style="display: none; position: absolute;">
-      <h3>Select Shot Type</h3>
-      <ul>
-        <li><button type="button" class="btn btn-link" data-type="wrist">Wrist Shot</button></li>
-        <li><button type="button" class="btn btn-link" data-type="slap">Slap Shot</button></li>
-        <li><button type="button" class="btn btn-link" data-type="snap">Snap Shot</button></li>
-      </ul>
+    <!-- Second Row -->
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Shots</th>
+                        <th>Goals</th>
+                        <th>Blocked</th>
+                        <th>Saved</th>
+                        <th>Missed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="player1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player3"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player4"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player5"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player6"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player7"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player8"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player9"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="player10"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
