@@ -54,9 +54,10 @@ canvas.addEventListener("click", function(event) {
 
   // Handle clicks outside the popup
   document.addEventListener("click", function(event) {
-    if (!popup.contains(event.target)) {
-      canvas.parentNode.removeChild(popup);
-    }
-  });
+      if (popup && !popup.contains(event.target)) {
+        canvas.parentNode.removeChild(popup);
+      }
+    });
+
 });
 
