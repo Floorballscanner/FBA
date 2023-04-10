@@ -1,0 +1,55 @@
+<!--
+
+This is the analysis - html - page content file. It is shown when the user is logged in and
+presses Analyse data - button at the index - page.
+
+It extends app_layout.html with Django
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+{% load static %}
+{{ request.user.id|json_script:"user_id" }}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Floorball Shot Tagging</h1>
+    <div class="row">
+        <!-- Canvas for the floorball game -->
+        <div class="col-9">
+            <canvas id="floorball-canvas" width="800" height="400"></canvas>
+        </div>
+        <!-- Shot tagging form -->
+        <div class="col-3">
+            <form>
+                <div class="mb-3">
+                    <label for="player-name" class="form-label">Player Name:</label>
+                    <input type="text" class="form-control" id="player-name">
+                </div>
+                <div class="mb-3">
+                    <label for="shot-type" class="form-label">Shot Type:</label>
+                    <select class="form-select" id="shot-type">
+                        <option value="wrist-shot">Wrist Shot</option>
+                        <option value="slap-shot">Slap Shot</option>
+                        <option value="backhand-shot">Backhand Shot</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="shot-location" class="form-label">Shot Location:</label>
+                    <input type="text" class="form-control" id="shot-location">
+                </div>
+                <button type="submit" class="btn btn-primary">Tag Shot</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/static/js/fliigadata.js"></script>
+<script type="text/javascript" src="/static/js/fliigavars.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['table']});
+</script>
+
+{% endblock %}

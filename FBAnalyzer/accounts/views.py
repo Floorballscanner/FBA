@@ -93,9 +93,8 @@ def analyse(request):
 
     return render(request, 'accounts/analysis.html', context = context)
 
-def fliiga(request):
-
-    return render(request, 'accounts/fliiga.html')
+def lite(request):
+    return render(request,'accounts/lite.html')
 
 def add_new_player(request):
 
