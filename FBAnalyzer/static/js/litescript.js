@@ -45,7 +45,7 @@ form.addEventListener("submit", function(event) {
     // Display a success message
     const successMessage = document.createElement("div");
     successMessage.classList.add("alert", "alert-success", "mt-3");
-    successMessage.textContent = ${playerName} made a ${shotType} from ${shotLocation}!;
+    successMessage.textContent = `${playerName} made a ${shotType} from ${shotLocation}!`;
     form.appendChild(successMessage);
     // Reset the form
     form.reset();
