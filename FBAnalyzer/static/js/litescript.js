@@ -30,6 +30,61 @@ drawGame();
 
 // Handle canvas click event
 canvas.addEventListener("click", function(event) {
+    // Calculate the click position relative to the canvas
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Open the shot form popup window
+    const popupWindow = window.open("", "Shot Form", "width=300,height=200");
+
+    // Set the HTML of the popup window
+    popupWindow.document.body.innerHTML = `
+        <h3>Select Shot Type</h3>
+        <form>
+            <div class="form-group">
+                <label for="shot-type">Shot type:</label>
+                <select class="form-control" id="shot-type">
+                    <option value="wrist shot">Wrist shot</option>
+                    <option value="slap shot">Slap shot</option>
+                    <option value="snap shot">Snap shot</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Tag Shot</button>
+        </form>
+    `;
+
+    // Show the popup window
+    popupWindow.document.body.style.display = "block";
+
+    // Handle form submission
+    const form = popupWindow.document.querySelector("form");
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get form input
+        const shotType = form.elements["shot-type"].value;
+
+        // Draw the shot on the canvas
+        context.fillStyle = "#00F";
+        context.beginPath();
+        context.arc(x, y, 10, 0, 2 * Math.PI);
+        context.fill();
+
+        // Display a success message
+        const successMessage = document.createElement("div");
+        successMessage.classList.add("alert", "alert-success", "mt-3");
+        successMessage.textContent = `A ${shotType} shot was tagged from (${x}, ${y})!`;
+        form.appendChild(successMessage);
+
+        // Reset the form and hide the popup
+        form.reset();
+        popupWindow.close();
+    });
+});
+
+// Handle canvas click event
+canvas.addEventListener("click", function(event) {
   // Calculate the click position relative to the canvas
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
