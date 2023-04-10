@@ -30,55 +30,72 @@ drawGame();
 
 // Handle canvas click event
 canvas.addEventListener("click", function(event) {
-    // Calculate the click position relative to the canvas
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+  // Calculate the click position relative to the canvas
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
 
-    // Open the shot form popup window
-    const popupWindow = window.open("", "Shot Form", "width=300,height=200");
+  // Create the popup window as a div element
+  const popup = document.createElement("div");
+  popup.classList.add("popup");
+  popup.style.position = "absolute";
+  popup.style.left = `${x}px`;
+  popup.style.top = `${y}px`;
 
-    // Set the HTML of the popup window
-    popupWindow.document.body.innerHTML = `
-        <h3>Select Shot Type</h3>
-        <form>
-            <div class="form-group">
-                <label for="shot-type">Shot type:</label>
-                <select class="form-control" id="shot-type">
-                    <option value="wrist shot">Wrist shot</option>
-                    <option value="slap shot">Slap shot</option>
-                    <option value="snap shot">Snap shot</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Tag Shot</button>
-        </form>
-    `;
+  // Create the list of shot types as an unordered list
+  const shotList = document.createElement("ul");
+  shotList.classList.add("shot-list");
 
-    // Show the popup window
-    popupWindow.document.body.style.display = "block";
+  // Add the shot types to the list as list items
+  const wristShot = document.createElement("li");
+  wristShot.classList.add("shot-type");
+  wristShot.textContent = "Wrist Shot";
+  wristShot.addEventListener("click", function() {
+    recordShot(x, y, "Wrist Shot");
+    popup.remove();
+  });
+  shotList.appendChild(wristShot);
 
-    // Handle form submission
-    const form = popupWindow.document.querySelector("form");
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
+  const slapShot = document.createElement("li");
+  slapShot.classList.add("shot-type");
+  slapShot.textContent = "Slap Shot";
+  slapShot.addEventListener("click", function() {
+    recordShot(x, y, "Slap Shot");
+    popup.remove();
+  });
+  shotList.appendChild(slapShot);
 
-        // Get form input
-        const shotType = form.elements["shot-type"].value;
+  const snapShot = document.createElement("li");
+  snapShot.classList.add("shot-type");
+  snapShot.textContent = "Snap Shot";
+  snapShot.addEventListener("click", function() {
+    recordShot(x, y, "Snap Shot");
+    popup.remove();
+  });
+  shotList.appendChild(snapShot);
 
-        // Draw the shot on the canvas
-        context.fillStyle = "#00F";
-        context.beginPath();
-        context.arc(x, y, 10, 0, 2 * Math.PI);
-        context.fill();
+  // Add the shot list to the popup window and append it to the document
+  popup.appendChild(shotList);
+  document.body.appendChild(popup);
 
-        // Display a success message
-        const successMessage = document.createElement("div");
-        successMessage.classList.add("alert", "alert-success", "mt-3");
-        successMessage.textContent = `A ${shotType} shot was tagged from (${x}, ${y})!`;
-        form.appendChild(successMessage);
-
-        // Reset the form and hide the popup
-        form.reset();
-        popupWindow.close();
-    });
+  // Close the popup window when user clicks outside of it
+  window.addEventListener("click", function(event) {
+    if (event.target !== popup && !popup.contains(event.target)) {
+      popup.remove();
+    }
+  });
 });
+
+// Function to record a shot on the canvas
+function recordShot(x, y, shotType) {
+  // Draw the shot on the canvas
+  context.fillStyle = "#00F";
+  context.beginPath();
+  context.arc(x, y, 10, 0, 2 * Math.PI);
+  context.fill();
+  // Display a success message
+  const successMessage = document.createElement("div");
+  successMessage.classList.add("alert", "alert-success", "mt-3");
+  successMessage.textContent = `${playerName} made a ${shotType} from (${x}, ${y})!`;
+  document.body.appendChild(successMessage);
+}
