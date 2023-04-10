@@ -35,56 +35,68 @@ canvas.addEventListener("click", function(event) {
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
 
-  // Create the shot list popup
-  const popup = document.createElement("ul");
-  popup.classList.add("shot-list");
-
-  // Build the shot list HTML
-  const shotListHtml = `
-    <li class="shot-list-item" data-shot-type="wrist-shot">Wrist Shot</li>
-    <li class="shot-list-item" data-shot-type="slap-shot">Slap Shot</li>
-    <li class="shot-list-item" data-shot-type="snap-shot">Snap Shot</li>
-  `;
-  popup.innerHTML = shotListHtml;
-
-  // Set the position of the popup to the click location
+  // Create the popup window as a div element
+  const popup = document.createElement("div");
+  popup.classList.add("popup");
+  popup.style.position = "absolute";
   popup.style.left = `${x}px`;
   popup.style.top = `${y}px`;
 
-  // Add popup to the canvas
-  canvas.parentNode.appendChild(popup);
+  // Create the list of shot types as an unordered list
+  const shotList = document.createElement("ul");
+  shotList.classList.add("shot-list");
 
-  // Handle shot selection
-  popup.addEventListener("click", function(event) {
-    // Get the selected shot type
-    const shotType = event.target.getAttribute("data-shot-type");
-    if (shotType) {
-      // Draw the shot on the canvas
-      context.fillStyle = "#00F";
-      context.beginPath();
-      context.arc(x, y, 10, 0, 2 * Math.PI);
-      context.fill();
+  // Add the shot types to the list as list items
+  const wristShot = document.createElement("li");
+  wristShot.classList.add("shot-type");
+  wristShot.textContent = "Wrist Shot";
+  wristShot.addEventListener("click", function() {
+    recordShot(x, y, "Wrist Shot");
+    popup.remove();
+  });
+  shotList.appendChild(wristShot);
 
-      // Display a success message
-      const successMessage = document.createElement("div");
-      successMessage.classList.add("alert", "alert-success", "mt-3");
-      successMessage.textContent = `Made a ${shotType} from (${x}, ${y})!`;
-      canvas.parentNode.appendChild(successMessage);
+  const slapShot = document.createElement("li");
+  slapShot.classList.add("shot-type");
+  slapShot.textContent = "Slap Shot";
+  slapShot.addEventListener("click", function() {
+    recordShot(x, y, "Slap Shot");
+    popup.remove();
+  });
+  shotList.appendChild(slapShot);
 
-      // Remove popup and success message after 3 seconds
-      setTimeout(function() {
-        canvas.parentNode.removeChild(popup);
-        canvas.parentNode.removeChild(successMessage);
-      }, 3000);
+  const snapShot = document.createElement("li");
+  snapShot.classList.add("shot-type");
+  snapShot.textContent = "Snap Shot";
+  snapShot.addEventListener("click", function() {
+    recordShot(x, y, "Snap Shot");
+    popup.remove();
+  });
+  shotList.appendChild(snapShot);
+
+  // Add the shot list to the popup window and append it to the document
+  popup.appendChild(shotList);
+  document.body.appendChild(popup);
+
+  // Close the popup window when user clicks outside of it
+  window.addEventListener("click", function(event) {
+    if (event.target !== popup && !popup.contains(event.target)) {
+      popup.remove();
     }
   });
-
-  // Handle clicks outside the popup
-  document.addEventListener("click", function(event) {
-      if (popup && !popup.contains(event.target)) {
-        canvas.parentNode.removeChild(popup);
-      }
-    });
-
 });
+
+// Function to record a shot on the canvas
+function recordShot(x, y, shotType) {
+  // Draw the shot on the canvas
+  context.fillStyle = "#00F";
+  context.beginPath();
+  context.arc(x, y, 10, 0, 2 * Math.PI);
+  context.fill();
+  // Display a success message
+  const successMessage = document.createElement("div");
+  successMessage.classList.add("alert", "alert-success", "mt-3");
+  successMessage.textContent = `${playerName} made a ${shotType} from (${x}, ${y})!`;
+  document.body.appendChild(successMessage);
+}
 
