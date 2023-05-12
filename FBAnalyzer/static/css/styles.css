@@ -82,7 +82,10 @@ body {
     text-align: center;
     margin: auto;
 }
-
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
 .app-text h1{
     font-size: 25px;
     padding-top: 20%;
