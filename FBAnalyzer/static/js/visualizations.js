@@ -417,6 +417,7 @@
                 window.alert("Game data deleted.");
                 game_delete.disabled = true;
                 s_game.selectedIndex = "0";
+                location.reload();
 
             })
             .catch((error) => {
