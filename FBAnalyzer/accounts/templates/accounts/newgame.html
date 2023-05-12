@@ -13,14 +13,16 @@ It extends app_layout.html with Django
 <div class="container" style="Padding-top: 40px;">
     <div class="row justify-content-center">
         <div class="col-sm-6">
-            <div class="team-selection">
-                <h2>Team 1</h2>
+            <div class="form-group">
+                <label for="T1name">Team 1 name</label>
+                <textarea class="form-control" id="T1name" rows="1"></textarea>
             </div>
             <div class="shot-map">
                 <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
             </div>
-            <div class="team-selection">
-                <h2>Team 2</h2>
+            <div class="form-group">
+                <label for="T2name">Team 1 name</label>
+                <textarea class="form-control" id="T2name" rows="1"></textarea>
             </div>
         </div>
         <div class="col-sm-6">
