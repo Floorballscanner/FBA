@@ -13,31 +13,23 @@ It extends app_layout.html with Django
 <div class="container" style="Padding-top: 40px;">
     <div class="row justify-content-center">
         <div class="col-sm-4">
-            <div class="form-group center" style="width: 50%;">
-                <label for="T1name" style="text-align: center;">Team 1</label>
+            <div class="form-group center mx-auto" style="width: 50%;">
+                <label for="T1name">Team 1</label>
                 <textarea class="form-control" id="T1name" rows="1"></textarea>
             </div>
             <div class="shot-map">
                 <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
             </div>
-            <div class="form-group center" style="width: 50%;">
-                <label for="T2name" style="text-align: center;">Team 2</label>
+            <div class="form-group center mx-auto" style="width: 50%;">
+                <label for="T2name">Team 2</label>
                 <textarea class="form-control" id="T2name" rows="1"></textarea>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="d-flex align-items-center" style="text-align: center;">
-                <h4>Goals</h4>
-            </div>
-            <div class="d-flex align-items-center" style="text-align: center;">
-                <h4 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span></h4>
-            </div>
-            <div class="d-flex align-items-center" style="text-align: center;">
-                <h4>xG</h4>
-            </div>
-            <div class="d-flex align-items-center" style="text-align: center;">
-                <h5 id="gxG"><span id="totxG_1">0</span> - <span id="totxG_2">0</span></h5>
-            </div>
+        <div class="col-sm-4 justify-content-center">
+            <h4>Goals</h4>
+            <h4 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span></h4>
+            <h4>xG</h4>
+            <h5 id="gxG"><span id="totxG_1">0</span> - <span id="totxG_2">0</span></h5>
         </div>
         <div class="col-sm-4" style="text-align: center;">
 
