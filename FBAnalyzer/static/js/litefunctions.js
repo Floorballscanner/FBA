@@ -31,7 +31,7 @@
     var PosX = 0;
     var PosY = 0;
     var myImg = new Image();
-    myImg.src = "/static/field.png";
+    myImg.src = "/static/field-new.png";
     var fWidth = 300; // Width of the shotmap field in pixels
     var fLength = 500; // Length of the shotmap field in pixels
     var name_t1 = document.getElementById("T1name"); // Team 1 name variable
