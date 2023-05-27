@@ -105,7 +105,7 @@
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
 
-        if (dy < 0.5) { // Team 2 shot
+        if (dy > 0.5) { // Team 2 shot
 
             // Update xG
             var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
@@ -139,7 +139,7 @@
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
 
-        if (dy < 0.5) { // Team 2 shot
+        if (dy > 0.5) { // Team 2 shot
 
             // Update xG
             var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
@@ -173,7 +173,7 @@
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
 
-        if (dy < 0.5) { // Team 2 shot
+        if (dy > 0.5) { // Team 2 shot
 
             // Update xG
             var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
@@ -218,7 +218,7 @@
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
 
-        if (dy < 0.5) { // Team 2 shot
+        if (dy > 0.5) { // Team 2 shot
 
             // Update xG
             var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
