@@ -26,11 +26,15 @@ It extends app_layout.html with Django
             </div>
         </div>
         <div class="col-sm-4 my-auto" style="text-align: center;">
-            <br><br>
             <h4>Goals</h4>
-            <h4 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span></h4>
+            <h4 id="gres"><span id="goals_1">0</span> - <span id="goals_2">0</span></h4>
             <h4>xG</h4>
-            <h5 id="gxG"><span id="totxG_1">0</span> - <span id="totxG_2">0</span></h5>
+            <h5 id="gxG"><span id="xG_1">0</span> - <span id="xG_2">0</span></h5>
+            <h4>Shots</h4>
+            <h5 id="gshots"><span id="shots_1">0</span> - <span id="shots_2">0</span></h5>
+            <h4>Shots On Goal</h4>
+            <h5 id="gsog"><span id="sog_1">0</span> - <span id="sog_2">0</span></h5>
+            <br><br>
         </div>
         <div class="col-sm-4" style="text-align: center;">
 
@@ -47,19 +51,7 @@ It extends app_layout.html with Django
   </ul>
 </div>
 
-<div id="shottype" class="shot-type">
-  <ul class="menu-options">
-    <li class="menu-option" onclick="shotTOnetimer()">Turnover | One-timer</li>
-    <li class="menu-option" onclick="shotTDirect()">Turnover | Direct</li>
-    <li class="menu-option" onclick="shotOnetimer()">One-timer</li>
-    <li class="menu-option" onclick="shotRebound()">Rebound</li>
-    <li class="menu-option" onclick="shotDirect()">Direct</li>
-  </ul>
-</div>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="/static/js/variables.js"></script>
-<script type="text/javascript" src="/static/js/gamefunctions.js"></script>
-<script type="text/javascript" src="/static/js/livedata.js"></script>
+<script type="text/javascript" src="/static/js/litefunctions.js"></script>
 
 {% endblock %}
