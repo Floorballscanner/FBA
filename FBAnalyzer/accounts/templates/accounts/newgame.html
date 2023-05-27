@@ -13,7 +13,7 @@ It extends app_layout.html with Django
 <div class="container" style="Padding-top: 40px;">
     <div class="row justify-content-center">
         <div class="col-sm-4">
-            <img src="{% static 'logo_lite.png' %}" height="50px" style="text-align: center;">
+            <img src="{% static 'logo_lite.png' %}" height="50px">
             <div class="form-group text-center mx-auto" style="width: 50%;">
                 <label for="T1name">Team 1</label>
                 <textarea class="form-control" id="T1name" rows="1"></textarea>
@@ -29,7 +29,7 @@ It extends app_layout.html with Django
         <br>
         <div class="col-sm-4 my-auto" style="text-align: center;">
             <br>
-            <img src="{% static 'logo_lite.png' %}" height="50px" style="text-align: center;">
+            <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
             <h4 style="color: #002072;">Goals</h4>
             <h4 id="gres"><span id="goals_1">0</span> - <span id="goals_2">0</span></h4>
             <h4 style="Padding-top: 10px; color: #002072;">xG</h4>
@@ -37,8 +37,9 @@ It extends app_layout.html with Django
             <h4 style="Padding-top: 10px; color: #002072;">Shots</h4>
             <h5 id="gshots"><span id="shots_1">0</span> - <span id="shots_2">0</span></h5>
             <h4 style="Padding-top: 10px; color: #002072;">Shots On Goal</h4>
-            <h5 id="gsog"><span id="sog_1">0</span> - <span id="sog_2">0</span></h5>
-            <br><br>
+            <h5 id="gsog"><span id="sog_1">0</span> - <span id="sog_2">0</span></h5><br>
+            <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
+            <br>
         </div>
         <div class="col-sm-4" style="text-align: center;">
 
