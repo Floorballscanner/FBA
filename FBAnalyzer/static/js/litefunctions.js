@@ -104,11 +104,11 @@
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
-        var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
         if (dy < 0.5) { // Team 2 shot
 
             // Update xG
+            var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
             b = Number(xG_t2.innerHTML);
             a = Math.round((b + dxG) * 100) / 100;
             xG_t2.innerHTML = a;
@@ -121,6 +121,7 @@
         else { // Team 1 shot
 
             // Update xG
+            var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
             b = Number(xG_t1.innerHTML);
             a = Math.round((b + dxG) * 100) / 100;
             xG_t1.innerHTML = a;
@@ -137,11 +138,11 @@
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
-        var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
         if (dy < 0.5) { // Team 2 shot
 
             // Update xG
+            var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
             b = Number(xG_t2.innerHTML);
             a = Math.round((b + dxG) * 100) / 100;
             xG_t2.innerHTML = a;
@@ -154,6 +155,7 @@
         else { // Team 1 shot
 
             // Update xG
+            var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
             b = Number(xG_t1.innerHTML);
             a = Math.round((b + dxG) * 100) / 100;
             xG_t1.innerHTML = a;
@@ -170,11 +172,11 @@
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
-        var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
         if (dy < 0.5) { // Team 2 shot
 
             // Update xG
+            var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
             b = Number(xG_t2.innerHTML);
             a = Math.round((b + dxG) * 100) / 100;
             xG_t2.innerHTML = a;
@@ -193,6 +195,7 @@
         else { // Team 1 shot
 
             // Update xG
+            var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
             b = Number(xG_t1.innerHTML);
             a = Math.round((b + dxG) * 100) / 100;
             xG_t1.innerHTML = a;
@@ -214,11 +217,11 @@
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
-        var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
         if (dy < 0.5) { // Team 2 shot
 
             // Update xG
+            var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
             b = Number(xG_t2.innerHTML);
             a = Math.round((b + dxG) * 100) / 100;
             xG_t2.innerHTML = a;
@@ -241,6 +244,7 @@
         else { // Team 1 shot
 
             // Update xG
+            var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
             b = Number(xG_t1.innerHTML);
             a = Math.round((b + dxG) * 100) / 100;
             xG_t1.innerHTML = a;
