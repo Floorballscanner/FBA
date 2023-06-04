@@ -23,7 +23,7 @@
     var PosX = 0;
     var PosY = 0;
     var myImg = new Image();
-    myImg.src = "/static/field.png";
+    myImg.src = "/static/field-new.png";
     var img = new Image();
     var img1 = new Image();
     var img2 = new Image();
