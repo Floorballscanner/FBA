@@ -23,7 +23,7 @@ window.onload = function() {
                 div2.setAttribute('class', 'col-sm-12');
 
                 const d = document.createElement('h5');
-                d.innerText = data[i].date.substr(1, 8);
+                d.innerText = data[i].date.substr(0, 8);
                 d.style.paddingTop = "10px";
 
                 const h = document.createElement('h1');

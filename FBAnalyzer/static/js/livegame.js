@@ -32,6 +32,7 @@ window.onload = function() {
             }
 
             document.getElementById('h1').style.fontWeight = "bold"
+            document.getElementById('gamedate').innerHTML = data.date.substr(0, 8);
             document.getElementById('homeTeam').innerHTML = data.nameT1;
             document.getElementById('awayTeam').innerHTML = data.nameT2;
 
