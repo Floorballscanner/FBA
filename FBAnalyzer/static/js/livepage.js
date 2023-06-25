@@ -23,12 +23,12 @@ window.onload = function() {
                 div2.setAttribute('class', 'col-sm-12');
 
                 const d = document.createElement('h5');
-                d.innerText = data[i].date;
-                d.style.paddingTop = "5px";
+                d.innerText = data[i].date.substr(1, 8);
+                d.style.paddingTop = "10px";
 
                 const h = document.createElement('h1');
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
-                h.style.paddingTop = "10px";
+                h.style.paddingTop = "5px";
                 h.style.fontWeight = "bold"
 
                 const h2 = document.createElement('h1');
