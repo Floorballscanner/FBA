@@ -62,6 +62,7 @@ It extends app_layout.html with Django
                     <h2 id="label">00:00:00</h2>
                     <h4 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span> (<span id="totp_1">0</span> - <span id="totp_2">0</span>)</h4>
                     <h5 id="gxG">xG <span id="totxG_1">0</span> - <span id="totxG_2">0</span> (<span id="totxGp_1">0</span> - <span id="totxGp_2">0</span>)</h5>
+                    <h5 id="gxGOT">xGOT <span id="totxGOT_1">0</span> - <span id="totxGOT_2">0</span> (<span id="totxGOTp_1">0</span> - <span id="totxGOTp_2">0</span>)</h5>
                 </div>
             </div>
             <div class="row justify-content-center" style="Padding-top: 0px;">
@@ -104,7 +105,7 @@ It extends app_layout.html with Django
             <div class="row justify-content-center" style="Padding-top: 30px;">
                 <div class="pos-input">
                     <p>Position</p>
-                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="20" alt="order" style="Padding: 0px">
+                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="15" alt="order" style="Padding: 0px">
                     <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
                         <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary"><span id="name_t2_2">Team 2</span></button>
                     </div>

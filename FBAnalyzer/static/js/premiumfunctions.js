@@ -403,6 +403,8 @@
                 tgtp_1.innerHTML = "0";
                 txGp_1.innerHTML = "0";
                 txGp_2.innerHTML = "0";
+                txGOTp_1.innerHTML = "0";
+                txGOTp_2.innerHTML = "0";
 
                 var ctx = cnvs.getContext("2d");
                 ctx.drawImage(myImg,0,0,fWidth,fLength);
@@ -417,6 +419,7 @@
                 dataShot = 0;
                 dataRes = 0;
                 dataxG = 0;
+                dataxGOT = 0;
                 shiftPos_2 = 0;
                 stT1Teamp_array = [0,0,0,0,0];
                 stT2Teamp_array = [0,0,0,0,0];
@@ -794,7 +797,6 @@
          }
     }
 
-// Etsii mihin kohtaa canvasia painetaan
     function FindPosition(oElement)
     {
       if(typeof( oElement.offsetParent ) != "undefined")
@@ -848,19 +850,9 @@
             PosY = PosY - ImgPos[1];
         }
     }
-// Tässä välissä saadaan result
+
     function shotMissed() {
         Draw(PosX,PosY,1);
-        dataxG = 0;
-    }
-
-    function shotBlocked() {
-        Draw(PosX,PosY,3);
-        dataxG = 0;
-    }
-
-    function shotSaved() {
-        Draw(PosX,PosY,2);
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
@@ -893,7 +885,7 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
-                
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -909,7 +901,7 @@
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
 
                 xf_g[7].innerHTML = xGf_g[7];
-                
+
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -918,7 +910,7 @@
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
-                
+
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -976,7 +968,7 @@
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
 
-                
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -986,7 +978,7 @@
 
                  xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
 
-                
+
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
 
                 xf_p[7].innerHTML = xGf_p[7];
@@ -994,7 +986,7 @@
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
 
                 xf_g[7].innerHTML = xGf_g[7];
-                
+
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -1003,7 +995,7 @@
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
-                
+
                 dataxG = dxG;
                 console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
@@ -1061,7 +1053,7 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
-                
+
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
@@ -1070,7 +1062,7 @@
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
 
-                
+
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
                 xa_p[7].innerHTML = xGa_p[7];
@@ -1079,7 +1071,7 @@
 
                 xa_g[7].innerHTML = xGa_g[7];
 
-                
+
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
 
                 xfT2_p[7].innerHTML = xGfT2_p[7];
@@ -1088,7 +1080,7 @@
 
                 xfT2_g[7].innerHTML = xGfT2_g[7];
 
-                
+
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -1136,6 +1128,720 @@
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+
+                xa_p[7].innerHTML = xGa_p[7];
+
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+
+                xa_g[7].innerHTML = xGa_g[7];
+
+
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
+                dataxG = dxG;
+                console.log(dataxG)
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+            }
+        }
+
+    }
+
+    function shotBlocked() {
+        Draw(PosX,PosY,3);
+
+        var dx = PosX / fWidth;
+        var dy = PosY / fLength;
+
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_g[7] = Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+
+                xf_p[7].innerHTML = xGf_p[7];
+
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+
+                xf_g[7].innerHTML = xGf_g[7];
+
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
+
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                // undo_array.push([xGaT2_g[line_on_2 - 1],dxG])
+
+                 xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+
+                xf_p[7].innerHTML = xGf_p[7];
+
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+
+                xf_g[7].innerHTML = xGf_g[7];
+
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
+
+                dataxG = dxG;
+                console.log(dataxG)
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+            }
+        }
+
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
+                    dxG = dxG * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+
+                xa_p[7].innerHTML = xGa_p[7];
+
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+
+                xa_g[7].innerHTML = xGa_g[7];
+
+
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
+
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+
+                xa_p[7].innerHTML = xGa_p[7];
+
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+
+                xa_g[7].innerHTML = xGa_g[7];
+
+
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
+                dataxG = dxG;
+                console.log(dataxG)
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+            }
+        }
+    }
+
+    function shotSaved() {
+        Draw(PosX,PosY,2);
+
+        var dx = PosX / fWidth;
+        var dy = PosY / fLength;
+
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
+                
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_g[7] = Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+
+                xf_p[7].innerHTML = xGf_p[7];
+
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+
+                xf_g[7].innerHTML = xGf_g[7];
+                
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
+                
+                dataxG = dxG;
+                dataxGOT = dxGOT;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+                var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                // undo_array.push([xGaT2_g[line_on_2 - 1],dxG])
+
+                 xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
+                
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+
+                xf_p[7].innerHTML = xGf_p[7];
+
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+
+                xf_g[7].innerHTML = xGf_g[7];
+                
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
+                
+                dataxG = dxG;
+                dataxGOT = dxGOT;
+                console.log(dataxG)
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+            }
+        }
+
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+                var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+                
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+                
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+
+                xa_p[7].innerHTML = xGa_p[7];
+
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+
+                xa_g[7].innerHTML = xGa_g[7];
+
+                
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
+                
+                dataxG = dxG;
+                dataxGOT = dxGOT;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
@@ -1212,21 +1918,27 @@
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
@@ -1269,11 +1981,11 @@
                 xaT2_g[7].innerHTML = xGaT2_g[7];
                 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
-
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -1330,21 +2042,27 @@
 
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+                var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
@@ -1354,7 +2072,6 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
-
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1373,7 +2090,6 @@
 
                 xf_g[7].innerHTML = xGf_g[7];
 
-
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -1383,6 +2099,7 @@
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
@@ -1443,21 +2160,27 @@
 
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+                var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
-                if (dataType == 1) { // Turnover direct x 1,25 xG
-                    dxG = dxG * 1.25;
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
@@ -1468,7 +2191,6 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
-
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
@@ -1476,7 +2198,6 @@
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
-
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
@@ -1486,7 +2207,6 @@
 
                 xa_g[7].innerHTML = xGa_g[7];
 
-
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
 
                 xfT2_p[7].innerHTML = xGfT2_p[7];
@@ -1495,8 +2215,8 @@
 
                 xfT2_g[7].innerHTML = xGfT2_g[7];
 
-
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
@@ -1557,21 +2277,27 @@
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
@@ -1611,6 +2337,7 @@
 
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
@@ -2477,8 +3204,7 @@
         }
         shotCounter++;
     }
-    
-// TÄSSÄ VAIHEESSA MEILLÄ ON KAIKKI DATA
+
     function shotTOnetimer() {
         dataType = 0;
         if (line_on < 4 && line_on_2 < 4) {
