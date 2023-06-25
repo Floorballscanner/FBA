@@ -1621,9 +1621,17 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
 
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
                 b = Number(txGp_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
@@ -1714,9 +1722,17 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
 
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
                 b = Number(txGp_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
@@ -1801,13 +1817,21 @@
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
-                b = Number(txG_2.innerHTML);
+                b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
-                txG_2.innerHTML = a;
+                txG_1.innerHTML = a;
 
-                b = Number(txGp_2.innerHTML);
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
-                txGp_2.innerHTML = a;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
@@ -1892,13 +1916,21 @@
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
 
-                b = Number(txG_2.innerHTML);
+                b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
-                txG_2.innerHTML = a;
+                txG_1.innerHTML = a;
 
-                b = Number(txGp_2.innerHTML);
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
-                txGp_2.innerHTML = a;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
@@ -1991,9 +2023,17 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
 
-                c = Number(txGp_1.innerHTML);
-                d = Math.round((c + dxG) * 100) / 100;
-                txGp_1.innerHTML = d;
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
@@ -2109,9 +2149,17 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
 
-                c = Number(txGp_1.innerHTML);
-                d = Math.round((c + dxG) * 100) / 100;
-                txGp_1.innerHTML = d;
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
@@ -2222,13 +2270,21 @@
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, xGaT2_g[7]]);
 
-                b = Number(txG_2.innerHTML);
+                b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
-                txG_2.innerHTML = a;
+                txG_1.innerHTML = a;
 
-                c = Number(txGp_2.innerHTML);
-                d = Math.round((c + dxG) * 100) / 100;
-                txGp_2.innerHTML = d;
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
@@ -2343,13 +2399,21 @@
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, xGaT2_g[7]]);
 
-                b = Number(txG_2.innerHTML);
+                b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
-                txG_2.innerHTML = a;
+                txG_1.innerHTML = a;
 
-                b = Number(txGp_2.innerHTML);
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
-                txGp_2.innerHTML = a;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
