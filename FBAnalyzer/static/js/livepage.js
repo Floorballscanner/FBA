@@ -22,6 +22,10 @@ window.onload = function() {
                 const div2 = document.createElement('div');
                 div2.setAttribute('class', 'col-sm-12');
 
+                const d = document.createElement('h5');
+                d.innerText = data[i].date;
+                d.style.paddingTop = "5px";
+
                 const h = document.createElement('h1');
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
                 h.style.paddingTop = "10px";
@@ -67,6 +71,7 @@ window.onload = function() {
                 }
                 else {h.style.paddingTop = "55px";}
 
+                div2.appendChild(d);
                 div2.appendChild(h);
                 div2.appendChild(h2);
                 div2.appendChild(h3);
