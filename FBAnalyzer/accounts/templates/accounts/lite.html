@@ -7,7 +7,7 @@ It extends app_layout.html with Django
 
 -->
 
-{% extends 'app_layout.html' %}
+<!-- {% extends 'app_layout.html' %} -->
 {% block content %}
 {% load static %}
 {{ request.user.id|json_script:"user_id" }}
