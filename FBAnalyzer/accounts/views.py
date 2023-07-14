@@ -96,6 +96,9 @@ def analyse(request):
 def lite(request):
     return render(request,'accounts/newgame.html')
 
+def lite_carousel(request):
+    return render(request,'accounts/lite.html')
+
 def add_new_player(request):
 
     """View function for adding a new player to the team."""

@@ -12,159 +12,59 @@ It extends app_layout.html with Django
 {% load static %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div class="container-fluid">
-
-    <!-- First Row -->
-    <div class="row">
-        <div class="col-md-6">
-            <canvas id="myCanvas" width="300" height="500"></canvas>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="item bg bg1 active">
+        <div class="container" style="text-align: center;">
+          <div class="form-group text-center mx-auto" style="width: 50%; Padding-top: 30px;">
+              <label for="T2name">Team 2</label>
+              <textarea class="form-control" id="T2name" rows="1"></textarea>
+          </div>
+          <div class="shot-map">
+              <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
+          </div>
+          <div class="form-group text-center mx-auto" style="width: 50%;">
+              <label for="T1name">Team 1</label>
+              <textarea class="form-control" id="T1name" rows="1"></textarea>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="input1">Player 1:</label>
-                <input type="text" class="form-control" id="input1">
-            </div>
-            <div class="form-group">
-                <label for="input2">Player 2:</label>
-                <input type="text" class="form-control" id="input2">
-            </div>
-            <div class="form-group">
-                <label for="input3">Player 3:</label>
-                <input type="text" class="form-control" id="input3">
-            </div>
-            <div class="form-group">
-                <label for="input4">Player 4:</label>
-                <input type="text" class="form-control" id="input4">
-            </div>
-            <div class="form-group">
-                <label for="input5">Player 5:</label>
-                <input type="text" class="form-control" id="input5">
-            </div>
-            <div class="form-group">
-                <label for="input6">Player 6:</label>
-                <input type="text" class="form-control" id="input6">
-            </div>
-            <div class="form-group">
-                <label for="input7">Player 7:</label>
-                <input type="text" class="form-control" id="input7">
-            </div>
-            <div class="form-group">
-                <label for="input8">Player 8:</label>
-                <input type="text" class="form-control" id="input8">
-            </div>
-            <div class="form-group">
-                <label for="input9">Player 9:</label>
-                <input type="text" class="form-control" id="input9">
-            </div>
-            <div class="form-group">
-                <label for="input10">Player 10:</label>
-                <input type="text" class="form-control" id="input10">
-            </div>
-            <!-- Add more input boxes as needed -->
+      </div>
+      <div class="item bg bg2">
+        <div class="container" style="text-align: center;">
+          <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
+          <h4 style="Padding-top: 30px; color: #002072;">Goals</h4>
+          <h4 id="gres"><span id="goals_1">0</span> - <span id="goals_2">0</span></h4>
+          <h4 style="Padding-top: 10px; color: #002072;">xG</h4>
+          <h5 id="gxG"><span id="xG_1">0</span> - <span id="xG_2">0</span></h5>
+          <h4 style="Padding-top: 10px; color: #002072;">Shots</h4>
+          <h5 id="gshots"><span id="shots_1">0</span> - <span id="shots_2">0</span></h5>
+          <h4 style="Padding-top: 10px; color: #002072;">Shots On Goal</h4>
+          <h5 style="Padding-bottom: 30px;" id="gsog"><span id="sog_1">0</span> - <span id="sog_2">0</span></h5>
+          <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
         </div>
+      </div>
+      <div class="item bg bg1">
+        <div class="container" style="text-align: center;">
+          <h3>Free LITE version</h3></br>
+          <p>Type in your teams, click on the rink and start tagging your shots!</p>
+          <p>With the Floorball Scanner LITE version you can easily map your shots and analyze game.</p></br>
+          <ul>
+              <li>Shotmap</li>
+              <li>Goals</li>
+              <li>Total Shots and Shots on Goal</li>
+              <li>Expected Goals (xG)</li>
+          </ul>
+          <p>Interested in more sophisticated data, such as possessions, line and player data? <a href="/signup">Contact Us</a> and ask for a free test licence.</p></br>
+        </div>
+      </div>
     </div>
-
-    <!-- Second Row -->
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Player</th>
-                        <th>Shots</th>
-                        <th>Goals</th>
-                        <th>Blocked</th>
-                        <th>Saved</th>
-                        <th>Missed</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id="player1"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player2"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player3"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player4"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player5"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player6"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player7"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player8"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player9"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="player10"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

@@ -37,6 +37,7 @@ urlpatterns = [
     path('accounts/edit_data/', views.edit_data, name="edit-data"),
     path('accounts/analyse/', views.analyse, name="analyse-data"),
     path('lite/', views.lite, name="lite-game"),
+    path('lite_carousel/', views.lite_carousel, name="lite-carousel"),
     path('apis/teamlist/', views.TeamList.as_view(), name="team-list"),
     path('apis/playerlist/', views.PlayerList.as_view(), name="player-list"),
     path('accounts/my_team/add_new_player/', views.add_new_player, name="add-new-player"),
