@@ -7,8 +7,8 @@ It extends app_layout.html with Django
 
 -->
 
-<!-- {% extends 'app_layout.html' %}
-{% block content %} -->
+{% extends 'app_layout.html' %}
+{% block content %}
 {% load static %}
 {{ request.user.id|json_script:"user_id" }}
 
@@ -19,22 +19,18 @@ It extends app_layout.html with Django
       <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="item bg bg1 active">
+      <div class="carousel-item active">
         <div class="container" style="text-align: center;">
-          <div class="form-group text-center mx-auto" style="width: 50%; Padding-top: 30px;">
-              <label for="T2name">Team 2</label>
-              <textarea class="form-control" id="T2name" rows="1"></textarea>
-          </div>
+          <label for="T2name">Team 2</label>
+          <textarea class="form-control" id="T2name" rows="1"></textarea>
           <div class="shot-map">
               <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
           </div>
-          <div class="form-group text-center mx-auto" style="width: 50%;">
-              <label for="T1name">Team 1</label>
-              <textarea class="form-control" id="T1name" rows="1"></textarea>
-          </div>
+          <label for="T1name">Team 1</label>
+          <textarea class="form-control" id="T1name" rows="1"></textarea>
         </div>
       </div>
-      <div class="item bg bg2">
+      <div class="carousel-item">
         <div class="container" style="text-align: center;">
           <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
           <h4 style="Padding-top: 30px; color: #002072;">Goals</h4>
@@ -48,7 +44,7 @@ It extends app_layout.html with Django
           <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
         </div>
       </div>
-      <div class="item bg bg1">
+      <div class="carousel-item">
         <div class="container" style="text-align: center;">
           <h3>Free LITE version</h3></br>
           <p>Type in your teams, click on the rink and start tagging your shots!</p>
@@ -74,4 +70,4 @@ It extends app_layout.html with Django
     google.charts.load('current', {'packages':['table']});
 </script>
 
-<!-- {% endblock %} -->
+{% endblock %}
