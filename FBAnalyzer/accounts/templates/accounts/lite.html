@@ -19,9 +19,9 @@ It extends app_layout.html with Django
       <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item active">
+      <div class="carousel-item active" data-interval="false">
         <div class="container" style="text-align: center;">
-          <label for="T2name">Team 2</label>
+          <label for="T2name" style="Padding-top: 30px;">Team 2</label>
           <textarea class="form-control" id="T2name" rows="1"></textarea>
           <div class="shot-map">
               <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
@@ -29,9 +29,11 @@ It extends app_layout.html with Django
           <label for="T1name">Team 1</label>
           <textarea class="form-control" id="T1name" rows="1"></textarea>
         </div>
+        <br>
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" data-interval="false">
         <div class="container" style="text-align: center;">
+          <br>
           <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
           <h4 style="Padding-top: 30px; color: #002072;">Goals</h4>
           <h4 id="gres"><span id="goals_1">0</span> - <span id="goals_2">0</span></h4>
@@ -42,9 +44,10 @@ It extends app_layout.html with Django
           <h4 style="Padding-top: 10px; color: #002072;">Shots On Goal</h4>
           <h5 style="Padding-bottom: 30px;" id="gsog"><span id="sog_1">0</span> - <span id="sog_2">0</span></h5>
           <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px">
+          <br><br>
         </div>
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" data-interval="false">
         <div class="container" style="text-align: center;">
           <h3>Free LITE version</h3></br>
           <p>Type in your teams, click on the rink and start tagging your shots!</p>
@@ -56,18 +59,30 @@ It extends app_layout.html with Django
               <li>Expected Goals (xG)</li>
           </ul>
           <p>Interested in more sophisticated data, such as possessions, line and player data? <a href="/signup">Contact Us</a> and ask for a free test licence.</p></br>
+          </br></br>
         </div>
       </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<div id="shotmenu" class="shot-menu">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotMissed()">Missed</li>
+    <li class="menu-option" onclick="shotSaved()">Saved</li>
+    <li class="menu-option" onclick="shotBlocked()">Blocked</li>
+    <li class="menu-option" onclick="shotGoal()">Goal</li>
+  </ul>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="/static/js/litescript.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'bar']});
-    google.charts.load('current', {'packages':['table']});
-</script>
+<script type="text/javascript" src="/static/js/litefunctions.js"></script>
 
 {% endblock %}
