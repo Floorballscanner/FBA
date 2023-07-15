@@ -12,7 +12,7 @@ It extends app_layout.html with Django
 {% load static %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div id="myCarousel" class="carousel carousel-dark slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -21,13 +21,17 @@ It extends app_layout.html with Django
     <div class="carousel-inner">
       <div class="carousel-item active" data-interval="false">
         <div class="container" style="text-align: center;">
-          <label for="T2name" style="Padding-top: 30px;">Team 2</label>
-          <textarea class="form-control" id="T2name" rows="1"></textarea>
+          <div class="form-group text-center mx-auto" style="width: 50%; Padding-top: 30px;">
+            <label for="T2name" style="Padding-top: 30px;">Team 2</label>
+            <textarea class="form-control" id="T2name" rows="1"></textarea>
+          </div>
           <div class="shot-map">
               <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
           </div>
-          <label for="T1name">Team 1</label>
-          <textarea class="form-control" id="T1name" rows="1"></textarea>
+          <div class="form-group text-center mx-auto" style="width: 50%; Padding-top: 30px;">
+            <label for="T1name">Team 1</label>
+            <textarea class="form-control" id="T1name" rows="1"></textarea>
+          </div>
         </div>
         <br>
       </div>
@@ -84,5 +88,15 @@ It extends app_layout.html with Django
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/static/js/litefunctions.js"></script>
+
+<style>
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23002072' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23002072' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+</style>
 
 {% endblock %}
