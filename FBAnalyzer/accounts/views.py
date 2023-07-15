@@ -94,10 +94,7 @@ def analyse(request):
     return render(request, 'accounts/analysis.html', context = context)
 
 def lite(request):
-    return render(request,'accounts/newgame.html')
-
-def lite_carousel(request):
-    return render(request,'accounts/lite.html')
+    return render(request, 'accounts/lite.html')
 
 def add_new_player(request):
 
