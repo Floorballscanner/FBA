@@ -93,7 +93,7 @@
         {
             menu.style.top = (PosY-(fLength/4)) + "px";
         }
-        menu.style.left = PosX + "px";
+        menu.style.left = (fWidth / 3) + "px";
 
         PosX = PosX - ImgPos[0];
         PosY = PosY - ImgPos[1];
