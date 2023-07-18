@@ -93,15 +93,10 @@
         {
             menu.style.top = (PosY-(fLength/4)) + "px";
         }
-        menu.style.left = (ImgPos[0] + (fWidth / 3)) + "px";
+        menu.style.left = (ImgPos[0] + (fWidth / 4)) + "px";
 
         PosX = PosX - ImgPos[0];
         PosY = PosY - ImgPos[1];
-
-        console.log("PosX: " + PosX)
-        console.log("PosY: " + PosY)
-        console.log(fWidth)
-        console.log(fLength)
     }
 
     function shotMissed() {
