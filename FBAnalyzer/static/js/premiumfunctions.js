@@ -301,33 +301,6 @@
                     initializeLive()
                 }
 
-                // Crate a new Game instance
-
-                data = { "date" : document.getElementById("select-date").value,
-                        "user" : user_id,
-                        "teams" : [s_T1.value, s_T2.value],
-                        "game_data" : data_object,
-                };
-
-                fetch("https://fbscanner.io/apis/games/" , {
-
-                  method: 'POST', // or 'PUT'
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken,
-                  },
-                  body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                    console.log("New Game instance created")
-                    game_id = data.id;
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-
             } else {
             }
         }
@@ -2918,7 +2891,6 @@
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
-                updateSaveData(); // Update data and save to background
                 if (shotCounter > 1) {
                     document.getElementById("undo").disabled = false;
                 }
@@ -2974,7 +2946,6 @@
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
-            updateSaveData(); // Update data and save to background
             if (shotCounter > 1) {
                 document.getElementById("undo").disabled = false;
             }
@@ -3262,7 +3233,6 @@
             plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
 
-        updateSaveData(); // Update data and save to background
         if (shotCounter > 1) {
             document.getElementById("undo").disabled = false;
         }
@@ -3363,7 +3333,7 @@
 
         if (r == true) {
 
-            // Possession data
+            // Shot data
 
             i = 1;
             saveNextS(i);
@@ -3421,55 +3391,33 @@
                 }
             }
 
-            // Shot data
-/*            i = 1;
-            saveNextT(i);
+            // Crate a new Game instance
 
-            function saveNextT(i) {
+            data = { "date" : document.getElementById("select-date").value,
+                    "user" : user_id,
+                    "teams" : [s_T1.value, s_T2.value],
+                    "game_data" : data_object,
+            };
 
-                if (i<premTimeData.length) {
-                    t_data = {
-                        "user" : premTimeData[i][0],
-                        "game" : premTimeData[i][1],
-                        "time" : premTimeData[i][2],
-                        "position" : premTimeData[i][3],
-                        "lines" : [premTimeData[i][4],premTimeData[i][5]],
-                        "T1LW" : premTimeData[i][6],
-                        "T1C" : premTimeData[i][7],
-                        "T1RW" : premTimeData[i][8],
-                        "T1LD" : premTimeData[i][9],
-                        "T1RD" : premTimeData[i][10],
-                        "T1G" : premTimeData[i][11],
-                        "T2LW" : premTimeData[i][12],
-                        "T2C" : premTimeData[i][13],
-                        "T2RW" : premTimeData[i][14],
-                        "T2LD" : premTimeData[i][15],
-                        "T2RD" : premTimeData[i][16],
-                        "T2G" : premTimeData[i][17],
-                    }
+            fetch("https://fbscanner.io/apis/games/" , {
 
-                    // Save data to database
-                    fetch('https://fbscanner.io/apis/times/', {
-
-                    method: 'POST', // or 'PUSH'
-                    headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken,
-                    },
-                    body: JSON.stringify(t_data),
-                    })
-
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data);
-                        i++;
-                        saveNextT(i);
-                    })
-                    .catch((error) => {
-                    console.error('Error:', error);
-                    });
-                }
-            }*/
+              method: 'POST', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+              },
+              body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                console.log("New Game instance created")
+                game_id = data.id;
+                updateSaveData()
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
             downloadCsv()
 
@@ -4333,9 +4281,6 @@
             xfT2_g[i].innerHTML = undo_object.xfT2_g[i];
             xaT2_g[i].innerHTML = undo_object.xaT2_g[i];
         }
-        
-
-        updateSaveData();
 
         document.getElementById("undo").disabled = true; // Disable Undo-button
     }
