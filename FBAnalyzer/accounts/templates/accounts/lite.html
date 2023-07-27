@@ -1,0 +1,103 @@
+<!--
+
+This is the analysis - html - page content file. It is shown when the user is logged in and
+presses Analyse data - button at the index - page.
+
+It extends app_layout.html with Django
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+{% load static %}
+{{ request.user.id|json_script:"user_id" }}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel"  data-interval="false">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="container" style="text-align: center;">
+          <div class="form-group text-center mx-auto" style="width: 50%; Padding-top: 30px;">
+            <label for="T2name">Team 2</label>
+            <textarea class="form-control" id="T2name" rows="1"></textarea>
+          </div>
+          <div class="shot-map">
+              <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
+          </div>
+          <div class="form-group text-center mx-auto" style="width: 50%; Padding-top: 10px;">
+            <label for="T1name">Team 1</label>
+            <textarea class="form-control" id="T1name" rows="1"></textarea>
+          </div>
+        </div>
+        <br>
+      </div>
+      <div class="carousel-item">
+        <div class="container">
+          <div class="d-flex flex-column" style="text-align: center; margin: 25%;">
+            <img src="{% static 'logo_lite.png' %}" width="200px" class="mx-auto">
+            <h4 style="Padding-top: 30px; color: #002072;">Goals</h4>
+            <h4 id="gres"><span id="goals_1">0</span> - <span id="goals_2">0</span></h4>
+            <h4 style="Padding-top: 10px; color: #002072;">xG</h4>
+            <h5 id="gxG"><span id="xG_1">0</span> - <span id="xG_2">0</span></h5>
+            <h4 style="Padding-top: 10px; color: #002072;">Shots</h4>
+            <h5 id="gshots"><span id="shots_1">0</span> - <span id="shots_2">0</span></h5>
+            <h4 style="Padding-top: 10px; color: #002072;">Shots On Goal</h4>
+            <h5 style="Padding-bottom: 30px;" id="gsog"><span id="sog_1">0</span> - <span id="sog_2">0</span></h5>
+            <img src="{% static 'logo_lite.png' %}" width="200px" class="mx-auto">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container">
+          <div class="d-flex flex-column" style="text-align: center; margin: 25%;">
+            <h3>Free LITE version</h3></br>
+            <p>Type in your teams, click on the rink and start tagging your shots!</p>
+            <p>With the Floorball Scanner LITE version you can easily map your shots and analyze game.</p></br>
+            <ul>
+                <li>Shotmap</li>
+                <li>Goals</li>
+                <li>Total Shots and Shots on Goal</li>
+                <li>Expected Goals (xG)</li>
+            </ul>
+            <p>Interested in more sophisticated data, such as possessions, line and player data? <a href="/signup">Contact Us</a> and ask for a free test licence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<div id="shotmenu" class="shot-menu">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotMissed()">Missed</li>
+    <li class="menu-option" onclick="shotSaved()">Saved</li>
+    <li class="menu-option" onclick="shotBlocked()">Blocked</li>
+    <li class="menu-option" onclick="shotGoal()">Goal</li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/static/js/litefunctions.js"></script>
+
+<style>
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23002072' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23002072' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+</style>
+
+{% endblock %}

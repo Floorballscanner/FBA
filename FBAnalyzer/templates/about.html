@@ -12,11 +12,16 @@ This is the about - infopage of the application.
         <div class="row">
             <div class="col-sm-12">
                 </br></br>
-                <h2>What is Floorball Scanner?</h2>
-                </br>
+                {% load static %}
+                <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
+                <h2>What is Floorball Scanner?</h2></br>
                 <p>Floorball Scanner gives you insight into your team's performance in real-time during
                 the game. You are able to see how each line performs and take actions based on the data.</p>
                 </br>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/faYZwFfryfc" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                </br></br>
                 <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px">
             </div>
         </div>
@@ -33,7 +38,8 @@ This is the about - infopage of the application.
         </br></br></br></br>
         <div class="row">
             <div class="col-sm-6">
-                <img class="img-fluid" src="{% static 'textresult.jpg' %}">
+                <img src="{% static 'aboutpage_players.png' %}" height="300px">
+                <img src="{% static 'aboutpage_lines.png' %}" height="300px">
             </div>
             <div class="col-sm-6">
                 <h3>Advanced statistics</h3></br>
@@ -50,7 +56,7 @@ This is the about - infopage of the application.
                 are doing against the opponent.</p>
             </div>
             <div class="col-sm-6">
-                <img class="img-fluid" src="{% static 'graphs.jpg' %}">
+                <img class="img-fluid" src="{% static 'aboutpage_graphs.png' %}">
             </div>
         </div>
         </br></br>

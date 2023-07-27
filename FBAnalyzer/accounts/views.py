@@ -73,6 +73,29 @@ def edit_teams(request):
 
     return render(request, 'accounts/edit_teams.html', context=context)
 
+def analyse(request):
+
+    if request.user.id == 3 or request.user.id == 2:
+        games = Game.objects.order_by('date')
+    else:
+        games = Game.objects.filter(user=request.user).order_by('date')
+
+    teams = Team.objects.all().order_by('name')
+    levels = Level.objects.all().order_by('name')
+    players = Player.objects.all().order_by('jersey_number')
+
+    context = {
+        'teams': teams,
+        'levels': levels,
+        'players': players,
+        'games': games,
+    }
+
+    return render(request, 'accounts/analysis.html', context = context)
+
+def lite(request):
+    return render(request, 'accounts/lite.html')
+
 def add_new_player(request):
 
     """View function for adding a new player to the team."""

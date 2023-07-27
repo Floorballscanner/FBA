@@ -403,6 +403,8 @@
                 tgtp_1.innerHTML = "0";
                 txGp_1.innerHTML = "0";
                 txGp_2.innerHTML = "0";
+                txGOTp_1.innerHTML = "0";
+                txGOTp_2.innerHTML = "0";
 
                 var ctx = cnvs.getContext("2d");
                 ctx.drawImage(myImg,0,0,fWidth,fLength);
@@ -417,6 +419,7 @@
                 dataShot = 0;
                 dataRes = 0;
                 dataxG = 0;
+                dataxGOT = 0;
                 shiftPos_2 = 0;
                 stT1Teamp_array = [0,0,0,0,0];
                 stT2Teamp_array = [0,0,0,0,0];
@@ -794,7 +797,6 @@
          }
     }
 
-// Etsii mihin kohtaa canvasia painetaan
     function FindPosition(oElement)
     {
       if(typeof( oElement.offsetParent ) != "undefined")
@@ -848,19 +850,9 @@
             PosY = PosY - ImgPos[1];
         }
     }
-// Tässä välissä saadaan result
+
     function shotMissed() {
         Draw(PosX,PosY,1);
-        dataxG = 0;
-    }
-
-    function shotBlocked() {
-        Draw(PosX,PosY,3);
-        dataxG = 0;
-    }
-
-    function shotSaved() {
-        Draw(PosX,PosY,2);
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
@@ -893,7 +885,7 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
-                
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -909,7 +901,7 @@
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
 
                 xf_g[7].innerHTML = xGf_g[7];
-                
+
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -918,7 +910,7 @@
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
-                
+
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -976,7 +968,7 @@
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
 
-                
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -986,7 +978,7 @@
 
                  xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
 
-                
+
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
 
                 xf_p[7].innerHTML = xGf_p[7];
@@ -994,7 +986,7 @@
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
 
                 xf_g[7].innerHTML = xGf_g[7];
-                
+
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -1003,7 +995,7 @@
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
-                
+
                 dataxG = dxG;
                 console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
@@ -1061,7 +1053,7 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
-                
+
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
@@ -1070,7 +1062,7 @@
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
 
-                
+
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
                 xa_p[7].innerHTML = xGa_p[7];
@@ -1079,7 +1071,7 @@
 
                 xa_g[7].innerHTML = xGa_g[7];
 
-                
+
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
 
                 xfT2_p[7].innerHTML = xGfT2_p[7];
@@ -1088,7 +1080,7 @@
 
                 xfT2_g[7].innerHTML = xGfT2_g[7];
 
-                
+
                 dataxG = dxG;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -1136,6 +1128,744 @@
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+
+                xa_p[7].innerHTML = xGa_p[7];
+
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+
+                xa_g[7].innerHTML = xGa_g[7];
+
+
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
+                dataxG = dxG;
+                console.log(dataxG)
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+            }
+        }
+
+    }
+
+    function shotBlocked() {
+        Draw(PosX,PosY,3);
+
+        var dx = PosX / fWidth;
+        var dy = PosY / fLength;
+
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_g[7] = Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+
+                xf_p[7].innerHTML = xGf_p[7];
+
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+
+                xf_g[7].innerHTML = xGf_g[7];
+
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
+
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                // undo_array.push([xGaT2_g[line_on_2 - 1],dxG])
+
+                 xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+
+                xf_p[7].innerHTML = xGf_p[7];
+
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+
+                xf_g[7].innerHTML = xGf_g[7];
+
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
+
+                dataxG = dxG;
+                console.log(dataxG)
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+            }
+        }
+
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,25 xG
+                    dxG = dxG * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,5 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+
+                xa_p[7].innerHTML = xGa_p[7];
+
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+
+                xa_g[7].innerHTML = xGa_g[7];
+
+
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
+
+                dataxG = dxG;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+
+                xa_p[7].innerHTML = xGa_p[7];
+
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+
+                xa_g[7].innerHTML = xGa_g[7];
+
+
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
+                dataxG = dxG;
+                console.log(dataxG)
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+            }
+        }
+    }
+
+    function shotSaved() {
+        Draw(PosX,PosY,2);
+
+        var dx = PosX / fWidth;
+        var dy = PosY / fLength;
+
+        if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
+                
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_g[7] = Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+
+                xf_p[7].innerHTML = xGf_p[7];
+
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+
+                xf_g[7].innerHTML = xGf_g[7];
+                
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
+                
+                dataxG = dxG;
+                dataxGOT = dxGOT;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
+
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 1) { // Team 1 shot, Team 1 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+                var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
+                }
+
+                xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_p[7] = Math.round((xGf_p[7] + dxG) * 100) / 100;
+
+                xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                
+                xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
+
+                xGaT2_g[line_on_2 - 1] = Math.round((xGaT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+                // undo_array.push([xGaT2_g[line_on_2 - 1],dxG])
+
+                 xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
+
+                
+                xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
+
+                xf_p[7].innerHTML = xGf_p[7];
+
+                xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
+
+                xf_g[7].innerHTML = xGf_g[7];
+                
+                xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
+
+                xaT2_p[7].innerHTML = xGaT2_p[7];
+
+                xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
+
+                xaT2_g[7].innerHTML = xGaT2_g[7];
+
+                
+                dataxG = dxG;
+                dataxGOT = dxGOT;
+                console.log(dataxG)
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_1.innerHTML = a;
+
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+            }
+        }
+
+        if (Order == 1 && Ball_pos == 2) { // Team 2 shot, Team 2 upper side
+
+            if (dy > 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+                var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
+                }
+
+                xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_p[7] = Math.round((xGa_p[7] + dxG) * 100) / 100;
+
+                xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+                
+                xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
+
+                xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
+
+                xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+                
+                xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
+
+                xa_p[7].innerHTML = xGa_p[7];
+
+                xa_g[line_on - 1].innerHTML = xGa_g[line_on - 1];
+
+                xa_g[7].innerHTML = xGa_g[7];
+
+                
+                xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
+
+                xfT2_p[7].innerHTML = xGfT2_p[7];
+
+                xfT2_g[line_on_2 - 1].innerHTML = xGfT2_g[line_on_2 - 1];;
+
+                xfT2_g[7].innerHTML = xGfT2_g[7];
+
+                
+                dataxG = dxG;
+                dataxGOT = dxGOT;
+                var date = new Date(gameCounter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
+                xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
+                xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
+                xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
+                xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
+                xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
+
+                b = Number(txG_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txG_2.innerHTML = a;
+
+                b = Number(txGOT_2.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                b = Number(txGOTp_2.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_2.innerHTML = a;
+
+                window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+
+            }
+        }
+
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
+
+            if (dy < 0.5) { // Ball on the attack zone
+                var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+
+                if (dataType == 0) { // Turnover one-timer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
+                }
+                if (dataType == 2) { // onetimer x 1,45 xG
+                    dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
+                }
+                if (dataType == 3) { // rebound x 1,1 xG
+                    dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
+                }
+                if (dataType == 4) { //direct x 0,85 xg
+                    dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
@@ -1190,9 +1920,17 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_2.innerHTML = a;
 
+                b = Number(txGOT_2.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_2.innerHTML = a;
+
                 b = Number(txGp_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_2.innerHTML = a;
+
+                b = Number(txGOTp_2.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
@@ -1212,21 +1950,27 @@
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
@@ -1269,19 +2013,27 @@
                 xaT2_g[7].innerHTML = xGaT2_g[7];
                 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
 
-
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
 
-                c = Number(txGp_1.innerHTML);
-                d = Math.round((c + dxG) * 100) / 100;
-                txGp_1.innerHTML = d;
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
@@ -1330,21 +2082,27 @@
 
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+                var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGf_p[line_on - 1] = Math.round((xGf_p[line_on - 1] + dxG) * 100) / 100;
@@ -1354,7 +2112,6 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
-
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1373,7 +2130,6 @@
 
                 xf_g[7].innerHTML = xGf_g[7];
 
-
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -1383,6 +2139,7 @@
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
@@ -1392,9 +2149,17 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_1.innerHTML = a;
 
-                c = Number(txGp_1.innerHTML);
-                d = Math.round((c + dxG) * 100) / 100;
-                txGp_1.innerHTML = d;
+                b = Number(txGOT_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_1.innerHTML = a;
+
+                b = Number(txGp_1.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_1.innerHTML = a;
+
+                b = Number(txGOTp_1.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
@@ -1443,21 +2208,27 @@
 
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
+                var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
-                if (dataType == 1) { // Turnover direct x 1,25 xG
-                    dxG = dxG * 1.25;
+                if (dataType == 1) { // Turnover direct x 1,2 xG
+                    dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
@@ -1468,7 +2239,6 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
-
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
@@ -1476,7 +2246,6 @@
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
-
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
@@ -1486,7 +2255,6 @@
 
                 xa_g[7].innerHTML = xGa_g[7];
 
-
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
 
                 xfT2_p[7].innerHTML = xGfT2_p[7];
@@ -1495,8 +2263,8 @@
 
                 xfT2_g[7].innerHTML = xGfT2_g[7];
 
-
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
@@ -1506,9 +2274,17 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_2.innerHTML = a;
 
-                c = Number(txGp_2.innerHTML);
-                d = Math.round((c + dxG) * 100) / 100;
-                txGp_2.innerHTML = d;
+                b = Number(txGOT_2.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_2.innerHTML = a;
+
+                b = Number(txGp_2.innerHTML);
+                a = Math.round((b + dxG) * 100) / 100;
+                txGp_2.innerHTML = a;
+
+                b = Number(txGOTp_2.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
                 window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
@@ -1557,21 +2333,27 @@
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
+                var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
+                    dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
                     dxG = dxG * 1.45;
+                    dxGOT = dxGOT * 1.45;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
+                    dxGOT = dxGOT * 1.1;
                 }
                 if (dataType == 4) { //direct x 0,85 xg
                     dxG = dxG * 0.85;
+                    dxGOT = dxGOT * 0.85;
                 }
 
                 xGa_p[line_on - 1] = Math.round((xGa_p[line_on - 1] + dxG) * 100) / 100;
@@ -1611,6 +2393,7 @@
 
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
@@ -1620,9 +2403,17 @@
                 a = Math.round((b + dxG) * 100) / 100;
                 txG_2.innerHTML = a;
 
+                b = Number(txGOT_2.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOT_2.innerHTML = a;
+
                 b = Number(txGp_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
                 txGp_2.innerHTML = a;
+
+                b = Number(txGOTp_2.innerHTML);
+                a = Math.round((b + dxGOT) * 100) / 100;
+                txGOTp_2.innerHTML = a;
 
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
@@ -2477,8 +3268,7 @@
         }
         shotCounter++;
     }
-    
-// TÄSSÄ VAIHEESSA MEILLÄ ON KAIKKI DATA
+
     function shotTOnetimer() {
         dataType = 0;
         if (line_on < 4 && line_on_2 < 4) {
@@ -2684,565 +3474,6 @@
             downloadCsv()
 
         }
-
-    }
-
-    function drawChart() {
-
-        // xG Game Chart
-
-        var chartData = google.visualization.arrayToDataTable([
-             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-             ['Line 1', Number(xGf_g[0]), 'color: #002072', Number(xGf_g[0]), Number(xGfT2_g[0]), 'color: #59D9EB', Number(xGfT2_g[0]) ],
-             ['Line 2', Number(xGf_g[1]), 'color: #002072', Number(xGf_g[1]), Number(xGfT2_g[1]), 'color: #59D9EB', Number(xGfT2_g[1]) ],
-             ['Line 3', Number(xGf_g[2]), 'color: #002072', Number(xGf_g[2]), Number(xGfT2_g[2]), 'color: #59D9EB', Number(xGfT2_g[2]) ],
-             ['PP', Number(xGf_g[3]) + Number(xGf_g[4]), 'color: #002072', Number(xGf_g[3]) + Number(xGf_g[4]), Number(xGfT2_g[3]) + Number(xGfT2_g[4]), 'color: #59D9EB', Number(xGfT2_g[3]) + Number(xGfT2_g[4]) ],
-             ['SH', Number(xGf_g[5]) + Number(xGf_g[6]), 'color: #002072', Number(xGf_g[5]) + Number(xGf_g[6]), Number(xGfT2_g[5]) + Number(xGfT2_g[6]), 'color: #59D9EB', Number(xGfT2_g[5]) + Number(xGfT2_g[6]) ]
-          ]);
-
-        // Period data
-        var chartData_p = google.visualization.arrayToDataTable([
-             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-             ['Line 1', Number(xGf_p[0]), 'color: #002072', Number(xGf_p[0]), Number(xGfT2_p[0]), 'color: #59D9EB', Number(xGfT2_p[0]) ],
-             ['Line 2', Number(xGf_p[1]), 'color: #002072', Number(xGf_p[1]), Number(xGfT2_p[1]), 'color: #59D9EB', Number(xGfT2_p[1]) ],
-             ['Line 3', Number(xGf_p[2]), 'color: #002072', Number(xGf_p[2]), Number(xGfT2_p[2]), 'color: #59D9EB', Number(xGfT2_p[2]) ],
-             ['PP', Number(xGf_p[3]) + Number(xGf_p[4]), 'color: #002072', Number(xGf_p[3]) + Number(xGf_p[4]), Number(xGfT2_p[3]) + Number(xGfT2_p[4]), 'color: #59D9EB', Number(xGfT2_p[3]) + Number(xGfT2_p[4]) ],
-             ['SH', Number(xGf_p[5]) + Number(xGf_p[6]), 'color: #002072', Number(xGf_p[5]) + Number(xGf_p[6]), Number(xGfT2_p[5]) + Number(xGfT2_p[6]), 'color: #59D9EB', Number(xGfT2_p[5]) + Number(xGfT2_p[6]) ]
-          ]);
-
-        var options = {
-            title: 'xG by Line',
-            bar: {groupWidth: "95%"},
-            legend: { position: 'bottom'},
-            colors: ['#002072', '#59D9EB'],
-            hAxis: { textPosition: 'none' }
-            };
-
-        var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
-        chart.draw(chartData, options);
-
-        var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
-        chart_per.draw(chartData_p, options);
-
-        //xG% GameChart
-
-        xGL1T1 = calcPercent(Number(xGf_g[0]), Number(xGa_g[0]));
-        xGL1T2 = calcPercent(Number(xGfT2_g[0]), Number(xGaT2_g[0]));
-        xGL2T1 = calcPercent(Number(xGf_g[1]), Number(xGa_g[1]));
-        xGL2T2 = calcPercent(Number(xGfT2_g[1]), Number(xGaT2_g[1]));
-        xGL3T1 = calcPercent(Number(xGf_g[2]), Number(xGa_g[2]));
-        xGL3T2 = calcPercent(Number(xGfT2_g[2]), Number(xGaT2_g[2]));
-
-        var chartData = google.visualization.arrayToDataTable([
-             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-             ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
-             ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
-             ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
-        ]);
-
-        // Period data
-        xGL1T1 = calcPercent(Number(xGf_p[0]), Number(xGa_p[0]));
-        xGL1T2 = calcPercent(Number(xGfT2_p[0]), Number(xGaT2_p[0]));
-        xGL2T1 = calcPercent(Number(xGf_p[1]), Number(xGa_p[1]));
-        xGL2T2 = calcPercent(Number(xGfT2_p[1]), Number(xGaT2_p[1]));
-        xGL3T1 = calcPercent(Number(xGf_p[2]), Number(xGa_p[2]));
-        xGL3T2 = calcPercent(Number(xGfT2_p[2]), Number(xGaT2_p[2]));
-
-        var chartData_p = google.visualization.arrayToDataTable([
-             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-             ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
-             ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
-             ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
-        ]);
-
-        var options = {
-            title: 'xG% by Line',
-            bar: {groupWidth: "95%"},
-            legend: { position: 'bottom'},
-            colors: ['#002072', '#59D9EB'],
-            hAxis: {
-                viewWindowMode:'explicit',
-                textPosition: 'none',
-                viewWindow: {
-                  max:100,
-                  min:0
-                }
-            },
-            };
-
-        var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
-        chart.draw(chartData, options);
-
-        var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
-        chart_per.draw(chartData_p, options);
-
-        // Team 1 Player xG chart
-
-        var pldata = new google.visualization.DataTable();
-        pldata.addColumn('string', 'Name');
-        pldata.addColumn('number', 'Shot xG');
-        pldata.addColumn('number', 'Pass xG');
-        pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Ass.');
-        pldata.addColumn('number', 'Shots');
-        pldata.addColumn('number', 'Shotass.');
-
-        for(i = 1; i < plT1_array.length; i++){
-            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7]]);
-        }
-        
-        var pldata_p = new google.visualization.DataTable();
-        pldata_p.addColumn('string', 'Name');
-        pldata_p.addColumn('number', 'Shot xG');
-        pldata_p.addColumn('number', 'Pass xG');
-        pldata_p.addColumn('number', 'Goals');
-        pldata_p.addColumn('number', 'Ass.');
-        pldata_p.addColumn('number', 'Shots');
-        pldata_p.addColumn('number', 'Shotass.');
-
-        for(i = 1; i < plT1p_array.length; i++){
-            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7]]);
-        }
-        
-        var options = {
-            title: 'Individual stats Team 1',
-            bar: {groupWidth: "95%"},
-            legend: { position: 'bottom'},
-            colors: ['#002072', '#59D9EB'],
-            hAxis: { textPosition: 'none' }
-            };
-
-
-        // Create and draw the visualization.
-        var chart = new google.visualization.Table(document.getElementById('T1plstats'));
-        chart.draw(pldata, options);
-        
-        var chart_per = new google.visualization.Table(document.getElementById('T1plstats_' + periodN));
-        chart_per.draw(pldata_p, options);
-
-        // Add sort listener
-
-        google.visualization.events.addListener(chart, 'sort',
-        function(event) {
-            pldata.sort([{column: event.column, desc: event.ascending}]);
-            chart.draw(pldata, options);
-        });
-        
-        google.visualization.events.addListener(chart_per, 'sort',
-        function(event) {
-            pldata_p.sort([{column: event.column, desc: event.ascending}]);
-            chart_per.draw(pldata_p, options);
-        });
-
-        // Team 2 Player xG chart
-
-        var pldata = new google.visualization.DataTable();
-        pldata.addColumn('string', 'Name');
-        pldata.addColumn('number', 'Shot xG');
-        pldata.addColumn('number', 'Pass xG');
-        pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Ass.');
-        pldata.addColumn('number', 'Shots');
-        pldata.addColumn('number', 'Shotass.');
-
-        for(i = 1; i < plT2_array.length; i++){
-            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7]]);
-        }
-        
-        var pldata_p = new google.visualization.DataTable();
-        pldata_p.addColumn('string', 'Name');
-        pldata_p.addColumn('number', 'Shot xG');
-        pldata_p.addColumn('number', 'Pass xG');
-        pldata_p.addColumn('number', 'Goals');
-        pldata_p.addColumn('number', 'Ass.');
-        pldata_p.addColumn('number', 'Shots');
-        pldata_p.addColumn('number', 'Shotass.');
-
-        for(i = 1; i < plT2p_array.length; i++){
-            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7]]);
-        }
-        
-        var options = {
-            title: 'Individual stats Team 2',
-            bar: {groupWidth: "95%"},
-            legend: { position: 'bottom'},
-            colors: ['#002072', '#59D9EB'],
-            hAxis: { textPosition: 'none' }
-            };
-
-        // Create and draw the visualization.
-        var chart = new google.visualization.Table(document.getElementById('T2plstats'));
-        chart.draw(pldata, options);
-
-        var chart_per = new google.visualization.Table(document.getElementById('T2plstats_' + periodN));
-        chart_per.draw(pldata_p, options);
-
-        // Add sort listener
-
-        google.visualization.events.addListener(chart, 'sort',
-        function(event) {
-            pldata.sort([{column: event.column, desc: event.ascending}]);
-            chart.draw(pldata, options);
-        });
-
-        google.visualization.events.addListener(chart_per, 'sort',
-        function(event) {
-            pldata_p.sort([{column: event.column, desc: event.ascending}]);
-            chart_per.draw(pldata_p, options);
-        });
-
-        // Linechart Team 1
-
-        var pldata1 = new google.visualization.DataTable();
-        pldata1.addColumn('string', 'Line');
-        pldata1.addColumn('number', 'ToC');
-        pldata1.addColumn('number', 'xG for');
-        pldata1.addColumn('number', 'xG ag.');
-        pldata1.addColumn('number', 'Plus');
-        pldata1.addColumn('number', 'Minus');
-        pldata1.addColumn('number', 'CF');
-        pldata1.addColumn('number', 'CA');
-        pldata1.addColumn('number', 'Pos%');
-        pldata1.addColumn('number', 'xG Turnov.');
-        pldata1.addColumn('number', 'xG org.att. ');
-
-        pldata1.addRows([
-            ['Line 1', Toc_g[0], Number(xf_g[0].textContent), Number(xa_g[0]. textContent), Number(gf_g[0].textContent), Number(ga_g[0]. textContent), Number(sf_g[0].textContent), Number(sa_g[0].textContent), Number(p_g[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
-            ['Line 2', Toc_g[1], Number(xf_g[1].textContent), Number(xa_g[1]. textContent), Number(gf_g[1].textContent), Number(ga_g[1]. textContent), Number(sf_g[1].textContent), Number(sa_g[1].textContent), Number(p_g[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
-            ['Line 3', Toc_g[2], Number(xf_g[2].textContent), Number(xa_g[2]. textContent), Number(gf_g[2].textContent), Number(ga_g[2]. textContent), Number(sf_g[2].textContent), Number(sa_g[2].textContent), Number(p_g[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
-            ['Powerplay', Toc_g[3], Number(xf_g[3].textContent), Number(xa_g[3]. textContent), Number(gf_g[3].textContent), Number(ga_g[3]. textContent), Number(sf_g[3].textContent), Number(sa_g[3].textContent), Number(p_g[3].textContent), 0, 0],
-            ['Pen. Kill', Toc_g[5], Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0],
-            ['6vs5', Toc_g[4], Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0],
-            ['5vs6', Toc_g[6], Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent), 0, 0],
-            ['Team', Toc_g[7], Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
-
-            ]);
-            
-        var pldata1_p = new google.visualization.DataTable();
-        pldata1_p.addColumn('string', 'Line');
-        pldata1_p.addColumn('number', 'ToC');
-        pldata1_p.addColumn('number', 'xG for');
-        pldata1_p.addColumn('number', 'xG ag.');
-        pldata1_p.addColumn('number', 'Plus');
-        pldata1_p.addColumn('number', 'Minus');
-        pldata1_p.addColumn('number', 'CF');
-        pldata1_p.addColumn('number', 'CA');
-        pldata1_p.addColumn('number', 'Pos%');
-        pldata1_p.addColumn('number', 'xG Turnov.');
-        pldata1_p.addColumn('number', 'xG org.att. ');
-
-        pldata1_p.addRows([
-            ['Line 1', Toc_p[0], Number(xf_p[0].textContent), Number(xa_p[0]. textContent), Number(gf_p[0].textContent), Number(ga_p[0]. textContent), Number(sf_p[0].textContent), Number(sa_p[0].textContent), Number(p_p[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
-            ['Line 2', Toc_p[1], Number(xf_p[1].textContent), Number(xa_p[1]. textContent), Number(gf_p[1].textContent), Number(ga_p[1]. textContent), Number(sf_p[1].textContent), Number(sa_p[1].textContent), Number(p_p[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
-            ['Line 3', Toc_p[2], Number(xf_p[2].textContent), Number(xa_p[2]. textContent), Number(gf_p[2].textContent), Number(ga_p[2]. textContent), Number(sf_p[2].textContent), Number(sa_p[2].textContent), Number(p_p[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
-            ['Powerplay', Toc_p[3], Number(xf_p[3].textContent), Number(xa_p[3]. textContent), Number(gf_p[3].textContent), Number(ga_p[3]. textContent), Number(sf_p[3].textContent), Number(sa_p[3].textContent), Number(p_p[3].textContent), 0, 0],
-            ['Pen. Kill', Toc_p[5], Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
-            ['6vs5', Toc_p[4], Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
-            ['5vs6', Toc_p[6], Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0],
-            ['Team', Toc_p[7], Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
-
-            ]);
-
-
-        var options = {
-            title: 'Line stats, Team 1',
-            bar: {groupWidth: "95%"},
-            legend: { position: 'bottom'},
-            colors: ['#002072', '#59D9EB'],
-            hAxis: { textPosition: 'none' }
-            };
-
-        // Create and draw the visualization.
-        var chart = new google.visualization.Table(document.getElementById('T1linestats'));
-        chart.draw(pldata1, options);
-        
-        var chart_per = new google.visualization.Table(document.getElementById('T1linestats_' + periodN));
-        chart_per.draw(pldata1_p, options);
-
-        // Linestats T2
-
-        var pldata2 = new google.visualization.DataTable();
-        pldata2.addColumn('string', 'Line');
-        pldata2.addColumn('number', 'ToC');
-        pldata2.addColumn('number', 'xG for');
-        pldata2.addColumn('number', 'xG ag.');
-        pldata2.addColumn('number', 'Plus');
-        pldata2.addColumn('number', 'Minus');
-        pldata2.addColumn('number', 'CF');
-        pldata2.addColumn('number', 'CA');
-        pldata2.addColumn('number', 'Pos%');
-        pldata2.addColumn('number', 'xG Turnov.');
-        pldata2.addColumn('number', 'xG org.att. ');
-
-        pldata2.addRows([
-            ['Line 1', TocT2_g[0], Number(xfT2_g[0].textContent), Number(xaT2_g[0]. textContent), Number(gfT2_g[0].textContent), Number(gaT2_g[0]. textContent), Number(sfT2_g[0].textContent), Number(saT2_g[0].textContent), Number(pT2_g[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
-            ['Line 2', TocT2_g[1], Number(xfT2_g[1].textContent), Number(xaT2_g[1]. textContent), Number(gfT2_g[1].textContent), Number(gaT2_g[1]. textContent), Number(sfT2_g[1].textContent), Number(saT2_g[1].textContent), Number(pT2_g[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
-            ['Line 3', TocT2_g[2], Number(xfT2_g[2].textContent), Number(xaT2_g[2]. textContent), Number(gfT2_g[2].textContent), Number(gaT2_g[2]. textContent), Number(sfT2_g[2].textContent), Number(saT2_g[2].textContent), Number(pT2_g[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
-            ['Powerplay', TocT2_g[3], Number(xfT2_g[3].textContent), Number(xaT2_g[3]. textContent), Number(gfT2_g[3].textContent), Number(gaT2_g[3]. textContent), Number(sfT2_g[3].textContent), Number(saT2_g[3].textContent), Number(pT2_g[3].textContent), 0, 0],
-            ['Pen. Kill', TocT2_g[5], Number(xfT2_g[5].textContent), Number(xaT2_g[5]. textContent), Number(gfT2_g[5].textContent), Number(gaT2_g[5]. textContent), Number(sfT2_g[5].textContent), Number(saT2_g[5].textContent), Number(pT2_g[5].textContent), 0, 0],
-            ['6vs5', TocT2_g[4], Number(xfT2_g[4].textContent), Number(xaT2_g[4]. textContent), Number(gfT2_g[4].textContent), Number(gaT2_g[4].textContent), Number(sfT2_g[4].textContent), Number(saT2_g[4].textContent), Number(pT2_g[4].textContent), 0, 0],
-            ['5vs6', TocT2_g[6], Number(xfT2_g[6].textContent), Number(xaT2_g[6]. textContent), Number(gfT2_g[6].textContent), Number(gaT2_g[6].textContent), Number(sfT2_g[6].textContent), Number(saT2_g[6].textContent), Number(pT2_g[6].textContent), 0, 0],
-            ['Team', TocT2_g[7], Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
-
-            ]);
-            
-        var pldata2_p = new google.visualization.DataTable();
-        pldata2_p.addColumn('string', 'Line');
-        pldata2_p.addColumn('number', 'ToC');
-        pldata2_p.addColumn('number', 'xG for');
-        pldata2_p.addColumn('number', 'xG ag.');
-        pldata2_p.addColumn('number', 'Plus');
-        pldata2_p.addColumn('number', 'Minus');
-        pldata2_p.addColumn('number', 'CF');
-        pldata2_p.addColumn('number', 'CA');
-        pldata2_p.addColumn('number', 'Pos%');
-        pldata2_p.addColumn('number', 'xG Turnov.');
-        pldata2_p.addColumn('number', 'xG org.att. ');
-
-        pldata2_p.addRows([
-            ['Line 1', TocT2_p[0], Number(xfT2_p[0].textContent), Number(xaT2_p[0]. textContent), Number(gfT2_p[0].textContent), Number(gaT2_p[0]. textContent), Number(sfT2_p[0].textContent), Number(saT2_p[0].textContent), Number(pT2_p[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
-            ['Line 2', TocT2_p[1], Number(xfT2_p[1].textContent), Number(xaT2_p[1]. textContent), Number(gfT2_p[1].textContent), Number(gaT2_p[1]. textContent), Number(sfT2_p[1].textContent), Number(saT2_p[1].textContent), Number(pT2_p[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
-            ['Line 3', TocT2_p[2], Number(xfT2_p[2].textContent), Number(xaT2_p[2]. textContent), Number(gfT2_p[2].textContent), Number(gaT2_p[2]. textContent), Number(sfT2_p[2].textContent), Number(saT2_p[2].textContent), Number(pT2_p[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
-            ['Powerplay', TocT2_p[3], Number(xfT2_p[3].textContent), Number(xaT2_p[3]. textContent), Number(gfT2_p[3].textContent), Number(gaT2_p[3]. textContent), Number(sfT2_p[3].textContent), Number(saT2_p[3].textContent), Number(pT2_p[3].textContent), 0, 0],
-            ['Pen. Kill', TocT2_p[5], Number(xfT2_p[5].textContent), Number(xaT2_p[5]. textContent), Number(gfT2_p[5].textContent), Number(gaT2_p[5]. textContent), Number(sfT2_p[5].textContent), Number(saT2_p[5].textContent), Number(pT2_p[5].textContent), 0, 0],
-            ['6vs5', TocT2_p[4], Number(xfT2_p[4].textContent), Number(xaT2_p[4]. textContent), Number(gfT2_p[4].textContent), Number(gaT2_p[4].textContent), Number(sfT2_p[4].textContent), Number(saT2_p[4].textContent), Number(pT2_p[4].textContent), 0, 0],
-            ['5vs6', TocT2_p[6], Number(xfT2_p[6].textContent), Number(xaT2_p[6]. textContent), Number(gfT2_p[6].textContent), Number(gaT2_p[6].textContent), Number(sfT2_p[6].textContent), Number(saT2_p[6].textContent), Number(pT2_p[6].textContent), 0, 0],
-            ['Team', TocT2_p[7], Number(xfT2_p[7].textContent), Number(xaT2_p[7]. textContent), Number(gfT2_p[7].textContent), Number(gaT2_p[7].textContent), Number(sfT2_p[7].textContent), Number(saT2_p[7].textContent), Number(pT2_p[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
-
-            ]);
-
-        var options = {
-            title: 'Line stats, Team 2',
-            bar: {groupWidth: "95%"},
-            legend: { position: 'bottom'},
-            colors: ['#002072', '#59D9EB'],
-            hAxis: { textPosition: 'none' }
-            };
-
-        // Create and draw the visualization.
-        var chart2 = new google.visualization.Table(document.getElementById('T2linestats'));
-        chart2.draw(pldata2, options);
-        
-        var chart2_per = new google.visualization.Table(document.getElementById('T2linestats_' + periodN));
-        chart2_per.draw(pldata2_p, options);
-
-        // Pie Chart, xG per type Team 1
-
-        var data = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnovers, one-timer', stxGT1Teamg_array[0]],
-        ['Turnovers, direct', stxGT1Teamg_array[1]],
-        ['Org.attack, one-timer', stxGT1Teamg_array[2]],
-        ['Org.attack, direct', stxGT1Teamg_array[4]],
-        ['Others',  stxGT1Teamg_array[3]]
-
-        ]);
-        
-        var data_p = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnovers, one-timer', stxGT1Teamp_array[0]],
-        ['Turnovers, direct', stxGT1Teamp_array[1]],
-        ['Org.attack, one-timer', stxGT1Teamp_array[2]],
-        ['Org.attack, direct', stxGT1Teamp_array[4]],
-        ['Others',  stxGT1Teamp_array[3]]
-
-        ]);
-
-        var options2 = {
-        title: 'Share of xG by attack types',
-        colors: ['#20AB4E', '#295738','#002072','#59D9EB','#F7FAFA'],
-        is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
-        chart.draw(data, options2);
-        
-        var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
-        chart_per.draw(data_p, options2);
-
-        // Pie Chart, xG per type Team 2
-
-        var data2 = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnover, one-timer', stxGT2Teamg_array[0]],
-        ['Turnover, direct', + stxGT2Teamg_array[1]],
-        ['Org. attack, one-timer', stxGT2Teamg_array[2]],
-        ['Org. attack, direct', stxGT2Teamg_array[4]],
-        ['Other', stxGT2Teamg_array[3]]
-
-        ]);
-        
-        var data2_p = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnover, one-timer', stxGT2Teamp_array[0]],
-        ['Turnover, direct', + stxGT2Teamp_array[1]],
-        ['Org. attack, one-timer', stxGT2Teamp_array[2]],
-        ['Org. attack, direct', stxGT2Teamp_array[4]],
-        ['Other', stxGT2Teamp_array[3]]
-
-        ]);
-
-        var options2 = {
-        title: 'Share of xG by attack/shot types',
-        colors: ['#EDA137', '#EB4F07','#D10808','#663D3D', '#F7FAFA'],
-        is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
-        chart.draw(data2, options2);
-        
-        var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
-        chart_per.draw(data2_p, options2);
-
-        // Team xG Chart
-        var data = google.visualization.arrayToDataTable(xGTeam_array);
-
-        var options = {
-          title: 'xG by Team',
-          curveType: 'function',
-          legend: { position: 'bottom' },
-          seriesType: 'lines',
-          series: {
-              2:{type: 'bars', color: 'blue'},
-              3:{type: 'bars', color: 'red'}}
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
-        chart.draw(data, options);
-
-        // Line 1 xG Chart
-        var data = google.visualization.arrayToDataTable(xGL1_array);
-
-        var options = {
-          title: 'xG by Line 1',
-          curveType: 'function',
-          legend: { position: 'bottom' },
-          seriesType: 'lines',
-          series: {
-              2:{type: 'bars', color: 'blue'},
-              3:{type: 'bars', color: 'red'}}
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('xGL1_chart'));
-        chart.draw(data, options);
-
-        // Line 2 xG Chart
-        var data = google.visualization.arrayToDataTable(xGL2_array);
-
-        var options = {
-          title: 'xG by Line 2',
-          curveType: 'function',
-          legend: { position: 'bottom' },
-          seriesType: 'lines',
-          series: {
-              2:{type: 'bars', color: 'blue'},
-              3:{type: 'bars', color: 'red'}}
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('xGL2_chart'));
-        chart.draw(data, options);
-
-        // Line 3 xG Chart
-        var data = google.visualization.arrayToDataTable(xGL3_array);
-
-        var options1 = {
-          title: 'xG by Line 3',
-          curveType: 'function',
-          legend: { position: 'bottom' },
-          seriesType: 'lines',
-          series: {
-              2:{type: 'bars', color: 'blue'},
-              3:{type: 'bars', color: 'red'}}
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('xGL3_chart'));
-        chart.draw(data, options1);
-
-        // Turnover chart
-
-         var chartData = google.visualization.arrayToDataTable([
-             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-             ['Line 1', stT1L1g_array[0] + stT1L1g_array[1], 'color: #002072', stT1L1g_array[0] + stT1L1g_array[1], stT2L1g_array[0] + stT2L1g_array[1], 'color: #59D9EB', stT2L1g_array[0] + stT2L1g_array[1]],
-             ['Line 2', stT1L2g_array[0] + stT1L2g_array[1], 'color: #002072', stT1L2g_array[0] + stT1L2g_array[1], stT2L2g_array[0] + stT2L2g_array[1], 'color: #59D9EB', stT2L2g_array[0] + stT2L2g_array[1]],
-             ['Line 3', stT1L3g_array[0] + stT1L3g_array[1], 'color: #002072', stT1L3g_array[0] + stT1L3g_array[1], stT2L3g_array[0] + stT2L3g_array[1], 'color: #59D9EB', stT2L3g_array[0] + stT2L3g_array[1]
-             ]
-          ]);
-
-        var options = {
-            title: 'Turnovers by Line',
-            bar: {groupWidth: "95%"},
-            legend: { position: 'bottom'},
-            colors: ['#002072', '#59D9EB'],
-            hAxis: { textPosition: 'none' }
-            };
-
-        // var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
-         // chart1.draw(chartData, options);
-
-
-       // Team 1 typechart
-
-        var chartDataX = google.visualization.arrayToDataTable([
-            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT1L1g_array[0], 'color: #20AB4E', stT1L1g_array[0], stT1L1g_array[1], 'color: #295738', stT1L1g_array[1], stT1L1g_array[2], 'color: #002072', stT1L1g_array[2], stT1L1g_array[4], 'color: #59D9EB', stT1L1g_array[4]],
-            ['Line2', stT1L2g_array[0], 'color: #20AB4E', stT1L2g_array[0], stT1L2g_array[1], 'color: #295738', stT1L2g_array[1], stT1L2g_array[2], 'color: #002072', stT1L2g_array[2], stT1L2g_array[4], 'color: #59D9EB', stT1L2g_array[4]],
-            ['Line3', stT1L3g_array[0], 'color: #20AB4E', stT1L3g_array[0], stT1L3g_array[1], 'color: #295738', stT1L3g_array[1], stT1L3g_array[2], 'color: #002072', stT1L3g_array[2], stT1L3g_array[4], 'color: #59D9EB', stT1L3g_array[4]
-            ]
-         ]);
-         
-        var chartDataX_p = google.visualization.arrayToDataTable([
-            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT1L1p_array[0], 'color: #20AB4E', stT1L1p_array[0], stT1L1p_array[1], 'color: #295738', stT1L1p_array[1], stT1L1p_array[2], 'color: #002072', stT1L1p_array[2], stT1L1p_array[4], 'color: #59D9EB', stT1L1p_array[4]],
-            ['Line2', stT1L2p_array[0], 'color: #20AB4E', stT1L2p_array[0], stT1L2p_array[1], 'color: #295738', stT1L2p_array[1], stT1L2p_array[2], 'color: #002072', stT1L2p_array[2], stT1L2p_array[4], 'color: #59D9EB', stT1L2p_array[4]],
-            ['Line3', stT1L3p_array[0], 'color: #20AB4E', stT1L3p_array[0], stT1L3p_array[1], 'color: #295738', stT1L3p_array[1], stT1L3p_array[2], 'color: #002072', stT1L3p_array[2], stT1L3p_array[4], 'color: #59D9EB', stT1L3p_array[4]
-            ]
-         ]);
-
-        var options = {
-            title: 'Shot types, Team 1',
-            bar: {groupWidth: "75%"},
-            legend: { position: 'bottom'},
-            colors: ['#20AB4E', '#295738','#002072','#59D9EB'],
-            hAxis: { textPosition: 'none' }
-            };
-
-        var chart2 = new google.visualization.BarChart(document.getElementById('T1_typechart'));
-        chart2.draw(chartDataX, options);
-        
-        var chart2_per = new google.visualization.BarChart(document.getElementById('T1_typechart_' + periodN));
-        chart2_per.draw(chartDataX_p, options);
-
-        // Team 2 typechart
-
-        var chartDataY = google.visualization.arrayToDataTable([
-            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT2L1g_array[0], 'color: #EDA137', stT2L1g_array[0], stT2L1g_array[1], 'color: #EB4F07', stT2L1g_array[1], stT2L1g_array[2], 'color: #D10808', stT2L1g_array[2], stT2L1g_array[4], 'color: #663D3D', stT2L1g_array[4]],
-            ['Line2', stT2L2g_array[0], 'color: #EDA137', stT2L2g_array[0], stT2L2g_array[1], 'color: #EB4F07', stT2L2g_array[1], stT2L2g_array[2], 'color: #D10808', stT2L2g_array[2], stT2L2g_array[4], 'color: #663D3D', stT2L2g_array[4]],
-            ['Line3', stT2L3g_array[0], 'color: #EDA137', stT2L3g_array[0], stT2L3g_array[1], 'color: #EB4F07', stT2L3g_array[1], stT2L3g_array[2], 'color: #D10808', stT2L3g_array[2], stT2L3g_array[4], 'color: #663D3D', stT2L3g_array[4]
-            ]
-         ]);
-         
-        var chartDataY_p = google.visualization.arrayToDataTable([
-            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT2L1p_array[0], 'color: #EDA137', stT2L1p_array[0], stT2L1p_array[1], 'color: #EB4F07', stT2L1p_array[1], stT2L1p_array[2], 'color: #D10808', stT2L1p_array[2], stT2L1p_array[4], 'color: #663D3D', stT2L1p_array[4]],
-            ['Line2', stT2L2p_array[0], 'color: #EDA137', stT2L2p_array[0], stT2L2p_array[1], 'color: #EB4F07', stT2L2p_array[1], stT2L2p_array[2], 'color: #D10808', stT2L2p_array[2], stT2L2p_array[4], 'color: #663D3D', stT2L2p_array[4]],
-            ['Line3', stT2L3p_array[0], 'color: #EDA137', stT2L3p_array[0], stT2L3p_array[1], 'color: #EB4F07', stT2L3p_array[1], stT2L3p_array[2], 'color: #D10808', stT2L3p_array[2], stT2L3p_array[4], 'color: #663D3D', stT2L3p_array[4]
-            ]
-         ]);
-
-        var options = {
-            title: 'Shot types, Team 2',
-            bar: {groupWidth: "75%"},
-            legend: { position: 'bottom'},
-            colors: ['#EDA137', '#EB4F07','#D10808','#663D3D'],
-            hAxis: { textPosition: 'none' }
-            };
-
-        var chartX = new google.visualization.BarChart(document.getElementById('T2_typechart'));
-        chartX.draw(chartDataY, options);
-
-        var chartX_per = new google.visualization.BarChart(document.getElementById('T2_typechart_' + periodN));
-        chartX_per.draw(chartDataY_p, options);
 
     }
 
@@ -4107,4 +4338,563 @@
         updateSaveData();
 
         document.getElementById("undo").disabled = true; // Disable Undo-button
+    }
+
+    function drawChart() {
+
+        // xG Game Chart
+
+        var chartData = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', Number(xGf_g[0]), 'color: #002072', Number(xGf_g[0]), Number(xGfT2_g[0]), 'color: #59D9EB', Number(xGfT2_g[0]) ],
+             ['Line 2', Number(xGf_g[1]), 'color: #002072', Number(xGf_g[1]), Number(xGfT2_g[1]), 'color: #59D9EB', Number(xGfT2_g[1]) ],
+             ['Line 3', Number(xGf_g[2]), 'color: #002072', Number(xGf_g[2]), Number(xGfT2_g[2]), 'color: #59D9EB', Number(xGfT2_g[2]) ],
+             ['PP', Number(xGf_g[3]) + Number(xGf_g[4]), 'color: #002072', Number(xGf_g[3]) + Number(xGf_g[4]), Number(xGfT2_g[3]) + Number(xGfT2_g[4]), 'color: #59D9EB', Number(xGfT2_g[3]) + Number(xGfT2_g[4]) ],
+             ['SH', Number(xGf_g[5]) + Number(xGf_g[6]), 'color: #002072', Number(xGf_g[5]) + Number(xGf_g[6]), Number(xGfT2_g[5]) + Number(xGfT2_g[6]), 'color: #59D9EB', Number(xGfT2_g[5]) + Number(xGfT2_g[6]) ]
+          ]);
+
+        // Period data
+        var chartData_p = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', Number(xGf_p[0]), 'color: #002072', Number(xGf_p[0]), Number(xGfT2_p[0]), 'color: #59D9EB', Number(xGfT2_p[0]) ],
+             ['Line 2', Number(xGf_p[1]), 'color: #002072', Number(xGf_p[1]), Number(xGfT2_p[1]), 'color: #59D9EB', Number(xGfT2_p[1]) ],
+             ['Line 3', Number(xGf_p[2]), 'color: #002072', Number(xGf_p[2]), Number(xGfT2_p[2]), 'color: #59D9EB', Number(xGfT2_p[2]) ],
+             ['PP', Number(xGf_p[3]) + Number(xGf_p[4]), 'color: #002072', Number(xGf_p[3]) + Number(xGf_p[4]), Number(xGfT2_p[3]) + Number(xGfT2_p[4]), 'color: #59D9EB', Number(xGfT2_p[3]) + Number(xGfT2_p[4]) ],
+             ['SH', Number(xGf_p[5]) + Number(xGf_p[6]), 'color: #002072', Number(xGf_p[5]) + Number(xGf_p[6]), Number(xGfT2_p[5]) + Number(xGfT2_p[6]), 'color: #59D9EB', Number(xGfT2_p[5]) + Number(xGfT2_p[6]) ]
+          ]);
+
+        var options = {
+            title: 'xG by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
+        chart.draw(chartData, options);
+
+        var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
+        chart_per.draw(chartData_p, options);
+
+        //xG% GameChart
+
+        xGL1T1 = calcPercent(Number(xGf_g[0]), Number(xGa_g[0]));
+        xGL1T2 = calcPercent(Number(xGfT2_g[0]), Number(xGaT2_g[0]));
+        xGL2T1 = calcPercent(Number(xGf_g[1]), Number(xGa_g[1]));
+        xGL2T2 = calcPercent(Number(xGfT2_g[1]), Number(xGaT2_g[1]));
+        xGL3T1 = calcPercent(Number(xGf_g[2]), Number(xGa_g[2]));
+        xGL3T2 = calcPercent(Number(xGfT2_g[2]), Number(xGaT2_g[2]));
+
+        var chartData = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
+             ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
+             ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
+        ]);
+
+        // Period data
+        xGL1T1 = calcPercent(Number(xGf_p[0]), Number(xGa_p[0]));
+        xGL1T2 = calcPercent(Number(xGfT2_p[0]), Number(xGaT2_p[0]));
+        xGL2T1 = calcPercent(Number(xGf_p[1]), Number(xGa_p[1]));
+        xGL2T2 = calcPercent(Number(xGfT2_p[1]), Number(xGaT2_p[1]));
+        xGL3T1 = calcPercent(Number(xGf_p[2]), Number(xGa_p[2]));
+        xGL3T2 = calcPercent(Number(xGfT2_p[2]), Number(xGaT2_p[2]));
+
+        var chartData_p = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
+             ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
+             ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
+        ]);
+
+        var options = {
+            title: 'xG% by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: {
+                viewWindowMode:'explicit',
+                textPosition: 'none',
+                viewWindow: {
+                  max:100,
+                  min:0
+                }
+            },
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
+        chart.draw(chartData, options);
+
+        var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
+        chart_per.draw(chartData_p, options);
+
+        // Team 1 Player xG chart
+
+        var pldata = new google.visualization.DataTable();
+        pldata.addColumn('string', 'Name');
+        pldata.addColumn('number', 'Shot xG');
+        pldata.addColumn('number', 'Pass xG');
+        pldata.addColumn('number', 'Goals');
+        pldata.addColumn('number', 'Ass.');
+        pldata.addColumn('number', 'Shots');
+        pldata.addColumn('number', 'Shotass.');
+
+        for(i = 1; i < plT1_array.length; i++){
+            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7]]);
+        }
+
+        var pldata_p = new google.visualization.DataTable();
+        pldata_p.addColumn('string', 'Name');
+        pldata_p.addColumn('number', 'Shot xG');
+        pldata_p.addColumn('number', 'Pass xG');
+        pldata_p.addColumn('number', 'Goals');
+        pldata_p.addColumn('number', 'Ass.');
+        pldata_p.addColumn('number', 'Shots');
+        pldata_p.addColumn('number', 'Shotass.');
+
+        for(i = 1; i < plT1p_array.length; i++){
+            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7]]);
+        }
+
+        var options = {
+            title: 'Individual stats Team 1',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('T1plstats'));
+        chart.draw(pldata, options);
+
+        var chart_per = new google.visualization.Table(document.getElementById('T1plstats_' + periodN));
+        chart_per.draw(pldata_p, options);
+
+        // Add sort listener
+
+        google.visualization.events.addListener(chart, 'sort',
+        function(event) {
+            pldata.sort([{column: event.column, desc: event.ascending}]);
+            chart.draw(pldata, options);
+        });
+
+        google.visualization.events.addListener(chart_per, 'sort',
+        function(event) {
+            pldata_p.sort([{column: event.column, desc: event.ascending}]);
+            chart_per.draw(pldata_p, options);
+        });
+
+        // Team 2 Player xG chart
+
+        var pldata = new google.visualization.DataTable();
+        pldata.addColumn('string', 'Name');
+        pldata.addColumn('number', 'Shot xG');
+        pldata.addColumn('number', 'Pass xG');
+        pldata.addColumn('number', 'Goals');
+        pldata.addColumn('number', 'Ass.');
+        pldata.addColumn('number', 'Shots');
+        pldata.addColumn('number', 'Shotass.');
+
+        for(i = 1; i < plT2_array.length; i++){
+            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7]]);
+        }
+
+        var pldata_p = new google.visualization.DataTable();
+        pldata_p.addColumn('string', 'Name');
+        pldata_p.addColumn('number', 'Shot xG');
+        pldata_p.addColumn('number', 'Pass xG');
+        pldata_p.addColumn('number', 'Goals');
+        pldata_p.addColumn('number', 'Ass.');
+        pldata_p.addColumn('number', 'Shots');
+        pldata_p.addColumn('number', 'Shotass.');
+
+        for(i = 1; i < plT2p_array.length; i++){
+            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7]]);
+        }
+
+        var options = {
+            title: 'Individual stats Team 2',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('T2plstats'));
+        chart.draw(pldata, options);
+
+        var chart_per = new google.visualization.Table(document.getElementById('T2plstats_' + periodN));
+        chart_per.draw(pldata_p, options);
+
+        // Add sort listener
+
+        google.visualization.events.addListener(chart, 'sort',
+        function(event) {
+            pldata.sort([{column: event.column, desc: event.ascending}]);
+            chart.draw(pldata, options);
+        });
+
+        google.visualization.events.addListener(chart_per, 'sort',
+        function(event) {
+            pldata_p.sort([{column: event.column, desc: event.ascending}]);
+            chart_per.draw(pldata_p, options);
+        });
+
+        // Linechart Team 1
+
+        var pldata1 = new google.visualization.DataTable();
+        pldata1.addColumn('string', 'Line');
+        pldata1.addColumn('number', 'ToC');
+        pldata1.addColumn('number', 'xG for');
+        pldata1.addColumn('number', 'xG ag.');
+        pldata1.addColumn('number', 'Plus');
+        pldata1.addColumn('number', 'Minus');
+        pldata1.addColumn('number', 'CF');
+        pldata1.addColumn('number', 'CA');
+        pldata1.addColumn('number', 'Pos%');
+        pldata1.addColumn('number', 'xG Turnov.');
+        pldata1.addColumn('number', 'xG org.att. ');
+
+        pldata1.addRows([
+            ['Line 1', Toc_g[0], Number(xf_g[0].textContent), Number(xa_g[0]. textContent), Number(gf_g[0].textContent), Number(ga_g[0]. textContent), Number(sf_g[0].textContent), Number(sa_g[0].textContent), Number(p_g[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
+            ['Line 2', Toc_g[1], Number(xf_g[1].textContent), Number(xa_g[1]. textContent), Number(gf_g[1].textContent), Number(ga_g[1]. textContent), Number(sf_g[1].textContent), Number(sa_g[1].textContent), Number(p_g[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
+            ['Line 3', Toc_g[2], Number(xf_g[2].textContent), Number(xa_g[2]. textContent), Number(gf_g[2].textContent), Number(ga_g[2]. textContent), Number(sf_g[2].textContent), Number(sa_g[2].textContent), Number(p_g[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
+            ['Powerplay', Toc_g[3], Number(xf_g[3].textContent), Number(xa_g[3]. textContent), Number(gf_g[3].textContent), Number(ga_g[3]. textContent), Number(sf_g[3].textContent), Number(sa_g[3].textContent), Number(p_g[3].textContent), 0, 0],
+            ['Pen. Kill', Toc_g[5], Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0],
+            ['6vs5', Toc_g[4], Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0],
+            ['5vs6', Toc_g[6], Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent), 0, 0],
+            ['Team', Toc_g[7], Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+
+            ]);
+
+        var pldata1_p = new google.visualization.DataTable();
+        pldata1_p.addColumn('string', 'Line');
+        pldata1_p.addColumn('number', 'ToC');
+        pldata1_p.addColumn('number', 'xG for');
+        pldata1_p.addColumn('number', 'xG ag.');
+        pldata1_p.addColumn('number', 'Plus');
+        pldata1_p.addColumn('number', 'Minus');
+        pldata1_p.addColumn('number', 'CF');
+        pldata1_p.addColumn('number', 'CA');
+        pldata1_p.addColumn('number', 'Pos%');
+        pldata1_p.addColumn('number', 'xG Turnov.');
+        pldata1_p.addColumn('number', 'xG org.att. ');
+
+        pldata1_p.addRows([
+            ['Line 1', Toc_p[0], Number(xf_p[0].textContent), Number(xa_p[0]. textContent), Number(gf_p[0].textContent), Number(ga_p[0]. textContent), Number(sf_p[0].textContent), Number(sa_p[0].textContent), Number(p_p[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
+            ['Line 2', Toc_p[1], Number(xf_p[1].textContent), Number(xa_p[1]. textContent), Number(gf_p[1].textContent), Number(ga_p[1]. textContent), Number(sf_p[1].textContent), Number(sa_p[1].textContent), Number(p_p[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
+            ['Line 3', Toc_p[2], Number(xf_p[2].textContent), Number(xa_p[2]. textContent), Number(gf_p[2].textContent), Number(ga_p[2]. textContent), Number(sf_p[2].textContent), Number(sa_p[2].textContent), Number(p_p[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
+            ['Powerplay', Toc_p[3], Number(xf_p[3].textContent), Number(xa_p[3]. textContent), Number(gf_p[3].textContent), Number(ga_p[3]. textContent), Number(sf_p[3].textContent), Number(sa_p[3].textContent), Number(p_p[3].textContent), 0, 0],
+            ['Pen. Kill', Toc_p[5], Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
+            ['6vs5', Toc_p[4], Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
+            ['5vs6', Toc_p[6], Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0],
+            ['Team', Toc_p[7], Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+
+            ]);
+
+
+        var options = {
+            title: 'Line stats, Team 1',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('T1linestats'));
+        chart.draw(pldata1, options);
+
+        var chart_per = new google.visualization.Table(document.getElementById('T1linestats_' + periodN));
+        chart_per.draw(pldata1_p, options);
+
+        // Linestats T2
+
+        var pldata2 = new google.visualization.DataTable();
+        pldata2.addColumn('string', 'Line');
+        pldata2.addColumn('number', 'ToC');
+        pldata2.addColumn('number', 'xG for');
+        pldata2.addColumn('number', 'xG ag.');
+        pldata2.addColumn('number', 'Plus');
+        pldata2.addColumn('number', 'Minus');
+        pldata2.addColumn('number', 'CF');
+        pldata2.addColumn('number', 'CA');
+        pldata2.addColumn('number', 'Pos%');
+        pldata2.addColumn('number', 'xG Turnov.');
+        pldata2.addColumn('number', 'xG org.att. ');
+
+        pldata2.addRows([
+            ['Line 1', TocT2_g[0], Number(xfT2_g[0].textContent), Number(xaT2_g[0]. textContent), Number(gfT2_g[0].textContent), Number(gaT2_g[0]. textContent), Number(sfT2_g[0].textContent), Number(saT2_g[0].textContent), Number(pT2_g[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
+            ['Line 2', TocT2_g[1], Number(xfT2_g[1].textContent), Number(xaT2_g[1]. textContent), Number(gfT2_g[1].textContent), Number(gaT2_g[1]. textContent), Number(sfT2_g[1].textContent), Number(saT2_g[1].textContent), Number(pT2_g[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
+            ['Line 3', TocT2_g[2], Number(xfT2_g[2].textContent), Number(xaT2_g[2]. textContent), Number(gfT2_g[2].textContent), Number(gaT2_g[2]. textContent), Number(sfT2_g[2].textContent), Number(saT2_g[2].textContent), Number(pT2_g[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
+            ['Powerplay', TocT2_g[3], Number(xfT2_g[3].textContent), Number(xaT2_g[3]. textContent), Number(gfT2_g[3].textContent), Number(gaT2_g[3]. textContent), Number(sfT2_g[3].textContent), Number(saT2_g[3].textContent), Number(pT2_g[3].textContent), 0, 0],
+            ['Pen. Kill', TocT2_g[5], Number(xfT2_g[5].textContent), Number(xaT2_g[5]. textContent), Number(gfT2_g[5].textContent), Number(gaT2_g[5]. textContent), Number(sfT2_g[5].textContent), Number(saT2_g[5].textContent), Number(pT2_g[5].textContent), 0, 0],
+            ['6vs5', TocT2_g[4], Number(xfT2_g[4].textContent), Number(xaT2_g[4]. textContent), Number(gfT2_g[4].textContent), Number(gaT2_g[4].textContent), Number(sfT2_g[4].textContent), Number(saT2_g[4].textContent), Number(pT2_g[4].textContent), 0, 0],
+            ['5vs6', TocT2_g[6], Number(xfT2_g[6].textContent), Number(xaT2_g[6]. textContent), Number(gfT2_g[6].textContent), Number(gaT2_g[6].textContent), Number(sfT2_g[6].textContent), Number(saT2_g[6].textContent), Number(pT2_g[6].textContent), 0, 0],
+            ['Team', TocT2_g[7], Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+
+            ]);
+
+        var pldata2_p = new google.visualization.DataTable();
+        pldata2_p.addColumn('string', 'Line');
+        pldata2_p.addColumn('number', 'ToC');
+        pldata2_p.addColumn('number', 'xG for');
+        pldata2_p.addColumn('number', 'xG ag.');
+        pldata2_p.addColumn('number', 'Plus');
+        pldata2_p.addColumn('number', 'Minus');
+        pldata2_p.addColumn('number', 'CF');
+        pldata2_p.addColumn('number', 'CA');
+        pldata2_p.addColumn('number', 'Pos%');
+        pldata2_p.addColumn('number', 'xG Turnov.');
+        pldata2_p.addColumn('number', 'xG org.att. ');
+
+        pldata2_p.addRows([
+            ['Line 1', TocT2_p[0], Number(xfT2_p[0].textContent), Number(xaT2_p[0]. textContent), Number(gfT2_p[0].textContent), Number(gaT2_p[0]. textContent), Number(sfT2_p[0].textContent), Number(saT2_p[0].textContent), Number(pT2_p[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
+            ['Line 2', TocT2_p[1], Number(xfT2_p[1].textContent), Number(xaT2_p[1]. textContent), Number(gfT2_p[1].textContent), Number(gaT2_p[1]. textContent), Number(sfT2_p[1].textContent), Number(saT2_p[1].textContent), Number(pT2_p[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
+            ['Line 3', TocT2_p[2], Number(xfT2_p[2].textContent), Number(xaT2_p[2]. textContent), Number(gfT2_p[2].textContent), Number(gaT2_p[2]. textContent), Number(sfT2_p[2].textContent), Number(saT2_p[2].textContent), Number(pT2_p[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
+            ['Powerplay', TocT2_p[3], Number(xfT2_p[3].textContent), Number(xaT2_p[3]. textContent), Number(gfT2_p[3].textContent), Number(gaT2_p[3]. textContent), Number(sfT2_p[3].textContent), Number(saT2_p[3].textContent), Number(pT2_p[3].textContent), 0, 0],
+            ['Pen. Kill', TocT2_p[5], Number(xfT2_p[5].textContent), Number(xaT2_p[5]. textContent), Number(gfT2_p[5].textContent), Number(gaT2_p[5]. textContent), Number(sfT2_p[5].textContent), Number(saT2_p[5].textContent), Number(pT2_p[5].textContent), 0, 0],
+            ['6vs5', TocT2_p[4], Number(xfT2_p[4].textContent), Number(xaT2_p[4]. textContent), Number(gfT2_p[4].textContent), Number(gaT2_p[4].textContent), Number(sfT2_p[4].textContent), Number(saT2_p[4].textContent), Number(pT2_p[4].textContent), 0, 0],
+            ['5vs6', TocT2_p[6], Number(xfT2_p[6].textContent), Number(xaT2_p[6]. textContent), Number(gfT2_p[6].textContent), Number(gaT2_p[6].textContent), Number(sfT2_p[6].textContent), Number(saT2_p[6].textContent), Number(pT2_p[6].textContent), 0, 0],
+            ['Team', TocT2_p[7], Number(xfT2_p[7].textContent), Number(xaT2_p[7]. textContent), Number(gfT2_p[7].textContent), Number(gaT2_p[7].textContent), Number(sfT2_p[7].textContent), Number(saT2_p[7].textContent), Number(pT2_p[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+
+            ]);
+
+        var options = {
+            title: 'Line stats, Team 2',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        // Create and draw the visualization.
+        var chart2 = new google.visualization.Table(document.getElementById('T2linestats'));
+        chart2.draw(pldata2, options);
+
+        var chart2_per = new google.visualization.Table(document.getElementById('T2linestats_' + periodN));
+        chart2_per.draw(pldata2_p, options);
+
+        // Pie Chart, xG per type Team 1
+
+        var data = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnovers, one-timer', stxGT1Teamg_array[0]],
+        ['Turnovers, direct', stxGT1Teamg_array[1]],
+        ['Org.attack, one-timer', stxGT1Teamg_array[2]],
+        ['Org.attack, direct', stxGT1Teamg_array[4]],
+        ['Others',  stxGT1Teamg_array[3]]
+
+        ]);
+
+        var data_p = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnovers, one-timer', stxGT1Teamp_array[0]],
+        ['Turnovers, direct', stxGT1Teamp_array[1]],
+        ['Org.attack, one-timer', stxGT1Teamp_array[2]],
+        ['Org.attack, direct', stxGT1Teamp_array[4]],
+        ['Others',  stxGT1Teamp_array[3]]
+
+        ]);
+
+        var options2 = {
+        title: 'Share of xG by attack types',
+        colors: ['#20AB4E', '#295738','#002072','#59D9EB','#F7FAFA'],
+        is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
+        chart.draw(data, options2);
+
+        var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
+        chart_per.draw(data_p, options2);
+
+        // Pie Chart, xG per type Team 2
+
+        var data2 = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnover, one-timer', stxGT2Teamg_array[0]],
+        ['Turnover, direct', + stxGT2Teamg_array[1]],
+        ['Org. attack, one-timer', stxGT2Teamg_array[2]],
+        ['Org. attack, direct', stxGT2Teamg_array[4]],
+        ['Other', stxGT2Teamg_array[3]]
+
+        ]);
+
+        var data2_p = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnover, one-timer', stxGT2Teamp_array[0]],
+        ['Turnover, direct', + stxGT2Teamp_array[1]],
+        ['Org. attack, one-timer', stxGT2Teamp_array[2]],
+        ['Org. attack, direct', stxGT2Teamp_array[4]],
+        ['Other', stxGT2Teamp_array[3]]
+
+        ]);
+
+        var options2 = {
+        title: 'Share of xG by attack/shot types',
+        colors: ['#EDA137', '#EB4F07','#D10808','#663D3D', '#F7FAFA'],
+        is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
+        chart.draw(data2, options2);
+
+        var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
+        chart_per.draw(data2_p, options2);
+
+        // Team xG Chart
+        var data = google.visualization.arrayToDataTable(xGTeam_array);
+
+        var options = {
+          title: 'xG by Team',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
+        chart.draw(data, options);
+
+        // Line 1 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL1_array);
+
+        var options = {
+          title: 'xG by Line 1',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('xGL1_chart'));
+        chart.draw(data, options);
+
+        // Line 2 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL2_array);
+
+        var options = {
+          title: 'xG by Line 2',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('xGL2_chart'));
+        chart.draw(data, options);
+
+        // Line 3 xG Chart
+        var data = google.visualization.arrayToDataTable(xGL3_array);
+
+        var options1 = {
+          title: 'xG by Line 3',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('xGL3_chart'));
+        chart.draw(data, options1);
+
+        // Turnover chart
+
+         var chartData = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', stT1L1g_array[0] + stT1L1g_array[1], 'color: #002072', stT1L1g_array[0] + stT1L1g_array[1], stT2L1g_array[0] + stT2L1g_array[1], 'color: #59D9EB', stT2L1g_array[0] + stT2L1g_array[1]],
+             ['Line 2', stT1L2g_array[0] + stT1L2g_array[1], 'color: #002072', stT1L2g_array[0] + stT1L2g_array[1], stT2L2g_array[0] + stT2L2g_array[1], 'color: #59D9EB', stT2L2g_array[0] + stT2L2g_array[1]],
+             ['Line 3', stT1L3g_array[0] + stT1L3g_array[1], 'color: #002072', stT1L3g_array[0] + stT1L3g_array[1], stT2L3g_array[0] + stT2L3g_array[1], 'color: #59D9EB', stT2L3g_array[0] + stT2L3g_array[1]
+             ]
+          ]);
+
+        var options = {
+            title: 'Turnovers by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        // var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
+         // chart1.draw(chartData, options);
+
+
+       // Team 1 typechart
+
+        var chartDataX = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', stT1L1g_array[0], 'color: #20AB4E', stT1L1g_array[0], stT1L1g_array[1], 'color: #295738', stT1L1g_array[1], stT1L1g_array[2], 'color: #002072', stT1L1g_array[2], stT1L1g_array[4], 'color: #59D9EB', stT1L1g_array[4]],
+            ['Line2', stT1L2g_array[0], 'color: #20AB4E', stT1L2g_array[0], stT1L2g_array[1], 'color: #295738', stT1L2g_array[1], stT1L2g_array[2], 'color: #002072', stT1L2g_array[2], stT1L2g_array[4], 'color: #59D9EB', stT1L2g_array[4]],
+            ['Line3', stT1L3g_array[0], 'color: #20AB4E', stT1L3g_array[0], stT1L3g_array[1], 'color: #295738', stT1L3g_array[1], stT1L3g_array[2], 'color: #002072', stT1L3g_array[2], stT1L3g_array[4], 'color: #59D9EB', stT1L3g_array[4]
+            ]
+         ]);
+
+        var chartDataX_p = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', stT1L1p_array[0], 'color: #20AB4E', stT1L1p_array[0], stT1L1p_array[1], 'color: #295738', stT1L1p_array[1], stT1L1p_array[2], 'color: #002072', stT1L1p_array[2], stT1L1p_array[4], 'color: #59D9EB', stT1L1p_array[4]],
+            ['Line2', stT1L2p_array[0], 'color: #20AB4E', stT1L2p_array[0], stT1L2p_array[1], 'color: #295738', stT1L2p_array[1], stT1L2p_array[2], 'color: #002072', stT1L2p_array[2], stT1L2p_array[4], 'color: #59D9EB', stT1L2p_array[4]],
+            ['Line3', stT1L3p_array[0], 'color: #20AB4E', stT1L3p_array[0], stT1L3p_array[1], 'color: #295738', stT1L3p_array[1], stT1L3p_array[2], 'color: #002072', stT1L3p_array[2], stT1L3p_array[4], 'color: #59D9EB', stT1L3p_array[4]
+            ]
+         ]);
+
+        var options = {
+            title: 'Shot types, Team 1',
+            bar: {groupWidth: "75%"},
+            legend: { position: 'bottom'},
+            colors: ['#20AB4E', '#295738','#002072','#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart2 = new google.visualization.BarChart(document.getElementById('T1_typechart'));
+        chart2.draw(chartDataX, options);
+
+        var chart2_per = new google.visualization.BarChart(document.getElementById('T1_typechart_' + periodN));
+        chart2_per.draw(chartDataX_p, options);
+
+        // Team 2 typechart
+
+        var chartDataY = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', stT2L1g_array[0], 'color: #EDA137', stT2L1g_array[0], stT2L1g_array[1], 'color: #EB4F07', stT2L1g_array[1], stT2L1g_array[2], 'color: #D10808', stT2L1g_array[2], stT2L1g_array[4], 'color: #663D3D', stT2L1g_array[4]],
+            ['Line2', stT2L2g_array[0], 'color: #EDA137', stT2L2g_array[0], stT2L2g_array[1], 'color: #EB4F07', stT2L2g_array[1], stT2L2g_array[2], 'color: #D10808', stT2L2g_array[2], stT2L2g_array[4], 'color: #663D3D', stT2L2g_array[4]],
+            ['Line3', stT2L3g_array[0], 'color: #EDA137', stT2L3g_array[0], stT2L3g_array[1], 'color: #EB4F07', stT2L3g_array[1], stT2L3g_array[2], 'color: #D10808', stT2L3g_array[2], stT2L3g_array[4], 'color: #663D3D', stT2L3g_array[4]
+            ]
+         ]);
+
+        var chartDataY_p = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', stT2L1p_array[0], 'color: #EDA137', stT2L1p_array[0], stT2L1p_array[1], 'color: #EB4F07', stT2L1p_array[1], stT2L1p_array[2], 'color: #D10808', stT2L1p_array[2], stT2L1p_array[4], 'color: #663D3D', stT2L1p_array[4]],
+            ['Line2', stT2L2p_array[0], 'color: #EDA137', stT2L2p_array[0], stT2L2p_array[1], 'color: #EB4F07', stT2L2p_array[1], stT2L2p_array[2], 'color: #D10808', stT2L2p_array[2], stT2L2p_array[4], 'color: #663D3D', stT2L2p_array[4]],
+            ['Line3', stT2L3p_array[0], 'color: #EDA137', stT2L3p_array[0], stT2L3p_array[1], 'color: #EB4F07', stT2L3p_array[1], stT2L3p_array[2], 'color: #D10808', stT2L3p_array[2], stT2L3p_array[4], 'color: #663D3D', stT2L3p_array[4]
+            ]
+         ]);
+
+        var options = {
+            title: 'Shot types, Team 2',
+            bar: {groupWidth: "75%"},
+            legend: { position: 'bottom'},
+            colors: ['#EDA137', '#EB4F07','#D10808','#663D3D'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chartX = new google.visualization.BarChart(document.getElementById('T2_typechart'));
+        chartX.draw(chartDataY, options);
+
+        var chartX_per = new google.visualization.BarChart(document.getElementById('T2_typechart_' + periodN));
+        chartX_per.draw(chartDataY_p, options);
+
     }

@@ -1,0 +1,146 @@
+<!--
+
+This is the analysis - html - page content file. It is shown when the user is logged in and
+presses Analyse data - button at the index - page.
+
+It extends app_layout.html with Django
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+{% load static %}
+{{ request.user.id|json_script:"user_id" }}
+
+<div class="container" style="Padding-top: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="team-selection">
+                <h2 style="Padding-top:20px;">Visualise your analysed games</h2><br>
+                <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
+                    <option selected disabled>Select a game...</option>
+                    {% for game in games %}
+                        <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: Time {{game.game_data.gameCounter}} - {{game.teams.all|join:" - " }}</option>
+                    {% endfor %}
+                </select>
+                <img src="{% static 'delete.png' %}" id="analyse_delete" onclick="deleteGameButton()" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="team-selection">
+                <h5 id="stdate"></h5>
+                <h3><span id="stteam_1"></span> - <span id="stteam_2"></span></h3></br>
+                <h4 id="stperiodNr">Period 1</h4>
+                <h3 id="stlabel">00:00:00</h3></br>
+                <h3><span id="sttotg_1">0</span> - <span id="sttotg_2">0</span></h3>
+                <h5>xG <span id="sttotxG_1">0</span> - <span id="sttotxG_2">0</span></h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div class="col-sm-12">
+            <div class="shot-map">
+                <canvas id="stmyCanvas" width="300" height="500"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="stxGGame_chart" style="height: 200px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="stxG%Game_chart" style="height: 200px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="stT1_typechart" style="height: 200px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="stT2_typechart" style="height: 200px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" style="Padding-top: 200px;">
+        <div class="col-sm-6">
+            <div class="linestats">
+                <h5><span id="stt1name1">Team 1</span> player stats</h5>
+                <div  id="stT1plstats" style="height: 600px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <h5><span id="stt2name1">Team 2</span> player stats</h5>
+                <div  id="stT2plstats" style="height: 600px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <h4><span id="stt1name2">Team 1</span> line stats</h4>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <div id="stT1linestats" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <h4><span id="stt2name2">Team 2</span> line stats</h4>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <div id="stT2linestats" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="stT1_st_piechart" style="height: 300px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px" >
+                <div id="stT2_st_piechart" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats" style="Padding-top: 50px">
+                <div id="stxGTeam_chart" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/static/js/visualizations.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['table']});
+</script>
+
+{% endblock %}

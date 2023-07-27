@@ -17,7 +17,7 @@ class Level(models.Model):
     created = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f'{self.name}, {self.country}'
+        return f'{self.name}'
 
 class Team(models.Model):
     objects = models.Manager()
@@ -61,6 +61,14 @@ class Game(models.Model):
 
     def __str__(self):
         return f'Date: {self.date}, User: {self.user}'
+
+    def get_time(self):
+        seconds = self.game_data_gameCounter
+        minutes = seconds // 60
+        hours = minutes // 60
+
+        return "%02d:%02d:%02d" % (hours, minutes % 60, seconds % 60)
+
 
 class Player(models.Model):
     objects = models.Manager()
