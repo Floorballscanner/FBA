@@ -21,7 +21,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                window.location.reload();
+                initializePage()
                 gd = data.game_data;
                 game_delete.disabled = false;
                 document.getElementById('stdate').innerHTML = data.date;
@@ -418,12 +418,30 @@
                 window.alert("Game data deleted.");
                 game_delete.disabled = true;
                 s_game.selectedIndex = "0";
-                window.location.reload();
+                initializePage()
 
             })
             .catch((error) => {
               console.error('Error:', error);
             });
         }
+
+    }
+
+    function initializePage() { // Empty values and charts
+
+        document.getElementById('stdate').innerHTML = ""
+        document.getElementById('sttotg_1').innerHTML = ""
+        document.getElementById('sttotg_2').innerHTML = ""
+        document.getElementById('sttotxG_1').innerHTML = ""
+        document.getElementById('sttotxG_2').innerHTML = ""
+        document.getElementById('stlabel').innerHTML = ""
+        document.getElementById('stperiodNr').innerHTML = ""
+        document.getElementById('stteam_1').innerHTML = ""
+        document.getElementById('stt1name1').innerHTML = ""
+        document.getElementById('stt1name2').innerHTML = ""
+        document.getElementById('stteam_2').innerHTML = ""
+        document.getElementById('stt2name1').innerHTML = ""
+        document.getElementById('stt2name2').innerHTML = ""
 
     }
