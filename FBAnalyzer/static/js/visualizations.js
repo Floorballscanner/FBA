@@ -2,10 +2,16 @@
     var s_game = document.getElementById("select-game");
     var game_delete = document.getElementById("analyse_delete");
     var img = new Image();
-    var cnvs = document.getElementById("stmyCanvas");
-    var ctx = cnvs.getContext("2d");
-    var fWidth = 300; // Width of the shotmap field in pixels
-    var fLength = 500; // Length of the shotmap field in pixels
+    var cnvs1 = document.getElementById("stmyCanvas_p1");
+    var ctx1 = cnvs1.getContext("2d");
+    var cnvs2 = document.getElementById("stmyCanvas_p2");
+    var ctx2 = cnvs2.getContext("2d");
+    var cnvs3 = document.getElementById("stmyCanvas_p3");
+    var ctx3 = cnvs3.getContext("2d");
+    var cnvs4 = document.getElementById("stmyCanvas_p4");
+    var ctx4 = cnvs4.getContext("2d");
+    var fWidth = 100; // Width of the shotmap field in pixels
+    var fLength = 166; // Length of the shotmap field in pixels
     var myImg = new Image();
     myImg.src = "/static/field-new.png";
 
@@ -65,9 +71,21 @@
                             gd.xGTeam_array[0][4] = 'Goal ' + data.name;
                     })
 
-                    img.src = gd.cnvs_url;
+                    img.src = gd.cnvs1_url;
                     img.onload = function() {
-                        ctx.drawImage(img,0,0,fWidth,fLength);
+                        ctx1.drawImage(img,0,0,fWidth,fLength);
+                     };
+                    img.src = gd.cnvs2_url;
+                    img.onload = function() {
+                        ctx2.drawImage(img,0,0,fWidth,fLength);
+                     };
+                    img.src = gd.cnvs3_url;
+                    img.onload = function() {
+                        ctx3.drawImage(img,0,0,fWidth,fLength);
+                     };
+                    img.src = gd.cnvs4_url;
+                    img.onload = function() {
+                        ctx4.drawImage(img,0,0,fWidth,fLength);
                      };
 
                     // xG Game Chart
@@ -453,7 +471,10 @@
         document.getElementById('stt2name1').innerHTML = ""
         document.getElementById('stt2name2').innerHTML = ""
 
-        ctx.drawImage(myImg,0,0,fWidth,fLength);
+        ctx1.drawImage(myImg,0,0,fWidth,fLength);
+        ctx2.drawImage(myImg,0,0,fWidth,fLength);
+        ctx3.drawImage(myImg,0,0,fWidth,fLength);
+        ctx4.drawImage(myImg,0,0,fWidth,fLength);
 
         // xG Game Chart
 
