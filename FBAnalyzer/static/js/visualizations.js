@@ -75,7 +75,7 @@
                     img.onload = function() {
                         ctx1.drawImage(img,0,0,fWidth,fLength);
                      };
-                    img.src = gd.cnvs2_url;
+                    /*img.src = gd.cnvs2_url;
                     img.onload = function() {
                         ctx2.drawImage(img,0,0,fWidth,fLength);
                      };
@@ -86,7 +86,7 @@
                     img.src = gd.cnvs4_url;
                     img.onload = function() {
                         ctx4.drawImage(img,0,0,fWidth,fLength);
-                     };
+                     };*/
 
                     // xG Game Chart
 
