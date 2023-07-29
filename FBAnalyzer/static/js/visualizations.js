@@ -11,6 +11,11 @@
 
     // Function for Analysis.html - game chart visualization
 
+    window.onload = function() {
+
+        initializePage()
+    }
+
     function changeGame() {
 
         // Set Game Stats
@@ -707,7 +712,7 @@
         chart.draw(data2, options2);
 
         // Team xG Chart
-        var data = [];
+        var data = google.visualization.arrayToDataTable([]);
 
         var options = {
           title: 'xG by Team',
