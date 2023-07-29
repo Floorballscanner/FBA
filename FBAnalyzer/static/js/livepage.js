@@ -24,7 +24,7 @@ window.onload = function() {
 
                 const d = document.createElement('h5');
                 d.innerText = data[i].date.substr(0, 10);
-                d.style.paddingTop = "10px";
+                d.style.paddingTop = "30px";
 
                 const h = document.createElement('h1');
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
@@ -67,7 +67,7 @@ window.onload = function() {
                     const img = document.createElement('img');
                     img.setAttribute('src',"/static/live.png");
                     img.setAttribute('width', '70px');
-                    img.style.paddingTop = "55px";
+                    img.style.paddingTop = "5px";
                     div2.appendChild(img);
                 }
                 //else {h.style.paddingTop = "55px";}
