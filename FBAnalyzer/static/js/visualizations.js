@@ -555,7 +555,7 @@
         pldata.addColumn('number', 'Shotass.');
 
         var options = {
-            title: 'Individual stats '+ gd.name_t1,
+            title: 'Individual stats '+ "",
             bar: {groupWidth: "95%"},
             legend: { position: 'bottom'},
             colors: ['#002072', '#59D9EB'],
@@ -587,7 +587,7 @@
         pldata.addColumn('number', 'Shotass.');
 
         var options = {
-            title: 'Individual stats '+ gd.name_t2,
+            title: 'Individual stats '+ "",
             bar: {groupWidth: "95%"},
             legend: { position: 'bottom'},
             colors: ['#002072', '#59D9EB'],
@@ -622,7 +622,7 @@
         pldata1.addColumn('number', 'xG org.att. ');
 
         var options = {
-            title: 'Line stats, ' + gd.name_t1,
+            title: 'Line stats, ' + "",
             bar: {groupWidth: "95%"},
             legend: { position: 'bottom'},
             colors: ['#002072', '#59D9EB'],
@@ -649,7 +649,7 @@
         pldata2.addColumn('number', 'xG org.att. ');
 
         var options = {
-            title: 'Line stats, ' + gd.name_t2,
+            title: 'Line stats, ' + "",
             bar: {groupWidth: "95%"},
             legend: { position: 'bottom'},
             colors: ['#002072', '#59D9EB'],
