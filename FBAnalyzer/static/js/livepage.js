@@ -57,10 +57,11 @@ window.onload = function() {
                 button.setAttribute('role', 'button');
                 button.style.paddingTop = "5px";
                 button.innerText = "Open live";
-                button.style.paddingBottom = "5px";
+                button.style.paddingBottom = "15px";
 
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
+                div2.appendChild(d);
 
                 if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
@@ -69,9 +70,8 @@ window.onload = function() {
                     img.style.paddingTop = "55px";
                     div2.appendChild(img);
                 }
-                else {h.style.paddingTop = "55px";}
+                //else {h.style.paddingTop = "55px";}
 
-                div2.appendChild(d);
                 div2.appendChild(h);
                 div2.appendChild(h2);
                 div2.appendChild(h3);
