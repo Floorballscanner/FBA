@@ -446,4 +446,297 @@
         document.getElementById('stt2name1').innerHTML = ""
         document.getElementById('stt2name2').innerHTML = ""
 
+        // xG Game Chart
+
+        var chartData = google.visualization.arrayToDataTable([
+             ['Line', "", { role: 'style' }, { role: 'annotation' }, "", { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0 ],
+             ['Line 2', 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0 ],
+             ['Line 3', 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0 ],
+             ['PP', 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0 ],
+             ['SH', 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0 ]
+          ]);
+
+        var options = {
+            title: 'xG by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('stxGGame_chart'));
+        chart.draw(chartData, options);
+
+        //xG% GameChart
+
+        xGL1T1 = 0;
+        xGL1T2 = 0;
+        xGL2T1 = 0;
+        xGL2T2 = 0;
+        xGL3T1 = 0;
+        xGL3T2 = 0;
+
+        var chartData = google.visualization.arrayToDataTable([
+             ['Line', "", { role: 'style' }, { role: 'annotation' }, "", { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', xGL1T1, 'color: #002072', xGL1T1 + "%", xGL1T2, 'color: #59D9EB', xGL1T2 + "%" ],
+             ['Line 2', xGL2T1, 'color: #002072', xGL2T1 + "%", xGL2T2, 'color: #59D9EB', xGL2T2 + "%" ],
+             ['Line 3', xGL3T1, 'color: #002072', xGL3T1 + "%", xGL3T2, 'color: #59D9EB', xGL3T2 + "%" ]
+        ]);
+
+        var options = {
+            title: 'xG% by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: {
+                viewWindowMode:'explicit',
+                textPosition: 'none',
+                viewWindow: {
+                  max:100,
+                  min:0
+                }
+            },
+            };
+
+        var chart = new google.visualization.BarChart(document.getElementById('stxG%Game_chart'));
+        chart.draw(chartData, options);
+
+        // Team 1 typechart
+
+        var chartDataX = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', 0, 'color: #20AB4E', 0, 0, 'color: #295738', 0, 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0],
+            ['Line2', 0, 'color: #20AB4E', 0, 0, 'color: #295738', 0, 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0],
+            ['Line3', 0, 'color: #20AB4E', 0, 0, 'color: #295738', 0, 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0]
+         ]);
+
+        var options = {
+            title: 'Shot types, ' + "",
+            bar: {groupWidth: "75%"},
+            legend: { position: 'bottom'},
+            colors: ['#20AB4E', '#295738','#002072','#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart2 = new google.visualization.BarChart(document.getElementById('stT1_typechart'));
+        chart2.draw(chartDataX, options);
+
+        // Team 2 typechart
+
+        var chartDataY = google.visualization.arrayToDataTable([
+            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Line1', 0, 'color: #EDA137', 0, 0, 'color: #EB4F07', 0, 0, 'color: #D10808', 0, 0, 'color: #663D3D', 0],
+            ['Line2', 0, 'color: #EDA137', 0, 0, 'color: #EB4F07', 0, 0, 'color: #D10808', 0, 0, 'color: #663D3D', 0],
+            ['Line3', 0, 'color: #EDA137', 0, 0, 'color: #EB4F07', 0, 0, 'color: #D10808', 0, 0, 'color: #663D3D', 0
+            ]
+         ]);
+
+        var options = {
+            title: 'Shot types, ' + "",
+            bar: {groupWidth: "75%"},
+            legend: { position: 'bottom'},
+            colors: ['#EDA137', '#EB4F07','#D10808','#663D3D'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chartX = new google.visualization.BarChart(document.getElementById('stT2_typechart'));
+        chartX.draw(chartDataY, options);
+
+        // Team 1 Player xG chart
+
+        var pldata = new google.visualization.DataTable();
+        pldata.addColumn('string', 'Name');
+        pldata.addColumn('number', 'Shot xG');
+        pldata.addColumn('number', 'Pass xG');
+        pldata.addColumn('number', 'Goals');
+        pldata.addColumn('number', 'Ass.');
+        pldata.addColumn('number', 'Shots');
+        pldata.addColumn('number', 'Shotass.');
+
+        var options = {
+            title: 'Individual stats '+ gd.name_t1,
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('stT1plstats'));
+        chart.draw(pldata, options);
+
+        // Add sort listener
+
+        google.visualization.events.addListener(chart, 'sort',
+        function(event) {
+            pldata.sort([{column: event.column, desc: event.ascending}]);
+            chart.draw(pldata, options);
+        });
+
+        // Team 2 Player xG chart
+
+        var pldata = new google.visualization.DataTable();
+        pldata.addColumn('string', 'Name');
+        pldata.addColumn('number', 'Shot xG');
+        pldata.addColumn('number', 'Pass xG');
+        pldata.addColumn('number', 'Goals');
+        pldata.addColumn('number', 'Ass.');
+        pldata.addColumn('number', 'Shots');
+        pldata.addColumn('number', 'Shotass.');
+
+        var options = {
+            title: 'Individual stats '+ gd.name_t2,
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('stT2plstats'));
+        chart.draw(pldata, options);
+
+        // Add sort listener
+
+        google.visualization.events.addListener(chart, 'sort',
+        function(event) {
+            pldata.sort([{column: event.column, desc: event.ascending}]);
+            chart.draw(pldata, options);
+        });
+
+        // Linechart Team 1
+
+        var pldata1 = new google.visualization.DataTable();
+        pldata1.addColumn('string', 'Line');
+        pldata1.addColumn('string', 'ToC');
+        pldata1.addColumn('number', 'xG for');
+        pldata1.addColumn('number', 'xG ag.');
+        pldata1.addColumn('number', 'Plus');
+        pldata1.addColumn('number', 'Minus');
+        pldata1.addColumn('number', 'CF');
+        pldata1.addColumn('number', 'CA');
+        pldata1.addColumn('number', 'Pos%');
+        pldata1.addColumn('number', 'xG Turnov.');
+        pldata1.addColumn('number', 'xG org.att. ');
+
+        var options = {
+            title: 'Line stats, ' + gd.name_t1,
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('stT1linestats'));
+        chart.draw(pldata1, options);
+
+        // Linestats T2
+
+        var pldata2 = new google.visualization.DataTable();
+        pldata2.addColumn('string', 'Line');
+        pldata2.addColumn('string', 'ToC');
+        pldata2.addColumn('number', 'xG for');
+        pldata2.addColumn('number', 'xG ag.');
+        pldata2.addColumn('number', 'Plus');
+        pldata2.addColumn('number', 'Minus');
+        pldata2.addColumn('number', 'CF');
+        pldata2.addColumn('number', 'CA');
+        pldata2.addColumn('number', 'Pos%');
+        pldata2.addColumn('number', 'xG Turnov.');
+        pldata2.addColumn('number', 'xG org.att. ');
+
+        var options = {
+            title: 'Line stats, ' + gd.name_t2,
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        // Create and draw the visualization.
+        var chart2 = new google.visualization.Table(document.getElementById('stT2linestats'));
+        chart2.draw(pldata2, options);
+
+        // Pie Chart, xG per type Team 1
+
+        var data = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnovers, one-timer', 0],
+        ['Turnovers, direct', 0],
+        ['Org.attack, one-timer', 0],
+        ['Org.attack, direct', 0],
+        ['Others',  0]
+
+        ]);
+
+        var options2 = {
+        title: 'Share of xG by attack types',
+        colors: ['#20AB4E', '#295738','#002072','#59D9EB','#F7FAFA'],
+        is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('stT1_st_piechart'));
+        chart.draw(data, options2);
+
+        // Pie Chart, xG per type Team 2
+
+        var data2 = new google.visualization.arrayToDataTable([
+        ['Type', 'xG'],
+        ['Turnover, one-timer', 0],
+        ['Turnover, direct', + 0],
+        ['Org. attack, one-timer', 0],
+        ['Org. attack, direct', 0],
+        ['Other', 0]
+
+        ]);
+
+        var options2 = {
+        title: 'Share of xG by attack/shot types',
+        colors: ['#EDA137', '#EB4F07','#D10808','#663D3D', '#F7FAFA'],
+        is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('stT2_st_piechart'));
+        chart.draw(data2, options2);
+
+        // Team xG Chart
+        var data = 0;
+
+        var options = {
+          title: 'xG by Team',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('stxGTeam_chart'));
+        chart.draw(data, options);
+
+        // Turnover chart
+
+         var chartData = google.visualization.arrayToDataTable([
+             ['Line', "", { role: 'style' }, { role: 'annotation' }, "", { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0],
+             ['Line 2', 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0],
+             ['Line 3', 0, 'color: #002072', 0, 0, 'color: #59D9EB', 0
+             ]
+          ]);
+
+        var options = {
+            title: 'Turnovers by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        // var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
+        // chart1.draw(chartData, options);
+
     }
