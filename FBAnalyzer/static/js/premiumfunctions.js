@@ -3329,9 +3329,9 @@
 
     function saveData() {
 
-        var r = confirm("Are you sure you want to save data,\n do this when your game is over?");
+        var conf_save = confirm("Are you sure you want to save data,\n do this when your game is over?");
 
-        if (r == true) {
+        if (conf_save == true) {
 
             // Shot data
 
@@ -3419,10 +3419,19 @@
                 console.error('Error:', error);
             });
 
-            downloadCsv()
-
         }
 
+        var conf_pr = confirm("Press OK to print results in a PDF-file");
+
+        if (conf_pr == true) {
+            Print()
+        }
+
+        var conf_csv = confirm("Press OK to download shots in a csv-file");
+
+        if (conf_csv == true) {
+            downloadCsv()
+        }
     }
 
     function set_t1_names() {
