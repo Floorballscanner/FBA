@@ -6,6 +6,8 @@
     var ctx = cnvs.getContext("2d");
     var fWidth = 300; // Width of the shotmap field in pixels
     var fLength = 500; // Length of the shotmap field in pixels
+    var myImg = new Image();
+    myImg.src = "/static/field-new.png";
 
     // Function for Analysis.html - game chart visualization
 
@@ -446,6 +448,8 @@
         document.getElementById('stt2name1').innerHTML = ""
         document.getElementById('stt2name2').innerHTML = ""
 
+        ctx.drawImage(myImg,0,0,fWidth,fLength);
+
         // xG Game Chart
 
         var chartData = google.visualization.arrayToDataTable([
@@ -703,7 +707,7 @@
         chart.draw(data2, options2);
 
         // Team xG Chart
-        var data = 0;
+        var data = [];
 
         var options = {
           title: 'xG by Team',
