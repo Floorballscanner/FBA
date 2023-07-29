@@ -71,22 +71,22 @@
                             gd.xGTeam_array[0][4] = 'Goal ' + data.name;
                     })
 
-                    img.src = gd.cnvs1_url;
+                    img.src = gd.cnvs_1_url;
                     img.onload = function() {
                         ctx1.drawImage(img,0,0,fWidth,fLength);
                      };
-                    /*img.src = gd.cnvs2_url;
+                    img.src = gd.cnvs_2_url;
                     img.onload = function() {
                         ctx2.drawImage(img,0,0,fWidth,fLength);
                      };
-                    img.src = gd.cnvs3_url;
+                    img.src = gd.cnvs_3_url;
                     img.onload = function() {
                         ctx3.drawImage(img,0,0,fWidth,fLength);
                      };
-                    img.src = gd.cnvs4_url;
+                    img.src = gd.cnvs_4_url;
                     img.onload = function() {
                         ctx4.drawImage(img,0,0,fWidth,fLength);
-                     };*/
+                     };
 
                     // xG Game Chart
 
