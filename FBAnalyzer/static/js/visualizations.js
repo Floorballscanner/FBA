@@ -712,7 +712,7 @@
         chart.draw(data2, options2);
 
         // Team xG Chart
-        var data = google.visualization.arrayToDataTable([['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']["",0,0,0,0]]);
+        var data = google.visualization.arrayToDataTable([['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2'],["",0,0,0,0]]);
 
         var options = {
           title: 'xG by Team',
