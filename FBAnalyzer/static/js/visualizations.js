@@ -1,7 +1,10 @@
 
     var s_game = document.getElementById("select-game");
     var game_delete = document.getElementById("analyse_delete");
-    var img = new Image();
+    var img1 = new Image();
+    var img2 = new Image();
+    var img3 = new Image();
+    var img4 = new Image();
     var cnvs1 = document.getElementById("stmyCanvas_p1");
     var ctx1 = cnvs1.getContext("2d");
     var cnvs2 = document.getElementById("stmyCanvas_p2");
@@ -71,21 +74,17 @@
                             gd.xGTeam_array[0][4] = 'Goal ' + data.name;
                     })
 
-                    img.src = gd.cnvs_1_url;
-                    img.onload = function() {
-                        ctx1.drawImage(img,0,0,fWidth,fLength);
+                    img1.src = gd.cnvs_1_url;
+                    ctx1.drawImage(img1,0,0,fWidth,fLength);
+                    img2.src = gd.cnvs_2_url;
+                    ctx2.drawImage(img2,0,0,fWidth,fLength);
+                    img3.src = gd.cnvs_3_url;
+                    img3.onload = function() {
+                        ctx3.drawImage(img3,0,0,fWidth,fLength);
                      };
-                    img.src = gd.cnvs_2_url;
-                    img.onload = function() {
-                        ctx2.drawImage(img,0,0,fWidth,fLength);
-                     };
-                    img.src = gd.cnvs_3_url;
-                    img.onload = function() {
-                        ctx3.drawImage(img,0,0,fWidth,fLength);
-                     };
-                    img.src = gd.cnvs_4_url;
-                    img.onload = function() {
-                        ctx4.drawImage(img,0,0,fWidth,fLength);
+                    img4.src = gd.cnvs_4_url;
+                    img4.onload = function() {
+                        ctx4.drawImage(img4,0,0,fWidth,fLength);
                      };
 
                     // xG Game Chart
