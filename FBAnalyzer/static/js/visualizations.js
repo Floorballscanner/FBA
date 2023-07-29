@@ -433,12 +433,12 @@
     function initializePage() { // Empty values and charts
 
         document.getElementById('stdate').innerHTML = ""
-        document.getElementById('sttotg_1').innerHTML = ""
-        document.getElementById('sttotg_2').innerHTML = ""
-        document.getElementById('sttotxG_1').innerHTML = ""
-        document.getElementById('sttotxG_2').innerHTML = ""
-        document.getElementById('stlabel').innerHTML = ""
-        document.getElementById('stperiodNr').innerHTML = ""
+        document.getElementById('sttotg_1').innerHTML = "0"
+        document.getElementById('sttotg_2').innerHTML = "0"
+        document.getElementById('sttotxG_1').innerHTML = "0"
+        document.getElementById('sttotxG_2').innerHTML = "0"
+        document.getElementById('stlabel').innerHTML = "00:00:00"
+        document.getElementById('stperiodNr').innerHTML = "Period 1"
         document.getElementById('stteam_1').innerHTML = ""
         document.getElementById('stt1name1').innerHTML = ""
         document.getElementById('stt1name2').innerHTML = ""
