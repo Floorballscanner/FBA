@@ -13,8 +13,8 @@
     var ctx3 = cnvs3.getContext("2d");
     var cnvs4 = document.getElementById("stmyCanvas_p4");
     var ctx4 = cnvs4.getContext("2d");
-    var fWidth = 100; // Width of the shotmap field in pixels
-    var fLength = 166; // Length of the shotmap field in pixels
+    var fWidth = 200; // Width of the shotmap field in pixels
+    var fLength = 332; // Length of the shotmap field in pixels
     var myImg = new Image();
     myImg.src = "/static/field-new.png";
 
@@ -75,9 +75,13 @@
                     })
 
                     img1.src = gd.cnvs_1_url;
-                    ctx1.drawImage(img1,0,0,fWidth,fLength);
+                    img1.onload = function() {
+                        ctx1.drawImage(img1,0,0,fWidth,fLength);
+                     };
                     img2.src = gd.cnvs_2_url;
-                    ctx2.drawImage(img2,0,0,fWidth,fLength);
+                    img2.onload = function() {
+                        ctx2.drawImage(img2,0,0,fWidth,fLength);
+                     };
                     img3.src = gd.cnvs_3_url;
                     img3.onload = function() {
                         ctx3.drawImage(img3,0,0,fWidth,fLength);
