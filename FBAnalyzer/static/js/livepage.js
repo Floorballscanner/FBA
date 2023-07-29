@@ -24,7 +24,7 @@ window.onload = function() {
 
                 const d = document.createElement('h5');
                 d.innerText = data[i].date.substr(0, 10);
-                d.style.paddingTop = "30px";
+                d.style.paddingTop = "50px";
 
                 const h = document.createElement('h1');
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
@@ -57,7 +57,7 @@ window.onload = function() {
                 button.setAttribute('role', 'button');
                 button.style.paddingTop = "5px";
                 button.innerText = "Open live";
-                button.style.paddingBottom = "15px";
+                button.style.paddingBottom = "5px";
 
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
