@@ -21,6 +21,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                window.location.reload();
                 gd = data.game_data;
                 game_delete.disabled = false;
                 document.getElementById('stdate').innerHTML = data.date;
