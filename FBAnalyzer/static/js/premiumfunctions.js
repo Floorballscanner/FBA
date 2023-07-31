@@ -2896,6 +2896,7 @@
                 }
                 shot_on = 0; // End the shot tag process
                 shotCounter++;
+                updateSaveData()
             }
         }
         else if (shooter_select == 0) {
@@ -2951,6 +2952,7 @@
             }
             shot_on = 0; // End the shot tag process
             shotCounter++;
+            updateSaveData()
         }
 
     }
@@ -3237,6 +3239,7 @@
             document.getElementById("undo").disabled = false;
         }
         shotCounter++;
+        updateSaveData()
     }
 
     function shotTOnetimer() {
@@ -3823,10 +3826,14 @@
             "tgt_2" : tgt_2.innerHTML,
             "txG_1" : txG_1.innerHTML,
             "txG_2" : txG_2.innerHTML,
+            "txGOT_1" : txGOT_1.innerHTML,
+            "txGOT_2" : txGOT_2.innerHTML,
             "tgtp_1" : tgtp_1.innerHTML,
             "tgtp_2" : tgtp_2.innerHTML,
             "txGp_1" : txGp_1.innerHTML,
             "txGp_2" : txGp_2.innerHTML,
+            "txGOTp_1" : txGOTp_1.innerHTML,
+            "txGOTp_2" : txGOTp_2.innerHTML,
             "line_on" : line_on,
             "line_on_2" : line_on_2,
             "started" : started,
@@ -4054,7 +4061,7 @@
 
         data_object_stringified = JSON.parse(JSON.stringify(data_object));
 
-        data = {"game_data" : data_object}
+/*        data = {"game_data" : data_object}
 
         fetch("https://fbscanner.io/apis/games/" + game_id + "/", {
 
@@ -4072,7 +4079,7 @@
     })
         .catch((error) => {
           console.error('Error:', error);
-    });
+    });*/
     
     }
     function undoButton() {
@@ -4103,10 +4110,15 @@
         tgt_2.innerHTML = undo_object.tgt_2;
         txG_1.innerHTML = undo_object.txG_1;
         txG_2.innerHTML = undo_object.txG_2;
+        txGOT_1.innerHTML = undo_object.txGOT_1;
+        txGOT_2.innerHTML = undo_object.txGOT_2;
+
         tgtp_1.innerHTML = undo_object.tgtp_1;
         tgtp_2.innerHTML = undo_object.tgtp_2;
         txGp_1.innerHTML = undo_object.txGp_1;
         txGp_2.innerHTML = undo_object.txGp_2;
+        txGOTp_1.innerHTML = undo_object.txGOTp_1;
+        txGOTp_2.innerHTML = undo_object.txGOTp_2;
         
         shotData = undo_object.shotData;
         premShotData = undo_object.premShotData;
