@@ -2896,7 +2896,7 @@
                 }
                 shot_on = 0; // End the shot tag process
                 shotCounter++;
-                updateSaveData()
+                updateSaveData();
             }
         }
         else if (shooter_select == 0) {
@@ -2952,7 +2952,7 @@
             }
             shot_on = 0; // End the shot tag process
             shotCounter++;
-            updateSaveData()
+            updateSaveData();
         }
 
     }
@@ -3239,7 +3239,7 @@
             document.getElementById("undo").disabled = false;
         }
         shotCounter++;
-        updateSaveData()
+        updateSaveData();
     }
 
     function shotTOnetimer() {
@@ -3416,7 +3416,7 @@
                 console.log('Success:', data);
                 console.log("New Game instance created")
                 game_id = data.id;
-                updateSaveData()
+                updateSaveData();
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -3817,6 +3817,7 @@
     }
     function updateSaveData() {
 
+        console.log("updateSaveData()")
         undo_object = JSON.parse(JSON.stringify(data_object_stringified));
 
         data_object = {
