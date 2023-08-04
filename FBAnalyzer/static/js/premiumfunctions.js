@@ -2476,6 +2476,7 @@
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
             ctx_p.fillStyle = "blue";
+            shooting_team = name_t1;
 
             if (dataType == 0 || dataType == 1) {
                 ctx.fillStyle = "green";
@@ -2649,6 +2650,7 @@
         else if (Ball_pos == 2) {
             ctx.fillStyle = "red";
             ctx_p.fillStyle = "red";
+            shooting_team = name_t2;
 
             if (dataType == 0 || dataType == 1) {
                 ctx.fillStyle = "orange";
@@ -2926,7 +2928,7 @@
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
-                printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, Ball_pos, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                             passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
                             p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
 
@@ -3020,7 +3022,7 @@
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
-            printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, Ball_pos, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+            printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                             passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
                             p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
 
@@ -3202,7 +3204,7 @@
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
-        printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, Ball_pos, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+        printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                             passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
                             p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
 
@@ -3985,6 +3987,7 @@
             "passer_id" : passer_id,
             "shooter_str" : shooter_str,
             "passer_str" : passer_str,
+            "shooting_team" : shooting_team,
             "xGTeam_array" : xGTeam_array,
             "xGL1_array" : xGL1_array,
             "xGL2_array" : xGL2_array,
@@ -4249,6 +4252,7 @@
         passer_id = undo_object.passer_id;
         shooter_str = undo_object.shooter_str;
         passer_str = undo_object.passer_str;
+        shooting_team = undo_object.shooting_team;
 
         xGTeam_array = undo_object.xGTeam_array;
         xGL1_array = undo_object.xGL1_array;
