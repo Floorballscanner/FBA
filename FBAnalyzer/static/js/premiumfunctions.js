@@ -2443,6 +2443,35 @@
         ctx_p.font = "12px Arial";
         shooter_id = "";
         passer_id = "";
+        
+        if (type == 1) {
+            dataRes_str = "Missed";
+        }
+        else if (type == 2) {
+            dataRes_str = "Saved";
+        }
+        else if (type == 3) {
+            dataRes_str = "Blocked";
+        }
+        else if (type == 4) {
+            dataRes_str = "Goal";
+        }
+
+        if (dataType == 0) { // Turnover one-timer
+            dataType_str = "Turnover | One-timer";
+        }
+        else if (dataType == 1) { // Turnover direct
+            dataType_str = "Turnover | Direct";
+        }
+        else if (dataType == 2) { // onetimer
+            dataType_str = "One-timer";
+        }
+        else if (dataType == 3) { // rebound
+            dataType_str = "Rebound";
+        }
+        else if (dataType == 4) { //direct
+            dataType_str = "Direct";
+        }
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
@@ -2881,15 +2910,25 @@
             }
             if ((Ball_pos == 1 && line_on > 3) || (Ball_pos == 2 && line_on_2 > 3)) {
                 p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
+                p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
+                p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
                 p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
+                p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+                p_T2G_str = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].text;
 
                 premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+
+                printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, Ball_pos, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
 
                 if (shotCounter > 1) {
                     document.getElementById("undo").disabled = false;
@@ -2914,12 +2953,29 @@
                 [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
+                
+                p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
+                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+                p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
+                [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+                p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
+                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+                p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
+                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+                p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
+                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+                p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
             }
 
             else if (line_on > 3) {
                 p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
+                
+                p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
+                p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
             }
 
             if (line_on_2 <= 3) {
@@ -2935,17 +2991,38 @@
                 [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+                
+                p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
+                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
+                p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
+                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
+                p_T2RW_str = document.getElementById("sT2L"+line_on_2+"RW").options
+                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
+                p_T2LD_str = document.getElementById("sT2L"+line_on_2+"LD").options
+                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
+                p_T2RD_str = document.getElementById("sT2L"+line_on_2+"RD").options
+                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
+                p_T2G_str = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].text;
             }
 
             else if (line_on_2 > 3) {
                 p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+
+                p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
+                p_T2G_str = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].text;
             }
 
             premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+
+            printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, Ball_pos, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
 
             if (shotCounter > 1) {
                 document.getElementById("undo").disabled = false;
@@ -3093,11 +3170,41 @@
                 [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
         p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+                
+        p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
+                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+        p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
+                [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+        p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
+                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+        p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
+                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+        p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
+                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+        p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
+
+        p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
+                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
+        p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
+                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
+        p_T2RW_str = document.getElementById("sT2L"+line_on_2+"RW").options
+                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
+        p_T2LD_str = document.getElementById("sT2L"+line_on_2+"LD").options
+                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
+        p_T2RD_str = document.getElementById("sT2L"+line_on_2+"RD").options
+                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
+        p_T2G_str = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].text;
         
         passertype.style.display = "none";
         premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+
+        printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, Ball_pos, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
 
         shot_on = 0; // End the shot tag process
 
@@ -3799,7 +3906,7 @@
 /*        name_time = name_t1+"_"+name_t2+"_positions.csv";
         name_time = name_time.replace(/\s/g, "");*/
 
-        csv_shot = arrayToCsv(premShotData);
+        csv_shot = arrayToCsv(printShotData);
         downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
 
 /*        csv_time = arrayToCsv(premTimeData);
@@ -3863,10 +3970,13 @@
             "name_t2" : name_t2,
             "shotData" : shotData,
             "premShotData" : premShotData,
+            "printShotData" : printShotData,
             "dataShot" : dataShot,
             "dataRes" : dataRes,
+            "dataRes_str" : dataRes_str,
             "dataxG" : dataxG,
             "dataType" : dataType,
+            "dataType_str" : dataType_str,
             "dataDis" : dataDis,
             "dataAngle" : dataAngle,
             "dataPp" : dataPp,
@@ -4123,10 +4233,13 @@
         
         shotData = undo_object.shotData;
         premShotData = undo_object.premShotData;
+        printShotData = undo_object.printShotData;
         dataShot = undo_object.dataShot;
         dataRes = undo_object.dataRes;
+        dataRes_str = undo_object.dataRes_str;
         dataxG = undo_object.dataxG;
         dataType = undo_object.dataType;
+        dataType_str = undo_object.dataType_str;
         dataDis = undo_object.dataDis;
         dataAngle = undo_object.dataAngle;
         dataPp = undo_object.dataPp;
