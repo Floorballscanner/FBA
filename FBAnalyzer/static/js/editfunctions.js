@@ -490,7 +490,7 @@ function editPlayer() {
             e_player_lastname.value = "";
             e_player_number.value = "";
             e_player_id.value = "";
-            e_player_level.value = s_player_level.value;
+            e_player_level.value = level_id;
             e_player_team.value = s_team.value;
 
             e_player_firstname.disabled = false;
@@ -691,7 +691,7 @@ function changePlayerLevel() {
         e_player_team.remove(i);
     }
 
-    fetch("https://fbscanner.io/apis/teams/")
+    fetch("https://fbscanner.io/apis/teamlist?level_id=" + e_player_level.value)
             .then(response => response.json())
             .then(teams => {
                 console.log('Success:', teams);
