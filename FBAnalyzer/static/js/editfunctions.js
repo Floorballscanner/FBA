@@ -492,6 +492,7 @@ function editPlayer() {
             e_player_id.value = "";
             e_player_level.value = level_id;
             e_player_team.value = s_team.value;
+            e_player_level.selectedIndex = s_player_level.selectedIndex;
 
             e_player_firstname.disabled = false;
             e_player_lastname.disabled = false;
@@ -578,6 +579,7 @@ function editPlayerButton() {
 
                 e_player_level.selectedIndex = 0;
                 e_player_team.selectedIndex = 0;
+                e_player.selectedIndex = 0;
 
                 updatePlayers() // Update player option box
             })
@@ -608,6 +610,7 @@ function editPlayerButton() {
                 e_player_id.value = "";
                 e_player_level.selectedIndex = 0;
                 e_player_team.selectedIndex = 0;
+                e_player.selectedIndex = 0;
 
                 e_player_firstname.disabled = true;
                 e_player_lastname.disabled = true;
