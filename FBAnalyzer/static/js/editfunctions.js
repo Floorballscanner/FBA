@@ -455,6 +455,7 @@ function editPlayer() {
                         var opt = new Option(levels[i].name, levels[i].id);
                         e_player_level.appendChild(opt);
                     }
+                    e_player_level.value = s_player_level.value;
                 })
             .catch((error) => {
                 console.error('Error:', error);
@@ -530,7 +531,7 @@ function editPlayer() {
         });
 
     }
-
+    e_player_level.value = s_player_level.value;
 }
 
 function editPlayerButton() {
