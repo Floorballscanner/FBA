@@ -5031,9 +5031,11 @@
                 sData.style.display = "block";
                 var opt = new Option(name_t1, data.teams[0]);
                 s_T1.appendChild(opt);
+                s_T1.selectedIndex = 1;
                 changeTeam1()
                 var opt = new Option(name_t2, data.teams[1]);
                 s_T2.appendChild(opt);
+                s_T2.selectedIndex = 1;
                 changeTeam2()
             })
 
