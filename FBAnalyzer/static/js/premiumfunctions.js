@@ -5011,6 +5011,8 @@
                 console.log('Success:', data);
                 undo_object = data.game_data;
                 undoButton()
+                name_t1 = data.name_t1;
+                name_t2 = data.name_t2;
                 set_t1_names()
                 set_t2_names()
             })
