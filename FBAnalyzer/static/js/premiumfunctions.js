@@ -7,6 +7,22 @@
         ctx3.drawImage(myImg,0,0,fWidth,fLength);
         ctx4.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
+
+        fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
+            .then(response => response.json())
+            .then(games => {
+                console.log('Success:', games);
+                for (let i=0;i<games.length;i++) {
+                    if (games[i].user == user_id) {
+                        var opt = new Option(games[i].game_data.name_t1 + " - " + games[i].game_data.name_t2, games[i].id);
+                        load_game.appendChild(opt);
+                    }
+                }
+            })
+        .catch((error) => {
+            console.error('Error:', error);
+    });
+
     }
     window.onbeforeunload = function() {
       return "Dude, are you sure you want to leave? Think of the kittens!";
@@ -4980,5 +4996,10 @@
 
         var chartX_per = new google.visualization.BarChart(document.getElementById('T2_typechart_' + periodN));
         chartX_per.draw(chartDataY_p, options);
+
+    }
+
+    function loadGame() {
+
 
     }
