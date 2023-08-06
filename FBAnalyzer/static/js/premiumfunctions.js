@@ -14,8 +14,10 @@
                 console.log('Success:', games);
                 for (let i=0;i<games.length;i++) {
                     if (games[i].user == user_id) {
-                        var opt = new Option(games[i].game_data.name_t1 + " - " + games[i].game_data.name_t2, games[i].id);
-                        load_game.appendChild(opt);
+                        if (typeof games[i].game_data.name_t1 !== "undefined") {
+                            var opt = new Option(games[i].game_data.name_t1 + " - " + games[i].game_data.name_t2, games[i].id);
+                            load_game.appendChild(opt);
+                        }
                     }
                 }
             })
