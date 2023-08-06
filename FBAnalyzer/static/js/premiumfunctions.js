@@ -303,7 +303,7 @@
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
-                // document.getElementById("ck2a").disabled = true;
+                document.getElementById("load-game").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 
@@ -5027,16 +5027,13 @@
                 document.getElementById("label").innerHTML = display;
                 periodN = data.game_data.periodN;
                 document.getElementById("periodNr").innerHTML = "Period " + periodN;
-                document.getElementById("select-level-t1").disabled = true;
-                document.getElementById("select-level-t2").disabled = true;
-                document.getElementById("select-team-1").disabled = true;
-                document.getElementById("select-team-2").disabled = true;
-                document.getElementById("select-date").disabled = true;
-                document.getElementById("period").disabled = false;
-                document.getElementById("reset").disabled = false;
-                document.getElementById("ck1a").disabled = true;
-                started = 1;
+                started = 0;
                 sData.style.display = "block";
+                var opt = new Option(name_t1, name_t1);
+                s_T1.appendChild(opt);
+                var opt = new Option(name_t2, name_t2);
+                s_T2.appendChild(opt);
+
             })
 
         .catch((error) => {
