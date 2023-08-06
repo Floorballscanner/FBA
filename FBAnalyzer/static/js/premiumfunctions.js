@@ -5010,7 +5010,9 @@
             .then(data => {
                 console.log('Success:', data);
                 undo_object = data.game_data;
-                undoButton();
+                undoButton()
+                set_t1_names()
+                set_t2_names()
             })
 
         .catch((error) => {
