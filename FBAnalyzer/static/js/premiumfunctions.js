@@ -5067,6 +5067,7 @@
                 s_T2.appendChild(opt);
                 s_T2.selectedIndex = s_T1.length - 1;
                 changeTeam2()
+                drawChart(); // Update charts
             })
 
         .catch((error) => {
