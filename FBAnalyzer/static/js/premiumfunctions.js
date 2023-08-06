@@ -4242,8 +4242,8 @@
         tgt_2.innerHTML = undo_object.tgt_2;
         txG_1.innerHTML = undo_object.txG_1;
         txG_2.innerHTML = undo_object.txG_2;
-        txGOT_1.innerHTML = undo_object.txGOT_1;
-        txGOT_2.innerHTML = undo_object.txGOT_2;
+        if (typeof undo_object.txGOT_1 != "undefined") {txGOT_1.innerHTML = undo_object.txGOT_1;}
+        if (typeof undo_object.txGOT_2 != "undefined") {txGOT_2.innerHTML = undo_object.txGOT_2;}
 
         tgtp_1.innerHTML = undo_object.tgtp_1;
         tgtp_2.innerHTML = undo_object.tgtp_2;
@@ -5029,11 +5029,12 @@
                 document.getElementById("periodNr").innerHTML = "Period " + periodN;
                 started = 0;
                 sData.style.display = "block";
-                var opt = new Option(name_t1, name_t1);
+                var opt = new Option(name_t1, data.teams[0]);
                 s_T1.appendChild(opt);
-                var opt = new Option(name_t2, name_t2);
+                changeTeam1()
+                var opt = new Option(name_t2, data.teams[1]);
                 s_T2.appendChild(opt);
-
+                changeTeam2()
             })
 
         .catch((error) => {
