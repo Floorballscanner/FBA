@@ -3529,25 +3529,55 @@
                     "game_data" : data_object,
             };
 
-            fetch("https://fbscanner.io/apis/games/" , {
+            // Crate a new Game instance
 
-              method: 'POST', // or 'PUT'
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken,
-              },
-              body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                console.log("New Game instance created")
-                game_id = data.id;
-                updateSaveData();
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            if (game_id == 0) {
+
+                fetch("https://fbscanner.io/apis/games/" , {
+
+                  method: 'POST', // or 'PUT'
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                  },
+                  body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    console.log("New Game instance created")
+                    game_id = data.id;
+                    updateSaveData();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+            }
+
+            // Update the saved game instance
+
+            else {
+
+                fetch("https://fbscanner.io/apis/games/" + game_id + "/", {
+
+                      method: 'PATCH', // or 'PUSH'
+                      mode: 'cors',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken,
+                      },
+                      body: JSON.stringify(data),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                      console.log('Success:', data);
+                })
+                    .catch((error) => {
+                      console.error('Error:', error);
+                });
+
+            }
 
         }
 
