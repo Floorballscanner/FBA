@@ -15,7 +15,7 @@
                 for (let i=0;i<games.length;i++) {
                     if (games[i].user == user_id) {
                         if (typeof games[i].game_data.name_t1 !== "undefined") {
-                            var opt = new Option(games[i].date + " " + games[i].game_data.name_t1 + " - " + games[i].game_data.name_t2, games[i].id);
+                            var opt = new Option(games[i].date + " | " + games[i].game_data.name_t1 + " - " + games[i].game_data.name_t2, games[i].id);
                             load_game.appendChild(opt);
                         }
                     }
@@ -5003,5 +5003,17 @@
 
     function loadGame() {
 
-        load_game.disabled = true;
+        game_id = load_game.options[load_game.selectedIndex].value;
+
+        fetch("https://fbscanner.io/apis/games/" + game_id + "/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                undo_object = data.game_data;
+                undoButton();
+            })
+
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
