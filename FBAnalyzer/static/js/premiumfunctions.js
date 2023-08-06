@@ -5010,6 +5010,7 @@
             .then(data => {
                 console.log('Success:', data);
                 undo_object = data.game_data;
+                data_object = data.game_data;
                 undoButton()
                 name_t1 = data.game_data.name_t1;
                 name_t2 = data.game_data.name_t2;
@@ -5019,6 +5020,23 @@
                 if (live == 0) {document.getElementById("ck1a").checked = false;}
                 document.getElementById("ck1a").disabled = true;
                 document.getElementById('select-date').value = data.date;
+                counter = data.game_data.counter;
+                gameCounter = data.game_data.gameCounter;
+                var date = new Date(counter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                document.getElementById("label").innerHTML = display;
+                periodN = data.game_data.periodN;
+                document.getElementById("periodNr").innerHTML = "Period " + periodN;
+                document.getElementById("select-level-t1").disabled = true;
+                document.getElementById("select-level-t2").disabled = true;
+                document.getElementById("select-team-1").disabled = true;
+                document.getElementById("select-team-2").disabled = true;
+                document.getElementById("select-date").disabled = true;
+                document.getElementById("period").disabled = false;
+                document.getElementById("reset").disabled = false;
+                document.getElementById("ck1a").disabled = true;
+                started = 1;
+                sData.style.display = "block";
             })
 
         .catch((error) => {
