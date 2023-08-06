@@ -5011,10 +5011,14 @@
                 console.log('Success:', data);
                 undo_object = data.game_data;
                 undoButton()
-                name_t1 = data.name_t1;
-                name_t2 = data.name_t2;
+                name_t1 = data.game_data.name_t1;
+                name_t2 = data.game_data.name_t2;
                 set_t1_names()
                 set_t2_names()
+                live = data.game_data.live;
+                if (live == 0) {document.getElementById("ck1a").checked = false;}
+                document.getElementById("ck1a").disabled = true;
+                document.getElementById('select-date').value = data.date;
             })
 
         .catch((error) => {
