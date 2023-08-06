@@ -4249,12 +4249,12 @@
         tgtp_2.innerHTML = undo_object.tgtp_2;
         txGp_1.innerHTML = undo_object.txGp_1;
         txGp_2.innerHTML = undo_object.txGp_2;
-        txGOTp_1.innerHTML = undo_object.txGOTp_1;
-        txGOTp_2.innerHTML = undo_object.txGOTp_2;
+        if (typeof undo_object.txGOTp_1 != "undefined") {txGOTp_1.innerHTML = undo_object.txGOTp_1;}
+        if (typeof undo_object.txGOTp_2 != "undefined") {txGOTp_2.innerHTML = undo_object.txGOTp_2;}
         
         shotData = undo_object.shotData;
         premShotData = undo_object.premShotData;
-        printShotData = undo_object.printShotData;
+        if (typeof undo_object.printShotData != "undefined") {printShotData = undo_object.printShotData;}
         dataShot = undo_object.dataShot;
         dataRes = undo_object.dataRes;
         dataRes_str = undo_object.dataRes_str;
