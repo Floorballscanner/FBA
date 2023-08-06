@@ -5003,5 +5003,5 @@
 
     function loadGame() {
 
-
+        load_game.disabled = true;
     }
