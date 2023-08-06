@@ -196,7 +196,7 @@ class GameList(generics.ListAPIView):
 
     def get_queryset(self):
 
-        queryset = Game.objects.all().order_by('date')
+        queryset = Game.objects.all().order_by('-date')
         user = self.request.query_params.get('user_id')
         if user is not None:
             queryset = queryset.filter(user__id=user)
