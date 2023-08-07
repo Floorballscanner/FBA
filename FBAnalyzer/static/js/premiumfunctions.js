@@ -7,6 +7,24 @@
         ctx3.drawImage(myImg,0,0,fWidth,fLength);
         ctx4.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
+
+        fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
+            .then(response => response.json())
+            .then(games => {
+                console.log('Success:', games);
+                for (let i=0;i<games.length;i++) {
+                    if (games[i].user == user_id) {
+                        if (typeof games[i].game_data.name_t1 !== "undefined") {
+                            var opt = new Option(games[i].date + " | " + games[i].game_data.name_t1 + " - " + games[i].game_data.name_t2, games[i].id);
+                            load_game.appendChild(opt);
+                        }
+                    }
+                }
+            })
+        .catch((error) => {
+            console.error('Error:', error);
+    });
+
     }
     window.onbeforeunload = function() {
       return "Dude, are you sure you want to leave? Think of the kittens!";
@@ -285,7 +303,7 @@
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
-                // document.getElementById("ck2a").disabled = true;
+                document.getElementById("load-game").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 
@@ -300,33 +318,6 @@
                 if (document.getElementById("ck1a").checked) {
                     initializeLive()
                 }
-
-                // Crate a new Game instance
-
-                data = { "date" : document.getElementById("select-date").value,
-                        "user" : user_id,
-                        "teams" : [s_T1.value, s_T2.value],
-                        "game_data" : data_object,
-                };
-
-                fetch("https://fbscanner.io/apis/games/" , {
-
-                  method: 'POST', // or 'PUT'
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken,
-                  },
-                  body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                    console.log("New Game instance created")
-                    game_id = data.id;
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
 
             } else {
             }
@@ -2470,10 +2461,40 @@
         ctx_p.font = "12px Arial";
         shooter_id = "";
         passer_id = "";
+        
+        if (type == 1) {
+            dataRes_str = "Missed";
+        }
+        else if (type == 2) {
+            dataRes_str = "Saved";
+        }
+        else if (type == 3) {
+            dataRes_str = "Blocked";
+        }
+        else if (type == 4) {
+            dataRes_str = "Goal";
+        }
+
+        if (dataType == 0) { // Turnover one-timer
+            dataType_str = "Turnover | One-timer";
+        }
+        else if (dataType == 1) { // Turnover direct
+            dataType_str = "Turnover | Direct";
+        }
+        else if (dataType == 2) { // onetimer
+            dataType_str = "One-timer";
+        }
+        else if (dataType == 3) { // rebound
+            dataType_str = "Rebound";
+        }
+        else if (dataType == 4) { //direct
+            dataType_str = "Direct";
+        }
 
         if (Ball_pos == 1) {
             ctx.fillStyle = "blue";
             ctx_p.fillStyle = "blue";
+            shooting_team = name_t1;
 
             if (dataType == 0 || dataType == 1) {
                 ctx.fillStyle = "green";
@@ -2647,6 +2668,7 @@
         else if (Ball_pos == 2) {
             ctx.fillStyle = "red";
             ctx_p.fillStyle = "red";
+            shooting_team = name_t2;
 
             if (dataType == 0 || dataType == 1) {
                 ctx.fillStyle = "orange";
@@ -2908,22 +2930,32 @@
             }
             if ((Ball_pos == 1 && line_on > 3) || (Ball_pos == 2 && line_on_2 > 3)) {
                 p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
+                p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
+                p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
                 p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
+                p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+                p_T2G_str = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].text;
 
                 premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
-                updateSaveData(); // Update data and save to background
+                printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
+
                 if (shotCounter > 1) {
                     document.getElementById("undo").disabled = false;
                 }
                 shot_on = 0; // End the shot tag process
                 shotCounter++;
+                updateSaveData();
             }
         }
         else if (shooter_select == 0) {
@@ -2941,12 +2973,29 @@
                 [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
+                
+                p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
+                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+                p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
+                [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+                p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
+                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+                p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
+                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+                p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
+                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+                p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
             }
 
             else if (line_on > 3) {
                 p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
+                
+                p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
+                p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
             }
 
             if (line_on_2 <= 3) {
@@ -2962,24 +3011,45 @@
                 [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+                
+                p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
+                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
+                p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
+                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
+                p_T2RW_str = document.getElementById("sT2L"+line_on_2+"RW").options
+                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
+                p_T2LD_str = document.getElementById("sT2L"+line_on_2+"LD").options
+                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
+                p_T2RD_str = document.getElementById("sT2L"+line_on_2+"RD").options
+                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
+                p_T2G_str = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].text;
             }
 
             else if (line_on_2 > 3) {
                 p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+
+                p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
+                p_T2G_str = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].text;
             }
 
             premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
-            updateSaveData(); // Update data and save to background
+            printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
+
             if (shotCounter > 1) {
                 document.getElementById("undo").disabled = false;
             }
             shot_on = 0; // End the shot tag process
             shotCounter++;
+            updateSaveData();
         }
 
     }
@@ -3120,11 +3190,41 @@
                 [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
         p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
+                
+        p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
+                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+        p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
+                [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+        p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
+                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+        p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
+                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+        p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
+                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+        p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
+
+        p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
+                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
+        p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
+                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
+        p_T2RW_str = document.getElementById("sT2L"+line_on_2+"RW").options
+                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
+        p_T2LD_str = document.getElementById("sT2L"+line_on_2+"LD").options
+                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
+        p_T2RD_str = document.getElementById("sT2L"+line_on_2+"RD").options
+                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
+        p_T2G_str = document.getElementById("sT2G").options
+                [document.getElementById("sT2G").selectedIndex].text;
         
         passertype.style.display = "none";
         premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+
+        printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh]);
 
         shot_on = 0; // End the shot tag process
 
@@ -3262,11 +3362,11 @@
             plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
 
-        updateSaveData(); // Update data and save to background
         if (shotCounter > 1) {
             document.getElementById("undo").disabled = false;
         }
         shotCounter++;
+        updateSaveData();
     }
 
     function shotTOnetimer() {
@@ -3359,11 +3459,11 @@
 
     function saveData() {
 
-        var r = confirm("Are you sure you want to save data,\n do this when your game is over?");
+        var conf_save = confirm("Are you sure you want to save data,\n do this when your game is over?");
 
-        if (r == true) {
+        if (conf_save == true) {
 
-            // Possession data
+            // Shot data
 
             i = 1;
             saveNextS(i);
@@ -3421,60 +3521,77 @@
                 }
             }
 
-            // Shot data
-/*            i = 1;
-            saveNextT(i);
+            // Crate a new Game instance
 
-            function saveNextT(i) {
+            data = { "date" : document.getElementById("select-date").value,
+                    "user" : user_id,
+                    "teams" : [s_T1.value, s_T2.value],
+                    "game_data" : data_object,
+            };
 
-                if (i<premTimeData.length) {
-                    t_data = {
-                        "user" : premTimeData[i][0],
-                        "game" : premTimeData[i][1],
-                        "time" : premTimeData[i][2],
-                        "position" : premTimeData[i][3],
-                        "lines" : [premTimeData[i][4],premTimeData[i][5]],
-                        "T1LW" : premTimeData[i][6],
-                        "T1C" : premTimeData[i][7],
-                        "T1RW" : premTimeData[i][8],
-                        "T1LD" : premTimeData[i][9],
-                        "T1RD" : premTimeData[i][10],
-                        "T1G" : premTimeData[i][11],
-                        "T2LW" : premTimeData[i][12],
-                        "T2C" : premTimeData[i][13],
-                        "T2RW" : premTimeData[i][14],
-                        "T2LD" : premTimeData[i][15],
-                        "T2RD" : premTimeData[i][16],
-                        "T2G" : premTimeData[i][17],
-                    }
+            // Crate a new Game instance
 
-                    // Save data to database
-                    fetch('https://fbscanner.io/apis/times/', {
+            if (game_id == 0) {
 
-                    method: 'POST', // or 'PUSH'
-                    headers: {
+                fetch("https://fbscanner.io/apis/games/" , {
+
+                  method: 'POST', // or 'PUT'
+                  headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrftoken,
-                    },
-                    body: JSON.stringify(t_data),
-                    })
+                  },
+                  body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    console.log("New Game instance created")
+                    game_id = data.id;
+                    updateSaveData();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
 
+            }
+
+            // Update the saved game instance
+
+            else {
+
+                fetch("https://fbscanner.io/apis/games/" + game_id + "/", {
+
+                      method: 'PATCH', // or 'PUSH'
+                      mode: 'cors',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken,
+                      },
+                      body: JSON.stringify(data),
+                })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Success:', data);
-                        i++;
-                        saveNextT(i);
-                    })
+                      console.log('Success:', data);
+                })
                     .catch((error) => {
-                    console.error('Error:', error);
-                    });
-                }
-            }*/
+                      console.error('Error:', error);
+                });
 
-            downloadCsv()
+            }
 
         }
 
+        var conf_pr = confirm("Press OK to print results in a PDF-file");
+
+        if (conf_pr == true) {
+            Print()
+        }
+
+        var conf_csv = confirm("Press OK to download shots in a csv-file");
+
+        if (conf_csv == true) {
+            downloadCsv()
+        }
     }
 
     function set_t1_names() {
@@ -3839,7 +3956,7 @@
 /*        name_time = name_t1+"_"+name_t2+"_positions.csv";
         name_time = name_time.replace(/\s/g, "");*/
 
-        csv_shot = arrayToCsv(premShotData);
+        csv_shot = arrayToCsv(printShotData);
         downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
 
 /*        csv_time = arrayToCsv(premTimeData);
@@ -3857,6 +3974,7 @@
     }
     function updateSaveData() {
 
+        console.log("updateSaveData()")
         undo_object = JSON.parse(JSON.stringify(data_object_stringified));
 
         data_object = {
@@ -3866,10 +3984,14 @@
             "tgt_2" : tgt_2.innerHTML,
             "txG_1" : txG_1.innerHTML,
             "txG_2" : txG_2.innerHTML,
+            "txGOT_1" : txGOT_1.innerHTML,
+            "txGOT_2" : txGOT_2.innerHTML,
             "tgtp_1" : tgtp_1.innerHTML,
             "tgtp_2" : tgtp_2.innerHTML,
             "txGp_1" : txGp_1.innerHTML,
             "txGp_2" : txGp_2.innerHTML,
+            "txGOTp_1" : txGOTp_1.innerHTML,
+            "txGOTp_2" : txGOTp_2.innerHTML,
             "line_on" : line_on,
             "line_on_2" : line_on_2,
             "started" : started,
@@ -3898,10 +4020,13 @@
             "name_t2" : name_t2,
             "shotData" : shotData,
             "premShotData" : premShotData,
+            "printShotData" : printShotData,
             "dataShot" : dataShot,
             "dataRes" : dataRes,
+            "dataRes_str" : dataRes_str,
             "dataxG" : dataxG,
             "dataType" : dataType,
+            "dataType_str" : dataType_str,
             "dataDis" : dataDis,
             "dataAngle" : dataAngle,
             "dataPp" : dataPp,
@@ -3910,6 +4035,7 @@
             "passer_id" : passer_id,
             "shooter_str" : shooter_str,
             "passer_str" : passer_str,
+            "shooting_team" : shooting_team,
             "xGTeam_array" : xGTeam_array,
             "xGL1_array" : xGL1_array,
             "xGL2_array" : xGL2_array,
@@ -4097,7 +4223,7 @@
 
         data_object_stringified = JSON.parse(JSON.stringify(data_object));
 
-        data = {"game_data" : data_object}
+/*        data = {"game_data" : data_object}
 
         fetch("https://fbscanner.io/apis/games/" + game_id + "/", {
 
@@ -4115,7 +4241,7 @@
     })
         .catch((error) => {
           console.error('Error:', error);
-    });
+    });*/
     
     }
     function undoButton() {
@@ -4146,17 +4272,25 @@
         tgt_2.innerHTML = undo_object.tgt_2;
         txG_1.innerHTML = undo_object.txG_1;
         txG_2.innerHTML = undo_object.txG_2;
+        if (typeof undo_object.txGOT_1 != "undefined") {txGOT_1.innerHTML = undo_object.txGOT_1;}
+        if (typeof undo_object.txGOT_2 != "undefined") {txGOT_2.innerHTML = undo_object.txGOT_2;}
+
         tgtp_1.innerHTML = undo_object.tgtp_1;
         tgtp_2.innerHTML = undo_object.tgtp_2;
         txGp_1.innerHTML = undo_object.txGp_1;
         txGp_2.innerHTML = undo_object.txGp_2;
+        if (typeof undo_object.txGOTp_1 != "undefined") {txGOTp_1.innerHTML = undo_object.txGOTp_1;}
+        if (typeof undo_object.txGOTp_2 != "undefined") {txGOTp_2.innerHTML = undo_object.txGOTp_2;}
         
         shotData = undo_object.shotData;
         premShotData = undo_object.premShotData;
+        if (typeof undo_object.printShotData != "undefined") {printShotData = undo_object.printShotData;}
         dataShot = undo_object.dataShot;
         dataRes = undo_object.dataRes;
+        dataRes_str = undo_object.dataRes_str;
         dataxG = undo_object.dataxG;
         dataType = undo_object.dataType;
+        dataType_str = undo_object.dataType_str;
         dataDis = undo_object.dataDis;
         dataAngle = undo_object.dataAngle;
         dataPp = undo_object.dataPp;
@@ -4166,6 +4300,7 @@
         passer_id = undo_object.passer_id;
         shooter_str = undo_object.shooter_str;
         passer_str = undo_object.passer_str;
+        shooting_team = undo_object.shooting_team;
 
         xGTeam_array = undo_object.xGTeam_array;
         xGL1_array = undo_object.xGL1_array;
@@ -4333,9 +4468,6 @@
             xfT2_g[i].innerHTML = undo_object.xfT2_g[i];
             xaT2_g[i].innerHTML = undo_object.xaT2_g[i];
         }
-        
-
-        updateSaveData();
 
         document.getElementById("undo").disabled = true; // Disable Undo-button
     }
@@ -4897,4 +5029,48 @@
         var chartX_per = new google.visualization.BarChart(document.getElementById('T2_typechart_' + periodN));
         chartX_per.draw(chartDataY_p, options);
 
+    }
+
+    function loadGame() {
+
+        game_id = load_game.options[load_game.selectedIndex].value;
+
+        fetch("https://fbscanner.io/apis/games/" + game_id + "/")
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                undo_object = data.game_data;
+                data_object = data.game_data;
+                undoButton()
+                name_t1 = data.game_data.name_t1;
+                name_t2 = data.game_data.name_t2;
+                set_t1_names()
+                set_t2_names()
+                live = data.game_data.live;
+                if (live == 0) {document.getElementById("ck1a").checked = false;}
+                document.getElementById("ck1a").disabled = true;
+                document.getElementById('select-date').value = data.date;
+                counter = data.game_data.counter;
+                gameCounter = data.game_data.gameCounter;
+                var date = new Date(counter * 1000);
+                var display = date.toISOString().substr(11, 8);
+                document.getElementById("label").innerHTML = display;
+                periodN = data.game_data.periodN;
+                document.getElementById("periodNr").innerHTML = "Period " + periodN;
+                started = 0;
+                sData.style.display = "block";
+                var opt = new Option(name_t1, data.teams[0]);
+                s_T1.appendChild(opt);
+                s_T1.selectedIndex = s_T1.length - 1;
+                changeTeam1()
+                var opt = new Option(name_t2, data.teams[1]);
+                s_T2.appendChild(opt);
+                s_T2.selectedIndex = s_T1.length - 1;
+                changeTeam2()
+                drawChart(); // Update charts
+            })
+
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }

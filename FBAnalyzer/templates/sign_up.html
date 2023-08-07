@@ -6,12 +6,17 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
 -->
 
 {% extends 'base_layout.html' %}
+{% load static %}
 {% block content %}
 
 <div class="container-fluid no-padding">
     <div class="app-text" style="Padding-top: 40px;">
         <h3>Sign up to Floorball Scanner</h3></br>
-        <p>If you're interested in analyzing your game, send us your detail information and we'll be in contact.</p></br></br>
+        <p>Send us a message in social media and we'll be in contact</p></br>
+        <a href="https://instagram.com/floorballscanner"><img src="{% static 'instagram_icon.png' %}" width="100px"</a></br></br>
+        <a href="https://twitter.com/floorballscnr"><img src="{% static 'twitter_icon.png' %}" width="100px"></a></br></br></br>
+
+        <!--<p>You can also use the contact form, send us your detail information and we'll be in contact.</p></br></br>
 
         <div class="row">
             <div class="col-sm-12">
@@ -28,7 +33,7 @@ It extends base_layout.html with Django and also utilizes Django's existing sign
                 </form>
             </div>
         </div>
-        </br></br>
+        </br></br>-->
 
     {% load static %}
     <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>

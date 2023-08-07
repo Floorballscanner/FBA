@@ -24,7 +24,7 @@ window.onload = function() {
 
                 const d = document.createElement('h5');
                 d.innerText = data[i].date.substr(0, 10);
-                d.style.paddingTop = "10px";
+                d.style.paddingTop = "50px";
 
                 const h = document.createElement('h1');
                 h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
@@ -61,17 +61,17 @@ window.onload = function() {
 
                 document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
+                div2.appendChild(d);
 
                 if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
                     const img = document.createElement('img');
                     img.setAttribute('src',"/static/live.png");
                     img.setAttribute('width', '70px');
-                    img.style.paddingTop = "55px";
+                    img.style.paddingTop = "5px";
                     div2.appendChild(img);
                 }
-                else {h.style.paddingTop = "55px";}
+                //else {h.style.paddingTop = "55px";}
 
-                div2.appendChild(d);
                 div2.appendChild(h);
                 div2.appendChild(h2);
                 div2.appendChild(h3);

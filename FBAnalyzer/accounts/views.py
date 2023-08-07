@@ -191,6 +191,17 @@ class PlayerList(generics.ListAPIView):
             queryset = queryset.filter(team__id=team)
         return queryset
 
+class GameList(generics.ListAPIView):
+    serializer_class = GameSerializer
+
+    def get_queryset(self):
+
+        queryset = Game.objects.all().order_by('-date')
+        user = self.request.query_params.get('user_id')
+        if user is not None:
+            queryset = queryset.filter(user__id=user)
+        return queryset
+
 @login_required
 def premium_game(request):
     teams = Team.objects.all().order_by('name')

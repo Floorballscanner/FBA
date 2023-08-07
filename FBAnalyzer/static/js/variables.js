@@ -57,6 +57,7 @@
     
     // Premium game level, team, and player select box elements
 
+    var load_game = document.getElementById("load-game");
     var s_Level_T1 = document.getElementById("select-level-t1");
     var s_Level_T2 = document.getElementById("select-level-t2");
     var s_T1 = document.getElementById("select-team-1");
@@ -169,14 +170,18 @@
     var premShotData = [['User', 'Game', 'Time', 'Possession', 'Result', 'Type', 'Distance',
                         'Angle', 'xG', 'Shooter', 'Passer', 'TFLW', 'TFC', 'TFRW', 'TFLD', 'TFRD', 'TFG',
                         'TALW', 'TAC', 'TARW', 'TALD', 'TARD', 'TAG', 'PP', 'SH']];
+    var printShotData = [['Date', 'Team 1', 'Team 2', 'Time', 'Shooting Team', 'Result', 'Type', 'xG', 'xGOT', 'Shooter',
+                        'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G', 'PP', 'SH']];
     var premTimeData = [['User', 'Game', 'Time', 'Possession', 'Line T1', 'Line T2', 'T1LW', 'T1C', 'T1RW',
                         'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G']];
     var timeData = [['User', 'Game', 'Time', 'Possession', 'Line T1', 'Line T2']];
     var dataShot = 0;
     var dataRes = 0;
+    var dataRes_str = "";
     var dataxG = 0;
     var dataxGOT = 0;
     var dataType = 0;
+    var dataType_str = "";
     var dataDis = 0;
     var dataAngle = 0;
     var dataPp = 0;
@@ -185,6 +190,7 @@
     var passer_id = 0;
     var shooter_str = "";
     var passer_str = "";
+    var shooting_team = "";
     var shotCounter = 0;
 
     // Data arrays for xG charts

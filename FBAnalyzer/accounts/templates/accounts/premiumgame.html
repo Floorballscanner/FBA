@@ -138,7 +138,9 @@ It extends app_layout.html with Django
                 </div>
             </div>
             <div class="row justify-content-center">
-                <button id="print" type="button" onclick="Print()" class="btn btn-secondary btn-sm">Print game</button>
+                <select disabled onchange="loadGame()" id="load-game" class="form-control-sm custom-select">
+                    <option selected disabled>Load game...</option>
+                </select>
             </div>
         </div>
     </div>

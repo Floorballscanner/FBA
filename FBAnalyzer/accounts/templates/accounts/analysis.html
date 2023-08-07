@@ -16,7 +16,7 @@ It extends app_layout.html with Django
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="team-selection">
-                <h2 style="Padding-top:20px;">Visualise your analysed games</h2><br>
+                <h2 style="Padding-top:20px;">My saved games</h2><br>
                 <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
                     <option selected disabled>Select a game...</option>
                     {% for game in games %}
@@ -41,9 +41,28 @@ It extends app_layout.html with Django
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 10px;">
-        <div class="col-sm-12">
+        <div class="col-sm-3">
             <div class="shot-map">
-                <canvas id="stmyCanvas" width="300" height="500"></canvas>
+                <p>Period 1</p>
+                <canvas id="stmyCanvas_p1" width="200" height="332"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="shot-map">
+                <p>Period 2</p>
+                <canvas id="stmyCanvas_p2" width="200" height="332"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="shot-map">
+                <p>Period 3</p>
+                <canvas id="stmyCanvas_p3" width="200" height="332"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="shot-map">
+                <p>Period 4</p>
+                <canvas id="stmyCanvas_p4" width="200" height="332"></canvas>
             </div>
         </div>
     </div>
