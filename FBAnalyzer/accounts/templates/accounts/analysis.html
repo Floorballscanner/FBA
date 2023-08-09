@@ -19,7 +19,8 @@ It extends app_layout.html with Django
                 <h2 style="Padding-top:20px;">My saved games</h2><br>
                 <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
                     <option selected disabled>Select a game...</option>
-                    {% for game in games|sort(attribute='date', reverse=true) %}
+                    {% assign sorted_games = games | sort(attribute='date', reverse=true) %}
+                    {% for game in sorted_games %}
                         <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: Time {{game.game_data.gameCounter}} - {{game.teams.all|join:" - " }}</option>
                     {% endfor %}
                 </select>
