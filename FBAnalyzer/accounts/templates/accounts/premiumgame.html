@@ -104,8 +104,8 @@ It extends app_layout.html with Django
         <div class="col-sm-4">
             <div class="row justify-content-center" style="Padding-top: 30px;">
                 <div class="pos-input">
-                    <p>Position</p>
-                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="15" alt="order" style="Padding: 0px">
+                    <p style="Margin: 0px;">Position</p>
+<!--                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="15" alt="order" style="Padding: 0px">-->
                     <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
                         <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary"><span id="name_t2_2">Team 2</span></button>
                     </div>
@@ -114,7 +114,7 @@ It extends app_layout.html with Django
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" style="Padding-top: 30px;">
                 <div class="game-btn" role="group" aria-label="Game buttons">
                     <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
                     <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
