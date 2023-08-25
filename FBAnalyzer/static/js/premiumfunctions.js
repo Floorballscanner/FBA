@@ -853,14 +853,14 @@
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
-                if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
+                if (dataType == 0) { // Turnover one-timer x 2 xG
+                    dxG = dxG * 2.0;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                 }
-                if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
+                if (dataType == 2) { // onetimer x 2 xG
+                    dxG = dxG * 2.0;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -935,14 +935,14 @@
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
-                if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
+                if (dataType == 0) { // Turnover one-timer x 2 xG
+                    dxG = dxG * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                 }
-                if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
+                if (dataType == 2) { // onetimer x 2 xG
+                    dxG = dxG * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1020,14 +1020,14 @@
             if (dy > 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
-                if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
+                if (dataType == 0) { // Turnover one-timer x 2 xG
+                    dxG = dxG * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.2;
                 }
-                if (dataType == 2) { // onetimer x 1,5 xG
-                    dxG = dxG * 1.45;
+                if (dataType == 2) { // onetimer x 2 xG
+                    dxG = dxG * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1106,13 +1106,13 @@
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1198,13 +1198,13 @@
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1280,13 +1280,13 @@
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1365,13 +1365,13 @@
                 var dxG = xG_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,25 xG
                     dxG = dxG * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,5 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1450,13 +1450,13 @@
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
+                    dxG = dxG * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1542,16 +1542,16 @@
                 var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                     dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1639,16 +1639,16 @@
                 var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                     dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1739,16 +1739,16 @@
                 var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                     dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1839,16 +1839,16 @@
                 var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                     dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -1944,16 +1944,16 @@
                 var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                     dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -2076,16 +2076,16 @@
                 var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                     dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -2202,16 +2202,16 @@
                 var dxGOT = xGOT_matrix[13-Math.floor((dy-0.5)*2*13)][12-Math.floor(dx*12)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                     dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
@@ -2327,16 +2327,16 @@
                 var dxGOT = xGOT_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
 
                 if (dataType == 0) { // Turnover one-timer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 1) { // Turnover direct x 1,2 xG
                     dxG = dxG * 1.2;
                     dxGOT = dxGOT * 1.2;
                 }
                 if (dataType == 2) { // onetimer x 1,45 xG
-                    dxG = dxG * 1.45;
-                    dxGOT = dxGOT * 1.45;
+                    dxG = dxG * 2;
+                    dxGOT = dxGOT * 2;
                 }
                 if (dataType == 3) { // rebound x 1,1 xG
                     dxG = dxG * 1.1;
