@@ -843,7 +843,6 @@
     }
 
     function shotMissed() {
-        Draw(PosX,PosY,1);
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
@@ -906,6 +905,7 @@
 
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -991,6 +991,7 @@
 
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -1076,6 +1077,7 @@
 
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -1160,6 +1162,7 @@
                 xfT2_g[7].innerHTML = xGfT2_g[7];
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -1186,11 +1189,10 @@
                 window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
-
+        Draw(PosX,PosY,1);
     }
 
     function shotBlocked() {
-        Draw(PosX,PosY,3);
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
@@ -1252,6 +1254,7 @@
 
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -1337,6 +1340,7 @@
 
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -1422,6 +1426,7 @@
 
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
@@ -1506,6 +1511,7 @@
                 xfT2_g[7].innerHTML = xGfT2_g[7];
 
                 dataxG = dxG;
+                dataxGOT = dxGOT;
                 console.log(dataxG)
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
@@ -1532,10 +1538,11 @@
                 window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
+
+        Draw(PosX,PosY,3);
     }
 
     function shotSaved() {
-        Draw(PosX,PosY,2);
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
@@ -1936,10 +1943,11 @@
                 window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
+
+        Draw(PosX,PosY,2);
     }
 
     function shotGoal() {
-        Draw(PosX,PosY,4);
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
@@ -2458,6 +2466,8 @@
                 }
             }
         }
+
+        Draw(PosX,PosY,4);
     }
 
     function Draw(x,y,type) {
