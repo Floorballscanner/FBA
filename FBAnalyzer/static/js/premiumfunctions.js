@@ -5049,10 +5049,10 @@
             hAxis: { textPosition: 'none' }
             };
 
-        var chart2 = new google.visualization.BarChart(document.getElementById('T1_typechart'));
+        var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
         chart2.draw(chartDataX, options);
 
-        var chart2_per = new google.visualization.BarChart(document.getElementById('T1_typechart_' + periodN));
+        var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
         chart2_per.draw(chartDataX_p, options);
 
         // Team 2 typechart
@@ -5081,10 +5081,10 @@
             hAxis: { textPosition: 'none' }
             };
 
-        var chartX = new google.visualization.BarChart(document.getElementById('T2_typechart'));
+        var chartX = new google.visualization.ColumnChart(document.getElementById('T2_typechart'));
         chartX.draw(chartDataY, options);
 
-        var chartX_per = new google.visualization.BarChart(document.getElementById('T2_typechart_' + periodN));
+        var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
         chartX_per.draw(chartDataY_p, options);
 
     }
