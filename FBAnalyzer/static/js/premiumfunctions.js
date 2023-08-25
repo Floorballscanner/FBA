@@ -4680,7 +4680,7 @@
 
         var pldata1 = new google.visualization.DataTable();
         pldata1.addColumn('string', 'Line');
-        pldata1.addColumn('number', 'ToC');
+        pldata1.addColumn('string', 'ToC');
         pldata1.addColumn('number', 'xG for');
         pldata1.addColumn('number', 'xG ag.');
         pldata1.addColumn('number', 'Plus');
@@ -4692,20 +4692,20 @@
         pldata1.addColumn('number', 'xG org.att. ');
 
         pldata1.addRows([
-            ['Line 1', Toc_g[0], Number(xf_g[0].textContent), Number(xa_g[0]. textContent), Number(gf_g[0].textContent), Number(ga_g[0]. textContent), Number(sf_g[0].textContent), Number(sa_g[0].textContent), Number(p_g[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
-            ['Line 2', Toc_g[1], Number(xf_g[1].textContent), Number(xa_g[1]. textContent), Number(gf_g[1].textContent), Number(ga_g[1]. textContent), Number(sf_g[1].textContent), Number(sa_g[1].textContent), Number(p_g[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
-            ['Line 3', Toc_g[2], Number(xf_g[2].textContent), Number(xa_g[2]. textContent), Number(gf_g[2].textContent), Number(ga_g[2]. textContent), Number(sf_g[2].textContent), Number(sa_g[2].textContent), Number(p_g[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
-            ['Powerplay', Toc_g[3], Number(xf_g[3].textContent), Number(xa_g[3]. textContent), Number(gf_g[3].textContent), Number(ga_g[3]. textContent), Number(sf_g[3].textContent), Number(sa_g[3].textContent), Number(p_g[3].textContent), 0, 0],
-            ['Pen. Kill', Toc_g[5], Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0],
-            ['6vs5', Toc_g[4], Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0],
-            ['5vs6', Toc_g[6], Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent), 0, 0],
-            ['Team', Toc_g[7], Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+            ['Line 1', toc_g[0].innerHTML, Number(xf_g[0].textContent), Number(xa_g[0]. textContent), Number(gf_g[0].textContent), Number(ga_g[0]. textContent), Number(sf_g[0].textContent), Number(sa_g[0].textContent), Number(p_g[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
+            ['Line 2', toc_g[1].innerHTML, Number(xf_g[1].textContent), Number(xa_g[1]. textContent), Number(gf_g[1].textContent), Number(ga_g[1]. textContent), Number(sf_g[1].textContent), Number(sa_g[1].textContent), Number(p_g[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
+            ['Line 3', toc_g[2].innerHTML, Number(xf_g[2].textContent), Number(xa_g[2]. textContent), Number(gf_g[2].textContent), Number(ga_g[2]. textContent), Number(sf_g[2].textContent), Number(sa_g[2].textContent), Number(p_g[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
+            ['Powerplay', toc_g[3].innerHTML, Number(xf_g[3].textContent), Number(xa_g[3]. textContent), Number(gf_g[3].textContent), Number(ga_g[3]. textContent), Number(sf_g[3].textContent), Number(sa_g[3].textContent), Number(p_g[3].textContent), 0, 0],
+            ['Pen. Kill', toc_g[4].innerHTML, Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0],
+            ['6vs5', toc_g[5].innerHTML, Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0],
+            ['5vs6', toc_g[6].innerHTML, Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent), 0, 0],
+            ['Team', toc_g[7].innerHTML, Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
             ]);
 
         var pldata1_p = new google.visualization.DataTable();
         pldata1_p.addColumn('string', 'Line');
-        pldata1_p.addColumn('number', 'ToC');
+        pldata1_p.addColumn('string', 'ToC');
         pldata1_p.addColumn('number', 'xG for');
         pldata1_p.addColumn('number', 'xG ag.');
         pldata1_p.addColumn('number', 'Plus');
@@ -4717,14 +4717,14 @@
         pldata1_p.addColumn('number', 'xG org.att. ');
 
         pldata1_p.addRows([
-            ['Line 1', Toc_p[0], Number(xf_p[0].textContent), Number(xa_p[0]. textContent), Number(gf_p[0].textContent), Number(ga_p[0]. textContent), Number(sf_p[0].textContent), Number(sa_p[0].textContent), Number(p_p[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
-            ['Line 2', Toc_p[1], Number(xf_p[1].textContent), Number(xa_p[1]. textContent), Number(gf_p[1].textContent), Number(ga_p[1]. textContent), Number(sf_p[1].textContent), Number(sa_p[1].textContent), Number(p_p[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
-            ['Line 3', Toc_p[2], Number(xf_p[2].textContent), Number(xa_p[2]. textContent), Number(gf_p[2].textContent), Number(ga_p[2]. textContent), Number(sf_p[2].textContent), Number(sa_p[2].textContent), Number(p_p[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
-            ['Powerplay', Toc_p[3], Number(xf_p[3].textContent), Number(xa_p[3]. textContent), Number(gf_p[3].textContent), Number(ga_p[3]. textContent), Number(sf_p[3].textContent), Number(sa_p[3].textContent), Number(p_p[3].textContent), 0, 0],
-            ['Pen. Kill', Toc_p[5], Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
-            ['6vs5', Toc_p[4], Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
-            ['5vs6', Toc_p[6], Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0],
-            ['Team', Toc_p[7], Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+            ['Line 1', toc_p[0].innerHTML, Number(xf_p[0].textContent), Number(xa_p[0]. textContent), Number(gf_p[0].textContent), Number(ga_p[0]. textContent), Number(sf_p[0].textContent), Number(sa_p[0].textContent), Number(p_p[0].textContent), stxGT1L1g_array[0] + stxGT1L1g_array[1], stxGT1L1g_array[2] + stxGT1L1g_array[3] + stxGT1L1g_array[4]],
+            ['Line 2', toc_p[1].innerHTML, Number(xf_p[1].textContent), Number(xa_p[1]. textContent), Number(gf_p[1].textContent), Number(ga_p[1]. textContent), Number(sf_p[1].textContent), Number(sa_p[1].textContent), Number(p_p[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
+            ['Line 3', toc_p[2].innerHTML, Number(xf_p[2].textContent), Number(xa_p[2]. textContent), Number(gf_p[2].textContent), Number(ga_p[2]. textContent), Number(sf_p[2].textContent), Number(sa_p[2].textContent), Number(p_p[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
+            ['Powerplay', toc_p[3].innerHTML, Number(xf_p[3].textContent), Number(xa_p[3]. textContent), Number(gf_p[3].textContent), Number(ga_p[3]. textContent), Number(sf_p[3].textContent), Number(sa_p[3].textContent), Number(p_p[3].textContent), 0, 0],
+            ['Pen. Kill', toc_p[4].innerHTML, Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
+            ['6vs5', toc_p[5].innerHTML, Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
+            ['5vs6', toc_p[6].innerHTML, Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0],
+            ['Team', toc_p[7].innerHTML, Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
             ]);
 
@@ -4748,7 +4748,7 @@
 
         var pldata2 = new google.visualization.DataTable();
         pldata2.addColumn('string', 'Line');
-        pldata2.addColumn('number', 'ToC');
+        pldata2.addColumn('string', 'ToC');
         pldata2.addColumn('number', 'xG for');
         pldata2.addColumn('number', 'xG ag.');
         pldata2.addColumn('number', 'Plus');
@@ -4760,20 +4760,20 @@
         pldata2.addColumn('number', 'xG org.att. ');
 
         pldata2.addRows([
-            ['Line 1', TocT2_g[0], Number(xfT2_g[0].textContent), Number(xaT2_g[0]. textContent), Number(gfT2_g[0].textContent), Number(gaT2_g[0]. textContent), Number(sfT2_g[0].textContent), Number(saT2_g[0].textContent), Number(pT2_g[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
-            ['Line 2', TocT2_g[1], Number(xfT2_g[1].textContent), Number(xaT2_g[1]. textContent), Number(gfT2_g[1].textContent), Number(gaT2_g[1]. textContent), Number(sfT2_g[1].textContent), Number(saT2_g[1].textContent), Number(pT2_g[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
-            ['Line 3', TocT2_g[2], Number(xfT2_g[2].textContent), Number(xaT2_g[2]. textContent), Number(gfT2_g[2].textContent), Number(gaT2_g[2]. textContent), Number(sfT2_g[2].textContent), Number(saT2_g[2].textContent), Number(pT2_g[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
-            ['Powerplay', TocT2_g[3], Number(xfT2_g[3].textContent), Number(xaT2_g[3]. textContent), Number(gfT2_g[3].textContent), Number(gaT2_g[3]. textContent), Number(sfT2_g[3].textContent), Number(saT2_g[3].textContent), Number(pT2_g[3].textContent), 0, 0],
-            ['Pen. Kill', TocT2_g[5], Number(xfT2_g[5].textContent), Number(xaT2_g[5]. textContent), Number(gfT2_g[5].textContent), Number(gaT2_g[5]. textContent), Number(sfT2_g[5].textContent), Number(saT2_g[5].textContent), Number(pT2_g[5].textContent), 0, 0],
-            ['6vs5', TocT2_g[4], Number(xfT2_g[4].textContent), Number(xaT2_g[4]. textContent), Number(gfT2_g[4].textContent), Number(gaT2_g[4].textContent), Number(sfT2_g[4].textContent), Number(saT2_g[4].textContent), Number(pT2_g[4].textContent), 0, 0],
-            ['5vs6', TocT2_g[6], Number(xfT2_g[6].textContent), Number(xaT2_g[6]. textContent), Number(gfT2_g[6].textContent), Number(gaT2_g[6].textContent), Number(sfT2_g[6].textContent), Number(saT2_g[6].textContent), Number(pT2_g[6].textContent), 0, 0],
-            ['Team', TocT2_g[7], Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+            ['Line 1', tocT2_g[0].innerHTML, Number(xfT2_g[0].textContent), Number(xaT2_g[0]. textContent), Number(gfT2_g[0].textContent), Number(gaT2_g[0]. textContent), Number(sfT2_g[0].textContent), Number(saT2_g[0].textContent), Number(pT2_g[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
+            ['Line 2', tocT2_g[1].innerHTML, Number(xfT2_g[1].textContent), Number(xaT2_g[1]. textContent), Number(gfT2_g[1].textContent), Number(gaT2_g[1]. textContent), Number(sfT2_g[1].textContent), Number(saT2_g[1].textContent), Number(pT2_g[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
+            ['Line 3', tocT2_g[2].innerHTML, Number(xfT2_g[2].textContent), Number(xaT2_g[2]. textContent), Number(gfT2_g[2].textContent), Number(gaT2_g[2]. textContent), Number(sfT2_g[2].textContent), Number(saT2_g[2].textContent), Number(pT2_g[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
+            ['Powerplay', tocT2_g[3].innerHTML, Number(xfT2_g[3].textContent), Number(xaT2_g[3]. textContent), Number(gfT2_g[3].textContent), Number(gaT2_g[3]. textContent), Number(sfT2_g[3].textContent), Number(saT2_g[3].textContent), Number(pT2_g[3].textContent), 0, 0],
+            ['Pen. Kill', tocT2_g[4].innerHTML, Number(xfT2_g[5].textContent), Number(xaT2_g[5]. textContent), Number(gfT2_g[5].textContent), Number(gaT2_g[5]. textContent), Number(sfT2_g[5].textContent), Number(saT2_g[5].textContent), Number(pT2_g[5].textContent), 0, 0],
+            ['6vs5', tocT2_g[5].innerHTML, Number(xfT2_g[4].textContent), Number(xaT2_g[4]. textContent), Number(gfT2_g[4].textContent), Number(gaT2_g[4].textContent), Number(sfT2_g[4].textContent), Number(saT2_g[4].textContent), Number(pT2_g[4].textContent), 0, 0],
+            ['5vs6', tocT2_g[6].innerHTML, Number(xfT2_g[6].textContent), Number(xaT2_g[6]. textContent), Number(gfT2_g[6].textContent), Number(gaT2_g[6].textContent), Number(sfT2_g[6].textContent), Number(saT2_g[6].textContent), Number(pT2_g[6].textContent), 0, 0],
+            ['Team', tocT2_g[7].innerHTML, Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
 
             ]);
 
         var pldata2_p = new google.visualization.DataTable();
         pldata2_p.addColumn('string', 'Line');
-        pldata2_p.addColumn('number', 'ToC');
+        pldata2_p.addColumn('string', 'ToC');
         pldata2_p.addColumn('number', 'xG for');
         pldata2_p.addColumn('number', 'xG ag.');
         pldata2_p.addColumn('number', 'Plus');
@@ -4785,14 +4785,14 @@
         pldata2_p.addColumn('number', 'xG org.att. ');
 
         pldata2_p.addRows([
-            ['Line 1', TocT2_p[0], Number(xfT2_p[0].textContent), Number(xaT2_p[0]. textContent), Number(gfT2_p[0].textContent), Number(gaT2_p[0]. textContent), Number(sfT2_p[0].textContent), Number(saT2_p[0].textContent), Number(pT2_p[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
-            ['Line 2', TocT2_p[1], Number(xfT2_p[1].textContent), Number(xaT2_p[1]. textContent), Number(gfT2_p[1].textContent), Number(gaT2_p[1]. textContent), Number(sfT2_p[1].textContent), Number(saT2_p[1].textContent), Number(pT2_p[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
-            ['Line 3', TocT2_p[2], Number(xfT2_p[2].textContent), Number(xaT2_p[2]. textContent), Number(gfT2_p[2].textContent), Number(gaT2_p[2]. textContent), Number(sfT2_p[2].textContent), Number(saT2_p[2].textContent), Number(pT2_p[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
-            ['Powerplay', TocT2_p[3], Number(xfT2_p[3].textContent), Number(xaT2_p[3]. textContent), Number(gfT2_p[3].textContent), Number(gaT2_p[3]. textContent), Number(sfT2_p[3].textContent), Number(saT2_p[3].textContent), Number(pT2_p[3].textContent), 0, 0],
-            ['Pen. Kill', TocT2_p[5], Number(xfT2_p[5].textContent), Number(xaT2_p[5]. textContent), Number(gfT2_p[5].textContent), Number(gaT2_p[5]. textContent), Number(sfT2_p[5].textContent), Number(saT2_p[5].textContent), Number(pT2_p[5].textContent), 0, 0],
-            ['6vs5', TocT2_p[4], Number(xfT2_p[4].textContent), Number(xaT2_p[4]. textContent), Number(gfT2_p[4].textContent), Number(gaT2_p[4].textContent), Number(sfT2_p[4].textContent), Number(saT2_p[4].textContent), Number(pT2_p[4].textContent), 0, 0],
-            ['5vs6', TocT2_p[6], Number(xfT2_p[6].textContent), Number(xaT2_p[6]. textContent), Number(gfT2_p[6].textContent), Number(gaT2_p[6].textContent), Number(sfT2_p[6].textContent), Number(saT2_p[6].textContent), Number(pT2_p[6].textContent), 0, 0],
-            ['Team', TocT2_p[7], Number(xfT2_p[7].textContent), Number(xaT2_p[7]. textContent), Number(gfT2_p[7].textContent), Number(gaT2_p[7].textContent), Number(sfT2_p[7].textContent), Number(saT2_p[7].textContent), Number(pT2_p[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+            ['Line 1', tocT2_p[0].innerHTML, Number(xfT2_p[0].textContent), Number(xaT2_p[0]. textContent), Number(gfT2_p[0].textContent), Number(gaT2_p[0]. textContent), Number(sfT2_p[0].textContent), Number(saT2_p[0].textContent), Number(pT2_p[0].textContent), stxGT2L1g_array[0] + stxGT2L1g_array[1], stxGT2L1g_array[2] + stxGT2L1g_array[3] + stxGT2L1g_array[4]],
+            ['Line 2', tocT2_p[1].innerHTML, Number(xfT2_p[1].textContent), Number(xaT2_p[1]. textContent), Number(gfT2_p[1].textContent), Number(gaT2_p[1]. textContent), Number(sfT2_p[1].textContent), Number(saT2_p[1].textContent), Number(pT2_p[1].textContent), stxGT2L2g_array[0] + stxGT2L2g_array[1], stxGT2L2g_array[2] + stxGT2L2g_array[3] + stxGT2L2g_array[4]],
+            ['Line 3', tocT2_p[2].innerHTML, Number(xfT2_p[2].textContent), Number(xaT2_p[2]. textContent), Number(gfT2_p[2].textContent), Number(gaT2_p[2]. textContent), Number(sfT2_p[2].textContent), Number(saT2_p[2].textContent), Number(pT2_p[2].textContent), stxGT2L3g_array[0] + stxGT2L3g_array[1], stxGT2L3g_array[2] + stxGT2L3g_array[3] + stxGT2L3g_array[4]],
+            ['Powerplay', tocT2_p[3].innerHTML, Number(xfT2_p[3].textContent), Number(xaT2_p[3]. textContent), Number(gfT2_p[3].textContent), Number(gaT2_p[3]. textContent), Number(sfT2_p[3].textContent), Number(saT2_p[3].textContent), Number(pT2_p[3].textContent), 0, 0],
+            ['Pen. Kill', tocT2_p[4].innerHTML, Number(xfT2_p[5].textContent), Number(xaT2_p[5]. textContent), Number(gfT2_p[5].textContent), Number(gaT2_p[5]. textContent), Number(sfT2_p[5].textContent), Number(saT2_p[5].textContent), Number(pT2_p[5].textContent), 0, 0],
+            ['6vs5', tocT2_p[5].innerHTML, Number(xfT2_p[4].textContent), Number(xaT2_p[4]. textContent), Number(gfT2_p[4].textContent), Number(gaT2_p[4].textContent), Number(sfT2_p[4].textContent), Number(saT2_p[4].textContent), Number(pT2_p[4].textContent), 0, 0],
+            ['5vs6', tocT2_p[6].innerHTML, Number(xfT2_p[6].textContent), Number(xaT2_p[6]. textContent), Number(gfT2_p[6].textContent), Number(gaT2_p[6].textContent), Number(sfT2_p[6].textContent), Number(saT2_p[6].textContent), Number(pT2_p[6].textContent), 0, 0],
+            ['Team', tocT2_p[7].innerHTML, Number(xfT2_p[7].textContent), Number(xaT2_p[7]. textContent), Number(gfT2_p[7].textContent), Number(gaT2_p[7].textContent), Number(sfT2_p[7].textContent), Number(saT2_p[7].textContent), Number(pT2_p[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
 
             ]);
 
