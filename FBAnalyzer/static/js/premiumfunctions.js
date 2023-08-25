@@ -2513,6 +2513,8 @@
         ctx_p.font = "12px Arial";
         shooter_id = "";
         passer_id = "";
+        passer_str = "";
+        shooter_str = "";
         
         if (type == 1) {
             dataRes_str = "Missed";
