@@ -844,6 +844,7 @@
 
     function shotMissed() {
 
+        Draw(PosX,PosY,1);
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
         var dxGOT = 0;
@@ -1189,11 +1190,11 @@
                 window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
-        Draw(PosX,PosY,1);
     }
 
     function shotBlocked() {
 
+        Draw(PosX,PosY,3);
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
         var dxGOT = 0;
@@ -1538,12 +1539,11 @@
                 window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
-
-        Draw(PosX,PosY,3);
     }
 
     function shotSaved() {
 
+        Draw(PosX,PosY,2);
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
         var dxGOT = 0;
@@ -1943,12 +1943,11 @@
                 window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
-
-        Draw(PosX,PosY,2);
     }
 
     function shotGoal() {
 
+        Draw(PosX,PosY,4);
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
         var dxGOT = 0;
@@ -2466,8 +2465,6 @@
                 }
             }
         }
-
-        Draw(PosX,PosY,4);
     }
 
     function Draw(x,y,type) {
