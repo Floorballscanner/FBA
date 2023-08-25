@@ -847,6 +847,9 @@
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
+        var dxGOT = 0;
+        var dxG = 0;
+
 
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
@@ -1191,6 +1194,8 @@
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
+        var dxGOT = 0;
+        var dxG = 0;
 
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
@@ -1534,6 +1539,8 @@
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
+        var dxGOT = 0;
+        var dxG = 0;
 
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
@@ -1936,6 +1943,8 @@
 
         var dx = PosX / fWidth;
         var dy = PosY / fLength;
+        var dxGOT = 0;
+        var dxG = 0;
 
         if (Order == 1 && Ball_pos == 1) { // Team 1 shot, Team 1 lower side
 
@@ -2880,9 +2889,11 @@
             }
             if (line_on == 4 || line_on == 5) {
                 dataPp = 1;
+                dataSh = 0;
             }
             if (line_on == 6 || line_on == 7) {
                 dataSh = 1;
+                dataPp = 0;
             }
         }
         if (Ball_pos == 2) {
@@ -2892,9 +2903,11 @@
             }
             if (line_on_2 == 4 || line_on_2 == 5) {
                 dataPp = 1;
+                dataSh = 0;
             }
             if (line_on_2 == 6 || line_on_2 == 7) {
                 dataSh = 1;
+                dataPp = 0;
             }
         }
 
