@@ -925,9 +925,12 @@
                 txGp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+
 
             }
         }
@@ -1012,9 +1015,11 @@
                 txGp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
             }
         }
 
@@ -1097,9 +1102,11 @@
                 txGp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
 
             }
         }
@@ -1183,9 +1190,11 @@
                 txGp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
 
@@ -1275,9 +1284,11 @@
                 txGp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
             }
         }
@@ -1362,9 +1373,11 @@
                 txGp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
             }
         }
 
@@ -1447,9 +1460,11 @@
                 txGp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
 
             }
         }
@@ -1533,9 +1548,11 @@
                 txGp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
 
@@ -1639,9 +1656,11 @@
                 txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
             }
         }
@@ -1740,9 +1759,11 @@
                 txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
             }
         }
 
@@ -1839,9 +1860,11 @@
                 txGOTp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
 
             }
         }
@@ -1938,9 +1961,11 @@
                 txGOTp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
             }
         }
 
@@ -2044,9 +2069,11 @@
                 txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -2170,9 +2197,11 @@
                 txGOTp_1.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -2295,9 +2324,11 @@
                 txGOTp_2.innerHTML = a;
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
@@ -2425,9 +2456,11 @@
 
 
                 window["stxGT"+Ball_pos+"Teamg_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
-                window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
