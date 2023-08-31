@@ -2509,7 +2509,7 @@
         else if (periodN == 2) {ctx_p = cnvs_2.getContext("2d");}
         else if (periodN == 3) {ctx_p = cnvs_3.getContext("2d");}
         else if (periodN == 4) {ctx_p = cnvs_4.getContext("2d");}
-        ctx_g = cnvs_g.getContext("2d");
+        ctx_g = cnvs_5.getContext("2d");
         menu.style.display = "none";
         ctx.font = "12px Arial";
         ctx_p.font = "12px Arial";
