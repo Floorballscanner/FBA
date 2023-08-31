@@ -2564,7 +2564,7 @@
                 ctx.fillStyle = "darkblue";
                 ctx_p.fillStyle = "darkblue";
             }
-        }
+
 
             dataShot = 1;
 
