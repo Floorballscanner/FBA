@@ -2731,13 +2731,23 @@
             }
         }
         else if (Ball_pos == 2) {
-            ctx.fillStyle = "red";
-            ctx_p.fillStyle = "red";
             shooting_team = name_t2;
 
-            if (dataType == 0 || dataType == 1) {
+            if (dataType === 0) {
+                ctx.fillStyle = "goldenrod";
+                ctx_p.fillStyle = "goldenrod";
+            } else if (dataType === 1) {
                 ctx.fillStyle = "orange";
                 ctx_p.fillStyle = "orange";
+            } else if (dataType === 2) {
+                ctx.fillStyle = "darkred";
+                ctx_p.fillStyle = "darkred";
+            } else if (dataType === 3) {
+                ctx.fillStyle = "orangered";
+                ctx_p.fillStyle = "orangered";
+            } else if (dataType === 4) {
+                ctx.fillStyle = "orangered";
+                ctx_p.fillStyle = "orangered";
             }
 
             dataShot = 2;
