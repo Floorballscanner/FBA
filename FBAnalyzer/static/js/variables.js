@@ -602,6 +602,7 @@
     var cnvs_2 = document.getElementById("myCanvas_2");
     var cnvs_3 = document.getElementById("myCanvas_3");
     var cnvs_4 = document.getElementById("myCanvas_4");
+    var cnvs_g = document.getElementById("myCanvas_g")
     var ctx = cnvs.getContext("2d");
     var ctx1 = cnvs_1.getContext("2d");
     var ctx2 = cnvs_2.getContext("2d");

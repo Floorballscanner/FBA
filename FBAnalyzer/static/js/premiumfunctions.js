@@ -6,6 +6,7 @@
         ctx2.drawImage(myImg,0,0,fWidth,fLength);
         ctx3.drawImage(myImg,0,0,fWidth,fLength);
         ctx4.drawImage(myImg,0,0,fWidth,fLength);
+        ctx5.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
 
         fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
@@ -2508,9 +2509,11 @@
         else if (periodN == 2) {ctx_p = cnvs_2.getContext("2d");}
         else if (periodN == 3) {ctx_p = cnvs_3.getContext("2d");}
         else if (periodN == 4) {ctx_p = cnvs_4.getContext("2d");}
+        ctx_g = cnvs_g.getContext("2d");
         menu.style.display = "none";
         ctx.font = "12px Arial";
         ctx_p.font = "12px Arial";
+        ctx_g.font = "12px Arial";
         shooter_id = "";
         passer_id = "";
         passer_str = "";
@@ -2551,18 +2554,23 @@
             if (dataType === 0) {
                 ctx.fillStyle = "darkgreen";
                 ctx_p.fillStyle = "darkgreen";
+                ctx_g.fillStyle = "darkgreen";
             } else if (dataType === 1) {
                 ctx.fillStyle = "lawngreen";
                 ctx_p.fillStyle = "lawngreen";
+                ctx_g.fillStyle = "lawngreen";
             } else if (dataType === 2) {
                 ctx.fillStyle = "black";
                 ctx_p.fillStyle = "black";
+                ctx_g.fillStyle = "black";
             } else if (dataType === 3) {
                 ctx.fillStyle = "blue";
                 ctx_p.fillStyle = "blue";
+                ctx_g.fillStyle = "blue";
             } else if (dataType === 4) {
                 ctx.fillStyle = "blue";
                 ctx_p.fillStyle = "blue";
+                ctx_g.fillStyle = "blue";
             }
 
 
@@ -2571,6 +2579,7 @@
             if (type == 1) {    // Shot Missed
                 ctx.fillText("M", x, y);
                 ctx_p.fillText("M", x, y);
+                ctx_g.fillText("M", x, y);
                 dataRes = 1;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2610,6 +2619,7 @@
             else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
                 ctx_p.fillText("B", x, y);
+                ctx_g.fillText("B", x, y);
                 dataRes = 3;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2649,6 +2659,7 @@
             else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
                 ctx_p.fillText("S", x, y);
+                ctx_g.fillText("S", x, y);
                 dataRes = 2;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2688,6 +2699,7 @@
             else if (type == 4) {   // Shot Goal
                 ctx.fillText("G", x, y);
                 ctx_p.fillText("G", x, y);
+                ctx_g.fillText("G", x, y);
                 dataRes = 4;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2736,18 +2748,23 @@
             if (dataType === 0) {
                 ctx.fillStyle = "saddlebrown";
                 ctx_p.fillStyle = "saddlebrown";
+                ctx_g.fillStyle = "saddlebrown";
             } else if (dataType === 1) {
                 ctx.fillStyle = "orange";
                 ctx_p.fillStyle = "orange";
+                ctx_g.fillStyle = "orange";
             } else if (dataType === 2) {
                 ctx.fillStyle = "darkred";
                 ctx_p.fillStyle = "darkred";
+                ctx_g.fillStyle = "darkred";
             } else if (dataType === 3) {
                 ctx.fillStyle = "orangered";
                 ctx_p.fillStyle = "orangered";
+                ctx_g.fillStyle = "orangered";
             } else if (dataType === 4) {
                 ctx.fillStyle = "orangered";
                 ctx_p.fillStyle = "orangered";
+                ctx_g.fillStyle = "orangered";
             }
 
             dataShot = 2;
@@ -2755,6 +2772,7 @@
             if (type == 1) {    // Shot Missed
                 ctx.fillText("M", x, y);
                 ctx_p.fillText("M", x, y);
+                ctx_g.fillText("M", x, y);
                 dataRes = 1;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -2782,6 +2800,7 @@
             else if (type == 3) {   // Shot Blocked
                 ctx.fillText("B", x, y);
                 ctx_p.fillText("B", x, y);
+                ctx_g.fillText("B", x, y);
                 dataRes = 3;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -2809,6 +2828,7 @@
             else if (type == 2) {   // Shot Saved
                 ctx.fillText("S", x, y);
                 ctx_p.fillText("S", x, y);
+                ctx_g.fillText("S", x, y);
                 dataRes = 2;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -2836,6 +2856,7 @@
             else if (type == 4) {   // Shot Goal
                 ctx.fillText("G", x, y);
                 ctx_p.fillText("G", x, y);
+                ctx_g.fillText("G", x, y);
                 dataRes = 4;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -4226,6 +4247,7 @@
             "cnvs_2_url" : cnvs_2.toDataURL(),
             "cnvs_3_url" : cnvs_3.toDataURL(),
             "cnvs_4_url" : cnvs_4.toDataURL(),
+            "cnvs_g_url" : cnvs_g.toDataURL(),
             "sf_p" : [sf_p[0].innerHTML, sf_p[1].innerHTML, sf_p[2].innerHTML, sf_p[3].innerHTML, sf_p[4].innerHTML, sf_p[5].innerHTML, sf_p[6].innerHTML, sf_p[7].innerHTML],
             "sa_p" : [sa_p[0].innerHTML, sa_p[1].innerHTML, sa_p[2].innerHTML, sa_p[3].innerHTML, sa_p[4].innerHTML, sa_p[5].innerHTML, sa_p[6].innerHTML, sa_p[7].innerHTML],
             "gf_p" : [gf_p[0].innerHTML, gf_p[1].innerHTML, gf_p[2].innerHTML, gf_p[3].innerHTML, gf_p[4].innerHTML, gf_p[5].innerHTML, gf_p[6].innerHTML, gf_p[7].innerHTML],
@@ -4345,6 +4367,10 @@
         img4.src = undo_object.cnvs_4_url;
         img4.onload = function() {
             ctx4.drawImage(img4,0,0,fWidth,fLength);
+        };
+        img5.src = undo_object.cnvs_g_url;
+        img5.onload = function() {
+            ctx5.drawImage(img5,0,0,fWidth,fLength);
         };
 
         tgt_1.innerHTML = undo_object.tgt_1;
