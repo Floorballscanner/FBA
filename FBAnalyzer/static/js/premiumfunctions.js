@@ -2549,20 +2549,20 @@
             shooting_team = name_t1;
 
             if (dataType === 0) {
-                ctx.fillStyle = "lightgreen";
-                ctx_p.fillStyle = "lightgreen";
+                ctx.fillStyle = "lawngreen";
+                ctx_p.fillStyle = "lawngreen";
             } else if (dataType === 1) {
                 ctx.fillStyle = "darkgreen";
                 ctx_p.fillStyle = "darkgreen";
             } else if (dataType === 2) {
-                ctx.fillStyle = "lightblue";
-                ctx_p.fillStyle = "lightblue";
+                ctx.fillStyle = "royalblue";
+                ctx_p.fillStyle = "royalblue";
             } else if (dataType === 3) {
-                ctx.fillStyle = "blue";
-                ctx_p.fillStyle = "blue";
+                ctx.fillStyle = "midnightblue";
+                ctx_p.fillStyle = "midnightblue";
             } else if (dataType === 4) {
-                ctx.fillStyle = "darkblue";
-                ctx_p.fillStyle = "darkblue";
+                ctx.fillStyle = "midnightblue";
+                ctx_p.fillStyle = "midnightblue";
             }
 
 
