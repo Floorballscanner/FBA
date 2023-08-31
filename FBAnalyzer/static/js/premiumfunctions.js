@@ -6,7 +6,7 @@
         ctx2.drawImage(myImg,0,0,fWidth,fLength);
         ctx3.drawImage(myImg,0,0,fWidth,fLength);
         ctx4.drawImage(myImg,0,0,fWidth,fLength);
-        ctx5.drawImage(myImg,0,0,fWidth,fLength);
+        ctx_g.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
 
         fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
@@ -4370,7 +4370,7 @@
         };
         img5.src = undo_object.cnvs_g_url;
         img5.onload = function() {
-            ctx5.drawImage(img5,0,0,fWidth,fLength);
+            ctx_g.drawImage(img5,0,0,fWidth,fLength);
         };
 
         tgt_1.innerHTML = undo_object.tgt_1;
