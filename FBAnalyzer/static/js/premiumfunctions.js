@@ -4948,7 +4948,7 @@
 
         var options2 = {
         title: 'Share of xG by attack/shot types',
-        colors: ['#EDA137', '#EB4F07','#D10808','#663D3D', '#F7FAFA'],
+        colors: ['#8B4513', '#FFA500','#8B0000','#FF4500', '#F7FAFA'],
         is3D: true,
         };
 
@@ -5080,17 +5080,17 @@
 
         var chartDataY = google.visualization.arrayToDataTable([
             ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT2L1g_array[0], 'color: #EDA137', stT2L1g_array[0], stT2L1g_array[1], 'color: #EB4F07', stT2L1g_array[1], stT2L1g_array[2], 'color: #D10808', stT2L1g_array[2], stT2L1g_array[4], 'color: #663D3D', stT2L1g_array[4]],
-            ['Line2', stT2L2g_array[0], 'color: #EDA137', stT2L2g_array[0], stT2L2g_array[1], 'color: #EB4F07', stT2L2g_array[1], stT2L2g_array[2], 'color: #D10808', stT2L2g_array[2], stT2L2g_array[4], 'color: #663D3D', stT2L2g_array[4]],
-            ['Line3', stT2L3g_array[0], 'color: #EDA137', stT2L3g_array[0], stT2L3g_array[1], 'color: #EB4F07', stT2L3g_array[1], stT2L3g_array[2], 'color: #D10808', stT2L3g_array[2], stT2L3g_array[4], 'color: #663D3D', stT2L3g_array[4]
+            ['Line1', stT2L1g_array[0], 'color: #8B4513', stT2L1g_array[0], stT2L1g_array[1], 'color: #FFA500', stT2L1g_array[1], stT2L1g_array[2], 'color: #8B0000', stT2L1g_array[2], stT2L1g_array[4], 'color: #FF4500', stT2L1g_array[4]],
+            ['Line2', stT2L2g_array[0], 'color: #8B4513', stT2L2g_array[0], stT2L2g_array[1], 'color: #FFA500', stT2L2g_array[1], stT2L2g_array[2], 'color: #8B0000', stT2L2g_array[2], stT2L2g_array[4], 'color: #FF4500', stT2L2g_array[4]],
+            ['Line3', stT2L3g_array[0], 'color: #8B4513', stT2L3g_array[0], stT2L3g_array[1], 'color: #FFA500', stT2L3g_array[1], stT2L3g_array[2], 'color: #8B0000', stT2L3g_array[2], stT2L3g_array[4], 'color: #FF4500', stT2L3g_array[4]
             ]
          ]);
 
         var chartDataY_p = google.visualization.arrayToDataTable([
             ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT2L1p_array[0], 'color: #EDA137', stT2L1p_array[0], stT2L1p_array[1], 'color: #EB4F07', stT2L1p_array[1], stT2L1p_array[2], 'color: #D10808', stT2L1p_array[2], stT2L1p_array[4], 'color: #663D3D', stT2L1p_array[4]],
-            ['Line2', stT2L2p_array[0], 'color: #EDA137', stT2L2p_array[0], stT2L2p_array[1], 'color: #EB4F07', stT2L2p_array[1], stT2L2p_array[2], 'color: #D10808', stT2L2p_array[2], stT2L2p_array[4], 'color: #663D3D', stT2L2p_array[4]],
-            ['Line3', stT2L3p_array[0], 'color: #EDA137', stT2L3p_array[0], stT2L3p_array[1], 'color: #EB4F07', stT2L3p_array[1], stT2L3p_array[2], 'color: #D10808', stT2L3p_array[2], stT2L3p_array[4], 'color: #663D3D', stT2L3p_array[4]
+            ['Line1', stT2L1p_array[0], 'color: #8B4513', stT2L1p_array[0], stT2L1p_array[1], 'color: #FFA500', stT2L1p_array[1], stT2L1p_array[2], 'color: #8B0000', stT2L1p_array[2], stT2L1p_array[4], 'color: #FF4500', stT2L1p_array[4]],
+            ['Line2', stT2L2p_array[0], 'color: #8B4513', stT2L2p_array[0], stT2L2p_array[1], 'color: #FFA500', stT2L2p_array[1], stT2L2p_array[2], 'color: #8B0000', stT2L2p_array[2], stT2L2p_array[4], 'color: #FF4500', stT2L2p_array[4]],
+            ['Line3', stT2L3p_array[0], 'color: #8B4513', stT2L3p_array[0], stT2L3p_array[1], 'color: #FFA500', stT2L3p_array[1], stT2L3p_array[2], 'color: #8B0000', stT2L3p_array[2], stT2L3p_array[4], 'color: #FF4500', stT2L3p_array[4]
             ]
          ]);
 
@@ -5098,7 +5098,7 @@
             title: 'Shot types, Team 2',
             bar: {groupWidth: "75%"},
             legend: { position: 'bottom'},
-            colors: ['#EDA137', '#EB4F07','#D10808','#663D3D'],
+            colors: ['#8B4513', '#FFA500','#8B0000','#FF4500'],
             hAxis: { textPosition: 'none' }
             };
 
