@@ -602,13 +602,14 @@
     var cnvs_2 = document.getElementById("myCanvas_2");
     var cnvs_3 = document.getElementById("myCanvas_3");
     var cnvs_4 = document.getElementById("myCanvas_4");
-    var cnvs_5 = document.getElementById("myCanvas_5")
+    var cnvs_5 = document.getElementById("myCanvas_5");
     var ctx = cnvs.getContext("2d");
     var ctx1 = cnvs_1.getContext("2d");
     var ctx2 = cnvs_2.getContext("2d");
     var ctx3 = cnvs_3.getContext("2d");
     var ctx4 = cnvs_4.getContext("2d");
     var ctx5 = cnvs_5.getContext("2d");
+
     // html id shotmenu to variable
     var menu = document.getElementById("shotmenu");
     // html id shottype to variable
