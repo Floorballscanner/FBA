@@ -286,10 +286,30 @@ It extends app_layout.html with Django
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="xGGame_chart" style="height: 200px"></div>
+                <div id="T1_typechart" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T1_st_piechart" style="height: 250px"></div>
             </div>
         </div>
         <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T2_typechart" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T2_st_piechart" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xGGame_chart" style="height: 200px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
             <div class="linestats">
                 <div id="xG%Game_chart" style="height: 200px"></div>
             </div>
@@ -297,18 +317,7 @@ It extends app_layout.html with Django
 
     </div>
 
-    <div class="row justify-content-center" style="Padding-top: 40px;">
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div id="T1_typechart" style="height: 200px"></div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div id="T2_typechart" style="height: 200px"></div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="row justify-content-center" style="Padding-top: 200px;">
         <div class="col-sm-6">
@@ -349,37 +358,6 @@ It extends app_layout.html with Django
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T1_st_piechart" style="height: 300px"></div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px" >
-                <div id="T2_st_piechart" style="height: 300px"></div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row justify-content-center" style="Padding-top: 10px;">
-        <h4>Game Shotmap</h4>
-        <div class="col-sm-12">
-            <div class="shot-map">
-                <canvas id="myCanvas_5" width="300" height="500"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center" style="Padding-top: 10px;">
-        <h4>Period 1 statistics</h4>
-        <div class="col-sm-12">
-            <div class="shot-map">
-                <canvas id="myCanvas_1" width="300" height="500"></canvas>
-            </div>
-        </div>
-    </div>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
