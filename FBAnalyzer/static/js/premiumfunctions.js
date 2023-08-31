@@ -4914,7 +4914,7 @@
 
         var options2 = {
         title: 'Share of xG by attack types',
-        colors: ['#20AB4E', '#295738','#002072','#59D9EB','#F7FAFA'],
+        colors: ['#006400', '#7CFC00','#000000','#0000FF','#F7FAFA'],
         is3D: true,
         };
 
@@ -5026,9 +5026,9 @@
 
          var chartData = google.visualization.arrayToDataTable([
              ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-             ['Line 1', stT1L1g_array[0] + stT1L1g_array[1], 'color: #002072', stT1L1g_array[0] + stT1L1g_array[1], stT2L1g_array[0] + stT2L1g_array[1], 'color: #59D9EB', stT2L1g_array[0] + stT2L1g_array[1]],
-             ['Line 2', stT1L2g_array[0] + stT1L2g_array[1], 'color: #002072', stT1L2g_array[0] + stT1L2g_array[1], stT2L2g_array[0] + stT2L2g_array[1], 'color: #59D9EB', stT2L2g_array[0] + stT2L2g_array[1]],
-             ['Line 3', stT1L3g_array[0] + stT1L3g_array[1], 'color: #002072', stT1L3g_array[0] + stT1L3g_array[1], stT2L3g_array[0] + stT2L3g_array[1], 'color: #59D9EB', stT2L3g_array[0] + stT2L3g_array[1]
+             ['Line 1', stT1L1g_array[0] + stT1L1g_array[1], 'color: #002072', stT1L1g_array[0] + stT1L1g_array[1], stT2L1g_array[0] + stT2L1g_array[1], 'color: #0000FF', stT2L1g_array[0] + stT2L1g_array[1]],
+             ['Line 2', stT1L2g_array[0] + stT1L2g_array[1], 'color: #002072', stT1L2g_array[0] + stT1L2g_array[1], stT2L2g_array[0] + stT2L2g_array[1], 'color: #0000FF', stT2L2g_array[0] + stT2L2g_array[1]],
+             ['Line 3', stT1L3g_array[0] + stT1L3g_array[1], 'color: #002072', stT1L3g_array[0] + stT1L3g_array[1], stT2L3g_array[0] + stT2L3g_array[1], 'color: #0000FF', stT2L3g_array[0] + stT2L3g_array[1]
              ]
           ]);
 
@@ -5048,17 +5048,17 @@
 
         var chartDataX = google.visualization.arrayToDataTable([
             ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT1L1g_array[0], 'color: #20AB4E', stT1L1g_array[0], stT1L1g_array[1], 'color: #295738', stT1L1g_array[1], stT1L1g_array[2], 'color: #002072', stT1L1g_array[2], stT1L1g_array[4], 'color: #59D9EB', stT1L1g_array[4]],
-            ['Line2', stT1L2g_array[0], 'color: #20AB4E', stT1L2g_array[0], stT1L2g_array[1], 'color: #295738', stT1L2g_array[1], stT1L2g_array[2], 'color: #002072', stT1L2g_array[2], stT1L2g_array[4], 'color: #59D9EB', stT1L2g_array[4]],
-            ['Line3', stT1L3g_array[0], 'color: #20AB4E', stT1L3g_array[0], stT1L3g_array[1], 'color: #295738', stT1L3g_array[1], stT1L3g_array[2], 'color: #002072', stT1L3g_array[2], stT1L3g_array[4], 'color: #59D9EB', stT1L3g_array[4]
+            ['Line1', stT1L1g_array[0], 'color: #006400', stT1L1g_array[0], stT1L1g_array[1], 'color: #7CFC00', stT1L1g_array[1], stT1L1g_array[2], 'color: #000000', stT1L1g_array[2], stT1L1g_array[4], 'color: #0000FF', stT1L1g_array[4]],
+            ['Line2', stT1L2g_array[0], 'color: #006400', stT1L2g_array[0], stT1L2g_array[1], 'color: #7CFC00', stT1L2g_array[1], stT1L2g_array[2], 'color: #000000', stT1L2g_array[2], stT1L2g_array[4], 'color: #0000FF', stT1L2g_array[4]],
+            ['Line3', stT1L3g_array[0], 'color: #006400', stT1L3g_array[0], stT1L3g_array[1], 'color: #7CFC00', stT1L3g_array[1], stT1L3g_array[2], 'color: #000000', stT1L3g_array[2], stT1L3g_array[4], 'color: #0000FF', stT1L3g_array[4]
             ]
          ]);
 
         var chartDataX_p = google.visualization.arrayToDataTable([
             ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT1L1p_array[0], 'color: #20AB4E', stT1L1p_array[0], stT1L1p_array[1], 'color: #295738', stT1L1p_array[1], stT1L1p_array[2], 'color: #002072', stT1L1p_array[2], stT1L1p_array[4], 'color: #59D9EB', stT1L1p_array[4]],
-            ['Line2', stT1L2p_array[0], 'color: #20AB4E', stT1L2p_array[0], stT1L2p_array[1], 'color: #295738', stT1L2p_array[1], stT1L2p_array[2], 'color: #002072', stT1L2p_array[2], stT1L2p_array[4], 'color: #59D9EB', stT1L2p_array[4]],
-            ['Line3', stT1L3p_array[0], 'color: #20AB4E', stT1L3p_array[0], stT1L3p_array[1], 'color: #295738', stT1L3p_array[1], stT1L3p_array[2], 'color: #002072', stT1L3p_array[2], stT1L3p_array[4], 'color: #59D9EB', stT1L3p_array[4]
+            ['Line1', stT1L1p_array[0], 'color: #006400', stT1L1p_array[0], stT1L1p_array[1], 'color: #7CFC00', stT1L1p_array[1], stT1L1p_array[2], 'color: #000000', stT1L1p_array[2], stT1L1p_array[4], 'color: #0000FF', stT1L1p_array[4]],
+            ['Line2', stT1L2p_array[0], 'color: #006400', stT1L2p_array[0], stT1L2p_array[1], 'color: #7CFC00', stT1L2p_array[1], stT1L2p_array[2], 'color: #000000', stT1L2p_array[2], stT1L2p_array[4], 'color: #0000FF', stT1L2p_array[4]],
+            ['Line3', stT1L3p_array[0], 'color: #006400', stT1L3p_array[0], stT1L3p_array[1], 'color: #7CFC00', stT1L3p_array[1], stT1L3p_array[2], 'color: #000000', stT1L3p_array[2], stT1L3p_array[4], 'color: #0000FF', stT1L3p_array[4]
             ]
          ]);
 
@@ -5066,7 +5066,7 @@
             title: 'Shot types, Team 1',
             bar: {groupWidth: "75%"},
             legend: { position: 'bottom'},
-            colors: ['#20AB4E', '#295738','#002072','#59D9EB'],
+            colors: ['#006400', '#7CFC00','#000000','#0000FF'],
             hAxis: { textPosition: 'none' }
             };
 
