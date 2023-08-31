@@ -2544,27 +2544,27 @@
         else if (dataType == 4) { //direct
             dataType_str = "Direct";
         }
-    }
+
         if (Ball_pos === 1) {
             shooting_team = name_t1;
 
-        if (dataType === 0) {
-            ctx.fillStyle = "lightgreen";
-            ctx_p.fillStyle = "lightgreen";
-        } else if (dataType === 1) {
-            ctx.fillStyle = "darkgreen";
-            ctx_p.fillStyle = "darkgreen";
-        } else if (dataType === 2) {
-            ctx.fillStyle = "lightblue";
-            ctx_p.fillStyle = "lightblue";
-        } else if (dataType === 3) {
-            ctx.fillStyle = "blue";
-            ctx_p.fillStyle = "blue";
-        } else if (dataType === 4) {
-            ctx.fillStyle = "darkblue";
-            ctx_p.fillStyle = "darkblue";
+            if (dataType === 0) {
+                ctx.fillStyle = "lightgreen";
+                ctx_p.fillStyle = "lightgreen";
+            } else if (dataType === 1) {
+                ctx.fillStyle = "darkgreen";
+                ctx_p.fillStyle = "darkgreen";
+            } else if (dataType === 2) {
+                ctx.fillStyle = "lightblue";
+                ctx_p.fillStyle = "lightblue";
+            } else if (dataType === 3) {
+                ctx.fillStyle = "blue";
+                ctx_p.fillStyle = "blue";
+            } else if (dataType === 4) {
+                ctx.fillStyle = "darkblue";
+                ctx_p.fillStyle = "darkblue";
+            }
         }
-    }
 
             dataShot = 1;
 
