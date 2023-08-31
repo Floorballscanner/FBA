@@ -2544,7 +2544,7 @@
         else if (dataType == 4) { //direct
             dataType_str = "Direct";
         }
-
+    }
         if (Ball_pos === 1) {
             shooting_team = name_t1;
 
