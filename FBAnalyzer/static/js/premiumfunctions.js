@@ -4898,7 +4898,7 @@
         ['Turnovers, direct', stxGT1Teamg_array[1]],
         ['Org.attack, one-timer', stxGT1Teamg_array[2]],
         ['Org.attack, direct', stxGT1Teamg_array[4]],
-        ['Others',  stxGT1Teamg_array[3]]
+        ['Rebounds',  stxGT1Teamg_array[3]]
 
         ]);
 
@@ -4908,13 +4908,13 @@
         ['Turnovers, direct', stxGT1Teamp_array[1]],
         ['Org.attack, one-timer', stxGT1Teamp_array[2]],
         ['Org.attack, direct', stxGT1Teamp_array[4]],
-        ['Others',  stxGT1Teamp_array[3]]
+        ['Rebounds',  stxGT1Teamp_array[3]]
 
         ]);
 
         var options2 = {
         title: 'Share of xG by attack types',
-        colors: ['#006400', '#7CFC00','#000000','#0000FF','#F7FAFA'],
+        colors: ['#006400', '#7CFC00','#000000','#0000FF','#D3D3D3'],
         is3D: true,
         };
 
@@ -4932,7 +4932,7 @@
         ['Turnover, direct', + stxGT2Teamg_array[1]],
         ['Org. attack, one-timer', stxGT2Teamg_array[2]],
         ['Org. attack, direct', stxGT2Teamg_array[4]],
-        ['Other', stxGT2Teamg_array[3]]
+        ['Rebound', stxGT2Teamg_array[3]]
 
         ]);
 
@@ -4942,13 +4942,13 @@
         ['Turnover, direct', + stxGT2Teamp_array[1]],
         ['Org. attack, one-timer', stxGT2Teamp_array[2]],
         ['Org. attack, direct', stxGT2Teamp_array[4]],
-        ['Other', stxGT2Teamp_array[3]]
+        ['Rebounds', stxGT2Teamp_array[3]]
 
         ]);
 
         var options2 = {
         title: 'Share of xG by attack/shot types',
-        colors: ['#8B4513', '#FFA500','#8B0000','#FF4500', '#F7FAFA'],
+        colors: ['#8B4513', '#FFA500','#8B0000','#FF4500', '#D3D3D3'],
         is3D: true,
         };
 
