@@ -2734,8 +2734,8 @@
             shooting_team = name_t2;
 
             if (dataType === 0) {
-                ctx.fillStyle = "goldenrod";
-                ctx_p.fillStyle = "goldenrod";
+                ctx.fillStyle = "saddlebrown";
+                ctx_p.fillStyle = "saddlebrown";
             } else if (dataType === 1) {
                 ctx.fillStyle = "orange";
                 ctx_p.fillStyle = "orange";
