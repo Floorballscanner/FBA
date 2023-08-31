@@ -4247,7 +4247,7 @@
             "cnvs_2_url" : cnvs_2.toDataURL(),
             "cnvs_3_url" : cnvs_3.toDataURL(),
             "cnvs_4_url" : cnvs_4.toDataURL(),
-            "cnvs_g_url" : cnvs_g.toDataURL(),
+            "cnvs_5_url" : cnvs_5.toDataURL(),
             "sf_p" : [sf_p[0].innerHTML, sf_p[1].innerHTML, sf_p[2].innerHTML, sf_p[3].innerHTML, sf_p[4].innerHTML, sf_p[5].innerHTML, sf_p[6].innerHTML, sf_p[7].innerHTML],
             "sa_p" : [sa_p[0].innerHTML, sa_p[1].innerHTML, sa_p[2].innerHTML, sa_p[3].innerHTML, sa_p[4].innerHTML, sa_p[5].innerHTML, sa_p[6].innerHTML, sa_p[7].innerHTML],
             "gf_p" : [gf_p[0].innerHTML, gf_p[1].innerHTML, gf_p[2].innerHTML, gf_p[3].innerHTML, gf_p[4].innerHTML, gf_p[5].innerHTML, gf_p[6].innerHTML, gf_p[7].innerHTML],
@@ -4368,7 +4368,7 @@
         img4.onload = function() {
             ctx4.drawImage(img4,0,0,fWidth,fLength);
         };
-        img5.src = undo_object.cnvs_g_url;
+        img5.src = undo_object.cnvs_5_url;
         img5.onload = function() {
             ctx5.drawImage(img5,0,0,fWidth,fLength);
         };
