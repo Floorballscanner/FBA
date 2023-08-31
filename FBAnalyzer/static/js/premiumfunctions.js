@@ -2555,14 +2555,14 @@
                 ctx.fillStyle = "darkgreen";
                 ctx_p.fillStyle = "darkgreen";
             } else if (dataType === 2) {
-                ctx.fillStyle = "royalblue";
-                ctx_p.fillStyle = "royalblue";
+                ctx.fillStyle = "blue";
+                ctx_p.fillStyle = "blue";
             } else if (dataType === 3) {
-                ctx.fillStyle = "midnightblue";
-                ctx_p.fillStyle = "midnightblue";
+                ctx.fillStyle = "black";
+                ctx_p.fillStyle = "black";
             } else if (dataType === 4) {
-                ctx.fillStyle = "midnightblue";
-                ctx_p.fillStyle = "midnightblue";
+                ctx.fillStyle = "black";
+                ctx_p.fillStyle = "black";
             }
 
 
