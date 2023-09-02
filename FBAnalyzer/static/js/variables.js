@@ -33,6 +33,7 @@
     var img2 = new Image();
     var img3 = new Image();
     var img4 = new Image();
+    var img5 = new Image();
     var PosTime = 0; // Possession time in counters Team 1
     var PosTime_2 = 0; // Possession time in counters Team 2
     var LineTime = 0; // Line on court time in counters Team 1
