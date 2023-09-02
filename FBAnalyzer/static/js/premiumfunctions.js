@@ -4072,6 +4072,47 @@
     function Print() {
         window.print();
     }
+    function printPdf() {
+        // Create a new window for printing
+        const printWindow = window.open('', '', 'width=600,height=600');
+
+        // Add the content to be printed to the new window
+        printWindow.document.write(`
+            <html>
+            <head>
+                <title>Floorball Scanner Game Print</title>
+            </head>
+            <body>
+                <div class="container" style="Padding-top: 60px;">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12">
+                        <h5>${document.getElementById("select-date").value}</h5>
+                        <h3>${name_t1} - ${name_t2}</h3></br>
+                        <h3>${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
+                        <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
+                        <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        /*<div class="col-sm-4">
+                        </div>*/
+                    </div>
+
+                </div>
+            </body>
+            </html>
+        `);
+
+        // Close the document after printing
+        printWindow.document.close();
+
+        // Trigger the print dialog
+        printWindow.print();
+
+        // Close the print window
+        printWindow.close();
+
+    }
     function updateSaveData() {
 
         console.log("updateSaveData()")
