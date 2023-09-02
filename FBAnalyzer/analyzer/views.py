@@ -29,3 +29,6 @@ def live(request):
 def game(request, nr):
     return render(request, 'game.html')
 
+def references(request):
+    return render(request, 'references.html')
+

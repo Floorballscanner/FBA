@@ -19,6 +19,7 @@ urlpatterns = [
     path('apis/', include(accounts_urls)),
     path('live/', views.live, name="livepage"),
     path('live/<nr>', views.game, name="gamepage"),
+    path('references/', views.references, name="references"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

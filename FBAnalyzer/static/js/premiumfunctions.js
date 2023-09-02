@@ -4072,6 +4072,69 @@
     function Print() {
         window.print();
     }
+    function printPdf() {
+        // Create a new window for printing
+        const printWindow = window.open('', '', 'width=600,height=600');
+
+        // Add the content to be printed to the new window
+        printWindow.document.write(`
+            <html>
+            <head>
+                <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
+            </head>
+            <body>
+                <img src="symbol_transparent.png" width="40px" height="40px"><br>
+                <div class="container" style="Padding-top: 20px;text-align: center;">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12">
+                        <h5>${document.getElementById("select-date").value}</h5>
+                        <h3>${name_t1} - ${name_t2}</h3></br>
+                        <h3>${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
+                        <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
+                        <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center" style="Padding-top: 10px;">
+                        <h4>Game statistics</h4>
+                    </div>
+                    <div class="row justify-content-center" style="Padding-top: 10px;">
+                        <div class="col-sm-4">
+                            <div class="shot-map">
+                                <h5>Game shotmap</h5>
+                                <img src = ${undo_object.cnvs_5_url} width="300" height="500"><br>
+                            </div>
+                        <div class="col-sm-4">
+                            <div class="linestats">
+                                <div id="printT1_typechart" style="height: 200px"></div>
+                            </div>
+                            <div class="linestats" style="Padding-top: 50px">
+                                <div  id="printT1_st_piechart" style="height: 250px"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="linestats">
+                                <div id="printT2_typechart" style="height: 200px"></div>
+                            </div>
+                            <div class="linestats" style="Padding-top: 50px">
+                                <div  id="printT2_st_piechart" style="height: 250px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `);
+
+        /*// Close the document after printing
+        printWindow.document.close();
+
+        // Trigger the print dialog
+        printWindow.print();
+
+        // Close the print window
+        printWindow.close();*/
+
+    }
     function updateSaveData() {
 
         console.log("updateSaveData()")
