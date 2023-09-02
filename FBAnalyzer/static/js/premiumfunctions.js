@@ -4074,7 +4074,7 @@
     }
     function printPdf() {
         // Create a new window for printing
-        const printWindow = window.open('', '', 'width=600,height=600');
+        const printWindow = window.open('', '', 'width=1600,height=600');
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
