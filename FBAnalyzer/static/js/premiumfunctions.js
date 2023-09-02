@@ -4083,7 +4083,7 @@
                 <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
             </head>
             <body>
-                <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
+                <img src="symbol_transparent.png" width="40px" height="40px"><br>
                 <div class="container" style="Padding-top: 20px;text-align: center;">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
