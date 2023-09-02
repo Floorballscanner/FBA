@@ -4102,7 +4102,7 @@
                         <div class="col-sm-4">
                             <div class="shot-map">
                                 <h5>Game shotmap</h5>
-                                <canvas width="300" height="500">${drawImage(img5,0,0,fWidth,fLength);}</canvas>
+                                <canvas width="300" height="500">${drawImage(img5,0,0,fWidth,fLength)}</canvas>
                             </div>
                         </div>
                         <div class="col-sm-4">
