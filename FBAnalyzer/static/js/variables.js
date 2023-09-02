@@ -217,7 +217,17 @@
     var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
     var plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
     var plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
-    
+
+    // Variables for print chart images
+    p_xGGame_chart = "";
+    p_xG%Game_chart = "";
+    p_T1_st_piechart = "";
+    p_T2_st_piechart = "";
+    p_xGTeam_chart = "";
+    p_T1_typechart = "";
+    p_T2_typechart = "";
+
+
     // Data arrays for shot type charts
 
     var stT1Teamg_array = [0,0,0,0,0];

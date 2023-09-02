@@ -4083,12 +4083,12 @@
                 <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
             </head>
             <body>
-                <img src="symbol_transparent.png" width="40px" height="40px"><br>
                 <div class="container" style="Padding-top: 20px;text-align: center;">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
+                        <img src="symbol_transparent.png" width="40px" height="40px"><br>
                         <h5>${document.getElementById("select-date").value}</h5>
-                        <h3>${name_t1} - ${name_t2}</h3></br>
+                        <h3>${name_t1} - ${name_t2}</h3>
                         <h3>${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
                         <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
                         <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
@@ -4101,22 +4101,22 @@
                         <div class="col-sm-4">
                             <div class="shot-map">
                                 <h5>Game shotmap</h5>
-                                <img src = ${undo_object.cnvs_5_url} width="300" height="500"><br>
+                                <img src = ${undo_object.cnvs_5_url} width="150" height="250"><br>
                             </div>
                         <div class="col-sm-4">
                             <div class="linestats">
-                                <div id="printT1_typechart" style="height: 200px"></div>
+                                <img src = ${p_T1_typechart} height="200"><br>
                             </div>
-                            <div class="linestats" style="Padding-top: 50px">
-                                <div  id="printT1_st_piechart" style="height: 250px"></div>
+                            <div class="linestats" style="Padding-top: 10px">
+                                <img src = ${p_T1_st_piechart} height="200"><br>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="linestats">
-                                <div id="printT2_typechart" style="height: 200px"></div>
+                                <img src = ${p_T2_typechart} height="200"><br>
                             </div>
                             <div class="linestats" style="Padding-top: 50px">
-                                <div  id="printT2_st_piechart" style="height: 250px"></div>
+                                <img src = ${p_T2_st_piechart} height="200"><br>
                             </div>
                         </div>
                     </div>
@@ -4672,6 +4672,12 @@
             };
 
         var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_xGGame_chart = chart.getImageURI();
+        });
+
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
@@ -4724,6 +4730,12 @@
             };
 
         var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_xG%Game_chart = chart.getImageURI();
+        });
+
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
@@ -5008,6 +5020,12 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_T1_st_piechart = chart.getImageURI();
+        });
+
         chart.draw(data, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
@@ -5042,6 +5060,12 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_T2_st_piechart = chart.getImageURI();
+        });
+
         chart.draw(data2, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
@@ -5061,6 +5085,12 @@
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_xGTeam_chart = chart.getImageURI();
+        });
+
         chart.draw(data, options);
 
         // Line 1 xG Chart
@@ -5160,6 +5190,12 @@
             };
 
         var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart2, 'ready', function () {
+            p_T1_typechart = chart2.getImageURI();
+        });
+
         chart2.draw(chartDataX, options);
 
         var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
@@ -5192,6 +5228,12 @@
             };
 
         var chartX = new google.visualization.ColumnChart(document.getElementById('T2_typechart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chartX, 'ready', function () {
+            p_T2_typechart = chartX.getImageURI();
+        });
+
         chartX.draw(chartDataY, options);
 
         var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
