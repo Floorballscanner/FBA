@@ -4101,7 +4101,7 @@
                         <div class="col-sm-4">
                             <div class="shot-map">
                                 <h5>Game shotmap</h5>
-                                <canvas id="printCanvas" width="300" height="500"></canvas></div>
+                                <img src = ${undo_object.cnvs_5_url} width="300" height="500"><br>
                             </div>
                         <div class="col-sm-4">
                             <div class="linestats">
@@ -4123,23 +4123,7 @@
                 </div>
             </body>
             </html>
-            <script>
-                window.onload = function() {
-                    var print_cnvs = document.getElementById("printCanvas");
-                    var print_ctx = print_cnvs.getContext("2d");
-                    print_img.src = undo_object.cnvs_5_url;
-                    print_img.onload = function() {
-                    print_ctx.drawImage(print_img,0,0,fWidth,fLength);
-                    };
-                }
-            </script>
         `);
-
-        var print_cnvs = document.getElementById("printCanvas");
-        var print_ctx = print_cnvs.getContext("2d");
-        print_img.src = undo_object.cnvs_5_url;
-        print_img.onload = function() {
-        print_ctx.drawImage(print_img,0,0,fWidth,fLength); }
 
         /*// Close the document after printing
         printWindow.document.close();
