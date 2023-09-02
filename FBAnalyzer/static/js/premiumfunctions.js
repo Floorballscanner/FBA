@@ -4078,12 +4078,14 @@
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
+            {% load static %}
             <html>
             <head>
-                <title>Floorball Scanner Game Print</title>
+                <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
             </head>
             <body>
-                <div class="container" style="Padding-top: 60px;text-align: center;">
+                <img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
+                <div class="container" style="Padding-top: 20px;text-align: center;">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
                         <h5>${document.getElementById("select-date").value}</h5>
@@ -4093,11 +4095,33 @@
                         <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        /*<div class="col-sm-4">
-                        </div>*/
+                    <div class="row justify-content-center" style="Padding-top: 10px;">
+                        <h4>Game statistics</h4>
                     </div>
-
+                    <div class="row justify-content-center" style="Padding-top: 10px;">
+                        <div class="col-sm-4">
+                            <div class="shot-map">
+                                <h5>Game shotmap</h5>
+                                <canvas width="300" height="500">${drawImage(img5,0,0,fWidth,fLength);}</canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="linestats">
+                                <div id="T1_typechart" style="height: 200px"></div>
+                            </div>
+                            <div class="linestats" style="Padding-top: 50px">
+                                <div  id="T1_st_piechart" style="height: 250px"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="linestats">
+                                <div id="T2_typechart" style="height: 200px"></div>
+                            </div>
+                            <div class="linestats" style="Padding-top: 50px">
+                                <div  id="T2_st_piechart" style="height: 250px"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </body>
             </html>
