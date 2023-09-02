@@ -42,8 +42,8 @@
                 if (Object.keys(gd).length > 0) { // If game data is not empty
                     game_delete.disabled = false;
                     document.getElementById('stdate').innerHTML = data.date;
-                    team_1 = data.teams[0];
-                    team_2 = data.teams[1];
+                    team_1 = gd.name_t1;
+                    team_2 = gd.name_t2;
                     document.getElementById('sttotg_1').innerHTML = gd.tgt_1;
                     document.getElementById('sttotg_2').innerHTML = gd.tgt_2;
                     document.getElementById('sttotxG_1').innerHTML = gd.txG_1;
@@ -53,26 +53,17 @@
                     var display = date.toISOString().substr(11, 8);
                     document.getElementById('stlabel').innerHTML = display;
                     document.getElementById('stperiodNr').innerHTML = "Period " + gd.periodN;
+                    document.getElementById('stteam_1').innerHTML = team_1;
+                    document.getElementById('stt1name1').innerHTML = team_1;
+                    document.getElementById('stt1name2').innerHTML = team_1;
+                    gd.xGTeam_array[0][1] = 'xG ' + team_1;
+                    gd.xGTeam_array[0][3] = 'Goal ' + team_1;
 
-                    fetch("https://fbscanner.io/apis/teams/" + team_1+ "/")
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById('stteam_1').innerHTML = data.name;
-                            document.getElementById('stt1name1').innerHTML = data.name;
-                            document.getElementById('stt1name2').innerHTML = data.name;
-                            gd.xGTeam_array[0][1] = 'xG ' + data.name;
-                            gd.xGTeam_array[0][3] = 'Goal ' + data.name;
-                    })
-
-                    fetch("https://fbscanner.io/apis/teams/" + team_2+ "/")
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById('stteam_2').innerHTML = data.name;
-                            document.getElementById('stt2name1').innerHTML = data.name;
-                            document.getElementById('stt2name2').innerHTML = data.name;
-                            gd.xGTeam_array[0][2] = 'xG ' + data.name;
-                            gd.xGTeam_array[0][4] = 'Goal ' + data.name;
-                    })
+                    document.getElementById('stteam_2').innerHTML = team_2;
+                    document.getElementById('stt2name1').innerHTML = team_2;
+                    document.getElementById('stt2name2').innerHTML = team_2;
+                    gd.xGTeam_array[0][2] = 'xG ' + team_2;
+                    gd.xGTeam_array[0][4] = 'Goal ' + team_2;
 
                     img1.src = gd.cnvs_1_url;
                     img1.onload = function() {

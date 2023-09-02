@@ -20,7 +20,7 @@ It extends app_layout.html with Django
                 <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
                     <option selected disabled>Select a game...</option>
                     {% for game in games reversed %}
-                        <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.teams.all|join:" - " }}</option>
+                        <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.data.name_t1}} - {{game.data.name_t2}}</option>
                     {% endfor %}
                 </select>
                 <img src="{% static 'delete.png' %}" id="analyse_delete" onclick="deleteGameButton()" disabled>
