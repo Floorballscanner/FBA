@@ -4078,7 +4078,7 @@
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
-            ${{% load static %}}
+            $({% load static %})
             <html>
             <head>
                 <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
