@@ -4083,7 +4083,7 @@
                 <title>Floorball Scanner Game Print</title>
             </head>
             <body>
-                <div class="container" style="Padding-top: 60px;">
+                <div class="container" style="Padding-top: 60px;text-align: center;">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
                         <h5>${document.getElementById("select-date").value}</h5>
@@ -4103,14 +4103,14 @@
             </html>
         `);
 
-        // Close the document after printing
+        /*// Close the document after printing
         printWindow.document.close();
 
         // Trigger the print dialog
         printWindow.print();
 
         // Close the print window
-        printWindow.close();
+        printWindow.close();*/
 
     }
     function updateSaveData() {
