@@ -4139,7 +4139,7 @@
         var print_ctx = print_cnvs.getContext("2d");
         print_img.src = undo_object.cnvs_5_url;
         print_img.onload = function() {
-        print_ctx.drawImage(print_img,0,0,fWidth,fLength);
+        print_ctx.drawImage(print_img,0,0,fWidth,fLength); }
 
         /*// Close the document after printing
         printWindow.document.close();
