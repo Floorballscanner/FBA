@@ -220,7 +220,7 @@
 
     // Variables for print chart images
     var p_xGGame_chart = "";
-    var p_xG%Game_chart = "";
+    var p_xG_per_Game_chart = "";
     var p_T1_st_piechart = "";
     var p_T2_st_piechart = "";
     var p_xGTeam_chart = "";
