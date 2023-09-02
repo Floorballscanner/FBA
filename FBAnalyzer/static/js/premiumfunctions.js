@@ -4078,7 +4078,6 @@
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
-            {% load static %}
             <html>
             <head>
                 <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
@@ -4102,28 +4101,36 @@
                         <div class="col-sm-4">
                             <div class="shot-map">
                                 <h5>Game shotmap</h5>
-                                <canvas id="myCanvas_5" width="300" height="500"></canvas></div>
+                                <canvas id="printCanvas" width="300" height="500"></canvas></div>
                             </div>
                         <div class="col-sm-4">
                             <div class="linestats">
-                                <div id="T1_typechart" style="height: 200px"></div>
+                                <div id="printT1_typechart" style="height: 200px"></div>
                             </div>
                             <div class="linestats" style="Padding-top: 50px">
-                                <div  id="T1_st_piechart" style="height: 250px"></div>
+                                <div  id="printT1_st_piechart" style="height: 250px"></div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="linestats">
-                                <div id="T2_typechart" style="height: 200px"></div>
+                                <div id="printT2_typechart" style="height: 200px"></div>
                             </div>
                             <div class="linestats" style="Padding-top: 50px">
-                                <div  id="T2_st_piechart" style="height: 250px"></div>
+                                <div  id="printT2_st_piechart" style="height: 250px"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </body>
             </html>
+            <script>
+                var print_cnvs = document.getElementById("printCanvas");
+                var print_ctx = print_cnvs.getContext("2d");
+                print_img.src = undo_object.cnvs_5_url;
+                print_img.onload = function() {
+                print_ctx.drawImage(print_img,0,0,fWidth,fLength);
+                };
+            </script>
         `);
 
         /*// Close the document after printing
