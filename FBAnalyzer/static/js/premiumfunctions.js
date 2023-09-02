@@ -4983,9 +4983,9 @@
 
         var data = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
-        ['Turnovers, one-timer', stxGT1Teamg_array[0]],
+        ['Turnovers, Cross-Pass', stxGT1Teamg_array[0]],
         ['Turnovers, direct', stxGT1Teamg_array[1]],
-        ['Org.attack, one-timer', stxGT1Teamg_array[2]],
+        ['Org.attack, Cross-Pass', stxGT1Teamg_array[2]],
         ['Org.attack, direct', stxGT1Teamg_array[4]],
         ['Rebounds',  stxGT1Teamg_array[3]]
 
@@ -4993,9 +4993,9 @@
 
         var data_p = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
-        ['Turnovers, one-timer', stxGT1Teamp_array[0]],
+        ['Turnovers, Cross-Pass', stxGT1Teamp_array[0]],
         ['Turnovers, direct', stxGT1Teamp_array[1]],
-        ['Org.attack, one-timer', stxGT1Teamp_array[2]],
+        ['Org.attack, Cross-Pass', stxGT1Teamp_array[2]],
         ['Org.attack, direct', stxGT1Teamp_array[4]],
         ['Rebounds',  stxGT1Teamp_array[3]]
 
@@ -5017,9 +5017,9 @@
 
         var data2 = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
-        ['Turnover, one-timer', stxGT2Teamg_array[0]],
+        ['Turnover, Cross-Pass', stxGT2Teamg_array[0]],
         ['Turnover, direct', + stxGT2Teamg_array[1]],
-        ['Org. attack, one-timer', stxGT2Teamg_array[2]],
+        ['Org. attack, Cross-Pass', stxGT2Teamg_array[2]],
         ['Org. attack, direct', stxGT2Teamg_array[4]],
         ['Rebound', stxGT2Teamg_array[3]]
 
@@ -5027,9 +5027,9 @@
 
         var data2_p = new google.visualization.arrayToDataTable([
         ['Type', 'xG'],
-        ['Turnover, one-timer', stxGT2Teamp_array[0]],
+        ['Turnover, Cross-Pass', stxGT2Teamp_array[0]],
         ['Turnover, direct', + stxGT2Teamp_array[1]],
-        ['Org. attack, one-timer', stxGT2Teamp_array[2]],
+        ['Org. attack, Cross-Pass', stxGT2Teamp_array[2]],
         ['Org. attack, direct', stxGT2Teamp_array[4]],
         ['Rebounds', stxGT2Teamp_array[3]]
 
@@ -5136,7 +5136,7 @@
        // Team 1 typechart
 
         var chartDataX = google.visualization.arrayToDataTable([
-            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
             ['Line1', stT1L1g_array[0], 'color: #006400', stT1L1g_array[0], stT1L1g_array[1], 'color: #7CFC00', stT1L1g_array[1], stT1L1g_array[2], 'color: #000000', stT1L1g_array[2], stT1L1g_array[4], 'color: #0000FF', stT1L1g_array[4]],
             ['Line2', stT1L2g_array[0], 'color: #006400', stT1L2g_array[0], stT1L2g_array[1], 'color: #7CFC00', stT1L2g_array[1], stT1L2g_array[2], 'color: #000000', stT1L2g_array[2], stT1L2g_array[4], 'color: #0000FF', stT1L2g_array[4]],
             ['Line3', stT1L3g_array[0], 'color: #006400', stT1L3g_array[0], stT1L3g_array[1], 'color: #7CFC00', stT1L3g_array[1], stT1L3g_array[2], 'color: #000000', stT1L3g_array[2], stT1L3g_array[4], 'color: #0000FF', stT1L3g_array[4]
@@ -5144,7 +5144,7 @@
          ]);
 
         var chartDataX_p = google.visualization.arrayToDataTable([
-            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
             ['Line1', stT1L1p_array[0], 'color: #006400', stT1L1p_array[0], stT1L1p_array[1], 'color: #7CFC00', stT1L1p_array[1], stT1L1p_array[2], 'color: #000000', stT1L1p_array[2], stT1L1p_array[4], 'color: #0000FF', stT1L1p_array[4]],
             ['Line2', stT1L2p_array[0], 'color: #006400', stT1L2p_array[0], stT1L2p_array[1], 'color: #7CFC00', stT1L2p_array[1], stT1L2p_array[2], 'color: #000000', stT1L2p_array[2], stT1L2p_array[4], 'color: #0000FF', stT1L2p_array[4]],
             ['Line3', stT1L3p_array[0], 'color: #006400', stT1L3p_array[0], stT1L3p_array[1], 'color: #7CFC00', stT1L3p_array[1], stT1L3p_array[2], 'color: #000000', stT1L3p_array[2], stT1L3p_array[4], 'color: #0000FF', stT1L3p_array[4]
@@ -5168,7 +5168,7 @@
         // Team 2 typechart
 
         var chartDataY = google.visualization.arrayToDataTable([
-            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
             ['Line1', stT2L1g_array[0], 'color: #8B4513', stT2L1g_array[0], stT2L1g_array[1], 'color: #FFA500', stT2L1g_array[1], stT2L1g_array[2], 'color: #8B0000', stT2L1g_array[2], stT2L1g_array[4], 'color: #FF4500', stT2L1g_array[4]],
             ['Line2', stT2L2g_array[0], 'color: #8B4513', stT2L2g_array[0], stT2L2g_array[1], 'color: #FFA500', stT2L2g_array[1], stT2L2g_array[2], 'color: #8B0000', stT2L2g_array[2], stT2L2g_array[4], 'color: #FF4500', stT2L2g_array[4]],
             ['Line3', stT2L3g_array[0], 'color: #8B4513', stT2L3g_array[0], stT2L3g_array[1], 'color: #FFA500', stT2L3g_array[1], stT2L3g_array[2], 'color: #8B0000', stT2L3g_array[2], stT2L3g_array[4], 'color: #FF4500', stT2L3g_array[4]
@@ -5176,7 +5176,7 @@
          ]);
 
         var chartDataY_p = google.visualization.arrayToDataTable([
-            ['Type', 'TO One-timer', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'One-timer', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
             ['Line1', stT2L1p_array[0], 'color: #8B4513', stT2L1p_array[0], stT2L1p_array[1], 'color: #FFA500', stT2L1p_array[1], stT2L1p_array[2], 'color: #8B0000', stT2L1p_array[2], stT2L1p_array[4], 'color: #FF4500', stT2L1p_array[4]],
             ['Line2', stT2L2p_array[0], 'color: #8B4513', stT2L2p_array[0], stT2L2p_array[1], 'color: #FFA500', stT2L2p_array[1], stT2L2p_array[2], 'color: #8B0000', stT2L2p_array[2], stT2L2p_array[4], 'color: #FF4500', stT2L2p_array[4]],
             ['Line3', stT2L3p_array[0], 'color: #8B4513', stT2L3p_array[0], stT2L3p_array[1], 'color: #FFA500', stT2L3p_array[1], stT2L3p_array[2], 'color: #8B0000', stT2L3p_array[2], stT2L3p_array[4], 'color: #FF4500', stT2L3p_array[4]
