@@ -4102,9 +4102,8 @@
                         <div class="col-sm-4">
                             <div class="shot-map">
                                 <h5>Game shotmap</h5>
-                                <canvas width="300" height="500">${drawImage(img5,0,0,fWidth,fLength)}</canvas>
+                                <canvas id="myCanvas_5" width="300" height="500"></canvas></div>
                             </div>
-                        </div>
                         <div class="col-sm-4">
                             <div class="linestats">
                                 <div id="T1_typechart" style="height: 200px"></div>
