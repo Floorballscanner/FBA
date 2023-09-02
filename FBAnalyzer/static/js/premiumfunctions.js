@@ -4078,6 +4078,7 @@
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
+            ${{% load static %}}
             <html>
             <head>
                 <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
@@ -4124,12 +4125,14 @@
             </body>
             </html>
             <script>
-                var print_cnvs = document.getElementById("printCanvas");
-                var print_ctx = print_cnvs.getContext("2d");
-                print_img.src = undo_object.cnvs_5_url;
-                print_img.onload = function() {
-                print_ctx.drawImage(print_img,0,0,fWidth,fLength);
-                };
+                window.onload = function() {
+                    var print_cnvs = document.getElementById("printCanvas");
+                    var print_ctx = print_cnvs.getContext("2d");
+                    print_img.src = undo_object.cnvs_5_url;
+                    print_img.onload = function() {
+                    print_ctx.drawImage(print_img,0,0,fWidth,fLength);
+                    };
+                }
             </script>
         `);
 
