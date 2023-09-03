@@ -4107,16 +4107,15 @@
                             <img src = ${p_T2_st_piechart} width="250px"><br>
                         </div>
                     </div>
-                    <br>
-                    <div class="row" style="text-align: center;">
+                    <div class="row" style="text-align: center;Padding-top: 20px;">
                         <img src = ${p_xGTeam_chart} width="600px">
                     </div>
-                    <div class="row" style="display: flex;">
+                    <div class="row" style="display: flex;Padding-top: 20px;">
                         <div class="column" style="flex:50%;">
-                            <img src = ${p_xGGame_chart} width="300px">
+                            <img src = ${p_xGGame_chart} width="400px">
                         </div>
                         <div class="column" style="flex:50%;">
-                            <img src = ${p_xG_per_Game_chart} width="300px">
+                            <img src = ${p_xG_per_Game_chart} width="400px">
                         </div>
                     </div>
                     <br>
