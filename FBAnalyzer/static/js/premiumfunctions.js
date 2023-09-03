@@ -4084,23 +4084,25 @@
             </head>
             <body>
                 <div class="container" style="Padding-top: 20px;text-align: center;">
-                    <img src="/static/symbol_transparent.png" width="40px" height="40px"><br>
-                    <h5>${document.getElementById("select-date").value}</h5>
-                    <h3>${name_t1} - ${name_t2}</h3>
-                    <h3>${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
-                    <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
-                    <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
-                    <h4>Game statistics</h4>
                     <div class="row">
-                        <div class="column">
+                        <img src="/static/symbol_transparent.png" width="40px" height="40px"><br>
+                        <h5>${document.getElementById("select-date").value}</h5>
+                        <h3>${name_t1} - ${name_t2}</h3>
+                        <h3>${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
+                        <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
+                        <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
+                        <h4>Game statistics</h4>
+                    </div>
+                    <div class="row">
+                        <div class="column" style="float:left;width:50%;">
                             <h5>Game shotmap</h5>
                             <img src = ${data_object.cnvs_5_url} width="150px" height="250px"><br>
                         </div>
-                        <div class="column">
+                        <div class="column" style="float:left;width:50%;">
                             <img src = ${p_T1_typechart} width="250px"><br>
                             <img src = ${p_T1_st_piechart} width="250px"><br>
                         </div>
-                        <div class="column">
+                        <div class="column" style="float:left;width:50%;">
                             <img src = ${p_T2_typechart} height="200"><br>
                             <img src = ${p_T2_st_piechart} height="200"><br>
                         </div>
