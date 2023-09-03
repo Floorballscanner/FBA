@@ -4085,13 +4085,13 @@
             <body>
                 <div class="container" style="Padding-top: 20px;text-align: center;">
                     <img src="/static/symbol_transparent.png" width="40px" height="40px"><br>
-                    <hr width="70%" size="5" align="center" color="#002072" noshade>
                     <h5>${document.getElementById("select-date").value}</h5>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
                     <h3>${name_t1} - ${name_t2}</h3>
                     <h3 style="Padding-top: 10px;">${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
                     <h4 style="Padding-top: 5px;">xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
                     <h4 style="Padding-top: 5px;">xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
-                    <hr width="70%" size="5" align="center" color="#002072" noshade>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
                     <h4 style="Padding-top: 20px;">Game statistics</h4>
                     <div class="row" style="display: flex;">
                         <div class="column" style="flex:33%;">
@@ -4111,7 +4111,8 @@
                     <div class="row" style="text-align: center;">
                         <img src = ${p_xGTeam_chart} width="600px">
                     </div>
-                    <hr width="70%" size="5" align="center" color="#002072" noshade>
+                    <br>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
                 </div>
             </body>
             </html>
