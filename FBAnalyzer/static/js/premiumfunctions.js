@@ -4791,10 +4791,10 @@
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T1plstats'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        /*// Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
             p_T1_plstats_chart = chart.getImageURI();
-        });
+        });*/
 
         chart.draw(pldata, options);
 
@@ -4854,10 +4854,10 @@
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T2plstats'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        /*// Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
             p_T2_plstats_chart = chart.getImageURI();
-        });
+        });*/
 
         chart.draw(pldata, options);
 
@@ -4942,10 +4942,10 @@
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T1linestats'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        /*// Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
             p_T1_linestats_chart = chart.getImageURI();
-        });
+        });*/
 
         chart.draw(pldata1, options);
 
@@ -5015,10 +5015,10 @@
         // Create and draw the visualization.
         var chart2 = new google.visualization.Table(document.getElementById('T2linestats'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        /*// Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart2, 'ready', function () {
             p_T1_linestats_chart = chart2.getImageURI();
-        });
+        });*/
 
         chart2.draw(pldata2, options);
 
