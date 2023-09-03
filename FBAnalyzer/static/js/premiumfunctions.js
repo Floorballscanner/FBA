@@ -4091,12 +4091,18 @@
                     <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
                     <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
                     <h4>Game statistics</h4>
-                    <h5>Game shotmap</h5>
-                    <img src = ${data_object.cnvs_5_url} width="150px" height="250px"><br>
-                    <img src = ${p_T1_typechart} width="250px"><br>
-                    <img src = ${p_T1_st_piechart} width="250px"><br>
-                    <img src = ${p_T2_typechart} height="200"><br>
-                    <img src = ${p_T2_st_piechart} height="200"><br>
+                    <div class="column">
+                        <h5>Game shotmap</h5>
+                        <img src = ${data_object.cnvs_5_url} width="150px" height="250px"><br>
+                    </div>
+                    <div class="column">
+                        <img src = ${p_T1_typechart} width="250px"><br>
+                        <img src = ${p_T1_st_piechart} width="250px"><br>
+                    </div>
+                    <div class="column">
+                        <img src = ${p_T2_typechart} height="200"><br>
+                        <img src = ${p_T2_st_piechart} height="200"><br>
+                    </div>
                     <div id="print_xGTeam_chart" style="width:800px"></div>
                 </div>
             </body>
