@@ -4111,6 +4111,14 @@
                     <div class="row" style="text-align: center;">
                         <img src = ${p_xGTeam_chart} width="600px">
                     </div>
+                    <div class="row" style="display: flex;">
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xGGame_chart} width="300px">
+                        </div>
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xG_per_Game_chart} width="300px">
+                        </div>
+                    </div>
                     <br>
                     <hr width="70%" size="2" align="center" color="#002072" noshade>
                 </div>
