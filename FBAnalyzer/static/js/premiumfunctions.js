@@ -4092,7 +4092,7 @@
                     <h4 style="Padding-top: 5px;">xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
                     <h4 style="Padding-top: 5px;">xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
                     <hr width="70%" size="2" align="center" color="#002072" noshade>
-                    <h4 style="Padding-top: 20px;">Game statistics</h4>
+                    <h4 style="Padding-top: 10px;">Game statistics</h4>
                     <div class="row" style="display: flex;">
                         <div class="column" style="flex:33%;">
                             <h5>Game shotmap</h5>
@@ -4116,6 +4116,16 @@
                         </div>
                         <div class="column" style="flex:50%;">
                             <img src = ${p_xG_per_Game_chart} width="400px">
+                        </div>
+                    </div>
+                    <div class="row" style="display: flex;Padding-top: 20px;">
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_T1_linestats_chart} width="400px">
+                            <img src = ${p_T1_plstats_chart} width="400px">
+                        </div>
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_T2_linestats_chart} width="400px">
+                            <img src = ${p_T2_plstats_chart} width="400px">
                         </div>
                     </div>
                     <br>
@@ -4780,6 +4790,12 @@
 
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T1plstats'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_T1_plstats_chart = chart.getImageURI();
+        });
+
         chart.draw(pldata, options);
 
         var chart_per = new google.visualization.Table(document.getElementById('T1plstats_' + periodN));
@@ -4837,6 +4853,12 @@
 
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T2plstats'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_T2_plstats_chart = chart.getImageURI();
+        });
+
         chart.draw(pldata, options);
 
         var chart_per = new google.visualization.Table(document.getElementById('T2plstats_' + periodN));
@@ -4879,7 +4901,7 @@
             ['Pen. Kill', toc_g[4].innerHTML, Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0],
             ['6vs5', toc_g[5].innerHTML, Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0],
             ['5vs6', toc_g[6].innerHTML, Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent), 0, 0],
-            ['Team', toc_g[7].innerHTML, Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+            ['5vs5', toc_g[7].innerHTML, Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
             ]);
 
@@ -4904,7 +4926,7 @@
             ['Pen. Kill', toc_p[4].innerHTML, Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
             ['6vs5', toc_p[5].innerHTML, Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
             ['5vs6', toc_p[6].innerHTML, Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0],
-            ['Team', toc_p[7].innerHTML, Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+            ['5vs5', toc_p[7].innerHTML, Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
             ]);
 
@@ -4919,6 +4941,12 @@
 
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('T1linestats'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_T1_linestats_chart = chart.getImageURI();
+        });
+
         chart.draw(pldata1, options);
 
         var chart_per = new google.visualization.Table(document.getElementById('T1linestats_' + periodN));
@@ -4986,6 +5014,12 @@
 
         // Create and draw the visualization.
         var chart2 = new google.visualization.Table(document.getElementById('T2linestats'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart2, 'ready', function () {
+            p_T1_linestats_chart = chart2.getImageURI();
+        });
+
         chart2.draw(pldata2, options);
 
         var chart2_per = new google.visualization.Table(document.getElementById('T2linestats_' + periodN));

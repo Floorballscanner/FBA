@@ -226,6 +226,10 @@
     var p_xGTeam_chart = "";
     var p_T1_typechart = "";
     var p_T2_typechart = "";
+    var p_T1_plstats_chart = "";
+    var p_T2_plstats_chart = "";
+    var p_T1_linestats_chart = "";
+    var p_T2_linestats_chart = "";
 
 
     // Data arrays for shot type charts
