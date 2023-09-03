@@ -4074,24 +4074,41 @@
     }
     function printPdf() {
         // Create a new window for printing
-        const printWindow = window.open('', '', 'width=1600,height=600');
+        const printWindow = window.open('', '', 'width=900px,height=600px');
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
             <html>
             <head>
                 <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
+                <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
+                <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+                <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+                <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+                <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+                <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">
+                <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
+                <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta name="google-site-verification" content="0G4LRoNP-1vwJXnGckjN_p_ZdGB01eg3aZqsebUemJQ" />
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMTSGWEP4V"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'G-GMTSGWEP4V');
+                </script>
             </head>
             <body>
                 <div class="container" style="Padding-top: 20px;text-align: center;">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
-                        <img src="symbol_transparent.png" width="40px" height="40px"><br>
-                        <h5>${document.getElementById("select-date").value}</h5>
-                        <h3>${name_t1} - ${name_t2}</h3>
-                        <h3>${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
-                        <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
-                        <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
+                            <img src="static/symbol_transparent.png" width="40px" height="40px"><br>
+                            <h5>${document.getElementById("select-date").value}</h5>
+                            <h3>${name_t1} - ${name_t2}</h3>
+                            <h3>${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
+                            <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
+                            <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
                         </div>
                     </div>
                     <div class="row justify-content-center" style="Padding-top: 10px;">
@@ -4101,14 +4118,14 @@
                         <div class="col-sm-4">
                             <div class="shot-map">
                                 <h5>Game shotmap</h5>
-                                <img src = ${undo_object.cnvs_5_url} width="150" height="250"><br>
+                                <img src = ${undo_object.cnvs_5_url} width="150px" height="250px"><br>
                             </div>
                         <div class="col-sm-4">
                             <div class="linestats">
-                                <img src = ${p_T1_typechart} height="200"><br>
+                                <img src = ${p_T1_typechart} width="250px"><br>
                             </div>
                             <div class="linestats" style="Padding-top: 10px">
-                                <img src = ${p_T1_st_piechart} height="200"><br>
+                                <img src = ${p_T1_st_piechart} width="250px"><br>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -4120,10 +4137,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row justify-content-center" style="Padding-top: 10px;">
+                        <div class="col-sm-12">
+                            <div id="print_xGTeam_chart" style="width:800px"></div>
+                        </div>
+                    </div>
                 </div>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                <script src="https://smtpjs.com/v3/smtp.js"></script>
             </body>
             </html>
         `);
+
+        printDraw(); // Draw the print window charts
 
         /*// Close the document after printing
         printWindow.document.close();
@@ -5283,4 +5311,23 @@
         .catch((error) => {
             console.error('Error:', error);
         });
+    }
+
+    function printDraw() {
+
+        var data = google.visualization.arrayToDataTable(xGTeam_array);
+
+        var options = {
+          title: 'xG by Team',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          seriesType: 'lines',
+          series: {
+              2:{type: 'bars', color: 'blue'},
+              3:{type: 'bars', color: 'red'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('print_xGTeam_chart'));
+        chart.draw(data, options);
+
     }
