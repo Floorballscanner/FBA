@@ -4079,19 +4079,19 @@
         const temp = document.getElementById('T1linestats_1');
 		html2canvas(temp).then((canvas) => {
 			p_T1_linestats_chart = canvas.toDataURL('image/png');
-        }
+        });
         const temp = document.getElementById('T2linestats_1');
 		html2canvas(temp).then((canvas) => {
 			p_T2_linestats_chart = canvas.toDataURL('image/png');
-        }
+        });
         const temp = document.getElementById('T1plstats_1');
 		html2canvas(temp).then((canvas) => {
 			p_T1_plstats_chart = canvas.toDataURL('image/png');
-        }
+        });
         const temp = document.getElementById('T2plstats_1');
 		html2canvas(temp).then((canvas) => {
 			p_T2_plstats_chart = canvas.toDataURL('image/png');
-        }
+        });
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
