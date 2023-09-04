@@ -4076,6 +4076,11 @@
         // Create a new window for printing
         const printWindow = window.open('', '', 'width=900px,height=600px');
 
+        p_T1_linestats_chart = document.getElementById('T1linestats_1').outerHTML;
+        p_T1_plstats_chart = document.getElementById('T1plstats_1').outerHTML;
+        p_T2_linestats_chart = document.getElementById('T2linestats_1').outerHTML;
+        p_T2_plstats_chart = document.getElementById('T2plstats_1').outerHTML;
+
         // Add the content to be printed to the new window
         printWindow.document.write(`
             <html>
@@ -4120,12 +4125,16 @@
                     </div>
                     <div class="row" style="display: flex;Padding-top: 20px;">
                         <div class="column" style="flex:50%;">
-                            <img src = ${p_T1_linestats_chart} width="400px">
-                            <img src = ${p_T1_plstats_chart} width="400px">
+                            <div style='width=400px'>
+                                ${p_T1_linestats_chart}
+                                ${p_T1_plstats_chart}
+                            </div>
                         </div>
                         <div class="column" style="flex:50%;">
-                            <img src = ${p_T2_linestats_chart} width="400px">
-                            <img src = ${p_T2_plstats_chart} width="400px">
+                            <div style='width=400px'>
+                                ${p_T2_linestats_chart}
+                                ${p_T2_plstats_chart}
+                            </div>
                         </div>
                     </div>
                     <br>
