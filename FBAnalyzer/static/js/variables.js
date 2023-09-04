@@ -33,6 +33,7 @@
     var img2 = new Image();
     var img3 = new Image();
     var img4 = new Image();
+    var img5 = new Image();
     var PosTime = 0; // Possession time in counters Team 1
     var PosTime_2 = 0; // Possession time in counters Team 2
     var LineTime = 0; // Line on court time in counters Team 1
@@ -216,7 +217,52 @@
     var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
     var plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
     var plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
+
+    // Variables for print chart images
+    var p_xGGame_chart = "";
+    var p_xG_per_Game_chart = "";
+    var p_T1_st_piechart = "";
+    var p_T2_st_piechart = "";
+    var p_xGTeam_chart = "";
+    var p_T1_typechart = "";
+    var p_T2_typechart = "";
+    var p_T1_plstats_chart = "";
+    var p_T2_plstats_chart = "";
+    var p_T1_linestats_chart = "";
+    var p_T2_linestats_chart = "";
+
+    var p_xGGame_chart_1 = "";
+    var p_xG_per_Game_chart_1 = "";
+    var p_T1_st_piechart_1 = "";
+    var p_T2_st_piechart_1 = "";
+    var p_xGTeam_chart_1 = "";
+    var p_T1_typechart_1 = "";
+    var p_T2_typechart_1 = "";
+
+    var p_xGGame_chart_2 = "";
+    var p_xG_per_Game_chart_2 = "";
+    var p_T1_st_piechart_2 = "";
+    var p_T2_st_piechart_2 = "";
+    var p_xGTeam_chart_2 = "";
+    var p_T1_typechart_2 = "";
+    var p_T2_typechart_2 = "";
     
+    var p_xGGame_chart_3 = "";
+    var p_xG_per_Game_chart_3 = "";
+    var p_T1_st_piechart_3 = "";
+    var p_T2_st_piechart_3 = "";
+    var p_xGTeam_chart_3 = "";
+    var p_T1_typechart_3 = "";
+    var p_T2_typechart_3 = "";
+    
+    var p_xGGame_chart_4 = "";
+    var p_xG_per_Game_chart_4 = "";
+    var p_T1_st_piechart_4 = "";
+    var p_T2_st_piechart_4 = "";
+    var p_xGTeam_chart_4 = "";
+    var p_T1_typechart_4 = "";
+    var p_T2_typechart_4 = "";
+
     // Data arrays for shot type charts
 
     var stT1Teamg_array = [0,0,0,0,0];

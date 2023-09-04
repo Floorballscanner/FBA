@@ -4073,8 +4073,37 @@
         window.print();
     }
     function printPdf() {
+
         // Create a new window for printing
-        const printWindow = window.open('', '', 'width=600,height=600');
+        const printWindow = window.open('', '', 'width=1000px,height=600px');
+
+        temp1 = document.getElementById('T1linestats_1');
+        temp2 = document.getElementById('T2linestats_1');
+        temp3 = document.getElementById('T1plstats_1');
+        temp4 = document.getElementById('T2plstats_1');
+
+		function first() {
+            return new Promise((resolve) => {
+                html2canvas(temp1).then(canvas1 => {
+                    p_T1_linestats_chart = canvas1.toDataURL('image/jpeg');
+                    html2canvas(temp2).then(canvas2 => {
+                        p_T2_linestats_chart = canvas2.toDataURL('image/jpeg');
+                        html2canvas(temp3).then(canvas3 => {
+                            p_T1_plstats_chart = canvas3.toDataURL('image/jpeg');
+                            html2canvas(temp4).then(canvas4 => {
+                                p_T2_plstats_chart = canvas4.toDataURL('image/jpeg');
+                            });
+                        });
+                    });
+                });
+            resolve();
+        });
+        async function fnAsync() {
+            await first();
+        }
+
+        fnAsync();
+}
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
@@ -4083,41 +4112,185 @@
                 <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
             </head>
             <body>
-                <img src="symbol_transparent.png" width="40px" height="40px"><br>
                 <div class="container" style="Padding-top: 20px;text-align: center;">
-                    <div class="row justify-content-center">
-                        <div class="col-sm-12">
-                        <h5>${document.getElementById("select-date").value}</h5>
-                        <h3>${name_t1} - ${name_t2}</h3></br>
-                        <h3>${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
-                        <h5>xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
-                        <h5>xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
+                    <img src="/static/symbol_transparent.png" width="40px" height="40px"><br>
+                    <h5>${document.getElementById("select-date").value}</h5>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
+                    <h3>${name_t1} - ${name_t2}</h3>
+                    <h3 style="Padding-top: 10px;">${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
+                    <h4 style="Padding-top: 5px;">xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
+                    <h4 style="Padding-top: 5px;">xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
+
+                    <!--Game statistics-->
+
+                    <h4 style="Padding-top: 10px;">Game statistics</h4>
+                    <div class="row" style="display: flex;">
+                        <div class="column" style="flex:33%;">
+                            <h5>Game shotmap</h5>
+                            <img src = ${data_object.cnvs_5_url} width="200px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T1_typechart} width="250px"><br>
+                            <img src = ${p_T1_st_piechart} width="250px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T2_typechart} width="250px"><br>
+                            <img src = ${p_T2_st_piechart} width="250px"><br>
                         </div>
                     </div>
-                    <div class="row justify-content-center" style="Padding-top: 10px;">
-                        <h4>Game statistics</h4>
+                    <div class="row" style="text-align: center;Padding-top: 20px;">
+                        <img src = ${p_xGTeam_chart} width="600px">
                     </div>
-                    <div class="row justify-content-center" style="Padding-top: 10px;">
-                        <div class="col-sm-4">
-                            <div class="shot-map">
-                                <h5>Game shotmap</h5>
-                                <img src = ${undo_object.cnvs_5_url} width="300" height="500"><br>
-                            </div>
-                        <div class="col-sm-4">
-                            <div class="linestats">
-                                <div id="printT1_typechart" style="height: 200px"></div>
-                            </div>
-                            <div class="linestats" style="Padding-top: 50px">
-                                <div  id="printT1_st_piechart" style="height: 250px"></div>
-                            </div>
+                    <div class="row" style="display: flex;Padding-top: 20px;">
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xGGame_chart} width="400px">
                         </div>
-                        <div class="col-sm-4">
-                            <div class="linestats">
-                                <div id="printT2_typechart" style="height: 200px"></div>
-                            </div>
-                            <div class="linestats" style="Padding-top: 50px">
-                                <div  id="printT2_st_piechart" style="height: 250px"></div>
-                            </div>
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xG_per_Game_chart} width="400px">
+                        </div>
+                    </div>
+                    <br>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
+
+                    <!--Period 1 statistics-->
+
+                    <h4 style="Padding-top: 10px;">Period 1 statistics</h4>
+                    <div class="row" style="display: flex;">
+                        <div class="column" style="flex:33%;">
+                            <h5>Period 1 shotmap</h5>
+                            <img src = ${data_object.cnvs_1_url} width="200px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T1_typechart_1} width="250px"><br>
+                            <img src = ${p_T1_st_piechart_1} width="250px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T2_typechart_1} width="250px"><br>
+                            <img src = ${p_T2_st_piechart_1} width="250px"><br>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;Padding-top: 20px;">
+                        <img src = ${p_xGTeam_chart_1} width="600px">
+                    </div>
+                    <div class="row" style="display: flex;Padding-top: 20px;">
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xGGame_chart_1} width="400px">
+                        </div>
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xG_per_Game_chart_1} width="400px">
+                        </div>
+                    </div>
+                    <br>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
+
+                    <!--Period 2 statistics-->
+
+                    <h4 style="Padding-top: 10px;">Period 1 statistics</h4>
+                    <div class="row" style="display: flex;">
+                        <div class="column" style="flex:33%;">
+                            <h5>Period 2 shotmap</h5>
+                            <img src = ${data_object.cnvs_2_url} width="200px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T1_typechart_2} width="250px"><br>
+                            <img src = ${p_T1_st_piechart_2} width="250px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T2_typechart_2} width="250px"><br>
+                            <img src = ${p_T2_st_piechart_2} width="250px"><br>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;Padding-top: 20px;">
+                        <img src = ${p_xGTeam_chart_2} width="600px">
+                    </div>
+                    <div class="row" style="display: flex;Padding-top: 20px;">
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xGGame_chart_2} width="400px">
+                        </div>
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xG_per_Game_chart_2} width="400px">
+                        </div>
+                    </div>
+                    <br>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
+
+                    <!--Period 3 statistics-->
+
+                    <h4 style="Padding-top: 10px;">Period 3 statistics</h4>
+                    <div class="row" style="display: flex;">
+                        <div class="column" style="flex:33%;">
+                            <h5>Period 3 shotmap</h5>
+                            <img src = ${data_object.cnvs_3_url} width="200px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T1_typechart_3} width="250px"><br>
+                            <img src = ${p_T1_st_piechart_3} width="250px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T2_typechart_3} width="250px"><br>
+                            <img src = ${p_T2_st_piechart_3} width="250px"><br>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;Padding-top: 20px;">
+                        <img src = ${p_xGTeam_chart_3} width="600px">
+                    </div>
+                    <div class="row" style="display: flex;Padding-top: 20px;">
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xGGame_chart_3} width="400px">
+                        </div>
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xG_per_Game_chart_3} width="400px">
+                        </div>
+                    </div>
+                    <br>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
+
+                    <!--Overtime statistics-->
+
+                    <h4 style="Padding-top: 10px;">Overtime statistics</h4>
+                    <div class="row" style="display: flex;">
+                        <div class="column" style="flex:33%;">
+                            <h5>Overtime shotmap</h5>
+                            <img src = ${data_object.cnvs_4_url} width="200px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T1_typechart_4} width="250px"><br>
+                            <img src = ${p_T1_st_piechart_4} width="250px"><br>
+                        </div>
+                        <div class="column" style="flex:33%;">
+                            <img src = ${p_T2_typechart_4} width="250px"><br>
+                            <img src = ${p_T2_st_piechart_4} width="250px"><br>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;Padding-top: 20px;">
+                        <img src = ${p_xGTeam_chart_4} width="600px">
+                    </div>
+                    <div class="row" style="display: flex;Padding-top: 20px;">
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xGGame_chart_4} width="400px">
+                        </div>
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_xG_per_Game_chart_4} width="400px">
+                        </div>
+                    </div>
+                    <br>
+                    <img src="/static/symbol_transparent.png" width="40px" height="40px"><br>
+                    <hr width="70%" size="2" align="center" color="#002072" noshade>
+                    <div class="row" style="display: flex;Padding-top: 20px;">
+                        <div class="column" style="flex:50%;Padding-top: 20px;">
+                            <img src = ${p_T1_linestats_chart} width="500px">
+                        </div>
+                        <div class="column" style="flex:50%;Padding-top: 20px;">
+                            <img src = ${p_T2_linestats_chart} width="500px">
+                        </div>
+                    </div>
+                    <div class="row" style="display: flex;Padding-top: 20px;">
+                        <div class="column" style="flex:50%;Padding-top: 20px;">
+                            <img src = ${p_T1_plstats_chart} width="400px">
+                        </div>
+                        <div class="column" style="flex:50%;Padding-top: 20px;">
+                            <img src = ${p_T2_plstats_chart} width="400px">
                         </div>
                     </div>
                 </div>
@@ -4672,9 +4845,24 @@
             };
 
         var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_xGGame_chart = chart.getImageURI();
+        });
+
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart_per 'ready', function () {
+            if (periodN == 1) {p_xGGame_chart_1 = chart_per.getImageURI();}
+            else if (periodN == 2) {p_xGGame_chart_2 = chart_per.getImageURI();}
+            else if (periodN == 3) {p_xGGame_chart_3 = chart_per.getImageURI();}
+            else if (periodN == 4) {p_xGGame_chart_4 = chart_per.getImageURI();}
+        });
+
         chart_per.draw(chartData_p, options);
 
         //xG% GameChart
@@ -4724,9 +4912,24 @@
             };
 
         var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_xG_per_Game_chart = chart.getImageURI();
+        });
+
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart_per, 'ready', function () {
+            if (periodN == 1) {p_xG_per_Game_chart_1 = chart_per.getImageURI();}
+            else if (periodN == 2) {p_xG_per_Game_chart_2 = chart_per.getImageURI();}
+            else if (periodN == 3) {p_xG_per_Game_chart_3 = chart_per.getImageURI();}
+            else if (periodN == 4) {p_xG_per_Game_chart_4 = chart_per.getImageURI();}
+        });
+
         chart_per.draw(chartData_p, options);
 
         // Team 1 Player xG chart
@@ -4867,7 +5070,7 @@
             ['Pen. Kill', toc_g[4].innerHTML, Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0],
             ['6vs5', toc_g[5].innerHTML, Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0],
             ['5vs6', toc_g[6].innerHTML, Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent), 0, 0],
-            ['Team', toc_g[7].innerHTML, Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+            ['5vs5', toc_g[7].innerHTML, Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
             ]);
 
@@ -4892,7 +5095,7 @@
             ['Pen. Kill', toc_p[4].innerHTML, Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
             ['6vs5', toc_p[5].innerHTML, Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
             ['5vs6', toc_p[6].innerHTML, Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0],
-            ['Team', toc_p[7].innerHTML, Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
+            ['5vs5', toc_p[7].innerHTML, Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
             ]);
 
@@ -4935,7 +5138,7 @@
             ['Pen. Kill', tocT2_g[4].innerHTML, Number(xfT2_g[5].textContent), Number(xaT2_g[5]. textContent), Number(gfT2_g[5].textContent), Number(gaT2_g[5]. textContent), Number(sfT2_g[5].textContent), Number(saT2_g[5].textContent), Number(pT2_g[5].textContent), 0, 0],
             ['6vs5', tocT2_g[5].innerHTML, Number(xfT2_g[4].textContent), Number(xaT2_g[4]. textContent), Number(gfT2_g[4].textContent), Number(gaT2_g[4].textContent), Number(sfT2_g[4].textContent), Number(saT2_g[4].textContent), Number(pT2_g[4].textContent), 0, 0],
             ['5vs6', tocT2_g[6].innerHTML, Number(xfT2_g[6].textContent), Number(xaT2_g[6]. textContent), Number(gfT2_g[6].textContent), Number(gaT2_g[6].textContent), Number(sfT2_g[6].textContent), Number(saT2_g[6].textContent), Number(pT2_g[6].textContent), 0, 0],
-            ['Team', tocT2_g[7].innerHTML, Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+            ['5vs5', tocT2_g[7].innerHTML, Number(xfT2_g[7].textContent), Number(xaT2_g[7]. textContent), Number(gfT2_g[7].textContent), Number(gaT2_g[7].textContent), Number(sfT2_g[7].textContent), Number(saT2_g[7].textContent), Number(pT2_g[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
 
             ]);
 
@@ -4960,7 +5163,7 @@
             ['Pen. Kill', tocT2_p[4].innerHTML, Number(xfT2_p[5].textContent), Number(xaT2_p[5]. textContent), Number(gfT2_p[5].textContent), Number(gaT2_p[5]. textContent), Number(sfT2_p[5].textContent), Number(saT2_p[5].textContent), Number(pT2_p[5].textContent), 0, 0],
             ['6vs5', tocT2_p[5].innerHTML, Number(xfT2_p[4].textContent), Number(xaT2_p[4]. textContent), Number(gfT2_p[4].textContent), Number(gaT2_p[4].textContent), Number(sfT2_p[4].textContent), Number(saT2_p[4].textContent), Number(pT2_p[4].textContent), 0, 0],
             ['5vs6', tocT2_p[6].innerHTML, Number(xfT2_p[6].textContent), Number(xaT2_p[6]. textContent), Number(gfT2_p[6].textContent), Number(gaT2_p[6].textContent), Number(sfT2_p[6].textContent), Number(saT2_p[6].textContent), Number(pT2_p[6].textContent), 0, 0],
-            ['Team', tocT2_p[7].innerHTML, Number(xfT2_p[7].textContent), Number(xaT2_p[7]. textContent), Number(gfT2_p[7].textContent), Number(gaT2_p[7].textContent), Number(sfT2_p[7].textContent), Number(saT2_p[7].textContent), Number(pT2_p[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
+            ['5vs5', tocT2_p[7].innerHTML, Number(xfT2_p[7].textContent), Number(xaT2_p[7]. textContent), Number(gfT2_p[7].textContent), Number(gaT2_p[7].textContent), Number(sfT2_p[7].textContent), Number(saT2_p[7].textContent), Number(pT2_p[7].textContent), stxGT2Teamg_array[0] + stxGT2Teamg_array[1], stxGT2Teamg_array[2] + stxGT2Teamg_array[3] + stxGT2Teamg_array[4]]
 
             ]);
 
@@ -5008,9 +5211,24 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_T1_st_piechart = chart.getImageURI();
+        });
+
         chart.draw(data, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart_per, 'ready', function () {
+            if (periodN == 1) {p_T1_st_piechart_1 = chart_per.getImageURI();}
+            else if (periodN == 2) {p_T1_st_piechart_2 = chart_per.getImageURI();}
+            else if (periodN == 3) {p_T1_st_piechart_3 = chart_per.getImageURI();}
+            else if (periodN == 4) {p_T1_st_piechart_4 = chart_per.getImageURI();}
+        });
+
         chart_per.draw(data_p, options2);
 
         // Pie Chart, xG per type Team 2
@@ -5042,9 +5260,24 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_T2_st_piechart = chart.getImageURI();
+        });
+
         chart.draw(data2, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart_per, 'ready', function () {
+            if (periodN == 1) {p_T2_st_piechart_1 = chart_per.getImageURI();}
+            else if (periodN == 2) {p_T2_st_piechart_2 = chart_per.getImageURI();}
+            else if (periodN == 3) {p_T2_st_piechart_3 = chart_per.getImageURI();}
+            else if (periodN == 4) {p_T2_st_piechart_4 = chart_per.getImageURI();}
+        });
+
         chart_per.draw(data2_p, options2);
 
         // Team xG Chart
@@ -5061,6 +5294,12 @@
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart, 'ready', function () {
+            p_xGTeam_chart = chart.getImageURI();
+        });
+
         chart.draw(data, options);
 
         // Line 1 xG Chart
@@ -5160,9 +5399,24 @@
             };
 
         var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart2, 'ready', function () {
+            p_T1_typechart = chart2.getImageURI();
+        });
+
         chart2.draw(chartDataX, options);
 
         var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chart2_per, 'ready', function () {
+            if (periodN == 1) {p_T1_typechart_1 = chart2_per.getImageURI();}
+            else if (periodN == 2) {p_T1_typechart_2 = chart2_per.getImageURI();}
+            else if (periodN == 3) {p_T1_typechart_3 = chart2_per.getImageURI();}
+            else if (periodN == 4) {p_T1_typechart_4 = chart2_per.getImageURI();}
+        });
+
         chart2_per.draw(chartDataX_p, options);
 
         // Team 2 typechart
@@ -5192,9 +5446,24 @@
             };
 
         var chartX = new google.visualization.ColumnChart(document.getElementById('T2_typechart'));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chartX, 'ready', function () {
+            p_T2_typechart = chartX.getImageURI();
+        });
+
         chartX.draw(chartDataY, options);
 
         var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
+
+        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        google.visualization.events.addListener(chartX_per, 'ready', function () {
+            if (periodN == 1) {p_T2_typechart_1 = chartX_per.getImageURI();}
+            else if (periodN == 2) {p_T2_typechart_2 = chartX_per.getImageURI();}
+            else if (periodN == 3) {p_T2_typechart_3 = chartX_per.getImageURI();}
+            else if (periodN == 4) {p_T2_typechart_4 = chartX_per.getImageURI();}
+        });
+
         chartX_per.draw(chartDataY_p, options);
 
     }
