@@ -4076,10 +4076,22 @@
         // Create a new window for printing
         const printWindow = window.open('', '', 'width=900px,height=600px');
 
-        p_T1_linestats_chart = document.getElementById('T1linestats_1').innerHTML;
-        p_T1_plstats_chart = document.getElementById('T1plstats_1').outerHTML;
-        p_T2_linestats_chart = document.getElementById('T2linestats_1').outerHTML;
-        p_T2_plstats_chart = document.getElementById('T2plstats_1').outerHTML;
+        const temp = document.getElementById('T1linestats_1');
+		html2canvas(temp).then((canvas) => {
+			p_T1_linestats_chart = canvas.toDataURL('image/png');
+        }
+        const temp = document.getElementById('T2linestats_1');
+		html2canvas(temp).then((canvas) => {
+			p_T2_linestats_chart = canvas.toDataURL('image/png');
+        }
+        const temp = document.getElementById('T1plstats_1');
+		html2canvas(temp).then((canvas) => {
+			p_T1_plstats_chart = canvas.toDataURL('image/png');
+        }
+        const temp = document.getElementById('T2plstats_1');
+		html2canvas(temp).then((canvas) => {
+			p_T2_plstats_chart = canvas.toDataURL('image/png');
+        }
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
@@ -4124,13 +4136,13 @@
                         </div>
                     </div>
                     <div class="row" style="display: flex;Padding-top: 20px;">
-                        <div class="column" style="flex:50%;font-size: 8px;">
-                            ${p_T1_linestats_chart}<br>
-                            ${p_T1_plstats_chart}
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_T1_linestats_chart} width="400px"><br>
+                            <img src = ${p_T1_plstats_chart} width="400px"><br>
                         </div>
-                        <div class="column" style="flex:50%;font-size: 8px;">
-                            ${p_T2_linestats_chart}<br>
-                            ${p_T2_plstats_chart}
+                        <div class="column" style="flex:50%;">
+                            <img src = ${p_T2_linestats_chart} width="400px"><br>
+                            <img src = ${p_T2_plstats_chart} width="400px"><br>
                         </div>
                     </div>
                     <br>
