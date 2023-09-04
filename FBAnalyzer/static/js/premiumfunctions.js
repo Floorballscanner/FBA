@@ -4186,7 +4186,7 @@
 
                     <!--Period 2 statistics-->
 
-                    <h4 style="Padding-top: 10px;">Period 1 statistics</h4>
+                    <h4 style="Padding-top: 10px;">Period 2 statistics</h4>
                     <div class="row" style="display: flex;">
                         <div class="column" style="flex:33%;">
                             <h5>Period 2 shotmap</h5>
