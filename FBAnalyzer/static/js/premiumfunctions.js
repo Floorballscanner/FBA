@@ -4124,17 +4124,13 @@
                         </div>
                     </div>
                     <div class="row" style="display: flex;Padding-top: 20px;">
-                        <div class="column" style="flex:50%;">
-                            <div style='width=400px;Padding-top: 20px;font-size: 8px;'>
-                                ${p_T1_linestats_chart}<br>
-                                ${p_T1_plstats_chart}
-                            </div>
+                        <div class="column" style="flex:50%;font-size: 8px;">
+                            ${p_T1_linestats_chart}<br>
+                            ${p_T1_plstats_chart}
                         </div>
-                        <div class="column" style="flex:50%;">
-                            <div style='width=400px;Padding-top: 20px;font-size: 8px;'>
-                                ${p_T2_linestats_chart}<br>
-                                ${p_T2_plstats_chart}
-                            </div>
+                        <div class="column" style="flex:50%;font-size: 8px;">
+                            ${p_T2_linestats_chart}<br>
+                            ${p_T2_plstats_chart}
                         </div>
                     </div>
                     <br>
