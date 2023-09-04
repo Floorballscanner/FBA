@@ -4090,69 +4090,71 @@
 			        p_T1_plstats_chart = canvas3.toDataURL('image/jpeg');
 			        html2canvas(temp4).then(canvas4 => {
 			            p_T2_plstats_chart = canvas4.toDataURL('image/jpeg');
+			            printW();
                     });
                 });
             });
         });
 
-        // Add the content to be printed to the new window
-        printWindow.document.write(`
-            <html>
-            <head>
-                <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
-            </head>
-            <body>
-                <div class="container" style="Padding-top: 20px;text-align: center;">
-                    <img src="/static/symbol_transparent.png" width="40px" height="40px"><br>
-                    <h5>${document.getElementById("select-date").value}</h5>
-                    <hr width="70%" size="2" align="center" color="#002072" noshade>
-                    <h3>${name_t1} - ${name_t2}</h3>
-                    <h3 style="Padding-top: 10px;">${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
-                    <h4 style="Padding-top: 5px;">xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
-                    <h4 style="Padding-top: 5px;">xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
-                    <hr width="70%" size="2" align="center" color="#002072" noshade>
-                    <h4 style="Padding-top: 10px;">Game statistics</h4>
-                    <div class="row" style="display: flex;">
-                        <div class="column" style="flex:33%;">
-                            <h5>Game shotmap</h5>
-                            <img src = ${data_object.cnvs_5_url} width="200px"><br>
+        function printW() {// Add the content to be printed to the new window
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>${document.getElementById("select-date").value} | ${name_t1} - ${name_t2}</title>
+                </head>
+                <body>
+                    <div class="container" style="Padding-top: 20px;text-align: center;">
+                        <img src="/static/symbol_transparent.png" width="40px" height="40px"><br>
+                        <h5>${document.getElementById("select-date").value}</h5>
+                        <hr width="70%" size="2" align="center" color="#002072" noshade>
+                        <h3>${name_t1} - ${name_t2}</h3>
+                        <h3 style="Padding-top: 10px;">${tgt_1.innerHTML} - ${tgt_2.innerHTML}</h3>
+                        <h4 style="Padding-top: 5px;">xG ${txG_1.innerHTML} - ${txG_2.innerHTML}</h5>
+                        <h4 style="Padding-top: 5px;">xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
+                        <hr width="70%" size="2" align="center" color="#002072" noshade>
+                        <h4 style="Padding-top: 10px;">Game statistics</h4>
+                        <div class="row" style="display: flex;">
+                            <div class="column" style="flex:33%;">
+                                <h5>Game shotmap</h5>
+                                <img src = ${data_object.cnvs_5_url} width="200px"><br>
+                            </div>
+                            <div class="column" style="flex:33%;">
+                                <img src = ${p_T1_typechart} width="250px"><br>
+                                <img src = ${p_T1_st_piechart} width="250px"><br>
+                            </div>
+                            <div class="column" style="flex:33%;">
+                                <img src = ${p_T2_typechart} width="250px"><br>
+                                <img src = ${p_T2_st_piechart} width="250px"><br>
+                            </div>
                         </div>
-                        <div class="column" style="flex:33%;">
-                            <img src = ${p_T1_typechart} width="250px"><br>
-                            <img src = ${p_T1_st_piechart} width="250px"><br>
+                        <div class="row" style="text-align: center;Padding-top: 20px;">
+                            <img src = ${p_xGTeam_chart} width="600px">
                         </div>
-                        <div class="column" style="flex:33%;">
-                            <img src = ${p_T2_typechart} width="250px"><br>
-                            <img src = ${p_T2_st_piechart} width="250px"><br>
+                        <div class="row" style="display: flex;Padding-top: 20px;">
+                            <div class="column" style="flex:50%;">
+                                <img src = ${p_xGGame_chart} width="400px">
+                            </div>
+                            <div class="column" style="flex:50%;">
+                                <img src = ${p_xG_per_Game_chart} width="400px">
+                            </div>
                         </div>
+                        <div class="row" style="display: flex;Padding-top: 20px;">
+                            <div class="column" style="flex:50%;">
+                                <img src = ${p_T1_linestats_chart} width="400px"><br>
+                                <img src = ${p_T1_plstats_chart} width="400px"><br>
+                            </div>
+                            <div class="column" style="flex:50%;">
+                                <img src = ${p_T2_linestats_chart} width="400px"><br>
+                                <img src = ${p_T2_plstats_chart} width="400px"><br>
+                            </div>
+                        </div>
+                        <br>
+                        <hr width="70%" size="2" align="center" color="#002072" noshade>
                     </div>
-                    <div class="row" style="text-align: center;Padding-top: 20px;">
-                        <img src = ${p_xGTeam_chart} width="600px">
-                    </div>
-                    <div class="row" style="display: flex;Padding-top: 20px;">
-                        <div class="column" style="flex:50%;">
-                            <img src = ${p_xGGame_chart} width="400px">
-                        </div>
-                        <div class="column" style="flex:50%;">
-                            <img src = ${p_xG_per_Game_chart} width="400px">
-                        </div>
-                    </div>
-                    <div class="row" style="display: flex;Padding-top: 20px;">
-                        <div class="column" style="flex:50%;">
-                            <img src = ${p_T1_linestats_chart} width="400px"><br>
-                            <img src = ${p_T1_plstats_chart} width="400px"><br>
-                        </div>
-                        <div class="column" style="flex:50%;">
-                            <img src = ${p_T2_linestats_chart} width="400px"><br>
-                            <img src = ${p_T2_plstats_chart} width="400px"><br>
-                        </div>
-                    </div>
-                    <br>
-                    <hr width="70%" size="2" align="center" color="#002072" noshade>
-                </div>
-            </body>
-            </html>
-        `);
+                </body>
+                </html>
+            `);
+        }
 
         /*// Close the document after printing
         printWindow.document.close();
