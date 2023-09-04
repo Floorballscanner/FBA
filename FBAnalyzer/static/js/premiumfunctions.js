@@ -4856,7 +4856,7 @@
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per 'ready', function () {
+        google.visualization.events.addListener(chart_per, 'ready', function () {
             if (periodN == 1) {p_xGGame_chart_1 = chart_per.getImageURI();}
             else if (periodN == 2) {p_xGGame_chart_2 = chart_per.getImageURI();}
             else if (periodN == 3) {p_xGGame_chart_3 = chart_per.getImageURI();}
