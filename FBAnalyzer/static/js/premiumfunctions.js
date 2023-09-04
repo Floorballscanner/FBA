@@ -2369,7 +2369,7 @@
             }
         }
 
-        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2 lower side
+        if (Order == 2 && Ball_pos == 2) { // Team 2 shot, Team 2.1 lower side
 
             if (dy < 0.5) { // Ball on the attack zone
                 var dxG = xG_matrix[Math.floor(dy*2*14)][Math.floor(dx*13)] / 100;
@@ -5067,7 +5067,7 @@
         var data = google.visualization.arrayToDataTable(xGL1_array);
 
         var options = {
-          title: 'xG by Line 1',
+          title: 'xGf by Line 1',
           curveType: 'function',
           legend: { position: 'bottom' },
           seriesType: 'lines',
