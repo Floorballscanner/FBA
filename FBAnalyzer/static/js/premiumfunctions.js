@@ -4074,9 +4074,26 @@
     }
     function printPdf() {
 
-
         // Create a new window for printing
         const printWindow = window.open('', '', 'width=900px,height=600px');
+
+        temp1 = document.getElementById('T1linestats_1');
+        temp2 = document.getElementById('T2linestats_1');
+        temp3 = document.getElementById('T1plstats_1');
+        temp4 = document.getElementById('T2plstats_1');
+
+		html2canvas(temp1).then(canvas1 => {
+			p_T1_linestats_chart = canvas1.toDataURL('image/jpeg');
+			html2canvas(temp2).then(canvas2 => {
+			    p_T2_linestats_chart = canvas2.toDataURL('image/jpeg');
+			    html2canvas(temp3).then(canvas3 => {
+			        p_T1_plstats_chart = canvas3.toDataURL('image/jpeg');
+			        html2canvas(temp4).then(canvas4 => {
+			            p_T2_plstats_chart = canvas4.toDataURL('image/jpeg');
+                    });
+                });
+            });
+        });
 
         // Add the content to be printed to the new window
         printWindow.document.write(`
@@ -5274,23 +5291,6 @@
 
         var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
         chartX_per.draw(chartDataY_p, options);
-
-        temp = document.getElementById('T1linestats_1');
-		html2canvas(temp).then(canvas => {
-			p_T1_linestats_chart = canvas.toDataURL('image/jpeg');
-        });
-        temp = document.getElementById('T2linestats_1');
-		html2canvas(temp).then(canvas => {
-			p_T2_linestats_chart = canvas.toDataURL('image/jpeg');
-        });
-        temp = document.getElementById('T1plstats_1');
-		html2canvas(temp).then(canvas => {
-			p_T1_plstats_chart = canvas.toDataURL('image/jpeg');
-        });
-        temp = document.getElementById('T2plstats_1');
-		html2canvas(temp).then(canvas => {
-			p_T2_plstats_chart = canvas.toDataURL('image/jpeg');
-        });
 
     }
 
