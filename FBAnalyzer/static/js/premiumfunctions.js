@@ -4857,10 +4857,10 @@
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
-            if periodN == 1 {p_xGGame_chart_1 = chart.getImageURI();}
-            else if periodN == 2 {p_xGGame_chart_2 = chart.getImageURI();}
-            else if periodN == 3 {p_xGGame_chart_3 = chart.getImageURI();}
-            else if periodN == 4 {p_xGGame_chart_4 = chart.getImageURI();}
+            if (periodN == 1) {p_xGGame_chart_1 = chart.getImageURI();}
+            else if (periodN == 2) {p_xGGame_chart_2 = chart.getImageURI();}
+            else if (periodN == 3) {p_xGGame_chart_3 = chart.getImageURI();}
+            else if (periodN == 4) {p_xGGame_chart_4 = chart.getImageURI();}
         });
 
         chart_per.draw(chartData_p, options);
@@ -4924,10 +4924,10 @@
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
-            if periodN == 1 {p_xG_per_Game_chart_1 = chart.getImageURI();}
-            else if periodN == 2 {p_xG_per_Game_chart_2 = chart.getImageURI();}
-            else if periodN == 3 {p_xG_per_Game_chart_3 = chart.getImageURI();}
-            else if periodN == 4 {p_xG_per_Game_chart_4 = chart.getImageURI();}
+            if (periodN == 1) {p_xG_per_Game_chart_1 = chart.getImageURI();}
+            else if (periodN == 2) {p_xG_per_Game_chart_2 = chart.getImageURI();}
+            else if (periodN == 3) {p_xG_per_Game_chart_3 = chart.getImageURI();}
+            else if (periodN == 4) {p_xG_per_Game_chart_4 = chart.getImageURI();}
         });
 
         chart_per.draw(chartData_p, options);
@@ -5223,10 +5223,10 @@
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
-            if periodN == 1 {p_T1_st_piechart_1 = chart.getImageURI();}
-            else if periodN == 2 {p_T1_st_piechart_2 = chart.getImageURI();}
-            else if periodN == 3 {p_T1_st_piechart_3 = chart.getImageURI();}
-            else if periodN == 4 {p_T1_st_piechart_4 = chart.getImageURI();}
+            if (periodN == 1) {p_T1_st_piechart_1 = chart.getImageURI();}
+            else if (periodN == 2) {p_T1_st_piechart_2 = chart.getImageURI();}
+            else if (periodN == 3) {p_T1_st_piechart_3 = chart.getImageURI();}
+            else if (periodN == 4) {p_T1_st_piechart_4 = chart.getImageURI();}
         });
 
         chart_per.draw(data_p, options2);
@@ -5272,10 +5272,10 @@
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
-            if periodN == 1 {p_T2_st_piechart_1 = chart_per.getImageURI();}
-            else if periodN == 2 {p_T2_st_piechart_2 = chart_per.getImageURI();}
-            else if periodN == 3 {p_T2_st_piechart_3 = chart_per.getImageURI();}
-            else if periodN == 4 {p_T2_st_piechart_4 = chart_per.getImageURI();}
+            if (periodN == 1) {p_T2_st_piechart_1 = chart_per.getImageURI();}
+            else if (periodN == 2) {p_T2_st_piechart_2 = chart_per.getImageURI();}
+            else if (periodN == 3) {p_T2_st_piechart_3 = chart_per.getImageURI();}
+            else if (periodN == 4) {p_T2_st_piechart_4 = chart_per.getImageURI();}
         });
 
         chart_per.draw(data2_p, options2);
@@ -5411,10 +5411,10 @@
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
-            if periodN == 1 {p_T1_typechart_1 = chart2_per.getImageURI();}
-            else if periodN == 2 {p_T1_typechart_2 = chart2_per.getImageURI();}
-            else if periodN == 3 {p_T1_typechart_3 = chart2_per.getImageURI();}
-            else if periodN == 4 {p_T1_typechart_4 = chart2_per.getImageURI();}
+            if (periodN == 1) {p_T1_typechart_1 = chart2_per.getImageURI();}
+            else if (periodN == 2) {p_T1_typechart_2 = chart2_per.getImageURI();}
+            else if (periodN == 3) {p_T1_typechart_3 = chart2_per.getImageURI();}
+            else if (periodN == 4) {p_T1_typechart_4 = chart2_per.getImageURI();}
         });
 
         chart2_per.draw(chartDataX_p, options);
@@ -5458,10 +5458,10 @@
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
-            if periodN == 1 {p_T2_typechart_1 = chartX_per.getImageURI();}
-            else if periodN == 2 {p_T2_typechart_2 = chartX_per.getImageURI();}
-            else if periodN == 3 {p_T2_typechart_3 = chartX_per.getImageURI();}
-            else if periodN == 4 {p_T2_typechart_4 = chartX_per.getImageURI();}
+            if (periodN == 1) {p_T2_typechart_1 = chartX_per.getImageURI();}
+            else if (periodN == 2) {p_T2_typechart_2 = chartX_per.getImageURI();}
+            else if (periodN == 3) {p_T2_typechart_3 = chartX_per.getImageURI();}
+            else if (periodN == 4) {p_T2_typechart_4 = chartX_per.getImageURI();}
         });
 
         chartX_per.draw(chartDataY_p, options);
