@@ -4122,7 +4122,7 @@
                     <h4 style="Padding-top: 5px;">xGOT ${txGOT_1.innerHTML} - ${txGOT_2.innerHTML}</h5>
                     <hr width="70%" size="2" align="center" color="#002072" noshade>
 
-                    // Game statistics
+                    <!--Game statistics-->
 
                     <h4 style="Padding-top: 10px;">Game statistics</h4>
                     <div class="row" style="display: flex;">
@@ -4153,7 +4153,7 @@
                     <br>
                     <hr width="70%" size="2" align="center" color="#002072" noshade>
 
-                    // Period 1 Statistics
+                    <!--Period 1 statistics-->
 
                     <h4 style="Padding-top: 10px;">Period 1 statistics</h4>
                     <div class="row" style="display: flex;">
@@ -4184,7 +4184,7 @@
                     <br>
                     <hr width="70%" size="2" align="center" color="#002072" noshade>
 
-                    // Period 2 Statistics
+                    <!--Period 2 statistics-->
 
                     <h4 style="Padding-top: 10px;">Period 1 statistics</h4>
                     <div class="row" style="display: flex;">
@@ -4215,7 +4215,7 @@
                     <br>
                     <hr width="70%" size="2" align="center" color="#002072" noshade>
 
-                    // Period 3 Statistics
+                    <!--Period 3 statistics-->
 
                     <h4 style="Padding-top: 10px;">Period 3 statistics</h4>
                     <div class="row" style="display: flex;">
@@ -4246,7 +4246,7 @@
                     <br>
                     <hr width="70%" size="2" align="center" color="#002072" noshade>
 
-                    // Period 4 Statistics
+                    <!--Overtime statistics-->
 
                     <h4 style="Padding-top: 10px;">Overtime statistics</h4>
                     <div class="row" style="display: flex;">
@@ -4856,11 +4856,11 @@
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            if (periodN == 1) {p_xGGame_chart_1 = chart.getImageURI();}
-            else if (periodN == 2) {p_xGGame_chart_2 = chart.getImageURI();}
-            else if (periodN == 3) {p_xGGame_chart_3 = chart.getImageURI();}
-            else if (periodN == 4) {p_xGGame_chart_4 = chart.getImageURI();}
+        google.visualization.events.addListener(chart_per 'ready', function () {
+            if (periodN == 1) {p_xGGame_chart_1 = chart_per.getImageURI();}
+            else if (periodN == 2) {p_xGGame_chart_2 = chart_per.getImageURI();}
+            else if (periodN == 3) {p_xGGame_chart_3 = chart_per.getImageURI();}
+            else if (periodN == 4) {p_xGGame_chart_4 = chart_per.getImageURI();}
         });
 
         chart_per.draw(chartData_p, options);
@@ -4923,11 +4923,11 @@
         var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            if (periodN == 1) {p_xG_per_Game_chart_1 = chart.getImageURI();}
-            else if (periodN == 2) {p_xG_per_Game_chart_2 = chart.getImageURI();}
-            else if (periodN == 3) {p_xG_per_Game_chart_3 = chart.getImageURI();}
-            else if (periodN == 4) {p_xG_per_Game_chart_4 = chart.getImageURI();}
+        google.visualization.events.addListener(chart_per, 'ready', function () {
+            if (periodN == 1) {p_xG_per_Game_chart_1 = chart_per.getImageURI();}
+            else if (periodN == 2) {p_xG_per_Game_chart_2 = chart_per.getImageURI();}
+            else if (periodN == 3) {p_xG_per_Game_chart_3 = chart_per.getImageURI();}
+            else if (periodN == 4) {p_xG_per_Game_chart_4 = chart_per.getImageURI();}
         });
 
         chart_per.draw(chartData_p, options);
@@ -5222,11 +5222,11 @@
         var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            if (periodN == 1) {p_T1_st_piechart_1 = chart.getImageURI();}
-            else if (periodN == 2) {p_T1_st_piechart_2 = chart.getImageURI();}
-            else if (periodN == 3) {p_T1_st_piechart_3 = chart.getImageURI();}
-            else if (periodN == 4) {p_T1_st_piechart_4 = chart.getImageURI();}
+        google.visualization.events.addListener(chart_per, 'ready', function () {
+            if (periodN == 1) {p_T1_st_piechart_1 = chart_per.getImageURI();}
+            else if (periodN == 2) {p_T1_st_piechart_2 = chart_per.getImageURI();}
+            else if (periodN == 3) {p_T1_st_piechart_3 = chart_per.getImageURI();}
+            else if (periodN == 4) {p_T1_st_piechart_4 = chart_per.getImageURI();}
         });
 
         chart_per.draw(data_p, options2);
@@ -5271,7 +5271,7 @@
         var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
+        google.visualization.events.addListener(chart_per, 'ready', function () {
             if (periodN == 1) {p_T2_st_piechart_1 = chart_per.getImageURI();}
             else if (periodN == 2) {p_T2_st_piechart_2 = chart_per.getImageURI();}
             else if (periodN == 3) {p_T2_st_piechart_3 = chart_per.getImageURI();}
@@ -5410,7 +5410,7 @@
         var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
+        google.visualization.events.addListener(chart2_per, 'ready', function () {
             if (periodN == 1) {p_T1_typechart_1 = chart2_per.getImageURI();}
             else if (periodN == 2) {p_T1_typechart_2 = chart2_per.getImageURI();}
             else if (periodN == 3) {p_T1_typechart_3 = chart2_per.getImageURI();}
@@ -5457,7 +5457,7 @@
         var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
 
         // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
+        google.visualization.events.addListener(chartX_per, 'ready', function () {
             if (periodN == 1) {p_T2_typechart_1 = chartX_per.getImageURI();}
             else if (periodN == 2) {p_T2_typechart_2 = chartX_per.getImageURI();}
             else if (periodN == 3) {p_T2_typechart_3 = chartX_per.getImageURI();}
