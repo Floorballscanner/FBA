@@ -4148,13 +4148,13 @@
                         </div>
                     </div>
                     <div class="row" style="display: flex;Padding-top: 20px;">
-                        <div class="column" style="flex:50%;">
-                            <img src = ${p_T1_linestats_chart} style="Padding-top: 20px;" width="500px">
-                            <img src = ${p_T1_plstats_chart} style="Padding-top: 20px;" width="400px"><br>
+                        <div class="column" style="flex:50%;Padding-top: 20px;">
+                            <img src = ${p_T1_linestats_chart} width="500px">
+                            <img src = ${p_T1_plstats_chart} width="400px"><br>
                         </div>
-                        <div class="column" style="flex:50%;">
-                            <img src = ${p_T2_linestats_chart} style="Padding-top: 20px;" width="500px">
-                            <img src = ${p_T2_plstats_chart} style="Padding-top: 20px;" width="400px"><br>
+                        <div class="column" style="flex:50%;Padding-top: 20px;">
+                            <img src = ${p_T2_linestats_chart} width="500px">
+                            <img src = ${p_T2_plstats_chart} width="400px"><br>
                         </div>
                     </div>
                     <br>
