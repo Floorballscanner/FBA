@@ -4846,22 +4846,22 @@
 
         var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+        /*// Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
             p_xGGame_chart = chart.getImageURI();
-        });
+        });*/
 
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart_per, 'ready', function () {
             if (periodN == 1) {p_xGGame_chart_1 = chart_per.getImageURI();}
             else if (periodN == 2) {p_xGGame_chart_2 = chart_per.getImageURI();}
             else if (periodN == 3) {p_xGGame_chart_3 = chart_per.getImageURI();}
             else if (periodN == 4) {p_xGGame_chart_4 = chart_per.getImageURI();}
-        });
+        });*/
 
         chart_per.draw(chartData_p, options);
 
@@ -4913,22 +4913,22 @@
 
         var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
             p_xG_per_Game_chart = chart.getImageURI();
-        });
+        });*/
 
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart_per, 'ready', function () {
             if (periodN == 1) {p_xG_per_Game_chart_1 = chart_per.getImageURI();}
             else if (periodN == 2) {p_xG_per_Game_chart_2 = chart_per.getImageURI();}
             else if (periodN == 3) {p_xG_per_Game_chart_3 = chart_per.getImageURI();}
             else if (periodN == 4) {p_xG_per_Game_chart_4 = chart_per.getImageURI();}
-        });
+        });*/
 
         chart_per.draw(chartData_p, options);
 
@@ -5212,22 +5212,22 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
             p_T1_st_piechart = chart.getImageURI();
-        });
+        });*/
 
         chart.draw(data, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart_per, 'ready', function () {
             if (periodN == 1) {p_T1_st_piechart_1 = chart_per.getImageURI();}
             else if (periodN == 2) {p_T1_st_piechart_2 = chart_per.getImageURI();}
             else if (periodN == 3) {p_T1_st_piechart_3 = chart_per.getImageURI();}
             else if (periodN == 4) {p_T1_st_piechart_4 = chart_per.getImageURI();}
-        });
+        });*/
 
         chart_per.draw(data_p, options2);
 
@@ -5261,22 +5261,22 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
             p_T2_st_piechart = chart.getImageURI();
-        });
+        });*/
 
         chart.draw(data2, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart_per, 'ready', function () {
             if (periodN == 1) {p_T2_st_piechart_1 = chart_per.getImageURI();}
             else if (periodN == 2) {p_T2_st_piechart_2 = chart_per.getImageURI();}
             else if (periodN == 3) {p_T2_st_piechart_3 = chart_per.getImageURI();}
             else if (periodN == 4) {p_T2_st_piechart_4 = chart_per.getImageURI();}
-        });
+        });*/
 
         chart_per.draw(data2_p, options2);
 
@@ -5295,10 +5295,10 @@
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart, 'ready', function () {
             p_xGTeam_chart = chart.getImageURI();
-        });
+        });*/
 
         chart.draw(data, options);
 
@@ -5400,22 +5400,22 @@
 
         var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart2, 'ready', function () {
             p_T1_typechart = chart2.getImageURI();
-        });
+        });*/
 
         chart2.draw(chartDataX, options);
 
         var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart2_per, 'ready', function () {
             if (periodN == 1) {p_T1_typechart_1 = chart2_per.getImageURI();}
             else if (periodN == 2) {p_T1_typechart_2 = chart2_per.getImageURI();}
             else if (periodN == 3) {p_T1_typechart_3 = chart2_per.getImageURI();}
             else if (periodN == 4) {p_T1_typechart_4 = chart2_per.getImageURI();}
-        });
+        });*/
 
         chart2_per.draw(chartDataX_p, options);
 
@@ -5447,22 +5447,22 @@
 
         var chartX = new google.visualization.ColumnChart(document.getElementById('T2_typechart'));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chartX, 'ready', function () {
             p_T2_typechart = chartX.getImageURI();
-        });
+        });*/
 
         chartX.draw(chartDataY, options);
 
         var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
 
-        // Wait for the chart to finish drawing before calling the getImageURI() method.
+/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chartX_per, 'ready', function () {
             if (periodN == 1) {p_T2_typechart_1 = chartX_per.getImageURI();}
             else if (periodN == 2) {p_T2_typechart_2 = chartX_per.getImageURI();}
             else if (periodN == 3) {p_T2_typechart_3 = chartX_per.getImageURI();}
             else if (periodN == 4) {p_T2_typechart_4 = chartX_per.getImageURI();}
-        });
+        });*/
 
         chartX_per.draw(chartDataY_p, options);
 
