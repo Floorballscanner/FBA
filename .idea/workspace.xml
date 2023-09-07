@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7e42a3de-a598-469c-a790-34b4ae76e4ed" name="Changes" comment="8.8.2022 xG%-visualization">
+      <change beforePath="$PROJECT_DIR$/FBAnalyzer/accounts/templates/accounts/premiumgame.html" beforeDir="false" afterPath="$PROJECT_DIR$/FBAnalyzer/accounts/templates/accounts/premiumgame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBAnalyzer/static/js/premiumfunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/FBAnalyzer/static/js/premiumfunctions.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="14ce129708a67e2ea5621d187276cdecce51603c" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/FBAnalyzer/accounts/templates/accounts/newgame.html" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="27xq4wqYTwX94OgpXHEFj7vwbhf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7e42a3de-a598-469c-a790-34b4ae76e4ed" name="Changes" comment="" />
+      <created>1650271897270</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1650271897270</updated>
+    </task>
+    <task id="LOCAL−00001" summary="#">
+      <created>1650272160116</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1650272160116</updated>
+    </task>
+    <task id="LOCAL−00002" summary="#">
+      <created>1650272591079</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1650272591079</updated>
+    </task>
+    <task id="LOCAL−00003" summary="#onetimer xG:n kerroin 1.5 -&gt; 1.3">
+      <created>1650273793262</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1650273793262</updated>
+    </task>
+    <task id="LOCAL−00004" summary="#onetimer xG:n kerroin 1.5 -&gt; 1.3">
+      <created>1650273839371</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1650273839371</updated>
+    </task>
+    <task id="LOCAL−00005" summary="#onetimer xG:n kerroin 1.5 -&gt; 1.3">
+      <created>1650273933438</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1650273933438</updated>
+    </task>
+    <task id="LOCAL−00006" summary="Live maalit">
+      <created>1650285877805</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1650285877805</updated>
+    </task>
+    <task id="LOCAL−00007" summary="#Tulostaulu">
+      <created>1650287220277</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1650287220277</updated>
+    </task>
+    <task id="LOCAL−00008" summary="#Tulostaulu">
+      <created>1650287699908</created>
+      <option name="number" value="LOCAL−00008" />
+      <option name="presentableId" value="LOCAL−00008" />
+      <updated>1650287699908</updated>
+    </task>
+    <task id="LOCAL−00009" summary="asd">
+      <created>1650288202836</created>
+      <option name="number" value="LOCAL−00009" />
+      <option name="presentableId" value="LOCAL−00009" />
+      <updated>1650288202836</updated>
+    </task>
+    <task id="LOCAL−00010" summary="asd">
+      <created>1650288229058</created>
+      <option name="number" value="LOCAL−00010" />
+      <option name="presentableId" value="LOCAL−00010" />
+      <updated>1650288229058</updated>
+    </task>
+    <task id="LOCAL−00011" summary="tulostaulu">
+      <created>1650288439045</created>
+      <option name="number" value="LOCAL−00011" />
+      <option name="presentableId" value="LOCAL−00011" />
+      <updated>1650288439045</updated>
+    </task>
+    <task id="LOCAL−00012" summary="xG-matriisin symmetrisointi &amp; tarkistus">
+      <created>1650710476712</created>
+      <option name="number" value="LOCAL−00012" />
+      <option name="presentableId" value="LOCAL−00012" />
+      <updated>1650710476712</updated>
+    </task>
+    <task id="LOCAL−00013" summary="Added coefficients for direct shots &amp; changed coef. for rebounds">
+      <created>1650712045560</created>
+      <option name="number" value="LOCAL−00013" />
+      <option name="presentableId" value="LOCAL−00013" />
+      <updated>1650712045560</updated>
+    </task>
+    <task id="LOCAL−00014" summary="Added away goals to livedata">
+      <created>1657628873974</created>
+      <option name="number" value="LOCAL−00014" />
+      <option name="presentableId" value="LOCAL−00014" />
+      <updated>1657628873974</updated>
+    </task>
+    <task id="LOCAL−00015" summary="Live data repairs">
+      <created>1657630084925</created>
+      <option name="number" value="LOCAL−00015" />
+      <option name="presentableId" value="LOCAL−00015" />
+      <updated>1657630084925</updated>
+    </task>
+    <task id="LOCAL−00016" summary="team_models_repair">
+      <created>1657633274645</created>
+      <option name="number" value="LOCAL−00016" />
+      <option name="presentableId" value="LOCAL−00016" />
+      <updated>1657633274645</updated>
+    </task>
+    <task id="LOCAL−00017" summary="team_models_repair">
+      <created>1657637139319</created>
+      <option name="number" value="LOCAL−00017" />
+      <option name="presentableId" value="LOCAL−00017" />
+      <updated>1657637139319</updated>
+    </task>
+    <task id="LOCAL−00018" summary="team_models_repair">
+      <created>1657638505232</created>
+      <option name="number" value="LOCAL−00018" />
+      <option name="presentableId" value="LOCAL−00018" />
+      <updated>1657638505232</updated>
+    </task>
+    <task id="LOCAL−00019" summary="dog_shit">
+      <created>1657639984243</created>
+      <option name="number" value="LOCAL−00019" />
+      <option name="presentableId" value="LOCAL−00019" />
+      <updated>1657639984243</updated>
+    </task>
+    <task id="LOCAL−00020" summary="2.8.2022 Prem.game visualisations">
+      <created>1659443723593</created>
+      <option name="number" value="LOCAL−00020" />
+      <option name="presentableId" value="LOCAL−00020" />
+      <updated>1659443723594</updated>
+    </task>
+    <task id="LOCAL−00021" summary="2.8.2022 calc_perc_funktio">
+      <created>1659942046299</created>
+      <option name="number" value="LOCAL−00021" />
+      <option name="presentableId" value="LOCAL−00021" />
+      <updated>1659942046299</updated>
+    </task>
+    <task id="LOCAL−00022" summary="8.8.2022 calc_perc_funktio">
+      <created>1659942392972</created>
+      <option name="number" value="LOCAL−00022" />
+      <option name="presentableId" value="LOCAL−00022" />
+      <updated>1659942392972</updated>
+    </task>
+    <task id="LOCAL−00023" summary="8.8.2022 xG%-visualization">
+      <created>1659943175370</created>
+      <option name="number" value="LOCAL−00023" />
+      <option name="presentableId" value="LOCAL−00023" />
+      <updated>1659943175370</updated>
+    </task>
+    <task id="LOCAL−00024" summary="8.8.2022 xG%-visualization">
+      <created>1659943778095</created>
+      <option name="number" value="LOCAL−00024" />
+      <option name="presentableId" value="LOCAL−00024" />
+      <updated>1659943778095</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="#" />
+    <MESSAGE value="#onetimer xG:n kerroin 1.5 -&gt; 1.3" />
+    <MESSAGE value="Live maalit" />
+    <MESSAGE value="#Tulostaulu" />
+    <MESSAGE value="asd" />
+    <MESSAGE value="tulostaulu" />
+    <MESSAGE value="xG-matriisin symmetrisointi &amp; tarkistus" />
+    <MESSAGE value="Added coefficients for direct shots &amp; changed coef. for rebounds" />
+    <MESSAGE value="Added away goals to livedata" />
+    <MESSAGE value="Live data repairs" />
+    <MESSAGE value="team_models_repair" />
+    <MESSAGE value="dog_shit" />
+    <MESSAGE value="2.8.2022 Prem.game visualisations" />
+    <MESSAGE value="2.8.2022 calc_perc_funktio" />
+    <MESSAGE value="8.8.2022 calc_perc_funktio" />
+    <MESSAGE value="8.8.2022 xG%-visualization" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.8.2022 xG%-visualization" />
+  </component>
+</project>
