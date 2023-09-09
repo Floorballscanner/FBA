@@ -126,7 +126,7 @@ body {
 }
 .frontpage-choices ul li {
     display: flex;
-    font-size: 8px;
+    font-size: 10px;
 }
 .frontpage-choices h2{
     font-size: 35px;
