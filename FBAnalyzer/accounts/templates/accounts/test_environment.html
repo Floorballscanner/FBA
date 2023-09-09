@@ -1,0 +1,1147 @@
+<!--
+
+This is the New Game Analysis Premium - html - page content file. It contains all the functionality of game analysis.
+It extends app_layout.html with Django
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+{% load static %}
+{{ request.user.id|json_script:"user_id" }}
+
+<div class="container" style="Padding-top: 30px;">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="team-selection">
+                <h2>Date</h2>
+                <input id="select-date" type="date">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="team-selection">
+                <h2>Team 1</h2>
+                <select onchange="changeLevel('T1')" id="select-level-t1" class="form-control-sm custom-select">
+                    <option selected disabled>Select a level...</option>
+                    {% for level in levels %}
+                        <option value="{{level.id}}">{{level.name}}</option>
+                    {% endfor %}
+                </select>
+                <select disabled onchange="changeTeam1()" id="select-team-1" class="form-control-sm custom-select">
+                    <option selected disabled>Select a team...</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="team-selection">
+                <h2>Team 2</h2>
+                <select onchange="changeLevel('T2')" id="select-level-t2" class="form-control-sm custom-select">
+                    <option selected disabled>Select a level...</option>
+                    {% for level in levels %}
+                        <option value="{{level.id}}">{{level.name}}</option>
+                    {% endfor %}
+                </select>
+                <select disabled onchange="changeTeam2()" id="select-team-2" class="form-control-sm custom-select">
+                    <option selected disabled>Select a team...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="shot-map">
+                <p style="margin:0px;"><span id="name_t1_21">Team 1</span> attack</p>
+                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
+                <p><span id="name_t2_21">Team 2</span> attack</p>
+            </div>
+        </div>
+        <div class="col-sm-4" style="Padding-top: 10px;">
+            <div class="row justify-content-center" style="Padding-top: 10px;">
+                <div class="game-clock">
+                    <h4 id="periodNr">Period 1</h4>
+                    <h2 id="label">00:00:00</h2>
+                    <h4 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span> (<span id="totp_1">0</span> - <span id="totp_2">0</span>)</h4>
+                    <h5 id="gxG">xG <span id="totxG_1">0</span> - <span id="totxG_2">0</span> (<span id="totxGp_1">0</span> - <span id="totxGp_2">0</span>)</h5>
+                    <h5 id="gxGOT">xGOT <span id="totxGOT_1">0</span> - <span id="totxGOT_2">0</span> (<span id="totxGOTp_1">0</span> - <span id="totxGOTp_2">0</span>)</h5>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="Padding-top: 0px;">
+                <div class="button-input">
+                    <p><span id="name_t1_1">Team 1</span> line on court</p>
+                    <div class="line-btn btn-group" role="group" aria-label="Line buttons">
+                        <button id="L1" type="button" style="background-color: #3046FB" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
+                        <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
+                        <button id="L3" type="button" onclick="Line_change(3)" class="btn btn-secondary">Line 3</button>
+                    </div>
+                    <div class="line-btn btn-group-sm" role="group" aria-label="Line buttons">
+                        <button id="Pp1" type="button" onclick="Line_change(4)" class="btn btn-secondary">PP 1</button>
+                        <button id="Pp2" type="button" onclick="Line_change(5)" class="btn btn-secondary">6vs5</button>
+                        <button id="Sh1" type="button" onclick="Line_change(6)" class="btn btn-secondary">SH 1</button>
+                        <button id="Sh2" type="button" onclick="Line_change(7)" class="btn btn-secondary">5vs6</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="Padding-top: 0px;">
+                <div class="button-input-2">
+                    <p><span id="name_t2_1">Team 2</span> line on court</p>
+                    <div class="line-btn-2 btn-group" role="group" aria-label="Line buttons Team 2">
+                        <button id="L1T2" type="button" style="background-color: #3046FB" onclick="Line_change_2(1)" class="btn btn-secondary">Line 1</button>
+                        <button id="L2T2" type="button" onclick="Line_change_2(2)" class="btn btn-secondary">Line 2</button>
+                        <button id="L3T2" type="button" onclick="Line_change_2(3)" class="btn btn-secondary">Line 3</button>
+                    </div>
+                    <div class="line-btn-2 btn-group-sm" role="group" aria-label="Line buttons Team 2">
+                        <button id="Pp1T2" type="button" onclick="Line_change_2(4)" class="btn btn-secondary">PP 1</button>
+                        <button id="Pp2T2" type="button" onclick="Line_change_2(5)" class="btn btn-secondary">6vs5</button>
+                        <button id="Sh1T2" type="button" onclick="Line_change_2(6)" class="btn btn-secondary">SH 1</button>
+                        <button id="Sh2T2" type="button" onclick="Line_change_2(7)" class="btn btn-secondary">5vs6</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="Padding-top: 30px;">
+                <button id="undo" type="button" onclick="undoButton()" disabled="true" class="btn btn-secondary btn-sm">Undo Last Shot</button>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="row justify-content-center" style="Padding-top: 30px;">
+                <div class="pos-input">
+                    <p style="Margin: 0px;">Possession</p>
+<!--                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="15" alt="order" style="Padding: 0px">-->
+                    <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
+                        <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary"><span id="name_t2_2">Team 2</span></button>
+                    </div>
+                    <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
+                        <button id="TeamL" type="button" style="background-color: #3046FB" onclick="BallTeamL()" class="btn btn-secondary"><span id="name_t1_2">Team 1</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="Padding-top: 30px;">
+                <div class="game-btn" role="group" aria-label="Game buttons">
+                    <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
+                    <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
+                    <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div style="Padding-top: 20px" class="custom-control custom-checkbox image-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="ck1a" checked onclick="checkLive()">
+                    <label class="custom-control-label" for="ck1a">
+                        <img src="{% static 'live.png' %}" alt="#" class="img-fluid" width="70px">
+                    </label>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div style="Padding-top: 5px" class="custom-control custom-checkbox image-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="ck2a" checked onclick="checkShooter()">
+                    <label class="custom-control-label" for="ck2a">
+                        <img src="{% static 'shooter.png' %}" alt="#" class="img-fluid" width="70px">
+                    </label>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <select disabled onchange="loadGame()" id="load-game" class="form-control-sm custom-select">
+                    <option selected disabled>Load game...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="lineup-selection">
+        <div class="row justify-content-center" style="Padding-top: 10px;">
+            <h4>Team Lineups</h4>
+        </div>
+        <div class="row justify-content-center" style="Padding-top: 10px;">
+            <div class="col-sm-6">
+                <h5><span id="name_t1_20">Team 1</span></h5>
+                <select disabled onchange="changePlayer('sT1G',0,8)" id="sT1G" class="form-control-sm custom-select">
+                    <option selected disabled>Select a goalie...</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <h5><span id="name_t2_20">Team 2</span></h5>
+                <select disabled onchange="changePlayer('sT2G',0,8)" id="sT2G" class="form-control-sm custom-select">
+                    <option selected disabled>Select a goalie...</option>
+                </select>
+            </div>
+        </div>
+        <div class="row justify-content-center" style="Padding-top: 10px;">
+            <div class="col-sm-2">
+                <h5>Line 1</h5>
+                <select disabled onchange="changePlayer('sT1L1LW',2,3)" id="sT1L1LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L1C',2,4)" id="sT1L1C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L1RW',2,5)" id="sT1L1RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L1LD',2,6)" id="sT1L1LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L1RD',2,7)" id="sT1L1RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 2</h5>
+                <select disabled onchange="changePlayer('sT1L2LW',3,3)" id="sT1L2LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L2C',3,4)" id="sT1L2C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L2RW',3,5)" id="sT1L2RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L2LD',3,6)" id="sT1L2LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L2RD',3,7)" id="sT1L2RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 3.</h5>
+                <select disabled onchange="changePlayer('sT1L3LW',4,3)" id="sT1L3LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L3C',4,4)" id="sT1L3C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L3RW',4,5)" id="sT1L3RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L3LD',4,6)" id="sT1L3LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L3RD',4,7)" id="sT1L3RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 1</h5>
+                <select disabled onchange="changePlayer('sT2L1LW',2,3)" id="sT2L1LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L1C',2,4)" id="sT2L1C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L1RW',2,5)" id="sT2L1RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L1LD',2,6)" id="sT2L1LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L1RD',2,7)" id="sT2L1RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 2</h5>
+                <select disabled onchange="changePlayer('sT2L2LW',3,3)" id="sT2L2LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L2C',3,4)" id="sT2L2C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L2RW',3,5)" id="sT2L2RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L2LD',3,6)" id="sT2L2LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L2RD',3,7)" id="sT2L2RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>Line 3</h5>
+                <select disabled onchange="changePlayer('sT2L3LW'4,3)" id="sT2L3LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L3C',4,4)" id="sT2L3C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L3RW',4,5)" id="sT2L3RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L3LD'4,6)" id="sT2L3LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L3RD',4,7)" id="sT2L3RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr width="70%" size="2" align="center" color="#002072" noshade>
+    <div class="row justify-content-center" style="Padding-top: 50px;">
+        <h4>Game statistics</h4>
+    </div>
+
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-4">
+            <div class="shot-map">
+                <h5>Game shotmap</h5>
+                <canvas id="myCanvas_5" width="300" height="500"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T1_typechart" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T1_st_piechart" style="height: 250px"></div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T2_typechart" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T2_st_piechart" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGTeam_chart" style="height: 300px"></div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xGGame_chart" style="height: 200px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xG%Game_chart" style="height: 200px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 200px;">
+        <div class="col-sm-6">
+            <div class="linestats">
+                <h5>Team 1 player stats</h5>
+                <div  id="T1plstats" style="height: 600px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <h5>Team 2 player stats</h5>
+                <div  id="T2plstats" style="height: 600px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <h4>Team 1 line stats</h4>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <div id="T1linestats" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <h4>Team 2 line stats</h4>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <div id="T2linestats" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+
+    <hr width="70%" size="2" align="center" color="#002072" noshade>
+     <div class="row justify-content-center" style="Padding-top: 50px;">
+        <h4>Period 1 stats</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-4">
+            <div class="shot-map">
+                <canvas id="myCanvas_1" width="300" height="500"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T1_typechart_1" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div id="T1_st_piechart_1" style="height: 250px"></div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T2_typechart_1" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div id="T2_st_piechart_1" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xGGame_chart_1" style="height: 200px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xG%Game_chart_1" style="height: 200px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px">
+                <h5>Team 1 player stats</h5>
+                <div id="T1plstats_1" style="height: 500px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px" >
+                <h5>Team 2 player stats</h5>
+                <div id="T2plstats_1" style="height: 500px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <h4>Team 1 line stats</h4>
+                <div id="T1linestats_1" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <h4>Team 2 line stats</h4>
+                <div style="Padding-top: 20px" id="T2linestats_1" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+    <hr width="70%" size="2" align="center" color="#002072" noshade>
+     <div class="row justify-content-center" style="Padding-top: 50px;">
+        <h4>Period 2 stats</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-4">
+            <div class="shot-map">
+                <canvas id="myCanvas_2" width="300" height="500"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T1_typechart_2" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T1_st_piechart_2" style="height: 250px"></div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T2_typechart_2" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T2_st_piechart_2" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xGGame_chart_2" style="height: 200px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xG%Game_chart_2" style="height: 200px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px">
+                <h5>Team 1 player stats</h5>
+                <div id="T1plstats_2" style="height: 500px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px" >
+                <h5>Team 2 player stats</h5>
+                <div id="T2plstats_2" style="height: 500px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <h4>Team 1 line stats</h4>
+                <div id="T1linestats_2" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <h4>Team 2 line stats</h4>
+                <div style="Padding-top: 20px" id="T2linestats_2" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+     <hr width="70%" size="2" align="center" color="#002072" noshade>
+     <div class="row justify-content-center" style="Padding-top: 50px;">
+        <h4>Period 3 stats</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-4">
+            <div class="shot-map">
+                <canvas id="myCanvas_3" width="300" height="500"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T1_typechart_3" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T1_st_piechart_3" style="height: 250px"></div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T2_typechart_3" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T2_st_piechart_3" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xGGame_chart_3" style="height: 200px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xG%Game_chart_3" style="height: 200px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px">
+                <h5>Team 1 player stats</h5>
+                <div  id="T1plstats_3" style="height: 500px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px" >
+                <h5>Team 2 player stats</h5>
+                <div  id="T2plstats_3" style="height: 500px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <h4>Team 1 line stats</h4>
+                <div id="T1linestats_3" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <h4>Team 2 line stats</h4>
+                <div style="Padding-top: 20px" id="T2linestats_3" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+    <hr width="70%" size="2" align="center" color="#002072" noshade>
+    <div class="row justify-content-center" style="Padding-top: 50px;">
+        <h4>Overtime stats</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-4">
+            <div class="shot-map">
+                <canvas id="myCanvas_4" width="300" height="500"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T1_typechart_4" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T1_st_piechart_4" style="height: 250px"></div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="linestats">
+                <div id="T2_typechart_4" style="height: 200px"></div>
+            </div>
+            <div class="linestats" style="Padding-top: 50px">
+                <div  id="T2_st_piechart_4" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xGGame_chart_4" style="height: 200px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats">
+                <div id="xG%Game_chart_4" style="height: 200px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px">
+                <h5>Team 1 player stats</h5>
+                <div  id="T1plstats_4" style="height: 500px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="linestats" style="Padding-top: 50px" >
+                <h5>Team 2 player stats</h5>
+                <div  id="T2plstats_4" style="height: 500px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <h4>Team 1 line stats</h4>
+                <div id="T1linestats_4" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="linestats">
+                <h4>Team 2 line stats</h4>
+                <div style="Padding-top: 20px" id="T2linestats_4" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 50px;">
+        <h4><span id="name_t1_3">Team 1</span></h4>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div id="sL1" class="stats-L1">
+                <h4><hr/>Line 1</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL1">0</span>% | <span id="pL1g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL1">0:00</span> | <span id="tocL1g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL1">0</span> | <span id="pmL1g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_4">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L1">0</span> | <span id="xGf_L1g">0</span></p>
+                <p>Shots: <span id="sfL1">0</span> | <span id="sfL1g">0</span></p>
+                <p>Blocked: <span id="baL1">0</span> | <span id="baL1g">0</span></p>
+                <p>Missed: <span id="mfL1">0</span> | <span id="mfL1g">0</span></p>
+                <p>Saved: <span id="safL1">0</span> | <span id="safL1g">0</span></p>
+                <p>Goals: <span id="gfL1">0</span> | <span id="gfL1g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_4">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L1">0</span> | <span id="xGa_L1g">0</span></p>
+                <p>Shots: <span id="saL1">0</span> | <span id="saL1g">0</span></p>
+                <p>Blocked: <span id="bfL1">0</span> | <span id="bfL1g">0</span></p>
+                <p>Missed: <span id="maL1">0</span> | <span id="maL1g">0</span></p>
+                <p>Saved: <span id="saaL1">0</span> | <span id="saaL1g">0</span></p>
+                <p>Goals: <span id="gaL1">0</span> | <span id="gaL1g">0</span></p>
+                <p style="padding-top: 10px"><b> Additional </b></p>
+                <p>Avg Time on Court: <span id="atocL1">0:00</span> | <span id="atocL1g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL1">0:00</span> | <span id="avgL1g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL1">0:00</span> | <span id="avgnoL1g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sL2" class="stats-L2">
+                <h4><hr/>Line 2</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL2">0</span>% | <span id="pL2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL2">0:00</span> | <span id="tocL2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL2">0</span> | <span id="pmL2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_5">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L2">0</span> | <span id="xGf_L2g">0</span></p>
+                <p>Shots: <span id="sfL2">0</span> | <span id="sfL2g">0</span></p>
+                <p>Blocked: <span id="baL2">0</span> | <span id="baL2g">0</span></p>
+                <p>Missed: <span id="mfL2">0</span> | <span id="mfL2g">0</span></p>
+                <p>Saved: <span id="safL2">0</span> | <span id="safL2g">0</span></p>
+                <p>Goals: <span id="gfL2">0</span> | <span id="gfL2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_5">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L2">0</span> | <span id="xGa_L2g">0</span></p>
+                <p>Shots: <span id="saL2">0</span> | <span id="saL2g">0</span></p>
+                <p>Blocked: <span id="bfL2">0</span> | <span id="bfL2g">0</span></p>
+                <p>Missed: <span id="maL2">0</span> | <span id="maL2g">0</span></p>
+                <p>Saved: <span id="saaL2">0</span> | <span id="saaL2g">0</span></p>
+                <p>Goals: <span id="gaL2">0</span> | <span id="gaL2g">0</span></p>
+                <p style="padding-top: 10px"><b>Addittional</b></p>
+                <p>Avg Time on Court: <span id="atocL2">0:00</span> | <span id="atocL2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL2">0:00</span> | <span id="avgL2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL2">0:00</span> | <span id="avgnoL2g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sL3" class="stats-L3">
+                <h4><hr/>Line 3</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL3">0</span>% | <span id="pL3g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL3">0:00</span> | <span id="tocL3g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL3">0</span> | <span id="pmL3g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_6">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L3">0</span> | <span id="xGf_L3g">0</span></p>
+                <p>Shots: <span id="sfL3">0</span> | <span id="sfL3g">0</span></p>
+                <p>Blocked: <span id="baL3">0</span> | <span id="baL3g">0</span></p>
+                <p>Missed: <span id="mfL3">0</span> | <span id="mfL3g">0</span></p>
+                <p>Saved: <span id="safL3">0</span> | <span id="safL3g">0</span></p>
+                <p>Goals: <span id="gfL3">0</span> | <span id="gfL3g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_6">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L3">0</span> | <span id="xGa_L3g">0</span></p>
+                <p>Shots: <span id="saL3">0</span> | <span id="saL3g">0</span></p>
+                <p>Blocked: <span id="bfL3">0</span> | <span id="bfL3g">0</span></p>
+                <p>Missed: <span id="maL3">0</span> | <span id="maL3g">0</span></p>
+                <p>Saved: <span id="saaL3">0</span> | <span id="saaL3g">0</span></p>
+                <p>Goals: <span id="gaL3">0</span> | <span id="gaL3g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocL3">0:00</span> | <span id="atocL3g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL3">0:00</span> | <span id="avgL3g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL3">0:00</span> | <span id="avgnoL3g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sTeam" class="stats-Team">
+                <h4><hr/>Team</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pTeam">0</span>% | <span id="pTeamg">0</span>%<p/>
+                <p style="padding-top: 10px"><b><span id="name_t1_7">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_Team">0</span> | <span id="xGf_Teamg">0</span></p>
+                <p>Shots: <span id="sfTeam">0</span> | <span id="sfTeamg">0</span></p>
+                <p>Blocked: <span id="baTeam">0</span> | <span id="baTeamg">0</span></p>
+                <p>Missed: <span id="mfTeam">0</span> | <span id="mfTeamg">0</span></p>
+                <p>Saved: <span id="safTeam">0</span> | <span id="safTeamg">0</span></p>
+                <p>Goals: <span id="gfTeam">0</span> | <span id="gfTeamg">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_7">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_Team">0</span> | <span id="xGa_Teamg">0</span></p>
+                <p>Shots: <span id="saTeam">0</span> | <span id="saTeamg">0</span></p>
+                <p>Blocked: <span id="bfTeam">0</span> | <span id="bfTeamg">0</span></p>
+                <p>Missed: <span id="maTeam">0</span> | <span id="maTeamg">0</span></p>
+                <p>Saved: <span id="saaTeam">0</span> | <span id="saaTeamg">0</span></p>
+                <p>Goals: <span id="gaTeam">0</span> | <span id="gaTeamg">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Time on Court: <span id="tocTeam">0:00</span> | <span id="tocTeamg">0:00</span></p>
+                <p>Avg Time on Court: <span id="atocTeam">0:00</span> | <span id="atocTeamg">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgTeam">0:00</span> | <span id="avgTeamg">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoTeam">0:00</span> | <span id="avgnoTeamg">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmTeam">0</span> | <span id="pmTeamg">0</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div id="sPP1" class="stats-PP1">
+                <h4><hr/>Powerplay 1</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pPP1">0</span>% | <span id="pPP1g">0</span>%<p/>
+                <p>Time on Court: <span id="tocPP1">0:00</span> | <span id="tocPP1g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmPP1">0</span> | <span id="pmPP1g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_8">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_PP1">0</span> | <span id="xGf_PP1g">0</span></p>
+                <p>Shots: <span id="sfPP1">0</span> | <span id="sfPP1g">0</span></p>
+                <p>Blocked: <span id="baPP1">0</span> | <span id="baPP1g">0</span></p>
+                <p>Missed: <span id="mfPP1">0</span> | <span id="mfPP1g">0</span></p>
+                <p>Saved: <span id="safPP1">0</span> | <span id="safPP1g">0</span></p>
+                <p>Goals: <span id="gfPP1">0</span> | <span id="gfPP1g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_8">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_PP1">0</span> | <span id="xGa_PP1g">0</span></p>
+                <p>Shots: <span id="saPP1">0</span> | <span id="saPP1g">0</span></p>
+                <p>Blocked: <span id="bfPP1">0</span> | <span id="bfPP1g">0</span></p>
+                <p>Missed: <span id="maPP1">0</span> | <span id="maPP1g">0</span></p>
+                <p>Saved: <span id="saaPP1">0</span> | <span id="saaPP1g">0</span></p>
+                <p>Goals: <span id="gaPP1">0</span> | <span id="gaPP1g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocPP1">0:00</span> | <span id="atocPP1g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgPP1">0:00</span> | <span id="avgPP1g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoPP1">0:00</span> | <span id="avgnoPP1g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sPP2" class="stats-PP2">
+                <h4><hr/>6vs5</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pPP2">0</span>% | <span id="pPP2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocPP2">0:00</span> | <span id="tocPP2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmPP2">0</span> | <span id="pmPP2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_9">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_PP2">0</span> | <span id="xGf_PP2g">0</span></p>
+                <p>Shots: <span id="sfPP2">0</span> | <span id="sfPP2g">0</span></p>
+                <p>Blocked: <span id="baPP2">0</span> | <span id="baPP2g">0</span></p>
+                <p>Missed: <span id="mfPP2">0</span> | <span id="mfPP2g">0</span></p>
+                <p>Saved: <span id="safPP2">0</span> | <span id="safPP2g">0</span></p>
+                <p>Goals: <span id="gfPP2">0</span> | <span id="gfPP2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_9">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_PP2">0</span> | <span id="xGa_PP2g">0</span></p>
+                <p>Shots: <span id="saPP2">0</span> | <span id="saPP2g">0</span></p>
+                <p>Blocked: <span id="bfPP2">0</span> | <span id="bfPP2g">0</span></p>
+                <p>Missed: <span id="maPP2">0</span> | <span id="maPP2g">0</span></p>
+                <p>Saved: <span id="saaPP2">0</span> | <span id="saaPP2g">0</span></p>
+                <p>Goals: <span id="gaPP2">0</span> | <span id="gaPP2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocPP2">0:00</span> | <span id="atocPP2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgPP2">0:00</span> | <span id="avgPP2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoPP2">0:00</span> | <span id="avgnoPP2g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sSH1" class="stats-SH1">
+                <h4><hr/>Shorthanded 1</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pSH1">0</span>% | <span id="pSH1g">0</span>%<p/>
+                <p>Time on Court: <span id="tocSH1">0:00</span> | <span id="tocSH1g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmSH1">0</span> | <span id="pmSH1g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_10">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_SH1">0</span> | <span id="xGf_SH1g">0</span></p>
+                <p>Shots: <span id="sfSH1">0</span> | <span id="sfSH1g">0</span></p>
+                <p>Blocked: <span id="baSH1">0</span> | <span id="baSH1g">0</span></p>
+                <p>Missed: <span id="mfSH1">0</span> | <span id="mfSH1g">0</span></p>
+                <p>Saved: <span id="safSH1">0</span> | <span id="safSH1g">0</span></p>
+                <p>Goals: <span id="gfSH1">0</span> | <span id="gfSH1g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_10">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_SH1">0</span> | <span id="xGa_SH1g">0</span></p>
+                <p>Shots: <span id="saSH1">0</span> | <span id="saSH1g">0</span></p>
+                <p>Blocked: <span id="bfSH1">0</span> | <span id="bfSH1g">0</span></p>
+                <p>Missed: <span id="maSH1">0</span> | <span id="maSH1g">0</span></p>
+                <p>Saved: <span id="saaSH1">0</span> | <span id="saaSH1g">0</span></p>
+                <p>Goals: <span id="gaSH1">0</span> | <span id="gaSH1g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocSH1">0:00</span> | <span id="atocSH1g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgSH1">0:00</span> | <span id="avgSH1g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoSH1">0:00</span> | <span id="avgnoSH1g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sSH2" class="stats-SH2">
+                <h4><hr/>5vs6</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pSH2">0</span>% | <span id="pSH2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocSH2">0:00</span> | <span id="tocSH2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmSH2">0</span> | <span id="pmSH2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_11">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_SH2">0</span> | <span id="xGf_SH2g">0</span></p>
+                <p>Shots: <span id="sfSH2">0</span> | <span id="sfSH2g">0</span></p>
+                <p>Blocked: <span id="baSH2">0</span> | <span id="baSH2g">0</span></p>
+                <p>Missed: <span id="mfSH2">0</span> | <span id="mfSH2g">0</span></p>
+                <p>Saved: <span id="safSH2">0</span> | <span id="safSH2g">0</span></p>
+                <p>Goals: <span id="gfSH2">0</span> | <span id="gfSH2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_11">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_SH2">0</span> | <span id="xGa_SH2g">0</span></p>
+                <p>Shots: <span id="saSH2">0</span> | <span id="saSH2g">0</span></p>
+                <p>Blocked: <span id="bfSH2">0</span> | <span id="bfSH2g">0</span></p>
+                <p>Missed: <span id="maSH2">0</span> | <span id="maSH2g">0</span></p>
+                <p>Saved: <span id="saaSH2">0</span> | <span id="saaSH2g">0</span></p>
+                <p>Goals: <span id="gaSH2">0</span> | <span id="gaSH2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg. Time on Court: <span id="atocSH2">0:00</span> | <span id="atocSH2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgSH2">0:00</span> | <span id="avgSH2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoSH2">0:00</span> | <span id="avgnoSH2g">0:00</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 100px;">
+        <h4><span id="name_t2_3">Team 2</span></h4>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div id="sL1T2" class="stats-L1T2">
+                <h4><hr/>Line 1</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL1T2">0</span>% | <span id="pL1T2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL1T2">0:00</span> | <span id="tocL1T2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL1T2">0</span> | <span id="pmL1T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_12">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L1T2">0</span> | <span id="xGf_L1T2g">0</span></p>
+                <p>Shots: <span id="sfL1T2">0</span> | <span id="sfL1T2g">0</span></p>
+                <p>Blocked: <span id="baL1T2">0</span> | <span id="baL1T2g">0</span></p>
+                <p>Missed: <span id="mfL1T2">0</span> | <span id="mfL1T2g">0</span></p>
+                <p>Saved: <span id="safL1T2">0</span> | <span id="safL1T2g">0</span></p>
+                <p>Goals: <span id="gfL1T2">0</span> | <span id="gfL1T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_12">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L1T2">0</span> | <span id="xGa_L1T2g">0</span></p>
+                <p>Shots: <span id="saL1T2">0</span> | <span id="saL1T2g">0</span></p>
+                <p>Blocked: <span id="bfL1T2">0</span> | <span id="bfL1T2g">0</span></p>
+                <p>Missed: <span id="maL1T2">0</span> | <span id="maL1T2g">0</span></p>
+                <p>Saved: <span id="saaL1T2">0</span> | <span id="saaL1T2g">0</span></p>
+                <p>Goals: <span id="gaL1T2">0</span> | <span id="gaL1T2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocL1T2">0:00</span> | <span id="atocL1T2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL1T2">0:00</span> | <span id="avgL1T2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL1T2">0:00</span> | <span id="avgnoL1T2g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sL2T2" class="stats-L2T2">
+                <h4><hr/>Line 2</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL2T2">0</span>% | <span id="pL2T2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL2T2">0:00</span> | <span id="tocL2T2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL2T2">0</span> | <span id="pmL2T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_13">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L2T2">0</span> | <span id="xGf_L2T2g">0</span></p>
+                <p>Shots: <span id="sfL2T2">0</span> | <span id="sfL2T2g">0</span></p>
+                <p>Blocked: <span id="baL2T2">0</span> | <span id="baL2T2g">0</span></p>
+                <p>Missed: <span id="mfL2T2">0</span> | <span id="mfL2T2g">0</span></p>
+                <p>Saved: <span id="safL2T2">0</span> | <span id="safL2T2g">0</span></p>
+                <p>Goals: <span id="gfL2T2">0</span> | <span id="gfL2T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_13">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L2T2">0</span> | <span id="xGa_L2T2g">0</span></p>
+                <p>Shots: <span id="saL2T2">0</span> | <span id="saL2T2g">0</span></p>
+                <p>Blocked: <span id="bfL2T2">0</span> | <span id="bfL2T2g">0</span></p>
+                <p>Missed: <span id="maL2T2">0</span> | <span id="maL2T2g">0</span></p>
+                <p>Saved: <span id="saaL2T2">0</span> | <span id="saaL2T2g">0</span></p>
+                <p>Goals: <span id="gaL2T2">0</span> | <span id="gaL2T2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocL2T2">0:00</span> | <span id="atocL2T2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL2T2">0:00</span> | <span id="avgL2T2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL2T2">0:00</span> | <span id="avgnoL2T2g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sL3T2" class="stats-L3T2">
+                <h4><hr/>Line 3</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pL3T2">0</span>% | <span id="pL3T2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocL3T2">0:00</span> | <span id="tocL3T2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmL3T2">0</span> | <span id="pmL3T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_14">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_L3T2">0</span> | <span id="xGf_L3T2g">0</span></p>
+                <p>Shots: <span id="sfL3T2">0</span> | <span id="sfL3T2g">0</span></p>
+                <p>Blocked: <span id="baL3T2">0</span> | <span id="baL3T2g">0</span></p>
+                <p>Missed: <span id="mfL3T2">0</span> | <span id="mfL3T2g">0</span></p>
+                <p>Saved: <span id="safL3T2">0</span> | <span id="safL3T2g">0</span></p>
+                <p>Goals: <span id="gfL3T2">0</span> | <span id="gfL3T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_14">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_L3T2">0</span> | <span id="xGa_L3T2g">0</span></p>
+                <p>Shots: <span id="saL3T2">0</span> | <span id="saL3T2g">0</span></p>
+                <p>Blocked: <span id="bfL3T2">0</span> | <span id="bfL3T2g">0</span></p>
+                <p>Missed: <span id="maL3T2">0</span> | <span id="maL3T2g">0</span></p>
+                <p>Saved: <span id="saaL3T2">0</span> | <span id="saaL3T2g">0</span></p>
+                <p>Goals: <span id="gaL3T2">0</span> | <span id="gaL3T2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocL3T2">0:00</span> | <span id="atocL3T2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgL3T2">0:00</span> | <span id="avgL3T2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoL3T2">0:00</span> | <span id="avgnoL3T2g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sTeamT2" class="stats-TeamT2">
+                <h4><hr/>Team</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pTeamT2">0</span>% | <span id="pTeamT2g">0</span>%<p/>
+                <p><b>Plus minus:</b> <span id="pmTeamT2">0</span> | <span id="pmTeamT2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_15">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_TeamT2">0</span> | <span id="xGf_TeamT2g">0</span></p>
+                <p>Shots: <span id="sfTeamT2">0</span> | <span id="sfTeamT2g">0</span></p>
+                <p>Blocked: <span id="baTeamT2">0</span> | <span id="baTeamT2g">0</span></p>
+                <p>Missed: <span id="mfTeamT2">0</span> | <span id="mfTeamT2g">0</span></p>
+                <p>Saved: <span id="safTeamT2">0</span> | <span id="safTeamT2g">0</span></p>
+                <p>Goals: <span id="gfTeamT2">0</span> | <span id="gfTeamT2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_15">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_TeamT2">0</span> | <span id="xGa_TeamT2g">0</span></p>
+                <p>Shots: <span id="saTeamT2">0</span> | <span id="saTeamT2g">0</span></p>
+                <p>Blocked: <span id="bfTeamT2">0</span> | <span id="bfTeamT2g">0</span></p>
+                <p>Missed: <span id="maTeamT2">0</span> | <span id="maTeamT2g">0</span></p>
+                <p>Saved: <span id="saaTeamT2">0</span> | <span id="saaTeamT2g">0</span></p>
+                <p>Goals: <span id="gaTeamT2">0</span> | <span id="gaTeamT2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Time on Court: <span id="tocTeamT2">0:00</span> | <span id="tocTeamT2g">0:00</span></p>
+                <p>Avg Time on Court: <span id="atocTeamT2">0:00</span> | <span id="atocTeamT2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgTeamT2">0:00</span> | <span id="avgTeamT2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoTeamT2">0:00</span> | <span id="avgnoTeamT2g">0:00</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div id="sPP1T2" class="stats-PP1T2">
+                <h4><hr/>Powerplay 1</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pPP1T2">0</span>% | <span id="pPP1T2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocPP1T2">0:00</span> | <span id="tocPP1T2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmPP1T2">0</span> | <span id="pmPP1T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_16">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_PP1T2">0</span> | <span id="xGf_PP1T2g">0</span></p>
+                <p>Shots: <span id="sfPP1T2">0</span> | <span id="sfPP1T2g">0</span></p>
+                <p>Blocked: <span id="baPP1T2">0</span> | <span id="baPP1T2g">0</span></p>
+                <p>Missed: <span id="mfPP1T2">0</span> | <span id="mfPP1T2g">0</span></p>
+                <p>Saves: <span id="safPP1T2">0</span> | <span id="safPP1T2g">0</span></p>
+                <p>Goals: <span id="gfPP1T2">0</span> | <span id="gfPP1T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_16">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_PP1T2">0</span> | <span id="xGa_PP1T2g">0</span></p>
+                <p>Shots: <span id="saPP1T2">0</span> | <span id="saPP1T2g">0</span></p>
+                <p>Blocked: <span id="bfPP1T2">0</span> | <span id="bfPP1T2g">0</span></p>
+                <p>Missed: <span id="maPP1T2">0</span> | <span id="maPP1T2g">0</span></p>
+                <p>Saved: <span id="saaPP1T2">0</span> | <span id="saaPP1T2g">0</span></p>
+                <p>Goals: <span id="gaPP1T2">0</span> | <span id="gaPP1T2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocPP1T2">0:00</span> | <span id="atocPP1T2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgPP1T2">0:00</span> | <span id="avgPP1T2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoPP1T2">0:00</span> | <span id="avgnoPP1T2g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sPP2T2" class="stats-PP2T2">
+                <h4><hr/>6vs5</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pPP2T2">0</span>% | <span id="pPP2T2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocPP2T2">0:00</span> | <span id="tocPP2T2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmPP2T2">0</span> | <span id="pmPP2T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_17">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_PP2T2">0</span> | <span id="xGf_PP2T2g">0</span></p>
+                <p>Shots: <span id="sfPP2T2">0</span> | <span id="sfPP2T2g">0</span></p>
+                <p>Blocked: <span id="baPP2T2">0</span> | <span id="baPP2T2g">0</span></p>
+                <p>Missed: <span id="mfPP2T2">0</span> | <span id="mfPP2T2g">0</span></p>
+                <p>Saved: <span id="safPP2T2">0</span> | <span id="safPP2T2g">0</span></p>
+                <p>Goals: <span id="gfPP2T2">0</span> | <span id="gfPP2T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_17">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_PP2T2">0</span> | <span id="xGa_PP2T2g">0</span></p>
+                <p>Shots: <span id="saPP2T2">0</span> | <span id="saPP2T2g">0</span></p>
+                <p>Blocked: <span id="bfPP2T2">0</span> | <span id="bfPP2T2g">0</span></p>
+                <p>Missed: <span id="maPP2T2">0</span> | <span id="maPP2T2g">0</span></p>
+                <p>Saved: <span id="saaPP2T2">0</span> | <span id="saaPP2T2g">0</span></p>
+                <p>Goals: <span id="gaPP2T2">0</span> | <span id="gaPP2T2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocPP2T2">0:00</span> | <span id="atocPP2T2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgPP2T2">0:00</span> | <span id="avgPP2T2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoPP2T2">0:00</span> | <span id="avgnoPP2T2g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sSH1T2" class="stats-SH1T2">
+                <h4><hr/>Shorthanded 1</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pSH1T2">0</span>% | <span id="pSH1T2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocSH1T2">0:00</span> | <span id="tocSH1T2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmSH1T2">0</span> | <span id="pmSH1T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_18">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_SH1T2">0</span> | <span id="xGf_SH1T2g">0</span></p>
+                <p>Shots: <span id="sfSH1T2">0</span> | <span id="sfSH1T2g">0</span></p>
+                <p>Blocked: <span id="baSH1T2">0</span> | <span id="baSH1T2g">0</span></p>
+                <p>Missed: <span id="mfSH1T2">0</span> | <span id="mfSH1T2g">0</span></p>
+                <p>Saved: <span id="safSH1T2">0</span> | <span id="safSH1T2g">0</span></p>
+                <p>Goals: <span id="gfSH1T2">0</span> | <span id="gfSH1T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_18">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_SH1T2">0</span> | <span id="xGa_SH1T2g">0</span></p>
+                <p>Shots: <span id="saSH1T2">0</span> | <span id="saSH1T2g">0</span></p>
+                <p>Blocked: <span id="bfSH1T2">0</span> | <span id="bfSH1T2g">0</span></p>
+                <p>Missed: <span id="maSH1T2">0</span> | <span id="maSH1T2g">0</span></p>
+                <p>Saved: <span id="saaSH1T2">0</span> | <span id="saaSH1T2g">0</span></p>
+                <p>Goals: <span id="gaSH1T2">0</span> | <span id="gaSH1T2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocSH1T2">0:00</span> | <span id="atocSH1T2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgSH1T2">0:00</span> | <span id="avgSH1T2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoSH1T2">0:00</span> | <span id="avgnoSH1T2g">0:00</span></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="sSH2T2" class="stats-SH2T2">
+                <h4><hr/>5vs6</h4>
+                <p style="padding-top: 10px"><b>Possession:</b> <span id="pSH2T2">0</span>% | <span id="pSH2T2g">0</span>%<p/>
+                <p>Time on Court: <span id="tocSH2T2">0:00</span> | <span id="tocSH2T2g">0:00</span></p>
+                <p><b>Plus minus:</b> <span id="pmSH2T2">0</span> | <span id="pmSH2T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t2_19">Team 2</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGf_SH2T2">0</span> | <span id="xGf_SH2T2g">0</span></p>
+                <p>Shots: <span id="sfSH2T2">0</span> | <span id="sfSH2T2g">0</span></p>
+                <p>Blocked: <span id="baSH2T2">0</span> | <span id="baSH2T2g">0</span></p>
+                <p>Missed: <span id="mfSH2T2">0</span> | <span id="mfSH2T2g">0</span></p>
+                <p>Saved: <span id="safSH2T2">0</span> | <span id="safSH2T2g">0</span></p>
+                <p>Goals: <span id="gfSH2T2">0</span> | <span id="gfSH2T2g">0</span></p>
+                <p style="padding-top: 10px"><b><span id="name_t1_19">Team 1</span> Shots</b></p>
+                <p><b>xG:</b> <span id="xGa_SH2T2">0</span> | <span id="xGa_SH2T2g">0</span></p>
+                <p>Shots: <span id="saSH2T2">0</span> | <span id="saSH2T2g">0</span></p>
+                <p>Blocked: <span id="bfSH2T2">0</span> | <span id="bfSH2T2g">0</span></p>
+                <p>Missed: <span id="maSH2T2">0</span> | <span id="maSH2T2g">0</span></p>
+                <p>Saved: <span id="saaSH2T2">0</span> | <span id="saaSH2T2g">0</span></p>
+                <p>Goals: <span id="gaSH2T2">0</span> | <span id="gaSH2T2g">0</span></p>
+                <p style="padding-top: 10px"><b>Additional</b></p>
+                <p>Avg Time on Court: <span id="atocSH2T2">0:00</span> | <span id="atocSH2T2g">0:00</span></p>
+                <p>Avg Time w Ball: <span id="avgSH2T2">0:00</span> | <span id="avgSH2T2g">0:00</span></p>
+                <p>Avg Time no Ball: <span id="avgnoSH2T2">0:00</span> | <span id="avgnoSH2T2g">0:00</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGL1_chart" style="height: 300px"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGL2_chart" style="height: 300px"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="xGL3_chart" style="height: 300px"></div>
+        </div>
+    </div>
+</div>
+
+<div id="shotmenu" class="shot-menu">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotMissed()">Missed</li>
+    <li class="menu-option" onclick="shotSaved()">Saved</li>
+    <li class="menu-option" onclick="shotBlocked()">Blocked</li>
+    <li class="menu-option" onclick="shotGoal()">Goal</li>
+  </ul>
+</div>
+
+<div id="shottype" class="shot-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotTOnetimer()">Turnover | Cross-Pass</li>
+    <li class="menu-option" onclick="shotTDirect()">Turnover | Direct</li>
+    <li class="menu-option" onclick="shotOnetimer()">Cross-Pass</li>
+    <li class="menu-option" onclick="shotRebound()">Rebound</li>
+    <li class="menu-option" onclick="shotDirect()">Direct</li>
+  </ul>
+</div>
+<div id="shooter" class="shooter-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotTaker('1')"><span id="shooter-1">LW</span></li>
+    <li class="menu-option" onclick="shotTaker('2')"><span id="shooter-2">C</span></li>
+    <li class="menu-option" onclick="shotTaker('3')"><span id="shooter-3">RW</span></li>
+    <li class="menu-option" onclick="shotTaker('4')"><span id="shooter-4">LD</span></li>
+    <li class="menu-option" onclick="shotTaker('5')"><span id="shooter-5">RD</span></li>
+  </ul>
+</div>
+<div id="passer" class="passer-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="shotPasser('1')"><span id="passer-1">LW</span></li>
+    <li class="menu-option" onclick="shotPasser('2')"><span id="passer-2">C</span></li>
+    <li class="menu-option" onclick="shotPasser('3')"><span id="passer-3">RW</span></li>
+    <li class="menu-option" onclick="shotPasser('4')"><span id="passer-4">LD</span></li>
+    <li class="menu-option" onclick="shotPasser('5')"><span id="passer-5">RD</span></li>
+    <li class="menu-option" onclick="shotPasser('6')"><span id="passer-6">G</span></li>
+    <li class="menu-option" onclick="shotPasser('7')"><span id="passer-7">No passer</span></li>
+  </ul>
+</div>
+<div id="options" class="option-menu">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="options('1')"><span id="option-1">Send game LIVE OFF</span></li>
+    <li class="menu-option" onclick="options('2')"><span id="option-2">Collect Team 1 Shooter&Passer OFF</span></li>
+    <li class="menu-option" onclick="options('3')"><span id="option-3">Collect Team 2 Shooter&Passer OFF</span></li>
+    <li class="menu-option" onclick="options('4')"><span id="option-4">Game Time 1x speed</span></li>
+    <li class="menu-option" onclick="options('5')"><span id="option-5">RD</span></li>
+    <li class="menu-option" onclick="options('6')"><span id="option-6">G</span></li>
+    <li class="menu-option" onclick="options('7')"><span id="option-7">No passer</span></li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.js"></script>
+<script type="text/javascript" src="/static/js/variables.js"></script>
+<script type="text/javascript" src="/static/js/premiumfunctions.js"></script>
+<script type="text/javascript" src="/static/js/livedata.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['table']});
+</script>
+
+{% endblock %}

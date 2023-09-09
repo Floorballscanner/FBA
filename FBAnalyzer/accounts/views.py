@@ -216,6 +216,19 @@ def premium_game(request):
     return render(request, 'accounts/premiumgame.html', context=context)
 
 @login_required
+def test_environment(request):
+    teams = Team.objects.all().order_by('name')
+    levels = Level.objects.all().order_by('name')
+    players = Player.objects.all().order_by('jersey_number')
+
+    context = {
+        'teams': teams,
+        'levels': levels,
+        'players': players,
+    }
+    return render(request, 'accounts/test_environment.html', context=context)
+
+@login_required
 def edit_data(request):
 
     return render(request, 'accounts/editdata.html')
