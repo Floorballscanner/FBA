@@ -5590,7 +5590,15 @@
 
         var combinedData = [];
         for (var i = 0; i < xGTeam_array.length; i++) {
-            combinedData.push([xGTeam_array[i][0], xGTeam_array[i][1], xGTeam_array[i][2], xGOTTeam_array[i][1], xGOTTeam_array[i][2], xGTeam_array[i][3], xGTeam_array[i][4]]);
+            combinedData.push([
+                xGTeam_array[i][0],
+                parseFloat(xGTeam_array[i][1]),
+                parseFloat(xGTeam_array[i][2]),
+                parseFloat(xGOTTeam_array[i][1]),
+                parseFloat(xGOTTeam_array[i][2]),
+                parseFloat(xGOTTeam_array[i][3]), // Goal Team 1
+                parseFloat(xGOTTeam_array[i][4]) // Goal Team 2
+            ]);
         }
 
         var data = google.visualization.arrayToDataTable(combinedData);
@@ -5604,16 +5612,40 @@
                 1: { color: 'red', label: 'xG - Team 2' },
                 2: { color: 'green', label: 'xGOT - Team 1' },
                 3: { color: 'purple', label: 'xGOT - Team 2' }
+            },
+            annotations: {
+                style: 'line',
+                highContrast: true,
+                textStyle: {
+                    fontSize: 12,
+                    color: '#333'
+                },
+                stem: {
+                    color: 'gray',
+                    length: 10
+                },
+                alwaysOutside: true
             }
         };
 
+        // Add vertical lines where 'Goal Team 1' or 'Goal Team 2' is not 0
+        var goals = [];
+        for (var i = 0; i < combinedData.length; i++) {
+            if (combinedData[i][4] !== 0 || combinedData[i][5] !== 0) {
+                goals.push({
+                    series: (combinedData[i][4] !== 0) ? 4 : 5, // Select the appropriate series
+                    x: combinedData[i][0],
+                    style: 'line',
+                    stemLength: 0,
+                    color: 'red',
+                    width: 2
+                });
+            }
+        }
+
+        options.annotations.annotations = goals;
+
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_xGTeam_chart = chart.getImageURI();
-        });*/
-
         chart.draw(data, options);
 
 
