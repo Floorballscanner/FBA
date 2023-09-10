@@ -741,7 +741,7 @@
     // xGOT Team 2
 
     var xGOTfT2_g = [xGOTfL1T2g, xGOTfL2T2g, xGOTfL3T2g, xGOTfPP1T2g, xGOTfPP2T2g, xGOTfSH1T2g, xGOTfSH2T2g, xGOTfTeamT2_g];
-    var xGaT2_g = [xGOTaL1T2g, xGOTaL2T2g, xGOTaL3T2g, xGOTaPP1T2g, xGOTaPP2T2g, xGOTaSH1T2g, xGOTaSH2T2g, xGOTaTeamT2_g];
+    var xGOTaT2_g = [xGOTaL1T2g, xGOTaL2T2g, xGOTaL3T2g, xGOTaPP1T2g, xGOTaPP2T2g, xGOTaSH1T2g, xGOTaSH2T2g, xGOTaTeamT2_g];
 
     // html id myCanvas to variable
     var cnvs = document.getElementById("myCanvas");
