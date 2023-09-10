@@ -830,14 +830,18 @@
             }
 
             stype.style.display = "block";
-            if (PosY <= 4*fLength/5)
+            if (PosY <= 4*fLength/5 && PosY > fLength/5)
             {
                 stype.style.top = PosY + "px";
             }
-            else
+            else if (PosY > fLength/5)
             {
                 stype.style.top = (PosY-(fLength/4)) + "px";
             }
+            else {
+                stype.style.top = (PosY-(fLength/4)) + "px";
+            }
+
             stype.style.left = PosX + "px";
 
             PosX = PosX - ImgPos[0];
@@ -3249,6 +3253,9 @@
             [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
             p_T2G_str = document.getElementById("sT2G").options
             [document.getElementById("sT2G").selectedIndex].text;*/
+
+            dataxG = 0;
+            dataxGOT = 0;
 
             printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                                 passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
