@@ -1086,6 +1086,35 @@ It extends app_layout.html with Django
   </ul>
 </div>
 
+<div id="possessionmenu" class="pos-menu">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="possession()">Possession +</li>
+    <li class="menu-option" onclick="shotSaved()">Possession -</li>
+  </ul>
+</div>
+
+<div id="posT1menu" class="posT1-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="posT1('1')"><span id="posT1-1">LW</span></li>
+    <li class="menu-option" onclick="posT2('2')"><span id="posT1-2">C</span></li>
+    <li class="menu-option" onclick="posT3('3')"><span id="posT1-3">RW</span></li>
+    <li class="menu-option" onclick="posT4('4')"><span id="posT1-4">LD</span></li>
+    <li class="menu-option" onclick="posT5('5')"><span id="posT1-5">RD</span></li>
+    <li class="menu-option" onclick="posT6('6')"><span id="posT1-6">No player</span></li>
+  </ul>
+</div>
+
+<div id="posT2menu" class="posT2-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="posT2('1')"><span id="posT2-1">LW</span></li>
+    <li class="menu-option" onclick="posT2('2')"><span id="posT2-2">C</span></li>
+    <li class="menu-option" onclick="posT2('3')"><span id="posT2-3">RW</span></li>
+    <li class="menu-option" onclick="posT2('4')"><span id="posT2-4">LD</span></li>
+    <li class="menu-option" onclick="posT2('5')"><span id="posT2-5">RD</span></li>
+    <li class="menu-option" onclick="posT2('6')"><span id="posT2-6">No player</span></li>
+  </ul>
+</div>
+
 <div id="shottype" class="shot-type">
   <ul class="menu-options">
     <li class="menu-option" onclick="shotTOnetimer()">Turnover | Cross-Pass</li>
@@ -1093,8 +1122,11 @@ It extends app_layout.html with Django
     <li class="menu-option" onclick="shotOnetimer()">Cross-Pass</li>
     <li class="menu-option" onclick="shotRebound()">Rebound</li>
     <li class="menu-option" onclick="shotDirect()">Direct</li>
+    <li class="menu-option" style="Padding-top:5px" onclick="shotOther('1')">Possession+</li>
+    <li class="menu-option" onclick="shotOther('2')">Possession-</li>
   </ul>
 </div>
+
 <div id="shooter" class="shooter-type">
   <ul class="menu-options">
     <li class="menu-option" onclick="shotTaker('1')"><span id="shooter-1">LW</span></li>
@@ -1104,6 +1136,7 @@ It extends app_layout.html with Django
     <li class="menu-option" onclick="shotTaker('5')"><span id="shooter-5">RD</span></li>
   </ul>
 </div>
+
 <div id="passer" class="passer-type">
   <ul class="menu-options">
     <li class="menu-option" onclick="shotPasser('1')"><span id="passer-1">LW</span></li>
@@ -1115,6 +1148,7 @@ It extends app_layout.html with Django
     <li class="menu-option" onclick="shotPasser('7')"><span id="passer-7">No passer</span></li>
   </ul>
 </div>
+
 <div id="options" class="option-menu">
   <ul class="menu-options">
     <li class="menu-option" onclick="options('1')"><span id="option-1">Send game LIVE OFF</span></li>

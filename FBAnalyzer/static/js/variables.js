@@ -172,7 +172,8 @@
                         'Angle', 'xG', 'Shooter', 'Passer', 'TFLW', 'TFC', 'TFRW', 'TFLD', 'TFRD', 'TFG',
                         'TALW', 'TAC', 'TARW', 'TALD', 'TARD', 'TAG', 'PP', 'SH']];
     var printShotData = [['Date', 'Team 1', 'Team 2', 'Time', 'Shooting Team', 'Result', 'Type', 'xG', 'xGOT', 'Shooter',
-                        'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G', 'PP', 'SH','Distance','Angle']];
+                        'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G',
+                        'PP', 'SH','Distance','Angle', 'Player Team 1', 'Player Team 2']];
     var premTimeData = [['User', 'Game', 'Time', 'Possession', 'Line T1', 'Line T2', 'T1LW', 'T1C', 'T1RW',
                         'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G']];
     var timeData = [['User', 'Game', 'Time', 'Possession', 'Line T1', 'Line T2']];
@@ -191,6 +192,10 @@
     var passer_id = 0;
     var shooter_str = "";
     var passer_str = "";
+    var posT1_id = 0;
+    var posT2_id = 0;
+    var posT1_str = "";
+    var posT2_str = "";
     var shooting_team = "";
     var shotCounter = 0;
 
@@ -666,6 +671,12 @@
     var shootertype = document.getElementById("shooter");
     // premium html id passer type to variable
     var passertype = document.getElementById("passer");
+    // premium html id possession menu to variable
+    var postype = document.getElementById("possessionmenu");
+    // premium html id possession Team 1 menu to variable
+    var posT1 = document.getElementById("posT1menu");
+    // premium html id Possession Team 2 menu to variable
+    var posT2 = document.getElementById("posT2menu");
     // home and away team textfields to variables
     var hTeam = document.getElementById("home_team");
     var aTeam = document.getElementById("away_team");
