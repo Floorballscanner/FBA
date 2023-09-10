@@ -836,7 +836,7 @@
             }
             else if (PosY > fLength/5)
             {
-                stype.style.top = (PosY-(fLength/4)) + "px";
+                stype.style.top = (PosY-(fLength/3)) + "px";
             }
             else {
                 stype.style.top = (PosY-(fLength/4)) + "px";
