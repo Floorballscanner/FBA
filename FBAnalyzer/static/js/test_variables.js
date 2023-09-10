@@ -213,7 +213,7 @@
 
     // Data arrays for xGOT charts
 
-    var xGOTTeam_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGOTTeam_array = [['Time','xGOT Team 1','xGOT Team 2','Goal Team 1','Goal Team 2']];
     var xGOTL1_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGOTL2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGOTL3_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
