@@ -5368,7 +5368,7 @@
             hAxis: { textPosition: 'none' }
             };
 
-        // var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
+        var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
          // chart1.draw(chartData, options);
 
 
@@ -5398,7 +5398,7 @@
             hAxis: { textPosition: 'none' }
             };
 
-        var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
+        // var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
 
 /*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chart2, 'ready', function () {
