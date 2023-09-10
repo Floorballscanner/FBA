@@ -2750,27 +2750,21 @@
         }
         else if (dataType == 5) {
             dataRes_str = "Possession +"
-            ctx.font = "14px Arial";
-            ctx_p.font = "14px Arial";
-            ctx_g.font = "14px Arial";
             ctx.fillStyle = "blue";
             ctx_p.fillStyle = "blue";
             ctx_g.fillStyle = "blue";
-            ctx.fillText("+", x, y);
-            ctx_p.fillText("+", x, y);
-            ctx_g.fillText("+", x, y);
+            ctx.fillText("o", x, y);
+            ctx_p.fillText("o", x, y);
+            ctx_g.fillText("o", x, y);
         }
         else if (dataType == 6) {
             dataRes_str = "Possession -"
-            ctx.font = "14px Arial";
-            ctx_p.font = "14px Arial";
-            ctx_g.font = "14px Arial";
-            ctx.fillStyle = "blue";
-            ctx_p.fillStyle = "blue";
-            ctx_g.fillStyle = "blue";
-            ctx.fillText("-", x, y);
-            ctx_p.fillText("-", x, y);
-            ctx_g.fillText("-", x, y);
+            ctx.fillStyle = "red";
+            ctx_p.fillStyle = "red";
+            ctx_g.fillStyle = "red";
+            ctx.fillText("o", x, y);
+            ctx_p.fillText("o", x, y);
+            ctx_g.fillText("o", x, y);
         }
 
         if (Ball_pos === 1) {
