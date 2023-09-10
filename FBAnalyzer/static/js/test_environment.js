@@ -2750,9 +2750,21 @@
         }
         else if (dataType == 5) {
             dataRes_str = "Possession +"
+            ctx.fillStyle = "darkgreen";
+            ctx_p.fillStyle = "darkgreen";
+            ctx_g.fillStyle = "darkgreen";
+            ctx.fillText("+", x, y);
+            ctx_p.fillText("+", x, y);
+            ctx_g.fillText("+", x, y);
         }
         else if (dataType == 6) {
             dataRes_str = "Possession -"
+            ctx.fillStyle = "darkgreen";
+            ctx_p.fillStyle = "darkgreen";
+            ctx_g.fillStyle = "darkgreen";
+            ctx.fillText("-", x, y);
+            ctx_p.fillText("-", x, y);
+            ctx_g.fillText("-", x, y);
         }
 
         if (Ball_pos === 1) {
