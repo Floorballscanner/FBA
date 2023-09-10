@@ -453,7 +453,7 @@
                     atoc_p[i].innerHTML = "00:00";
                     avg_p[i].innerHTML = "00:00";
                     avgno_p[i].innerHTML = "00:00";
-                    
+
                     sfT2_p[i].innerHTML = 0;
                     saT2_p[i].innerHTML = 0;
                     gfT2_p[i].innerHTML = 0;
@@ -501,7 +501,7 @@
              Toc_g[line_on - 1]++;
              Toc_p[7]++;
              Toc_g[7]++;
-             
+
              TocT2_p[line_on_2 - 1]++;
              TocT2_g[line_on_2 - 1]++;
              TocT2_p[7]++;
@@ -514,7 +514,7 @@
                 Pos_g[7]++;
                 Pos_p[7]++;
             }
-             
+
              if (Ball_pos == 2) {
                 PosT2_p[line_on_2 - 1]++;
                 PosT2_g[line_on_2 - 1]++;
@@ -534,7 +534,7 @@
 
              p_g[line_on - 1].innerHTML = Math.round(100 * Pos_g[line_on - 1] / Toc_g[line_on - 1]);
              p_g[7].innerHTML = Math.round(100 * Pos_g[7] / Toc_g[7]);
-             
+
              pT2_p[line_on_2 - 1].innerHTML = Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
              pT2_p[7].innerHTML = Math.round(100 * PosT2_p[7] / TocT2_p[7]);
 
@@ -558,7 +558,7 @@
              var toc = new Date(Toc_g[7] * 1000);
              var d = toc.toISOString().substr(14, 5);
              toc_g[7].innerHTML = d;
-             
+
              var toc = new Date(TocT2_p[line_on_2 - 1] * 1000);
              var d = toc.toISOString().substr(14, 5);
              tocT2_p[line_on_2 - 1].innerHTML = d;
@@ -597,7 +597,7 @@
                 var a = avg.toISOString().substr(14, 5);
                 avg_g[7].innerHTML = a;
              }
-             
+
              if (NotT2_p[line_on_2 - 1] > 0) {
                 var avg = new Date(Math.round(PosT2_p[line_on_2 - 1] / NotT2_p[line_on_2 - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
@@ -641,7 +641,7 @@
                 var a = avg.toISOString().substr(14, 5);
                 avgno_g[7].innerHTML = a;
              }
-             
+
              if (NotnoT2_p[line_on_2 - 1] > 0) {
                 var avg = new Date(Math.round((TocT2_p[line_on_2 - 1] - PosT2_p[line_on_2 - 1]) / NotnoT2_p[line_on_2 - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
@@ -685,7 +685,7 @@
                 var a = avg.toISOString().substr(14, 5);
                 atoc_g[7].innerHTML = a;
              }
-             
+
              if (NosT2_p[line_on_2 - 1] > 0) {
                 var avg = new Date(Math.round(TocT2_p[line_on_2 - 1] / NosT2_p[line_on_2 - 1]) * 1000);
                 var a = avg.toISOString().substr(14, 5);
@@ -1601,7 +1601,7 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
-                
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -1617,7 +1617,7 @@
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
 
                 xf_g[7].innerHTML = xGf_g[7];
-                
+
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -1626,7 +1626,7 @@
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
-                
+
                 dataxG = dxG;
                 dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
@@ -1701,7 +1701,7 @@
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
 
-                
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -1711,7 +1711,7 @@
 
                  xGaT2_g[7]= Math.round((xGaT2_g[7] + dxG) * 100) / 100;
 
-                
+
                 xf_p[line_on - 1].innerHTML = xGf_p[line_on - 1];
 
                 xf_p[7].innerHTML = xGf_p[7];
@@ -1719,7 +1719,7 @@
                 xf_g[line_on - 1].innerHTML = xGf_g[line_on - 1];
 
                 xf_g[7].innerHTML = xGf_g[7];
-                
+
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -1728,7 +1728,7 @@
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
 
-                
+
                 dataxG = dxG;
                 dataxGOT = dxGOT;
                 console.log(dataxG)
@@ -1803,7 +1803,7 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
-                
+
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
@@ -1812,7 +1812,7 @@
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
 
-                
+
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
                 xa_p[7].innerHTML = xGa_p[7];
@@ -1821,7 +1821,7 @@
 
                 xa_g[7].innerHTML = xGa_g[7];
 
-                
+
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
 
                 xfT2_p[7].innerHTML = xGfT2_p[7];
@@ -1830,7 +1830,7 @@
 
                 xfT2_g[7].innerHTML = xGfT2_g[7];
 
-                
+
                 dataxG = dxG;
                 dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
@@ -1905,7 +1905,7 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
-                
+
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
@@ -1914,7 +1914,7 @@
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
 
-                
+
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
                 xa_p[7].innerHTML = xGa_p[7];
@@ -1923,7 +1923,7 @@
 
                 xa_g[7].innerHTML = xGa_g[7];
 
-                
+
                 xfT2_p[line_on_2 - 1].innerHTML = xGfT2_p[line_on_2 - 1];
 
                 xfT2_p[7].innerHTML = xGfT2_p[7];
@@ -2017,7 +2017,7 @@
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
                 // undo_array.push([xGf_g[7],dxG])
-                
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
                 // undo_array.push([xGaT2_p[line_on_2 - 1],dxG])
 
@@ -2037,7 +2037,7 @@
 
                 xf_g[7].innerHTML = xGf_g[7];
 
-                
+
                 xaT2_p[line_on_2 - 1].innerHTML = xGaT2_p[line_on_2 - 1];
 
                 xaT2_p[7].innerHTML = xGaT2_p[7];
@@ -2045,7 +2045,7 @@
                 xaT2_g[line_on_2 - 1].innerHTML = xGaT2_g[line_on_2 - 1];;
 
                 xaT2_g[7].innerHTML = xGaT2_g[7];
-                
+
                 dataxG = dxG;
                 dataxGOT = dxGOT;
                 var date = new Date(gameCounter * 1000);
@@ -2518,7 +2518,7 @@
         passer_id = "";
         passer_str = "";
         shooter_str = "";
-        
+
         if (type == 1) {
             dataRes_str = "Missed";
         }
@@ -3073,7 +3073,7 @@
                 [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
-                
+
                 p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
                 [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
                 p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
@@ -3092,7 +3092,7 @@
                 p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
                 p_T1G = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].value;
-                
+
                 p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
                 p_T1G_str = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].text;
@@ -3111,7 +3111,7 @@
                 [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
                 p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
-                
+
                 p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
                 [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
                 p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
@@ -3290,7 +3290,7 @@
                 [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
         p_T2G = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].value;
-                
+
         p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
                 [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
         p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
@@ -3316,7 +3316,7 @@
                 [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
         p_T2G_str = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].text;
-        
+
         passertype.style.display = "none";
         premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
@@ -3394,9 +3394,9 @@
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
-        
+
         // Add shot xG and passed xG to player period charts
-        
+
         found_s = 0;
         found_p = 0;
         if (Ball_pos == 1) {
@@ -4579,7 +4579,7 @@
         .catch((error) => {
           console.error('Error:', error);
     });*/
-    
+
     }
     function undoButton() {
 
@@ -4622,7 +4622,7 @@
         txGp_2.innerHTML = undo_object.txGp_2;
         if (typeof undo_object.txGOTp_1 != "undefined") {txGOTp_1.innerHTML = undo_object.txGOTp_1;}
         if (typeof undo_object.txGOTp_2 != "undefined") {txGOTp_2.innerHTML = undo_object.txGOTp_2;}
-        
+
         shotData = undo_object.shotData;
         premShotData = undo_object.premShotData;
         if (typeof undo_object.printShotData != "undefined") {printShotData = undo_object.printShotData;}
@@ -4636,7 +4636,7 @@
         dataAngle = undo_object.dataAngle;
         dataPp = undo_object.dataPp;
         dataSh = undo_object.dataSh;
-        
+
         shooter_id = undo_object.shooter_id;
         passer_id = undo_object.passer_id;
         shooter_str = undo_object.shooter_str;
@@ -4657,7 +4657,7 @@
         plT2_array = undo_object.plT2_array;
         plT1p_array = undo_object.plT1p_array;
         plT2p_array = undo_object.plT2p_array;
-        
+
         stT1Teamg_array = undo_object.stT1Teamg_array;
         stT2Teamg_array = undo_object.stT2Teamg_array;
         stT1Teamp_array = undo_object.stT1Teamp_array;
@@ -4674,7 +4674,7 @@
         stT2L3g_array = undo_object.stT2L3g_array;
         stT1L3p_array = undo_object.stT1L3p_array;
         stT2L3p_array = undo_object.stT2L3p_array;
-        
+
         stxGT1Teamg_array = undo_object.stxGT1Teamg_array;
         stxGT2Teamg_array = undo_object.stxGT2Teamg_array;
         stxGT1Teamp_array = undo_object.stxGT1Teamp_array;
@@ -4723,7 +4723,7 @@
         staxGT2L3g_array = undo_object.staxGT2L3g_array;
         staxGT1L3p_array = undo_object.staxGT1L3p_array;
         staxGT2L3p_array = undo_object.staxGT2L3p_array;
-        
+
         Toc_p = undo_object.Toc_p;
         Toc_g = undo_object.Toc_g;
         Pos_p = undo_object.Pos_p;
@@ -4752,9 +4752,9 @@
         xGfT2_g = undo_object.xGfT2_g;
         xGaT2_p = undo_object.xGaT2_p;
         xGaT2_g = undo_object.xGaT2_g;
-        
+
         for (let i=0;i<=7;i++) {
-            
+
             sf_p[i].innerHTML = undo_object.sf_p[i];
             sa_p[i].innerHTML = undo_object.sa_p[i];
             gf_p[i].innerHTML = undo_object.gf_p[i];
@@ -4781,7 +4781,7 @@
             saa_g[i].innerHTML = undo_object.saa_g[i];
             xf_g[i].innerHTML = undo_object.xf_g[i];
             xa_g[i].innerHTML = undo_object.xa_g[i];
-    
+
             sfT2_p[i].innerHTML = undo_object.sfT2_p[i];
             saT2_p[i].innerHTML = undo_object.saT2_p[i];
             gfT2_p[i].innerHTML = undo_object.gfT2_p[i];
