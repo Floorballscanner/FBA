@@ -5590,7 +5590,7 @@
 
         var combinedData = [];
         for (var i = 0; i < xGTeam_array.length; i++) {
-            combinedData.push([xGTeam_array[i][0], xGTeam_array[i][1], xGTeam_array[i][2], xGOTTeam_array[i][1], xGOTTeam_array[i][2]]);
+            combinedData.push([xGTeam_array[i][0], xGTeam_array[i][1], xGTeam_array[i][2], xGOTTeam_array[i][1], xGOTTeam_array[i][2], xGTeam_array[i][3], xGTeam_array[i][4]]);
         }
 
         var data = google.visualization.arrayToDataTable(combinedData);
