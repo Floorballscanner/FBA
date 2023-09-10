@@ -5369,7 +5369,7 @@
             };
 
         var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
-         // chart1.draw(chartData, options);
+        chart1.draw(chartData, options);
 
 
        // Team 1 typechart
@@ -5405,7 +5405,7 @@
             p_T1_typechart = chart2.getImageURI();
         });*/
 
-        chart2.draw(chartDataX, options);
+        //chart2.draw(chartDataX, options);
 
         var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
 
