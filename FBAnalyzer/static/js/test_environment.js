@@ -1869,6 +1869,10 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
+                xGOTa_g[line_on - 1] = Math.round((xGOTa_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTa_g[7]= Math.round((xGOTa_g[7] + dxGOT) * 100) / 100;
+
 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1976,6 +1980,10 @@
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+                xGOTa_g[line_on - 1] = Math.round((xGOTa_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTa_g[7]= Math.round((xGOTa_g[7] + dxGOT) * 100) / 100;
 
 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -2367,6 +2375,10 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
+                xGOTa_g[line_on - 1] = Math.round((xGOTa_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTa_g[7]= Math.round((xGOTa_g[7] + dxGOT) * 100) / 100;
+
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
@@ -2499,6 +2511,10 @@
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+                xGOTa_g[line_on - 1] = Math.round((xGOTa_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTa_g[7]= Math.round((xGOTa_g[7] + dxGOT) * 100) / 100;
 
 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -4917,7 +4933,7 @@
         shooting_team = undo_object.shooting_team;
 
         xGTeam_array = undo_object.xGTeam_array;
-        xGOTTeam_array = undo.object.xGOTTeam_array;
+        xGOTTeam_array = undo_object.xGOTTeam_array;
         xGL1_array = undo_object.xGL1_array;
         xGL2_array = undo_object.xGL2_array;
         xGL3_array = undo_object.xGL3_array;
