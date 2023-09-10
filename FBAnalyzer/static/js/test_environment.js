@@ -881,6 +881,10 @@
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
 
+                xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -968,6 +972,10 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -1068,6 +1076,10 @@
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
 
+                xGOTfT2_g[line_on_2 - 1] = Math.round((xGOTfT2_g[line_on_2 - 1] + dxGOT) * 100) / 100;
+
+                xGOTfT2_g[7]= Math.round((xGOTfT2_g[7] + dxGOT) * 100) / 100;
+
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
@@ -1157,6 +1169,10 @@
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+                xGOTfT2_g[line_on_2 - 1] = Math.round((xGOTfT2_g[line_on_2 - 1] + dxGOT) * 100) / 100;
+
+                xGOTfT2_g[7]= Math.round((xGOTfT2_g[7] + dxGOT) * 100) / 100;
 
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
@@ -1248,6 +1264,10 @@
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
 
+                xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -1334,6 +1354,10 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -1434,6 +1458,10 @@
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
 
+                xGOTfT2_g[line_on_2 - 1] = Math.round((xGOTfT2_g[line_on_2 - 1] + dxGOT) * 100) / 100;
+
+                xGOTfT2_g[7]= Math.round((xGOTfT2_g[7] + dxGOT) * 100) / 100;
+
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
@@ -1523,6 +1551,10 @@
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+                xGOTfT2_g[line_on_2 - 1] = Math.round((xGOTfT2_g[line_on_2 - 1] + dxGOT) * 100) / 100;
+
+                xGOTfT2_g[7]= Math.round((xGOTfT2_g[7] + dxGOT) * 100) / 100;
 
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
@@ -1619,6 +1651,10 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1720,6 +1756,10 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -1833,6 +1873,10 @@
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+                xGOTfT2_g[line_on_2 - 1] = Math.round((xGOTfT2_g[line_on_2 - 1] + dxGOT) * 100) / 100;
+
+                xGOTfT2_g[7]= Math.round((xGOTfT2_g[7] + dxGOT) * 100) / 100;
 
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
@@ -1937,6 +1981,10 @@
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+                xGOTfT2_g[line_on_2 - 1] = Math.round((xGOTfT2_g[line_on_2 - 1] + dxGOT) * 100) / 100;
+
+                xGOTfT2_g[7]= Math.round((xGOTfT2_g[7] + dxGOT) * 100) / 100;
 
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
@@ -2043,6 +2091,10 @@
 
                 xGf_g[7] = Math.round((xGf_g[7] + dxG) * 100) / 100;
                 // undo_array.push([xGf_g[7],dxG])
+
+                xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
                 // undo_array.push([xGaT2_p[line_on_2 - 1],dxG])
@@ -2176,6 +2228,10 @@
                 xGf_g[line_on - 1] = Math.round((xGf_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGf_g[7]= Math.round((xGf_g[7] + dxG) * 100) / 100;
+
+                xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -2315,6 +2371,10 @@
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
 
+                xGOTfT2_g[line_on_2 - 1] = Math.round((xGOTfT2_g[line_on_2 - 1] + dxGOT) * 100) / 100;
+
+                xGOTfT2_g[7]= Math.round((xGOTfT2_g[7] + dxGOT) * 100) / 100;
+
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
 
                 xa_p[7].innerHTML = xGa_p[7];
@@ -2444,6 +2504,10 @@
                 xGfT2_g[line_on_2 - 1] = Math.round((xGfT2_g[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_g[7]= Math.round((xGfT2_g[7] + dxG) * 100) / 100;
+
+                xGOTfT2_g[line_on_2 - 1] = Math.round((xGOTfT2_g[line_on_2 - 1] + dxGOT) * 100) / 100;
+
+                xGOTfT2_g[7]= Math.round((xGOTfT2_g[7] + dxGOT) * 100) / 100;
 
 
                 xa_p[line_on - 1].innerHTML = xGa_p[line_on - 1];
@@ -4650,6 +4714,8 @@
             "xGf_g" : xGf_g,
             "xGa_p" : xGa_p,
             "xGa_g" : xGa_g,
+            "xGOTf_g" : xGOTf_g,
+            "xGOTa_g" : xGOTa_g,
             "TocT2_p" : TocT2_p,
             "TocT2_g" : TocT2_g,
             "PosT2_p" : PosT2_p,
@@ -4662,8 +4728,10 @@
             "NotnoT2_g" : NotnoT2_g,
             "xGfT2_p" : xGfT2_p,
             "xGfT2_g" : xGfT2_g,
+            "xGOTfT2_g" : xGOTfT2_g,
             "xGaT2_p" : xGaT2_p,
             "xGaT2_g" : xGaT2_g,
+            "xGOTaT2_g" : xGOTaT2_g,
             "cnvs_url" : cnvs.toDataURL(),
             "cnvs_1_url" : cnvs_1.toDataURL(),
             "cnvs_2_url" : cnvs_2.toDataURL(),
@@ -4924,8 +4992,10 @@
         Notno_g = undo_object.Notno_g;
         xGf_p = undo_object.xGf_p;
         xGf_g = undo_object.xGf_g;
+        xGOTf_g = undo_object.xGOTf_g;
         xGa_p = undo_object.xGa_p;
         xGa_g = undo_object.xGa_g;
+        xGOTa_g = undo_object.xGOTa_g;
         TocT2_p = undo_object.TocT2_p;
         TocT2_g = undo_object.TocT2_g;
         PosT2_p = undo_object.PosT2_p;
@@ -4938,8 +5008,10 @@
         NotnoT2_g = undo_object.NotnoT2_g;
         xGfT2_p = undo_object.xGfT2_p;
         xGfT2_g = undo_object.xGfT2_g;
+        xGOTfT2_g = undo_object.xGOTfT2_g;
         xGaT2_p = undo_object.xGaT2_p;
         xGaT2_g = undo_object.xGaT2_g;
+        xGOTaT2_g = undo_object.xGOTaT2_g;
 
         for (let i=0;i<=7;i++) {
 
