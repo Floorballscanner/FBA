@@ -591,7 +591,7 @@
     var xGaSH2p = 0;
     var xGaSH2g = 0;
 
-    ----
+    //----
 
     var xGOTfL1p = 0;
     var xGOTfL2p = 0;
@@ -663,7 +663,7 @@
     var xGaSH2T2p = 0;
     var xGaSH2T2g = 0;
 
-    ----
+    //----
 
     var xGOTfL1T2p = 0;
     var xGOTfL2T2p = 0;
