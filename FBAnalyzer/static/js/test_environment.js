@@ -5376,36 +5376,24 @@
     //pmPPT1 = data.gfGameT1L4+data.gfGameT1L5-data.gaGameT1L4+data.gaGameT1L5;
     //pmPPT2 = data.gfGameT2L4+data.gfGameT2L5-data.gaGameT2L4+data.gaGameT2L5;
 
-    //var chartData = google.visualization.arrayToDataTable([
-        // ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-       //  ['Line 1', gfL1g-gaL1g, 'color: #002072', gfL1g-gaL1g, gfL1T2g-gaL1T2g, 'color: #59D9EB', gfL1T2g-gaL1T2g ],
-       //  ['Line 2', gfL2g-gaL2g, 'color: #002072', gfL2g-gaL2g, gfL2T2g-gaL2T2g, 'color: #59D9EB', gfL2T2g-gaL2T2g ],
-       //  ['Line 3', gfL3g-gaL3g, 'color: #002072', gfL3g-gaL3g, gfL3T2g-gaL3T2g, 'color: #59D9EB', gfL3T2g-gaL3T2g ],
-     // ]);
+        var chartData = google.visualization.arrayToDataTable([
+            ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
+            ['Line 1', Number(gfL1g) - Number(gaL1g), 'color: #002072', Number(gfL1g) - Number(gaL1g), Number(gfL1T2g) - Number(gaL1T2g), 'color: #59D9EB', Number(gfL1T2g) - Number(gaL1T2g)],
+            ['Line 2', Number(gfL2g) - Number(gaL2g), 'color: #002072', Number(gfL2g) - Number(gaL2g), Number(gfL2T2g) - Number(gaL2T2g), 'color: #59D9EB', Number(gfL2T2g) - Number(gaL2T2g)],
+            ['Line 3', Number(gfL3g) - Number(gaL3g), 'color: #002072', Number(gfL3g) - Number(gaL3g), Number(gfL3T2g) - Number(gaL3T2g), 'color: #59D9EB', Number(gfL3T2g) - Number(gaL3T2g)],
+        ]);
 
-    // Plusminus Game Chart
 
-    pmPPT1 = data.gfGameT1L4+data.gfGameT1L5-data.gaGameT1L4+data.gaGameT1L5;
-    pmPPT2 = data.gfGameT2L4+data.gfGameT2L5-data.gaGameT2L4+data.gaGameT2L5;
+        var options = {
+            title: '+- by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
 
-    var chartData = google.visualization.arrayToDataTable([
-         ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', data.gfGameT1L1-data.gaGameT1L1, 'color: #002072', data.gfGameT1L1-data.gaGameT1L1, data.gfGameT2L1-data.gaGameT2L1, 'color: #59D9EB', data.gfGameT2L1-data.gaGameT2L1 ],
-         ['Line 2', data.gfGameT1L2-data.gaGameT1L2, 'color: #002072', data.gfGameT1L2-data.gaGameT1L2, data.gfGameT2L2-data.gaGameT2L2, 'color: #59D9EB', data.gfGameT2L2-data.gaGameT2L2 ],
-         ['Line 3', data.gfGameT1L3-data.gaGameT1L3, 'color: #002072', data.gfGameT1L3-data.gaGameT1L3, data.gfGameT2L3-data.gaGameT2L3, 'color: #59D9EB', data.gfGameT2L3-data.gaGameT2L3 ],
-         ['PP', pmPPT1, 'color: #002072', pmPPT1, pmPPT2, 'color: #59D9EB', pmPPT2 ]
-      ]);
-
-    var options = {
-        title: '+- by Line',
-        bar: {groupWidth: "95%"},
-        legend: { position: 'bottom'},
-        colors: ['#002072', '#59D9EB'],
-        hAxis: { textPosition: 'none' }
-        };
-
-    var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart'));
-    chart.draw(chartData, options);
+        var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart'));
+        chart.draw(chartData, options);
 
 
        // Team 1 typechart

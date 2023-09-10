@@ -283,6 +283,7 @@
     var stT1L3p_array = [0,0,0,0,0];
     var stT2L3p_array = [0,0,0,0,0];
 
+
     // Data arrays for shot type xG charts
 
     var stxGT1Teamg_array = [0,0,0,0,0];
