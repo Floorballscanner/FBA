@@ -5595,26 +5595,54 @@
 
         var data = google.visualization.arrayToDataTable(combinedData);
 
-        var options = {
-            title: 'xG and xGOT by Team',
-            curveType: 'function',
-            legend: { position: 'bottom' },
-            series: {
-                0: { color: 'blue', label: 'xG - Team 1' },
-                1: { color: 'red', label: 'xG - Team 2' },
-                2: { color: 'green', label: 'xGOT - Team 1' },
-                3: { color: 'purple', label: 'xGOT - Team 2' }
-            }
-        };
+        var view = new google.visualization.DataView(data);
+            view.setColumns([
+                0, // Assuming this is your x-axis data
+                {
+                    calc: function (dt, row) {
+                        // Custom label for the first series
+                        return dt.getValue(row, 1) + ' - xG';
+                    },
+                    type: 'number',
+                    label: 'xG - Team 1'
+                },
+                {
+                    calc: function (dt, row) {
+                        // Custom label for the second series
+                        return dt.getValue(row, 3) + ' - xGOT';
+                    },
+                    type: 'number',
+                    label: 'xGOT - Team 1'
+                },
+                {
+                    calc: function (dt, row) {
+                        // Custom label for the third series
+                        return dt.getValue(row, 2) + ' - xG';
+                    },
+                    type: 'number',
+                    label: 'xG - Team 2'
+                },
+                {
+                    calc: function (dt, row) {
+                        // Custom label for the fourth series
+                        return dt.getValue(row, 4) + ' - xGOT';
+                    },
+                    type: 'number',
+                    label: 'xGOT - Team 2'
+                }
+            ]);
 
-        var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
+            // Create the chart with the DataView
+            var options = {
+                title: 'xG and xGOT by Team',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_xGTeam_chart = chart.getImageURI();
-        });*/
+            var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
+            chart.draw(view, options);
 
-        chart.draw(data, options);
+
 
         // Line 1 xG Chart
         var data = google.visualization.arrayToDataTable(xGL1_array);
