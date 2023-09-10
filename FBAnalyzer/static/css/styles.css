@@ -241,7 +241,7 @@ body {
 	text-align: center;
 	padding: 0 0 0 0;
 }
-.shot-menu, .shot-type, .shooter-type, .passer-type, .pos-menu, .posT1-menu, .posT2-menu {
+.shot-menu, .shot-type, .shooter-type, .passer-type, .posT1-type, .posT2-type {
     position: absolute;
     display: none;
     text-align: center;
@@ -249,24 +249,24 @@ body {
     border: 1px solid darkgray;
 }
 
-.shot-menu ul, .shot-type ul, .shooter-type ul, .passer-type ul, .pos-menu ul, .posT1-menu ul, .posT2-menu ul {
+.shot-menu ul, .shot-type ul, .shooter-type ul, .passer-type ul, .posT1-type ul, .posT2-type ul {
     padding: 0px;
     margin: 0px;
     min-width: 150px;
     list-style: none;
 }
 
-.shot-menu ul li, .shot-type ul li, .shooter-type ul li, .passer-type ul li, .pos-menu ul li, .posT1-menu ul li, .posT2-menu ul li {
+.shot-menu ul li, .shot-type ul li, .shooter-type ul li, .passer-type ul li, .posT1-type ul li, .posT2-type ul li {
     padding-bottom: 7px;
     padding-top: 7px;
 }
 
-.shot-menu ul li a, .shot-type ul li a, .shooter-type ul li a, .passer-type ul li a, .pos-menu ul li a, .posT1-menu ul li a, .posT2-menu ul li a {
+.shot-menu ul li a, .shot-type ul li a, .shooter-type ul li a, .passer-type ul li a, .posT1-type ul li a, .posT2-type ul li a {
     text-decoration: none;
     color: black;
 }
 
-.shot-menu ul li:hover, .shot-type ul li:hover, .shooter-type ul li:hover, .passer-type ul li:hover, .pos-menu ul li:hover, .posT1-menu ul li:hover, .posT2-menu ul li:hover {
+.shot-menu ul li:hover, .shot-type ul li:hover, .shooter-type ul li:hover, .passer-type ul li:hover, .posT1-type ul li:hover, .posT2-type ul li:hover {
     background: darkgray;
 }
 

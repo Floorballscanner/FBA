@@ -671,12 +671,10 @@
     var shootertype = document.getElementById("shooter");
     // premium html id passer type to variable
     var passertype = document.getElementById("passer");
-    // premium html id possession menu to variable
-    var postype = document.getElementById("possessionmenu");
     // premium html id possession Team 1 menu to variable
-    var posT1 = document.getElementById("posT1menu");
+    var posT1menu = document.getElementById("posT1menu");
     // premium html id Possession Team 2 menu to variable
-    var posT2 = document.getElementById("posT2menu");
+    var posT2menu = document.getElementById("posT2menu");
     // home and away team textfields to variables
     var hTeam = document.getElementById("home_team");
     var aTeam = document.getElementById("away_team");
