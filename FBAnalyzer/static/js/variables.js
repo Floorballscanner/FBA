@@ -211,6 +211,19 @@
     var xGL2T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGL3T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
 
+    // Data arrays for xGOT charts
+
+    var xGOTTeam_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGOTL1_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGOTL2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGOTL3_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+
+    var xGOTTeamT2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGOTL1T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGOTL2T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGOTL3T2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+
+
     // Data arrays for line shift charts
 
     var posTeam_array = [['Shift nr','Line 1','Line 2','Line 3','PP Line','SH Line', 'Team']];
@@ -631,7 +644,11 @@
     var xGf_g = [xGfL1g, xGfL2g, xGfL3g, xGfPP1g, xGfPP2g, xGfSH1g, xGfSH2g, xGfTeam_g];
     var xGa_p = [xGaL1p, xGaL2p, xGaL3p, xGaPP1p, xGaPP2p, xGaSH1p, xGaSH2p, xGaTeam_p];
     var xGa_g = [xGaL1g, xGaL2g, xGaL3g, xGaPP1g, xGaPP2g, xGaSH1g, xGaSH2g, xGaTeam_g];
-    
+
+    //xGOT Team 1
+
+    var xGOTf_g = [xGOTfL1g, xGOTfL2g, xGOTfL3g, xGOTfPP1g, xGOTfPP2g, xGOTfSH1g, xGOTfSH2g, xGOTfTeam_g];
+    var xGOTa_g = [xGOTaL1g, xGOTaL2g, xGOTaL3g, xGOTaPP1g, xGOTaPP2g, xGOTaSH1g, xGOTaSH2g, xGOTaTeam_g];
     // Team 2
     
     var TocT2_p = [TocL1T2p, TocL2T2p, TocL3T2p, TocPP1T2p, TocPP2T2p, TocSH1T2p, TocSH2T2p, TocTeamT2_p];
@@ -648,6 +665,11 @@
     var xGfT2_g = [xGfL1T2g, xGfL2T2g, xGfL3T2g, xGfPP1T2g, xGfPP2T2g, xGfSH1T2g, xGfSH2T2g, xGfTeamT2_g];
     var xGaT2_p = [xGaL1T2p, xGaL2T2p, xGaL3T2p, xGaPP1T2p, xGaPP2T2p, xGaSH1T2p, xGaSH2T2p, xGaTeamT2_p];
     var xGaT2_g = [xGaL1T2g, xGaL2T2g, xGaL3T2g, xGaPP1T2g, xGaPP2T2g, xGaSH1T2g, xGaSH2T2g, xGaTeamT2_g];
+
+    // xGOT Team 2
+
+    var xGOTfT2_g = [xGOTfL1T2g, xGOTfL2T2g, xGOTfL3T2g, xGOTfPP1T2g, xGOTfPP2T2g, xGOTfSH1T2g, xGOTfSH2T2g, xGOTfTeamT2_g];
+    var xGaT2_g = [xGOTaL1T2g, xGOTaL2T2g, xGOTaL3T2g, xGOTaPP1T2g, xGOTaPP2T2g, xGOTaSH1T2g, xGOTaSH2T2g, xGOTaTeamT2_g];
 
     // html id myCanvas to variable
     var cnvs = document.getElementById("myCanvas");

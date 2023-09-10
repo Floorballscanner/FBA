@@ -762,10 +762,12 @@
                  var date = new Date(gameCounter * 1000);
                  var display = date.toISOString().substr(11, 8);
                  xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                 xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                  xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                  xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                  xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                  xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                 xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                  xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                  xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                  xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -909,10 +911,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -999,10 +1003,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1086,10 +1092,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1174,10 +1182,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1268,10 +1278,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1357,10 +1369,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1444,10 +1458,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1532,10 +1548,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1632,10 +1650,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1735,10 +1755,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1836,10 +1858,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -1937,10 +1961,12 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, 0]);
                 xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
                 xGL3_array.push([display, xGf_g[2], xGa_g[2], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
                 xGL1T2_array.push([display, xGfT2_g[0], xGaT2_g[0], 0, 0]);
                 xGL2T2_array.push([display, xGfT2_g[1], xGaT2_g[1], 0, 0]);
                 xGL3T2_array.push([display, xGfT2_g[2], xGaT2_g[2], 0, 0]);
@@ -2051,7 +2077,9 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -2179,7 +2207,9 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], xGf_g[7], 0]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], xGfT2_g[7], 0]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
 
                 b = Number(txG_1.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -2306,7 +2336,9 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, xGaT2_g[7]]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -2437,7 +2469,9 @@
                 var date = new Date(gameCounter * 1000);
                 var display = date.toISOString().substr(11, 8);
                 xGTeam_array.push([display, xGf_g[7], xGa_g[7], 0, xGa_g[7]]);
+                xGOTTeam_array.push([display, xGOTf_g[7], xGOTa_g[7], 0, 0]);
                 xGTeamT2_array.push([display, xGfT2_g[7], xGaT2_g[7], 0, xGaT2_g[7]]);
+                xGOTTeamT2_array.push([display, xGOTfT2_g[7], xGOTaT2_g[7], 0, 0]);
 
                 b = Number(txG_2.innerHTML);
                 a = Math.round((b + dxG) * 100) / 100;
@@ -4523,10 +4557,12 @@
             "passer_str" : passer_str,
             "shooting_team" : shooting_team,
             "xGTeam_array" : xGTeam_array,
+            "xGOTTeam_array" : xGOTTeam_array,
             "xGL1_array" : xGL1_array,
             "xGL2_array" : xGL2_array,
             "xGL3_array" : xGL3_array,
             "xGTeamT2_array" : xGTeamT2_array,
+            "xGOTTeamT2_array" : xGOTTeamT2_array,
             "xGL1T2_array" : xGL1T2_array,
             "xGL2T2_array" : xGL2T2_array,
             "xGL3T2_array" : xGL3T2_array,
@@ -4794,10 +4830,12 @@
         shooting_team = undo_object.shooting_team;
 
         xGTeam_array = undo_object.xGTeam_array;
+        xGOTTeam_array = undo.object.xGOTTeam_array;
         xGL1_array = undo_object.xGL1_array;
         xGL2_array = undo_object.xGL2_array;
         xGL3_array = undo_object.xGL3_array;
         xGTeamT2_array = undo_object.xGTeamT2_array;
+        xGOTTeamT2_array = undo_object.xGOTTeamT2_array;
         xGL1T2_array = undo_object.xGL1T2_array;
         xGL2T2_array = undo_object.xGL2T2_array;
         xGL3T2_array = undo_object.xGL3T2_array;
@@ -5431,16 +5469,35 @@
         chart_per.draw(data2_p, options2);
 
         // Team xG Chart
-        var data = google.visualization.arrayToDataTable(xGTeam_array);
+        // var data = google.visualization.arrayToDataTable(xGTeam_array);
+
+        // var options = {
+        //  title: 'xG by Team',
+        //  curveType: 'function',
+         // legend: { position: 'bottom' },
+        //  seriesType: 'lines',
+         // series: {
+            //  2:{type: 'bars', color: 'blue'},
+           //   3:{type: 'bars', color: 'red'}}
+       // };
+
+        var combinedData = [];
+        for (var i = 0; i < xGTeam_array.length; i++) {
+            combinedData.push([xGTeam_array[i][0], xGTeam_array[i][1], xGTeam_array[i][2], xGOTTeam_array[i][1], xGOTTeam_array[i][2]]);
+        }
+
+        var data = google.visualization.arrayToDataTable(combinedData);
 
         var options = {
-          title: 'xG by Team',
-          curveType: 'function',
-          legend: { position: 'bottom' },
-          seriesType: 'lines',
-          series: {
-              2:{type: 'bars', color: 'blue'},
-              3:{type: 'bars', color: 'red'}}
+            title: 'xG and xGOT by Team',
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            series: {
+                0: { color: 'blue' },
+                1: { color: 'red' },
+                2: { color: 'green' },
+                3: { color: 'purple' }
+            }
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
