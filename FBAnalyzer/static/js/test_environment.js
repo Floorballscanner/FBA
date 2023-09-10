@@ -5377,7 +5377,7 @@
     //pmPPT2 = data.gfGameT2L4+data.gfGameT2L5-data.gaGameT2L4+data.gaGameT2L5;
 
     var chartData = google.visualization.arrayToDataTable([
-         ['Line', nameT1, { role: 'style' }, { role: 'annotation' }, nameT2, { role: 'style' }, { role: 'annotation' } ],
+         ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
          ['Line 1', gfL1g-gaL1g, 'color: #002072', gfL1g-gaL1g, gfL1T2g-gaL1T2g, 'color: #59D9EB', gfL1T2g-gaL1T2g ],
          ['Line 2', gfL2g-gaL2g, 'color: #002072', gfL2g-gaL2g, gfL2T2g-gaL2T2g, 'color: #59D9EB', gfL2T2g-gaL2T2g ],
          ['Line 3', gfL3g-gaL3g, 'color: #002072', gfL3g-gaL3g, gfL3T2g-gaL3T2g, 'color: #59D9EB', gfL3T2g-gaL3T2g ],
