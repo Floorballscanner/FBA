@@ -5600,10 +5600,10 @@
             curveType: 'function',
             legend: { position: 'bottom' },
             series: {
-                0: { color: 'blue' },
-                1: { color: 'red' },
-                2: { color: 'green' },
-                3: { color: 'purple' }
+                0: { color: 'blue', label: 'xG - Team 1' },
+                1: { color: 'red', label: 'xG - Team 2' },
+                2: { color: 'green', label: 'xGOT - Team 1' },
+                3: { color: 'purple', label: 'xGOT - Team 2' }
             }
         };
 
