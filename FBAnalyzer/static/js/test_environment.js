@@ -5603,7 +5603,9 @@
                 0: { color: 'blue', label: 'xG - Team 1' },
                 1: { color: 'red', label: 'xG - Team 2' },
                 2: { color: 'green', label: 'xGOT - Team 1' },
-                3: { color: 'purple', label: 'xGOT - Team 2' }
+                3: { color: 'purple', label: 'xGOT - Team 2' },
+                4: {type: 'bars', color: 'blue'},
+                5: {type: 'bars', color: 'red'}
             }
         };
 
