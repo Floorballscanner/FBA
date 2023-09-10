@@ -5602,8 +5602,8 @@
             series: {
                 0: { color: 'blue', label: 'xG - Team 1' },
                 1: { color: 'red', label: 'xG - Team 2' },
-                2: { color: 'green', label: 'xGOT - Team 1' },
-                3: { color: 'purple', label: 'xGOT - Team 2' },
+                2: { color: 'blue', label: 'xGOT - Team 1', lineDashStyle: [4, 4] }, // Dashed line for series 2
+                3: { color: 'red', label: 'xGOT - Team 2', lineDashStyle: [4, 4] }, // Dashed line for series 3
                 4: {type: 'bars', color: 'blue'},
                 5: {type: 'bars', color: 'red'}
             }
