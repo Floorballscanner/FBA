@@ -172,7 +172,7 @@
                         'Angle', 'xG', 'Shooter', 'Passer', 'TFLW', 'TFC', 'TFRW', 'TFLD', 'TFRD', 'TFG',
                         'TALW', 'TAC', 'TARW', 'TALD', 'TARD', 'TAG', 'PP', 'SH']];
     var printShotData = [['Date', 'Team 1', 'Team 2', 'Time', 'Shooting Team', 'Result', 'Type', 'xG', 'xGOT', 'Shooter',
-                        'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G', 'PP', 'SH']];
+                        'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G', 'PP', 'SH','Distance','Angle']];
     var premTimeData = [['User', 'Game', 'Time', 'Possession', 'Line T1', 'Line T2', 'T1LW', 'T1C', 'T1RW',
                         'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G']];
     var timeData = [['User', 'Game', 'Time', 'Possession', 'Line T1', 'Line T2']];
