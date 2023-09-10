@@ -5377,11 +5377,11 @@
     //pmPPT2 = data.gfGameT2L4+data.gfGameT2L5-data.gaGameT2L4+data.gaGameT2L5;
 
         var chartData = google.visualization.arrayToDataTable([
-            ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
-            ['Line 1', Number(gfL1g) - Number(gaL1g), 'color: #002072', Number(gfL1g) - Number(gaL1g), Number(gfL1T2g) - Number(gaL1T2g), 'color: #59D9EB', Number(gfL1T2g) - Number(gaL1T2g)],
-            ['Line 2', Number(gfL2g) - Number(gaL2g), 'color: #002072', Number(gfL2g) - Number(gaL2g), Number(gfL2T2g) - Number(gaL2T2g), 'color: #59D9EB', Number(gfL2T2g) - Number(gaL2T2g)],
-            ['Line 3', Number(gfL3g) - Number(gaL3g), 'color: #002072', Number(gfL3g) - Number(gaL3g), Number(gfL3T2g) - Number(gaL3T2g), 'color: #59D9EB', Number(gfL3T2g) - Number(gaL3T2g)],
-        ]);
+    ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
+    ['Line 1', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, 'color: #002072', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML, 'color: #59D9EB', ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML],
+    ['Line 2', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, 'color: #002072', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML, 'color: #59D9EB', ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML],
+    ['Line 3', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, 'color: #002072', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML, 'color: #59D9EB', ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML],
+]);
 
 
         var options = {
@@ -5398,29 +5398,29 @@
 
        // Team 1 typechart
 
-        var chartDataX = google.visualization.arrayToDataTable([
-            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT1L1g_array[0], 'color: #006400', stT1L1g_array[0], stT1L1g_array[1], 'color: #7CFC00', stT1L1g_array[1], stT1L1g_array[2], 'color: #000000', stT1L1g_array[2], stT1L1g_array[4], 'color: #0000FF', stT1L1g_array[4]],
-            ['Line2', stT1L2g_array[0], 'color: #006400', stT1L2g_array[0], stT1L2g_array[1], 'color: #7CFC00', stT1L2g_array[1], stT1L2g_array[2], 'color: #000000', stT1L2g_array[2], stT1L2g_array[4], 'color: #0000FF', stT1L2g_array[4]],
-            ['Line3', stT1L3g_array[0], 'color: #006400', stT1L3g_array[0], stT1L3g_array[1], 'color: #7CFC00', stT1L3g_array[1], stT1L3g_array[2], 'color: #000000', stT1L3g_array[2], stT1L3g_array[4], 'color: #0000FF', stT1L3g_array[4]
-            ]
-         ]);
+        // var chartDataX = google.visualization.arrayToDataTable([
+          //  ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+         //   ['Line1', stT1L1g_array[0], 'color: #006400', stT1L1g_array[0], stT1L1g_array[1], 'color: #7CFC00', stT1L1g_array[1], stT1L1g_array[2], 'color: #000000', stT1L1g_array[2], stT1L1g_array[4], 'color: #0000FF', stT1L1g_array[4]],
+         //   ['Line2', stT1L2g_array[0], 'color: #006400', stT1L2g_array[0], stT1L2g_array[1], 'color: #7CFC00', stT1L2g_array[1], stT1L2g_array[2], 'color: #000000', stT1L2g_array[2], stT1L2g_array[4], 'color: #0000FF', stT1L2g_array[4]],
+         //   ['Line3', stT1L3g_array[0], 'color: #006400', stT1L3g_array[0], stT1L3g_array[1], 'color: #7CFC00', stT1L3g_array[1], stT1L3g_array[2], 'color: #000000', stT1L3g_array[2], stT1L3g_array[4], 'color: #0000FF', stT1L3g_array[4]
+         //   ]
+         //]);
 
-        var chartDataX_p = google.visualization.arrayToDataTable([
-            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT1L1p_array[0], 'color: #006400', stT1L1p_array[0], stT1L1p_array[1], 'color: #7CFC00', stT1L1p_array[1], stT1L1p_array[2], 'color: #000000', stT1L1p_array[2], stT1L1p_array[4], 'color: #0000FF', stT1L1p_array[4]],
-            ['Line2', stT1L2p_array[0], 'color: #006400', stT1L2p_array[0], stT1L2p_array[1], 'color: #7CFC00', stT1L2p_array[1], stT1L2p_array[2], 'color: #000000', stT1L2p_array[2], stT1L2p_array[4], 'color: #0000FF', stT1L2p_array[4]],
-            ['Line3', stT1L3p_array[0], 'color: #006400', stT1L3p_array[0], stT1L3p_array[1], 'color: #7CFC00', stT1L3p_array[1], stT1L3p_array[2], 'color: #000000', stT1L3p_array[2], stT1L3p_array[4], 'color: #0000FF', stT1L3p_array[4]
-            ]
-         ]);
+       //  var chartDataX_p = google.visualization.arrayToDataTable([
+         //   ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
+         //   ['Line1', stT1L1p_array[0], 'color: #006400', stT1L1p_array[0], stT1L1p_array[1], 'color: #7CFC00', stT1L1p_array[1], stT1L1p_array[2], 'color: #000000', stT1L1p_array[2], stT1L1p_array[4], 'color: #0000FF', stT1L1p_array[4]],
+         //   ['Line2', stT1L2p_array[0], 'color: #006400', stT1L2p_array[0], stT1L2p_array[1], 'color: #7CFC00', stT1L2p_array[1], stT1L2p_array[2], 'color: #000000', stT1L2p_array[2], stT1L2p_array[4], 'color: #0000FF', stT1L2p_array[4]],
+          //  ['Line3', stT1L3p_array[0], 'color: #006400', stT1L3p_array[0], stT1L3p_array[1], 'color: #7CFC00', stT1L3p_array[1], stT1L3p_array[2], 'color: #000000', stT1L3p_array[2], stT1L3p_array[4], 'color: #0000FF', stT1L3p_array[4]
+        //    ]
+        // ]);
 
-        var options = {
-            title: 'Shot types, Team 1',
-            bar: {groupWidth: "75%"},
-            legend: { position: 'bottom'},
-            colors: ['#006400', '#7CFC00','#000000','#0000FF'],
-            hAxis: { textPosition: 'none' }
-            };
+      //  var options = {
+         //   title: 'Shot types, Team 1',
+           // bar: {groupWidth: "75%"},
+         //   legend: { position: 'bottom'},
+          //  colors: ['#006400', '#7CFC00','#000000','#0000FF'],
+          //  hAxis: { textPosition: 'none' }
+          //  };
 
         // var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
 
@@ -5441,7 +5441,7 @@
             else if (periodN == 4) {p_T1_typechart_4 = chart2_per.getImageURI();}
         });*/
 
-        chart2_per.draw(chartDataX_p, options);
+      //  chart2_per.draw(chartDataX_p, options);
 
         // Team 2 typechart
 
@@ -5469,7 +5469,7 @@
             hAxis: { textPosition: 'none' }
             };
 
-        var chartX = new google.visualization.ColumnChart(document.getElementById('T2_typechart'));
+        //var chartX = new google.visualization.ColumnChart(document.getElementById('T2_typechart'));
 
 /*        // Wait for the chart to finish drawing before calling the getImageURI() method.
         google.visualization.events.addListener(chartX, 'ready', function () {
