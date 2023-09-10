@@ -5383,12 +5383,18 @@
        //  ['Line 3', gfL3g-gaL3g, 'color: #002072', gfL3g-gaL3g, gfL3T2g-gaL3T2g, 'color: #59D9EB', gfL3T2g-gaL3T2g ],
      // ]);
 
+    // Plusminus Game Chart
+
+    pmPPT1 = data.gfGameT1L4+data.gfGameT1L5-data.gaGameT1L4+data.gaGameT1L5;
+    pmPPT2 = data.gfGameT2L4+data.gfGameT2L5-data.gaGameT2L4+data.gaGameT2L5;
+
     var chartData = google.visualization.arrayToDataTable([
-    ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-    ['Line 1', gf_g[0] - ga_g[0], 'color: #002072', gf_g[0] - ga_g[0], gfT2_g[0] - gaT2_g[0], 'color: #59D9EB', gfT2_g[0] - gaT2_g[0] ],
-    ['Line 2', gf_g[1] - ga_g[1], 'color: #002072', gf_g[1] - ga_g[1], gfT2_g[1] - gaT2_g[1], 'color: #59D9EB', gfT2_g[1] - gaT2_g[1] ],
-    ['Line 3', gf_g[2] - ga_g[2], 'color: #002072', gf_g[2] - ga_g[2], gfT2_g[2] - gaT2_g[2], 'color: #59D9EB', gfT2_g[2] - gaT2_g[2] ],
-]);
+         ['Line', data.nameT1, { role: 'style' }, { role: 'annotation' }, data.nameT2, { role: 'style' }, { role: 'annotation' } ],
+         ['Line 1', data.gfGameT1L1-data.gaGameT1L1, 'color: #002072', data.gfGameT1L1-data.gaGameT1L1, data.gfGameT2L1-data.gaGameT2L1, 'color: #59D9EB', data.gfGameT2L1-data.gaGameT2L1 ],
+         ['Line 2', data.gfGameT1L2-data.gaGameT1L2, 'color: #002072', data.gfGameT1L2-data.gaGameT1L2, data.gfGameT2L2-data.gaGameT2L2, 'color: #59D9EB', data.gfGameT2L2-data.gaGameT2L2 ],
+         ['Line 3', data.gfGameT1L3-data.gaGameT1L3, 'color: #002072', data.gfGameT1L3-data.gaGameT1L3, data.gfGameT2L3-data.gaGameT2L3, 'color: #59D9EB', data.gfGameT2L3-data.gaGameT2L3 ],
+         ['PP', pmPPT1, 'color: #002072', pmPPT1, pmPPT2, 'color: #59D9EB', pmPPT2 ]
+      ]);
 
     var options = {
         title: '+- by Line',
