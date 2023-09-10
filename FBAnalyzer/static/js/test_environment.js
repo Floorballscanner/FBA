@@ -1865,6 +1865,10 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
+                xGOTa_g[line_on - 1] = Math.round((xGOTa_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTa_g[7]= Math.round((xGOTa_g[7] + dxGOT) * 100) / 100;
+
 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1972,6 +1976,10 @@
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+                xGOTa_g[line_on - 1] = Math.round((xGOTa_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTa_g[7]= Math.round((xGOTa_g[7] + dxGOT) * 100) / 100;
 
 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -2363,6 +2371,10 @@
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
 
+                xGOTa_g[line_on - 1] = Math.round((xGOTa_g[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTa_g[7]= Math.round((xGOTa_g[7] + dxGOT) * 100) / 100;
+
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGfT2_p[7] = Math.round((xGfT2_p[7] + dxG) * 100) / 100;
@@ -2495,6 +2507,10 @@
                 xGa_g[line_on - 1] = Math.round((xGa_g[line_on - 1] + dxG) * 100) / 100;
 
                 xGa_g[7]= Math.round((xGa_g[7] + dxG) * 100) / 100;
+
+                xGOTa_g[line_on - 1] = Math.round((xGOTa_g[line_on - 1] + dxG) * 100) / 100;
+
+                xGOTa_g[7]= Math.round((xGOTa_g[7] + dxG) * 100) / 100;
 
 
                 xGfT2_p[line_on_2 - 1] = Math.round((xGfT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -5565,12 +5581,15 @@
             curveType: 'function',
             legend: { position: 'bottom' },
             series: {
-                0: { color: 'blue' },
-                1: { color: 'red' },
-                2: { color: 'green' },
-                3: { color: 'purple' }
-            }
+                0: { color: 'blue', visibleInLegend: true },
+                1: { color: 'red', visibleInLegend: true },
+                2: { color: 'green', visibleInLegend: true },
+                3: { color: 'purple', visibleInLegend: true }
+            },
+            seriesNames: ['xG Team 1', 'xG Team2', 'xGOT Team 1', 'xGOT Team2 ']
         };
+
+
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
 
