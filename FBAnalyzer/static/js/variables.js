@@ -590,6 +590,42 @@
     var xGaPP2p = 0;
     var xGaSH2p = 0;
     var xGaSH2g = 0;
+
+    ----
+
+    var xGOTfL1p = 0;
+    var xGOTfL2p = 0;
+    var xGOTfL3p = 0;
+    var xGOTfTeam_p = 0;
+    var xGOTfL1g = 0;
+    var xGOTfL2g = 0;
+    var xGOTfL3g = 0;
+    var xGOTfTeam_g = 0;
+    var xGOTfPP1g = 0;
+    var xGOTfPP1p = 0;
+    var xGOTfSH1p = 0;
+    var xGOTfSH1g = 0;
+    var xGOTfPP2g = 0;
+    var xGOTfPP2p = 0;
+    var xGOTfSH2p = 0;
+    var xGOTfSH2g = 0;
+
+    var xGOTaL1p = 0;
+    var xGOTaL2p = 0;
+    var xGOTaL3p = 0;
+    var xGOTaTeam_p = 0;
+    var xGOTaL1g = 0;
+    var xGOTaL2g = 0;
+    var xGOTaL3g = 0;
+    var xGOTaTeam_g = 0;
+    var xGOTaPP1g = 0;
+    var xGOTaPP1p = 0;
+    var xGOTaSH1p = 0;
+    var xGOTaSH1g = 0;
+    var xGOTaPP2g = 0;
+    var xGOTaPP2p = 0;
+    var xGOTaSH2p = 0;
+    var xGOTaSH2g = 0;
     
     // Team 2
     
@@ -626,6 +662,42 @@
     var xGaPP2T2p = 0;
     var xGaSH2T2p = 0;
     var xGaSH2T2g = 0;
+
+    ----
+
+    var xGOTfL1T2p = 0;
+    var xGOTfL2T2p = 0;
+    var xGOTfL3T2p = 0;
+    var xGOTfTeamT2_p = 0;
+    var xGOTfL1T2g = 0;
+    var xGOTfL2T2g = 0;
+    var xGOTfL3T2g = 0;
+    var xGOTfTeamT2_g = 0;
+    var xGOTfPP1T2g = 0;
+    var xGOTfPP1T2p = 0;
+    var xGOTfSH1T2p = 0;
+    var xGOTfSH1T2g = 0;
+    var xGOTfPP2T2g = 0;
+    var xGOTfPP2T2p = 0;
+    var xGOTfSH2T2p = 0;
+    var xGOTfSH2T2g = 0;
+
+    var xGOTaL1T2p = 0;
+    var xGOTaL2T2p = 0;
+    var xGOTaL3T2p = 0;
+    var xGOTaTeamT2_p = 0;
+    var xGOTaL1T2g = 0;
+    var xGOTaL2T2g = 0;
+    var xGOTaL3T2g = 0;
+    var xGOTaTeamT2_g = 0;
+    var xGOTaPP1T2g = 0;
+    var xGOTaPP1T2p = 0;
+    var xGOTaSH1T2p = 0;
+    var xGOTaSH1T2g = 0;
+    var xGOTaPP2T2g = 0;
+    var xGOTaPP2T2p = 0;
+    var xGOTaSH2T2p = 0;
+    var xGOTaSH2T2g = 0;
 
     // Arrays for easy access to variables
     // Team 1
