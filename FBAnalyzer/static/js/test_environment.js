@@ -2750,18 +2750,24 @@
         }
         else if (dataType == 5) {
             dataRes_str = "Possession +"
-            ctx.fillStyle = "darkgreen";
-            ctx_p.fillStyle = "darkgreen";
-            ctx_g.fillStyle = "darkgreen";
+            ctx.font = "14px Arial";
+            ctx_p.font = "14px Arial";
+            ctx_g.font = "14px Arial";
+            ctx.fillStyle = "blue";
+            ctx_p.fillStyle = "blue";
+            ctx_g.fillStyle = "blue";
             ctx.fillText("+", x, y);
             ctx_p.fillText("+", x, y);
             ctx_g.fillText("+", x, y);
         }
         else if (dataType == 6) {
             dataRes_str = "Possession -"
-            ctx.fillStyle = "darkgreen";
-            ctx_p.fillStyle = "darkgreen";
-            ctx_g.fillStyle = "darkgreen";
+            ctx.font = "14px Arial";
+            ctx_p.font = "14px Arial";
+            ctx_g.font = "14px Arial";
+            ctx.fillStyle = "blue";
+            ctx_p.fillStyle = "blue";
+            ctx_g.fillStyle = "blue";
             ctx.fillText("-", x, y);
             ctx_p.fillText("-", x, y);
             ctx_g.fillText("-", x, y);
@@ -3234,8 +3240,7 @@
             [document.getElementById("sT1G").selectedIndex].text;
 
             p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
-            p_T2G_str = document.getElementById("sT2G").options
-            [document.getElementById("sT2G").selectedIndex].text;
+            p_T2G_str = "";
 
             // Team 2 players on field
             /*p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
@@ -3253,9 +3258,10 @@
 
             printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                                 passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
-                                p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2)], posT1_str, posT2_str);
+                                p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), posT1_str, posT2_str)];
             shot_on = 0; // End the shot tag process
         }
+
         else if (dataType < 5) { // If not possession change
 
             // Shot menu hidden, shooter menu visible
