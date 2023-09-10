@@ -2526,9 +2526,9 @@
         document.getElementById("posT1-5").innerHTML = document.getElementById("sT1L"+l+"RD").options
                                             [document.getElementById("sT1L"+l+"RD").selectedIndex].text;
         stype.style.display = "none";
-        posT1type.style.display = "block";
-        posT1type.style.left = stype.style.left;
-        posT1type.style.top = stype.style.top;
+        posT1.style.display = "block";
+        posT1.style.left = stype.style.left;
+        posT1.style.top = stype.style.top;
 
 
         /*if (line_on < 4 && line_on_2 < 4) {
@@ -2580,7 +2580,7 @@
         
         Draw(PosX,PosY,dataType);
 
-        posT1type.style.display = "none";
+        posT1.style.display = "none";
         
          // Set possession menu items according to players on field
         /*l = line_on_2;
@@ -2596,9 +2596,9 @@
         document.getElementById("PosT2-5").innerHTML = document.getElementById("sT2L"+l+"RD").options
                                             [document.getElementById("sT2L"+l+"RD").selectedIndex].text;
                                             
-        posT2type.style.display = "block";
-        posT2type.style.left = posT1type.style.left;
-        posT2type.style.top = posT1type.style.top;*/
+        posT2.style.display = "block";
+        posT2.style.left = posT1.style.left;
+        posT2.style.top = posT1.style.top;*/
     }
 
     function posT2(player) {
