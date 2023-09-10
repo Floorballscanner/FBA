@@ -230,6 +230,7 @@
     var p_T2_plstats_chart = "";
     var p_T1_linestats_chart = "";
     var p_T2_linestats_chart = "";
+    var p_pmGame_chart = "";
 
     var p_xGGame_chart_1 = "";
     var p_xG_per_Game_chart_1 = "";
