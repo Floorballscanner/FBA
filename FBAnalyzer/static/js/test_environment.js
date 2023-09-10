@@ -2754,9 +2754,9 @@
                 ctx_p.fillStyle = "orange";
                 ctx_g.fillStyle = "orange";
             } else if (dataType === 2) {
-                ctx.fillStyle = "darkred";
-                ctx_p.fillStyle = "darkred";
-                ctx_g.fillStyle = "darkred";
+                ctx.fillStyle = "white";
+                ctx_p.fillStyle = "white";
+                ctx_g.fillStyle = "white";
             } else if (dataType === 3) {
                 ctx.fillStyle = "orangered";
                 ctx_p.fillStyle = "orangered";
