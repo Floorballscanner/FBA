@@ -2515,15 +2515,15 @@
         // Set possession menu items according to players on field
         l = line_on;
 
-        document.getElementById("PosT1-1").innerHTML = document.getElementById("sT1L"+l+"LW").options
+        document.getElementById("posT1-1").innerHTML = document.getElementById("sT1L"+l+"LW").options
                                             [document.getElementById("sT1L"+l+"LW").selectedIndex].text;
-        document.getElementById("PosT1-2").innerHTML = document.getElementById("sT1L"+l+"C").options
+        document.getElementById("posT1-2").innerHTML = document.getElementById("sT1L"+l+"C").options
                                             [document.getElementById("sT1L"+l+"C").selectedIndex].text;
-        document.getElementById("PosT1-3").innerHTML = document.getElementById("sT1L"+l+"RW").options
+        document.getElementById("posT1-3").innerHTML = document.getElementById("sT1L"+l+"RW").options
                                             [document.getElementById("sT1L"+l+"RW").selectedIndex].text;
-        document.getElementById("PosT1-4").innerHTML = document.getElementById("sT1L"+l+"LD").options
+        document.getElementById("posT1-4").innerHTML = document.getElementById("sT1L"+l+"LD").options
                                             [document.getElementById("sT1L"+l+"LD").selectedIndex].text;
-        document.getElementById("PosT1-5").innerHTML = document.getElementById("sT1L"+l+"RD").options
+        document.getElementById("posT1-5").innerHTML = document.getElementById("sT1L"+l+"RD").options
                                             [document.getElementById("sT1L"+l+"RD").selectedIndex].text;
         stype.style.display = "none";
         posT1type.style.display = "block";
