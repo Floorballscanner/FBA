@@ -830,14 +830,18 @@
             }
 
             stype.style.display = "block";
-            if (PosY <= 4*fLength/5)
+            if (PosY <= 4*fLength/5 && PosY > fLength/5)
             {
                 stype.style.top = PosY + "px";
             }
-            else
+            else if (PosY > fLength/5)
             {
+                stype.style.top = (PosY-(fLength/2)) + "px";
+            }
+            else {
                 stype.style.top = (PosY-(fLength/4)) + "px";
             }
+
             stype.style.left = PosX + "px";
 
             PosX = PosX - ImgPos[0];
@@ -2766,9 +2770,21 @@
         }
         else if (dataType == 5) {
             dataRes_str = "Possession +"
+            ctx.fillStyle = "blue";
+            ctx_p.fillStyle = "blue";
+            ctx_g.fillStyle = "blue";
+            ctx.fillText("o", x, y);
+            ctx_p.fillText("o", x, y);
+            ctx_g.fillText("o", x, y);
         }
         else if (dataType == 6) {
             dataRes_str = "Possession -"
+            ctx.fillStyle = "red";
+            ctx_p.fillStyle = "red";
+            ctx_g.fillStyle = "red";
+            ctx.fillText("o", x, y);
+            ctx_p.fillText("o", x, y);
+            ctx_g.fillText("o", x, y);
         }
 
         if (Ball_pos === 1) {
@@ -3238,8 +3254,7 @@
             [document.getElementById("sT1G").selectedIndex].text;
 
             p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
-            p_T2G_str = document.getElementById("sT2G").options
-            [document.getElementById("sT2G").selectedIndex].text;
+            p_T2G_str = "";
 
             // Team 2 players on field
             /*p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
@@ -3255,11 +3270,15 @@
             p_T2G_str = document.getElementById("sT2G").options
             [document.getElementById("sT2G").selectedIndex].text;*/
 
+            dataxG = 0;
+            dataxGOT = 0;
+
             printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                                 passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
-                                p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2)], posT1_str, posT2_str);
-
+                                p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), posT1_str, posT2_str]);
+            shot_on = 0; // End the shot tag process
         }
+
         else if (dataType < 5) { // If not possession change
 
             // Shot menu hidden, shooter menu visible
@@ -5343,8 +5362,8 @@
             ['Line 2', toc_g[1].innerHTML, Number(xf_g[1].textContent), Number(xa_g[1]. textContent), Number(gf_g[1].textContent), Number(ga_g[1]. textContent), Number(sf_g[1].textContent), Number(sa_g[1].textContent), Number(p_g[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
             ['Line 3', toc_g[2].innerHTML, Number(xf_g[2].textContent), Number(xa_g[2]. textContent), Number(gf_g[2].textContent), Number(ga_g[2]. textContent), Number(sf_g[2].textContent), Number(sa_g[2].textContent), Number(p_g[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
             ['Powerplay', toc_g[3].innerHTML, Number(xf_g[3].textContent), Number(xa_g[3]. textContent), Number(gf_g[3].textContent), Number(ga_g[3]. textContent), Number(sf_g[3].textContent), Number(sa_g[3].textContent), Number(p_g[3].textContent), 0, 0],
-            ['Pen. Kill', toc_g[4].innerHTML, Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0],
-            ['6vs5', toc_g[5].innerHTML, Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0],
+            ['Pen. Kill', toc_g[5].innerHTML, Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0],
+            ['6vs5', toc_g[4].innerHTML, Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0],
             ['5vs6', toc_g[6].innerHTML, Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent), 0, 0],
             ['5vs5', toc_g[7].innerHTML, Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
@@ -5368,8 +5387,8 @@
             ['Line 2', toc_p[1].innerHTML, Number(xf_p[1].textContent), Number(xa_p[1]. textContent), Number(gf_p[1].textContent), Number(ga_p[1]. textContent), Number(sf_p[1].textContent), Number(sa_p[1].textContent), Number(p_p[1].textContent), stxGT1L2g_array[0] + stxGT1L2g_array[1], stxGT1L2g_array[2] + stxGT1L2g_array[3] + stxGT1L2g_array[4]],
             ['Line 3', toc_p[2].innerHTML, Number(xf_p[2].textContent), Number(xa_p[2]. textContent), Number(gf_p[2].textContent), Number(ga_p[2]. textContent), Number(sf_p[2].textContent), Number(sa_p[2].textContent), Number(p_p[2].textContent), stxGT1L3g_array[0] + stxGT1L3g_array[1], stxGT1L3g_array[2] + stxGT1L3g_array[3] + stxGT1L3g_array[4]],
             ['Powerplay', toc_p[3].innerHTML, Number(xf_p[3].textContent), Number(xa_p[3]. textContent), Number(gf_p[3].textContent), Number(ga_p[3]. textContent), Number(sf_p[3].textContent), Number(sa_p[3].textContent), Number(p_p[3].textContent), 0, 0],
-            ['Pen. Kill', toc_p[4].innerHTML, Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
-            ['6vs5', toc_p[5].innerHTML, Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
+            ['Pen. Kill', toc_p[5].innerHTML, Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0],
+            ['6vs5', toc_p[4].innerHTML, Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0],
             ['5vs6', toc_p[6].innerHTML, Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0],
             ['5vs5', toc_p[7].innerHTML, Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4]],
 
