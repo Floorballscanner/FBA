@@ -231,10 +231,10 @@
 
     // Data arrays for players charts
 
-    var plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
-    var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
-    var plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
-    var plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
+    var plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
+    var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
+    var plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
+    var plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
 
     // Variables for print chart images
     var p_xGGame_chart = "";
@@ -358,6 +358,17 @@
     var staxGT2L3g_array = [0,0,0,0,0];
     var staxGT1L3p_array = [0,0,0,0,0];
     var staxGT2L3p_array = [0,0,0,0,0];
+
+    // Data arrays for line Possession +-
+
+    var posplusT1g_array = [0,0,0,0];
+    var posminusT1g_array = [0,0,0,0];
+    var posplusT2g_array = [0,0,0,0];
+    var posminusT2g_array = [0,0,0,0];
+    var posplusT1p_array = [0,0,0,0];
+    var posminusT1p_array = [0,0,0,0];
+    var posplusT2p_array = [0,0,0,0];
+    var posminusT2p_array = [0,0,0,0];
 
     // Time on court by line period/game (in counters)
     // Team 1
