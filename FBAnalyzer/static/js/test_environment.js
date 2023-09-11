@@ -423,8 +423,8 @@
                 stT2L3p_array = [0,0,0,0,0];
                 posplusT1p_array = [0,0,0,0];
                 posplusT2p_array = [0,0,0,0];
-                plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
-                plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
+                plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
+                plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
 
 
                 for (let i = 0; i < 8; i++) {
