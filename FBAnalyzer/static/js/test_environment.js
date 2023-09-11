@@ -3285,6 +3285,49 @@
                 }
             }
 
+            if (line_on_2 == '1') {
+                if (dataType == 5) {
+                    posminusT2g_array[0]++;
+                    posminusT2p_array[0]++;
+                    posminusT2g_array[3]++;
+                    posminusT2p_array[3]++;
+                }
+                if (dataType == 6) {
+                    posplusT2g_array[0]++;
+                    posplusT2p_array[0]++;
+                    posplusT2g_array[3]++;
+                    posplusT2p_array[3]++;
+                }
+            }
+            if (line_on_2 == '2') {
+                if (dataType == 5) {
+                    posminusT2g_array[1]++;
+                    posminusT2p_array[1]++;
+                    posminusT2g_array[3]++;
+                    posminusT2p_array[3]++;
+                }
+                if (dataType == 6) {
+                    posplusT2g_array[1]++;
+                    posplusT2p_array[1]++;
+                    posplusT2g_array[3]++;
+                    posplusT2p_array[3]++;
+                }
+            }
+            if (line_on_2 == '3') {
+                if (dataType == 5) {
+                    posminusT2g_array[2]++;
+                    posminusT2p_array[2]++;
+                    posminusT2g_array[3]++;
+                    posminusT2p_array[3]++;
+                }
+                if (dataType == 6) {
+                    posplusT2g_array[2]++;
+                    posplusT2p_array[2]++;
+                    posplusT2g_array[3]++;
+                    posplusT2p_array[3]++;
+                }
+            }
+
             // Team 1 players on field
             p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
             [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
@@ -3722,12 +3765,12 @@
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0]);
+                plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1]);
+                plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
             }
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
@@ -3753,12 +3796,12 @@
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT2_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0]);
+                plT2_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT2_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1]);
+                plT2_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
@@ -3789,12 +3832,12 @@
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT1p_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0]);
+                plT1p_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1]);
+                plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
             }
             plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
@@ -3820,12 +3863,12 @@
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT2p_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0]);
+                plT2p_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1]);
+                plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
             }
             plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
