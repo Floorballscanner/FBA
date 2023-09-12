@@ -833,16 +833,13 @@
             }
 
             stype.style.display = "block";
-            if (PosY <= 4*fLength/5 && PosY > fLength/5)
+            if (PosY <= 4*fLength/5)
             {
                 stype.style.top = PosY + "px";
             }
-            else if (PosY > fLength/5)
+            else
             {
                 stype.style.top = (PosY-(fLength/2)) + "px";
-            }
-            else {
-                stype.style.top = (PosY-(fLength/4)) + "px";
             }
 
             stype.style.left = PosX + "px";
