@@ -95,14 +95,40 @@
     var s_T2L3RW = document.getElementById("sT2L3RW");
     var s_T2L3LD = document.getElementById("sT2L3LD");
     var s_T2L3RD = document.getElementById("sT2L3RD");
+    var s_T1PPLW = document.getElementById("sT1PPLW");
+    var s_T1PPC = document.getElementById("sT1PPC");
+    var s_T1PPRW = document.getElementById("sT1PPRW");
+    var s_T1PPLD = document.getElementById("sT1PPLD");
+    var s_T1PPRD = document.getElementById("sT1PPRD");
+    var s_T2PPLW = document.getElementById("sT2PPLW");
+    var s_T2PPC = document.getElementById("sT2PPC");
+    var s_T2PPRW = document.getElementById("sT2PPRW");
+    var s_T2PPLD = document.getElementById("sT2PPLD");
+    var s_T2PPRD = document.getElementById("sT2PPRD");
+    var s_T16v5LW = document.getElementById("sT16v5LW");
+    var s_T16v5C = document.getElementById("sT16v5C");
+    var s_T16v5RW = document.getElementById("sT16v5RW");
+    var s_T16v5LD = document.getElementById("sT16v5LD");
+    var s_T16v5RD = document.getElementById("sT16v5RD");
+    var s_T16v5X = document.getElementById("sT16v5X");
+    var s_T26v5LW = document.getElementById("sT26v5LW");
+    var s_T26v5C = document.getElementById("sT26v5C");
+    var s_T26v5RW = document.getElementById("sT26v5RW");
+    var s_T26v5LD = document.getElementById("sT26v5LD");
+    var s_T26v5RD = document.getElementById("sT26v5RD");
+    var s_T26v5X = document.getElementById("sT26v5X");
 
     var s_T1_p = [s_T1G, s_T1L1LW, s_T1L1C, s_T1L1RW, s_T1L1LD, s_T1L1RD,
                     s_T1L2LW, s_T1L2C, s_T1L2RW, s_T1L2LD, s_T1L2RD,
-                    s_T1L3LW, s_T1L3C, s_T1L3RW, s_T1L3LD, s_T1L3RD];
+                    s_T1L3LW, s_T1L3C, s_T1L3RW, s_T1L3LD, s_T1L3RD,
+                    s_T1PPLW, s_T1PPC, s_T1PPRW, s_T1PPLD, s_T1PPRD,
+                    s_T16v5LW, s_T16v5C, s_T16v5RW, s_T16v5LD, s_T16v5RD, s_T16v5X];
 
     var s_T2_p = [s_T2G, s_T2L1LW, s_T2L1C, s_T2L1RW, s_T2L1LD, s_T2L1RD,
                     s_T2L2LW, s_T2L2C, s_T2L2RW, s_T2L2LD, s_T2L2RD,
-                    s_T2L3LW, s_T2L3C, s_T2L3RW, s_T2L3LD, s_T2L3RD];
+                    s_T2L3LW, s_T2L3C, s_T2L3RW, s_T2L3LD, s_T2L3RD,
+                    s_T2PPLW, s_T2PPC, s_T2PPRW, s_T2PPLD, s_T2PPRD,
+                    s_T26v5LW, s_T26v5C, s_T26v5RW, s_T26v5LD, s_T26v5RD, s_T26v5X];
 
     // Team 1 and Team 2 name elements
 
