@@ -192,7 +192,7 @@
         shiftPos = 0;
         console.log(line_on); // debugging
         // Automatic line change for Team 2
-        if (line < 4) {
+/*        if (line < 4) {
             Line_change_2(line);
         }
         if (line == 4) {
@@ -206,7 +206,7 @@
         }
         if (line == 7) {
             Line_change_2(5);
-        }
+        }*/
     }
 
     // Team 2 line change functionality
