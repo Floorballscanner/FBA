@@ -123,7 +123,7 @@ It extends app_layout.html with Django
             </div>
             <div class="row justify-content-center">
                 <div style="Padding-top: 20px" class="custom-control custom-checkbox image-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="ck1a" checked onclick="checkLive()">
+                    <input type="checkbox" class="custom-control-input" id="ck1a" onclick="checkLive()">
                     <label class="custom-control-label" for="ck1a">
                         <img src="{% static 'live.png' %}" alt="#" class="img-fluid" width="70px">
                     </label>
@@ -131,7 +131,7 @@ It extends app_layout.html with Django
             </div>
             <div class="row justify-content-center">
                 <div style="Padding-top: 5px" class="custom-control custom-checkbox image-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="ck2a" checked onclick="checkShooter()">
+                    <input type="checkbox" class="custom-control-input" id="ck2a" onclick="checkShooter()">
                     <label class="custom-control-label" for="ck2a">
                         <img src="{% static 'shooter.png' %}" alt="#" class="img-fluid" width="70px">
                     </label>
@@ -341,7 +341,7 @@ It extends app_layout.html with Django
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
-                <h4>Team 1 line stats</h4>
+                <h5>Team 1 line stats</h5>
                 <div id="T1linestats"></div>
             </div>
         </div>
@@ -350,7 +350,7 @@ It extends app_layout.html with Django
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
-                <h4>Team 2 line stats</h4>
+                <h5>Team 2 line stats</h5>
                 <div id="T2linestats"></div>
             </div>
         </div>

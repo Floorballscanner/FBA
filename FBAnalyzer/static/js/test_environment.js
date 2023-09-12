@@ -4212,6 +4212,7 @@
             .then(data => {
                 console.log('Success:', data);
 
+                // Empty old team players
                 for (let i=0; i<s_T1_p.length; i++) {
                     removeOptions(s_T1_p[i]);
                 }
@@ -4222,17 +4223,6 @@
                         opt = new Option("#" + data[i].jersey_number + " " + data[i].last_name, data[i].id);
                         s_T1_p[j].appendChild(opt);
                     }
-
-                    var pos = convPos(data[i].position);
-                    var line = convLine(data[i].line);
-
-                    if (typeof pos !== 'undefined' && typeof line !== 'undefined') {
-                        document.getElementById("sT1"+line+pos).value = data[i].id;
-                    }
-                    else if (pos == "G") {
-                        document.getElementById("sT1G").value = data[i].id;
-                    }
-                    else {}
                 }
 
         })
@@ -4264,18 +4254,6 @@
                         opt = new Option("#" + data[i].jersey_number + " " + data[i].last_name, data[i].id);
                         s_T2_p[j].appendChild(opt);
                     }
-
-                    var pos = convPos(data[i].position);
-                    var line = convLine(data[i].line);
-
-                    if (typeof pos !== 'undefined' && typeof line !== 'undefined') {
-                        document.getElementById("sT2"+line+pos).value = data[i].id;
-
-                    }
-                    else if (pos == "G") {
-                        document.getElementById("sT2G").value = data[i].id;
-                    }
-                    else {}
                 }
 
         })
@@ -4287,7 +4265,7 @@
 
     function changePlayer(position, l, p) {
 
-        var player_id = document.getElementById(position).options
+        /*var player_id = document.getElementById(position).options
                         [document.getElementById(position).selectedIndex].value;
         var pos = p;
         var line = l;
@@ -4387,7 +4365,7 @@
         })
         .catch((error) => {
           console.error('Error:', error);
-        });
+        });*/
 
     }
 
