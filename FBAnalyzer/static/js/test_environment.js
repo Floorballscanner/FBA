@@ -832,10 +832,8 @@
                 + document.documentElement.scrollTop;
             }
 
-            console.log(PosY);
-
             stype.style.display = "block";
-            if ((PosY - ImgPos[1]) <= fLength/5)
+            if ((PosY - ImgPos[1]) <= 4*fLength/5)
             {
                 stype.style.top = PosY + "px";
             }
