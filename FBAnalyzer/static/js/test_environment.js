@@ -3412,7 +3412,7 @@
 
             if (shooter_select == 1) { // If Shooter tagging is on
 
-                if ((Ball_pos == 1 && line_on <= 3) || (Ball_pos == 2 && line_on_2 <= 3)) {
+                if ((Ball_pos == 1 && line_on <= 5) || (Ball_pos == 2 && line_on_2 <= 5)) {
                     // Set menu items according to players on field
                     if (Ball_pos == 1) {
                         l = line_on;
@@ -3420,16 +3420,51 @@
                     else if (Ball_pos == 2) {
                         l = line_on_2;
                     }
-                    document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+                    if (l <= 3) { // 5 vs 5
+
+                        document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
                                                         [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
-                    document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
-                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
-                    document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
-                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
-                    document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
-                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
-                    document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
-                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
+                        document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+                                                            [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
+                        document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+                                                            [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
+                        document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+                                                            [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
+                        document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+                                                            [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
+                    }
+                    else if (l == 4) { // PP
+
+                        document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"PPLW").options
+                                                            [document.getElementById("sT"+Ball_pos+"PPLW").selectedIndex].text;
+                        document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"PPC").options
+                                                            [document.getElementById("sT"+Ball_pos+"PPC").selectedIndex].text;
+                        document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"PPRW").options
+                                                            [document.getElementById("sT"+Ball_pos+"PPRW").selectedIndex].text;
+                        document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"PPLD").options
+                                                            [document.getElementById("sT"+Ball_pos+"PPLD").selectedIndex].text;
+                        document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"PPRD").options
+                                                            [document.getElementById("sT"+Ball_pos+"PPRD").selectedIndex].text;
+
+                    }
+                    else if (l == 5) { // 6 vs 5
+
+                        document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"6v5LW").options
+                                                        [document.getElementById("sT"+Ball_pos+"6v5LW").selectedIndex].text;
+                        document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"6v5C").options
+                                                            [document.getElementById("sT"+Ball_pos+"6v5C").selectedIndex].text;
+                        document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"6v5RW").options
+                                                            [document.getElementById("sT"+Ball_pos+"6v5RW").selectedIndex].text;
+                        document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"6v5LD").options
+                                                            [document.getElementById("sT"+Ball_pos+"6v5LD").selectedIndex].text;
+                        document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"6v5RD").options
+                                                            [document.getElementById("sT"+Ball_pos+"6v5RD").selectedIndex].text;
+                        document.getElementById("shooter-6").innerHTML = document.getElementById("sT"+Ball_pos+"6v5X").options
+                                                            [document.getElementById("sT"+Ball_pos+"6v5X").selectedIndex].text;
+                        document.getElementById("shooter-6").style.display = "block";
+
+                    }
+
                     shootertype.style.display = "block";
                     shootertype.style.left = stype.style.left;
                     shootertype.style.top = stype.style.top;
@@ -3574,37 +3609,114 @@
         }
 
         if (s_position == "1") {
-            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+            if (l <= 3) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].value;
-            shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+                shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
+            }
+            else if (l == 4) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"PPLW").options
+                        [document.getElementById("sT"+Ball_pos+"PPLW").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"PPLW").options
+                        [document.getElementById("sT"+Ball_pos+"PPLW").selectedIndex].text;
+            }
+            else if (l == 5) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"6v5LW").options
+                        [document.getElementById("sT"+Ball_pos+"6v5LW").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"6v5LW").options
+                        [document.getElementById("sT"+Ball_pos+"6v5LW").selectedIndex].text; 
+            }
         }
         else if (s_position == "2") {
-            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+            if (l <= 3) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].value;
-            shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+                shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
+            }
+            else if (l == 4) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"PPC").options
+                        [document.getElementById("sT"+Ball_pos+"PPC").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"PPC").options
+                        [document.getElementById("sT"+Ball_pos+"PPC").selectedIndex].text;
+            }
+            else if (l == 5) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"6v5C").options
+                        [document.getElementById("sT"+Ball_pos+"6v5C").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"6v5C").options
+                        [document.getElementById("sT"+Ball_pos+"6v5C").selectedIndex].text; 
+            }
         }
         else if (s_position == "3") {
-            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+            if (l <= 3) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].value;
-            shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+                shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
+            }
+            else if (l == 4) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"PPRW").options
+                        [document.getElementById("sT"+Ball_pos+"PPRW").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"PPRW").options
+                        [document.getElementById("sT"+Ball_pos+"PPRW").selectedIndex].text;
+            }
+            else if (l == 5) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"6v5RW").options
+                        [document.getElementById("sT"+Ball_pos+"6v5RW").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"6v5RW").options
+                        [document.getElementById("sT"+Ball_pos+"6v5RW").selectedIndex].text; 
+            }
         }
         else if (s_position == "4") {
-            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+            if (l <= 3) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].value;
-            shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+                shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
+            }
+            else if (l == 4) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"PPLD").options
+                        [document.getElementById("sT"+Ball_pos+"PPLD").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"PPLD").options
+                        [document.getElementById("sT"+Ball_pos+"PPLD").selectedIndex].text;
+            }
+            else if (l == 5) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"6v5LD").options
+                        [document.getElementById("sT"+Ball_pos+"6v5LD").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"6v5LD").options
+                        [document.getElementById("sT"+Ball_pos+"6v5LD").selectedIndex].text; 
+            }
         }
         else if (s_position == "5") {
-            shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+            if (l <= 3) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].value;
-            shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+                shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
+            }
+            else if (l == 4) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"PPRD").options
+                        [document.getElementById("sT"+Ball_pos+"PPRD").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"PPRD").options
+                        [document.getElementById("sT"+Ball_pos+"PPRD").selectedIndex].text;
+            }
+            else if (l == 5) {
+                shooter_id = document.getElementById("sT"+Ball_pos+"6v5RD").options
+                        [document.getElementById("sT"+Ball_pos+"6v5RD").selectedIndex].value;
+                shooter_str = document.getElementById("sT"+Ball_pos+"6v5RD").options
+                        [document.getElementById("sT"+Ball_pos+"6v5RD").selectedIndex].text; 
+            }
+        }
+        else if (s_position == "6") {
+            shooter_id = document.getElementById("sT"+Ball_pos+"6v5X").options
+                    [document.getElementById("sT"+Ball_pos+"6v5X").selectedIndex].value;
+            shooter_str = document.getElementById("sT"+Ball_pos+"6v5X").options
+                    [document.getElementById("sT"+Ball_pos+"6v5X").selectedIndex].text;
         }
 
         shootertype.style.display = "none";
+        document.getElementById("shooter-6").style.display = "none";
 
         // Set menu items according to players on field
         document.getElementById("passer-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
