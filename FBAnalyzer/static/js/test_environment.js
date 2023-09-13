@@ -833,7 +833,7 @@
             }
 
             stype.style.display = "block";
-            if (PosY <= 4*fLength/5)
+            if (PosY <= fLength/5)
             {
                 stype.style.top = PosY + "px";
             }
