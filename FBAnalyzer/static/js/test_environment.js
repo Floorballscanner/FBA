@@ -832,6 +832,9 @@
                 + document.documentElement.scrollTop;
             }
 
+
+            console.log(PosY);
+
             stype.style.display = "block";
             if (PosY <= fLength/5)
             {
