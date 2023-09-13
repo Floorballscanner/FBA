@@ -832,13 +832,10 @@
                 + document.documentElement.scrollTop;
             }
 
-            PosX = PosX - ImgPos[0];
-            PosY = PosY - ImgPos[1];
-
             console.log(PosY);
 
             stype.style.display = "block";
-            if (PosY <= fLength/5)
+            if ((PosY - ImgPos[1]) <= fLength/5)
             {
                 stype.style.top = PosY + "px";
             }
@@ -849,7 +846,8 @@
 
             stype.style.left = PosX + "px";
 
-
+            PosX = PosX - ImgPos[0];
+            PosY = PosY - ImgPos[1];
         }
     }
 
