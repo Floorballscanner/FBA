@@ -387,7 +387,7 @@ It extends app_layout.html with Django
         </div>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-sm-12">
             <div id="xGTeam_chart" style="height: 300px"></div>
         </div>
@@ -407,36 +407,28 @@ It extends app_layout.html with Django
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
-            <div class="linestats">
-                <h5>Team 1 player stats</h5>
-                <div id="T1plstats"></div>
-            </div>
+            <h5>Team 1 player stats</h5>
+            <div id="T1plstats"></div>
         </div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
-            <div class="linestats">
-                <h5>Team 2 player stats</h5>
-                <div id="T2plstats"></div>
-            </div>
+            <h5>Team 2 player stats</h5>
+            <div id="T2plstats"></div>
         </div>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
-            <div class="linestats">
-                <h5>Team 1 line stats</h5>
-                <div id="T1linestats"></div>
-            </div>
+            <h5>Team 1 line stats</h5>
+            <div id="T1linestats"></div>
         </div>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
-            <div class="linestats">
-                <h5>Team 2 line stats</h5>
-                <div id="T2linestats"></div>
-            </div>
+            <h5>Team 2 line stats</h5>
+            <div id="T2linestats"></div>
         </div>
     </div>
 
@@ -1213,7 +1205,7 @@ It extends app_layout.html with Django
     <li class="menu-option" onclick="shotTaker('3')"><span id="shooter-3">RW</span></li>
     <li class="menu-option" onclick="shotTaker('4')"><span id="shooter-4">LD</span></li>
     <li class="menu-option" onclick="shotTaker('5')"><span id="shooter-5">RD</span></li>
-    <li class="menu-option" onclick="shotTaker('6')"><span id="shooter-6">X</span></li>
+    <li class="menu-option" style="display:none;" onclick="shotTaker('6')"><span id="shooter-6">X</span></li>
   </ul>
 </div>
 
