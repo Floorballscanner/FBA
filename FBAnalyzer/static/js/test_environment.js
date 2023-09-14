@@ -3709,69 +3709,88 @@
                         [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
         }
 
-        p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
-                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
-        p_T1C = document.getElementById("sT1L"+line_on+"C").options
-                [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
-        p_T1RW = document.getElementById("sT1L"+line_on+"RW").options
-                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
-        p_T1LD = document.getElementById("sT1L"+line_on+"LD").options
-                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
-        p_T1RD = document.getElementById("sT1L"+line_on+"RD").options
-                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
-        p_T1G = document.getElementById("sT1G").options
-                [document.getElementById("sT1G").selectedIndex].value;
-
-        p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
-                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
-        p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
-                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
-        p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
-                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
-        p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
-                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
-        p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
-                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
-        p_T2G = document.getElementById("sT2G").options
-                [document.getElementById("sT2G").selectedIndex].value;
-
-        p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
-                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
-        p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
-                [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
-        p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
-                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
-        p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
-                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
-        p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
-                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
-        p_T1G_str = document.getElementById("sT1G").options
-                [document.getElementById("sT1G").selectedIndex].text;
-        p_T1X_str = "";
-
-        if (line_on == 5) {
-            p_T1X_str = document.getElementById("sT1L5X").options
-                    [document.getElementById("sT1L5X").selectedIndex].text;
+        if (line_on < 6) {
+            p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
+                    [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
+            p_T1C = document.getElementById("sT1L"+line_on+"C").options
+                    [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
+            p_T1RW = document.getElementById("sT1L"+line_on+"RW").options
+                    [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
+            p_T1LD = document.getElementById("sT1L"+line_on+"LD").options
+                    [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
+            p_T1RD = document.getElementById("sT1L"+line_on+"RD").options
+                    [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
+            p_T1G = document.getElementById("sT1G").options
+                    [document.getElementById("sT1G").selectedIndex].value;
+        }
+        else if (line_on > 5) {
+            p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = p_T1G = "";
         }
 
-        p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
-                [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
-        p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
-                [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
-        p_T2RW_str = document.getElementById("sT2L"+line_on_2+"RW").options
-                [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
-        p_T2LD_str = document.getElementById("sT2L"+line_on_2+"LD").options
-                [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
-        p_T2RD_str = document.getElementById("sT2L"+line_on_2+"RD").options
-                [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
-        p_T2G_str = document.getElementById("sT2G").options
-                [document.getElementById("sT2G").selectedIndex].text;
-        p_T2X_str = "";
-
-        if (line_on_2 == 5) {
-            p_T2X_str = document.getElementById("sT2L5X").options
-                    [document.getElementById("sT2L5X").selectedIndex].text;
+        if (line_on_2 < 6) {
+            p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
+                    [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
+            p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
+                    [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
+            p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
+                    [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
+            p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
+                    [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
+            p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
+                    [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
+            p_T2G = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].value;
         }
+        else if (line_on_2 > 5) {
+            p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = p_T2G = "";
+        }
+
+        if (line_on < 6) {
+            p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
+                    [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+            p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
+                    [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+            p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
+                    [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+            p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
+                    [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+            p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
+                    [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+            p_T1G_str = document.getElementById("sT1G").options
+                    [document.getElementById("sT1G").selectedIndex].text;
+            p_T1X_str = "";
+
+            if (line_on == 5) {
+                p_T1X_str = document.getElementById("sT1L5X").options
+                        [document.getElementById("sT1L5X").selectedIndex].text;
+            }
+        }
+        else if (line_on > 5) {
+            p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = p_T1G_str = p_T1X_str = "";
+        }
+
+        if (line_on_2 < 6) {
+            p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
+                    [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
+            p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
+                    [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
+            p_T2RW_str = document.getElementById("sT2L"+line_on_2+"RW").options
+                    [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
+            p_T2LD_str = document.getElementById("sT2L"+line_on_2+"LD").options
+                    [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
+            p_T2RD_str = document.getElementById("sT2L"+line_on_2+"RD").options
+                    [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
+            p_T2G_str = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].text;
+            p_T2X_str = "";
+
+            if (line_on_2 == 5) {
+                p_T2X_str = document.getElementById("sT2L5X").options
+                        [document.getElementById("sT2L5X").selectedIndex].text;
+            }
+            else if (line_on_2 > 5) {
+                p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = p_T2G_str = p_T2X_str = "";
+            }
 
         passertype.style.display = "none";
         document.getElementById("passer-8").style.display = "none";
