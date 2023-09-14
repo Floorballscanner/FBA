@@ -191,6 +191,7 @@
         shiftNo++;
         shiftPos = 0;
         console.log(line_on); // debugging
+
         // Automatic line change for Team 2
 /*        if (line < 4) {
             Line_change_2(line);
@@ -3338,9 +3339,15 @@
             [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
             p_T1G_str = document.getElementById("sT1G").options
             [document.getElementById("sT1G").selectedIndex].text;
+            p_T1X_str = "";
+
+            if (line_on == 5) {
+                p_T1X_str = document.getElementById("sT1L5X").options
+                [document.getElementById("sT1L5X").selectedIndex].text;
+            }
 
             p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
-            p_T2G_str = "";
+            p_T2G_str = p_T2X_str = "";
 
             // Team 2 players on field
             /*p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
@@ -3364,14 +3371,14 @@
             found = 0;
             for (let i=0;i<plT1_array.length;i++) {
                 if (posT1_id == plT1_array[i][0]) {
-                    if (dataType == 5) {plT1_array[i][8]++;}
-                    if (dataType == 6) {plT1_array[i][9]++;}
+                    if (dataType == 5) {plT1_array[i][10]++;}
+                    if (dataType == 6) {plT1_array[i][11]++;}
                     found = 1;
                 }
             }
             if (found == 0) { // Player not found, adding new row to the array
-                if (dataType == 5) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 1, 0]);}
-                if (dataType == 6) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 1]);}
+                if (dataType == 5) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);}
+                if (dataType == 6) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);}
             }
 
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -3381,21 +3388,21 @@
             found = 0;
             for (let i=0;i<plT1p_array.length;i++) {
                 if (posT1_id == plT1p_array[i][0]) {
-                    if (dataType == 5) {plT1p_array[i][8]++;}
-                    if (dataType == 6) {plT1p_array[i][9]++;}
+                    if (dataType == 5) {plT1p_array[i][10]++;}
+                    if (dataType == 6) {plT1p_array[i][11]++;}
                     found = 1;
                 }
             }
             if (found == 0) { // Player not found, adding new row to the array
-                if (dataType == 5) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 1, 0]);}
-                if (dataType == 6) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 1]);}
+                if (dataType == 5) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);}
+                if (dataType == 6) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);}
             }
 
             plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
 
             printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
-                                passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
-                                p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), posT1_str, posT2_str]);
+                                passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
+                                p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), posT1_str, posT2_str]);
 
             shot_on = 0; // End the shot tag process
             shotCounter++;
@@ -3418,47 +3425,21 @@
                     else if (Ball_pos == 2) {
                         l = line_on_2;
                     }
-                    if (l <= 3) { // 5 vs 5
 
-                        document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
-                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
-                        document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
-                                                            [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
-                        document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
-                                                            [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
-                        document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
-                                                            [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
-                        document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
-                                                            [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
-                    }
-                    else if (l == 4) { // PP
+                    document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+                                                    [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
+                    document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
+                    document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
+                    document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
+                    document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
+                    if (l == 5) { // 6 vs 5
 
-                        document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"PPLW").options
-                                                            [document.getElementById("sT"+Ball_pos+"PPLW").selectedIndex].text;
-                        document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"PPC").options
-                                                            [document.getElementById("sT"+Ball_pos+"PPC").selectedIndex].text;
-                        document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"PPRW").options
-                                                            [document.getElementById("sT"+Ball_pos+"PPRW").selectedIndex].text;
-                        document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"PPLD").options
-                                                            [document.getElementById("sT"+Ball_pos+"PPLD").selectedIndex].text;
-                        document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"PPRD").options
-                                                            [document.getElementById("sT"+Ball_pos+"PPRD").selectedIndex].text;
-
-                    }
-                    else if (l == 5) { // 6 vs 5
-
-                        document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"6v5LW").options
-                                                        [document.getElementById("sT"+Ball_pos+"6v5LW").selectedIndex].text;
-                        document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"6v5C").options
-                                                            [document.getElementById("sT"+Ball_pos+"6v5C").selectedIndex].text;
-                        document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"6v5RW").options
-                                                            [document.getElementById("sT"+Ball_pos+"6v5RW").selectedIndex].text;
-                        document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"6v5LD").options
-                                                            [document.getElementById("sT"+Ball_pos+"6v5LD").selectedIndex].text;
-                        document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"6v5RD").options
-                                                            [document.getElementById("sT"+Ball_pos+"6v5RD").selectedIndex].text;
-                        document.getElementById("shooter-6").innerHTML = document.getElementById("sT"+Ball_pos+"6v5X").options
-                                                            [document.getElementById("sT"+Ball_pos+"6v5X").selectedIndex].text;
+                        document.getElementById("shooter-6").innerHTML = document.getElementById("sT"+Ball_pos+"L5X").options
+                                                            [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
                         document.getElementById("shooter-6").style.display = "block";
 
                     }
@@ -3469,7 +3450,7 @@
                     console.log("Shooter menu open")
 
                 }
-                if ((Ball_pos == 1 && line_on > 3) || (Ball_pos == 2 && line_on_2 > 3)) {
+                if ((Ball_pos == 1 && line_on > 5) || (Ball_pos == 2 && line_on_2 > 5)) {
                     p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
                     p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
                     p_T1G = document.getElementById("sT1G").options
@@ -3488,8 +3469,8 @@
                                 p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
                     printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
-                                passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
-                                p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2)]);
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
 
                     if (shotCounter > 1) {
                         document.getElementById("undo").disabled = false;
@@ -3582,8 +3563,8 @@
                                 p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
                 printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
-                                passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
-                                p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2)]);
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
 
                 if (shotCounter > 1) {
                     document.getElementById("undo").disabled = false;
@@ -3607,110 +3588,40 @@
         }
 
         if (s_position == "1") {
-            if (l <= 3) {
                 shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].value;
                 shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
-            }
-            else if (l == 4) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"PPLW").options
-                        [document.getElementById("sT"+Ball_pos+"PPLW").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"PPLW").options
-                        [document.getElementById("sT"+Ball_pos+"PPLW").selectedIndex].text;
-            }
-            else if (l == 5) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"6v5LW").options
-                        [document.getElementById("sT"+Ball_pos+"6v5LW").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"6v5LW").options
-                        [document.getElementById("sT"+Ball_pos+"6v5LW").selectedIndex].text; 
-            }
         }
         else if (s_position == "2") {
-            if (l <= 3) {
                 shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].value;
                 shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
-            }
-            else if (l == 4) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"PPC").options
-                        [document.getElementById("sT"+Ball_pos+"PPC").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"PPC").options
-                        [document.getElementById("sT"+Ball_pos+"PPC").selectedIndex].text;
-            }
-            else if (l == 5) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"6v5C").options
-                        [document.getElementById("sT"+Ball_pos+"6v5C").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"6v5C").options
-                        [document.getElementById("sT"+Ball_pos+"6v5C").selectedIndex].text; 
-            }
         }
         else if (s_position == "3") {
-            if (l <= 3) {
                 shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].value;
                 shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
-            }
-            else if (l == 4) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"PPRW").options
-                        [document.getElementById("sT"+Ball_pos+"PPRW").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"PPRW").options
-                        [document.getElementById("sT"+Ball_pos+"PPRW").selectedIndex].text;
-            }
-            else if (l == 5) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"6v5RW").options
-                        [document.getElementById("sT"+Ball_pos+"6v5RW").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"6v5RW").options
-                        [document.getElementById("sT"+Ball_pos+"6v5RW").selectedIndex].text; 
-            }
         }
         else if (s_position == "4") {
-            if (l <= 3) {
                 shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].value;
                 shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
-            }
-            else if (l == 4) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"PPLD").options
-                        [document.getElementById("sT"+Ball_pos+"PPLD").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"PPLD").options
-                        [document.getElementById("sT"+Ball_pos+"PPLD").selectedIndex].text;
-            }
-            else if (l == 5) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"6v5LD").options
-                        [document.getElementById("sT"+Ball_pos+"6v5LD").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"6v5LD").options
-                        [document.getElementById("sT"+Ball_pos+"6v5LD").selectedIndex].text; 
-            }
         }
         else if (s_position == "5") {
-            if (l <= 3) {
                 shooter_id = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].value;
                 shooter_str = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
                         [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
-            }
-            else if (l == 4) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"PPRD").options
-                        [document.getElementById("sT"+Ball_pos+"PPRD").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"PPRD").options
-                        [document.getElementById("sT"+Ball_pos+"PPRD").selectedIndex].text;
-            }
-            else if (l == 5) {
-                shooter_id = document.getElementById("sT"+Ball_pos+"6v5RD").options
-                        [document.getElementById("sT"+Ball_pos+"6v5RD").selectedIndex].value;
-                shooter_str = document.getElementById("sT"+Ball_pos+"6v5RD").options
-                        [document.getElementById("sT"+Ball_pos+"6v5RD").selectedIndex].text; 
-            }
         }
         else if (s_position == "6") {
-            shooter_id = document.getElementById("sT"+Ball_pos+"6v5X").options
-                    [document.getElementById("sT"+Ball_pos+"6v5X").selectedIndex].value;
-            shooter_str = document.getElementById("sT"+Ball_pos+"6v5X").options
-                    [document.getElementById("sT"+Ball_pos+"6v5X").selectedIndex].text;
+            shooter_id = document.getElementById("sT"+Ball_pos+"L5X").options
+                    [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].value;
+            shooter_str = document.getElementById("sT"+Ball_pos+"L5X").options
+                    [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
         }
 
         shootertype.style.display = "none";
@@ -3729,6 +3640,13 @@
                                                 [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
         document.getElementById("passer-6").innerHTML = document.getElementById("sT"+Ball_pos+"G").options
                                                 [document.getElementById("sT"+Ball_pos+"G").selectedIndex].text;
+        if (l == 5) {
+
+            document.getElementById("passer-8").innerHTML = document.getElementById("sT"+Ball_pos+"L5X").options
+                                                [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
+            document.getElementById("passer-8").style.display = "block";
+        }
+
         passertype.style.display = "block";
         passertype.style.left = stype.style.left;
         passertype.style.top = stype.style.top;
@@ -3784,6 +3702,12 @@
             passer_id = "";
             passer_str = "";
         }
+        else if (p_position == "8") {
+            passer_id = document.getElementById("sT"+Ball_pos+"L5X").options
+                        [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].value;
+            passer_str = document.getElementById("sT"+Ball_pos+"L5X").options
+                        [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
+        }
 
         p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
                 [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
@@ -3823,6 +3747,12 @@
                 [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
         p_T1G_str = document.getElementById("sT1G").options
                 [document.getElementById("sT1G").selectedIndex].text;
+        p_T1X_str = "";
+
+        if (line_on == 5) {
+            p_T1X_str = document.getElementById("sT1L5X").options
+                    [document.getElementById("sT1L5X").selectedIndex].text;
+        }
 
         p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
                 [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
@@ -3836,15 +3766,22 @@
                 [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
         p_T2G_str = document.getElementById("sT2G").options
                 [document.getElementById("sT2G").selectedIndex].text;
+        p_T2X_str = "";
+
+        if (line_on_2 == 5) {
+            p_T2X_str = document.getElementById("sT2L5X").options
+                    [document.getElementById("sT2L5X").selectedIndex].text;
+        }
 
         passertype.style.display = "none";
+        document.getElementById("passer-8").style.display = "none";
         premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
 
         printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
-                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T2LW_str, p_T2C_str,
-                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2)]);
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
 
         shot_on = 0; // End the shot tag process
 
@@ -3855,62 +3792,102 @@
         if (Ball_pos == 1) {
             for (let i=0;i<plT1_array.length;i++) {
                 if (shooter_id == plT1_array[i][0]) {
-                    plT1_array[i][2] = plT1_array[i][2] + dataxG; // Add xG to shooter id
-                    plT1_array[i][6]++;
+                    if (line_on < 4 || line_on > 5) {
+                        plT1_array[i][2] = plT1_array[i][2] + dataxG; // Add xG to shooter id
+                    }
+                    if (line_on == 4 || line_on == 5) {
+                        plT1_array[i][4] = plT1_array[i][4] + dataxG; // Add xG to shooter id on powerplay
+                    }
+                    plT1_array[i][8]++;
                     found_s = 1;
                     if (dataRes == 4) { // if Goal
-                        plT1_array[i][4]++;
+                        plT1_array[i][6]++;
                     }
                 }
                 if (passer_id == plT1_array[i][0]) {
-                    plT1_array[i][3] = plT1_array[i][3] + dataxG; // Add xG to passer id
-                    plT1_array[i][7]++;
+                    if (line_on < 4 || line_on > 5) {
+                        plT1_array[i][3] = plT1_array[i][3] + dataxG; // Add xG to passer id
+                    }
+                    if (line_on == 4 || line_on == 5) {
+                        plT1_array[i][5] = plT1_array[i][5] + dataxG; // Add xG to passer id on powerplay
+                    }
+                    plT1_array[i][9]++;
                     found_p = 1;
                     if (dataRes == 4) { // if Goal
-                        plT1_array[i][5]++;
+                        plT1_array[i][7]++;
                     }
                 }
             }
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT1_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                if (line_on < 4 || line_on > 5) {
+                    plT1_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                }
+                if (line_on == 4 || line_on == 5) {
+                    plT1_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT1_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                if (line_on < 4 || line_on > 5) {
+                    plT1_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                }
+                if (line_on == 4 || line_on == 5) {
+                    plT1_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                }
             }
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
         else if (Ball_pos == 2) {
             for (let i=0;i<plT2_array.length;i++) {
                 if (shooter_id == plT2_array[i][0]) {
-                    plT2_array[i][2] = plT2_array[i][2] + dataxG; // Add xG to shooter id
-                    plT2_array[i][6]++;
+                    if (line_on_2 < 4 || line_on_2 > 5) {
+                        plT2_array[i][2] = plT2_array[i][2] + dataxG; // Add xG to shooter id
+                    }
+                    if (line_on_2 == 4 || line_on_2 == 5) {
+                        plT2_array[i][4] = plT2_array[i][4] + dataxG; // Add xG to shooter id on powerplay
+                    }
+                    plT2_array[i][8]++;
                     found_s = 1;
                     if (dataRes == 4) { // if Goal
-                        plT2_array[i][4]++;
+                        plT2_array[i][6]++;
                     }
                 }
                 if (passer_id == plT2_array[i][0]) {
-                    plT2_array[i][3] = plT2_array[i][3] + dataxG; // Add xG to passer id
-                    plT2_array[i][7]++;
+                    if (line_on_2 < 4 || line_on_2 > 5) {
+                        plT2_array[i][3] = plT2_array[i][3] + dataxG; // Add xG to passer id
+                    }
+                    if (line_on_2 == 4 || line_on_2 == 5) {
+                        plT2_array[i][5] = plT2_array[i][5] + dataxG; // Add xG to passer id on powerplay
+                    }
+                    plT2_array[i][9]++;
                     found_p = 1;
                     if (dataRes == 4) { // if Goal
-                        plT2_array[i][5]++;
+                        plT2_array[i][7]++;
                     }
                 }
             }
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT2_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                if (line_on_2 < 4 || line_on_2 > 5) {
+                    plT2_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                }
+                if (line_on_2 == 4 || line_on_2 == 5) {
+                    plT2_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT2_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                if (line_on_2 < 4 || line_on_2 > 5) {
+                    plT2_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                }
+                if (line_on_2 == 4 || line_on_2 == 5) {
+                    plT2_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                }
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
@@ -3922,62 +3899,102 @@
         if (Ball_pos == 1) {
             for (let i=0;i<plT1p_array.length;i++) {
                 if (shooter_id == plT1p_array[i][0]) {
-                    plT1p_array[i][2] = plT1p_array[i][2] + dataxG; // Add xG to shooter id
-                    plT1p_array[i][6]++;
+                    if (line_on < 4 || line_on > 5) {
+                        plT1p_array[i][2] = plT1p_array[i][2] + dataxG; // Add xG to shooter id
+                    }
+                    if (line_on == 4 || line_on == 5) {
+                        plT1p_array[i][4] = plT1p_array[i][4] + dataxG; // Add xG to shooter id on powerplay
+                    }
+                    plT1p_array[i][8]++;
                     found_s = 1;
                     if (dataRes == 4) { // if Goal
-                        plT1p_array[i][4]++;
+                        plT1p_array[i][6]++;
                     }
                 }
                 if (passer_id == plT1p_array[i][0]) {
-                    plT1p_array[i][3] = plT1p_array[i][3] + dataxG; // Add xG to passer id
-                    plT1p_array[i][7]++;
+                    if (line_on < 4 || line_on > 5) {
+                        plT1p_array[i][3] = plT1p_array[i][3] + dataxG; // Add xG to passer id
+                    }
+                    if (line_on == 4 || line_on == 5) {
+                        plT1p_array[i][5] = plT1p_array[i][5] + dataxG; // Add xG to passer id on powerplay
+                    }
+                    plT1p_array[i][9]++;
                     found_p = 1;
                     if (dataRes == 4) { // if Goal
-                        plT1p_array[i][5]++;
+                        plT1p_array[i][7]++;
                     }
                 }
             }
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT1p_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                if (line_on < 4 || line_on > 5) {
+                    plT1p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                }
+                if (line_on == 4 || line_on == 5) {
+                    plT1p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                if (line_on < 4 || line_on > 5) {
+                    plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                }
+                if (line_on == 4 || line_on == 5) {
+                    plT1p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                }
             }
             plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
         else if (Ball_pos == 2) {
             for (let i=0;i<plT2p_array.length;i++) {
                 if (shooter_id == plT2p_array[i][0]) {
-                    plT2p_array[i][2] = plT2p_array[i][2] + dataxG; // Add xG to shooter id
-                    plT2p_array[i][6]++;
+                    if (line_on_2 < 4 || line_on_2 > 5) {
+                        plT2p_array[i][2] = plT2p_array[i][2] + dataxG; // Add xG to shooter id
+                    }
+                    if (line_on_2 == 4 || line_on_2 == 5) {
+                        plT2p_array[i][4] = plT2p_array[i][4] + dataxG; // Add xG to shooter id on powerplay
+                    }
+                    plT2p_array[i][8]++;
                     found_s = 1;
                     if (dataRes == 4) { // if Goal
-                        plT2p_array[i][4]++;
+                        plT2p_array[i][6]++;
                     }
                 }
                 if (passer_id == plT2p_array[i][0]) {
-                    plT2p_array[i][3] = plT2p_array[i][3] + dataxG; // Add xG to passer id
-                    plT2p_array[i][7]++;
+                    if (line_on_2 < 4 || line_on_2 > 5) {
+                        plT2p_array[i][3] = plT2p_array[i][3] + dataxG; // Add xG to passer id
+                    }
+                    if (line_on_2 == 4 || line_on_2 == 5) {
+                        plT2p_array[i][5] = plT2p_array[i][5] + dataxG; // Add xG to passer id on powerplay
+                    }
+                    plT2p_array[i][9]++;
                     found_p = 1;
                     if (dataRes == 4) { // if Goal
-                        plT2p_array[i][5]++;
+                        plT2p_array[i][7]++;
                     }
                 }
             }
             if (found_s == 0) { // Shooter not found, adding new row to the array
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
-                plT2p_array.push([shooter_id, shooter_str, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                if (line_on_2 < 4 || line_on_2 > 5) {
+                    plT2p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                }
+                if (line_on_2 == 4 || line_on_2 == 5) {
+                    plT2p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
-                plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                if (line_on_2 < 4 || line_on_2 > 5) {
+                    plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                }
+                if (line_on_2 == 4 || line_on_2 == 5) {
+                    plT2p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                }
             }
             plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
         }
@@ -5462,6 +5479,8 @@
         pldata.addColumn('string', 'Name');
         pldata.addColumn('number', 'Shot xG');
         pldata.addColumn('number', 'Pass xG');
+        pldata.addColumn('number', 'Shot xG PP');
+        pldata.addColumn('number', 'Pass xG PP');
         pldata.addColumn('number', 'Goals');
         pldata.addColumn('number', 'Ass.');
         pldata.addColumn('number', 'Shots');
@@ -5470,13 +5489,15 @@
         pldata.addColumn('number', 'Possession -');
 
         for(i = 1; i < plT1_array.length; i++){
-            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7], plT1_array[i][8], plT1_array[i][9]]);
+            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7], plT1_array[i][8], plT1_array[i][9], plT1_array[i][10], plT1_array[i][11]]);
         }
 
         var pldata_p = new google.visualization.DataTable();
         pldata_p.addColumn('string', 'Name');
         pldata_p.addColumn('number', 'Shot xG');
         pldata_p.addColumn('number', 'Pass xG');
+        pldata_p.addColumn('number', 'Shot xG PP');
+        pldata_p.addColumn('number', 'Pass xG PP');
         pldata_p.addColumn('number', 'Goals');
         pldata_p.addColumn('number', 'Ass.');
         pldata_p.addColumn('number', 'Shots');
@@ -5485,7 +5506,7 @@
         pldata_p.addColumn('number', 'Possession -');
 
         for(i = 1; i < plT1p_array.length; i++){
-            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7], plT1p_array[i][8], plT1p_array[i][9]]);
+            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7], plT1p_array[i][8], plT1p_array[i][9], plT1p_array[i][10], plT1p_array[i][11]]);
         }
 
         var options = {
@@ -5524,6 +5545,8 @@
         pldata.addColumn('string', 'Name');
         pldata.addColumn('number', 'Shot xG');
         pldata.addColumn('number', 'Pass xG');
+        pldata.addColumn('number', 'Shot xG PP');
+        pldata.addColumn('number', 'Pass xG PP');
         pldata.addColumn('number', 'Goals');
         pldata.addColumn('number', 'Ass.');
         pldata.addColumn('number', 'Shots');
@@ -5532,13 +5555,15 @@
         pldata.addColumn('number', 'Possession -');
 
         for(i = 1; i < plT2_array.length; i++){
-            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7], plT2_array[i][8], plT2_array[i][9]]);
+            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7], plT2_array[i][8], plT2_array[i][9], plT2_array[i][10], plT2_array[i][11]]);
         }
 
         var pldata_p = new google.visualization.DataTable();
         pldata_p.addColumn('string', 'Name');
         pldata_p.addColumn('number', 'Shot xG');
         pldata_p.addColumn('number', 'Pass xG');
+        pldata_p.addColumn('number', 'Shot xG PP');
+        pldata_p.addColumn('number', 'Pass xG PP');
         pldata_p.addColumn('number', 'Goals');
         pldata_p.addColumn('number', 'Ass.');
         pldata_p.addColumn('number', 'Shots');
@@ -5547,7 +5572,7 @@
         pldata_p.addColumn('number', 'Possession -');
 
         for(i = 1; i < plT2p_array.length; i++){
-            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7], plT2p_array[i][8], plT2p_array[i][9]]);
+            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7], plT2p_array[i][8], plT2p_array[i][9], plT2p_array[i][10], plT2p_array[i][11]]);
         }
 
         var options = {
