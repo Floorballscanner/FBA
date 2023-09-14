@@ -3788,9 +3788,10 @@
                 p_T2X_str = document.getElementById("sT2L5X").options
                         [document.getElementById("sT2L5X").selectedIndex].text;
             }
-            else if (line_on_2 > 5) {
-                p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = p_T2G_str = p_T2X_str = "";
-            }
+        }
+        else if (line_on_2 > 5) {
+            p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = p_T2G_str = p_T2X_str = "";
+        }
 
         passertype.style.display = "none";
         document.getElementById("passer-8").style.display = "none";
