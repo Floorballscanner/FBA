@@ -833,7 +833,7 @@
             }
 
             stype.style.display = "block";
-            if ((PosY - ImgPos[1]) <= 4*fLength/5)
+            if ((PosY - ImgPos[1]) <= fLength/2)
             {
                 stype.style.top = PosY + "px";
             }
