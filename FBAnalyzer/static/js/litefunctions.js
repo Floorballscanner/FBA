@@ -312,8 +312,8 @@
     function team1name() {
         s = " ";
         a = T1name.value;
-        b = 15 - a;
-        l = length(a);
+        l = a.length;
+        b = 20 - l;
         t1n.innerHTML = T1name.value + s.repeat(b);
         console.log("team1name")
     }
@@ -321,8 +321,8 @@
     function team2name() {
         s = " ";
         a = T2name.value;
-        b = 15 - a;
         l = length(a);
+        b = 20 - l;
         t2n.innerHTML = s.repeat(b) + T2name.value;
         console.log("team2name")
     }
