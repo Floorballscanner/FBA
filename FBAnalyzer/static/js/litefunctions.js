@@ -36,6 +36,8 @@
     var fLength = 500; // Length of the shotmap field in pixels
     var name_t1 = document.getElementById("T1name"); // Team 1 name variable
     var name_t2 = document.getElementById("T2name"); // Team 2 name variable
+    var t1n = document.getElementById("t1n"); // Team 1 name on result page
+    var t2n = document.getElementById("t2n"); // Team 2 name on result page
     var cnvs = document.getElementById("myCanvas");
     var ctx = cnvs.getContext("2d");
     var menu = document.getElementById("shotmenu");
@@ -305,4 +307,12 @@
                 ctx.fillText("G", x, y);
             }
         }
+    }
+
+    function team1name() {
+        t1n.innerHTML = T1name.innerHTML;
+    }
+
+    function team2name() {
+        t2n.innerHTML = T2name.innerHTML;
     }
