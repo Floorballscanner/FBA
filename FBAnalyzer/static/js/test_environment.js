@@ -5911,7 +5911,7 @@
         // Summary chart
 
         var pldata19 = new google.visualization.DataTable();
-        pldata19.addColumn('string', '#');
+        pldata19.addColumn('string', '##');
         pldata19.addColumn('number', 'Goals T1');
         pldata19.addColumn('number', 'Goals T2');
         pldata19.addColumn('number', 'xG T1');
