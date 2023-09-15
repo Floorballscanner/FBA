@@ -323,6 +323,6 @@
         a = T2name.value;
         b = 15 - a;
         l = length(a);
-        t2n.innerHTML = s.repeat(b) + T2name.value + ;
+        t2n.innerHTML = s.repeat(b) + T2name.value;
         console.log("team2name")
     }
