@@ -5912,8 +5912,8 @@
 
         var pldata19 = new google.visualization.DataTable();
         pldata19.addColumn('string', '###');
-        pldata19.addColumn('number', 'GF T1');
-        pldata19.addColumn('number', 'GF T2');
+        pldata19.addColumn('number', 'T1');
+        pldata19.addColumn('number', 'T2');
         pldata19.addColumn('number', 'xG T1');
         pldata19.addColumn('number', 'xG T2');
         pldata19.addColumn('number', 'xGOT T1');
@@ -5931,9 +5931,7 @@
             legend: { position: 'bottom'},
             colors: ['#002072', '#59D9EB'],
             hAxis: { textPosition: 'none' },
-            cssClassNames: {
-              'tableCell': 'center-align'   // Center-align data cells
-            }
+
             };
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('Summary_game'));
