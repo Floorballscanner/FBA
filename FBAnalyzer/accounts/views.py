@@ -233,6 +233,11 @@ def edit_data(request):
 
     return render(request, 'accounts/editdata.html')
 
+@login_required
+def update_info(request):
+
+    return render(request, 'accounts/update_info.html')
+
 class UpdatePlayer(generics.UpdateAPIView):
     serializer_class = PlayerUpdateSerializer
     queryset = Player.objects.all()

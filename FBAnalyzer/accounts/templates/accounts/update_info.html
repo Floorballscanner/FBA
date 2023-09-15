@@ -1,0 +1,47 @@
+<!--
+
+This is the index - html - page content file that is the first web page after login.
+It extends app_layout.html with Django
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+{% load static %}
+<div class="container" style="Padding-top: 10px;">
+	<div class="frontpage-choices">
+		<div class="row">
+			<div class="col-sm-12">
+              <h4>New update info 16.9.2023</h4>
+              <p>NEW functionality added to Floorball Scanner.</p>
+              <p>Based on user requests we have updated the software to include ball possession gains and losses
+              that can now be tagged to shotmap both line and player based.</p>
+              <p>New update functionalities are:</p>
+              <h7>Possession + and Possession -</h7>
+              <ul>
+                <li>Pressing the shotmap opens up a more extensive list of shot types, including Possession + and
+                Possession -. If Shooter tagging is on, it is also possible to tag which player lost or gained ball possession.
+                Possession + and - only works for Team 1 and Ball possession selection does not affect the player selection
+                but only Team 1 players can be selected.</li>
+                <li>Blue o symbol means gained ball possession (your player takes ball possession from the opponent),
+                red o symbol means lost ball possession.</li>
+                <li>Player and line possession + and - are also added to Line and Player charts</li>
+              </ul>
+              <h7>Automatic Team 2 line change removed</h7>
+              <ul>
+                <li>Automatic Team 2 line change for 5-5 lines (lines 1 - 3) are removed, because it enables future
+                development to calculate automatically number of shifts started with or without ball for lines.</li>
+                <li>Automatic Team 2 line change is still working for Powerplay and Shorthanded lines</li>
+              </ul>
+              <h7>Shooter and Passer tagging on Powerplay and 6v5</h7>
+              <ul>
+                <li>It is now possible to tag shooter and passer on Powerplay and 6v5 special teams.</li>
+                <li>Shot xG and pass xG are calculated on respective columns on line and player tables so
+                they can be seen separately from 5-5 xG.</li>
+              </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
