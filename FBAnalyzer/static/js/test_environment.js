@@ -5908,6 +5908,34 @@
 
         chart.draw(data, options);
 
+        // Summary chart
+
+        var pldata19 = new google.visualization.DataTable();
+        pldata19.addColumn('string', '#');
+        pldata19.addColumn('number', 'Goals T1');
+        pldata19.addColumn('number', 'Goals T2');
+        pldata19.addColumn('number', 'xG T1');
+        pldata19.addColumn('number', 'xG T2.');
+        pldata19.addColumn('number', 'xGOT T1');
+        pldata19.addColumn('number', 'xGOT T2');
+
+
+        pldata19.addRows([
+            ['Game', Number(gf_g[7].textContent), Number(ga_g[7]. textContent), Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(xGOTf_g[7]. textContent), Number(xGOTa_g[7]. textContent)  ],
+
+            ]);
+
+        var options = {
+            title: ’Summary,
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+        // Create and draw the visualization.
+        var chart = new google.visualization.Table(document.getElementById('Summary_game'));
+        chart.draw(pldata19, options);
+
 
 
 
