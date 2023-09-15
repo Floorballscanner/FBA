@@ -5921,7 +5921,7 @@
 
 
         pldata19.addRows([
-            ['Game', Number(gf_g[7].textContent), Number(ga_g[7]. textContent), Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(xGOTf_g[7]. textContent), Number(xGOTa_g[7]. textContent)  ],
+            ['Game', Number(gf_g[7].textContent), Number(ga_g[7]. textContent), Number(xf_g[7].textContent), Number(xa_g[7]. textContent), xGOTf_g[7], xGOTa_g[7]  ],
 
             ]);
 
@@ -5930,7 +5930,11 @@
             bar: {groupWidth: "95%"},
             legend: { position: 'bottom'},
             colors: ['#002072', '#59D9EB'],
-            hAxis: { textPosition: 'none' }
+            hAxis: { textPosition: 'none' },
+            cssClassNames: {
+              'headerCell': 'center-align', // Center-align header cells
+              'tableCell': 'center-align'   // Center-align data cells
+            }
             };
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('Summary_game'));
