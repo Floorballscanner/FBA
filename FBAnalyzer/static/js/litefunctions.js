@@ -321,7 +321,7 @@
     function team2name() {
         s = " ";
         a = T2name.value;
-        l = length(a);
+        l = a.length;
         b = 20 - l;
         t2n.innerHTML = s.repeat(b) + T2name.value;
         console.log("team2name")
