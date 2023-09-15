@@ -310,19 +310,9 @@
     }
 
     function team1name() {
-        s = " ";
-        a = T1name.value;
-        l = a.length;
-        b = 20 - l;
-        t1n.innerHTML = T1name.value + s.repeat(b);
-        console.log("team1name")
+        t1n.innerHTML = T1name.value;
     }
 
     function team2name() {
-        s = " ";
-        a = T2name.value;
-        l = a.length;
-        b = 20 - l;
-        t2n.innerHTML = s.repeat(b) + T2name.value;
-        console.log("team2name")
+        t2n.innerHTML = T2name.value;
     }
