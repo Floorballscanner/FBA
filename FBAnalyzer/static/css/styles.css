@@ -344,3 +344,10 @@ textarea {
     text-align: center;
 	width: 90%;
 }
+
+.update-info li {
+    padding: 5px;
+}
+.update-info h5 {
+    color: #F5F5F5;
+}
