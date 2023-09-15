@@ -310,11 +310,11 @@
     }
 
     function team1name() {
-        t1n.innerHTML = T1name.innerHTML;
+        t1n.innerHTML = T1name.value;
         console.log("team1name")
     }
 
     function team2name() {
-        t2n.innerHTML = T2name.innerHTML;
+        t2n.innerHTML = T2name.value;
         console.log("team2name")
     }
