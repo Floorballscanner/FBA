@@ -5911,11 +5911,11 @@
         // Summary chart
 
         var pldata19 = new google.visualization.DataTable();
-        pldata19.addColumn('string', '##');
-        pldata19.addColumn('number', 'Goals T1');
-        pldata19.addColumn('number', 'Goals T2');
+        pldata19.addColumn('string', '###');
+        pldata19.addColumn('number', 'GF T1');
+        pldata19.addColumn('number', 'GF T2');
         pldata19.addColumn('number', 'xG T1');
-        pldata19.addColumn('number', 'xG T2.');
+        pldata19.addColumn('number', 'xG T2');
         pldata19.addColumn('number', 'xGOT T1');
         pldata19.addColumn('number', 'xGOT T2');
 
