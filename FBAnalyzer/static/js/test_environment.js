@@ -3440,7 +3440,7 @@
 
                         document.getElementById("shooter-6").innerHTML = document.getElementById("sT"+Ball_pos+"L5X").options
                                                             [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
-                        document.getElementById("shooter-6").style.display = "block";
+                        document.getElementById("sh-6").removeAttribute("hidden");
 
                     }
 
@@ -3625,7 +3625,7 @@
         }
 
         shootertype.style.display = "none";
-        document.getElementById("shooter-6").style.display = "none";
+        document.getElementById("sh-6").setAttribute("hidden", "hidden");
 
         // Set menu items according to players on field
         document.getElementById("passer-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
@@ -3644,7 +3644,7 @@
 
             document.getElementById("passer-8").innerHTML = document.getElementById("sT"+Ball_pos+"L5X").options
                                                 [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
-            document.getElementById("passer-8").style.display = "block";
+            document.getElementById("pas-6").removeAttribute("hidden");
         }
 
         passertype.style.display = "block";
@@ -3794,7 +3794,7 @@
         }
 
         passertype.style.display = "none";
-        document.getElementById("passer-8").style.display = "none";
+        document.getElementById("pas-6").setAttribute("hidden", "hidden");
         premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
                             dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
                             p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
