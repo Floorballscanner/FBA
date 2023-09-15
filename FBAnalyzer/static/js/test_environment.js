@@ -5926,7 +5926,7 @@
             ]);
 
         var options = {
-            title: ’Summary,
+            title: 'Summary',
             bar: {groupWidth: "95%"},
             legend: { position: 'bottom'},
             colors: ['#002072', '#59D9EB'],
