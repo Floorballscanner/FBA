@@ -5931,8 +5931,7 @@
             legend: { position: 'bottom'},
             colors: ['#002072', '#59D9EB'],
             hAxis: { textPosition: 'none' },
-            cssClassNames: {
-              'headerCell': 'center-align', // Center-align header cells
+            cssClassNames:
               'tableCell': 'center-align'   // Center-align data cells
             }
             };
