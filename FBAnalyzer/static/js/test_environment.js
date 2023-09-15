@@ -5649,7 +5649,7 @@
             ['Pen. Kill', toc_g[5].innerHTML, Number(xf_g[5].textContent), Number(xa_g[5]. textContent), Number(gf_g[5].textContent), Number(ga_g[5]. textContent), Number(sf_g[5].textContent), Number(sa_g[5].textContent), Number(p_g[5].textContent), 0, 0, 0, 0],
             ['6vs5', toc_g[4].innerHTML, Number(xf_g[4].textContent), Number(xa_g[4]. textContent), Number(gf_g[4].textContent), Number(ga_g[4].textContent), Number(sf_g[4].textContent), Number(sa_g[4].textContent), Number(p_g[4].textContent), 0, 0, 0, 0],
             ['5vs6', toc_g[6].innerHTML, Number(xf_g[6].textContent), Number(xa_g[6]. textContent), Number(gf_g[6].textContent), Number(ga_g[6].textContent), Number(sf_g[6].textContent), Number(sa_g[6].textContent), Number(p_g[6].textContent), 0, 0, 0, 0],
-            ['5vs5', toc_g[7].innerHTML, Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4], posplusT1g_array[3], posminusT1g_array[3]],
+            ['Total', toc_g[7].innerHTML, Number(xf_g[7].textContent), Number(xa_g[7]. textContent), Number(gf_g[7].textContent), Number(ga_g[7].textContent), Number(sf_g[7].textContent), Number(sa_g[7].textContent), Number(p_g[7].textContent), stxGT1Teamg_array[0] + stxGT1Teamg_array[1], stxGT1Teamg_array[2] + stxGT1Teamg_array[3] + stxGT1Teamg_array[4], posplusT1g_array[3], posminusT1g_array[3]],
 
             ]);
 
@@ -5676,7 +5676,7 @@
             ['Pen. Kill', toc_p[5].innerHTML, Number(xf_p[5].textContent), Number(xa_p[5]. textContent), Number(gf_p[5].textContent), Number(ga_p[5]. textContent), Number(sf_p[5].textContent), Number(sa_p[5].textContent), Number(p_p[5].textContent), 0, 0, 0, 0],
             ['6vs5', toc_p[4].innerHTML, Number(xf_p[4].textContent), Number(xa_p[4]. textContent), Number(gf_p[4].textContent), Number(ga_p[4].textContent), Number(sf_p[4].textContent), Number(sa_p[4].textContent), Number(p_p[4].textContent), 0, 0, 0, 0],
             ['5vs6', toc_p[6].innerHTML, Number(xf_p[6].textContent), Number(xa_p[6]. textContent), Number(gf_p[6].textContent), Number(ga_p[6].textContent), Number(sf_p[6].textContent), Number(sa_p[6].textContent), Number(p_p[6].textContent), 0, 0, 0, 0],
-            ['5vs5', toc_p[7].innerHTML, Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamp_array[0] + stxGT1Teamp_array[1], stxGT1Teamp_array[2] + stxGT1Teamp_array[3] + stxGT1Teamp_array[4], posplusT1p_array[3], posminusT1p_array[3]],
+            ['Total', toc_p[7].innerHTML, Number(xf_p[7].textContent), Number(xa_p[7]. textContent), Number(gf_p[7].textContent), Number(ga_p[7].textContent), Number(sf_p[7].textContent), Number(sa_p[7].textContent), Number(p_p[7].textContent), stxGT1Teamp_array[0] + stxGT1Teamp_array[1], stxGT1Teamp_array[2] + stxGT1Teamp_array[3] + stxGT1Teamp_array[4], posplusT1p_array[3], posminusT1p_array[3]],
 
             ]);
 
