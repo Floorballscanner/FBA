@@ -311,8 +311,10 @@
 
     function team1name() {
         t1n.innerHTML = T1name.innerHTML;
+        console.log("team1name")
     }
 
     function team2name() {
         t2n.innerHTML = T2name.innerHTML;
+        console.log("team2name")
     }

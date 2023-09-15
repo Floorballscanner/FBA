@@ -23,14 +23,14 @@ It extends app_layout.html with Django
         <div class="container" style="text-align: center;">
           <div class="form-group text-center mx-auto" style="width: 50%; Padding-top: 30px;">
             <label for="T2name">Team 2</label>
-            <textarea class="form-control" onchange="team2name()" id="T2name" rows="1"></textarea>
+            <textarea class="form-control" oninput="team2name()" id="T2name" rows="1"></textarea>
           </div>
           <div class="shot-map">
               <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
           </div>
           <div class="form-group text-center mx-auto" style="width: 50%; Padding-top: 10px;">
             <label for="T1name">Team 1</label>
-            <textarea class="form-control" onchange="team1name()" id="T1name" rows="1"></textarea>
+            <textarea class="form-control" oninput="team1name()" id="T1name" rows="1"></textarea>
           </div>
         </div>
         <br>
