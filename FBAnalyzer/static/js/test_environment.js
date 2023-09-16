@@ -5960,7 +5960,7 @@
     ]);
         //Create and draw visualisation
         var chart_pe = new google.visualization.Table(document.getElementById('Summary_game_' + periodN));
-        chart.draw(pedata19, options);
+        chart_pe.draw(pedata19, options);
 
 
 
