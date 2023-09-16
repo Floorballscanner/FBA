@@ -347,10 +347,11 @@ textarea {
 
 .update-info li {
     padding: 5px;
+    font-size: 12px;
 }
 .update-info h5 {
     color: #002072;
 }
 .update-info p {
-    font-size: 10px;
+    font-size: 12px;
 }
