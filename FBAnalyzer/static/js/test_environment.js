@@ -5925,6 +5925,7 @@
             ['Goals', Number(gf_g[7].textContent), Number(ga_g[7]. textContent)],
 	        ['xG', Number(xf_g[7].textContent), Number(xa_g[7]. textContent)],
 	        ['xGOT',  xGOTf_g[7], xGOTa_g[7]],
+	        ['Shots', Number(sf_g[7].textContent), Number(sa_g[7]. textContent)]
 
     ]);
 
@@ -5939,6 +5940,28 @@
         // Create and draw the visualization.
         var chart = new google.visualization.Table(document.getElementById('Summary_game'));
         chart.draw(pldata19, options);
+
+        // Same for periods
+
+        var pedata19 = new google.visualization.DataTable();
+            pedata19.addColumn('string', 'Team');
+            pedata19.addColumn('number', '1');
+            pedata19.addColumn('number', '2');
+            //pldata19.addColumn('number', 'xG T1');
+            //pldata19.addColumn('number', 'xG T2');
+            //pldata19.addColumn('number', 'xGOT T1');
+            //pldata19.addColumn('number', 'xGOT T2');
+
+
+            pedata19.addRows([
+                ['Goals', Number(gf_p[7].textContent), Number(ga_p[7]. textContent)],
+                ['xG', Number(xf_p[7].textContent), Number(xa_p[7]. textContent)],
+                ['Shots', Number(sf_p[7].textContent), Number(sa_p[7]. textContent)],
+    ]);
+        //Create and draw visualisation
+        var chart_pe = new google.visualization.Table(document.getElementById('Summary_game_' + periodN));
+        chart.draw(pedata19, options);
+
 
 
 
