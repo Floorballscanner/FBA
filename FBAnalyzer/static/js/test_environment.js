@@ -3561,8 +3561,7 @@
                     [document.getElementById("sT2G").selectedIndex].value;
 
                     p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
-                    p_T2G_str = document.getElementById("sT2G").options
-                    [document.getElementById("sT2G").selectedIndex].text;
+                    p_T2G_str = p_T2X_str = "";
                 }
 
                 premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
