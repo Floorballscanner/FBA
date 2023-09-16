@@ -283,8 +283,6 @@
                 }
             }
         }
-        console.log("Shift Possession: " + shiftP);
-        console.log("Team Possession: " + teamPos);
         PosTime_2 = 0;
         LineTime_2 = 0;
         shiftNo_2++;
@@ -3483,7 +3481,7 @@
             }
             else if (shooter_select == 0) {
 
-                if (line_on <= 3) {
+                if (line_on <= 5) {
                     p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
                     [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
                     p_T1C = document.getElementById("sT1L"+line_on+"C").options
@@ -3509,19 +3507,22 @@
                     [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
                     p_T1G_str = document.getElementById("sT1G").options
                     [document.getElementById("sT1G").selectedIndex].text;
+
+                    if (line_on == 5) {
+                        p_T1X_str = document.getElementById("sT1L5X").options
+                        [document.getElementById("sT1L5X").selectedIndex].text;
+                    }
                 }
 
-                else if (line_on > 3) {
+                else if (line_on > 5) {
                     p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
-                    p_T1G = document.getElementById("sT1G").options
-                    [document.getElementById("sT1G").selectedIndex].value;
+                    p_T1G = "";
 
                     p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
-                    p_T1G_str = document.getElementById("sT1G").options
-                    [document.getElementById("sT1G").selectedIndex].text;
+                    p_T1G_str = p_T1X_str = "";
                 }
 
-                if (line_on_2 <= 3) {
+                if (line_on_2 <= 5) {
                     p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
                     [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
                     p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
@@ -3547,6 +3548,11 @@
                     [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
                     p_T2G_str = document.getElementById("sT2G").options
                     [document.getElementById("sT2G").selectedIndex].text;
+
+                    if (line_on_2 == 5) {
+                        p_T2X_str = document.getElementById("sT2L5X").options
+                        [document.getElementById("sT2L5X").selectedIndex].text;
+                    }
                 }
 
                 else if (line_on_2 > 3) {
