@@ -5915,16 +5915,18 @@
         pldata19.addColumn('string', '###');
         pldata19.addColumn('number', 'T1');
         pldata19.addColumn('number', 'T2');
-        pldata19.addColumn('number', 'xG T1');
-        pldata19.addColumn('number', 'xG T2');
-        pldata19.addColumn('number', 'xGOT T1');
-        pldata19.addColumn('number', 'xGOT T2');
+        //pldata19.addColumn('number', 'xG T1');
+        //pldata19.addColumn('number', 'xG T2');
+        //pldata19.addColumn('number', 'xGOT T1');
+        //pldata19.addColumn('number', 'xGOT T2');
 
 
         pldata19.addRows([
-            ['Game', Number(gf_g[7].textContent), Number(ga_g[7]. textContent), Number(xf_g[7].textContent), Number(xa_g[7]. textContent), xGOTf_g[7], xGOTa_g[7]  ],
+            ['Goals', Number(gf_g[7].textContent), Number(ga_g[7]. textContent)],
+	        ['xG', Number(xf_g[7].textContent), Number(xa_g[7]. textContent)],
+	        ['xGOT',  xGOTf_g[7], xGOTa_g[7]],
 
-            ]);
+    ]);
 
         var options = {
             title: 'Summary',
