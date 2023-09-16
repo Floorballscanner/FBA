@@ -142,50 +142,49 @@
                 Nos_p[7]++;
                 Nos_g[7]++;
             }
+            if (LineTime > 0) {
+                if (old_line == 1) {
+                    shiftP = Math.round(100 * shiftPos / LineTime);
+                    posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
 
-            if (old_line == 1) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                    posTeam_array.push([shiftNo, shiftP, 0, 0, 0, 0, teamPos]);
+                }
+                if (old_line == 2) {
+                    shiftP = Math.round(100 * shiftPos / LineTime);
+                    posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
 
-                posTeam_array.push([shiftNo, shiftP, 0, 0, 0, 0, teamPos]);
-            }
-            if (old_line == 2) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                    posTeam_array.push([shiftNo, 0, shiftP, 0, 0, 0, teamPos]);
+                }
+                if (old_line == 3) {
+                    shiftP = Math.round(100 * shiftPos / LineTime);
+                    posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
 
-                posTeam_array.push([shiftNo, 0, shiftP, 0, 0, 0, teamPos]);
-            }
-            if (old_line == 3) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                    posTeam_array.push([shiftNo, 0, 0, shiftP, 0, 0, teamPos]);
+                }
+                if (old_line == 4 || old_line == 5) {
+                    shiftP = Math.round(100 * shiftPos / LineTime);
+                    posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
 
-                posTeam_array.push([shiftNo, 0, 0, shiftP, 0, 0, teamPos]);
-            }
-            if (old_line == 4 || old_line == 5) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
+                    posTeam_array.push([shiftNo, 0, 0, 0, shiftP, 0, teamPos]);
+                }
+                if (old_line == 6 || old_line == 7) {
+                    shiftP = Math.round(100 * shiftPos / LineTime);
+                    posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
 
-                posTeam_array.push([shiftNo, 0, 0, 0, shiftP, 0, teamPos]);
-            }
-            if (old_line == 6 || old_line == 7) {
-                shiftP = Math.round(100 * shiftPos / LineTime);
-                posT = Pos_g[0] + Pos_g[1] + Pos_g[2] + Pos_g[3] + Pos_g[4] + Pos_g[5] + Pos_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * Pos_p[line_on - 1] / Toc_p[line_on - 1]);
-
-                posTeam_array.push([shiftNo, 0, 0, 0, 0, shiftP, teamPos]);
+                    posTeam_array.push([shiftNo, 0, 0, 0, 0, shiftP, teamPos]);
+                }
             }
         }
-        console.log("Shift Possession: " + shiftP);
-        console.log("Team Possession: " + teamPos);
         PosTime = 0;
         LineTime = 0;
         shiftNo++;
@@ -241,45 +240,47 @@
                 NosT2_g[7]++;
             }
 
-            if (old_line == 1) {
-                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
-                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
+            if (LineTime_2 > 0) {
+                if (old_line == 1) {
+                    shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                    posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeamT2_array.push([shiftNo_2, shiftP, 0, 0, 0, 0, teamPos]);
-            }
-            if (old_line == 2) {
-                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
-                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
+                    posTeamT2_array.push([shiftNo_2, shiftP, 0, 0, 0, 0, teamPos]);
+                }
+                if (old_line == 2) {
+                    shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                    posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeamT2_array.push([shiftNo_2, 0, shiftP, 0, 0, 0, teamPos]);
-            }
-            if (old_line == 3) {
-                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
-                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
+                    posTeamT2_array.push([shiftNo_2, 0, shiftP, 0, 0, 0, teamPos]);
+                }
+                if (old_line == 3) {
+                    shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                    posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeamT2_array.push([shiftNo_2, 0, 0, shiftP, 0, 0, teamPos]);
-            }
-            if (old_line == 4 || old_line == 5) {
-                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
-                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
+                    posTeamT2_array.push([shiftNo_2, 0, 0, shiftP, 0, 0, teamPos]);
+                }
+                if (old_line == 4 || old_line == 5) {
+                    shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                    posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeamT2_array.push([shiftNo_2, 0, 0, 0, shiftP, 0, teamPos]);
-            }
-            if (old_line == 6 || old_line == 7) {
-                shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
-                posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
-                teamPos = Math.round(100 * posT / gameCounter);
-                Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
+                    posTeamT2_array.push([shiftNo_2, 0, 0, 0, shiftP, 0, teamPos]);
+                }
+                if (old_line == 6 || old_line == 7) {
+                    shiftP = Math.round(100 * shiftPos_2 / LineTime_2);
+                    posT = PosT2_g[0] + PosT2_g[1] + PosT2_g[2] + PosT2_g[3] + PosT2_g[4] + PosT2_g[5] + PosT2_g[6];
+                    teamPos = Math.round(100 * posT / gameCounter);
+                    Math.round(100 * PosT2_p[line_on_2 - 1] / TocT2_p[line_on_2 - 1]);
 
-                posTeamT2_array.push([shiftNo_2, 0, 0, 0, 0, shiftP, teamPos]);
+                    posTeamT2_array.push([shiftNo_2, 0, 0, 0, 0, shiftP, teamPos]);
+                }
             }
         }
         console.log("Shift Possession: " + shiftP);

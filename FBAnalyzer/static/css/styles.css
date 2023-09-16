@@ -351,3 +351,6 @@ textarea {
 .update-info h5 {
     color: #002072;
 }
+.update-info p {
+    font-size: 10px;
+}
