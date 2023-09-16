@@ -2822,36 +2822,36 @@
                 dataRes = 1;
 
                 sf_p[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sf_p[7].innerHTML++;
                 }
                 sf_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sf_g[7].innerHTML++;
                 }
                 mf_p[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     mf_p[7].innerHTML++;
                 }
                 mf_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     mf_g[7].innerHTML++;
                 }
 
                 saT2_p[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saT2_p[7].innerHTML++;
                 }
                 saT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saT2_g[7].innerHTML++;
                 }
                 maT2_p[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     maT2_p[7].innerHTML++;
                 }
                 maT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     maT2_g[7].innerHTML++;
                 }
             }
@@ -2862,36 +2862,36 @@
                 dataRes = 3;
 
                 sf_p[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sf_p[7].innerHTML++;
                 }
                 sf_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sf_g[7].innerHTML++;
                 }
                 ba_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     ba_g[7].innerHTML++;
                 }
                 ba_p[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     ba_p[7].innerHTML++;
                 }
 
                 saT2_p[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saT2_p[7].innerHTML++;
                 }
                 saT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saT2_g[7].innerHTML++;
                 }
                 bfT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     bfT2_g[7].innerHTML++;
                 }
                 bfT2_p[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     bfT2_p[7].innerHTML++;
                 }
             }
@@ -2902,36 +2902,36 @@
                 dataRes = 2;
 
                 sf_p[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sf_p[7].innerHTML++;
                 }
                 sf_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sf_g[7].innerHTML++;
                 }
                 saf_p[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     saf_p[7].innerHTML++;
                 }
                 saf_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     saf_g[7].innerHTML++;
                 }
 
                 saT2_p[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saT2_p[7].innerHTML++;
                 }
                 saT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saT2_g[7].innerHTML++;
                 }
                 saaT2_p[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saaT2_p[7].innerHTML++;
                 }
                 saaT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saaT2_g[7].innerHTML++;
                 }
             }
@@ -2944,7 +2944,7 @@
                 sf_p[line_on - 1].innerHTML++;
                 gf_p[line_on - 1].innerHTML++;
                 pm_p[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sf_p[7].innerHTML++;
                     gf_p[7].innerHTML++;
                     pm_p[7].innerHTML++;
@@ -2953,7 +2953,7 @@
                 sf_g[line_on - 1].innerHTML++;
                 gf_g[line_on - 1].innerHTML++;
                 pm_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sf_g[7].innerHTML++;
                     gf_g[7].innerHTML++;
                     pm_g[7].innerHTML++;
@@ -2962,7 +2962,7 @@
                 saT2_p[line_on_2 - 1].innerHTML++;
                 gaT2_p[line_on_2 - 1].innerHTML++;
                 pmT2_p[line_on_2 - 1].innerHTML--;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saT2_p[7].innerHTML++;
                     gaT2_p[7].innerHTML++;
                     pmT2_p[7].innerHTML--;
@@ -2971,7 +2971,7 @@
                 saT2_g[line_on_2 - 1].innerHTML++;
                 gaT2_g[line_on_2 - 1].innerHTML++;
                 pmT2_g[line_on_2 - 1].innerHTML--;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     saT2_g[7].innerHTML++;
                     gaT2_g[7].innerHTML++;
                     pmT2_g[7].innerHTML--;
@@ -3018,7 +3018,7 @@
                 sa_g[line_on - 1].innerHTML++;
                 ma_p[line_on - 1].innerHTML++;
                 ma_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sa_g[7].innerHTML++;
                     sa_p[7].innerHTML++;
                     ma_p[7].innerHTML++;
@@ -3029,7 +3029,7 @@
                 sfT2_g[line_on_2 - 1].innerHTML++;
                 mfT2_p[line_on_2 - 1].innerHTML++;
                 mfT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     sfT2_g[7].innerHTML++;
                     sfT2_p[7].innerHTML++;
                     mfT2_p[7].innerHTML++;
@@ -3046,7 +3046,7 @@
                 bf_p[line_on - 1].innerHTML++;
                 sa_g[line_on - 1].innerHTML++;
                 bf_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sa_g[7].innerHTML++;
                     bf_g[7].innerHTML++;
                     sa_p[7].innerHTML++;
@@ -3057,7 +3057,7 @@
                 baT2_p[line_on_2 - 1].innerHTML++;
                 sfT2_g[line_on_2 - 1].innerHTML++;
                 baT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     sfT2_g[7].innerHTML++;
                     baT2_g[7].innerHTML++;
                     sfT2_p[7].innerHTML++;
@@ -3074,7 +3074,7 @@
                 sa_g[line_on - 1].innerHTML++;
                 saa_p[line_on - 1].innerHTML++;
                 saa_g[line_on - 1].innerHTML++;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sa_p[7].innerHTML++;
                     sa_g[7].innerHTML++;
                     saa_p[7].innerHTML++;
@@ -3085,7 +3085,7 @@
                 sfT2_g[line_on_2 - 1].innerHTML++;
                 safT2_p[line_on_2 - 1].innerHTML++;
                 safT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     sfT2_p[7].innerHTML++;
                     sfT2_g[7].innerHTML++;
                     safT2_p[7].innerHTML++;
@@ -3101,7 +3101,7 @@
                 sa_p[line_on - 1].innerHTML++;
                 ga_p[line_on - 1].innerHTML++;
                 pm_p[line_on - 1].innerHTML--;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sa_p[7].innerHTML++;
                     ga_p[7].innerHTML++;
                     pm_p[7].innerHTML--;
@@ -3110,7 +3110,7 @@
                 sa_g[line_on - 1].innerHTML++;
                 ga_g[line_on - 1].innerHTML++;
                 pm_g[line_on - 1].innerHTML--;
-                if (line_on < 4) {
+                if (line_on < 7) {
                     sa_g[7].innerHTML++;
                     ga_g[7].innerHTML++;
                     pm_g[7].innerHTML--;
@@ -3119,7 +3119,7 @@
                 sfT2_p[line_on_2 - 1].innerHTML++;
                 gfT2_p[line_on_2 - 1].innerHTML++;
                 pmT2_p[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     sfT2_p[7].innerHTML++;
                     gfT2_p[7].innerHTML++;
                     pmT2_p[7].innerHTML++;
@@ -3128,7 +3128,7 @@
                 sfT2_g[line_on_2 - 1].innerHTML++;
                 gfT2_g[line_on_2 - 1].innerHTML++;
                 pmT2_g[line_on_2 - 1].innerHTML++;
-                if (line_on_2 < 4) {
+                if (line_on_2 < 7) {
                     sfT2_g[7].innerHTML++;
                     gfT2_g[7].innerHTML++;
                     pmT2_g[7].innerHTML++;
