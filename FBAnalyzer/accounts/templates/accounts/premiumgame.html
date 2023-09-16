@@ -123,7 +123,7 @@ It extends app_layout.html with Django
             </div>
             <div class="row justify-content-center">
                 <div style="Padding-top: 20px" class="custom-control custom-checkbox image-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="ck1a" checked onclick="checkLive()">
+                    <input type="checkbox" class="custom-control-input" id="ck1a" onclick="checkLive()">
                     <label class="custom-control-label" for="ck1a">
                         <img src="{% static 'live.png' %}" alt="#" class="img-fluid" width="70px">
                     </label>
@@ -131,7 +131,7 @@ It extends app_layout.html with Django
             </div>
             <div class="row justify-content-center">
                 <div style="Padding-top: 5px" class="custom-control custom-checkbox image-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="ck2a" checked onclick="checkShooter()">
+                    <input type="checkbox" class="custom-control-input" id="ck2a" onclick="checkShooter()">
                     <label class="custom-control-label" for="ck2a">
                         <img src="{% static 'shooter.png' %}" alt="#" class="img-fluid" width="70px">
                     </label>
@@ -272,10 +272,97 @@ It extends app_layout.html with Django
                 </select>
             </div>
         </div>
+        <div class="row justify-content-center" style="Padding-top: 10px;">
+            <div class="col-sm-2">
+                <h5>PP1</h5>
+                <select disabled onchange="changePlayer('sT1L4LW',5,3)" id="sT1L4LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L4C',5,4)" id="sT1L4C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L4RW',5,5)" id="sT1L4RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L4LW',5,6)" id="sT1L4LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L4LW',5,7)" id="sT1L4RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>6vs5</h5>
+                <select disabled onchange="changePlayer('sT1L5LW',5,3)" id="sT1L5LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L5C',5,4)" id="sT1L5C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L5RW',5,5)" id="sT1L5RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L5LW',5,6)" id="sT1L5LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L5LW',5,7)" id="sT1L5RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT1L5X',5,7)" id="sT1L5X" class="form-control-sm custom-select">
+                    <option selected disabled>Select X...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-2">
+                <h5>PP1</h5>
+                <select disabled onchange="changePlayer('sT2L4LW',5,3)" id="sT2L4LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L4C',5,4)" id="sT2L4C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L4RW',5,5)" id="sT2L4RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L4LW',5,6)" id="sT2L4LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L4LW',5,7)" id="sT2L4RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h5>6vs5</h5>
+                <select disabled onchange="changePlayer('sT2L5LW',5,3)" id="sT2L5LW" class="form-control-sm custom-select">
+                    <option selected disabled>Select LW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L5C',5,4)" id="sT2L5C" class="form-control-sm custom-select">
+                    <option selected disabled>Select C...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L5RW',5,5)" id="sT2L5RW" class="form-control-sm custom-select">
+                    <option selected disabled>Select RW...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L5LW',5,6)" id="sT2L5LD" class="form-control-sm custom-select">
+                    <option selected disabled>Select LD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L5LW',5,7)" id="sT2L5RD" class="form-control-sm custom-select">
+                    <option selected disabled>Select RD...</option>
+                </select>
+                <select disabled onchange="changePlayer('sT2L5X',5,7)" id="sT2L5X" class="form-control-sm custom-select">
+                    <option selected disabled>Select X...</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
     </div>
     <hr width="100%" size="2" align="center" color="#002072" noshade>
-    <div class="row justify-content-center" style="Padding-top: 50px;">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Game statistics</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div id="Summary_game" style="height: 120px"></div>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
@@ -287,83 +374,73 @@ It extends app_layout.html with Django
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart" style="height: 200px"></div>
+                <div id="toGame_chart" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T1_st_piechart" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div id="T1_st_piechart"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart" style="height: 200px"></div>
+                <div id="pmGame_chart" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T2_st_piechart" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div id="T2_st_piechart"></div>
             </div>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-sm-12">
             <div id="xGTeam_chart" style="height: 300px"></div>
         </div>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
-
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart" style="height: 200px"></div>
+                <div id="xGGame_chart"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart" style="height: 200px"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 200px;">
-        <div class="col-sm-6">
-            <div class="linestats">
-                <h5>Team 1 player stats</h5>
-                <div  id="T1plstats" style="height: 600px"></div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats">
-                <h5>Team 2 player stats</h5>
-                <div  id="T2plstats" style="height: 600px"></div>
+                <div id="xG%Game_chart"></div>
             </div>
         </div>
     </div>
-
-    <div class="row justify-content-center">
-        <h4>Team 1 line stats</h4>
-    </div>
-
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
-            <div class="linestats">
-                <div id="T1linestats" style="height: 300px"></div>
-            </div>
+            <h5 style="text-align: center;">Team 1 player stats</h5>
+            <div style="text-align: center;" id="T1plstats"></div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-12">
+            <h5 style="text-align: center;">Team 2 player stats</h5>
+            <div style="text-align: center;" id="T2plstats"></div>
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <h4>Team 2 line stats</h4>
+    <div class="row justify-content-center" style="Padding-top: 40px;">
+        <div class="col-sm-12">
+            <h5 style="text-align: center;">Team 1 line stats</h5>
+            <div style="text-align: center;" id="T1linestats"></div>
+        </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
-            <div class="linestats">
-                <div id="T2linestats" style="height: 300px"></div>
-            </div>
+            <h5 style="text-align: center;">Team 2 line stats</h5>
+            <div style="text-align: center;" id="T2linestats"></div>
         </div>
     </div>
 
     <hr width="100%" size="2" align="center" color="#002072" noshade>
-     <div class="row justify-content-center" style="Padding-top: 50px;">
+     <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Period 1 stats</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div id="Summary_game_1" style="height: 100px"></div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-4">
@@ -373,66 +450,69 @@ It extends app_layout.html with Django
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart_1" style="height: 200px"></div>
+                <div id="T1_typechart_1"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div id="T1_st_piechart_1" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div id="T1_st_piechart_1"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart_1" style="height: 200px"></div>
+                <div id="T2_typechart_1"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div id="T2_st_piechart_1" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div id="T2_st_piechart_1"></div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart_1" style="height: 200px"></div>
+                <div id="xGGame_chart_1"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart_1" style="height: 200px"></div>
+                <div id="xG%Game_chart_1"></div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px">
+            <div class="linestats" style="Padding-top: 40px">
                 <h5>Team 1 player stats</h5>
-                <div id="T1plstats_1" style="height: 500px"></div>
+                <div id="T1plstats_1"></div>
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px" >
+            <div class="linestats" style="Padding-top: 40px" >
                 <h5>Team 2 player stats</h5>
-                <div id="T2plstats_1" style="height: 500px"></div>
+                <div id="T2plstats_1"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
                 <h4>Team 1 line stats</h4>
-                <div id="T1linestats_1" style="height: 300px"></div>
+                <div id="T1linestats_1"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
                 <h4>Team 2 line stats</h4>
-                <div style="Padding-top: 20px" id="T2linestats_1" style="height: 300px"></div>
+                <div id="T2linestats_1"></div>
             </div>
         </div>
     </div>
     <hr width="100%" size="2" align="center" color="#002072" noshade>
-     <div class="row justify-content-center" style="Padding-top: 50px;">
+     <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Period 2 stats</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div id="Summary_game_2" style="height: 100px"></div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-4">
@@ -442,66 +522,69 @@ It extends app_layout.html with Django
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart_2" style="height: 200px"></div>
+                <div id="T1_typechart_2"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T1_st_piechart_2" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div id="T1_st_piechart_2"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart_2" style="height: 200px"></div>
+                <div id="T2_typechart_2"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T2_st_piechart_2" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div  id="T2_st_piechart_2"></div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart_2" style="height: 200px"></div>
+                <div id="xGGame_chart_2"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart_2" style="height: 200px"></div>
+                <div id="xG%Game_chart_2"></div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px">
+            <div class="linestats" style="Padding-top: 40px">
                 <h5>Team 1 player stats</h5>
-                <div id="T1plstats_2" style="height: 500px"></div>
+                <div id="T1plstats_2"></div>
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px" >
+            <div class="linestats" style="Padding-top: 40px" >
                 <h5>Team 2 player stats</h5>
-                <div id="T2plstats_2" style="height: 500px"></div>
+                <div id="T2plstats_2"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
                 <h4>Team 1 line stats</h4>
-                <div id="T1linestats_2" style="height: 300px"></div>
+                <div id="T1linestats_2"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
                 <h4>Team 2 line stats</h4>
-                <div style="Padding-top: 20px" id="T2linestats_2" style="height: 300px"></div>
+                <div id="T2linestats_2"></div>
             </div>
         </div>
     </div>
      <hr width="100%" size="2" align="center" color="#002072" noshade>
-     <div class="row justify-content-center" style="Padding-top: 50px;">
+     <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Period 3 stats</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div id="Summary_game_3" style="height: 120px"></div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-4">
@@ -511,66 +594,69 @@ It extends app_layout.html with Django
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart_3" style="height: 200px"></div>
+                <div id="T1_typechart_3"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T1_st_piechart_3" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div  id="T1_st_piechart_3"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart_3" style="height: 200px"></div>
+                <div id="T2_typechart_3"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T2_st_piechart_3" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div  id="T2_st_piechart_3"></div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart_3" style="height: 200px"></div>
+                <div id="xGGame_chart_3"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart_3" style="height: 200px"></div>
+                <div id="xG%Game_chart_3"></div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px">
+            <div class="linestats" style="Padding-top: 40px">
                 <h5>Team 1 player stats</h5>
-                <div  id="T1plstats_3" style="height: 500px"></div>
+                <div  id="T1plstats_3"></div>
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px" >
+            <div class="linestats" style="Padding-top: 40px" >
                 <h5>Team 2 player stats</h5>
-                <div  id="T2plstats_3" style="height: 500px"></div>
+                <div  id="T2plstats_3"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
                 <h4>Team 1 line stats</h4>
-                <div id="T1linestats_3" style="height: 300px"></div>
+                <div id="T1linestats_3"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
                 <h4>Team 2 line stats</h4>
-                <div style="Padding-top: 20px" id="T2linestats_3" style="height: 300px"></div>
+                <div id="T2linestats_3"></div>
             </div>
         </div>
     </div>
     <hr width="100%" size="2" align="center" color="#002072" noshade>
-    <div class="row justify-content-center" style="Padding-top: 50px;">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Overtime stats</h4>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 10px;">
+        <div id="Summary_game_4" style="height: 100px"></div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-4">
@@ -580,64 +666,64 @@ It extends app_layout.html with Django
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart_4" style="height: 200px"></div>
+                <div id="T1_typechart_4"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T1_st_piechart_4" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div  id="T1_st_piechart_4"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart_4" style="height: 200px"></div>
+                <div id="T2_typechart_4"></div>
             </div>
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="T2_st_piechart_4" style="height: 250px"></div>
+            <div class="linestats" style="Padding-top: 40px">
+                <div  id="T2_st_piechart_4"></div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart_4" style="height: 200px"></div>
+                <div id="xGGame_chart_4"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart_4" style="height: 200px"></div>
+                <div id="xG%Game_chart_4"></div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px">
+            <div class="linestats" style="Padding-top: 40px">
                 <h5>Team 1 player stats</h5>
-                <div  id="T1plstats_4" style="height: 500px"></div>
+                <div id="T1plstats_4"></div>
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px" >
+            <div class="linestats" style="Padding-top: 40px" >
                 <h5>Team 2 player stats</h5>
-                <div  id="T2plstats_4" style="height: 500px"></div>
+                <div  id="T2plstats_4"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
                 <h4>Team 1 line stats</h4>
-                <div id="T1linestats_4" style="height: 300px"></div>
+                <div id="T1linestats_4"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
                 <h4>Team 2 line stats</h4>
-                <div style="Padding-top: 20px" id="T2linestats_4" style="height: 300px"></div>
+                <div id="T2linestats_4"></div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center" style="Padding-top: 50px;">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4><span id="name_t1_3">Team 1</span></h4>
     </div>
     <div class="row">
@@ -1093,6 +1179,28 @@ It extends app_layout.html with Django
   </ul>
 </div>
 
+<div id="posT1menu" class="posT1-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="posT1('1')"><span id="posT1-1">LW</span></li>
+    <li class="menu-option" onclick="posT1('2')"><span id="posT1-2">C</span></li>
+    <li class="menu-option" onclick="posT1('3')"><span id="posT1-3">RW</span></li>
+    <li class="menu-option" onclick="posT1('4')"><span id="posT1-4">LD</span></li>
+    <li class="menu-option" onclick="posT1('5')"><span id="posT1-5">RD</span></li>
+    <li class="menu-option" onclick="posT1('6')"><span id="posT1-6">No player</span></li>
+  </ul>
+</div>
+
+<div id="posT2menu" class="posT2-type">
+  <ul class="menu-options">
+    <li class="menu-option" onclick="posT2('1')"><span id="posT2-1">LW</span></li>
+    <li class="menu-option" onclick="posT2('2')"><span id="posT2-2">C</span></li>
+    <li class="menu-option" onclick="posT2('3')"><span id="posT2-3">RW</span></li>
+    <li class="menu-option" onclick="posT2('4')"><span id="posT2-4">LD</span></li>
+    <li class="menu-option" onclick="posT2('5')"><span id="posT2-5">RD</span></li>
+    <li class="menu-option" onclick="posT2('6')"><span id="posT2-6">No player</span></li>
+  </ul>
+</div>
+
 <div id="shottype" class="shot-type">
   <ul class="menu-options">
     <li class="menu-option" onclick="shotTOnetimer()">Turnover | Cross-Pass</li>
@@ -1100,8 +1208,11 @@ It extends app_layout.html with Django
     <li class="menu-option" onclick="shotOnetimer()">Cross-Pass</li>
     <li class="menu-option" onclick="shotRebound()">Rebound</li>
     <li class="menu-option" onclick="shotDirect()">Direct</li>
+    <li class="menu-option" style="color:blue;" onclick="shotOther('1')">Possession+</li>
+    <li class="menu-option" style="color:red;" onclick="shotOther('2')">Possession-</li>
   </ul>
 </div>
+
 <div id="shooter" class="shooter-type">
   <ul class="menu-options">
     <li class="menu-option" onclick="shotTaker('1')"><span id="shooter-1">LW</span></li>
@@ -1109,8 +1220,10 @@ It extends app_layout.html with Django
     <li class="menu-option" onclick="shotTaker('3')"><span id="shooter-3">RW</span></li>
     <li class="menu-option" onclick="shotTaker('4')"><span id="shooter-4">LD</span></li>
     <li class="menu-option" onclick="shotTaker('5')"><span id="shooter-5">RD</span></li>
+    <li hidden class="menu-option" id="sh-6" onclick="shotTaker('6')"><span id="shooter-6">X</span></li>
   </ul>
 </div>
+
 <div id="passer" class="passer-type">
   <ul class="menu-options">
     <li class="menu-option" onclick="shotPasser('1')"><span id="passer-1">LW</span></li>
@@ -1118,10 +1231,12 @@ It extends app_layout.html with Django
     <li class="menu-option" onclick="shotPasser('3')"><span id="passer-3">RW</span></li>
     <li class="menu-option" onclick="shotPasser('4')"><span id="passer-4">LD</span></li>
     <li class="menu-option" onclick="shotPasser('5')"><span id="passer-5">RD</span></li>
+    <li hidden class="menu-option" id="pas-6" onclick="shotPasser('8')"><span id="passer-8">X</span></li>
     <li class="menu-option" onclick="shotPasser('6')"><span id="passer-6">G</span></li>
     <li class="menu-option" onclick="shotPasser('7')"><span id="passer-7">No passer</span></li>
   </ul>
 </div>
+
 <div id="options" class="option-menu">
   <ul class="menu-options">
     <li class="menu-option" onclick="options('1')"><span id="option-1">Send game LIVE OFF</span></li>
@@ -1135,7 +1250,6 @@ It extends app_layout.html with Django
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.js"></script>
 <script type="text/javascript" src="/static/js/variables.js"></script>
 <script type="text/javascript" src="/static/js/premiumfunctions.js"></script>
 <script type="text/javascript" src="/static/js/livedata.js"></script>

@@ -47,15 +47,15 @@
     var data = {}; // Live data object
     var data_url = "null"; // Live data url
     var today = new Date();
-    var live = 1; // If live updates are sent to API 1 yes / 0 no
-    var shooter_select = 1; // If user wants to tag shooter
+    var live = 0; // If live updates are sent to API 1 yes / 0 no
+    var shooter_select = 0; // If user wants to tag shooter
     var user_id = JSON.parse(document.getElementById('user_id').textContent); // user id number
     var game_id = 0; // game id number
     var shot_on = 0; // Shot tag process on/off
     var data_object = {}; // Save data object contains all saved/loaded data
     var undo_object = {}; // Undo object contains previous state data
     var data_object_stringified = {} // Deep copy of a data_object
-    
+
     // Premium game level, team, and player select box elements
 
     var load_game = document.getElementById("load-game");
@@ -95,20 +95,46 @@
     var s_T2L3RW = document.getElementById("sT2L3RW");
     var s_T2L3LD = document.getElementById("sT2L3LD");
     var s_T2L3RD = document.getElementById("sT2L3RD");
-    
+    var s_T1L4LW = document.getElementById("sT1L4LW");
+    var s_T1L4C = document.getElementById("sT1L4C");
+    var s_T1L4RW = document.getElementById("sT1L4RW");
+    var s_T1L4LD = document.getElementById("sT1L4LD");
+    var s_T1L4RD = document.getElementById("sT1L4RD");
+    var s_T2L4LW = document.getElementById("sT2L4LW");
+    var s_T2L4C = document.getElementById("sT2L4C");
+    var s_T2L4RW = document.getElementById("sT2L4RW");
+    var s_T2L4LD = document.getElementById("sT2L4LD");
+    var s_T2L4RD = document.getElementById("sT2L4RD");
+    var s_T1L5LW = document.getElementById("sT1L5LW");
+    var s_T1L5C = document.getElementById("sT1L5C");
+    var s_T1L5RW = document.getElementById("sT1L5RW");
+    var s_T1L5LD = document.getElementById("sT1L5LD");
+    var s_T1L5RD = document.getElementById("sT1L5RD");
+    var s_T1L5X = document.getElementById("sT1L5X");
+    var s_T2L5LW = document.getElementById("sT2L5LW");
+    var s_T2L5C = document.getElementById("sT2L5C");
+    var s_T2L5RW = document.getElementById("sT2L5RW");
+    var s_T2L5LD = document.getElementById("sT2L5LD");
+    var s_T2L5RD = document.getElementById("sT2L5RD");
+    var s_T2L5X = document.getElementById("sT2L5X");
+
     var s_T1_p = [s_T1G, s_T1L1LW, s_T1L1C, s_T1L1RW, s_T1L1LD, s_T1L1RD,
-                    s_T1L2LW, s_T1L2C, s_T1L2RW, s_T1L2LD, s_T1L2RD, 
-                    s_T1L3LW, s_T1L3C, s_T1L3RW, s_T1L3LD, s_T1L3RD];
-                    
+                    s_T1L2LW, s_T1L2C, s_T1L2RW, s_T1L2LD, s_T1L2RD,
+                    s_T1L3LW, s_T1L3C, s_T1L3RW, s_T1L3LD, s_T1L3RD,
+                    s_T1L4LW, s_T1L4C, s_T1L4RW, s_T1L4LD, s_T1L4RD,
+                    s_T1L5LW, s_T1L5C, s_T1L5RW, s_T1L5LD, s_T1L5RD, s_T1L5X];
+
     var s_T2_p = [s_T2G, s_T2L1LW, s_T2L1C, s_T2L1RW, s_T2L1LD, s_T2L1RD,
-                    s_T2L2LW, s_T2L2C, s_T2L2RW, s_T2L2LD, s_T2L2RD, 
-                    s_T2L3LW, s_T2L3C, s_T2L3RW, s_T2L3LD, s_T2L3RD];
+                    s_T2L2LW, s_T2L2C, s_T2L2RW, s_T2L2LD, s_T2L2RD,
+                    s_T2L3LW, s_T2L3C, s_T2L3RW, s_T2L3LD, s_T2L3RD,
+                    s_T2L4LW, s_T2L4C, s_T2L4RW, s_T2L4LD, s_T2L4RD,
+                    s_T2L5LW, s_T2L5C, s_T2L5RW, s_T2L5LD, s_T2L5RD, s_T2L5X];
 
     // Team 1 and Team 2 name elements
-    
+
     var name_t1 = "Team 1"; // Team 1 name variable
     var name_t2 = "Team 2"; // Team 2 name variable
-    
+
     var n_t1_1 = document.getElementById("name_t1_1");
     var n_t1_2 = document.getElementById("name_t1_2");
     var n_t1_3 = document.getElementById("name_t1_3");
@@ -130,7 +156,7 @@
     var n_t1_19 = document.getElementById("name_t1_19");
     var n_t1_20 = document.getElementById("name_t1_20");
     var n_t1_21 = document.getElementById("name_t1_21");
-    
+
     var name_t1_id = [n_t1_1, n_t1_2, n_t1_3, n_t1_4, n_t1_5, n_t1_6, n_t1_7, n_t1_8,
                  n_t1_9, n_t1_10, n_t1_11, n_t1_12, n_t1_13, n_t1_14, n_t1_15,
                  n_t1_16, n_t1_17, n_t1_18, n_t1_19, n_t1_20, n_t1_21];
@@ -156,7 +182,7 @@
     var n_t2_19 = document.getElementById("name_t2_19");
     var n_t2_20 = document.getElementById("name_t2_20");
     var n_t2_21 = document.getElementById("name_t2_21");
-    
+
     var name_t2_id = [n_t2_1, n_t2_2, n_t2_3, n_t2_4, n_t2_5, n_t2_6, n_t2_7, n_t2_8,
                  n_t2_9, n_t2_10, n_t2_11, n_t2_12, n_t2_13, n_t2_14, n_t2_15,
                  n_t2_16, n_t2_17, n_t2_18, n_t2_19, n_t2_20, n_t2_21];
@@ -172,7 +198,7 @@
                         'Angle', 'xG', 'Shooter', 'Passer', 'TFLW', 'TFC', 'TFRW', 'TFLD', 'TFRD', 'TFG',
                         'TALW', 'TAC', 'TARW', 'TALD', 'TARD', 'TAG', 'PP', 'SH']];
     var printShotData = [['Date', 'Team 1', 'Team 2', 'Time', 'Shooting Team', 'Result', 'Type', 'xG', 'xGOT', 'Shooter',
-                        'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G',
+                        'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G', 'T1X', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G', 'T2X',
                         'PP', 'SH','Distance','Angle', 'Player Team 1', 'Player Team 2']];
     var premTimeData = [['User', 'Game', 'Time', 'Possession', 'Line T1', 'Line T2', 'T1LW', 'T1C', 'T1RW',
                         'T1LD', 'T1RD', 'T1G', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G']];
@@ -213,7 +239,7 @@
 
     // Data arrays for xGOT charts
 
-    var xGOTTeam_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    var xGOTTeam_array = [['Time','xGOT Team 1','xGOT Team 2','Goal Team 1','Goal Team 2']];
     var xGOTL1_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGOTL2_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     var xGOTL3_array = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
@@ -231,10 +257,10 @@
 
     // Data arrays for players charts
 
-    var plT1_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
-    var plT2_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
-    var plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
-    var plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists']];
+    var plT1_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
+    var plT2_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
+    var plT1p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
+    var plT2p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
 
     // Variables for print chart images
     var p_xGGame_chart = "";
@@ -265,7 +291,7 @@
     var p_xGTeam_chart_2 = "";
     var p_T1_typechart_2 = "";
     var p_T2_typechart_2 = "";
-    
+
     var p_xGGame_chart_3 = "";
     var p_xG_per_Game_chart_3 = "";
     var p_T1_st_piechart_3 = "";
@@ -273,7 +299,7 @@
     var p_xGTeam_chart_3 = "";
     var p_T1_typechart_3 = "";
     var p_T2_typechart_3 = "";
-    
+
     var p_xGGame_chart_4 = "";
     var p_xG_per_Game_chart_4 = "";
     var p_T1_st_piechart_4 = "";
@@ -359,9 +385,20 @@
     var staxGT1L3p_array = [0,0,0,0,0];
     var staxGT2L3p_array = [0,0,0,0,0];
 
+    // Data arrays for line Possession +-
+
+    var posplusT1g_array = [0,0,0,0];
+    var posminusT1g_array = [0,0,0,0];
+    var posplusT2g_array = [0,0,0,0];
+    var posminusT2g_array = [0,0,0,0];
+    var posplusT1p_array = [0,0,0,0];
+    var posminusT1p_array = [0,0,0,0];
+    var posplusT2p_array = [0,0,0,0];
+    var posminusT2p_array = [0,0,0,0];
+
     // Time on court by line period/game (in counters)
     // Team 1
-    
+
     var TocL1p = 0;
     var TocL2p = 0;
     var TocL3p = 0;
@@ -378,9 +415,9 @@
     var TocSH2g = 0;
     var TocTeam_g = 0;
     var TocTeam_p = 0;
-    
+
     // Team 2
-    
+
     var TocL1T2p = 0;
     var TocL2T2p = 0;
     var TocL3T2p = 0;
@@ -400,7 +437,7 @@
 
     // Number of times with ball (in pcs)
     // Team 1
-    
+
     var NotL1p = 0;
     var NotL2p = 0;
     var NotL3p = 0;
@@ -419,7 +456,7 @@
     var NotTeam_p = 0;
 
     // Team 2
-    
+
     var NotL1T2p = 0;
     var NotL2T2p = 0;
     var NotL3T2p = 0;
@@ -436,10 +473,10 @@
     var NotSH2T2g = 0;
     var NotTeamT2_g = 0;
     var NotTeamT2_p = 0;
-    
+
     // Number of times without ball (in pcs)
     // Team 1
-    
+
     var NotnoL1p = 0;
     var NotnoL2p = 0;
     var NotnoL3p = 0;
@@ -458,7 +495,7 @@
     var NotnoTeam_p = 0;
 
     // Team 2
-    
+
     var NotnoL1T2p = 0;
     var NotnoL2T2p = 0;
     var NotnoL3T2p = 0;
@@ -475,10 +512,10 @@
     var NotnoSH2T2g = 0;
     var NotnoTeamT2_g = 0;
     var NotnoTeamT2_p = 0;
-    
+
     // Ball possession by line/team period/game (in counters)
     // Team 1
-    
+
     var PosL1p = 0;
     var PosL2p = 0;
     var PosL3p = 0;
@@ -497,7 +534,7 @@
     var PosSH2g = 0;
 
     // Team 2
-    
+
     var PosL1T2p = 0;
     var PosL2T2p = 0;
     var PosL3T2p = 0;
@@ -514,10 +551,10 @@
     var PosPP2T2p = 0;
     var PosSH2T2p = 0;
     var PosSH2T2g = 0;
-    
+
     // Number of shifts per line period/game (in pcs)
     // Team 1
-    
+
     var NosL1p = 0;
     var NosL2p = 0;
     var NosL3p = 0;
@@ -534,9 +571,9 @@
     var NosPP2p = 0;
     var NosSH2p = 0;
     var NosSH2g = 0;
-    
+
     // Team 2
-    
+
     var NosL1T2p = 0;
     var NosL2T2p = 0;
     var NosL3T2p = 0;
@@ -553,7 +590,7 @@
     var NosPP2T2p = 0;
     var NosSH2T2p = 0;
     var NosSH2T2g = 0;
-    
+
     // xG values by line/team period/game
     // Team 1
 
@@ -626,9 +663,9 @@
     var xGOTaPP2p = 0;
     var xGOTaSH2p = 0;
     var xGOTaSH2g = 0;
-    
+
     // Team 2
-    
+
     var xGfL1T2p = 0;
     var xGfL2T2p = 0;
     var xGfL3T2p = 0;
@@ -701,7 +738,7 @@
 
     // Arrays for easy access to variables
     // Team 1
-    
+
     var Toc_p = [TocL1p, TocL2p, TocL3p, TocPP1p, TocPP2p, TocSH1p, TocSH2p, TocTeam_p];
     var Toc_g = [TocL1g, TocL2g, TocL3g, TocPP1g, TocPP2g, TocSH1g, TocSH2g, TocTeam_g];
     var Pos_p = [PosL1p, PosL2p, PosL3p, PosPP1p, PosPP2p, PosSH1p, PosSH2p, PosTeam_p];
@@ -722,7 +759,7 @@
     var xGOTf_g = [xGOTfL1g, xGOTfL2g, xGOTfL3g, xGOTfPP1g, xGOTfPP2g, xGOTfSH1g, xGOTfSH2g, xGOTfTeam_g];
     var xGOTa_g = [xGOTaL1g, xGOTaL2g, xGOTaL3g, xGOTaPP1g, xGOTaPP2g, xGOTaSH1g, xGOTaSH2g, xGOTaTeam_g];
     // Team 2
-    
+
     var TocT2_p = [TocL1T2p, TocL2T2p, TocL3T2p, TocPP1T2p, TocPP2T2p, TocSH1T2p, TocSH2T2p, TocTeamT2_p];
     var TocT2_g = [TocL1T2g, TocL2T2g, TocL3T2g, TocPP1T2g, TocPP2T2g, TocSH1T2g, TocSH2T2g, TocTeamT2_g];
     var PosT2_p = [PosL1T2p, PosL2T2p, PosL3T2p, PosPP1T2p, PosPP2T2p, PosSH1T2p, PosSH2T2p, PosTeamT2_p];
@@ -867,9 +904,9 @@
     var maTeamp = document.getElementById("maTeam");
     var safTeamp = document.getElementById("safTeam");
     var saaTeamp = document.getElementById("saaTeam");
-    
+
     // Team 2
-    
+
     var sfL1T2p = document.getElementById("sfL1T2");
     var saL1T2p = document.getElementById("saL1T2");
     var bfL1T2p = document.getElementById("bfL1T2");
@@ -1019,9 +1056,9 @@
     var xGa_SH1p = document.getElementById("xGa_SH1");
     var xGa_SH2p = document.getElementById("xGa_SH2");
     var xGa_Teamp = document.getElementById("xGa_Team");
-    
+
     // Team 2
-    
+
     var pL1T2p = document.getElementById("pL1T2");
     var pL2T2p = document.getElementById("pL2T2");
     var pL3T2p = document.getElementById("pL3T2");
@@ -1227,9 +1264,9 @@
     var xGa_SH1g = document.getElementById("xGa_SH1g");
     var xGa_SH2g = document.getElementById("xGa_SH2g");
     var xGa_Teamg = document.getElementById("xGa_Teamg");
-    
+
     // Team 2
-    
+
     var sfL1T2g = document.getElementById("sfL1T2g");
     var saL1T2g = document.getElementById("saL1T2g");
     var bfL1T2g = document.getElementById("bfL1T2g");
@@ -1422,9 +1459,9 @@
     var avgno_g = [avgnoL1g, avgnoL2g, avgnoL3g, avgnoPP1g, avgnoPP2g, avgnoSH1g, avgnoSH2g, avgnoTeamg];
     var xf_g = [xGf_L1g, xGf_L2g, xGf_L3g, xGf_PP1g, xGf_PP2g, xGf_SH1g, xGf_SH2g, xGf_Teamg];
     var xa_g = [xGa_L1g, xGa_L2g, xGa_L3g, xGa_PP1g, xGa_PP2g, xGa_SH1g, xGa_SH2g, xGa_Teamg];
-    
+
     // Team 2
-    
+
     var sfT2_p = [sfL1T2p, sfL2T2p, sfL3T2p, sfPP1T2p, sfPP2T2p, sfSH1T2p, sfSH2T2p, sfTeamT2p];
     var saT2_p = [saL1T2p, saL2T2p, saL3T2p, saPP1T2p, saPP2T2p, saSH1T2p, saSH2T2p, saTeamT2p];
     var gfT2_p = [gfL1T2p, gfL2T2p, gfL3T2p, gfPP1T2p, gfPP2T2p, gfSH1T2p, gfSH2T2p, gfTeamT2p];
