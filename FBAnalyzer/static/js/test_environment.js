@@ -5912,9 +5912,9 @@
         // Summary chart
 
         var pldata19 = new google.visualization.DataTable();
-        pldata19.addColumn('string', '###');
-        pldata19.addColumn('number', 'T1');
-        pldata19.addColumn('number', 'T2');
+        pldata19.addColumn('string', 'Team');
+        pldata19.addColumn('number', '1');
+        pldata19.addColumn('number', '2');
         //pldata19.addColumn('number', 'xG T1');
         //pldata19.addColumn('number', 'xG T2');
         //pldata19.addColumn('number', 'xGOT T1');
