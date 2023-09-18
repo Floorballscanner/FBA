@@ -300,6 +300,9 @@
     var p_T1_typechart_3 = "";
     var p_T2_typechart_3 = "";
 
+    var p_T1X_str = "";
+    var p_T2X_str = "";
+
     var p_xGGame_chart_4 = "";
     var p_xG_per_Game_chart_4 = "";
     var p_T1_st_piechart_4 = "";
