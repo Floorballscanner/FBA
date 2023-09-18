@@ -311,7 +311,7 @@
     var p_T1_typechart_4 = "";
     var p_T2_typechart_4 = "";
 
-    // Data arrays for shot type charts
+    // Data arrays for shot type chartss
 
     var stT1Teamg_array = [0,0,0,0,0];
     var stT2Teamg_array = [0,0,0,0,0];
