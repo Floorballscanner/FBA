@@ -1524,7 +1524,7 @@
 
         ];
 
-    let xG_matrix = [     // This is the xG matrix
+    let xG_matrix = [     // This is the xG matrixxx
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [1, 1, 7, 8, 8, 19, 54, 19, 8, 8, 7, 1, 1],
