@@ -186,13 +186,17 @@
                     pldata.addColumn('string', 'Name');
                     pldata.addColumn('number', 'Shot xG');
                     pldata.addColumn('number', 'Pass xG');
+                    pldata.addColumn('number', 'Shot xG PP');
+                    pldata.addColumn('number', 'Pass xG PP');
                     pldata.addColumn('number', 'Goals');
                     pldata.addColumn('number', 'Ass.');
                     pldata.addColumn('number', 'Shots');
                     pldata.addColumn('number', 'Shotass.');
+                    pldata.addColumn('number', 'Possession +');
+                    pldata.addColumn('number', 'Possession -');
 
                     for(i = 1; i < gd.plT1_array.length; i++){
-                        pldata.addRow([gd.plT1_array[i][1], gd.plT1_array[i][2], gd.plT1_array[i][3], gd.plT1_array[i][4], gd.plT1_array[i][5], gd.plT1_array[i][6], gd.plT1_array[i][7]]);
+                        pldata.addRow([gd.plT1_array[i][1], gd.plT1_array[i][2], gd.plT1_array[i][3], gd.plT1_array[i][4], gd.plT1_array[i][5], gd.plT1_array[i][6], gd.plT1_array[i][7], gd.plT1_array[i][8], gd.plT1_array[i][9], gd.plT1_array[i][10], gd.plT1_array[i][11]]);
                     }
 
                     var options = {
@@ -222,13 +226,17 @@
                     pldata.addColumn('string', 'Name');
                     pldata.addColumn('number', 'Shot xG');
                     pldata.addColumn('number', 'Pass xG');
+                    pldata.addColumn('number', 'Shot xG PP');
+                    pldata.addColumn('number', 'Pass xG PP');
                     pldata.addColumn('number', 'Goals');
                     pldata.addColumn('number', 'Ass.');
                     pldata.addColumn('number', 'Shots');
                     pldata.addColumn('number', 'Shotass.');
+                    pldata.addColumn('number', 'Possession +');
+                    pldata.addColumn('number', 'Possession -');
 
                     for(i = 1; i < gd.plT2_array.length; i++){
-                        pldata.addRow([gd.plT2_array[i][1], gd.plT2_array[i][2], gd.plT2_array[i][3], gd.plT2_array[i][4], gd.plT2_array[i][5], gd.plT2_array[i][6], gd.plT2_array[i][7]]);
+                        pldata.addRow([gd.plT2_array[i][1], gd.plT2_array[i][2], gd.plT2_array[i][3], gd.plT2_array[i][4], gd.plT2_array[i][5], gd.plT2_array[i][6], gd.plT2_array[i][7], gd.plT2_array[i][8], gd.plT2_array[i][9], gd.plT2_array[i][10], gd.plT2_array[i][11]]);
                     }
 
                     var options = {
