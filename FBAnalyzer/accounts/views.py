@@ -229,6 +229,20 @@ def test_environment(request):
     return render(request, 'accounts/test_environment.html', context=context)
 
 @login_required
+def test_analysis(request):
+
+    if request.user.id == 3 or request.user.id == 2:
+        games = Game.objects.order_by('date')
+    else:
+        games = Game.objects.filter(user=request.user).order_by('date')
+
+    context = {
+        'games': games,
+    }
+
+    return render(request, 'accounts/test_analysis.html', context=context)
+
+@login_required
 def edit_data(request):
 
     return render(request, 'accounts/editdata.html')
