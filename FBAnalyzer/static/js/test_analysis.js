@@ -9,16 +9,13 @@ function changeGame() {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
-                    initializePage()
                     gd = data.game_data;
                     if (Object.keys(gd).length > 0) { // If game data is not empty
 
 
 
                     }
-                }
-
-            })
+                })
                 .catch((error) => {
                     console.error('Error:', error);
             });
