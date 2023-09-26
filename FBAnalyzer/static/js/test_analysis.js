@@ -17,8 +17,10 @@ function changeGame() {
 
                         // Iterate through the array of arrays and extract shooter names
                         gd.printShotData.forEach(row => {
-                            const shooterName = row[9]; // Assuming array indexing is 0-based
-                            uniqueShooters.add(shooterName);
+                            if (row[1].includes(gd.name_t1)) { // Check the 2nd column for team 1
+                                const shooterName = row[9]; // Assuming array indexing is 0-based
+                                uniqueShooters.add(shooterName);
+                            }
                         });
 
                         // Convert the Set to an array if needed
