@@ -24,6 +24,8 @@ It extends app_layout.html with Django
                     {% endfor %}
                 </select>
                 <img src="{% static 'delete.png' %}" id="analyse_delete" onclick="deleteGameButton()" disabled>
+                <button id="dl_csv" type="button" onclick="downloadCsv()" disabled="true" class="btn btn-secondary">Download Shots</button>
+
             </div>
         </div>
     </div>
@@ -36,6 +38,7 @@ It extends app_layout.html with Django
                 <h3 id="stlabel">00:00:00</h3></br>
                 <h3><span id="sttotg_1">0</span> - <span id="sttotg_2">0</span></h3>
                 <h5>xG <span id="sttotxG_1">0</span> - <span id="sttotxG_2">0</span></h5>
+                <h6>xGOT <span id="sttotxGOT_1">0</span> - <span id="sttotxGOT_2">0</span></h6>
             </div>
         </div>
     </div>

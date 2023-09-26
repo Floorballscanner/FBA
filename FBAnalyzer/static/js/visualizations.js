@@ -13,10 +13,15 @@
     var ctx3 = cnvs3.getContext("2d");
     var cnvs4 = document.getElementById("stmyCanvas_p4");
     var ctx4 = cnvs4.getContext("2d");
+    var csvButton = document.getElementById('dl_csv');
     var fWidth = 200; // Width of the shotmap field in pixels
     var fLength = 332; // Length of the shotmap field in pixels
     var myImg = new Image();
     myImg.src = "/static/field-new.png";
+    printShotData = [];
+    name_t1 = "";
+    name_t2 = "";
+
 
     // Function for Analysis.html - game chart visualization
 
@@ -44,10 +49,15 @@
                     document.getElementById('stdate').innerHTML = data.date;
                     team_1 = gd.name_t1;
                     team_2 = gd.name_t2;
+                    name_t1 = team_1;
+                    name_t2 = team_2;
+                    printShotData = gd.printShotData;
                     document.getElementById('sttotg_1').innerHTML = gd.tgt_1;
                     document.getElementById('sttotg_2').innerHTML = gd.tgt_2;
                     document.getElementById('sttotxG_1').innerHTML = gd.txG_1;
                     document.getElementById('sttotxG_2').innerHTML = gd.txG_2;
+                    document.getElementById('sttotxGOT_1').innerHTML = gd.txGOT_1;
+                    document.getElementById('sttotxGOT_2').innerHTML = gd.txGOT_2;
 
                     var date = new Date(gd.gameCounter * 1000);
                     var display = date.toISOString().substr(11, 8);
@@ -81,6 +91,7 @@
                     img4.onload = function() {
                         ctx4.drawImage(img4,0,0,fWidth,fLength);
                      };
+                    csvButton.disabled = 'false';
 
                     // xG Game Chart
 
@@ -464,6 +475,8 @@
         document.getElementById('sttotg_2').innerHTML = "0"
         document.getElementById('sttotxG_1').innerHTML = "0"
         document.getElementById('sttotxG_2').innerHTML = "0"
+        document.getElementById('sttotxGOT_1').innerHTML = "0"
+        document.getElementById('sttotxGOT_2').innerHTML = "0"
         document.getElementById('stlabel').innerHTML = "00:00:00"
         document.getElementById('stperiodNr').innerHTML = "Period 1"
         document.getElementById('stteam_1').innerHTML = ""
@@ -472,11 +485,16 @@
         document.getElementById('stteam_2').innerHTML = ""
         document.getElementById('stt2name1').innerHTML = ""
         document.getElementById('stt2name2').innerHTML = ""
+        csvButton.disabled = 'true';
 
         ctx1.drawImage(myImg,0,0,fWidth,fLength);
         ctx2.drawImage(myImg,0,0,fWidth,fLength);
         ctx3.drawImage(myImg,0,0,fWidth,fLength);
         ctx4.drawImage(myImg,0,0,fWidth,fLength);
+
+        printShotData = [];
+        name_t1 = "";
+        name_t2 = "";
 
         // xG Game Chart
 
@@ -770,5 +788,43 @@
 
         // var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
         // chart1.draw(chartData, options);
+
+    }
+
+    function arrayToCsv(data){
+      return data.map(row =>
+        row
+        .map(String)  // convert every value to String
+        .map(v => v.replaceAll('"', '""'))  // escape double colons
+        .map(v => `"${v}"`)  // quote it
+        .join(',')  // comma-separated
+      ).join('\r\n');  // rows starting on new lines
+    }
+
+    /** Download contents as a file
+     * Source: https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+     */
+    function downloadBlob(content, filename, contentType) {
+      // Create a blob
+      var blob = new Blob([content], { type: contentType });
+      var url = URL.createObjectURL(blob);
+
+      // Create a link to download it
+      var pom = document.createElement('a');
+      pom.href = url;
+      pom.setAttribute('download', filename);
+      pom.click();
+    }
+
+    function downloadCsv() {
+
+        var conf_csv = confirm("Press OK to download shots in a csv-file");
+
+            if (conf_csv == true) {
+                name_shot = name_t1+"_"+name_t2+"_shots.csv";
+                name_shot = name_shot.replace(/\s/g, "");
+                csv_shot = arrayToCsv(printShotData);
+                downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
+            }
 
     }
