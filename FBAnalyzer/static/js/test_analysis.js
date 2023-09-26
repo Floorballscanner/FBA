@@ -12,7 +12,18 @@ function changeGame() {
                     gd = data.game_data;
                     if (Object.keys(gd).length > 0) { // If game data is not empty
 
+                        // Create an empty Set to store unique shooter names
+                        const uniqueShooters = new Set();
 
+                        // Iterate through the array of arrays and extract shooter names
+                        gd.printShotData.forEach(row => {
+                            const shooterName = row[9]; // Assuming array indexing is 0-based
+                            uniqueShooters.add(shooterName);
+                        });
+
+                        // Convert the Set to an array if needed
+                        const uniqueShootersArray = Array.from(uniqueShooters);
+                        console.log(uniqueShootersArray);
 
                     }
                 })
