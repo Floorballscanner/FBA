@@ -17,6 +17,7 @@ It extends app_layout.html with Django
         <div class="col-sm-12">
             <div class="team-selection">
                 <h2 style="Padding-top:20px;">My saved games</h2><br>
+                <button id="dl_csv" type="button" onclick="downloadCsv()" disabled="true" class="btn btn-secondary" style="font-size:8px;">Download Shots</button>
                 <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
                     <option selected disabled>Select a game...</option>
                     {% for game in games reversed %}
@@ -24,8 +25,6 @@ It extends app_layout.html with Django
                     {% endfor %}
                 </select>
                 <img src="{% static 'delete.png' %}" id="analyse_delete" onclick="deleteGameButton()" disabled>
-                <button id="dl_csv" type="button" onclick="downloadCsv()" disabled="true" class="btn btn-secondary" style="font-size:8px;">Download Shots</button>
-
             </div>
         </div>
     </div>

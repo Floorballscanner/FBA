@@ -58,7 +58,7 @@
                     document.getElementById('sttotxG_2').innerHTML = gd.txG_2;
                     document.getElementById('sttotxGOT_1').innerHTML = gd.txGOT_1;
                     document.getElementById('sttotxGOT_2').innerHTML = gd.txGOT_2;
-                    csvButton.disabled = "false";
+                    csvButton.disabled = false;
 
                     var date = new Date(gd.gameCounter * 1000);
                     var display = date.toISOString().substr(11, 8);
@@ -485,7 +485,7 @@
         document.getElementById('stteam_2').innerHTML = ""
         document.getElementById('stt2name1').innerHTML = ""
         document.getElementById('stt2name2').innerHTML = ""
-        csvButton.disabled = 'true';
+        csvButton.disabled = true;
 
         ctx1.drawImage(myImg,0,0,fWidth,fLength);
         ctx2.drawImage(myImg,0,0,fWidth,fLength);
