@@ -13,7 +13,7 @@
     var ctx3 = cnvs3.getContext("2d");
     var cnvs4 = document.getElementById("stmyCanvas_p4");
     var ctx4 = cnvs4.getContext("2d");
-    var csvButton = document.getElementById('dl_csv');
+    var csvButton = document.getElementById("dl_csv");
     var fWidth = 200; // Width of the shotmap field in pixels
     var fLength = 332; // Length of the shotmap field in pixels
     var myImg = new Image();
@@ -58,6 +58,7 @@
                     document.getElementById('sttotxG_2').innerHTML = gd.txG_2;
                     document.getElementById('sttotxGOT_1').innerHTML = gd.txGOT_1;
                     document.getElementById('sttotxGOT_2').innerHTML = gd.txGOT_2;
+                    csvButton.disabled = "false";
 
                     var date = new Date(gd.gameCounter * 1000);
                     var display = date.toISOString().substr(11, 8);
@@ -91,7 +92,6 @@
                     img4.onload = function() {
                         ctx4.drawImage(img4,0,0,fWidth,fLength);
                      };
-                    csvButton.disabled = 'false';
 
                     // xG Game Chart
 
