@@ -17,7 +17,7 @@ function changeGame() {
 
                         // Iterate through the array of arrays and extract shooter names
                         gd.printShotData.forEach(row => {
-                            if (row[1].includes(name_t1)) {
+                            if (row[1].includes(gd.name_t1)) {
                                 const shooterName = row[9]; // Assuming array indexing is 0-based
                                 const matches = shooterName.match(/#(\d+) (.+)/); // Extract jersey number and name
 
