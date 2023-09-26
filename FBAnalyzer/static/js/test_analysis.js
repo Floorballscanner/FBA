@@ -12,8 +12,8 @@ function changeGame() {
                     gd = data.game_data;
                     if (Object.keys(gd).length > 0) { // If game data is not empty
 
-                        // Create an empty array to store shooter objects
-                        const shooterObjects = [];
+                        // Create a map to store shooter objects with unique jersey numbers
+                        const uniqueShootersMap = new Map();
 
                         // Iterate through the array of arrays and extract shooter names
                         gd.printShotData.forEach(row => {
@@ -24,18 +24,23 @@ function changeGame() {
                                 if (matches && matches.length === 3) {
                                   const jerseyNumber = parseInt(matches[1], 10);
                                   const playerName = matches[2];
-                                  shooterObjects.push({ jerseyNumber, playerName });
+
+                                  // Check if a shooter with the same jersey number already exists
+                                  if (!uniqueShootersMap.has(jerseyNumber)) {
+                                    // If not, add the shooter to the map
+                                    uniqueShootersMap.set(jerseyNumber, playerName);
+                                  }
                                 }
                             }
                         });
 
-                        // Sort shooter objects by jersey number in ascending order
-                        shooterObjects.sort((a, b) => a.jerseyNumber - b.jerseyNumber);
-
-                        // Extract the sorted shooter names from the sorted objects
-                        const sortedShooters = shooterObjects.map(obj => `#${obj.jerseyNumber} ${obj.playerName}`);
+                        // Sort the unique shooter names by jersey number in ascending order
+                        const sortedShooters = [...uniqueShootersMap.entries()]
+                          .sort((a, b) => a[0] - b[0]) // Sort by jersey number
+                          .map(entry => `#${entry[0]} ${entry[1]}`); // Map back to the original format
 
                         console.log(sortedShooters);
+
                     }
                 })
                 .catch((error) => {
