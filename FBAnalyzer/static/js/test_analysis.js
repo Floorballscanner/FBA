@@ -109,6 +109,52 @@ function drawCharts() {
         pldata.sort([{column: event.column, desc: event.ascending}]);
         chart.draw(pldata, options);
     });
+    
+    // Player data chart / Game
+
+    var pldata60 = new google.visualization.DataTable();
+    pldata60.addColumn('string', 'Player Name');
+    pldata60.addColumn('number', 'Games');
+    pldata60.addColumn('number', 'ixG');
+    pldata60.addColumn('number', 'ixAss');
+    pldata60.addColumn('number', 'ixG_PP');
+    pldata60.addColumn('number', 'ixAss_PP');
+    pldata60.addColumn('number', 'Goals');
+    pldata60.addColumn('number', 'Assists');
+    pldata60.addColumn('number', 'Shots');
+    pldata60.addColumn('number', 'Shot Assists');
+    pldata60.addColumn('number', 'Possession +');
+    pldata60.addColumn('number', 'Possession -');
+
+    [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
+                    'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
+
+    for(i = 1; i < playerData.length; i++){
+        pldata60.addRow([playerData[i][1], playerData[i][2], playerData[i][3]/playerData[i][2], playerData[i][4]/playerData[i][2],
+        playerData[i][5]/playerData[i][2], playerData[i][6]/playerData[i][2], playerData[i][7]/playerData[i][2], playerData[i][8]/playerData[i][2],
+        playerData[i][9]/playerData[i][2], playerData[i][10]/playerData[i][2], playerData[i][11]/playerData[i][2], playerData[i][12]/playerData[i][2]]);
+    }
+
+    var options = {
+        title: 'Player stats / Game',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+
+    // Create and draw the visualization.
+    var chart = new google.visualization.Table(document.getElementById('playerData60'));
+    chart.draw(pldata60, options);
+
+    // Add sort listener
+
+    google.visualization.events.addListener(chart, 'sort',
+    function(event) {
+        pldata.sort([{column: event.column, desc: event.ascending}]);
+        chart.draw(pldata, options);
+    });
 }
 
 function findShooters() {
