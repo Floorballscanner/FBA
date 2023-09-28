@@ -6,6 +6,7 @@ var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game',
 
 function changeGame() {
 
+    playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
     var selectedValues = [];
     // Iterate through each option in the select element
     for (var i = 0; i < s_game.options.length; i++) {
@@ -66,7 +67,6 @@ function changeGame() {
                 console.error('Error:', error);
         });
     }
-    playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
 }
 
 function drawCharts() {
