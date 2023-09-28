@@ -17,8 +17,8 @@ It extends app_layout.html with Django
         <div class="col-sm-12">
             <div class="team-selection">
                 <h2 style="Padding-top:20px;">Select games</h2><br>
-                <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
-                    <option selected disabled>Select a game...</option>
+                <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select" multiple>
+                    <option selected disabled>Select games...</option>
                     {% for game in games reversed %}
                         <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.game_data.name_t1}} - {{game.game_data.name_t2}}</option>
                     {% endfor %}
