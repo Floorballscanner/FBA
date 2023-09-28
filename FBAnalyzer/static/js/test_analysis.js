@@ -132,8 +132,8 @@ function drawCharts() {
     for(i = 1; i < playerData.length; i++){
         pldata60.addRow([playerData[i][1], playerData[i][2], playerData[i][3]/playerData[i][2], playerData[i][4]/playerData[i][2],
         playerData[i][5]/playerData[i][2], playerData[i][6]/playerData[i][2], playerData[i][7]/playerData[i][2], playerData[i][8]/playerData[i][2],
-        playerData[i][9]/playerData[i][2], playerData[i][3]/playerData[i][9], playerData[i][11]/playerData[i][2], playerData[i][4]/playerData[i][10],
-        playerData[i][13]/playerData[i][2], playerData[i][14]/playerData[i][2]]);
+        playerData[i][9]/playerData[i][2], playerData[i][3]/playerData[i][9], playerData[i][10]/playerData[i][2], playerData[i][4]/playerData[i][10],
+        playerData[i][11]/playerData[i][2], playerData[i][12]/playerData[i][2]]);
     }
 
     var options60 = {
