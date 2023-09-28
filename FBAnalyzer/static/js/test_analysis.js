@@ -56,13 +56,59 @@ function changeGame() {
                             }
                         }
                     }
+                    for (i=1;i<playerData.length;i++) {
+                        playerData[i][2]++;
+                    }
                 }
             })
             .catch((error) => {
                 console.error('Error:', error);
         });
     }
-    console.log(playerData);
+    
+    // Player data chart
+    
+    'ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']
+
+    var pldata = new google.visualization.DataTable();
+    pldata.addColumn('string', 'Player Name');
+    pldata.addColumn('number', 'Games');
+    pldata.addColumn('number', 'ixG');
+    pldata.addColumn('number', 'ixAss');
+    pldata.addColumn('number', 'ixG_PP');
+    pldata.addColumn('number', 'ixAss_PP');
+    pldata.addColumn('number', 'Goals');
+    pldata.addColumn('number', 'Assists');
+    pldata.addColumn('number', 'Shots');
+    pldata.addColumn('number', 'Shot Assists');
+    pldata.addColumn('number', 'Possession +');
+    pldata.addColumn('number', 'Possession -');
+
+    for(i = 1; i < playerData.length; i++){
+        pldata.addRow([playerData[i][1], playerData[i][2], playerData[i][3], playerData[i][4], playerData[i][5], playerData[i][6],
+        playerData[i][7], playerData[i][8], playerData[i][9], playerData[i][10], playerData[i][11], playerData[i][12]]);
+    }
+
+    var options = {
+        title: 'Player stats',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+
+    // Create and draw the visualization.
+    var chart = new google.visualization.Table(document.getElementById('playerData'));
+    chart.draw(pldata, options);
+
+    // Add sort listener
+
+    google.visualization.events.addListener(chart, 'sort',
+    function(event) {
+        pldata.sort([{column: event.column, desc: event.ascending}]);
+        chart.draw(pldata, options);
+    });
 }
 
 function findShooters() {
