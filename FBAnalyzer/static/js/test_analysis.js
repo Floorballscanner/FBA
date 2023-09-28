@@ -18,7 +18,7 @@ function changeGame() {
     }
 
     for (i=0;i<selectedValues.length;i++) {
-        game_id = selectedValues[i].value;
+        game_id = selectedValues[i];
 
         fetch("https://fbscanner.io/apis/games/" + game_id + "/")
             .then(response => response.json())
