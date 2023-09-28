@@ -67,8 +67,6 @@ function changeGame() {
     }
     
     // Player data chart
-    
-    'ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']
 
     var pldata = new google.visualization.DataTable();
     pldata.addColumn('string', 'Player Name');
