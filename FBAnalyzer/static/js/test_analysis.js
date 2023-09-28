@@ -122,20 +122,21 @@ function drawCharts() {
     pldata60.addColumn('number', 'Goals');
     pldata60.addColumn('number', 'Assists');
     pldata60.addColumn('number', 'Shots');
+    pldata60.addColumn('number', 'ixG/Shot');
     pldata60.addColumn('number', 'Shot Assists');
+    pldata60.addColumn('number', 'ixAss/Assist');
     pldata60.addColumn('number', 'Possession +');
     pldata60.addColumn('number', 'Possession -');
 
-    [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
-                    'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
 
     for(i = 1; i < playerData.length; i++){
         pldata60.addRow([playerData[i][1], playerData[i][2], playerData[i][3]/playerData[i][2], playerData[i][4]/playerData[i][2],
         playerData[i][5]/playerData[i][2], playerData[i][6]/playerData[i][2], playerData[i][7]/playerData[i][2], playerData[i][8]/playerData[i][2],
-        playerData[i][9]/playerData[i][2], playerData[i][10]/playerData[i][2], playerData[i][11]/playerData[i][2], playerData[i][12]/playerData[i][2]]);
+        playerData[i][9]/playerData[i][2], playerData[i][3]/playerData[i][9], playerData[i][11]/playerData[i][2], playerData[i][4]/playerData[i][10],
+        playerData[i][13]/playerData[i][2], playerData[i][14]/playerData[i][2]]);
     }
 
-    var options = {
+    var options60 = {
         title: 'Player stats / Game',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
@@ -145,15 +146,15 @@ function drawCharts() {
 
 
     // Create and draw the visualization.
-    var chart = new google.visualization.Table(document.getElementById('playerData60'));
-    chart.draw(pldata60, options);
+    var chart60 = new google.visualization.Table(document.getElementById('playerData60'));
+    chart60.draw(pldata60, options60);
 
     // Add sort listener
 
-    google.visualization.events.addListener(chart, 'sort',
+    google.visualization.events.addListener(chart60, 'sort',
     function(event) {
-        pldata.sort([{column: event.column, desc: event.ascending}]);
-        chart.draw(pldata, options);
+        pldata60.sort([{column: event.column, desc: event.ascending}]);
+        chart60.draw(pldata60, options60);
     });
 }
 
