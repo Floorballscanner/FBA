@@ -60,12 +60,15 @@ function changeGame() {
                         playerData[i][2]++;
                     }
                 }
+                drawCharts();
             })
             .catch((error) => {
                 console.error('Error:', error);
         });
     }
-    
+}
+
+function drawCharts() {
     // Player data chart
 
     var pldata = new google.visualization.DataTable();
