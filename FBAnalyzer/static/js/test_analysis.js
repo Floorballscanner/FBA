@@ -39,6 +39,7 @@ function changeGame() {
 
                                 if (data[i][0] == playerData[j][0]) { // Player found
                                     found = 1;
+                                    playerData[j][2]++;
                                     playerData[j][3] = playerData[j][3] + data[i][2];
                                     playerData[j][4] = playerData[j][4] + data[i][3];
                                     playerData[j][5] = playerData[j][5] + data[i][4];
@@ -52,13 +53,10 @@ function changeGame() {
                                 }
                             }
                             if (found == 0) { // Player not found, adding to list
-                                playerData.push([data[i][0], data[i][1], 0, data[i][2], data[i][3], data[i][4], data[i][5],
+                                playerData.push([data[i][0], data[i][1], 1, data[i][2], data[i][3], data[i][4], data[i][5],
                                 data[i][6], data[i][7], data[i][8], data[i][9], data[i][10],data[i][11]]);
                             }
                         }
-                    }
-                    for (i=1;i<playerData.length;i++) {
-                        playerData[i][2]++;
                     }
                 }
                 drawCharts();
