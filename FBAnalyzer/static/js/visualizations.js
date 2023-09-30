@@ -829,15 +829,16 @@
 
     }
 
-    /*$(document).ready(function () {
+    document.addEventListener("DOMContentLoaded", function () {
         // Increment the idle time counter every minute.
         var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
 
         // Zero the idle timer on mouse movement.
-        $(this).mousemove(function (e) {
+        document.addEventListener("mousemove", function (e) {
             idleTime = 0;
         });
-        $(this).keypress(function (e) {
+
+        document.addEventListener("keypress", function (e) {
             idleTime = 0;
         });
     });
@@ -847,4 +848,4 @@
         if (idleTime > 19) { // 20 minutes
             window.location.replace("https://fbscanner.io/accounts");
         }
-    }*/
+    }

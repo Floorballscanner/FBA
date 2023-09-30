@@ -208,7 +208,7 @@ function findShooters() {
 
     function timerIncrement() {
         idleTime = idleTime + 1;
-        if (idleTime > 0) { // 20 minutes
+        if (idleTime > 19) { // 20 minutes
             window.location.replace("https://fbscanner.io/accounts");
         }
     }
