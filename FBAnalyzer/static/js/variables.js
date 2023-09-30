@@ -55,6 +55,7 @@
     var data_object = {}; // Save data object contains all saved/loaded data
     var undo_object = {}; // Undo object contains previous state data
     var data_object_stringified = {} // Deep copy of a data_object
+    var idleTime = 0; // Calculate page idle time
 
     // Premium game level, team, and player select box elements
 
