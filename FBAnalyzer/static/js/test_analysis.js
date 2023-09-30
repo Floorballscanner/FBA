@@ -3,6 +3,7 @@ var s_game = document.getElementById("select-game");
 var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
 var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
                     'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
+var idleTime = 0;
 
 function changeGame() {
 
