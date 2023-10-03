@@ -238,7 +238,7 @@ function drawCharts() {
 
 function calcxy(dis, angle) {
 
-    angle = angle + 90;
+    // angle = angle + 90;
 
     x = dis * Math.sin(angle * (Math.PI/180));
     y = Math.abs(dis * Math.cos(angle * (Math.PI/180)));
@@ -248,10 +248,13 @@ function calcxy(dis, angle) {
 
 function drawMap(pl) {
 
+    fLength = 332;
+    fWidth = 200;
+
     if (pl == 1) {
 
-        name = s_p1.options[s_p1.selectedIndex].value;
-        ctx1.drawImage(myImg,0,0,200,332);
+        name = s_p1.options[s_p1.selectedIndex].text;
+        ctx1.drawImage(myImg,0,0,fWidth,fLength);
         for (i=1;i<shotData.length;i++) {
 
             if (shotData[i][9] == name) {
@@ -259,6 +262,9 @@ function drawMap(pl) {
                 angle = Number(shotData[i][28]);
 
                 [x,y] = calcxy(dis,angle);
+                x = x + (fWidth/2);
+                y = y + (fLength/10);
+
                 ctx1.fillStyle = "blue";
                 ctx1.fillText("o", x, y);
 
@@ -267,15 +273,15 @@ function drawMap(pl) {
     }
     else if (pl == 2) {
 
-        name = s_p2.options[s_p2.selectedIndex].value;
-        ctx2.drawImage(myImg,0,0,200,332);
+        name = s_p2.options[s_p2.selectedIndex].text;
+        ctx2.drawImage(myImg,0,0,fWidth,fLength);
         ctx2.fillStyle = "blue";
         ctx2.fillText("o", x, y);
     }
     else if (pl == 3) {
 
-        name = s_p3.options[s_p3.selectedIndex].value;
-        ctx3.drawImage(myImg,0,0,200,332);
+        name = s_p3.options[s_p3.selectedIndex].text;
+        ctx3.drawImage(myImg,0,0,fWidth,fLength);
     }
 
 
