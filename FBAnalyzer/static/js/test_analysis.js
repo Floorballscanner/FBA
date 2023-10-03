@@ -6,9 +6,9 @@
     var gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
     var shotData = [];
     var idleTime = 0;
-    var s-p1 = document.getElementById('select-p1');
-    var s-p2 = document.getElementById('select-p2');
-    var s-p3 = document.getElementById('select-p3');
+    var s_p1 = document.getElementById('select-p1');
+    var s_p2 = document.getElementById('select-p2');
+    var s_p3 = document.getElementById('select-p3');
 
     var myImg = new Image();
     myImg.src = "/static/field-new.png";
@@ -89,9 +89,9 @@ function changeGame() {
         });
     }
 
-    s-p1.disabled = false;
-    s-p2.disabled = false;
-    s-p3.disabled = false;
+    s_p1.disabled = false;
+    s_p2.disabled = false;
+    s_p3.disabled = false;
 
     for (let i=1; i<playerData.length; i++) {
         opt = new Option(playerData[i][1], playerData[i][0]);
