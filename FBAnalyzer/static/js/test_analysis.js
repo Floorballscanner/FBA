@@ -64,8 +64,8 @@ function changeGame() {
                         }
                     }
                     // Game stats to game data array
-                    gameData.push([date, gd.name_t1, gd.name_t2, gd.txG_1, gd.txG_2, gd.txGOT_1, gd.txGOT_2, gd.tgt_1, 
-                    gd.tgt_2, gd.sf_g[7], gd.sfT2_g[7]]);
+                    gameData.push([date, gd.name_t1, gd.name_t2, Number(gd.txG_1), Number(gd.txG_2), Number(gd.txGOT_1),
+                    Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7]]));
                     
                 }
                 drawCharts();
