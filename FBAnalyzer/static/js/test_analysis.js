@@ -82,22 +82,24 @@ function changeGame() {
                     Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
                     
                 }
-                drawCharts();
+
+                if (i = selectedValues.length - 1) {
+                    drawCharts();
+                    s_p1.disabled = false;
+                    s_p2.disabled = false;
+                    s_p3.disabled = false;
+
+                    for (let i=1; i<playerData.length; i++) {
+                        opt = new Option(playerData[i][1], playerData[i][0]);
+                        s_p1.appendChild(opt);
+                        s_p2.appendChild(opt);
+                        s_p3.appendChild(opt);
+                    }
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
         });
-    }
-
-    s_p1.disabled = false;
-    s_p2.disabled = false;
-    s_p3.disabled = false;
-
-    for (let i=1; i<playerData.length; i++) {
-        opt = new Option(playerData[i][1], playerData[i][0]);
-        s_p1.appendChild(opt);
-        s_p2.appendChild(opt);
-        s_p3.appendChild(opt);
     }
 }
 
