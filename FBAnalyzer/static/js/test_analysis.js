@@ -113,7 +113,7 @@ function drawCharts() {
 
     // Add sort listener
 
-    google.visualization.events.addListener(chart, 'sort',
+    google.visualization.events.addListener(gchart, 'sort',
     function(event) {
         gdata.sort([{column: event.column, desc: event.ascending}]);
         gchart.draw(gdata, options);
