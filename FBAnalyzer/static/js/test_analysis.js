@@ -1,10 +1,23 @@
 
-var s_game = document.getElementById("select-game");
-var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
-var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
-                    'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
-var gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
-var idleTime = 0;
+    var s_game = document.getElementById("select-game");
+    var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
+    var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
+                        'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
+    var gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
+    var shotData = [];
+    var idleTime = 0;
+    var s-p1 = document.getElementById('select-p1');
+    var s-p2 = document.getElementById('select-p2');
+    var s-p3 = document.getElementById('select-p3');
+
+    var myImg = new Image();
+    myImg.src = "/static/field-new.png";
+    var cnvs1 = document.getElementById("p1Map");
+    var cnvs2 = document.getElementById("p2Map");
+    var cnvs3 = document.getElementById("p3Map");
+    var ctx1 = cnvs1.getContext("2d");
+    var ctx2 = cnvs2.getContext("2d");
+    var ctx3 = cnvs3.getContext("2d");
 
 function changeGame() {
 
@@ -34,6 +47,7 @@ function changeGame() {
 
                 if (Object.keys(gd).length > 0) { // If game data is not empty
                     data = gd.plT1_array;
+                    shotData = shotData.concat(gd.printShotData);
 
                     for (i=1;i<data.length;i++) { // Go through all game player stats
 
@@ -73,6 +87,17 @@ function changeGame() {
             .catch((error) => {
                 console.error('Error:', error);
         });
+    }
+
+    s-p1.disabled = false;
+    s-p2.disabled = false;
+    s-p3.disabled = false;
+
+    for (let i=1; i<playerData.length; i++) {
+        opt = new Option(playerData[i][1], playerData[i][0]);
+        s-p1.appendChild(opt);
+        s-p2.appendChild(opt);
+        s-p3.appendChild(opt);
     }
 }
 
@@ -209,38 +234,53 @@ function drawCharts() {
     });
 }
 
-function findShooters() {
+function calcxy(dis, angle) {
 
-    // Create a map to store shooter objects with unique jersey numbers
-    const uniqueShootersMap = new Map();
+    angle = angle + 90;
 
-    // Iterate through the array of arrays and extract shooter names
-    gd.printShotData.forEach(row => {
-        if (row[1].includes(gd.name_t1)) {
-            const shooterName = row[9]; // Assuming array indexing is 0-based
-            const matches = shooterName.match(/#(\d+) (.+)/); // Extract jersey number and name
+    x = dis * Math.sin(angle * (Math.PI/180));
+    y = Math.abs(dis * Math.cos(angle * (Math.PI/180));
 
-            if (matches && matches.length === 3) {
-              const jerseyNumber = parseInt(matches[1], 10);
-              const playerName = matches[2];
+    return [x,y]
+}
 
-              // Check if a shooter with the same jersey number already exists
-              if (!uniqueShootersMap.has(jerseyNumber)) {
-                // If not, add the shooter to the map
-                uniqueShootersMap.set(jerseyNumber, playerName);
-              }
+function drawMap(pl) {
+
+    if (pl == 1) {
+
+        name = s-p1.options[s-p1.selectedIndex].value;
+        ctx1.drawImage(myImg,0,0,200,332);
+        for (i=1;i<shotData.length;i++) {
+
+            if (shotData[i][9] == name) {
+                dis = Number(shotData[i][27]);
+                angle = Number(shotData[i][28]);
+
+                [x,y] = calcxy(dis,angle);
+                ctx1.fillStyle = "blue";
+                ctx1.fillText("o", x, y);
+
             }
         }
-    });
+    }
+    else if (pl == 2) {
 
-    // Sort the unique shooter names by jersey number in ascending order
-    const sortedShooters = [...uniqueShootersMap.entries()]
-      .sort((a, b) => a[0] - b[0]) // Sort by jersey number
-      .map(entry => `#${entry[0]} ${entry[1]}`); // Map back to the original format
+        name = s-p2.options[s-p2.selectedIndex].value;
+        ctx2.drawImage(myImg,0,0,200,332);
+        ctx2.fillStyle = "blue";
+        ctx2.fillText("o", x, y);
+    }
+    else if (pl == 3) {
 
-    console.log(sortedShooters);
+        name = s-p3.options[s-p3.selectedIndex].value;
+        ctx3.drawImage(myImg,0,0,200,332);
+    }
+
+
+
 
 }
+
 
     document.addEventListener("DOMContentLoaded", function () {
         // Increment the idle time counter every minute.
