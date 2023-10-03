@@ -95,9 +95,9 @@ function changeGame() {
 
     for (let i=1; i<playerData.length; i++) {
         opt = new Option(playerData[i][1], playerData[i][0]);
-        s-p1.appendChild(opt);
-        s-p2.appendChild(opt);
-        s-p3.appendChild(opt);
+        s_p1.appendChild(opt);
+        s_p2.appendChild(opt);
+        s_p3.appendChild(opt);
     }
 }
 
@@ -239,7 +239,7 @@ function calcxy(dis, angle) {
     angle = angle + 90;
 
     x = dis * Math.sin(angle * (Math.PI/180));
-    y = Math.abs(dis * Math.cos(angle * (Math.PI/180));
+    y = Math.abs(dis * Math.cos(angle * (Math.PI/180)));
 
     return [x,y]
 }
@@ -248,7 +248,7 @@ function drawMap(pl) {
 
     if (pl == 1) {
 
-        name = s-p1.options[s-p1.selectedIndex].value;
+        name = s_p1.options[s_p1.selectedIndex].value;
         ctx1.drawImage(myImg,0,0,200,332);
         for (i=1;i<shotData.length;i++) {
 
@@ -265,14 +265,14 @@ function drawMap(pl) {
     }
     else if (pl == 2) {
 
-        name = s-p2.options[s-p2.selectedIndex].value;
+        name = s_p2.options[s_p2.selectedIndex].value;
         ctx2.drawImage(myImg,0,0,200,332);
         ctx2.fillStyle = "blue";
         ctx2.fillText("o", x, y);
     }
     else if (pl == 3) {
 
-        name = s-p3.options[s-p3.selectedIndex].value;
+        name = s_p3.options[s_p3.selectedIndex].value;
         ctx3.drawImage(myImg,0,0,200,332);
     }
 
