@@ -3,12 +3,15 @@ var s_game = document.getElementById("select-game");
 var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
 var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
                     'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
+var gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
 var idleTime = 0;
 
 function changeGame() {
 
     playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
+    gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
     var selectedValues = [];
+
     // Iterate through each option in the select element
     for (var i = 0; i < s_game.options.length; i++) {
         var option = s_game.options[i];
@@ -27,6 +30,7 @@ function changeGame() {
             .then(data => {
                 console.log('Success:', data);
                 gd = data.game_data;
+                date = data.date;
 
                 if (Object.keys(gd).length > 0) { // If game data is not empty
                     data = gd.plT1_array;
@@ -59,6 +63,10 @@ function changeGame() {
                             }
                         }
                     }
+                    // Game stats to game data array
+                    gameData.push([date, gd.name_t1, gd.name_t2, gd.txG_1, gd.txG_2, gd.txGOT_1, gd.txGOT_2, gd.tgt_1, 
+                    gd.tgt_2, gd.sf_g[7], gd.sfT2_g[7]]);
+                    
                 }
                 drawCharts();
             })
@@ -69,6 +77,48 @@ function changeGame() {
 }
 
 function drawCharts() {
+
+    // Game data chart
+
+    var gdata = new google.visualization.DataTable();
+    gdata.addColumn('string', 'Date');
+    gdata.addColumn('string', 'Team 1');
+    gdata.addColumn('string', 'Team 2');
+    gdata.addColumn('number', 'xG T1');
+    gdata.addColumn('number', 'xG T2');
+    gdata.addColumn('number', 'xGOT T1');
+    gdata.addColumn('number', 'xGOT T2');
+    gdata.addColumn('number', 'Goals T1');
+    gdata.addColumn('number', 'Goals T2');
+    gdata.addColumn('number', 'Shots T1');
+    gdata.addColumn('number', 'Shots T2');
+
+    for(i = 1; i < gameData.length; i++){
+        gdata.addRow([gameData[i][0], gameData[i][1], gameData[i][2], gameData[i][3], gameData[i][4], gameData[i][5],
+        gameData[i][6], gameData[i][7], gameData[i][8], gameData[i][9], gameData[i][10]]);
+    }
+
+    var options = {
+        title: 'Game stats',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+
+    // Create and draw the visualization.
+    var gchart = new google.visualization.Table(document.getElementById('gameData'));
+    gchart.draw(gdata, options);
+
+    // Add sort listener
+
+    google.visualization.events.addListener(chart, 'sort',
+    function(event) {
+        gdata.sort([{column: event.column, desc: event.ascending}]);
+        gchart.draw(gdata, options);
+    });
+    
     // Player data chart
 
     var pldata = new google.visualization.DataTable();
