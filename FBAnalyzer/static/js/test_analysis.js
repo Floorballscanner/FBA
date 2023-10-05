@@ -83,19 +83,21 @@ function changeGame() {
                     
                 }
 
-                if (i = selectedValues.length - 1) {
+                if (i == selectedValues.length - 1) {
                     drawCharts();
                     s_p1.disabled = false;
                     s_p2.disabled = false;
                     s_p3.disabled = false;
                     console.log("ennen for-looppia");
 
-                    for (let i=1; i<playerData.length; i++) {
-                        opt = new Option(playerData[i][1], playerData[i][0]);
-                        console.log("Pelaaja: " + playerData[i][1]);
-                        s_p1.appendChild(opt);
-                        s_p2.appendChild(opt);
-                        s_p3.appendChild(opt);
+                    for (let j=1; j<playerData.length; j++) {
+                        opt1 = new Option(playerData[j][1], playerData[j][0]);
+                        opt2 = new Option(playerData[j][1], playerData[j][0]);
+                        opt3 = new Option(playerData[j][1], playerData[j][0]);
+                        console.log("Pelaaja: " + playerData[j][1]);
+                        s_p1.appendChild(opt1);
+                        s_p2.appendChild(opt2);
+                        s_p3.appendChild(opt3);
                     }
                 }
             })
