@@ -34,10 +34,11 @@ function changeGame() {
             selectedValues.push(option.value);
         }
     }
-    console.log(selectedValues.length);
+
+    last = selectedValues[selectedValues.length-1];
     for (i=0;i<selectedValues.length;i++) {
         game_id = selectedValues[i];
-        nr = i;
+
         fetch("https://fbscanner.io/apis/games/" + game_id + "/")
             .then(response => response.json())
             .then(data => {
@@ -80,22 +81,19 @@ function changeGame() {
                     // Game stats to game data array
                     gameData.push([date, gd.name_t1, gd.name_t2, Number(gd.txG_1), Number(gd.txG_2), Number(gd.txGOT_1),
                     Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
-                    
+
                 }
-                console.log("nr = " + nr);
-                console.log(selectedValues.length - 1);
-                if (nr == selectedValues.length - 1) {
+
+                if (game_id == last) {
                     drawCharts();
                     s_p1.disabled = false;
                     s_p2.disabled = false;
                     s_p3.disabled = false;
-                    console.log("ennen for-looppia");
 
                     for (let j=1; j<playerData.length; j++) {
                         opt1 = new Option(playerData[j][1], playerData[j][0]);
                         opt2 = new Option(playerData[j][1], playerData[j][0]);
                         opt3 = new Option(playerData[j][1], playerData[j][0]);
-                        console.log("Pelaaja: " + playerData[j][1]);
                         s_p1.appendChild(opt1);
                         s_p2.appendChild(opt2);
                         s_p3.appendChild(opt3);
@@ -272,6 +270,11 @@ function drawMap(pl) {
 
                 ctx1.fillStyle = "blue";
                 ctx1.fillText("o", x, y);
+
+                console.log('Radius: ' + radius);
+                console.log('Angle: ' + angle);
+                console.log('x: ' + x);
+                console.log('y: ' + y);
 
             }
         }
