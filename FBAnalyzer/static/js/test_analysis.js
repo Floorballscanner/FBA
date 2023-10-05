@@ -26,7 +26,7 @@ function changeGame() {
     var selectedValues = [];
 
     // Iterate through each option in the select element
-    for (var i = 0; i < s_game.options.length; i++) {
+    for (i = 0; i < s_game.options.length; i++) {
         var option = s_game.options[i];
 
         // Check if the option is selected
@@ -37,7 +37,7 @@ function changeGame() {
     console.log(selectedValues.length);
     for (i=0;i<selectedValues.length;i++) {
         game_id = selectedValues[i];
-
+        nr = i;
         fetch("https://fbscanner.io/apis/games/" + game_id + "/")
             .then(response => response.json())
             .then(data => {
@@ -82,9 +82,9 @@ function changeGame() {
                     Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
                     
                 }
-                console.log("i = " + i);
+                console.log("nr = " + nr);
                 console.log(selectedValues.length - 1);
-                if (i == selectedValues.length - 1) {
+                if (nr == selectedValues.length - 1) {
                     drawCharts();
                     s_p1.disabled = false;
                     s_p2.disabled = false;
