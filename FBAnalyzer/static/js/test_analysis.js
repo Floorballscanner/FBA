@@ -90,6 +90,12 @@ function changeGame() {
                     s_p2.disabled = false;
                     s_p3.disabled = false;
 
+                    while (s_p1.options.length > 0) {
+                        s_p1.remove(0);
+                        s_p2.remove(0);
+                        s_p3.remove(0);
+                    }
+
                     for (let j=1; j<playerData.length; j++) {
                         opt1 = new Option(playerData[j][1], playerData[j][0]);
                         opt2 = new Option(playerData[j][1], playerData[j][0]);
