@@ -91,9 +91,9 @@ function changeGame() {
                     s_p3.disabled = false;
 
                     while (s_p1.options.length > 0) {
-                        s_p1.remove(0);
-                        s_p2.remove(0);
-                        s_p3.remove(0);
+                        s_p1.remove(1);
+                        s_p2.remove(1);
+                        s_p3.remove(1);
                     }
 
                     for (let j=1; j<playerData.length; j++) {
