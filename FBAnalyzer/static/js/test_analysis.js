@@ -82,7 +82,8 @@ function changeGame() {
                     Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
                     
                 }
-
+                console.log("i = " + i);
+                console.log(selectedValues.length - 1);
                 if (i == selectedValues.length - 1) {
                     drawCharts();
                     s_p1.disabled = false;
