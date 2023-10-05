@@ -90,10 +90,10 @@ function changeGame() {
                     s_p2.disabled = false;
                     s_p3.disabled = false;
 
-                    while (s_p1.options.length > 0) {
-                        s_p1.remove(1);
-                        s_p2.remove(1);
-                        s_p3.remove(1);
+                    while (s_p1.options.length > 1) {
+                        s_p1.remove(s_p1.options.length-1);
+                        s_p2.remove(s_p2.options.length-1);
+                        s_p3.remove(s_p3.options.length-1);
                     }
 
                     for (let j=1; j<playerData.length; j++) {
