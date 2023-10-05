@@ -6221,7 +6221,7 @@
 
     function timerIncrement() {
         idleTime = idleTime + 1;
-        if (idleTime > 59) { // 60 minutes
+        if (idleTime > 179) { // 60 minutes
             window.location.replace("https://fbscanner.io/accounts");
         }
     }

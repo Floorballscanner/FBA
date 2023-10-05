@@ -238,7 +238,7 @@ function drawCharts() {
 
 function calcxy(dis, angle) {
 
-    // angle = angle + 90;
+    angle = angle + 90;
 
     x = dis * Math.sin(angle * (Math.PI/180));
     y = Math.abs(dis * Math.cos(angle * (Math.PI/180)));
