@@ -88,9 +88,11 @@ function changeGame() {
                     s_p1.disabled = false;
                     s_p2.disabled = false;
                     s_p3.disabled = false;
+                    console.log("ennen for-looppia");
 
                     for (let i=1; i<playerData.length; i++) {
                         opt = new Option(playerData[i][1], playerData[i][0]);
+                        console.log("Pelaaja: " + playerData[i][1]);
                         s_p1.appendChild(opt);
                         s_p2.appendChild(opt);
                         s_p3.appendChild(opt);
@@ -236,12 +238,12 @@ function drawCharts() {
     });
 }
 
-function calcxy(dis, angle) {
+function calcxy(radius, angle) {
 
     angle = angle + 90;
 
-    x = dis * Math.sin(angle * (Math.PI/180));
-    y = Math.abs(dis * Math.cos(angle * (Math.PI/180)));
+    x = radius * Math.sin(Math.PI * 2 * angle / 360);
+    y = radius * Math.cos(Math.PI * 2 * angle / 360);
 
     return [x,y]
 }
@@ -258,10 +260,10 @@ function drawMap(pl) {
         for (i=1;i<shotData.length;i++) {
 
             if (shotData[i][9] == name) {
-                dis = Number(shotData[i][27]);
+                radius = Number(shotData[i][27]);
                 angle = Number(shotData[i][28]);
 
-                [x,y] = calcxy(dis,angle);
+                [x,y] = calcxy(radius,angle);
                 x = x + (fWidth/2);
                 y = y + (fLength/10);
 
