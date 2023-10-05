@@ -34,7 +34,7 @@ function changeGame() {
             selectedValues.push(option.value);
         }
     }
-
+    console.log(selectedValues.length);
     for (i=0;i<selectedValues.length;i++) {
         game_id = selectedValues[i];
 
@@ -49,31 +49,31 @@ function changeGame() {
                     data = gd.plT1_array;
                     shotData = shotData.concat(gd.printShotData);
 
-                    for (i=1;i<data.length;i++) { // Go through all game player stats
+                    for (j=1;j<data.length;j++) { // Go through all game player stats
 
-                        if (data[i][0] != "") {
+                        if (data[j][0] != "") {
                             found = 0;
 
-                            for (j=1;j<playerData.length;j++) { // Sum game datas
+                            for (k=1;k<playerData.length;k++) { // Sum game datas
 
-                                if (data[i][0] == playerData[j][0]) { // Player found
+                                if (data[j][0] == playerData[k][0]) { // Player found
                                     found = 1;
-                                    playerData[j][2]++;
-                                    playerData[j][3] = playerData[j][3] + data[i][2];
-                                    playerData[j][4] = playerData[j][4] + data[i][3];
-                                    playerData[j][5] = playerData[j][5] + data[i][4];
-                                    playerData[j][6] = playerData[j][6] + data[i][5];
-                                    playerData[j][7] = playerData[j][7] + data[i][6];
-                                    playerData[j][8] = playerData[j][8] + data[i][7];
-                                    playerData[j][9] = playerData[j][9] + data[i][8];
-                                    playerData[j][10] = playerData[j][10] + data[i][9];
-                                    playerData[j][11] = playerData[j][11] + data[i][10];
-                                    playerData[j][12] = playerData[j][12] + data[i][11];
+                                    playerData[k][2]++;
+                                    playerData[k][3] = playerData[k][3] + data[j][2];
+                                    playerData[k][4] = playerData[k][4] + data[j][3];
+                                    playerData[k][5] = playerData[k][5] + data[j][4];
+                                    playerData[k][6] = playerData[k][6] + data[j][5];
+                                    playerData[k][7] = playerData[k][7] + data[j][6];
+                                    playerData[k][8] = playerData[k][8] + data[j][7];
+                                    playerData[k][9] = playerData[k][9] + data[j][8];
+                                    playerData[k][10] = playerData[k][10] + data[j][9];
+                                    playerData[k][11] = playerData[k][11] + data[j][10];
+                                    playerData[k][12] = playerData[k][12] + data[j][11];
                                 }
                             }
                             if (found == 0) { // Player not found, adding to list
-                                playerData.push([data[i][0], data[i][1], 1, data[i][2], data[i][3], data[i][4], data[i][5],
-                                data[i][6], data[i][7], data[i][8], data[i][9], data[i][10],data[i][11]]);
+                                playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
+                                data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
                             }
                         }
                     }
