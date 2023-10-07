@@ -58,10 +58,12 @@ It extends app_layout.html with Django
     <div class="row justify-content-center" style="Padding-top: 20px;">
         <div class="col-sm-4">
             <div class="linestats">
-                <select id="select-p1" class="form-control-sm custom-select" style="Padding-top:5px;width=50%;float:right;">
+                <select id="select-p1" class="form-control-sm custom-select" style="Padding-top:5px;">
                     <option selected disabled>Select player...</option>
                 </select>
-                <button onclick="drawMap(1)" class="btn btn-secondary" style="font-size:12px;">Draw</button>
+                <br>
+                <button onclick="drawMap(1)" class="btn btn-secondary" style="font-size:12px;Padding-top:5px;">Draw</button>
+                <br>
                 <canvas id="p1Map" width="200" height="332" style="Padding-top: 10px;"></canvas>
             </div>
         </div>
