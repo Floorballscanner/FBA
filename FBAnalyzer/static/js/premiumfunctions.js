@@ -9,7 +9,7 @@
         ctx5.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
 
-        fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
+        /*fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
             .then(response => response.json())
             .then(games => {
                 console.log('Success:', games);
@@ -24,7 +24,7 @@
             })
         .catch((error) => {
             console.error('Error:', error);
-    });
+        });*/
 
     }
     window.onbeforeunload = function() {
