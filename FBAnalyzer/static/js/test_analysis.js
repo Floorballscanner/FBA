@@ -9,15 +9,21 @@
     var s_p1 = document.getElementById('select-p1');
     var s_p2 = document.getElementById('select-p2');
     var s_p3 = document.getElementById('select-p3');
+    var s_p4 = document.getElementById('select-p4');
+    var s_p5 = document.getElementById('select-p5');
 
     var myImg = new Image();
     myImg.src = "/static/field-new.png";
     var cnvs1 = document.getElementById("p1Map");
     var cnvs2 = document.getElementById("p2Map");
     var cnvs3 = document.getElementById("p3Map");
+    var cnvs4 = document.getElementById("p4Map");
+    var cnvs5 = document.getElementById("p5Map");
     var ctx1 = cnvs1.getContext("2d");
     var ctx2 = cnvs2.getContext("2d");
     var ctx3 = cnvs3.getContext("2d");
+    var ctx4 = cnvs4.getContext("2d");
+    var ctx5 = cnvs5.getContext("2d");
 
 function changeGame() {
 
