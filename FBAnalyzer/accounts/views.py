@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
+from datetime import datetime
 from rest_framework import viewsets, generics
 from django.forms import modelformset_factory
 from .serializers import UserSerializer, TeamSerializer, LineSerializer, PositionSerializer, LevelSerializer, TimeSerializer
@@ -76,7 +77,7 @@ def edit_teams(request):
 def analyse(request):
 
     if request.user.id == 3 or request.user.id == 2:
-        games = Game.objects.order_by('date')
+        games = Game.objects.filter(date__gte=datetime(2023, 9, 1)).order_by('date')
     else:
         games = Game.objects.filter(user=request.user).order_by('date')
 
@@ -232,7 +233,8 @@ def test_environment(request):
 def test_analysis(request):
 
     if request.user.id == 3 or request.user.id == 2:
-        games = Game.objects.order_by('date')
+        games = Game.objects.filter(date__gte=datetime(2023, 9, 1)).order_by('date')
+
     else:
         games = Game.objects.filter(user=request.user).order_by('date')
 
