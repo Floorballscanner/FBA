@@ -90,6 +90,10 @@ function changeGame() {
                     s_p2.disabled = false;
                     s_p3.disabled = false;
 
+                    s_p1.selectedIndex = "0";
+                    s_p2.selectedIndex = "0";
+                    s_p3.selectedIndex = "0";
+
                     while (s_p1.options.length > 1) {
                         s_p1.remove(s_p1.options.length-1);
                         s_p2.remove(s_p2.options.length-1);
@@ -324,3 +328,5 @@ function drawMap(pl) {
             window.location.replace("https://fbscanner.io/accounts");
         }
     }
+
+
