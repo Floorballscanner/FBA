@@ -167,11 +167,20 @@ function drawCharts() {
     
     // Player data chart
 
+    sumofxG = 0;
+    sumofxAss = 0;
+    for (i=1;i<playerData.length;i++) {
+        sumofxG = sumofxG + playerData[i][3];
+        sumofxAss = sumofxAss + playerData[i][4];
+    }
+
     var pldata = new google.visualization.DataTable();
     pldata.addColumn('string', 'Player Name');
     pldata.addColumn('number', 'Games');
     pldata.addColumn('number', 'ixG');
+    pldata.addColumn('number', 'xG%');
     pldata.addColumn('number', 'ixAss');
+    pldata.addColumn('number', 'xAss%');
     pldata.addColumn('number', 'ixG_PP');
     pldata.addColumn('number', 'ixAss_PP');
     pldata.addColumn('number', 'Goals');
@@ -182,7 +191,7 @@ function drawCharts() {
     pldata.addColumn('number', 'Possession -');
 
     for(i = 1; i < playerData.length; i++){
-        pldata.addRow([playerData[i][1], playerData[i][2], playerData[i][3], playerData[i][4], playerData[i][5], playerData[i][6],
+        pldata.addRow([playerData[i][1], playerData[i][2], playerData[i][3], playerData[i][3] / sumofxG, playerData[i][4], playerData[i][4] / sumofxAss, playerData[i][5], playerData[i][6],
         playerData[i][7], playerData[i][8], playerData[i][9], playerData[i][10], playerData[i][11], playerData[i][12]]);
     }
 
