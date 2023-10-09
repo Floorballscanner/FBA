@@ -271,6 +271,9 @@ function calcxy(radius, angle) {
     x = radius * Math.sin(Math.PI * 2 * angle / 360);
     y = radius * Math.cos(Math.PI * 2 * angle / 360);
 
+    console.log("Orig x: " + x);
+    console.log("Orig y: " + y);
+
     return [x,y]
 }
 
