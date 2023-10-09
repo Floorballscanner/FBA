@@ -293,8 +293,8 @@ function drawMap(pl) {
                 angle = Number(shotData[i][28]);
 
                 [x,y] = calcxy(radius,angle);
-                x = (x * fWidth / 20) - (fWidth/2);
-                y = -1 * (y * fLength / 40) - (fLength/10);
+                x = (fWidth /2) - (x * fWidth / 20);
+                y = (fLength / 10) - (y * fLength / 40);
 
                 ctx1.fillStyle = "blue";
                 ctx1.fillText("o", x, y);
