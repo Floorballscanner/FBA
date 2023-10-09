@@ -290,7 +290,7 @@ function drawMap(pl) {
                 angle = Number(shotData[i][28]);
 
                 [x,y] = calcxy(radius,angle);
-                x = (x * fWidth / 20) + (fWidth/2) ;
+                x = (x * fWidth / 20) + (fWidth/2);
                 y = (y * fLength / 40 + (fLength/10);
 
                 ctx1.fillStyle = "blue";
