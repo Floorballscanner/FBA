@@ -291,7 +291,7 @@ function drawMap(pl) {
 
                 [x,y] = calcxy(radius,angle);
                 x = (x * fWidth / 20) + (fWidth/2);
-                y = (y * fLength / 40 + (fLength/10);
+                y = (y * fLength / 40) + (fLength/10);
 
                 ctx1.fillStyle = "blue";
                 ctx1.fillText("o", x, y);
