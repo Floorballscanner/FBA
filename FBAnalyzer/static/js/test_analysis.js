@@ -290,7 +290,7 @@ function drawMap(pl) {
                 angle = Number(shotData[i][28]);
 
                 [x,y] = calcxy(radius,angle);
-                x = (fWidth /2) - (x * fWidth / 20);
+                x = (fWidth /2) + (x * fWidth / 20);
                 y = (fLength / 10) - (y * fLength / 40);
 
                 if (shotData[i][5] == "Missed") {
