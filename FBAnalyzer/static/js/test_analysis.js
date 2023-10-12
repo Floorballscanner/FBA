@@ -266,7 +266,7 @@ function drawCharts() {
 
 function calcxy(radius, angle) {
 
-    angle = 360 - angle - 90;
+    angle = 360 - angle;
 
     x = radius * Math.cos(Math.PI * 2 * angle / 360);
     y = radius * Math.sin(Math.PI * 2 * angle / 360);
