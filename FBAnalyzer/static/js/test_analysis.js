@@ -268,8 +268,8 @@ function calcxy(radius, angle) {
 
     angle = angle + 90;
 
-    x = radius * Math.sin(Math.PI * 2 * angle / 360);
-    y = radius * Math.cos(Math.PI * 2 * angle / 360);
+    x = radius * Math.cos(Math.PI * 2 * angle / 360);
+    y = radius * Math.sin(Math.PI * 2 * angle / 360);
 
     return [x,y]
 }
