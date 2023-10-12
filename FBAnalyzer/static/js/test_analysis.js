@@ -29,6 +29,7 @@ function changeGame() {
 
     playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
     gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
+    shotData = []‚
     var selectedValues = [];
 
     // Iterate through each option in the select element
@@ -384,7 +385,7 @@ function drawMap(pl) {
                 angle = Number(shotData[i][28]);
 
                 [x,y] = calcxy(radius,angle);
-                x = (fWidth /2) - (x * fWidth / 20);
+                x = (fWidth /2) + (x * fWidth / 20);
                 y = (fLength / 10) - (y * fLength / 40);
 
                 if (shotData[i][5] == "Missed") {
@@ -478,7 +479,7 @@ function drawMap(pl) {
                 angle = Number(shotData[i][28]);
 
                 [x,y] = calcxy(radius,angle);
-                x = (fWidth /2) - (x * fWidth / 20);
+                x = (fWidth /2) + (x * fWidth / 20);
                 y = (fLength / 10) - (y * fLength / 40);
 
                 if (shotData[i][5] == "Missed") {
@@ -572,7 +573,7 @@ function drawMap(pl) {
                 angle = Number(shotData[i][28]);
 
                 [x,y] = calcxy(radius,angle);
-                x = (fWidth /2) - (x * fWidth / 20);
+                x = (fWidth /2) + (x * fWidth / 20);
                 y = (fLength / 10) - (y * fLength / 40);
 
                 if (shotData[i][5] == "Missed") {
@@ -666,7 +667,7 @@ function drawMap(pl) {
                 angle = Number(shotData[i][28]);
 
                 [x,y] = calcxy(radius,angle);
-                x = (fWidth /2) - (x * fWidth / 20);
+                x = (fWidth /2) + (x * fWidth / 20);
                 y = (fLength / 10) - (y * fLength / 40);
 
                 if (shotData[i][5] == "Missed") {
