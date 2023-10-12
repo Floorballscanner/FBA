@@ -271,9 +271,6 @@ function calcxy(radius, angle) {
     x = radius * Math.sin(Math.PI * 2 * angle / 360);
     y = radius * Math.cos(Math.PI * 2 * angle / 360);
 
-    console.log("Orig x: " + x);
-    console.log("Orig y: " + y);
-
     return [x,y]
 }
 
@@ -296,14 +293,82 @@ function drawMap(pl) {
                 x = (fWidth /2) - (x * fWidth / 20);
                 y = (fLength / 10) - (y * fLength / 40);
 
-                ctx1.fillStyle = "blue";
-                ctx1.fillText("o", x, y);
+                if (shotData[i][5] == "Missed") {
+                        
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx1.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx1.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx1.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx1.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx1.fillStyle = "blue";
+                    }
+                    ctx1.fillText("M", x, y);
+                }
+                if (shotData[i][5] == "Saved") {
 
-                console.log('Radius: ' + radius);
-                console.log('Angle: ' + angle);
-                console.log('x: ' + x);
-                console.log('y: ' + y);
-
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx1.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx1.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx1.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx1.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx1.fillStyle = "blue";
+                    }
+                    ctx1.fillText("S", x, y);
+                }
+                if (shotData[i][5] == "Blocked") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx1.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx1.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx1.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx1.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx1.fillStyle = "blue";
+                    }
+                    ctx1.fillText("B", x, y);
+                }
+                if (shotData[i][5] == "Goal") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx1.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx1.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx1.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx1.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx1.fillStyle = "blue";
+                    }
+                    ctx1.fillText("G", x, y);
+                }
             }
         }
     }
@@ -311,17 +376,378 @@ function drawMap(pl) {
 
         name = s_p2.options[s_p2.selectedIndex].text;
         ctx2.drawImage(myImg,0,0,fWidth,fLength);
-        ctx2.fillStyle = "blue";
-        ctx2.fillText("o", x, y);
+
+        for (i=1;i<shotData.length;i++) {
+
+            if (shotData[i][9] == name) {
+                radius = Number(shotData[i][27]);
+                angle = Number(shotData[i][28]);
+
+                [x,y] = calcxy(radius,angle);
+                x = (fWidth /2) - (x * fWidth / 20);
+                y = (fLength / 10) - (y * fLength / 40);
+
+                if (shotData[i][5] == "Missed") {
+                        
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx2.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx2.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx2.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx2.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx2.fillStyle = "blue";
+                    }
+                    ctx2.fillText("M", x, y);
+                }
+                if (shotData[i][5] == "Saved") {
+
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx2.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx2.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx2.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx2.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx2.fillStyle = "blue";
+                    }
+                    ctx2.fillText("S", x, y);
+                }
+                if (shotData[i][5] == "Blocked") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx2.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx2.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx2.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx2.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx2.fillStyle = "blue";
+                    }
+                    ctx2.fillText("B", x, y);
+                }
+                if (shotData[i][5] == "Goal") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx2.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx2.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx2.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx2.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx2.fillStyle = "blue";
+                    }
+                    ctx2.fillText("G", x, y);
+                }
+            }
+        }
     }
     else if (pl == 3) {
 
         name = s_p3.options[s_p3.selectedIndex].text;
         ctx3.drawImage(myImg,0,0,fWidth,fLength);
+        
+        for (i=1;i<shotData.length;i++) {
+
+            if (shotData[i][9] == name) {
+                radius = Number(shotData[i][27]);
+                angle = Number(shotData[i][28]);
+
+                [x,y] = calcxy(radius,angle);
+                x = (fWidth /2) - (x * fWidth / 20);
+                y = (fLength / 10) - (y * fLength / 40);
+
+                if (shotData[i][5] == "Missed") {
+                        
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx3.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx3.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx3.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx3.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx3.fillStyle = "blue";
+                    }
+                    ctx3.fillText("M", x, y);
+                }
+                if (shotData[i][5] == "Saved") {
+
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx3.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx3.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx3.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx3.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx3.fillStyle = "blue";
+                    }
+                    ctx3.fillText("S", x, y);
+                }
+                if (shotData[i][5] == "Blocked") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx3.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx3.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx3.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx3.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx3.fillStyle = "blue";
+                    }
+                    ctx3.fillText("B", x, y);
+                }
+                if (shotData[i][5] == "Goal") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx3.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx3.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx3.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx3.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx3.fillStyle = "blue";
+                    }
+                    ctx3.fillText("G", x, y);
+                }
+            }
+        }
     }
+    else if (pl == 4) {
 
+        name = s_p4.options[s_p4.selectedIndex].text;
+        ctx4.drawImage(myImg,0,0,fWidth,fLength);
+        
+        for (i=1;i<shotData.length;i++) {
 
+            if (shotData[i][9] == name) {
+                radius = Number(shotData[i][27]);
+                angle = Number(shotData[i][28]);
 
+                [x,y] = calcxy(radius,angle);
+                x = (fWidth /2) - (x * fWidth / 20);
+                y = (fLength / 10) - (y * fLength / 40);
+
+                if (shotData[i][5] == "Missed") {
+                        
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx4.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx4.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx4.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx4.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx4.fillStyle = "blue";
+                    }
+                    ctx4.fillText("M", x, y);
+                }
+                if (shotData[i][5] == "Saved") {
+
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx4.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx4.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx4.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx4.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx4.fillStyle = "blue";
+                    }
+                    ctx4.fillText("S", x, y);
+                }
+                if (shotData[i][5] == "Blocked") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx4.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx4.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx4.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx4.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx4.fillStyle = "blue";
+                    }
+                    ctx4.fillText("B", x, y);
+                }
+                if (shotData[i][5] == "Goal") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx4.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx4.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx4.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx4.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx4.fillStyle = "blue";
+                    }
+                    ctx4.fillText("G", x, y);
+                }
+            }
+        }
+    }
+    else if (pl == 5) {
+
+        name = s_p5.options[s_p5.selectedIndex].text;
+        ctx5.drawImage(myImg,0,0,fWidth,fLength);
+        
+        for (i=1;i<shotData.length;i++) {
+
+            if (shotData[i][9] == name) {
+                radius = Number(shotData[i][27]);
+                angle = Number(shotData[i][28]);
+
+                [x,y] = calcxy(radius,angle);
+                x = (fWidth /2) - (x * fWidth / 20);
+                y = (fLength / 10) - (y * fLength / 40);
+
+                if (shotData[i][5] == "Missed") {
+                        
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx5.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx5.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx5.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx5.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx5.fillStyle = "blue";
+                    }
+                    ctx5.fillText("M", x, y);
+                }
+                if (shotData[i][5] == "Saved") {
+
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx5.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx5.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx5.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx5.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx5.fillStyle = "blue";
+                    }
+                    ctx5.fillText("S", x, y);
+                }
+                if (shotData[i][5] == "Blocked") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx5.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx5.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx5.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx5.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx5.fillStyle = "blue";
+                    }
+                    ctx5.fillText("B", x, y);
+                }
+                if (shotData[i][5] == "Goal") {
+                    
+                    if (shotData[i][6] == "Turnover | One-timer") {
+                        ctx5.fillStyle = "darkgreen";
+                    }
+                    else if (shotData[i][6] == "Turnover | Direct") {
+                        ctx5.fillStyle = "lawngreen";
+                    }
+                    else if (shotData[i][6] == "One-timer") {
+                        ctx5.fillStyle = "black";
+                    }
+                    else if (shotData[i][6] == "Rebound") {
+                        ctx5.fillStyle = "blue";
+                    }
+                    else if (shotData[i][6] == "Direct") {
+                        ctx5.fillStyle = "blue";
+                    }
+                    ctx5.fillText("G", x, y);
+                }
+            }
+        }
+    }
 
 }
 
