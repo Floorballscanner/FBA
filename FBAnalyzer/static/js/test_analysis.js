@@ -41,7 +41,10 @@ async function getGameData(game_id) {
         .catch((error) => {
             console.error('Error:', error);
         });
+}
 
+async function callGame(game_id) {
+    data = await this.getGameData(game_id);
     return data;
 }
 
@@ -73,7 +76,7 @@ function changeGame() {
     for (i=0;i<selectedValues.length;i++) {
         game_id = selectedValues[i];
         console.log("getGameData: " + game_id)
-        data = getGameData(game_id);
+        data = callGame(game_id);
         console.log("data maybe found")
         gd = data.game_data;
         date = data.date;
