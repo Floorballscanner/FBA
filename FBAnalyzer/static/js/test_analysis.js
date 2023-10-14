@@ -172,23 +172,23 @@ function changeGame() {
 
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
 
-                                playerData_5v5[shooter_row][3]] = playerData_5v5[shooter_row][3]] + xG;
-                                playerData_5v5[shooter_row][7]]++;
+                                playerData_5v5[shooter_row][3] = playerData_5v5[shooter_row][3] + xG;
+                                playerData_5v5[shooter_row][7]++;
                                 if (goal == 1) {
-                                    playerData_5v5[shooter_row][4]]++;
+                                    playerData_5v5[shooter_row][4]++;
                                 }
                                 if (passer_row != 0) {
-                                    playerData_5v5[passer_row][5]] = playerData_5v5[passer_row][5]] + xG;
-                                    playerData_5v5[passer_row][8]]++;
+                                    playerData_5v5[passer_row][5] = playerData_5v5[passer_row][5] + xG;
+                                    playerData_5v5[passer_row][8]++;
                                     if (goal == 1) {
-                                        playerData_5v5[passer_row][6]]++;
+                                        playerData_5v5[passer_row][6]++;
                                     }
                                 }
                                 for (l=0; l<onField.length; l++) {
-                                    playerData_5v5[onField[l][11]] = playerData_5v5[onField[l][11]] + xG;
-                                    playerData_5v5[onField[l][17]]++;
+                                    playerData_5v5[onField[l]][11] = playerData_5v5[onField[l]][11] + xG;
+                                    playerData_5v5[onField[l]][17]++;
                                     if (goal == 1) {
-                                        playerData_5v5[onField[l][14]]++;
+                                        playerData_5v5[onField[l]][14]++;
                                     }
                                 }
                             }
