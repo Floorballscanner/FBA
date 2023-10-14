@@ -131,6 +131,8 @@ function changeGame() {
                         s_p2.appendChild(opt2);
                         s_p3.appendChild(opt3);
                     }
+                    sumofxG = 0;
+                    sumofxAss = 0;
 
                     for (let j=1;j<shotData.length; j++) {
 
@@ -233,8 +235,7 @@ function changeGame() {
                             }
                         }
                     }
-                    sumofxG = 0;
-                    sumofxAss = 0;
+
                     for (l=1;l<playerData_5v5.length;l++) {
                         sumofxG = sumofxG + Number(playerData_5v5[l][4]);
                         sumofxAss = sumofxAss + Number(playerData_5v5[l][7]);
