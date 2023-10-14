@@ -79,7 +79,7 @@ async function getGameData(game_id) {
                 Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
 
             }
-        });
+        })
 
         .catch((error) => {
             console.error('Error:', error);
