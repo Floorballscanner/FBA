@@ -7,6 +7,7 @@
                         'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA']];
     var shotData = [];
+    var data = 0;
     var idleTime = 0;
     var fLength = 332;
     var fWidth = 200;
@@ -31,21 +32,8 @@
 
 async function getGameData(game_id) {
 
-    await fetch("https://fbscanner.io/apis/games/" + game_id + "/")
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            return data;
-        })
-
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-}
-
-async function callGame(game_id) {
-    data = await this.getGameData(game_id);
-    return data;
+    let apiResponse = await fetch("https://fbscanner.io/apis/games/" + game_id + "/");
+    data = await apiResponse.json();
 }
 
 function changeGame() {
@@ -76,7 +64,7 @@ function changeGame() {
     for (i=0;i<selectedValues.length;i++) {
         game_id = selectedValues[i];
         console.log("getGameData: " + game_id)
-        data = callGame(game_id);
+        getGameData(game_id);
         console.log("data maybe found")
         gd = data.game_data;
         date = data.date;
