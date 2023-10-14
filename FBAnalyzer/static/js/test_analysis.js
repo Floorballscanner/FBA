@@ -114,7 +114,9 @@ function changeGame() {
     for (i=0;i<selectedValues.length;i++) {
         game_id = selectedValues[i];
         getGameData(game_id);
+        console.log("getGameData: " + game_id)
     }
+    console.log("Outside for-loop")
     s_p1.disabled = false;
     s_p2.disabled = false;
     s_p3.disabled = false;
@@ -282,6 +284,7 @@ function changeGame() {
         xGp = xGp.toFixed(2);
         playerData_5v5[l][15] = xGp;
     }
+    console.log("drawCharts - function")
     drawCharts();
 }
 
