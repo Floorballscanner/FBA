@@ -170,7 +170,7 @@ function changeGame() {
 
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
 
-                                temp = Number(playerData_5v5[shooter_row][3]) + xG;
+                                temp = Number(playerData_5v5[shooter_row][4]) + xG;
                                 playerData_5v5[shooter_row][4] = temp.toFixed(2);
                                 playerData_5v5[shooter_row][9]++;
                                 if (goal == 1) {
