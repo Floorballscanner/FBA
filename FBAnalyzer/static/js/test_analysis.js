@@ -29,6 +29,63 @@
     var ctx4 = cnvs4.getContext("2d");
     var ctx5 = cnvs5.getContext("2d");
 
+async function getGameData(game_id) {
+
+    await fetch("https://fbscanner.io/apis/games/" + game_id + "/")
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            gd = data.game_data;
+            date = data.date;
+
+            if (Object.keys(gd).length > 0) { // If game data is not empty
+                data = gd.plT1_array;
+                shotData = shotData.concat(gd.printShotData);
+
+                for (j=1;j<data.length;j++) { // Go through all game player stats
+
+                    if (data[j][0] != "") {
+                        found = 0;
+
+                        for (k=1;k<playerData.length;k++) { // Sum game datas
+
+                            if (data[j][0] == playerData[k][0]) { // Player found
+                                found = 1;
+                                playerData[k][2]++;
+                                playerData_5v5[k][2]++;
+                                playerData_PP[k][2]++;
+                                playerData[k][3] = playerData[k][3] + data[j][2];
+                                playerData[k][4] = playerData[k][4] + data[j][3];
+                                playerData[k][5] = playerData[k][5] + data[j][4];
+                                playerData[k][6] = playerData[k][6] + data[j][5];
+                                playerData[k][7] = playerData[k][7] + data[j][6];
+                                playerData[k][8] = playerData[k][8] + data[j][7];
+                                playerData[k][9] = playerData[k][9] + data[j][8];
+                                playerData[k][10] = playerData[k][10] + data[j][9];
+                                playerData[k][11] = playerData[k][11] + data[j][10];
+                                playerData[k][12] = playerData[k][12] + data[j][11];
+                            }
+                        }
+                        if (found == 0) { // Player not found, adding to list
+                            playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
+                            data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
+                            playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                            playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                        }
+                    }
+                }
+                // Game stats to game data array
+                gameData.push([date, gd.name_t1, gd.name_t2, Number(gd.txG_1), Number(gd.txG_2), Number(gd.txGOT_1),
+                Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
+
+            }
+        });
+
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
 function changeGame() {
 
     playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
@@ -54,235 +111,178 @@ function changeGame() {
         }
     }
 
-    last = selectedValues[selectedValues.length-1];
     for (i=0;i<selectedValues.length;i++) {
         game_id = selectedValues[i];
-
-        fetch("https://fbscanner.io/apis/games/" + game_id + "/")
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                gd = data.game_data;
-                date = data.date;
-
-                if (Object.keys(gd).length > 0) { // If game data is not empty
-                    data = gd.plT1_array;
-                    shotData = shotData.concat(gd.printShotData);
-
-                    for (j=1;j<data.length;j++) { // Go through all game player stats
-
-                        if (data[j][0] != "") {
-                            found = 0;
-
-                            for (k=1;k<playerData.length;k++) { // Sum game datas
-
-                                if (data[j][0] == playerData[k][0]) { // Player found
-                                    found = 1;
-                                    playerData[k][2]++;
-                                    playerData_5v5[k][2]++;
-                                    playerData_PP[k][2]++;
-                                    playerData[k][3] = playerData[k][3] + data[j][2];
-                                    playerData[k][4] = playerData[k][4] + data[j][3];
-                                    playerData[k][5] = playerData[k][5] + data[j][4];
-                                    playerData[k][6] = playerData[k][6] + data[j][5];
-                                    playerData[k][7] = playerData[k][7] + data[j][6];
-                                    playerData[k][8] = playerData[k][8] + data[j][7];
-                                    playerData[k][9] = playerData[k][9] + data[j][8];
-                                    playerData[k][10] = playerData[k][10] + data[j][9];
-                                    playerData[k][11] = playerData[k][11] + data[j][10];
-                                    playerData[k][12] = playerData[k][12] + data[j][11];
-                                }
-                            }
-                            if (found == 0) { // Player not found, adding to list
-                                playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
-                                data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
-                                playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
-                                playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
-                            }
-                        }
-                    }
-                    // Game stats to game data array
-                    gameData.push([date, gd.name_t1, gd.name_t2, Number(gd.txG_1), Number(gd.txG_2), Number(gd.txGOT_1),
-                    Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
-
-                }
-
-                if (game_id == last) {
-
-                    s_p1.disabled = false;
-                    s_p2.disabled = false;
-                    s_p3.disabled = false;
-
-                    s_p1.selectedIndex = "0";
-                    s_p2.selectedIndex = "0";
-                    s_p3.selectedIndex = "0";
-
-                    while (s_p1.options.length > 1) {
-                        s_p1.remove(s_p1.options.length-1);
-                        s_p2.remove(s_p2.options.length-1);
-                        s_p3.remove(s_p3.options.length-1);
-                    }
-
-                    for (let j=1; j<playerData.length; j++) {
-                        opt1 = new Option(playerData[j][1], playerData[j][0]);
-                        opt2 = new Option(playerData[j][1], playerData[j][0]);
-                        opt3 = new Option(playerData[j][1], playerData[j][0]);
-                        s_p1.appendChild(opt1);
-                        s_p2.appendChild(opt2);
-                        s_p3.appendChild(opt3);
-                    }
-                    sumofxG = 0;
-                    sumofxAss = 0;
-
-                    for (let j=1;j<shotData.length; j++) {
-
-                        if ((shotData[j][4] == gd.name_t1) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // My team shot
-
-                            shooter = shotData[j][9];
-                            passer = shotData[j][10];
-                            xG = Number(shotData[j][7]);
-                            onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
-
-                            if (shotData[j][25] == 1) {PP = 1}
-                            else {PP = 0}
-                            if (shotData[j][26] == 1) {SH = 1}
-                            else {SH = 0}
-
-                            goal = 0;
-                            if (shotData[j][5] == "Goal") {goal = 1}
-
-                            // If player shoots or passes or is on field
-                            shooter_row = 0;
-                            passer_row = 0;
-                            onf_row = [0,0,0,0,0];
-
-                            for (let k=1; k<playerData_5v5.length; k++) {
-                                if (playerData_5v5[k][1] == shooter) {
-                                    shooter_row = k;
-                                }
-                                if (playerData_5v5[k][1] == passer) {
-                                    passer_row = k;
-                                }
-                                if (playerData_5v5[k][1] == onField[0]) {onf_row[0] = k}
-                                if (playerData_5v5[k][1] == onField[1]) {onf_row[1] = k}
-                                if (playerData_5v5[k][1] == onField[2]) {onf_row[2] = k}
-                                if (playerData_5v5[k][1] == onField[3]) {onf_row[3] = k}
-                                if (playerData_5v5[k][1] == onField[4]) {onf_row[4] = k}
-                            }
-
-                            if (PP == 0 && SH == 0) { // 5 vs 5 shots
-
-                                temp = Number(playerData_5v5[shooter_row][4]) + xG;
-                                playerData_5v5[shooter_row][4] = temp.toFixed(2);
-                                playerData_5v5[shooter_row][9]++;
-                                if (goal == 1) {
-                                    playerData_5v5[shooter_row][5]++;
-                                }
-                                if (passer_row != 0) {
-
-                                    temp = Number(playerData_5v5[passer_row][7]) + xG;
-                                    playerData_5v5[passer_row][7] = temp.toFixed(2);
-                                    playerData_5v5[passer_row][10]++;
-                                    if (goal == 1) {
-                                        playerData_5v5[passer_row][8]++;
-                                    }
-                                }
-                                for (l=0; l<onf_row.length; l++) {
-                                    temp = Number(playerData_5v5[onf_row[l]][13]) + xG;
-                                    playerData_5v5[onf_row[l]][13] = temp.toFixed(2);
-                                    playerData_5v5[onf_row[l]][19]++;
-                                    if (goal == 1) {
-                                        playerData_5v5[onf_row[l]][16]++;
-                                    }
-                                }
-                            }
-                        }
-
-                        else if ((shotData[j][4] == gd.name_t2) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // Opponent team shot
-
-                            xG = Number(shotData[j][7]);
-                            onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
-
-                            if (shotData[j][25] == 1) {PP = 1}
-                            else {PP = 0}
-                            if (shotData[j][26] == 1) {SH = 1}
-                            else {SH = 0}
-
-                            goal = 0;
-                            if (shotData[j][5] == "Goal") {goal = 1}
-
-                            // If player is on field
-                            onf_row = [0,0,0,0,0];
-
-                            for (let k=1; k<playerData_5v5.length; k++) {
-                                if (playerData_5v5[k][1] == onField[0]) {onf_row[0] = k}
-                                if (playerData_5v5[k][1] == onField[1]) {onf_row[1] = k}
-                                if (playerData_5v5[k][1] == onField[2]) {onf_row[2] = k}
-                                if (playerData_5v5[k][1] == onField[3]) {onf_row[3] = k}
-                                if (playerData_5v5[k][1] == onField[4]) {onf_row[4] = k}
-                            }
-
-                            if (PP == 0 && SH == 0) { // 5 vs 5 shots
-
-                                for (l=0; l<onf_row.length; l++) {
-                                    temp = Number(playerData_5v5[onf_row[l]][14]) + xG;
-                                    playerData_5v5[onf_row[l]][14] = temp.toFixed(2);
-                                    playerData_5v5[onf_row[l]][20]++;
-                                    if (goal == 1) {
-                                        playerData_5v5[onf_row[l]][17]++;
-                                    }
-                                }
-                            }
-                        }
-                        else if ((shotData[j][5] == "Possession +") || (shotData[j][5] == "Possession -")) {
-
-                            player = shotData[j][29];
-                            if (shotData[j][25] == 1) {PP = 1}
-                            else {PP = 0}
-                            if (shotData[j][26] == 1) {SH = 1}
-                            else {SH = 0}
-
-                            if (PP == 0 && SH == 0) { // 5 vs 5
-
-                                player_row = 0;
-                                for (let k=1; k<playerData_5v5.length; k++) {
-                                    if (playerData_5v5[k][1] == player) {
-                                        player_row = k;
-                                    }
-                                }
-                                if (shotData[j][5] == "Possession +") {
-                                    playerData_5v5[player_row][11]++;
-                                }
-                                if (shotData[j][5] == "Possession -") {
-                                    playerData_5v5[player_row][12]++;
-                                }
-                            }
-                        }
-                    }
-
-                    for (l=1;l<playerData_5v5.length;l++) {
-                        sumofxG = sumofxG + Number(playerData_5v5[l][4]);
-                        sumofxAss = sumofxAss + Number(playerData_5v5[l][7]);
-                    }
-                    for (l=1;l<playerData_5v5.length;l++) {
-                        xG_p = Number(playerData_5v5[l][4]) / sumofxG;
-                        xG_p = xG_p.toFixed(2);
-                        xAss_p = Number(playerData_5v5[l][7]) / sumofxAss;
-                        xAss_p = xAss_p.toFixed(2);
-                        playerData_5v5[l][3] = xG_p;
-                        playerData_5v5[l][6] = xAss_p;
-                        playerData_5v5[l][18] = playerData_5v5[l][16] - playerData_5v5[l][17];
-                        xGp = Number(playerData_5v5[l][13]) / (Number(playerData_5v5[l][13]) + Number(playerData_5v5[l][14]))
-                        xGp = xGp.toFixed(2);
-                        playerData_5v5[l][15] = xGp;
-                    }
-                    drawCharts();
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-        });
+        getGameData(game_id);
     }
+    s_p1.disabled = false;
+    s_p2.disabled = false;
+    s_p3.disabled = false;
+
+    s_p1.selectedIndex = "0";
+    s_p2.selectedIndex = "0";
+    s_p3.selectedIndex = "0";
+
+    while (s_p1.options.length > 1) {
+        s_p1.remove(s_p1.options.length-1);
+        s_p2.remove(s_p2.options.length-1);
+        s_p3.remove(s_p3.options.length-1);
+    }
+
+    for (let j=1; j<playerData.length; j++) {
+        opt1 = new Option(playerData[j][1], playerData[j][0]);
+        opt2 = new Option(playerData[j][1], playerData[j][0]);
+        opt3 = new Option(playerData[j][1], playerData[j][0]);
+        s_p1.appendChild(opt1);
+        s_p2.appendChild(opt2);
+        s_p3.appendChild(opt3);
+    }
+    sumofxG = 0;
+    sumofxAss = 0;
+
+    for (let j=1;j<shotData.length; j++) {
+
+        if ((shotData[j][4] == gd.name_t1) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // My team shot
+
+            shooter = shotData[j][9];
+            passer = shotData[j][10];
+            xG = Number(shotData[j][7]);
+            onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
+
+            if (shotData[j][25] == 1) {PP = 1}
+            else {PP = 0}
+            if (shotData[j][26] == 1) {SH = 1}
+            else {SH = 0}
+
+            goal = 0;
+            if (shotData[j][5] == "Goal") {goal = 1}
+
+            // If player shoots or passes or is on field
+            shooter_row = 0;
+            passer_row = 0;
+            onf_row = [0,0,0,0,0];
+
+            for (let k=1; k<playerData_5v5.length; k++) {
+                if (playerData_5v5[k][1] == shooter) {
+                    shooter_row = k;
+                }
+                if (playerData_5v5[k][1] == passer) {
+                    passer_row = k;
+                }
+                if (playerData_5v5[k][1] == onField[0]) {onf_row[0] = k}
+                if (playerData_5v5[k][1] == onField[1]) {onf_row[1] = k}
+                if (playerData_5v5[k][1] == onField[2]) {onf_row[2] = k}
+                if (playerData_5v5[k][1] == onField[3]) {onf_row[3] = k}
+                if (playerData_5v5[k][1] == onField[4]) {onf_row[4] = k}
+            }
+
+            if (PP == 0 && SH == 0) { // 5 vs 5 shots
+
+                temp = Number(playerData_5v5[shooter_row][4]) + xG;
+                playerData_5v5[shooter_row][4] = temp.toFixed(2);
+                playerData_5v5[shooter_row][9]++;
+                if (goal == 1) {
+                    playerData_5v5[shooter_row][5]++;
+                }
+                if (passer_row != 0) {
+
+                    temp = Number(playerData_5v5[passer_row][7]) + xG;
+                    playerData_5v5[passer_row][7] = temp.toFixed(2);
+                    playerData_5v5[passer_row][10]++;
+                    if (goal == 1) {
+                        playerData_5v5[passer_row][8]++;
+                    }
+                }
+                for (l=0; l<onf_row.length; l++) {
+                    temp = Number(playerData_5v5[onf_row[l]][13]) + xG;
+                    playerData_5v5[onf_row[l]][13] = temp.toFixed(2);
+                    playerData_5v5[onf_row[l]][19]++;
+                    if (goal == 1) {
+                        playerData_5v5[onf_row[l]][16]++;
+                    }
+                }
+            }
+        }
+
+        else if ((shotData[j][4] == gd.name_t2) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // Opponent team shot
+
+            xG = Number(shotData[j][7]);
+            onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
+
+            if (shotData[j][25] == 1) {PP = 1}
+            else {PP = 0}
+            if (shotData[j][26] == 1) {SH = 1}
+            else {SH = 0}
+
+            goal = 0;
+            if (shotData[j][5] == "Goal") {goal = 1}
+
+            // If player is on field
+            onf_row = [0,0,0,0,0];
+
+            for (let k=1; k<playerData_5v5.length; k++) {
+                if (playerData_5v5[k][1] == onField[0]) {onf_row[0] = k}
+                if (playerData_5v5[k][1] == onField[1]) {onf_row[1] = k}
+                if (playerData_5v5[k][1] == onField[2]) {onf_row[2] = k}
+                if (playerData_5v5[k][1] == onField[3]) {onf_row[3] = k}
+                if (playerData_5v5[k][1] == onField[4]) {onf_row[4] = k}
+            }
+
+            if (PP == 0 && SH == 0) { // 5 vs 5 shots
+
+                for (l=0; l<onf_row.length; l++) {
+                    temp = Number(playerData_5v5[onf_row[l]][14]) + xG;
+                    playerData_5v5[onf_row[l]][14] = temp.toFixed(2);
+                    playerData_5v5[onf_row[l]][20]++;
+                    if (goal == 1) {
+                        playerData_5v5[onf_row[l]][17]++;
+                    }
+                }
+            }
+        }
+        else if ((shotData[j][5] == "Possession +") || (shotData[j][5] == "Possession -")) {
+
+            player = shotData[j][29];
+            if (shotData[j][25] == 1) {PP = 1}
+            else {PP = 0}
+            if (shotData[j][26] == 1) {SH = 1}
+            else {SH = 0}
+
+            if (PP == 0 && SH == 0) { // 5 vs 5
+
+                player_row = 0;
+                for (let k=1; k<playerData_5v5.length; k++) {
+                    if (playerData_5v5[k][1] == player) {
+                        player_row = k;
+                    }
+                }
+                if (shotData[j][5] == "Possession +") {
+                    playerData_5v5[player_row][11]++;
+                }
+                if (shotData[j][5] == "Possession -") {
+                    playerData_5v5[player_row][12]++;
+                }
+            }
+        }
+    }
+
+    for (l=1;l<playerData_5v5.length;l++) {
+        sumofxG = sumofxG + Number(playerData_5v5[l][4]);
+        sumofxAss = sumofxAss + Number(playerData_5v5[l][7]);
+    }
+    for (l=1;l<playerData_5v5.length;l++) {
+        xG_p = Number(playerData_5v5[l][4]) / sumofxG;
+        xG_p = xG_p.toFixed(2);
+        xAss_p = Number(playerData_5v5[l][7]) / sumofxAss;
+        xAss_p = xAss_p.toFixed(2);
+        playerData_5v5[l][3] = xG_p;
+        playerData_5v5[l][6] = xAss_p;
+        playerData_5v5[l][18] = playerData_5v5[l][16] - playerData_5v5[l][17];
+        xGp = Number(playerData_5v5[l][13]) / (Number(playerData_5v5[l][13]) + Number(playerData_5v5[l][14]))
+        xGp = xGp.toFixed(2);
+        playerData_5v5[l][15] = xGp;
+    }
+    drawCharts();
 }
 
 function drawCharts() {
@@ -333,7 +333,7 @@ function drawCharts() {
     var pldata = new google.visualization.DataTable();
     pldata.addColumn('string', 'Player Name');
     pldata.addColumn('number', 'Games');
-    pldata.addColumn('number', 'xG%');
+    pldata.addColumn('number', 'ixG%');
     pldata.addColumn('number', 'ixG');
     pldata.addColumn('number', 'iGoals');
     pldata.addColumn('number', 'xAss%');
