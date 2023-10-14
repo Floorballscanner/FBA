@@ -68,51 +68,51 @@ function changeGame() {
         getGameData(game_id);
         setTimeout(() => {
             console.log('Waited for one second');
-        }, 1000);
-        console.log("data maybe found")
-        gd = data.game_data;
-        date = data.date;
+            console.log("data maybe found")
+            gd = data.game_data;
+            date = data.date;
 
-        if (Object.keys(gd).length > 0) { // If game data is not empty
-            data = gd.plT1_array;
-            shotData = shotData.concat(gd.printShotData);
+            if (Object.keys(gd).length > 0) { // If game data is not empty
+                data = gd.plT1_array;
+                shotData = shotData.concat(gd.printShotData);
 
-            for (j=1;j<data.length;j++) { // Go through all game player stats
+                for (j=1;j<data.length;j++) { // Go through all game player stats
 
-                if (data[j][0] != "") {
-                    found = 0;
+                    if (data[j][0] != "") {
+                        found = 0;
 
-                    for (k=1;k<playerData.length;k++) { // Sum game datas
+                        for (k=1;k<playerData.length;k++) { // Sum game datas
 
-                        if (data[j][0] == playerData[k][0]) { // Player found
-                            found = 1;
-                            playerData[k][2]++;
-                            playerData_5v5[k][2]++;
-                            playerData_PP[k][2]++;
-                            playerData[k][3] = playerData[k][3] + data[j][2];
-                            playerData[k][4] = playerData[k][4] + data[j][3];
-                            playerData[k][5] = playerData[k][5] + data[j][4];
-                            playerData[k][6] = playerData[k][6] + data[j][5];
-                            playerData[k][7] = playerData[k][7] + data[j][6];
-                            playerData[k][8] = playerData[k][8] + data[j][7];
-                            playerData[k][9] = playerData[k][9] + data[j][8];
-                            playerData[k][10] = playerData[k][10] + data[j][9];
-                            playerData[k][11] = playerData[k][11] + data[j][10];
-                            playerData[k][12] = playerData[k][12] + data[j][11];
+                            if (data[j][0] == playerData[k][0]) { // Player found
+                                found = 1;
+                                playerData[k][2]++;
+                                playerData_5v5[k][2]++;
+                                playerData_PP[k][2]++;
+                                playerData[k][3] = playerData[k][3] + data[j][2];
+                                playerData[k][4] = playerData[k][4] + data[j][3];
+                                playerData[k][5] = playerData[k][5] + data[j][4];
+                                playerData[k][6] = playerData[k][6] + data[j][5];
+                                playerData[k][7] = playerData[k][7] + data[j][6];
+                                playerData[k][8] = playerData[k][8] + data[j][7];
+                                playerData[k][9] = playerData[k][9] + data[j][8];
+                                playerData[k][10] = playerData[k][10] + data[j][9];
+                                playerData[k][11] = playerData[k][11] + data[j][10];
+                                playerData[k][12] = playerData[k][12] + data[j][11];
+                            }
+                        }
+                        if (found == 0) { // Player not found, adding to list
+                            playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
+                            data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
+                            playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                            playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
                         }
                     }
-                    if (found == 0) { // Player not found, adding to list
-                        playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
-                        data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
-                        playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
-                        playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
-                    }
                 }
+                // Game stats to game data array
+                gameData.push([date, gd.name_t1, gd.name_t2, Number(gd.txG_1), Number(gd.txG_2), Number(gd.txGOT_1),
+                Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
             }
-            // Game stats to game data array
-            gameData.push([date, gd.name_t1, gd.name_t2, Number(gd.txG_1), Number(gd.txG_2), Number(gd.txGOT_1),
-            Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
-        }
+        }, 1000);
     }
     console.log("Outside for-loop")
     s_p1.disabled = false;
