@@ -206,7 +206,9 @@ function changeGame() {
                                 xAss_p = xAss_p.toFixed(2);
 
                                 playerData_5v5[shooter_row][3] = xG_p;
-                                playerData_5v5[passer_row][6] = xAss_p;
+                                if (passer_row != 0) {
+                                    playerData_5v5[passer_row][6] = xAss_p;
+                                }
                             }
 
                         }
