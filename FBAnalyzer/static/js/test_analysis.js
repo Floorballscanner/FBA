@@ -272,6 +272,9 @@ function changeGame() {
                         playerData_5v5[l][3] = xG_p;
                         playerData_5v5[l][6] = xAss_p;
                         playerData_5v5[l][18] = playerData_5v5[l][16] - playerData_5v5[l][17];
+                        xGp = Number(playerData_5v5[l][13]) / (Number(playerData_5v5[l][13]) + Number(playerData_5v5[l][14]))
+                        xGp = xGp.toFixed(2);
+                        playerData_5v5[l][15] = xGp;
                     }
                     drawCharts();
                 }
