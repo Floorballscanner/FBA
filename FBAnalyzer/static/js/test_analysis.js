@@ -34,6 +34,7 @@ async function getGameData(game_id) {
 
     let apiResponse = await fetch("https://fbscanner.io/apis/games/" + game_id + "/");
     data = await apiResponse.json();
+    console.log("Success:", data)
 }
 
 function changeGame() {
