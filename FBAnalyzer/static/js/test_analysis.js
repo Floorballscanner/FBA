@@ -1,9 +1,13 @@
 
     var s_game = document.getElementById("select-game");
     var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
+    var playerData_5v5 = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
+     'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
+    var playerData_PP = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
+     'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
     var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
                         'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
-    var gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
+    var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA']];
     var shotData = [];
     var idleTime = 0;
     var s_p1 = document.getElementById('select-p1');
@@ -29,7 +33,11 @@ function changeGame() {
 
     playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
     gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
-    shotData = []‚
+    playerData_5v5 = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
+     'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
+    playerData_PP = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
+     'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
+    shotData = [];
     var selectedValues = [];
 
     // Iterate through each option in the select element
@@ -67,6 +75,8 @@ function changeGame() {
                                 if (data[j][0] == playerData[k][0]) { // Player found
                                     found = 1;
                                     playerData[k][2]++;
+                                    playerData_5v5[k][2]++;
+                                    playerData_PP[k][2]++;
                                     playerData[k][3] = playerData[k][3] + data[j][2];
                                     playerData[k][4] = playerData[k][4] + data[j][3];
                                     playerData[k][5] = playerData[k][5] + data[j][4];
@@ -82,6 +92,8 @@ function changeGame() {
                             if (found == 0) { // Player not found, adding to list
                                 playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
                                 data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
+                                playerData_5v5.push([data[j][0], data[j][1], 1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                                playerData_PP.push([data[j][0], data[j][1], 1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
                             }
                         }
                     }
