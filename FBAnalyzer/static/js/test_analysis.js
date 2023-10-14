@@ -271,6 +271,7 @@ function changeGame() {
                         xAss_p = xAss_p.toFixed(2);
                         playerData_5v5[l][3] = xG_p;
                         playerData_5v5[l][6] = xAss_p;
+                        playerData_5v5[l][18] = playerData_5v5[l][16] - playerData_5v5[l][17];
                     }
                 }
             })
@@ -323,34 +324,32 @@ function drawCharts() {
         gchart.draw(gdata, options);
     });
     
-    // Player data chart
-
-    sumofxG = 0;
-    sumofxAss = 0;
-    for (i=1;i<playerData.length;i++) {
-        sumofxG = sumofxG + playerData[i][3];
-        sumofxAss = sumofxAss + playerData[i][4];
-    }
+    // 5 vs 5 Player data chart
 
     var pldata = new google.visualization.DataTable();
     pldata.addColumn('string', 'Player Name');
     pldata.addColumn('number', 'Games');
-    pldata.addColumn('number', 'ixG');
     pldata.addColumn('number', 'xG%');
-    pldata.addColumn('number', 'ixAss');
+    pldata.addColumn('number', 'ixG');
+    pldata.addColumn('number', 'iGoals');
     pldata.addColumn('number', 'xAss%');
-    pldata.addColumn('number', 'ixG_PP');
-    pldata.addColumn('number', 'ixAss_PP');
-    pldata.addColumn('number', 'Goals');
-    pldata.addColumn('number', 'Assists');
-    pldata.addColumn('number', 'Shots');
-    pldata.addColumn('number', 'Shot Assists');
-    pldata.addColumn('number', 'Possession +');
-    pldata.addColumn('number', 'Possession -');
+    pldata.addColumn('number', 'ixAss');
+    pldata.addColumn('number', 'iAss');
+    pldata.addColumn('number', 'iShots');
+    pldata.addColumn('number', 'iPasses');
+    pldata.addColumn('number', 'Pos+');
+    pldata.addColumn('number', 'Pos-');
+    pldata.addColumn('number', 'xGF');
+    pldata.addColumn('number', 'xGA');
+    pldata.addColumn('number', 'xG%');
+    pldata.addColumn('number', 'GF');
+    pldata.addColumn('number', 'GA');
+    pldata.addColumn('number', '+-');
+    pldata.addColumn('number', 'SF');
+    pldata.addColumn('number', 'SA');
 
-    for(i = 1; i < playerData.length; i++){
-        pldata.addRow([playerData[i][1], playerData[i][2], playerData[i][3], playerData[i][3] / sumofxG, playerData[i][4], playerData[i][4] / sumofxAss, playerData[i][5], playerData[i][6],
-        playerData[i][7], playerData[i][8], playerData[i][9], playerData[i][10], playerData[i][11], playerData[i][12]]);
+    for (i = 1; i < playerData_5v5.length; i++) {
+        pldata.addRow([playerData_5v5[i][1], playerData_5v5[i][2], playerData_5v5[i][3], playerData_5v5[i][4], playerData_5v5[i][5], playerData_5v5[i][6], playerData_5v5[i][7], playerData_5v5[i][8], playerData_5v5[i][9], playerData_5v5[i][10], playerData_5v5[i][11], playerData_5v5[i][12], playerData_5v5[i][13], playerData_5v5[i][14], playerData_5v5[i][15], playerData_5v5[i][16], playerData_5v5[i][17], playerData_5v5[i][18], playerData_5v5[i][19], playerData_5v5[i][20]]);
     }
 
     var options = {
