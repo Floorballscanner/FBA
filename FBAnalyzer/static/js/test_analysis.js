@@ -2,9 +2,9 @@
     var s_game = document.getElementById("select-game");
     var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
     var playerData_5v5 = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
-     'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
+     'xGF','xGA','xG%','GF','GA','+-','SF','SA']];
     var playerData_PP = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
-     'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
+     'xGF','xGA','xG%','GF','GA','+-','SF','SA']];
     var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
                         'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA']];
@@ -39,6 +39,12 @@ function changeGame() {
      'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
     shotData = [];
     var selectedValues = [];
+
+    ctx1.drawImage(myImg,0,0,fWidth,fLength);
+    ctx2.drawImage(myImg,0,0,fWidth,fLength);
+    ctx3.drawImage(myImg,0,0,fWidth,fLength);
+    ctx4.drawImage(myImg,0,0,fWidth,fLength);
+    ctx5.drawImage(myImg,0,0,fWidth,fLength);
 
     // Iterate through each option in the select element
     for (i = 0; i < s_game.options.length; i++) {
@@ -126,6 +132,81 @@ function changeGame() {
                         s_p1.appendChild(opt1);
                         s_p2.appendChild(opt2);
                         s_p3.appendChild(opt3);
+                    }
+
+                    for (let j=1;j<shotData.length; j++) {
+
+                        if ((shotData[j][4] == gd.name_t1) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // My team shot
+
+                            shooter = shotData[j][9];
+                            passer = shotData[j][10];
+                            xG = shotData[j][7];
+                            onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
+
+                            if (shotData[j][25] == 1) {PP = 1};
+                            else if (shotData[j][25] == 0) {PP = 0};
+                            if (shotData[j][26] == 1) {SH = 1};
+                            else if (shotData[j][26] == 0) {SH = 0};
+
+                            goal = 0;
+                            if (shotData[j][5] == "Goal") {goal = 1};
+
+                            // If player shoots or passes or is on field
+                            shooter_row = 0;
+                            passer_row = 0;
+                            onf_row = [0,0,0,0,0];
+
+                            for (let k=1; k<playerData.length; k++) {
+                                if (playerData[k][1] == shooter) {
+                                    shooter_row = k;
+                                }
+                                if (playerData[k][1] == passer) {
+                                    passer_row = k;
+                                }
+                                if (playerData[k][1] == onField[0]) {onf_row[0] = k};
+                                if (playerData[k][1] == onField[1]) {onf_row[1] = k};
+                                if (playerData[k][1] == onField[2]) {onf_row[2] = k};
+                                if (playerData[k][1] == onField[3]) {onf_row[3] = k};
+                                if (playerData[k][1] == onField[4]) {onf_row[4] = k};
+                            }
+
+                            if (PP == 0 && SH == 0) { // 5 vs 5 shots
+
+                                playerData_5v5[shooter_row][3]] = playerData_5v5[shooter_row][3]] + xG;
+                                playerData_5v5[shooter_row][7]]++;
+                                if (goal == 1) {
+                                    playerData_5v5[shooter_row][4]]++;
+                                }
+                                if (passer_row != 0) {
+                                    playerData_5v5[passer_row][5]] = playerData_5v5[passer_row][5]] + xG;
+                                    playerData_5v5[passer_row][8]]++;
+                                    if (goal == 1) {
+                                        playerData_5v5[passer_row][6]]++;
+                                    }
+                                }
+                                for (l=0; l<onField.length; l++) {
+                                    playerData_5v5[onField[l][11]] = playerData_5v5[onField[l][11]] + xG;
+                                    playerData_5v5[onField[l][17]]++;
+                                    if (goal == 1) {
+                                        playerData_5v5[onField[l][14]]++;
+                                    }
+                                }
+                            }
+
+                        }
+
+                        else if ((shotData[j][4] == gd.name_t2) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // Opponent team shot
+
+                            xG = shotData[j][7];
+                            onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
+
+                            if (shotData[j][25] == 1) {PP = 1};
+                            else if (shotData[j][25] == 0) {PP = 0};
+                            if (shotData[j][26] == 1) {SH = 1};
+                            else if (shotData[j][26] == 0) {SH = 0};
+
+                        }
+
                     }
                 }
             })
@@ -295,7 +376,6 @@ function drawMap(pl) {
     if (pl == 1) {
 
         name = s_p1.options[s_p1.selectedIndex].text;
-        ctx1.drawImage(myImg,0,0,fWidth,fLength);
         for (i=1;i<shotData.length;i++) {
 
             if (shotData[i][9] == name) {
@@ -388,7 +468,6 @@ function drawMap(pl) {
     else if (pl == 2) {
 
         name = s_p2.options[s_p2.selectedIndex].text;
-        ctx2.drawImage(myImg,0,0,fWidth,fLength);
 
         for (i=1;i<shotData.length;i++) {
 
@@ -482,7 +561,6 @@ function drawMap(pl) {
     else if (pl == 3) {
 
         name = s_p3.options[s_p3.selectedIndex].text;
-        ctx3.drawImage(myImg,0,0,fWidth,fLength);
         
         for (i=1;i<shotData.length;i++) {
 
@@ -576,7 +654,6 @@ function drawMap(pl) {
     else if (pl == 4) {
 
         name = s_p4.options[s_p4.selectedIndex].text;
-        ctx4.drawImage(myImg,0,0,fWidth,fLength);
         
         for (i=1;i<shotData.length;i++) {
 
@@ -670,7 +747,6 @@ function drawMap(pl) {
     else if (pl == 5) {
 
         name = s_p5.options[s_p5.selectedIndex].text;
-        ctx5.drawImage(myImg,0,0,fWidth,fLength);
         
         for (i=1;i<shotData.length;i++) {
 
