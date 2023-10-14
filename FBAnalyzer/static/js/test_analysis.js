@@ -1,10 +1,8 @@
 
     var s_game = document.getElementById("select-game");
     var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
-    var playerData_5v5 = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
-     'xGF','xGA','xG%','GF','GA','+-','SF','SA']];
-    var playerData_PP = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
-     'xGF','xGA','xG%','GF','GA','+-','SF','SA']];
+    var playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA']];
+    var playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA']];
     var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
                         'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA']];
@@ -35,10 +33,8 @@ function changeGame() {
 
     playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
     gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
-    playerData_5v5 = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
-     'xGF','xGA','xG%','GF','GA','+-','SF','SA']];
-    playerData_PP = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
-     'xGF','xGA','xG%','GF','GA','+-','SF','SA']];
+    playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA']];
+    playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA']];
     shotData = [];
     var selectedValues = [];
 
@@ -100,8 +96,8 @@ function changeGame() {
                             if (found == 0) { // Player not found, adding to list
                                 playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
                                 data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
-                                playerData_5v5.push([data[j][0], data[j][1], 1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
-                                playerData_PP.push([data[j][0], data[j][1], 1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                                playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                                playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
                             }
                         }
                     }
@@ -175,28 +171,42 @@ function changeGame() {
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
 
                                 temp = Number(playerData_5v5[shooter_row][3]) + xG;
-                                playerData_5v5[shooter_row][3] = temp.toFixed(2);
-                                playerData_5v5[shooter_row][7]++;
+                                playerData_5v5[shooter_row][4] = temp.toFixed(2);
+                                playerData_5v5[shooter_row][9]++;
                                 if (goal == 1) {
-                                    playerData_5v5[shooter_row][4]++;
+                                    playerData_5v5[shooter_row][5]++;
                                 }
                                 if (passer_row != 0) {
 
                                     temp = Number(playerData_5v5[passer_row][5]) + xG;
-                                    playerData_5v5[passer_row][5] = temp.toFixed(2);
-                                    playerData_5v5[passer_row][8]++;
+                                    playerData_5v5[passer_row][7] = temp.toFixed(2);
+                                    playerData_5v5[passer_row][10]++;
                                     if (goal == 1) {
-                                        playerData_5v5[passer_row][6]++;
+                                        playerData_5v5[passer_row][8]++;
                                     }
                                 }
                                 for (l=0; l<onf_row.length; l++) {
-                                    temp = Number(playerData_5v5[onf_row[l]][11]) + xG;
-                                    playerData_5v5[onf_row[l]][11] = temp.toFixed(2);
-                                    playerData_5v5[onf_row[l]][17]++;
+                                    temp = Number(playerData_5v5[onf_row[l]][13]) + xG;
+                                    playerData_5v5[onf_row[l]][13] = temp.toFixed(2);
+                                    playerData_5v5[onf_row[l]][19]++;
                                     if (goal == 1) {
-                                        playerData_5v5[onf_row[l]][14]++;
+                                        playerData_5v5[onf_row[l]][16]++;
                                     }
                                 }
+
+                                sumofxG = 0;
+                                sumofxAss = 0;
+                                for (l=1;l<playerData_5v5.length;l++) {
+                                    sumofxG = sumofxG + Number(playerData_5v5[l][4]);
+                                    sumofxAss = sumofxAss + Number(playerData[l][7]);
+                                }
+                                xG_p = Number(playerData_5v5[shooter_row][4]) / sumofxG;
+                                xG_p = xG_p.toFixed(2);
+                                xAss_p = Number(playerData_5v5[passer_row][7]) / sumofxAss;
+                                xAss_p = xAss_p.toFixed(2);
+
+                                playerData_5v5[shooter_row][3] = xG_p;
+                                playerData_5v5[passer_row][6] = xAss_p;
                             }
 
                         }
@@ -228,11 +238,11 @@ function changeGame() {
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
 
                                 for (l=0; l<onf_row.length; l++) {
-                                    temp = Number(playerData_5v5[onf_row[l]][12]) + xG;
-                                    playerData_5v5[onf_row[l]][12] = temp.toFixed(2);
-                                    playerData_5v5[onf_row[l]][18]++;
+                                    temp = Number(playerData_5v5[onf_row[l]][14]) + xG;
+                                    playerData_5v5[onf_row[l]][14] = temp.toFixed(2);
+                                    playerData_5v5[onf_row[l]][20]++;
                                     if (goal == 1) {
-                                        playerData_5v5[onf_row[l]][15]++;
+                                        playerData_5v5[onf_row[l]][17]++;
                                     }
                                 }
                             }
