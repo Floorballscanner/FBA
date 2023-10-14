@@ -66,6 +66,9 @@ function changeGame() {
         game_id = selectedValues[i];
         console.log("getGameData: " + game_id)
         getGameData(game_id);
+        setTimeout(() => {
+            console.log('Waited for one second');
+        }, 1000);
         console.log("data maybe found")
         gd = data.game_data;
         date = data.date;
