@@ -113,7 +113,7 @@ function changeGame() {
 
     for (i=0;i<selectedValues.length;i++) {
         game_id = selectedValues[i];
-        getGameData(game_id);
+        await getGameData(game_id);
         console.log("getGameData: " + game_id)
     }
     console.log("Outside for-loop")
