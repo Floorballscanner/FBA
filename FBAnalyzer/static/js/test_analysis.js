@@ -178,7 +178,7 @@ function changeGame() {
                                 }
                                 if (passer_row != 0) {
 
-                                    temp = Number(playerData_5v5[passer_row][5]) + xG;
+                                    temp = Number(playerData_5v5[passer_row][7]) + xG;
                                     playerData_5v5[passer_row][7] = temp.toFixed(2);
                                     playerData_5v5[passer_row][10]++;
                                     if (goal == 1) {
