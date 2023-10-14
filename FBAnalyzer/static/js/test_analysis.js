@@ -174,7 +174,7 @@ function changeGame() {
 
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
 
-                                temp = playerData_5v5[shooter_row][3] + xG;
+                                temp = Number(playerData_5v5[shooter_row][3]) + xG;
                                 playerData_5v5[shooter_row][3] = temp.toFixed(2);
                                 playerData_5v5[shooter_row][7]++;
                                 if (goal == 1) {
@@ -182,7 +182,7 @@ function changeGame() {
                                 }
                                 if (passer_row != 0) {
 
-                                    temp = playerData_5v5[passer_row][5] + xG;
+                                    temp = Number(playerData_5v5[passer_row][5]) + xG;
                                     playerData_5v5[passer_row][5] = temp.toFixed(2);
                                     playerData_5v5[passer_row][8]++;
                                     if (goal == 1) {
@@ -190,7 +190,7 @@ function changeGame() {
                                     }
                                 }
                                 for (l=0; l<onf_row.length; l++) {
-                                    temp = playerData_5v5[onf_row[l]][11] + xG;
+                                    temp = Number(playerData_5v5[onf_row[l]][11]) + xG;
                                     playerData_5v5[onf_row[l]][11] = temp.toFixed(2);
                                     playerData_5v5[onf_row[l]][17]++;
                                     if (goal == 1) {
