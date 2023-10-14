@@ -108,7 +108,7 @@ function changeGame() {
                 }
 
                 if (game_id == last) {
-                    drawCharts();
+
                     s_p1.disabled = false;
                     s_p2.disabled = false;
                     s_p3.disabled = false;
@@ -273,6 +273,7 @@ function changeGame() {
                         playerData_5v5[l][6] = xAss_p;
                         playerData_5v5[l][18] = playerData_5v5[l][16] - playerData_5v5[l][17];
                     }
+                    drawCharts();
                 }
             })
             .catch((error) => {
