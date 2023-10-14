@@ -10,6 +10,8 @@
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA']];
     var shotData = [];
     var idleTime = 0;
+    var fLength = 332;
+    var fWidth = 200;
     var s_p1 = document.getElementById('select-p1');
     var s_p2 = document.getElementById('select-p2');
     var s_p3 = document.getElementById('select-p3');
@@ -369,9 +371,6 @@ function calcxy(radius, angle) {
 }
 
 function drawMap(pl) {
-
-    fLength = 332;
-    fWidth = 200;
 
     if (pl == 1) {
 
