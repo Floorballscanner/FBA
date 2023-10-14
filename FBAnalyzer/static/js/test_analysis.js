@@ -174,23 +174,24 @@ function changeGame() {
 
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
 
-                                playerData_5v5[shooter_row][3] = playerData_5v5[shooter_row][3] + xG;
-                                playerData_5v5[shooter_row][3] = playerData_5v5[shooter_row][3].toFixed(2);
+                                temp = playerData_5v5[shooter_row][3] + xG;
+                                playerData_5v5[shooter_row][3] = temp.toFixed(2);
                                 playerData_5v5[shooter_row][7]++;
                                 if (goal == 1) {
                                     playerData_5v5[shooter_row][4]++;
                                 }
                                 if (passer_row != 0) {
-                                    playerData_5v5[passer_row][5] = playerData_5v5[passer_row][5] + xG;
-                                    playerData_5v5[passer_row][5] = playerData_5v5[passer_row][5].toFixed(2);
+
+                                    temp = playerData_5v5[passer_row][5] + xG;
+                                    playerData_5v5[passer_row][5] = temp.toFixed(2);
                                     playerData_5v5[passer_row][8]++;
                                     if (goal == 1) {
                                         playerData_5v5[passer_row][6]++;
                                     }
                                 }
                                 for (l=0; l<onf_row.length; l++) {
-                                    playerData_5v5[onf_row[l]][11] = playerData_5v5[onf_row[l]][11] + xG;
-                                    playerData_5v5[onf_row[l]][11] = playerData_5v5[onf_row[l]][11].toFixed(2);
+                                    temp = playerData_5v5[onf_row[l]][11] + xG;
+                                    playerData_5v5[onf_row[l]][11] = temp.toFixed(2);
                                     playerData_5v5[onf_row[l]][17]++;
                                     if (goal == 1) {
                                         playerData_5v5[onf_row[l]][14]++;
@@ -202,7 +203,7 @@ function changeGame() {
 
                         else if ((shotData[j][4] == gd.name_t2) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // Opponent team shot
 
-                            xG = shotData[j][7];
+                            xG = Number(shotData[j][7]);
                             onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
 
                             if (shotData[j][25] == 1) {PP = 1}
@@ -210,6 +211,31 @@ function changeGame() {
                             if (shotData[j][26] == 1) {SH = 1}
                             else {SH = 0}
 
+                            goal = 0;
+                            if (shotData[j][5] == "Goal") {goal = 1}
+
+                            // If player is on field
+                            onf_row = [0,0,0,0,0];
+
+                            for (let k=1; k<playerData.length; k++) {
+                                if (playerData[k][1] == onField[0]) {onf_row[0] = k}
+                                if (playerData[k][1] == onField[1]) {onf_row[1] = k}
+                                if (playerData[k][1] == onField[2]) {onf_row[2] = k}
+                                if (playerData[k][1] == onField[3]) {onf_row[3] = k}
+                                if (playerData[k][1] == onField[4]) {onf_row[4] = k}
+                            }
+
+                            if (PP == 0 && SH == 0) { // 5 vs 5 shots
+
+                                for (l=0; l<onf_row.length; l++) {
+                                    playerData_5v5[onf_row[l]][11] = playerData_5v5[onf_row[l]][11] + xG;
+                                    playerData_5v5[onf_row[l]][11] = playerData_5v5[onf_row[l]][11].toFixed(2);
+                                    playerData_5v5[onf_row[l]][17]++;
+                                    if (goal == 1) {
+                                        playerData_5v5[onf_row[l]][14]++;
+                                    }
+                                }
+                            }
                         }
 
                     }
