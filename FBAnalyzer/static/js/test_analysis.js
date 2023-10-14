@@ -156,18 +156,18 @@ function changeGame() {
                             passer_row = 0;
                             onf_row = [0,0,0,0,0];
 
-                            for (let k=1; k<playerData.length; k++) {
-                                if (playerData[k][1] == shooter) {
+                            for (let k=1; k<playerData_5v5.length; k++) {
+                                if (playerData_5v5[k][1] == shooter) {
                                     shooter_row = k;
                                 }
-                                if (playerData[k][1] == passer) {
+                                if (playerData_5v5[k][1] == passer) {
                                     passer_row = k;
                                 }
-                                if (playerData[k][1] == onField[0]) {onf_row[0] = k}
-                                if (playerData[k][1] == onField[1]) {onf_row[1] = k}
-                                if (playerData[k][1] == onField[2]) {onf_row[2] = k}
-                                if (playerData[k][1] == onField[3]) {onf_row[3] = k}
-                                if (playerData[k][1] == onField[4]) {onf_row[4] = k}
+                                if (playerData_5v5[k][1] == onField[0]) {onf_row[0] = k}
+                                if (playerData_5v5[k][1] == onField[1]) {onf_row[1] = k}
+                                if (playerData_5v5[k][1] == onField[2]) {onf_row[2] = k}
+                                if (playerData_5v5[k][1] == onField[3]) {onf_row[3] = k}
+                                if (playerData_5v5[k][1] == onField[4]) {onf_row[4] = k}
                             }
 
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
@@ -214,12 +214,12 @@ function changeGame() {
                             // If player is on field
                             onf_row = [0,0,0,0,0];
 
-                            for (let k=1; k<playerData.length; k++) {
-                                if (playerData[k][1] == onField[0]) {onf_row[0] = k}
-                                if (playerData[k][1] == onField[1]) {onf_row[1] = k}
-                                if (playerData[k][1] == onField[2]) {onf_row[2] = k}
-                                if (playerData[k][1] == onField[3]) {onf_row[3] = k}
-                                if (playerData[k][1] == onField[4]) {onf_row[4] = k}
+                            for (let k=1; k<playerData_5v5.length; k++) {
+                                if (playerData_5v5[k][1] == onField[0]) {onf_row[0] = k}
+                                if (playerData_5v5[k][1] == onField[1]) {onf_row[1] = k}
+                                if (playerData_5v5[k][1] == onField[2]) {onf_row[2] = k}
+                                if (playerData_5v5[k][1] == onField[3]) {onf_row[3] = k}
+                                if (playerData_5v5[k][1] == onField[4]) {onf_row[4] = k}
                             }
 
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
@@ -231,6 +231,30 @@ function changeGame() {
                                     if (goal == 1) {
                                         playerData_5v5[onf_row[l]][17]++;
                                     }
+                                }
+                            }
+                        }
+                        else if (shotData[j][5] == "Possession +") || (shotData[j][5] == "Possession -")) {
+
+                            player = shotData[j][29];
+                            if (shotData[j][25] == 1) {PP = 1}
+                            else {PP = 0}
+                            if (shotData[j][26] == 1) {SH = 1}
+                            else {SH = 0}
+
+                            if (PP == 0 && SH == 0) { // 5 vs 5
+
+                                player_row = 0;
+                                for (let k=1; k<playerData_5v5.length; k++) {
+                                    if (playerData_5v5[k][1] == player) {
+                                        player_row = k;
+                                    }
+                                }
+                                if (shotData[j][5] == "Possession +") {
+                                    playerData_5v5[player_row][11]++;
+                                }
+                                if (shotData[j][5] == "Possession -") {
+                                    playerData_5v5[player_row][12]++;
                                 }
                             }
                         }
