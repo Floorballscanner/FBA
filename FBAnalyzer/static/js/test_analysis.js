@@ -234,7 +234,7 @@ function changeGame() {
                                 }
                             }
                         }
-                        else if (shotData[j][5] == "Possession +") || (shotData[j][5] == "Possession -")) {
+                        else if ((shotData[j][5] == "Possession +") || (shotData[j][5] == "Possession -")) {
 
                             player = shotData[j][29];
                             if (shotData[j][25] == 1) {PP = 1}
