@@ -142,7 +142,7 @@ function changeGame() {
 
                             shooter = shotData[j][9];
                             passer = shotData[j][10];
-                            xG = shotData[j][7];
+                            xG = Number(shotData[j][7]);
                             onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
 
                             if (shotData[j][25] == 1) {PP = 1}
@@ -186,11 +186,11 @@ function changeGame() {
                                         playerData_5v5[passer_row][6]++;
                                     }
                                 }
-                                for (l=0; l<onField.length; l++) {
-                                    playerData_5v5[onField[l]][11] = playerData_5v5[onField[l]][11] + xG;
-                                    playerData_5v5[onField[l]][17]++;
+                                for (l=0; l<onf_row.length; l++) {
+                                    playerData_5v5[onf_row[l]][11] = playerData_5v5[onf_row[l]][11] + xG;
+                                    playerData_5v5[onf_row[l]][17]++;
                                     if (goal == 1) {
-                                        playerData_5v5[onField[l]][14]++;
+                                        playerData_5v5[onf_row[l]][14]++;
                                     }
                                 }
                             }
