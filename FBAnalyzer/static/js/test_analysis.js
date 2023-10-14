@@ -143,13 +143,13 @@ function changeGame() {
                             xG = shotData[j][7];
                             onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
 
-                            if (shotData[j][25] == 1) {PP = 1};
+                            if (shotData[j][25] == 1) {PP = 1}
                             else {PP = 0}
-                            if (shotData[j][26] == 1) {SH = 1};
+                            if (shotData[j][26] == 1) {SH = 1}
                             else {SH = 0}
 
                             goal = 0;
-                            if (shotData[j][5] == "Goal") {goal = 1};
+                            if (shotData[j][5] == "Goal") {goal = 1}
 
                             // If player shoots or passes or is on field
                             shooter_row = 0;
@@ -163,11 +163,11 @@ function changeGame() {
                                 if (playerData[k][1] == passer) {
                                     passer_row = k;
                                 }
-                                if (playerData[k][1] == onField[0]) {onf_row[0] = k};
-                                if (playerData[k][1] == onField[1]) {onf_row[1] = k};
-                                if (playerData[k][1] == onField[2]) {onf_row[2] = k};
-                                if (playerData[k][1] == onField[3]) {onf_row[3] = k};
-                                if (playerData[k][1] == onField[4]) {onf_row[4] = k};
+                                if (playerData[k][1] == onField[0]) {onf_row[0] = k}
+                                if (playerData[k][1] == onField[1]) {onf_row[1] = k}
+                                if (playerData[k][1] == onField[2]) {onf_row[2] = k}
+                                if (playerData[k][1] == onField[3]) {onf_row[3] = k}
+                                if (playerData[k][1] == onField[4]) {onf_row[4] = k}
                             }
 
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
@@ -200,9 +200,9 @@ function changeGame() {
                             xG = shotData[j][7];
                             onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
 
-                            if (shotData[j][25] == 1) {PP = 1};
+                            if (shotData[j][25] == 1) {PP = 1}
                             else {PP = 0}
-                            if (shotData[j][26] == 1) {SH = 1};
+                            if (shotData[j][26] == 1) {SH = 1}
                             else {SH = 0}
 
                         }
