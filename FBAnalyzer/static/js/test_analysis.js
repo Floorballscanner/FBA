@@ -198,10 +198,8 @@ function changeGame() {
                                 sumofxAss = 0;
                                 for (l=1;l<playerData_5v5.length;l++) {
                                     sumofxG = sumofxG + Number(playerData_5v5[l][4]);
-                                    sumofxAss = sumofxAss + Number(playerData[l][7]);
+                                    sumofxAss = sumofxAss + Number(playerData_5v5[l][7]);
                                 }
-                                console.log("sumofxG: " + sumofxG);
-                                console.log("sumofxAss: " + sumofxAss);
                                 xG_p = Number(playerData_5v5[shooter_row][4]) / sumofxG;
                                 xG_p = xG_p.toFixed(2);
                                 xAss_p = Number(playerData_5v5[passer_row][7]) / sumofxAss;
@@ -251,8 +249,9 @@ function changeGame() {
                                 }
                             }
                         }
-
                     }
+                    console.log("sumofxG: " + sumofxG);
+                    console.log("sumofxAss: " + sumofxAss);
                 }
             })
             .catch((error) => {
