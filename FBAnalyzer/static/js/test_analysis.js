@@ -240,14 +240,13 @@ function changeGame() {
                         sumofxG = sumofxG + Number(playerData_5v5[l][4]);
                         sumofxAss = sumofxAss + Number(playerData_5v5[l][7]);
                     }
-                    xG_p = Number(playerData_5v5[shooter_row][4]) / sumofxG;
-                    xG_p = xG_p.toFixed(2);
-                    xAss_p = Number(playerData_5v5[passer_row][7]) / sumofxAss;
-                    xAss_p = xAss_p.toFixed(2);
-
-                    playerData_5v5[shooter_row][3] = xG_p;
-                    if (passer_row != 0) {
-                        playerData_5v5[passer_row][6] = xAss_p;
+                    for (l=1;l<playerData_5v5.length;l++) {
+                        xG_p = Number(playerData_5v5[l][4]) / sumofxG;
+                        xG_p = xG_p.toFixed(2);
+                        xAss_p = Number(playerData_5v5[l][7]) / sumofxAss;
+                        xAss_p = xAss_p.toFixed(2);
+                        playerData_5v5[l][3] = xG_p;
+                        playerData_5v5[l][6] = xAss_p;
                     }
                 }
             })
