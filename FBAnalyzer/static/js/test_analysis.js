@@ -144,9 +144,9 @@ function changeGame() {
                             onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
 
                             if (shotData[j][25] == 1) {PP = 1};
-                            else if (shotData[j][25] == 0) {PP = 0};
+                            else {PP = 0};
                             if (shotData[j][26] == 1) {SH = 1};
-                            else if (shotData[j][26] == 0) {SH = 0};
+                            else {SH = 0};
 
                             goal = 0;
                             if (shotData[j][5] == "Goal") {goal = 1};
@@ -201,9 +201,9 @@ function changeGame() {
                             onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
 
                             if (shotData[j][25] == 1) {PP = 1};
-                            else if (shotData[j][25] == 0) {PP = 0};
+                            else {PP = 0};
                             if (shotData[j][26] == 1) {SH = 1};
-                            else if (shotData[j][26] == 0) {SH = 0};
+                            else {SH = 0};
 
                         }
 
