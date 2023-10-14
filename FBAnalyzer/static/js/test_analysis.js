@@ -35,7 +35,7 @@ async function getGameData(game_id) {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-
+            return data;
         })
 
         .catch((error) => {
