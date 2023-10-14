@@ -36,9 +36,9 @@ function changeGame() {
     playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
     gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
     playerData_5v5 = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
-     'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
+     'xGF','xGA','xG%','GF','GA','+-','SF','SA']];
     playerData_PP = [['ID','Name','Games','ixG','iGoals','ixAss','iAss','iShots','iPasses','Pos+','Pos-',
-     'xGA','xGF','xG%','GA','GF','+-','SA','SF']];
+     'xGF','xGA','xG%','GF','GA','+-','SF','SA']];
     shotData = [];
     var selectedValues = [];
 
@@ -175,12 +175,14 @@ function changeGame() {
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
 
                                 playerData_5v5[shooter_row][3] = playerData_5v5[shooter_row][3] + xG;
+                                playerData_5v5[shooter_row][3].toFixed(2);
                                 playerData_5v5[shooter_row][7]++;
                                 if (goal == 1) {
                                     playerData_5v5[shooter_row][4]++;
                                 }
                                 if (passer_row != 0) {
                                     playerData_5v5[passer_row][5] = playerData_5v5[passer_row][5] + xG;
+                                    playerData_5v5[passer_row][5].toFixed(2);
                                     playerData_5v5[passer_row][8]++;
                                     if (goal == 1) {
                                         playerData_5v5[passer_row][6]++;
@@ -188,6 +190,7 @@ function changeGame() {
                                 }
                                 for (l=0; l<onf_row.length; l++) {
                                     playerData_5v5[onf_row[l]][11] = playerData_5v5[onf_row[l]][11] + xG;
+                                    playerData_5v5[onf_row[l]][11].toFixed(2);
                                     playerData_5v5[onf_row[l]][17]++;
                                     if (goal == 1) {
                                         playerData_5v5[onf_row[l]][14]++;
