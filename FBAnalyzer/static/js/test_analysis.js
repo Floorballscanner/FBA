@@ -228,11 +228,11 @@ function changeGame() {
                             if (PP == 0 && SH == 0) { // 5 vs 5 shots
 
                                 for (l=0; l<onf_row.length; l++) {
-                                    playerData_5v5[onf_row[l]][11] = playerData_5v5[onf_row[l]][11] + xG;
-                                    playerData_5v5[onf_row[l]][11] = playerData_5v5[onf_row[l]][11].toFixed(2);
-                                    playerData_5v5[onf_row[l]][17]++;
+                                    temp = playerData_5v5[onf_row[l]][12] + xG;
+                                    playerData_5v5[onf_row[l]][12] = temp.toFixed(2);
+                                    playerData_5v5[onf_row[l]][18]++;
                                     if (goal == 1) {
-                                        playerData_5v5[onf_row[l]][14]++;
+                                        playerData_5v5[onf_row[l]][15]++;
                                     }
                                 }
                             }
