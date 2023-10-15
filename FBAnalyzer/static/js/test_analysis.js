@@ -425,11 +425,11 @@ function drawCharts() {
 
     max = Math.max(Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]));
     var GAxG_data = google.visualization.arrayToDataTable([
-      ['ixG', 'iGoals', {role: 'annotation'}, {role: 'tooltip'}],
-      [Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
+      ['ixG', 'iGoals','Trend', {role: 'annotation'}, {role: 'tooltip'}],
+      [Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]), Number(playerData_5v5[1][4]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), playerData_5v5[i][1], playerData_5v5[i][1]]);
+        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), Number(playerData_5v5[i][4]), playerData_5v5[i][1], playerData_5v5[i][1]]);
         if (max < Math.max(Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]))) {
             max = Math.max(Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]));
         }
@@ -443,6 +443,8 @@ function drawCharts() {
         hAxis: {title: 'ixG', minValue: 0, maxValue: max },
         vAxis: {title: 'iGoals', minValue: 0, maxValue: max },
         legend: 'none',
+        seriesType: 'scatter',
+        series: { 1: { type: 'line', color: 'grey' } },
     };
 
     var GAxG_chart = new google.visualization.ComboChart(document.getElementById('GAxG_plot'));
