@@ -413,7 +413,9 @@ function drawCharts() {
     }
 
     var cssClassNames = {
-    'tableRow': 'playerData'
+    'tableRow': 'playerData-table'
+    'headerRow': 'playerData-header',
+    'oddTableRow': 'playerData-table',
     };
 
     var options = {
