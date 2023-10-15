@@ -417,7 +417,7 @@ function drawCharts() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
-        fontSize : '16px'
+        fontSize : 16,
         hAxis: { textPosition: 'none' }
         };
 
