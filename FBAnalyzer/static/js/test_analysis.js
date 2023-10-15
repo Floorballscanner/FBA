@@ -426,10 +426,10 @@ function drawCharts() {
     var GAxG_data = new google.visualization.DataTable();
     GAxG_data.addColumn('number', 'ixG');
     GAxG_data.addColumn('number', 'iGoals');
-    GAxG_data.addColumn('string', {role: 'annotation'});
+    // GAxG_data.addColumn('string', {role: 'annotation'});
 
     for (i = 1; i < playerData_5v5.length; i++) {
-        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), playerData_5v5[i][1]]);
+        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5])]); //, playerData_5v5[i][1]]);
     }
 
     var options = {
