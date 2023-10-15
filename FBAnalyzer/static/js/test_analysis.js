@@ -424,11 +424,11 @@ function drawCharts() {
     // Goals above xG chart
 
     var GAxG_data = google.visualization.arrayToDataTable([
-      ['ixG', 'iGoals', {role: 'annotation'}],
-      [Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]), playerData_5v5[1][1]]]);
+      ['ixG', 'iGoals', {role: 'annotation'}, {role: 'tooltip'}],
+      [Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), playerData_5v5[i][1]]);
+        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), playerData_5v5[i][1], playerData_5v5[i][1]]);
     }
 
     var options = {
@@ -444,11 +444,11 @@ function drawCharts() {
     // Assists above xAss chart
 
     var GAxAss_data = new google.visualization.arrayToDataTable([
-      ['ixAss', 'iAssists', {role: 'annotation'}],
-      [Number(playerData_5v5[1][7]), Number(playerData_5v5[1][8]), playerData_5v5[1][1]]]);
+      ['ixAss', 'iAssists', {role: 'annotation'}, {role: 'tooltip'}],
+      [Number(playerData_5v5[1][7]), Number(playerData_5v5[1][8]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        GAxAss_data.addRow([Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), playerData_5v5[i][1]]);
+        GAxAss_data.addRow([Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), playerData_5v5[i][1], playerData_5v5[i][1]]);
     }
 
     var options = {
@@ -464,11 +464,11 @@ function drawCharts() {
     // Points above xPoints chart
 
     var GAxPoints_data = google.visualization.arrayToDataTable([
-      ['ixPoints', 'iPoints', {role: 'annotation'}],
-      [Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7]), Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8]), playerData_5v5[1][1]]]);
+      ['ixPoints', 'iPoints', {role: 'annotation'}, {role: 'tooltip'}],
+      [Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7]), Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        GAxPoints_data.addRow([Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7]), Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8]), playerData_5v5[i][1]]);
+        GAxPoints_data.addRow([Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7]), Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8]), playerData_5v5[i][1], playerData_5v5[i][1]]);
     }
 
     var options = {
@@ -484,11 +484,11 @@ function drawCharts() {
     // xG% chart
 
     var xG_data = google.visualization.arrayToDataTable([
-      ['xGA', 'xGF', {role: 'annotation'}],
-      [Number(playerData_5v5[1][14]), Number(playerData_5v5[1][13]), playerData_5v5[1][1]]]);
+      ['xGA', 'xGF', {role: 'annotation'}, {role: 'tooltip'}],
+      [Number(playerData_5v5[1][14]), Number(playerData_5v5[1][13]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        xG_data.addRow([Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]), playerData_5v5[i][1]]);
+        xG_data.addRow([Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]), playerData_5v5[i][1], playerData_5v5[i][1]]);
     }
 
     var options = {
