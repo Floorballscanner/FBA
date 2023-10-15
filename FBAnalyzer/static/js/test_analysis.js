@@ -409,7 +409,7 @@ function drawCharts() {
     pldata.addColumn('number', 'SA');
 
     for (i = 1; i < playerData_5v5.length; i++) {
-        pldata.addRow([playerData_5v5[i][1], Number(playerData_5v5[i][2]), Number(playerData_5v5[i][3]), Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), Number(playerData_5v5[i][6]), Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), Number(playerData_5v5[i][22]), Number(playerData_5v5[i][23]), Number(playerData_5v5[i][24]), Number(playerData_5v5[i][9]), Number(playerData_5v5[i][25]), Number(playerData_5v5[i][10]), Number(playerData_5v5[i][11]), Number(playerData_5v5[i][12]), Number(playerData_5v5[i][13]), Number(playerData_5v5[i][14]), Number(playerData_5v5[i][15]), Number(playerData_5v5[i][16]), Number(playerData_5v5[i][17]), Number(playerData_5v5[i][18]), Number(playerData_5v5[i][19]), Number(playerData_5v5[i][20])]);
+        pldata.addRow([playerData_5v5[i][1], Number(playerData_5v5[i][2]), Number(playerData_5v5[i][3]), Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), Number(playerData_5v5[i][6]), Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), Number(playerData_5v5[i][24]), Number(playerData_5v5[i][23]), Number(playerData_5v5[i][22]), Number(playerData_5v5[i][9]), Number(playerData_5v5[i][25]), Number(playerData_5v5[i][10]), Number(playerData_5v5[i][11]), Number(playerData_5v5[i][12]), Number(playerData_5v5[i][13]), Number(playerData_5v5[i][14]), Number(playerData_5v5[i][15]), Number(playerData_5v5[i][16]), Number(playerData_5v5[i][17]), Number(playerData_5v5[i][18]), Number(playerData_5v5[i][19]), Number(playerData_5v5[i][20])]);
     }
 
     var options = {
