@@ -492,6 +492,7 @@ function drawCharts() {
 
     max = Math.max((Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7])), (Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8])));
     ixP = Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7]);
+    ixP = ixP.toFixed(2);
     iP = Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8]);
     var GAxPoints_data = google.visualization.arrayToDataTable([
       ['ixPoints', 'iPoints', {role: 'annotation'}, {role: 'tooltip'}],
@@ -499,6 +500,7 @@ function drawCharts() {
 
     for (i = 2; i < playerData_5v5.length; i++) {
         ixP = Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7]);
+        ixP = ixP.toFixed(2);
         iP = Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8]);
         GAxPoints_data.addRow([ixP, iP, playerData_5v5[i][1], playerData_5v5[i][1] + " ixPoints: " + ixP + " iPoints: " + iP]);
         if (max < Math.max(ixP, iP)) {
