@@ -481,7 +481,27 @@ function drawCharts() {
     var GAxPoints_chart = new google.visualization.ScatterChart(document.getElementById('GAxPoints_plot'));
     GAxPoints_chart.draw(GAxPoints_data, options);
 
-    // Player data chart / Game
+    // xG% chart
+
+    var xG_data = google.visualization.arrayToDataTable([
+      ['xGF', 'xGA', {role: 'annotation'}],
+      [Number(playerData_5v5[1][13]), Number(playerData_5v5[1][14]), playerData_5v5[1][1]]]);
+
+    for (i = 2; i < playerData_5v5.length; i++) {
+        xG_data.addRow([Number(playerData_5v5[i][13]), Number(playerData_5v5[i][14]), playerData_5v5[i][1]]);
+    }
+
+    var options = {
+          title: 'xGF vs xGA per player',
+          hAxis: {title: 'xGF'},
+          vAxis: {title: 'xGA'},
+          legend: 'none'
+    };
+
+    var xG_chart = new google.visualization.ScatterChart(document.getElementById('xG%_plot'));
+    xG_chart.draw(xG_data, options);
+
+    /*// Player data chart / Game
 
     var pldata60 = new google.visualization.DataTable();
     pldata60.addColumn('string', 'Player Name');
@@ -526,7 +546,7 @@ function drawCharts() {
     function(event) {
         pldata60.sort([{column: event.column, desc: event.ascending}]);
         chart60.draw(pldata60, options60);
-    });
+    });*/
 }
 
 function calcxy(radius, angle) {
