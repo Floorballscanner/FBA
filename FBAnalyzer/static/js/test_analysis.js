@@ -423,18 +423,24 @@ function drawCharts() {
 
     // Goals above xG chart
 
+    max = Math.max(Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]));
     var GAxG_data = google.visualization.arrayToDataTable([
       ['ixG', 'iGoals', {role: 'annotation'}, {role: 'tooltip'}],
       [Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
         GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), playerData_5v5[i][1], playerData_5v5[i][1]]);
+        if (max < Math.max(Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]))) {
+            max = Math.max(Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]));
+        }
     }
+
+    max = Math.round(max);
 
     var options = {
           title: 'Goals above xG per player',
-          hAxis: {title: 'ixG'},
-          vAxis: {title: 'iGoals'},
+          hAxis: {title: 'ixG', minValue: 0, maxValue: max },
+          vAxis: {title: 'iGoals', minValue: 0, maxValue: max },
           legend: 'none'
     };
 
@@ -443,18 +449,24 @@ function drawCharts() {
 
     // Assists above xAss chart
 
+    max = Math.max(Number(playerData_5v5[1][7]), Number(playerData_5v5[1][8]));
     var GAxAss_data = new google.visualization.arrayToDataTable([
       ['ixAss', 'iAssists', {role: 'annotation'}, {role: 'tooltip'}],
       [Number(playerData_5v5[1][7]), Number(playerData_5v5[1][8]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
         GAxAss_data.addRow([Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), playerData_5v5[i][1], playerData_5v5[i][1]]);
+        if (max < Math.max(Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]))) {
+            max = Math.max(Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]));
+        }
     }
+
+    max = Math.round(max);
 
     var options = {
           title: 'Assists above xAss per player',
-          hAxis: {title: 'ixAss'},
-          vAxis: {title: 'iAssists'},
+          hAxis: {title: 'ixAss', minValue: 0, maxValue: max },
+          vAxis: {title: 'iAssists', minValue: 0, maxValue: max },
           legend: 'none'
     };
 
@@ -463,18 +475,24 @@ function drawCharts() {
     
     // Points above xPoints chart
 
+    max = Math.max((Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7])), (Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8])));
     var GAxPoints_data = google.visualization.arrayToDataTable([
       ['ixPoints', 'iPoints', {role: 'annotation'}, {role: 'tooltip'}],
       [Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7]), Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
         GAxPoints_data.addRow([Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7]), Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8]), playerData_5v5[i][1], playerData_5v5[i][1]]);
+        if (max < Math.max((Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7])), (Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8])))) {
+            max = Math.max((Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7])), (Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8])));
+        }
     }
+
+    max = Math.round(max);
 
     var options = {
           title: 'Points above xPoints per player',
-          hAxis: {title: 'ixPoints'},
-          vAxis: {title: 'iPoints'},
+          hAxis: {title: 'ixPoints', minValue: 0, maxValue: max },
+          vAxis: {title: 'iPoints', minValue: 0, maxValue: max },
           legend: 'none'
     };
 
@@ -483,18 +501,22 @@ function drawCharts() {
 
     // xG% chart
 
+    max = Math.max(Number(playerData_5v5[1][14]), Number(playerData_5v5[1][13]));
     var xG_data = google.visualization.arrayToDataTable([
       ['xGA', 'xGF', {role: 'annotation'}, {role: 'tooltip'}],
       [Number(playerData_5v5[1][14]), Number(playerData_5v5[1][13]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
         xG_data.addRow([Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]), playerData_5v5[i][1], playerData_5v5[i][1]]);
+        if (max < Math.max(Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]))) {
+            max = Math.max(Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]));
+        }
     }
 
     var options = {
           title: 'xGF vs xGA per player',
-          hAxis: {title: 'xGA'},
-          vAxis: {title: 'xGF'},
+          hAxis: {title: 'xGA', minValue: 0, maxValue: max },
+          vAxis: {title: 'xGF', minValue: 0, maxValue: max },
           legend: 'none'
     };
 
