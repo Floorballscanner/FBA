@@ -444,10 +444,6 @@ function drawCharts() {
         }
     }]);
 
-  var options = {
-
-  };
-
     max = Math.round(max) + 1;
     console.log("Max: " + max)
 
@@ -465,7 +461,7 @@ function drawCharts() {
     };
 
     var GAxG_chart = new google.visualization.ComboChart(document.getElementById('GAxG_plot'));
-    GAxG_chart.draw(GAxG_data, options);
+    GAxG_chart.draw(view, options);
 
     // Assists above xAss chart
 
