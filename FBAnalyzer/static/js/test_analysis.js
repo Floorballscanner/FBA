@@ -391,9 +391,9 @@ function drawCharts() {
     pldata.addColumn('number', 'xAss%');
     pldata.addColumn('number', 'ixAss');
     pldata.addColumn('number', 'iAss');
-    pldata.addColumn('number', 'xPoints%');
-    pldata.addColumn('number', 'ixPoints');
-    pldata.addColumn('number', 'iPoints');
+    pldata.addColumn('number', 'xP%');
+    pldata.addColumn('number', 'ixP');
+    pldata.addColumn('number', 'iP');
     pldata.addColumn('number', 'iShots');
     pldata.addColumn('number', 'ixG/Shot');
     pldata.addColumn('number', 'iPasses');
