@@ -420,7 +420,70 @@ function drawCharts() {
         pldata.sort([{column: event.column, desc: event.ascending}]);
         chart.draw(pldata, options);
     });
+
+    // Goals above xG chart
+
+    var GAxG_data = new google.visualization.DataTable();
+    GAxG_data.addColumn('number', 'ixG');
+    GAxG_data.addColumn('number', 'iGoals');
+    GAxG_data.addColumn('string', {role: 'annotation'});
+
+    for (i = 1; i < playerData_5v5.length; i++) {
+        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), playerData_5v5[i][1]]);
+    }
+
+    var options = {
+          title: 'Goals above xG per player',
+          hAxis: {title: 'ixG'},
+          vAxis: {title: 'iGoals'},
+          legend: 'none'
+    };
+
+    var GAxG_chart = new google.visualization.ScatterChart(document.getElementById('GAxG_plot'));
+    GAxG_chart.draw(GAxG_data, options);
+
+    // Assists above xAss chart
+
+    var GAxAss_data = new google.visualization.DataTable();
+    GAxAss_data.addColumn('number', 'ixAss');
+    GAxAss_data.addColumn('number', 'iAssists');
+    GAxAss_data.addColumn('string', {role: 'annotation'});
+
+    for (i = 1; i < playerData_5v5.length; i++) {
+        GAxAss_data.addRow([Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), playerData_5v5[i][1]]);
+    }
+
+    var options = {
+          title: 'Assists above xAss per player',
+          hAxis: {title: 'ixAss'},
+          vAxis: {title: 'iAssists'},
+          legend: 'none'
+    };
+
+    var GAxAss_chart = new google.visualization.ScatterChart(document.getElementById('GAxAss_plot'));
+    GAxAss_chart.draw(GAxAss_data, options);
     
+    // Points above xPoints chart
+
+    var GAxPoints_data = new google.visualization.DataTable();
+    GAxPoints_data.addColumn('number', 'ixPoints');
+    GAxPoints_data.addColumn('number', 'iPoints');
+    GAxPoints_data.addColumn('string', {role: 'annotation'});
+
+    for (i = 1; i < playerData_5v5.length; i++) {
+        GAxPoints_data.addRow([Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7]), Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8]), playerData_5v5[i][1]]);
+    }
+
+    var options = {
+          title: 'Points above xPoints per player',
+          hAxis: {title: 'ixPoints'},
+          vAxis: {title: 'iPoints'},
+          legend: 'none'
+    };
+
+    var GAxPoints_chart = new google.visualization.ScatterChart(document.getElementById('GAxPoints_plot'));
+    GAxPoints_chart.draw(GAxPoints_data, options);
+
     // Player data chart / Game
 
     var pldata60 = new google.visualization.DataTable();
@@ -948,26 +1011,5 @@ function drawMap(pl) {
 
 }
 
-
-    document.addEventListener("DOMContentLoaded", function () {
-        // Increment the idle time counter every minute.
-        var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
-
-        // Zero the idle timer on mouse movement.
-        document.addEventListener("mousemove", function (e) {
-            idleTime = 0;
-        });
-
-        document.addEventListener("keypress", function (e) {
-            idleTime = 0;
-        });
-    });
-
-    function timerIncrement() {
-        idleTime = idleTime + 1;
-        if (idleTime > 19) { // 20 minutes
-            window.location.replace("https://fbscanner.io/accounts");
-        }
-    }
 
 
