@@ -246,7 +246,7 @@ function changeGame() {
                 }
             }
 
-            else if ((shotData[j][4] == gd.name_t2) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // Opponent team shot
+            else if ((shotData[j][4] != gd.name_t1) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // Opponent team shot
 
                 xG = Number(shotData[j][7]);
                 onField = [shotData[j][11],shotData[j][12],shotData[j][13],shotData[j][14],shotData[j][15]];
