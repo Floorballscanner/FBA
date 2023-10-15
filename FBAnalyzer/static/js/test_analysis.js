@@ -326,7 +326,7 @@ function changeGame() {
         }
         console.log("drawCharts - function")
         drawCharts();
-    }, 2000);
+    }, 500 * selectedValues.length);
 }
 
 function drawCharts() {
