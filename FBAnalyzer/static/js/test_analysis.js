@@ -453,10 +453,10 @@ function drawCharts() {
     max = Math.max(Number(playerData_5v5[1][7]), Number(playerData_5v5[1][8]));
     var GAxAss_data = new google.visualization.arrayToDataTable([
       ['ixAss', 'iAssists', {role: 'annotation'}, {role: 'tooltip'}],
-      [Number(playerData_5v5[1][7]), Number(playerData_5v5[1][8]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
+      [Number(playerData_5v5[1][7]), Number(playerData_5v5[1][8]), playerData_5v5[1][1], playerData_5v5[1][1] + " ixAss: " + playerData_5v5[1][7] + " iAssists: " + playerData_5v5[1][8]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        GAxAss_data.addRow([Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), playerData_5v5[i][1], playerData_5v5[i][1]]);
+        GAxAss_data.addRow([Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), playerData_5v5[i][1], playerData_5v5[i][1] + " ixAss: " + playerData_5v5[i][7] + " iAssists: " + playerData_5v5[i][8]]);
         if (max < Math.max(Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]))) {
             max = Math.max(Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]));
         }
@@ -478,14 +478,18 @@ function drawCharts() {
     // Points above xPoints chart
 
     max = Math.max((Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7])), (Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8])));
+    ixP = Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7]);
+    iP = Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8]);
     var GAxPoints_data = google.visualization.arrayToDataTable([
       ['ixPoints', 'iPoints', {role: 'annotation'}, {role: 'tooltip'}],
-      [Number(playerData_5v5[1][4]) + Number(playerData_5v5[1][7]), Number(playerData_5v5[1][5]) + Number(playerData_5v5[1][8]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
+      [ixP, iP, playerData_5v5[1][1], playerData_5v5[1][1] + " ixPoints: " + ixP + " iPoints: " + iP]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        GAxPoints_data.addRow([Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7]), Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8]), playerData_5v5[i][1], playerData_5v5[i][1]]);
-        if (max < Math.max((Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7])), (Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8])))) {
-            max = Math.max((Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7])), (Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8])));
+        ixP = Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7]);
+        iP = Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8]);
+        GAxPoints_data.addRow([ixP, iP, playerData_5v5[i][1], playerData_5v5[i][1] + " ixPoints: " + ixP + " iPoints: " + iP]);
+        if (max < Math.max(ixP, iP) {
+            max = Math.max(ixP, iP);
         }
     }
 
@@ -507,10 +511,10 @@ function drawCharts() {
     max = Math.max(Number(playerData_5v5[1][14]), Number(playerData_5v5[1][13]));
     var xG_data = google.visualization.arrayToDataTable([
       ['xGA', 'xGF', {role: 'annotation'}, {role: 'tooltip'}],
-      [Number(playerData_5v5[1][14]), Number(playerData_5v5[1][13]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
+      [Number(playerData_5v5[1][14]), Number(playerData_5v5[1][13]), playerData_5v5[1][1], playerData_5v5[1][1] + " xGA: " + playerData_5v5[1][14] + " xGF: " + playerData_5v5[1][13]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        xG_data.addRow([Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]), playerData_5v5[i][1], playerData_5v5[i][1]]);
+        xG_data.addRow([Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]), playerData_5v5[i][1], playerData_5v5[i][1] + " xGA: " + playerData_5v5[i][14] + " xGF: " + playerData_5v5[i][13]]);
         if (max < Math.max(Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]))) {
             max = Math.max(Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]));
         }
