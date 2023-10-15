@@ -484,17 +484,17 @@ function drawCharts() {
     // xG% chart
 
     var xG_data = google.visualization.arrayToDataTable([
-      ['xGF', 'xGA', {role: 'annotation'}],
-      [Number(playerData_5v5[1][13]), Number(playerData_5v5[1][14]), playerData_5v5[1][1]]]);
+      ['xGA', 'xGF', {role: 'annotation'}],
+      [Number(playerData_5v5[1][14]), Number(playerData_5v5[1][13]), playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        xG_data.addRow([Number(playerData_5v5[i][13]), Number(playerData_5v5[i][14]), playerData_5v5[i][1]]);
+        xG_data.addRow([Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]), playerData_5v5[i][1]]);
     }
 
     var options = {
           title: 'xGF vs xGA per player',
-          hAxis: {title: 'xGF'},
-          vAxis: {title: 'xGA'},
+          hAxis: {title: 'xGA'},
+          vAxis: {title: 'xGF'},
           legend: 'none'
     };
 
