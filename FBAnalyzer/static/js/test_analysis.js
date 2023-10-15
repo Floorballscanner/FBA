@@ -424,9 +424,10 @@ function drawCharts() {
     // Goals above xG chart
 
     var GAxG_data = google.visualization.arrayToDataTable([
-      ['ixG', 'iGoals', {role: 'annotation'}]]);
+      ['ixG', 'iGoals', {role: 'annotation'}],
+      [Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]), playerData_5v5[1][1]]]);
 
-    for (i = 1; i < playerData_5v5.length; i++) {
+    for (i = 2; i < playerData_5v5.length; i++) {
         GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), playerData_5v5[i][1]]);
     }
 
