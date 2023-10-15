@@ -426,10 +426,10 @@ function drawCharts() {
     max = Math.max(Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]));
     var GAxG_data = google.visualization.arrayToDataTable([
       ['ixG', 'iGoals','Trend', {role: 'annotation'}, {role: 'tooltip'}],
-      [Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]), Number(playerData_5v5[1][4]), playerData_5v5[1][1], playerData_5v5[1][1]]]);
+      [Number(playerData_5v5[1][4]), Number(playerData_5v5[1][5]), 0, playerData_5v5[1][1], playerData_5v5[1][1]]]);
 
     for (i = 2; i < playerData_5v5.length; i++) {
-        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), Number(playerData_5v5[i][4]), playerData_5v5[i][1], playerData_5v5[i][1]]);
+        GAxG_data.addRow([Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), 0, playerData_5v5[i][1], playerData_5v5[i][1]]);
         if (max < Math.max(Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]))) {
             max = Math.max(Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]));
         }
@@ -437,6 +437,10 @@ function drawCharts() {
 
     max = Math.round(max) + 1;
     console.log("Max: " + max)
+
+    for (i=1;i<=max;i++) {
+        GAxG_data.addRow([i, 0, i, "", "");
+    }
 
     var options = {
         title: 'Goals above xG per player',
