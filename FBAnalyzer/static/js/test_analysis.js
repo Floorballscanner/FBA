@@ -488,7 +488,7 @@ function drawCharts() {
         ixP = Number(playerData_5v5[i][4]) + Number(playerData_5v5[i][7]);
         iP = Number(playerData_5v5[i][5]) + Number(playerData_5v5[i][8]);
         GAxPoints_data.addRow([ixP, iP, playerData_5v5[i][1], playerData_5v5[i][1] + " ixPoints: " + ixP + " iPoints: " + iP]);
-        if (max < Math.max(ixP, iP) {
+        if (max < Math.max(ixP, iP)) {
             max = Math.max(ixP, iP);
         }
     }
