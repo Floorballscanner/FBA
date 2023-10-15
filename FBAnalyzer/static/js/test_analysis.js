@@ -391,12 +391,12 @@ function drawCharts() {
     pldata.addColumn('number', 'xAss%');
     pldata.addColumn('number', 'ixAss');
     pldata.addColumn('number', 'iAss');
-    pldata.addColumn('number', 'xP%');
-    pldata.addColumn('number', 'ixP');
-    pldata.addColumn('number', 'iP');
-    pldata.addColumn('number', 'iShots');
-    pldata.addColumn('number', 'ixG/Shot');
-    pldata.addColumn('number', 'iPasses');
+    pldata.addColumn('number', 'xPo%');
+    pldata.addColumn('number', 'ixPo');
+    pldata.addColumn('number', 'iPo');
+    pldata.addColumn('number', 'iSF');
+    pldata.addColumn('number', 'ixG/iSF');
+    pldata.addColumn('number', 'iPa');
     pldata.addColumn('number', 'Pos+');
     pldata.addColumn('number', 'Pos-');
     pldata.addColumn('number', 'xGF');
@@ -417,6 +417,7 @@ function drawCharts() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
+        fontSize : '16px'
         hAxis: { textPosition: 'none' }
         };
 
