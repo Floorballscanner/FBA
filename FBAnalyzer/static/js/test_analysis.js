@@ -436,6 +436,7 @@ function drawCharts() {
     }
 
     max = Math.round(max);
+    console.log("Max: " + max)
 
     var options = {
           title: 'Goals above xG per player',
@@ -462,6 +463,7 @@ function drawCharts() {
     }
 
     max = Math.round(max);
+    console.log("Max: " + max)
 
     var options = {
           title: 'Assists above xAss per player',
@@ -488,6 +490,7 @@ function drawCharts() {
     }
 
     max = Math.round(max);
+    console.log("Max: " + max)
 
     var options = {
           title: 'Points above xPoints per player',
@@ -512,6 +515,9 @@ function drawCharts() {
             max = Math.max(Number(playerData_5v5[i][14]), Number(playerData_5v5[i][13]));
         }
     }
+
+    max = Math.round(max);
+    console.log("Max: " + max)
 
     var options = {
           title: 'xGF vs xGA per player',
