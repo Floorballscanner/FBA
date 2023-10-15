@@ -435,15 +435,6 @@ function drawCharts() {
         }
     }
 
-    var view = new google.visualization.DataView(data);
-    view.setColumns([0, 1, 2, 3, {
-        label: 'ixG = iGoals',
-        type: 'number',
-        calc: function (dt, row) {
-          return dt.getValue(row, 0)
-        }
-    }]);
-
     max = Math.round(max) + 1;
     console.log("Max: " + max)
 
@@ -452,16 +443,10 @@ function drawCharts() {
         hAxis: {title: 'ixG', minValue: 0, maxValue: max },
         vAxis: {title: 'iGoals', minValue: 0, maxValue: max },
         legend: 'none',
-        seriesType: 'scatter',
-        series: {
-            1: {
-            type: 'line'
-            }
-        }
     };
 
     var GAxG_chart = new google.visualization.ComboChart(document.getElementById('GAxG_plot'));
-    GAxG_chart.draw(view, options);
+    GAxG_chart.draw(GAxG_data, options);
 
     // Assists above xAss chart
 
