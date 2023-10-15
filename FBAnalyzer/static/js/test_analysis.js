@@ -32,6 +32,7 @@
 
 async function getGameData(game_ids) {
 
+    console.log('First game: ' + game_ids[0])
     let apiResponse = await fetch("https://fbscanner.io/apis/games/" + game_ids[0] + "/");
     data = await apiResponse.json();
     gd = data.game_data;
@@ -78,6 +79,7 @@ async function getGameData(game_ids) {
         Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
     }
     for (i=1;i<game_ids.length;i++) {
+        console.log('Next game: ' + game_ids[i])
         let apiResponse = await fetch("https://fbscanner.io/apis/games/" + game_ids[i] + "/");
         data = await apiResponse.json();
         gd = data.game_data;
@@ -150,10 +152,11 @@ function changeGame() {
             selectedValues.push(option.value);
         }
     }
+    console.log("call getGameData()")
     getGameData(selectedValues);
     setTimeout(() => {
         console.log('Waited for one second');
-        console.log("data maybe found")
+
         s_p1.disabled = false;
         s_p2.disabled = false;
         s_p3.disabled = false;
