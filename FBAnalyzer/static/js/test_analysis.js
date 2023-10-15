@@ -435,7 +435,7 @@ function drawCharts() {
         }
     }
 
-    max = Math.round(max);
+    max = Math.round(max) + 1;
     console.log("Max: " + max)
 
     var options = {
@@ -462,7 +462,7 @@ function drawCharts() {
         }
     }
 
-    max = Math.round(max);
+    max = Math.round(max) + 1;
     console.log("Max: " + max)
 
     var options = {
@@ -489,7 +489,7 @@ function drawCharts() {
         }
     }
 
-    max = Math.round(max);
+    max = Math.round(max) + 1;
     console.log("Max: " + max)
 
     var options = {
@@ -516,7 +516,7 @@ function drawCharts() {
         }
     }
 
-    max = Math.round(max);
+    max = Math.round(max) + 1;
     console.log("Max: " + max)
 
     var options = {
