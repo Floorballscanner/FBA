@@ -439,7 +439,7 @@ function drawCharts() {
     console.log("Max: " + max)
 
     for (i=1;i<=max;i++) {
-        GAxG_data.addRow([i, 0, i, "", "");
+        GAxG_data.addRow([i, 0, i, "", ""]);
     }
 
     var options = {
