@@ -95,7 +95,7 @@ async function getGameData(game_ids) {
         gfSH = Number(gd.gf_g[5]) + Number(gd.gf_g[6]);
         gaSH = Number(gd.ga_g[5]) + Number(gd.ga_g[6]);
         xGFDir_p = (gd.stxGT1Teamg_array[2] + gd.stxGT1Teamg_array[3] + gd.stxGT1Teamg_array[4]) / gd.txG_1;
-        xGFDir_p = xGADir_p.toFixed(2);
+        xGFDir_p = xGFDir_p.toFixed(2);
         xGADir_p = (gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4]) / gd.txG_2;
         xGADir_p = xGADir_p.toFixed(2);
         xGFTO_p = (gd.stxGT1Teamg_array[0] + gd.stxGT1Teamg_array[1]) / gd.txG_1;
