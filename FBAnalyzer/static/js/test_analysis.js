@@ -103,7 +103,7 @@ async function getGameData(game_ids) {
         xGATO_p = (gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1]) / gd.txG_2;
         xGATO_p = xGATO_p.toFixed(2);
 
-        gameData.push([date,gd.name_t1,gd.name_t2,Number(gd.txG_1),Number(gd.txG_2),Number(gd.txGOT_1),Number(gd.txGOT_2),Number(gd.tgt_1),Number(gd.tgt_2),Number(gd.sf_g[7]),Number(gd.sfT2_g[7]),xGf5v5,xGa5v5,gf5v5,ga5v5,xGfPP,xGapp,gfPP,gaPP,xGfSH,xGaSH,gfSH,gaSH,xGFDir_p,xGADir_p,xGFTO_p,xGATO_p]);
+        gameData.push([date,gd.name_t1,gd.name_t2,Number(gd.txG_1),Number(gd.txG_2),Number(gd.txGOT_1),Number(gd.txGOT_2),Number(gd.tgt_1),Number(gd.tgt_2),Number(gd.sf_g[7]),Number(gd.sfT2_g[7]),xGf5v5,xGa5v5,gf5v5,ga5v5,xGfPP,xGaPP,gfPP,gaPP,xGfSH,xGaSH,gfSH,gaSH,xGFDir_p,xGADir_p,xGFTO_p,xGATO_p]);
     }
     for (i=1;i<game_ids.length;i++) {
         console.log('Next game: ' + game_ids[i])
