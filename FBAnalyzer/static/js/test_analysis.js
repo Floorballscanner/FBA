@@ -77,31 +77,31 @@ async function getGameData(game_ids) {
 
         // Game stats to game data array
         xGf5v5 = Number(gd.xGf_g[0]) + Number(gd.xGf_g[1]) + Number(gd.xGf_g[2]);
-        xGf5v5 = xGf5v5.toFixed(2);
+        xGf5v5 = Number(xGf5v5.toFixed(2));
         xGa5v5 = Number(gd.xGa_g[0]) + Number(gd.xGa_g[1]) + Number(gd.xGa_g[2]);
-        xGa5v5 = xGa5v5.toFixed(2);
+        xGa5v5 = Number(xGa5v5.toFixed(2));
         gf5v5 = Number(gd.gf_g[0]) + Number(gd.gf_g[1]) + Number(gd.gf_g[2]);
         ga5v5 = Number(gd.ga_g[0]) + Number(gd.ga_g[1]) + Number(gd.ga_g[2]);
         xGfPP = Number(gd.xGf_g[3]) + Number(gd.xGf_g[4]);
-        xGfPP = xGfPP.toFixed(2);
+        xGfPP = Number(xGfPP.toFixed(2));
         xGaPP = Number(gd.xGa_g[3]) + Number(gd.xGa_g[4]);
-        xGaPP = xGaPP.toFixed(2);
+        xGaPP = Number(xGaPP.toFixed(2));
         gfPP = Number(gd.gf_g[3]) + Number(gd.gf_g[4]);
         gaPP = Number(gd.ga_g[3]) + Number(gd.ga_g[4]);
         xGfSH = Number(gd.xGf_g[5]) + Number(gd.xGf_g[6]);
-        xGfSH = xGfSH.toFixed(2);
+        xGfSH = Number(xGfSH.toFixed(2));
         xGaSH = Number(gd.xGa_g[5]) + Number(gd.xGa_g[6]);
-        xGaSH = xGaSH.toFixed(2);
+        xGaSH = Number(xGaSH.toFixed(2));
         gfSH = Number(gd.gf_g[5]) + Number(gd.gf_g[6]);
         gaSH = Number(gd.ga_g[5]) + Number(gd.ga_g[6]);
         xGFDir_p = (gd.stxGT1Teamg_array[2] + gd.stxGT1Teamg_array[3] + gd.stxGT1Teamg_array[4]) / gd.txG_1;
-        xGFDir_p = xGFDir_p.toFixed(2);
+        xGFDir_p = Number(xGFDir_p.toFixed(2));
         xGADir_p = (gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4]) / gd.txG_2;
-        xGADir_p = xGADir_p.toFixed(2);
+        xGADir_p = Number(xGADir_p.toFixed(2));
         xGFTO_p = (gd.stxGT1Teamg_array[0] + gd.stxGT1Teamg_array[1]) / gd.txG_1;
-        xGFTO_p = xGFTO_p.toFixed(2);
+        xGFTO_p = Number(xGFTO_p.toFixed(2));
         xGATO_p = (gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1]) / gd.txG_2;
-        xGATO_p = xGATO_p.toFixed(2);
+        xGATO_p = Number(xGATO_p.toFixed(2));
 
         gameData.push([date,gd.name_t1,gd.name_t2,Number(gd.txG_1),Number(gd.txG_2),Number(gd.txGOT_1),Number(gd.txGOT_2),Number(gd.tgt_1),Number(gd.tgt_2),Number(gd.sf_g[7]),Number(gd.sfT2_g[7]),xGf5v5,xGa5v5,gf5v5,ga5v5,xGfPP,xGaPP,gfPP,gaPP,xGfSH,xGaSH,gfSH,gaSH,xGFDir_p,xGADir_p,xGFTO_p,xGATO_p]);
     }
