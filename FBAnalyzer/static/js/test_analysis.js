@@ -5,7 +5,7 @@
     var playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
     var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
                         'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
-    var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA']];
+    var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     var shotData = [];
     var data = 0;
     var idleTime = 0;
@@ -74,9 +74,36 @@ async function getGameData(game_ids) {
                 }
             }
         }
+
         // Game stats to game data array
-        gameData.push([date, gd.name_t1, gd.name_t2, Number(gd.txG_1), Number(gd.txG_2), Number(gd.txGOT_1),
-        Number(gd.txGOT_2), Number(gd.tgt_1), Number(gd.tgt_2), Number(gd.sf_g[7]), Number(gd.sfT2_g[7])]);
+        xGf5v5 = Number(gd.xGf_g[0]) + Number(gd.xGf_g[1]) + Number(gd.xGf_g[2]);
+        xGf5v5 = xGf5v5.toFixed(2);
+        xGa5v5 = Number(gd.xGa_g[0]) + Number(gd.xGa_g[1]) + Number(gd.xGa_g[2]);
+        xGa5v5 = xGa5v5.toFixed(2);
+        gf5v5 = Number(gd.gf_g[0]) + Number(gd.gf_g[1]) + Number(gd.gf_g[2]);
+        ga5v5 = Number(gd.ga_g[0]) + Number(gd.ga_g[1]) + Number(gd.ga_g[2]);
+        xGfPP = Number(gd.xGf_g[3]) + Number(gd.xGf_g[4]);
+        xGfPP = xGfPP.toFixed(2);
+        xGaPP = Number(gd.xGa_g[3]) + Number(gd.xGa_g[4]);
+        xGaPP = xGaPP.toFixed(2);
+        gfPP = Number(gd.gf_g[3]) + Number(gd.gf_g[4]);
+        gaPP = Number(gd.ga_g[3]) + Number(gd.ga_g[4]);
+        xGfSH = Number(gd.xGf_g[5]) + Number(gd.xGf_g[6]);
+        xGfSH = xGfSH.toFixed(2);
+        xGaSH = Number(gd.xGa_g[5]) + Number(gd.xGa_g[6]);
+        xGaSH = xGaSH.toFixed(2);
+        gfSH = Number(gd.gf_g[5]) + Number(gd.gf_g[6]);
+        gaSH = Number(gd.ga_g[5]) + Number(gd.ga_g[6]);
+        xGFDir_p = (gd.stxGT1Teamg_array[2] + gd.stxGT1Teamg_array[3] + gd.stxGT1Teamg_array[4]) / gd.txG_1;
+        xGFDir_p = xGADir_p.toFixed(2);
+        xGADir_p = (gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4]) / gd.txG_2;
+        xGADir_p = xGADir_p.toFixed(2);
+        xGFTO_p = (gd.stxGT1Teamg_array[0] + gd.stxGT1Teamg_array[1]) / gd.txG_1;
+        xGFTO_p = xGATO_p.toFixed(2);
+        xGATO_p = (gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1]) / gd.txG_2;
+        xGATO_p = xGATO_p.toFixed(2);
+
+        gameData.push([date,gd.name_t1,gd.name_t2,Number(gd.txG_1),Number(gd.txG_2),Number(gd.txGOT_1),Number(gd.txGOT_2),Number(gd.tgt_1),Number(gd.tgt_2),Number(gd.sf_g[7]),Number(gd.sfT2_g[7]),xGf5v5,xGa5v5,gf5v5,ga5v5,xGfPP,xGapp,gfPP,gaPP,xGfSH,xGaSH,gfSH,gaSH,xGFDir_p,xGADir_p,xGFTO_p,xGATO_p]);
     }
     for (i=1;i<game_ids.length;i++) {
         console.log('Next game: ' + game_ids[i])
@@ -131,9 +158,9 @@ async function getGameData(game_ids) {
 function changeGame() {
 
     playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
-    gameData = [['Date','Team1','Team2','xG_Team1','xG_Team2','xGOT_Team1','xGOT_Team2','Goals_Team1','Goals_Team2','Shots_Team1','Shots_Team2']];
     playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
     playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
+    gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     shotData = [];
     var selectedValues = [];
 
@@ -340,9 +367,7 @@ function changeGame() {
 function drawCharts() {
 
     // Game data chart
-
     var gdata = new google.visualization.DataTable();
-    gdata.addColumn('string', 'Date');
     gdata.addColumn('string', 'Team 1');
     gdata.addColumn('string', 'Team 2');
     gdata.addColumn('number', 'xGF');
@@ -353,17 +378,40 @@ function drawCharts() {
     gdata.addColumn('number', 'GA');
     gdata.addColumn('number', 'SF');
     gdata.addColumn('number', 'SA');
+    gdata.addColumn('number', 'xGF5v5');
+    gdata.addColumn('number', 'xGA5v5');
+    gdata.addColumn('number', 'GF5v5');
+    gdata.addColumn('number', 'GA5v5');
+    gdata.addColumn('number', 'xGFPP');
+    gdata.addColumn('number', 'xGAPP');
+    gdata.addColumn('number', 'GFPP');
+    gdata.addColumn('number', 'GAPP');
+    gdata.addColumn('number', 'xGFSH');
+    gdata.addColumn('number', 'xGASH');
+    gdata.addColumn('number', 'GFSH');
+    gdata.addColumn('number', 'GASH');
+    gdata.addColumn('number', 'xGFDir%');
+    gdata.addColumn('number', 'xGADir%');
+    gdata.addColumn('number', 'xGFTO%');
+    gdata.addColumn('number', 'xGATO%');
 
     for(i = 1; i < gameData.length; i++){
-        gdata.addRow([gameData[i][0], gameData[i][1], gameData[i][2], gameData[i][3], gameData[i][4], gameData[i][5],
-        gameData[i][6], gameData[i][7], gameData[i][8], gameData[i][9], gameData[i][10]]);
+        gdata.addRow([gameData[i][1], gameData[i][2], gameData[i][3], gameData[i][4], gameData[i][5],
+        gameData[i][6], gameData[i][7], gameData[i][8], gameData[i][9], gameData[i][10], gameData[i][11], gameData[i][12], gameData[i][13], gameData[i][14], gameData[i][15], gameData[i][16], gameData[i][17], gameData[i][18], gameData[i][19], gameData[i][20], gameData[i][21], gameData[i][22], gameData[i][23], gameData[i][24], gameData[i][25], gameData[i][26]]);
     }
+
+    var cssClassNames = {
+    'tableRow': 'playerData-table',
+    'headerRow': 'playerData-header',
+    'oddTableRow': 'playerData-table',
+    };
 
     var options = {
         title: 'Game stats',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
+        'cssClassNames': cssClassNames,
         hAxis: { textPosition: 'none' }
         };
 
