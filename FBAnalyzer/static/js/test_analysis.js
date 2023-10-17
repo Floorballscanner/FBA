@@ -393,6 +393,89 @@ function changeGame() {
 
 function drawCharts() {
 
+    var gameDataAvg['Date','Team1','Team2',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    for(i = 1; i < gameData.length; i++){
+        for (j=3; j<gameData[i].length; j++) {
+            gameDataAvg[j] = gameDataAvg[j] + gameData[i][j];
+        }
+    }
+    for (i=3; j<gameDataAvg.length; i++) {
+        gameDataAvg[i] = gameDataAvg[i] / (gameData.length - 1);
+        gameDataAvg[i] = Number(gameDataAvg[i].toFixed(2));
+    }
+
+    // Game Data Chart For
+
+    var gamefdata = google.visualization.arrayToDataTable([
+         ['Type', 'xG', { role: 'style' }, { role: 'annotation' }, 'Goals', { role: 'style' }, { role: 'annotation' } ],
+         ['Total', gameDataAvg[3], 'color: #002072', gameDataAvg[3], gameDataAvg[7], 'color: #59D9EB', gameDataAvg[7] ],
+         ['5v5', gameDataAvg[11], 'color: #002072', gameDataAvg[11], gameDataAvg[13], 'color: #59D9EB', gameDataAvg[13] ],
+         ['PP', gameDataAvg[15], 'color: #002072', gameDataAvg[15], gameDataAvg[17], 'color: #59D9EB', gameDataAvg[17] ],
+         ['SH', gameDataAvg[19], 'color: #002072', gameDataAvg[19], gameDataAvg[21], 'color: #59D9EB', gameDataAvg[21] ]
+      ]);
+
+    var options = {
+        title: 'Game Stats For',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+    var gStatsF = new google.visualization.BarChart(document.getElementById('gameStatsF'));
+    gStatsF.draw(gamefdata, options);
+
+    // Game Data Chart For
+
+    var gameadata = google.visualization.arrayToDataTable([
+         ['Type', 'xG', { role: 'style' }, { role: 'annotation' }, 'Goals', { role: 'style' }, { role: 'annotation' } ],
+         ['Total', gameDataAvg[4], 'color: #002072', gameDataAvg[4], gameDataAvg[8], 'color: #59D9EB', gameDataAvg[8] ],
+         ['5v5', gameDataAvg[12], 'color: #002072', gameDataAvg[12], gameDataAvg[14], 'color: #59D9EB', gameDataAvg[14] ],
+         ['PP', gameDataAvg[16], 'color: #002072', gameDataAvg[16], gameDataAvg[18], 'color: #59D9EB', gameDataAvg[18] ],
+         ['SH', gameDataAvg[20], 'color: #002072', gameDataAvg[20], gameDataAvg[22], 'color: #59D9EB', gameDataAvg[22] ]
+      ]);
+
+    var options = {
+        title: 'Game Stats Against',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+    var gStatsA = new google.visualization.BarChart(document.getElementById('gameStatsA'));
+    gStatsA.draw(gameadata, options);
+
+    // xG Direct and Turnover For
+
+    var typeChartF = google.visualization.arrayToDataTable([
+         ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+         ['Direct Attack', gameDataAvg[22], 'color: #002072', gameDataAvg[22]],
+         ['Turnover Attack', gameDataAvg[24], 'color: #59D9EB', gameDataAvg[24] ]
+      ]);
+
+    var options = {
+        title: 'Type of xG For',
+        };
+
+    var typeCF = new google.visualization.PieChart(document.getElementById('xGTypeStatsF'));
+    typeCF.draw(typeChartF, options);
+
+     // xG Direct and Turnover Against
+
+    var typeChartA = google.visualization.arrayToDataTable([
+         ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+         ['Direct Attack', gameDataAvg[23], 'color: #002072', gameDataAvg[23]],
+         ['Turnover Attack', gameDataAvg[25], 'color: #59D9EB', gameDataAvg[25] ]
+      ]);
+
+    var options = {
+        title: 'Type of xG Against',
+        };
+
+    var typeCA = new google.visualization.PieChart(document.getElementById('xGTypeStatsA'));
+    typeCA.draw(typeChartA, options);
+
     // Game data chart
     var gdata = new google.visualization.DataTable();
     gdata.addColumn('string', 'Team 1');

@@ -5412,12 +5412,6 @@
             };
 
         var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
-
-        /*// Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_xGGame_chart = chart.getImageURI();
-        });*/
-
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
