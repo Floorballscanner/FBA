@@ -6,6 +6,7 @@
     var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
                         'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
+    var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     var shotData = [];
     var data = 0;
     var idleTime = 0;
@@ -404,18 +405,6 @@ function drawCharts() {
     gdata.addColumn('number', 'GA');
     gdata.addColumn('number', 'SF');
     gdata.addColumn('number', 'SA');
-    gdata.addColumn('number', 'xGF5v5');
-    gdata.addColumn('number', 'xGA5v5');
-    gdata.addColumn('number', 'GF5v5');
-    gdata.addColumn('number', 'GA5v5');
-    gdata.addColumn('number', 'xGFPP');
-    gdata.addColumn('number', 'xGAPP');
-    gdata.addColumn('number', 'GFPP');
-    gdata.addColumn('number', 'GAPP');
-    gdata.addColumn('number', 'xGFSH');
-    gdata.addColumn('number', 'xGASH');
-    gdata.addColumn('number', 'GFSH');
-    gdata.addColumn('number', 'GASH');
     gdata.addColumn('number', 'xGFDir%');
     gdata.addColumn('number', 'xGADir%');
     gdata.addColumn('number', 'xGFTO%');
@@ -423,35 +412,70 @@ function drawCharts() {
 
     for(i = 1; i < gameData.length; i++){
         gdata.addRow([gameData[i][1], gameData[i][2], gameData[i][3], gameData[i][4], gameData[i][5],
-        gameData[i][6], gameData[i][7], gameData[i][8], gameData[i][9], gameData[i][10], gameData[i][11], gameData[i][12], gameData[i][13], gameData[i][14], gameData[i][15], gameData[i][16], gameData[i][17], gameData[i][18], gameData[i][19], gameData[i][20], gameData[i][21], gameData[i][22], gameData[i][23], gameData[i][24], gameData[i][25], gameData[i][26]]);
+        gameData[i][6], gameData[i][7], gameData[i][8], gameData[i][9], gameData[i][10], gameData[i][23], gameData[i][24], gameData[i][25], gameData[i][26]]);
     }
-
-    var cssClassNames = {
-    'tableRow': 'playerData-table',
-    'headerRow': 'playerData-header',
-    'oddTableRow': 'playerData-table',
-    };
 
     var options = {
         title: 'Game stats',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
-        'cssClassNames': cssClassNames,
         hAxis: { textPosition: 'none' }
         };
 
 
     // Create and draw the visualization.
-    var gchart = new google.visualization.Table(document.getElementById('gameData'));
-    gchart.draw(gdata, options);
+    var gstchart = new google.visualization.Table(document.getElementById('gameData'));
+    gstchart.draw(gdata, options);
 
     // Add sort listener
 
-    google.visualization.events.addListener(gchart, 'sort',
+    google.visualization.events.addListener(gstchart, 'sort',
     function(event) {
         gdata.sort([{column: event.column, desc: event.ascending}]);
-        gchart.draw(gdata, options);
+        gstchart.draw(gdata, options);
+    });
+    
+    // Game data special teams chart
+    var gdatast = new google.visualization.DataTable();
+    gdatast.addColumn('string', 'Team 1');
+    gdatast.addColumn('string', 'Team 2');
+    gdatast.addColumn('number', 'xGF5v5');
+    gdatast.addColumn('number', 'xGA5v5');
+    gdatast.addColumn('number', 'GF5v5');
+    gdatast.addColumn('number', 'GA5v5');
+    gdatast.addColumn('number', 'xGFPP');
+    gdatast.addColumn('number', 'xGAPP');
+    gdatast.addColumn('number', 'GFPP');
+    gdatast.addColumn('number', 'GAPP');
+    gdatast.addColumn('number', 'xGFSH');
+    gdatast.addColumn('number', 'xGASH');
+    gdatast.addColumn('number', 'GFSH');
+    gdatast.addColumn('number', 'GASH');
+
+    for(i = 1; i < gameData.length; i++){
+        gdatast.addRow([gameData[i][1], gameData[i][2], gameData[i][11], gameData[i][12], gameData[i][13], gameData[i][14], gameData[i][15], gameData[i][16], gameData[i][17], gameData[i][18], gameData[i][19], gameData[i][20], gameData[i][21], gameData[i][22]]);
+    }
+
+    var options = {
+        title: 'Game stats special teams',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+
+    // Create and draw the visualization.
+    var gstchart = new google.visualization.Table(document.getElementById('gameDataST'));
+    gstchart.draw(gdatast, options);
+
+    // Add sort listener
+
+    google.visualization.events.addListener(gstchart, 'sort',
+    function(event) {
+        gdatast.sort([{column: event.column, desc: event.ascending}]);
+        gstchart.draw(gdatast, options);
     });
     
     // 5 vs 5 Player data chart
@@ -486,18 +510,17 @@ function drawCharts() {
         pldata.addRow([playerData_5v5[i][1], Number(playerData_5v5[i][2]), Number(playerData_5v5[i][3]), Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), Number(playerData_5v5[i][6]), Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), Number(playerData_5v5[i][24]), Number(playerData_5v5[i][22]), Number(playerData_5v5[i][23]), Number(playerData_5v5[i][9]), Number(playerData_5v5[i][25]), Number(playerData_5v5[i][10]), Number(playerData_5v5[i][11]), Number(playerData_5v5[i][12]), Number(playerData_5v5[i][13]), Number(playerData_5v5[i][14]), Number(playerData_5v5[i][15]), Number(playerData_5v5[i][16]), Number(playerData_5v5[i][17]), Number(playerData_5v5[i][18]), Number(playerData_5v5[i][19]), Number(playerData_5v5[i][20])]);
     }
 
-    var cssClassNames = {
+/*    var cssClassNames = {
     'tableRow': 'playerData-table',
     'headerRow': 'playerData-header',
     'oddTableRow': 'playerData-table',
-    };
+    };*/
 
     var options = {
         title: 'Player stats',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
-        'cssClassNames': cssClassNames,
         hAxis: { textPosition: 'none' }
         };
 
