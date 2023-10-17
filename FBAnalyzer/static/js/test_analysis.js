@@ -418,6 +418,9 @@ function drawCharts() {
 
     // Game Data Chart For
 
+    max = Math.max(gameDataAvg[3],gameDataAvg[7],gameDataAvg[4],gameDataAvg[8]);
+    max = max + 3;
+
     var gamefdata = google.visualization.arrayToDataTable([
          ['Type', 'xG', { role: 'style' }, { role: 'annotation' }, 'Goals', { role: 'style' }, { role: 'annotation' } ],
          ['Total', gameDataAvg[3], 'color: #002072', gameDataAvg[3], gameDataAvg[7], 'color: #59D9EB', gameDataAvg[7] ],
@@ -431,7 +434,7 @@ function drawCharts() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
-        hAxis: { textPosition: 'none' }
+        hAxis: { textPosition: 'none', minValue: 0, maxValue: max}
         };
 
     var gStatsF = new google.visualization.BarChart(document.getElementById('gameStatsF'));
@@ -452,7 +455,7 @@ function drawCharts() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
-        hAxis: { textPosition: 'none' }
+        hAxis: { textPosition: 'none', minValue: 0, maxValue: max}
         };
 
     var gStatsA = new google.visualization.BarChart(document.getElementById('gameStatsA'));
