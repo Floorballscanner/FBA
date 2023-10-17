@@ -410,10 +410,6 @@ function drawCharts() {
         xGtypeAvg[2] = xGtypeAvg[2] + xGtypeData[j][2];
         xGtypeAvg[3] = xGtypeAvg[3] + xGtypeData[j][3];
     }
-    xGtypeAvg[0] = xGtypeAvg[0] / (xGtypeData.length-1);
-    xGtypeAvg[1] = xGtypeAvg[1] / (xGtypeData.length-1);
-    xGtypeAvg[2] = xGtypeAvg[2] / (xGtypeData.length-1);
-    xGtypeAvg[3] = xGtypeAvg[3] / (xGtypeData.length-1);
 
     xGtypeAvg[0] = Number(xGtypeAvg[0].toFixed(2));
     xGtypeAvg[1] = Number(xGtypeAvg[1].toFixed(2));
@@ -431,7 +427,7 @@ function drawCharts() {
       ]);
 
     var options = {
-        title: 'Game Stats For',
+        title: 'xG and Goals For',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
@@ -452,7 +448,7 @@ function drawCharts() {
       ]);
 
     var options = {
-        title: 'Game Stats Against',
+        title: 'xG and Goals Against',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
