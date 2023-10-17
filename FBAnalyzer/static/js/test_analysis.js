@@ -393,7 +393,7 @@ function changeGame() {
 
 function drawCharts() {
 
-    var gameDataAvg['Date','Team1','Team2',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var gameDataAvg = ['Date','Team1','Team2',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     for(i = 1; i < gameData.length; i++){
         for (j=3; j<gameData[i].length; j++) {
             gameDataAvg[j] = gameDataAvg[j] + gameData[i][j];
