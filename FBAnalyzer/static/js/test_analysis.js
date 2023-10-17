@@ -7,6 +7,7 @@
                         'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
+    var xGtypeData = [['xGFDir%','xGADir%','xGFTO%','xGATO%']];
     var shotData = [];
     var data = 0;
     var idleTime = 0;
@@ -105,6 +106,7 @@ async function getGameData(game_ids) {
         xGATO_p = Number(xGATO_p.toFixed(2));
 
         gameData.push([date,gd.name_t1,gd.name_t2,Number(gd.txG_1),Number(gd.txG_2),Number(gd.txGOT_1),Number(gd.txGOT_2),Number(gd.tgt_1),Number(gd.tgt_2),Number(gd.sf_g[7]),Number(gd.sfT2_g[7]),xGf5v5,xGa5v5,gf5v5,ga5v5,xGfPP,xGaPP,gfPP,gaPP,xGfSH,xGaSH,gfSH,gaSH,xGFDir_p,xGADir_p,xGFTO_p,xGATO_p]);
+        xGtypeData.push([gd.stxGT1Teamg_array[2] + gd.stxGT1Teamg_array[3] + gd.stxGT1Teamg_array[4],gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4],gd.stxGT1Teamg_array[0] + gd.stxGT1Teamg_array[1],gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1]]);
     }
     for (i=1;i<game_ids.length;i++) {
         console.log('Next game: ' + game_ids[i])
@@ -178,6 +180,7 @@ async function getGameData(game_ids) {
             xGATO_p = Number(xGATO_p.toFixed(2));
 
             gameData.push([date,gd.name_t1,gd.name_t2,Number(gd.txG_1),Number(gd.txG_2),Number(gd.txGOT_1),Number(gd.txGOT_2),Number(gd.tgt_1),Number(gd.tgt_2),Number(gd.sf_g[7]),Number(gd.sfT2_g[7]),xGf5v5,xGa5v5,gf5v5,ga5v5,xGfPP,xGaPP,gfPP,gaPP,xGfSH,xGaSH,gfSH,gaSH,xGFDir_p,xGADir_p,xGFTO_p,xGATO_p]);
+            xGtypeData.push([gd.stxGT1Teamg_array[2] + gd.stxGT1Teamg_array[3] + gd.stxGT1Teamg_array[4],gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4],gd.stxGT1Teamg_array[0] + gd.stxGT1Teamg_array[1],gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1]]);
         }
     }
 }
@@ -188,6 +191,7 @@ function changeGame() {
     playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
     playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
     gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
+    xGtypeData = [['xGFDir%','xGADir%','xGFTO%','xGATO%']];
     shotData = [];
     var selectedValues = [];
 
@@ -393,16 +397,28 @@ function changeGame() {
 
 function drawCharts() {
 
-    var gameDataAvg = ['Date','Team1','Team2',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var gameDataAvg = ['Date','Team1','Team2',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var xGtypeAvg = [0,0,0,0];
     for(i = 1; i < gameData.length; i++){
         for (j=3; j<gameData[i].length; j++) {
             gameDataAvg[j] = gameDataAvg[j] + gameData[i][j];
         }
     }
-    for (i=3; j<gameDataAvg.length; i++) {
-        gameDataAvg[i] = gameDataAvg[i] / (gameData.length - 1);
-        gameDataAvg[i] = Number(gameDataAvg[i].toFixed(2));
+    for (j=1;j<xGtypeData.length;j++) {
+        xGtypeAvg[0] = xGtypeAvg[0] + xGtypeData[j][0];
+        xGtypeAvg[1] = xGtypeAvg[1] + xGtypeData[j][1];
+        xGtypeAvg[2] = xGtypeAvg[2] + xGtypeData[j][2];
+        xGtypeAvg[3] = xGtypeAvg[3] + xGtypeData[j][3];
     }
+    xGtypeAvg[0] = xGtypeAvg[0] / (xGtypeData.length-1);
+    xGtypeAvg[1] = xGtypeAvg[1] / (xGtypeData.length-1);
+    xGtypeAvg[2] = xGtypeAvg[2] / (xGtypeData.length-1);
+    xGtypeAvg[3] = xGtypeAvg[3] / (xGtypeData.length-1);
+
+    xGtypeAvg[0] = Number(xGtypeAvg[0].toFixed(2));
+    xGtypeAvg[1] = Number(xGtypeAvg[1].toFixed(2));
+    xGtypeAvg[2] = Number(xGtypeAvg[2].toFixed(2));
+    xGtypeAvg[3] = Number(xGtypeAvg[3].toFixed(2));
 
     // Game Data Chart For
 
@@ -450,8 +466,8 @@ function drawCharts() {
 
     var typeChartF = google.visualization.arrayToDataTable([
          ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
-         ['Direct Attack', gameDataAvg[22], 'color: #002072', gameDataAvg[22]],
-         ['Turnover Attack', gameDataAvg[24], 'color: #59D9EB', gameDataAvg[24] ]
+         ['Direct Attack', xGtypeAvg[0], 'color: #002072', xGtypeAvg[0]],
+         ['Turnover Attack', xGtypeAvg[2], 'color: #59D9EB', xGtypeAvg[2] ]
       ]);
 
     var options = {
@@ -465,8 +481,8 @@ function drawCharts() {
 
     var typeChartA = google.visualization.arrayToDataTable([
          ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
-         ['Direct Attack', gameDataAvg[23], 'color: #002072', gameDataAvg[23]],
-         ['Turnover Attack', gameDataAvg[25], 'color: #59D9EB', gameDataAvg[25] ]
+         ['Direct Attack', xGtypeAvg[1], 'color: #002072', xGtypeAvg[1]],
+         ['Turnover Attack', xGtypeAvg[3], 'color: #59D9EB', xGtypeAvg[3] ]
       ]);
 
     var options = {
