@@ -584,10 +584,10 @@ function drawCharts() {
     pldata.addColumn('number', 'ixG%');
     pldata.addColumn('number', 'ixG');
     pldata.addColumn('number', 'iGoals');
-    pldata.addColumn('number', 'xAss%');
+    pldata.addColumn('number', 'ixAss%');
     pldata.addColumn('number', 'ixAss');
     pldata.addColumn('number', 'iAss');
-    pldata.addColumn('number', 'xPo%');
+    pldata.addColumn('number', 'ixPo%');
     pldata.addColumn('number', 'ixPo');
     pldata.addColumn('number', 'iPo');
     pldata.addColumn('number', 'iSF');

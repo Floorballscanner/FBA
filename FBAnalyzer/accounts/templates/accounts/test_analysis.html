@@ -47,11 +47,20 @@ It extends app_layout.html with Django
             <h5 style="text-align: center;">Game stats</h5>
             <div class="linestats">
                 <div style="text-align: center;" id="gameData"></div>
-                <p style="font-size:8px;">xGF = expected Goals For Team 1, xGA = expected Goals Against Team 1, xGOTF = expected Goals (On-Target shots) For Team 1,
-                 = expected Goals (On-Target shots) Against Team 1, GF = Goals For Team 1, GA = Goals Against Team 1, SF = Shots For Team 1,
-                SA = Shots Against Team 1, xGFDir% = % of expected Goals For Team 1 from Direct attacks (Shot types: Direct, Rebound, Cross-pass),
-                xGADir% = % of expected Goals Against Team 1 from Direct attacks, xGFTO% = % of expected Goals For Team 1 from TurnOver attacks
-                (Shot types: Turn-over | Direct, Turn-over | Cross-pass), xGATO% = % of expected Goals Against Team 1 from TurnOver attacks</p>
+                <p style="font-size:8px;Padding-top:5px;">
+                <b>xGF</b> = expected Goals For Team 1,
+                <b>xGA</b> = expected Goals Against Team 1,
+                <b>xGOTF</b> = expected Goals (On-Target shots) For Team 1,
+                <b>xGOTA</b> = expected Goals (On-Target shots) Against Team 1,
+                <b>GF</b> = Goals For Team 1,
+                <b>GA</b> = Goals Against Team 1,
+                <b>SF</b> = Shots For Team 1,
+                <b>SA</b> = Shots Against Team 1,
+                <b>xGFDir%</b> = % of expected Goals For Team 1 from Direct attacks (Shot types: Direct, Rebound, Cross-pass),
+                <b>xGADir%</b> = % of expected Goals Against Team 1 from Direct attacks,
+                <b>xGFTO%</b> = % of expected Goals For Team 1 from TurnOver attacks (Shot types: Turn-over | Direct, Turn-over | Cross-pass),
+                <b>xGATO%</b> = % of expected Goals Against Team 1 from TurnOver attacks
+                </p>
             </div>
         </div>
     </div>
@@ -64,7 +73,7 @@ It extends app_layout.html with Django
         </div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h5 style="text-align: center;">Cumulative player stats | 5 vs 5</h5>
+        <h5 style="text-align: center;">Player stats | 5 vs 5</h5>
     </div>
     <div class="row justify-content-center" style="Padding-top: 20px;">
         <div class="col-sm-6">
@@ -94,6 +103,30 @@ It extends app_layout.html with Django
         <div class="col-sm-12">
             <div class="linestats">
                 <div style="text-align: center;" id="playerData"></div>
+                <p style="font-size:8px;Padding-top:5px;">
+                <b>ixG%</b> = % of individual (player) expected Goals in relation to team xG,
+                <b>ixG</b> = individual expected Goals,
+                <b>iGoals</b> = individual Goals,
+                <b>ixAss%</b> = % of individual expected Assists in relation to team xAssists,
+                <b>ixAss</b> = individual expected Assists,
+                <b>iAss</b> = individual Assists (passes leading to goal),
+                <b>ixPo%</b> = % of individual expected Points in relation to team xPoints,
+                <b>ixPo</b> = individual expected Points,
+                <b>iPo</b> = individual Points,
+                <b>iSF</b> = individual Shots For,
+                <b>ixG/iSF</b> = individual expected Goals / individual Shots for,
+                <b>iPa</b> = individual Passes (leading to a shot),
+                <b>Pos+</b> = number of Possession gained,
+                <b>Pos-</b> = number of Possession lost,
+                <b>xGF</b> = Team expected Goals For while player on field,
+                <b>xGA</b> = Team expected Goals Against while player on field,
+                <b>xG%</b> = % of expected Goals For in relation to expected Goals Against
+                <b>GF</b> = Team Goals For while player on field,
+                <b>GA</b> = Team Goals Against while player on field,
+                <b>+-</b> = Player plus minus,
+                <b>SF</b> = Team Shots For while player on field,
+                <b>SA</b> = Team Shots Against while player on field
+                </p>
             </div>
         </div>
     </div>
