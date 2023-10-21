@@ -32,6 +32,17 @@
     var ctx4 = cnvs4.getContext("2d");
     var ctx5 = cnvs5.getContext("2d");
 
+    var cnvs1p = document.getElementById("p1PosMap");
+    /*var cnvs2p = document.getElementById("p2PosMap");
+    var cnvs3p = document.getElementById("p3PosMap");
+    var cnvs4p = document.getElementById("p4PosMap");
+    var cnvs5p = document.getElementById("p5PosMap");*/
+    var ctx1p = cnvs1p.getContext("2d");
+    /*var ctx2p = cnvs2p.getContext("2d");
+    var ctx3p = cnvs3p.getContext("2d");
+    var ctx4p = cnvs4p.getContext("2d");
+    var ctx5p = cnvs5p.getContext("2d");*/
+
 async function getGameData(game_ids) {
 
     console.log('First game: ' + game_ids[0])
@@ -811,6 +822,8 @@ function drawMap(pl) {
 
         name = s_p1.options[s_p1.selectedIndex].text;
         ctx1.drawImage(myImg,0,0,fWidth,fLength);
+        ctx1p.drawImage(myImg,0,0,fWidth,fLength);
+
         for (i=1;i<shotData.length;i++) {
 
             if (shotData[i][9] == name) {
@@ -896,6 +909,25 @@ function drawMap(pl) {
                         ctx1.fillStyle = "blue";
                     }
                     ctx1.fillText("G", x, y);
+                }
+            }
+
+            else if (shotData[i][29] == name) {
+
+                radius = Number(shotData[i][27]);
+                angle = Number(shotData[i][28]);
+
+                [x,y] = calcxy(radius,angle);
+                x = (fWidth /2) + (x * fWidth / 20);
+                y = (fLength / 10) - (y * fLength / 40);
+
+                if (shotData[i][5] == "Possession +") {
+                    ctx1p.fillStyle = "blue";
+                    ctx1p.fillText("o", x, y);
+                }
+                if (shotData[i][5] == "Possession -") {
+                    ctx1p.fillStyle = "red";
+                    ctx1p.fillText("o", x, y);
                 }
             }
         }
