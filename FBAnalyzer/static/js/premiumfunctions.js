@@ -3361,6 +3361,10 @@
             else if (line_on > 5) { // If SH line on field
                 p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
                 p_T1G_str = p_T1X_str = "";
+                posT1_id = 0;
+                posT1_str = "";
+                posT2_id = 0;
+                posT2_str = "";
             }
 
             p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
