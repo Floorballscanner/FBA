@@ -2633,20 +2633,31 @@
         // Set possession menu items according to players on field
         l = line_on;
 
-        document.getElementById("posT1-1").innerHTML = document.getElementById("sT1L"+l+"LW").options
-                                            [document.getElementById("sT1L"+l+"LW").selectedIndex].text;
-        document.getElementById("posT1-2").innerHTML = document.getElementById("sT1L"+l+"C").options
-                                            [document.getElementById("sT1L"+l+"C").selectedIndex].text;
-        document.getElementById("posT1-3").innerHTML = document.getElementById("sT1L"+l+"RW").options
-                                            [document.getElementById("sT1L"+l+"RW").selectedIndex].text;
-        document.getElementById("posT1-4").innerHTML = document.getElementById("sT1L"+l+"LD").options
-                                            [document.getElementById("sT1L"+l+"LD").selectedIndex].text;
-        document.getElementById("posT1-5").innerHTML = document.getElementById("sT1L"+l+"RD").options
-                                            [document.getElementById("sT1L"+l+"RD").selectedIndex].text;
-        stype.style.display = "none";
-        posT1menu.style.display = "block";
-        posT1menu.style.left = stype.style.left;
-        posT1menu.style.top = stype.style.top;
+        if (line_on < 5) {  // No SH possession changes
+
+            document.getElementById("posT1-1").innerHTML = document.getElementById("sT1L"+l+"LW").options
+                                                [document.getElementById("sT1L"+l+"LW").selectedIndex].text;
+            document.getElementById("posT1-2").innerHTML = document.getElementById("sT1L"+l+"C").options
+                                                [document.getElementById("sT1L"+l+"C").selectedIndex].text;
+            document.getElementById("posT1-3").innerHTML = document.getElementById("sT1L"+l+"RW").options
+                                                [document.getElementById("sT1L"+l+"RW").selectedIndex].text;
+            document.getElementById("posT1-4").innerHTML = document.getElementById("sT1L"+l+"LD").options
+                                                [document.getElementById("sT1L"+l+"LD").selectedIndex].text;
+            document.getElementById("posT1-5").innerHTML = document.getElementById("sT1L"+l+"RD").options
+                                                [document.getElementById("sT1L"+l+"RD").selectedIndex].text;
+            stype.style.display = "none";
+            posT1menu.style.display = "block";
+            posT1menu.style.left = stype.style.left;
+            posT1menu.style.top = stype.style.top;
+
+        }
+
+        else if (line_on >= 5) {
+            stype.style.display = "none";
+            Draw(PosX,PosY,dataType);
+        }
+
+
 
 
         /*if (line_on < 4 && line_on_2 < 4) {
@@ -5497,14 +5508,14 @@
 
         var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
-        pldata.addColumn('number', 'Shot xG');
-        pldata.addColumn('number', 'Pass xG');
-        pldata.addColumn('number', 'Shot xG PP');
-        pldata.addColumn('number', 'Pass xG PP');
-        pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Ass.');
+        pldata.addColumn('number', 'ixG');
+        pldata.addColumn('number', 'ixAss');
+        pldata.addColumn('number', 'ixG PP');
+        pldata.addColumn('number', 'ixAss PP');
+        pldata.addColumn('number', 'iGoals');
+        pldata.addColumn('number', 'iAss');
         pldata.addColumn('number', 'Shots');
-        pldata.addColumn('number', 'Shotass.');
+        pldata.addColumn('number', 'Passes');
         pldata.addColumn('number', 'Possession +');
         pldata.addColumn('number', 'Possession -');
 
@@ -5514,14 +5525,14 @@
 
         var pldata_p = new google.visualization.DataTable();
         pldata_p.addColumn('string', 'Name');
-        pldata_p.addColumn('number', 'Shot xG');
-        pldata_p.addColumn('number', 'Pass xG');
-        pldata_p.addColumn('number', 'Shot xG PP');
-        pldata_p.addColumn('number', 'Pass xG PP');
-        pldata_p.addColumn('number', 'Goals');
-        pldata_p.addColumn('number', 'Ass.');
+        pldata_p.addColumn('number', 'ixG');
+        pldata_p.addColumn('number', 'ixAss');
+        pldata_p.addColumn('number', 'ixG PP');
+        pldata_p.addColumn('number', 'ixAss PP');
+        pldata_p.addColumn('number', 'iGoals');
+        pldata_p.addColumn('number', 'iAss');
         pldata_p.addColumn('number', 'Shots');
-        pldata_p.addColumn('number', 'Shotass.');
+        pldata_p.addColumn('number', 'Passes');
         pldata_p.addColumn('number', 'Possession +');
         pldata_p.addColumn('number', 'Possession -');
 
@@ -5563,14 +5574,14 @@
 
         var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
-        pldata.addColumn('number', 'Shot xG');
-        pldata.addColumn('number', 'Pass xG');
-        pldata.addColumn('number', 'Shot xG PP');
-        pldata.addColumn('number', 'Pass xG PP');
-        pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Ass.');
+        pldata.addColumn('number', 'ixG');
+        pldata.addColumn('number', 'ixAss');
+        pldata.addColumn('number', 'iXG PP');
+        pldata.addColumn('number', 'ixAss PP');
+        pldata.addColumn('number', 'iGoals');
+        pldata.addColumn('number', 'iAss');
         pldata.addColumn('number', 'Shots');
-        pldata.addColumn('number', 'Shotass.');
+        pldata.addColumn('number', 'Passes');
         pldata.addColumn('number', 'Possession +');
         pldata.addColumn('number', 'Possession -');
 
@@ -5580,14 +5591,14 @@
 
         var pldata_p = new google.visualization.DataTable();
         pldata_p.addColumn('string', 'Name');
-        pldata_p.addColumn('number', 'Shot xG');
-        pldata_p.addColumn('number', 'Pass xG');
-        pldata_p.addColumn('number', 'Shot xG PP');
-        pldata_p.addColumn('number', 'Pass xG PP');
-        pldata_p.addColumn('number', 'Goals');
-        pldata_p.addColumn('number', 'Ass.');
+        pldata_p.addColumn('number', 'ixG');
+        pldata_p.addColumn('number', 'ixAss');
+        pldata_p.addColumn('number', 'ixG PP');
+        pldata_p.addColumn('number', 'ixAss PP');
+        pldata_p.addColumn('number', 'iGoals');
+        pldata_p.addColumn('number', 'iAss.');
         pldata_p.addColumn('number', 'Shots');
-        pldata_p.addColumn('number', 'Shotass.');
+        pldata_p.addColumn('number', 'Passes');
         pldata_p.addColumn('number', 'Possession +');
         pldata_p.addColumn('number', 'Possession -');
 
