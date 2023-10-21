@@ -392,7 +392,7 @@ function changeGame() {
         }
         console.log("drawCharts - function")
         drawCharts();
-    }, 500 * selectedValues.length);
+    }, 500 + (500 * selectedValues.length));
 }
 
 function drawCharts() {
