@@ -3336,24 +3336,31 @@
                 }
             }
 
-            // Team 1 players on field
-            p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
-            [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
-            p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
-            [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
-            p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
-            [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
-            p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
-            [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
-            p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
-            [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
-            p_T1G_str = document.getElementById("sT1G").options
-            [document.getElementById("sT1G").selectedIndex].text;
-            p_T1X_str = "";
+            if (line_on <= 5) {
+                // Team 1 players on field
+                p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
+                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+                p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
+                [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+                p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
+                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+                p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
+                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+                p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
+                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+                p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
+                p_T1X_str = "";
 
-            if (line_on == 5) {
-                p_T1X_str = document.getElementById("sT1L5X").options
-                [document.getElementById("sT1L5X").selectedIndex].text;
+                if (line_on == 5) {
+                    p_T1X_str = document.getElementById("sT1L5X").options
+                    [document.getElementById("sT1L5X").selectedIndex].text;
+                }
+            }
+
+            else if (line_on > 5) { // If SH line on field
+                p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
+                p_T1G_str = p_T1X_str = "";
             }
 
             p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
