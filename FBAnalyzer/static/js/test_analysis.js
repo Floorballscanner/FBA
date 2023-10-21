@@ -212,6 +212,8 @@ function changeGame() {
     ctx4.drawImage(myImg,0,0,fWidth,fLength);
     ctx5.drawImage(myImg,0,0,fWidth,fLength);
 
+    ctx1p.drawImage(myImg,0,0,fWidth,fLength);
+
     // Iterate through each option in the select element
     for (i = 0; i < s_game.options.length; i++) {
         var option = s_game.options[i];
