@@ -13,6 +13,7 @@ It extends app_layout.html with Django
 {{ request.user.id|json_script:"user_id" }}
 
 <div class="container" style="Padding-top: 80px;">
+    <a href="/accounts/saved_games"><img src="{% static 'back.png' %}" height="30px"></a>
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="team-selection">

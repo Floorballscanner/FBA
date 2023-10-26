@@ -230,7 +230,7 @@ def test_environment(request):
     return render(request, 'accounts/test_environment.html', context=context)
 
 @login_required
-def test_analysis(request):
+def premium_analysis(request):
 
     if request.user.id == 3 or request.user.id == 2:
         games = Game.objects.filter(date__gte=datetime(2023, 9, 1)).order_by('date')
@@ -242,12 +242,16 @@ def test_analysis(request):
         'games': games,
     }
 
-    return render(request, 'accounts/test_analysis.html', context=context)
+    return render(request, 'accounts/premium_analysis.html', context=context)
 
 @login_required
 def edit_data(request):
 
     return render(request, 'accounts/editdata.html')
+
+@login_required
+def saved_games(request):
+    return render(request,'accounts/saved_games.html')
 
 @login_required
 def update_info(request):

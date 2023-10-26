@@ -13,6 +13,7 @@ It extends app_layout.html with Django
 {{ request.user.id|json_script:"user_id" }}
 
 <div class="container" style="Padding-top: 80px;">
+    <a href="/accounts/saved_games"><img src="{% static 'back.png' %}" height="30px"></a>
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="team-selection">
@@ -228,7 +229,7 @@ It extends app_layout.html with Django
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="/static/js/test_analysis.js"></script>
+<script type="text/javascript" src="/static/js/premium_analysis.js"></script>
 <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'bar']});
     google.charts.load('current', {'packages':['table']});

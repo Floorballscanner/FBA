@@ -5399,6 +5399,7 @@
             xaT2_g[i].innerHTML = undo_object.xaT2_g[i];
         }
 
+        data_object_stringified = JSON.parse(JSON.stringify(data_object));
         document.getElementById("undo").disabled = true; // Disable Undo-button
     }
 
