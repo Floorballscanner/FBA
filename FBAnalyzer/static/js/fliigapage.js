@@ -98,9 +98,7 @@ window.onload = function() {
                 div2.appendChild(button);*/
 
         })
-
             console.log('Success:', data);
-        })
 
         .catch((error) => {
           console.error('Error:', error);
