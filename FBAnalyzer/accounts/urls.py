@@ -41,6 +41,7 @@ urlpatterns = [
     path('accounts/premium_analysis/', views.premium_analysis, name="premium-analysis"),
     path('accounts/saved_games/', views.saved_games, name="saved-games"),
     path('lite/', views.lite, name="lite-game"),
+    path('fliiga_test/', views.fliiga_test, name="fliiga-test"),
     path('apis/teamlist/', views.TeamList.as_view(), name="team-list"),
     path('apis/playerlist/', views.PlayerList.as_view(), name="player-list"),
     path('apis/gamelist/', views.GameList.as_view(), name="game-list"),
