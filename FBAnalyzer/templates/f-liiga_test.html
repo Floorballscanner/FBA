@@ -7,11 +7,19 @@ This is the F-liiga result test page.
 {% extends 'base_layout.html' %}
 {% block content %}
 {% load static %}
-<div class="container-fluid no-padding">
-    <div id="head" class="app-text"style="Padding-top: 40px;">
-
+<div class="container" style="Padding-top: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="team-selection">
+                <h2 style="Padding-top:20px;">Select games</h2><br>
+                <select id="select-game" class="form-control-sm custom-select" multiple>
+                    <option disabled>Select games...</option>
+                </select>
+                <button onclick="changeGame()" class="btn btn-secondary" style="font-size:12px;">Load</button>
+            </div>
+            <hr width="100%" size="2" align="center" color="#002072" noshade>
+        </div>
     </div>
-    </br></br>
 </div>
 
 <script type="text/javascript" src="/static/js/fliigapage.js"></script>

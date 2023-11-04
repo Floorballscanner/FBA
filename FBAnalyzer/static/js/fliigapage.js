@@ -4,6 +4,7 @@
 const csrftoken = getCookie('csrftoken');
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
+var s_game = document.getElementById("select-game");
 
 // Creates the HTML - page when the window is loaded
 
@@ -34,6 +35,14 @@ window.onload = function() {
             });
 
             matches = modifiedMatches;
+
+            for (let j=0; j<matches.length; j++) {
+                if (matches[j].status == 'Played') {
+                    opt = new Option(matches[j].date + " | "  + matches[j].team_A_name + " - " + matches[j].team_B_name, matches[j].match_id);
+                    s_game.appendChild(opt);
+                }
+            }
+
             console.log('Success:', data);
 
         })
@@ -95,9 +104,9 @@ function updatePage() {
 
 function GetSortOrder(prop) {
     return function(a, b) {
-        if (a[prop] < b[prop]) {
+        if (a[prop] > b[prop]) {
             return 1;
-        } else if (a[prop] > b[prop]) {
+        } else if (a[prop] < b[prop]) {
             return -1;
         }
         return 0;
