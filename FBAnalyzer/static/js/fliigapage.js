@@ -4,6 +4,7 @@
 const csrftoken = getCookie('csrftoken');
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
+var events = "";
 var s_game = document.getElementById("select-game");
 
 // Creates the HTML - page when the window is loaded
@@ -51,6 +52,43 @@ window.onload = function() {
     });
 
     // t = setTimeout(function(){ updatePage() }, 60000); // Update page every minute
+}
+
+function changeGame() {
+
+    match_id = s_game.value;
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatch?api_key="+api_key+"&match_id="+match_id)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            const match_json = data.match;
+            const events_json = match_json.events;
+
+            // List of keys you want to select from matches_json
+            const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
+
+            // Create a new array to store the modified JSON objects
+            const modifiedEvents = [];
+
+            // Iterate through matches_json and create new objects with selected keys
+            events_json.forEach(event => {
+              const modifiedEvent = {};
+              selectedKeys.forEach(key => {
+                if (event.hasOwnProperty(key)) {
+                  modifiedEvent[key] = event[key];
+                }
+              });
+              modifiedEvents.push(modifiedEvent);
+            });
+
+            events = modifiedEvents;
+            console.log('Success:', data);
+
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+    });
+
 }
 
 function getCookie(name) {
