@@ -98,7 +98,7 @@ def lite(request):
     return render(request, 'accounts/lite.html')
 
 def fliiga_test(request):
-    return render(request, 'fliiga_test.html')
+    return render(request, 'f-liiga_test.html')
 
 def add_new_player(request):
 
