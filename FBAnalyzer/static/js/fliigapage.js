@@ -9,7 +9,6 @@ var lineups = [];
 var lineup_t1 = [];
 var lineup_t2 = [];
 var shots = [];
-var match = "";
 var maxX = 1700; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxY = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var s_game = document.getElementById("select-game");
@@ -26,6 +25,8 @@ var t1s = document.getElementById('sttotshots_1');
 var t2s = document.getElementById('sttotshots_2');
 var t1sOT = document.getElementById('sttotsOT_1');
 var t2sOT = document.getElementById('sttotsOT_2');
+var t1name = "";
+var t2name = "";
 
 
 // Creates the HTML - page when the window is loaded
@@ -82,9 +83,11 @@ function changeGame() {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            match = data.match;
+            const match = data.match;
             const events_json = match.events;
             const lineups_json = match.lineups;
+            t1name = match.team_A_name;
+            t2name = match.team_B_name;
 
             // List of keys you want to select from events_json
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
@@ -236,7 +239,7 @@ function drawCharts() {
     });
 
     var options = {
-        title: 'Player stats, ' + match.team_A_name,
+        title: 'Player stats, ' + t1name,
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
@@ -245,7 +248,7 @@ function drawCharts() {
 
     // Create and draw the visualization.
     var chart = new google.visualization.Table(document.getElementById('stT1_playerchart'));
-    chart1.draw(pldata, options);
+    chart.draw(pldata, options);
 
     var pldata2 = new google.visualization.DataTable();
     pldata2.addColumn('string', 'Player');
@@ -265,7 +268,7 @@ function drawCharts() {
     });
 
     var options = {
-        title: 'Player stats, ' + match.team_B_name,
+        title: 'Player stats, ' + t2name,
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: ['#002072', '#59D9EB'],
