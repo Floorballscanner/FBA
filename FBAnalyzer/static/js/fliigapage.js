@@ -119,6 +119,10 @@ function changeGame() {
 
             events = modifiedEvents;
             lineups = modifiedLineups;
+            lineups.forEach(event => {
+                event.xGOT = 0;
+                event.xG = 0;
+            });
 
             // Filter rows where 'code' is one of the specified values
             shots = events.filter(event => ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code));
