@@ -32,9 +32,26 @@ This is the F-liiga result test page.
             </div>
         </div>
     </div>
+    <div class="row justify-content-center" style="Padding-top: 20px;">
+        <div class="col-sm-6">
+            <div class="team-selection">
+                <div id="stT1_playerchart" style="height: 300px"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="team-selection">
+                <div id="stT2_playerchart" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
     <br><br>
 </div>
 
 <script type="text/javascript" src="/static/js/fliigapage.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['table']});
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 {% endblock %}

@@ -183,6 +183,11 @@ function changeGame() {
 
             });
 
+            lineup_t1 = Object.values(lineups)
+                .filter(lineup => lineups.team_id === match.team_A_id);
+            lineup_t2 = Object.values(lineups)
+                .filter(lineup => lineups.team_id === match.team_B_id);
+
             // Set game data to page
             imgt1.src = match.club_A_crest;
             imgt2.src = match.club_B_crest;
@@ -197,13 +202,19 @@ function changeGame() {
             t1sOT.innerHTML = t1sOT_temp;
             t2sOT.innerHTML = t2sOT_temp;
             g_date.innerHTML = match.date;
-            
+
+            drawCharts();
             console.log('Success:', data);
 
         })
         .catch((error) => {
           console.error('Error:', error);
     });
+
+}
+
+function drawCharts() {
+
 
 }
 
