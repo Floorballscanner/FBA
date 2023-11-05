@@ -217,7 +217,63 @@ function changeGame() {
 
 function drawCharts() {
 
+    var pldata = new google.visualization.DataTable();
+    pldata.addColumn('string', 'Player');
+    pldata.addColumn('string', 'Position');
+    pldata.addColumn('number', 'Goals');
+    pldata.addColumn('number', 'Assists');
+    pldata.addColumn('number', 'Points');
+    pldata.addColumn('number', 'Shots');
+    pldata.addColumn('number', 'xG');
+    pldata.addColumn('number', 'xGOT');
+    pldata.addColumn('number', 'Plus');
+    pldata.addColumn('number', 'Minus');
 
+    lineup_t1.forEach(lineup => {
+        pldata.addRow(["#" + lineup.shirt_number + " " lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.points, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+
+    var options = {
+        title: 'Player stats, ' + match.team_A_name,
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+    // Create and draw the visualization.
+    var chart = new google.visualization.Table(document.getElementById('stT1_playerchart'));
+    chart1.draw(pldata, options);
+
+    var pldata2 = new google.visualization.DataTable();
+    pldata2.addColumn('string', 'Player');
+    pldata2.addColumn('string', 'Position');
+    pldata2.addColumn('number', 'Goals');
+    pldata2.addColumn('number', 'Assists');
+    pldata2.addColumn('number', 'Points');
+    pldata2.addColumn('number', 'Shots');
+    pldata2.addColumn('number', 'xG');
+    pldata2.addColumn('number', 'xGOT');
+    pldata2.addColumn('number', 'Plus');
+    pldata2.addColumn('number', 'Minus');
+
+    lineup_t2.forEach(lineup => {
+        pldata2.addRow(["#" + lineup.shirt_number + " " lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.points, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+
+    var options = {
+        title: 'Player stats, ' + match.team_B_name,
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['#002072', '#59D9EB'],
+        hAxis: { textPosition: 'none' }
+        };
+
+    // Create and draw the visualization.
+    var chart2 = new google.visualization.Table(document.getElementById('stT2_playerchart'));
+    chart2.draw(pldata2, options);
 }
 
 function getCookie(name) {
