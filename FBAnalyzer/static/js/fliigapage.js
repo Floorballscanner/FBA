@@ -180,6 +180,8 @@ function changeGame() {
                 lineup.xGOT = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
+                lineup.shots = Object.values(shots)
+                .filter(shot => shot.player_id === pl).length;
 
             });
 
