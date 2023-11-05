@@ -141,13 +141,9 @@ function changeGame() {
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
 
             t1s_temp = Object.values(shots).filter(shot => shot.team === 'A').length;
-            console.log(t1s_temp)
             t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
-            console.log(t2s_temp)
             t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
-            console.log(t1sOT_temp)
             t2sOT_temp = Object.values(shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
-            console.log(t2sOT_temp)
 
             // Set game data to page
             imgt1.src = match.club_A_crest;
@@ -159,9 +155,9 @@ function changeGame() {
             t1xGOT.innerHTML = t1xGOT_temp.toFixed(2);
             t2xGOT.innerHTML = t2xGOT_temp.toFixed(2);
             t1s.innerHTML = t1s_temp;
-            t1s.innerHTML = t2s_temp;
+            t2s.innerHTML = t2s_temp;
             t1sOT.innerHTML = t1sOT_temp;
-            t1sOT.innerHTML = t2sOT_temp;
+            t2sOT.innerHTML = t2sOT_temp;
             g_date.innerHTML = match.date;
             
             console.log('Success:', data);
