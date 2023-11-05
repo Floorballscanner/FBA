@@ -5,6 +5,8 @@ const csrftoken = getCookie('csrftoken');
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
 var events = "";
+var maxX = 1700; // Arvioitu, päätyviiva 0 - keskiviiva 1700
+var maxY = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var s_game = document.getElementById("select-game");
 var g_date = document.getElementById("stdate");
 var t1g = document.getElementById('sttotg_1');
@@ -97,7 +99,35 @@ function changeGame() {
 
             events = modifiedEvents;
 
+            // Assuming events is an array of objects with 'location' and 'code' properties
+            let pd_events = events.map(event => ({ ...event })); // Clone the array of objects
 
+            // Filter shots based on the 'code' property
+            let shots = pd_events.filter(event =>
+                ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code)
+            );
+
+            // Reset the index of the filtered shots array
+            shots = shots.map((event, index) => ({ ...event, index })).map(event => ({ ...event }));
+
+            // Add 'xGOT' and 'xG' properties to each shot event
+            shots.addColumn('xGOT', 0);
+            shots.addColumn('xG', 0);
+
+            for (let i = 0; i < shots.length; i++) {
+                const st = shots[i].location.split(',');
+                const x = parseFloat(st[1]);
+                const y = parseFloat(st[0]);
+                const [xGOT, xG] = calcxG(x, y);
+
+                if (shots[i].code === 'laukaus' || shots[i].code === 'laukausmaali') {
+                    shots[i].xGOT = xGOT;
+                } else {
+                    shots[i].xGOT = 0;
+                }
+
+                shots[i].xG = xG;
+            }
 
             // Set game data to page
             t1name.innerHTML = match.team_A_name;
@@ -181,6 +211,21 @@ function GetSortOrder(prop) {
         }
         return 0;
     }
+}
+
+function calcxG(x, y) {
+    y = 1000 + y;
+
+    if (x > maxX) {
+        x = maxX - 1;
+    }
+
+    const xd = 2 + Math.floor((x / maxX) * 12);
+    const yd = Math.floor((y / maxY) * 13);
+    const xGOT = xGOT_matrix[xd][yd] / 100;
+    const xG = xG_matrix[xd][yd] / 100;
+
+    return [xGOT, xG];
 }
 
 // xG mapping matrix ON Target
