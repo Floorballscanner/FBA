@@ -123,19 +123,42 @@ function changeGame() {
                 shots[i].xG = xG;
             }
 
+            // Sum all "xG" values using reduce
+            t1xG_temp = Object.values(shots)
+                .filter(shot => shot.team === 'A')
+                .reduce((sum, shot) => sum + shot.xG, 0);
+
+            t2xG_temp = Object.values(shots)
+                .filter(shot => shot.team === 'B')
+                .reduce((sum, shot) => sum + shot.xG, 0);
+
+            t1xGOT_temp = Object.values(shots)
+                .filter(shot => shot.team === 'A')
+                .reduce((sum, shot) => sum + shot.xGOT, 0);
+
+            t2xGOT_temp = Object.values(shots)
+                .filter(shot => shot.team === 'B')
+                .reduce((sum, shot) => sum + shot.xGOT, 0);
+
+            t1s_temp = Object.values(shots).filter(shot => shot.team === 'A').length;
+            t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
+            t1sOT_temp = Object.values(Shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
+            t2sOT_temp = Object.values(Shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
+
+
             // Set game data to page
             t1name.innerHTML = match.team_A_name;
             t2name.innerHTML = match.team_B_name;
             t1g.innerHTML = match.fs_A;
             t2g.innerHTML = match.fs_B;
-            t1xG.innerHTML = 0;
-            t2xG.innerHTML = 0;
-            t1xGOT.innerHTML = 0;
-            t2xGOT.innerHTML = 0;
-            t1s.innerHTML = 0;
-            t1s.innerHTML = 0;
-            t1sOT.innerHTML = 0;
-            t1sOT.innerHTML = 0;
+            t1xG.innerHTML = t1xG_temp.toFixed(2);
+            t2xG.innerHTML = t2xG_temp.toFixed(2);
+            t1xGOT.innerHTML = t1xGOT_temp.toFixed(2);
+            t2xGOT.innerHTML = t2xGOT_temp.toFixed(2);
+            t1s.innerHTML = t1s_temp;
+            t1s.innerHTML = t2s_temp;
+            t1sOT.innerHTML = t1sOT_temp;
+            t1sOT.innerHTML = t2sOT_temp;
             g_date.innerHTML = match.date;
             
             console.log('Success:', data);
