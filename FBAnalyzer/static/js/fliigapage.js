@@ -9,6 +9,7 @@ var lineups = [];
 var lineup_t1 = [];
 var lineup_t2 = [];
 var shots = [];
+var match = "";
 var maxX = 1700; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxY = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var s_game = document.getElementById("select-game");
@@ -81,7 +82,7 @@ function changeGame() {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            const match = data.match;
+            match = data.match;
             const events_json = match.events;
             const lineups_json = match.lineups;
 
