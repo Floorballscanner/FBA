@@ -19,9 +19,9 @@ var t2xGOT = document.getElementById('sttotxGOT_2');
 var imgt1 = document.getElementById('imgt1');
 var imgt2 = document.getElementById('imgt2');
 var t1s = document.getElementById('sttotshots_1');
-var t1s = document.getElementById('sttotshots_2');
+var t2s = document.getElementById('sttotshots_2');
 var t1sOT = document.getElementById('sttotsOT_1');
-var t1sOT = document.getElementById('sttotsOT_2');
+var t2sOT = document.getElementById('sttotsOT_2');
 
 
 // Creates the HTML - page when the window is loaded
