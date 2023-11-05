@@ -7,18 +7,18 @@ var matches = "";
 var events = "";
 var s_game = document.getElementById("select-game");
 var g_date = document.getElementById("stdate");
-var t1g = document.getElementById('sttotg_1').innerHTML
-var t2g = document.getElementById('sttotg_2').innerHTML
-var t1xG = document.getElementById('sttotxG_1').innerHTML
-var t2xG = document.getElementById('sttotxG_2').innerHTML
-var t1xGOT = document.getElementById('sttotxGOT_1').innerHTML
-var t2xGOT = document.getElementById('sttotxGOT_2').innerHTML
-var t1name = document.getElementById('stteam_1').innerHTML
-var t2name = document.getElementById('stteam_2').innerHTML
-var t1s = document.getElementById('sttotshots_1').innerHTML
-var t1s = document.getElementById('sttotshots_2').innerHTML
-var t1sOT = document.getElementById('sttotsOT_1').innerHTML
-var t1sOT = document.getElementById('sttotsOT_2').innerHTML
+var t1g = document.getElementById('sttotg_1');
+var t2g = document.getElementById('sttotg_2');
+var t1xG = document.getElementById('sttotxG_1');
+var t2xG = document.getElementById('sttotxG_2');
+var t1xGOT = document.getElementById('sttotxGOT_1');
+var t2xGOT = document.getElementById('sttotxGOT_2');
+var t1name = document.getElementById('stteam_1');
+var t2name = document.getElementById('stteam_2');
+var t1s = document.getElementById('sttotshots_1');
+var t1s = document.getElementById('sttotshots_2');
+var t1sOT = document.getElementById('sttotsOT_1');
+var t1sOT = document.getElementById('sttotsOT_2');
 
 
 // Creates the HTML - page when the window is loaded
@@ -97,20 +97,22 @@ function changeGame() {
 
             events = modifiedEvents;
 
+
+
             // Set game data to page
-            t1name = match.team_A_name;
-            t2name = match.team_B_name;
-            t1g = match.fs_A;
-            t2g = match.fs_B;
-            t1xG = 0;
-            t2xG = 0;
-            t1xGOT = 0;
-            t2xGOT = 0;
-            t1s = 0;
-            t1s = 0;
-            t1sOT = 0;
-            t1sOT = 0;
-            g_date = match.date;
+            t1name.innerHTML = match.team_A_name;
+            t2name.innerHTML = match.team_B_name;
+            t1g.innerHTML = match.fs_A;
+            t2g.innerHTML = match.fs_B;
+            t1xG.innerHTML = 0;
+            t2xG.innerHTML = 0;
+            t1xGOT.innerHTML = 0;
+            t2xGOT.innerHTML = 0;
+            t1s.innerHTML = 0;
+            t1s.innerHTML = 0;
+            t1sOT.innerHTML = 0;
+            t1sOT.innerHTML = 0;
+            g_date.innerHTML = match.date;
             
             console.log('Success:', data);
 
@@ -180,3 +182,42 @@ function GetSortOrder(prop) {
         return 0;
     }
 }
+
+// xG mapping matrix ON Target
+
+let xGOT_matrix = [           // This is the xGOT matrix
+
+    [ 0.01, 0.01, 0.01, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.01, 0.01, 0.01],
+    [ 0.01, 0.01, 0.01, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.01, 0.01, 0.01],
+    [ 2, 2,13,14,15,38,64,38,15,14, 13, 2, 2],
+    [ 4, 5,15,19,29,48,50,48,29,19,15, 5, 4],
+    [ 5, 8,18,20,23,32,38,32,23,20,18, 8, 5],
+    [ 7,12,16,22,26,32,36,32,26,22,16,12, 7],
+    [ 8,13,16,18,25,29,33,29,25,18,16,13, 8],
+    [ 9,15,16,23,27,31,32,31,27,23,16,15, 9],
+    [12,14,16,19,23,29,30,29,23,19,16,14,12],
+    [13,14,15,18,22,26,28,26,22,18,15,14,13],
+    [13,13,13,16,21,25,25,25,21,16,13,13,13],
+    [10,11,12,15,19,20,21,20,19,15,12,11,10],
+    [ 7, 9,11,13,15,17,19,17,15,13,11, 9, 7],
+    [ 5, 7,9,11,13,15,17,15,13,11,9, 7, 5],
+
+    ];
+
+let xG_matrix = [     // This is the xG matrix
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 7, 8, 8, 19, 54, 19, 8, 8, 7, 1, 1],
+    [2, 3, 8, 10, 16, 30, 30, 30, 16, 10, 8, 3, 2],
+    [3, 4, 10, 11, 12, 17, 21, 17, 12, 11, 10, 4, 3],
+    [4, 7, 9, 12, 14, 17, 19, 17, 14, 12, 9, 6, 4],
+    [4, 7, 9, 10, 14, 16, 18, 16, 14, 10, 9, 7, 4],
+    [5, 8, 9, 12, 15, 17, 17, 17, 15, 12, 9, 8, 5],
+    [7, 8, 9, 10, 12, 16, 16, 16, 12, 10, 9, 8, 7],
+    [7, 8, 8, 10, 12, 14, 15, 14, 12, 10, 8, 8, 7],
+    [7, 7, 7, 9, 11, 14, 14, 14, 11, 9, 7, 7, 7],
+    [5, 6, 7, 8, 10, 11, 11, 11, 10, 8, 7, 6, 5],
+    [4, 5, 6, 7, 8, 9, 10, 9, 8, 7, 6, 5, 4],
+    [3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3],
+
+    ];
