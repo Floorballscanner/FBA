@@ -6,6 +6,20 @@ var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
 var events = "";
 var s_game = document.getElementById("select-game");
+var g_date = document.getElementById("stdate");
+var t1g = document.getElementById('sttotg_1').innerHTML
+var t2g = document.getElementById('sttotg_2').innerHTML
+var t1xG = document.getElementById('sttotxG_1').innerHTML
+var t2xG = document.getElementById('sttotxG_2').innerHTML
+var t1xGOT = document.getElementById('sttotxGOT_1').innerHTML
+var t2xGOT = document.getElementById('sttotxGOT_2').innerHTML
+var t1name = document.getElementById('stteam_1').innerHTML
+var t2name = document.getElementById('stteam_2').innerHTML
+var t1s = document.getElementById('sttotshots_1').innerHTML
+var t1s = document.getElementById('sttotshots_2').innerHTML
+var t1sOT = document.getElementById('sttotsOT_1').innerHTML
+var t1sOT = document.getElementById('sttotsOT_2').innerHTML
+
 
 // Creates the HTML - page when the window is loaded
 
@@ -61,7 +75,7 @@ function changeGame() {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            const match_json = data.match;
+            const match = data.match;
             const events_json = match_json.events;
 
             // List of keys you want to select from matches_json
@@ -82,6 +96,22 @@ function changeGame() {
             });
 
             events = modifiedEvents;
+
+            // Set game data to page
+            t1name = match.team_A_name;
+            t2name = match.team_B_name;
+            t1g = match.fs_A;
+            t2g = match.fs_B;
+            t1xG = 0;
+            t2xG = 0;
+            t1xGOT = 0;
+            t2xGOT = 0;
+            t1s = 0;
+            t1s = 0;
+            t1sOT = 0;
+            t1sOT = 0;
+            g_date = match.date;
+            
             console.log('Success:', data);
 
         })
