@@ -5,6 +5,9 @@ const csrftoken = getCookie('csrftoken');
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
 var events = "";
+var lineups = [];
+var lineup_t1 = [];
+var lineup_t2 = [];
 var shots = [];
 var maxX = 1700; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxY = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
@@ -80,14 +83,19 @@ function changeGame() {
             console.log(data)
             const match = data.match;
             const events_json = match.events;
+            const lineups_json = match.lineups;
 
-            // List of keys you want to select from matches_json
+            // List of keys you want to select from events_json
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
+
+            // List of keys you want to select from lineups_json
+            const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','shots','saves','goals','assists','points','plus','minus'];
 
             // Create a new array to store the modified JSON objects
             const modifiedEvents = [];
+            const modifiedLineups = [];
 
-            // Iterate through matches_json and create new objects with selected keys
+            // Iterate through events_json and create new objects with selected keys
             events_json.forEach(event => {
               const modifiedEvent = {};
               selectedKeys.forEach(key => {
@@ -98,7 +106,19 @@ function changeGame() {
               modifiedEvents.push(modifiedEvent);
             });
 
+            // Iterate through lineups_json and create new objects with selected keys
+            lineups_json.forEach(lineup => {
+              const modifiedLineup = {};
+              selectedKeys_lineup.forEach(key => {
+                if (lineup.hasOwnProperty(key)) {
+                  modifiedLineup[key] = lineup[key];
+                }
+              });
+              modifiedLineups.push(modifiedLineup);
+            });
+
             events = modifiedEvents;
+            lineups = modifiedLineups;
 
             // Filter rows where 'code' is one of the specified values
             shots = events.filter(event => ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code));
