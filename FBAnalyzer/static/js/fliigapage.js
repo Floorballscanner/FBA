@@ -249,6 +249,7 @@ function drawCharts() {
     // Create and draw the visualization.
     var chart = new google.visualization.Table(document.getElementById('stT1_playerchart'));
     chart.draw(pldata, options);
+    document.getElementById("stt1name").innerHTML = t1name;
 
     var pldata2 = new google.visualization.DataTable();
     pldata2.addColumn('string', 'Player');
@@ -278,6 +279,7 @@ function drawCharts() {
     // Create and draw the visualization.
     var chart2 = new google.visualization.Table(document.getElementById('stT2_playerchart'));
     chart2.draw(pldata2, options);
+    document.getElementById("stt2name").innerHTML = t2name;
 }
 
 function getCookie(name) {
