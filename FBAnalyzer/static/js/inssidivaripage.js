@@ -266,7 +266,7 @@ function drawCharts() {
 
     lineup_t2.forEach(lineup => {
         pldata2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.points, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
     });
 
     var options = {
