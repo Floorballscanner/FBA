@@ -142,8 +142,8 @@ function changeGame() {
 
             t1s_temp = Object.values(shots).filter(shot => shot.team === 'A').length;
             t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
-            t1sOT_temp = Object.values(Shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
-            t2sOT_temp = Object.values(Shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
+            t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
+            t2sOT_temp = Object.values(shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
 
 
             // Set game data to page
