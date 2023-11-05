@@ -42,6 +42,7 @@ urlpatterns = [
     path('accounts/saved_games/', views.saved_games, name="saved-games"),
     path('lite/', views.lite, name="lite-game"),
     path('fliiga_test/', views.fliiga_test, name="fliiga-test"),
+    path('inssidivari_test/', views.inssidivari_test, name="inssidivari-test"),
     path('apis/teamlist/', views.TeamList.as_view(), name="team-list"),
     path('apis/playerlist/', views.PlayerList.as_view(), name="player-list"),
     path('apis/gamelist/', views.GameList.as_view(), name="game-list"),

@@ -100,6 +100,9 @@ def lite(request):
 def fliiga_test(request):
     return render(request, 'f-liiga_test.html')
 
+def inssidivari_test(request):
+    return render(request, 'inssidivari_test.html')
+
 def add_new_player(request):
 
     """View function for adding a new player to the team."""
