@@ -223,7 +223,7 @@ function drawCharts() {
 
     var pldata = new google.visualization.DataTable();
     pldata.addColumn('string', 'Player');
-    pldata.addColumn('string', 'Position');
+    pldata.addColumn('string', 'Pos.');
     pldata.addColumn('number', 'Goals');
     pldata.addColumn('number', 'Assists');
     pldata.addColumn('number', 'Points');
@@ -253,7 +253,7 @@ function drawCharts() {
 
     var pldata2 = new google.visualization.DataTable();
     pldata2.addColumn('string', 'Player');
-    pldata2.addColumn('string', 'Position');
+    pldata2.addColumn('string', 'Pos.');
     pldata2.addColumn('number', 'Goals');
     pldata2.addColumn('number', 'Assists');
     pldata2.addColumn('number', 'Points');
