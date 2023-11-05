@@ -89,7 +89,7 @@ function changeGame() {
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
 
             // List of keys you want to select from lineups_json
-            const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','shots','saves','goals','assists','points','plus','minus'];
+            const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','position','shots','saves','goals','assists','points','plus','minus'];
 
             // Create a new array to store the modified JSON objects
             const modifiedEvents = [];
@@ -168,6 +168,20 @@ function changeGame() {
             t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
             t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
             t2sOT_temp = Object.values(shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
+
+            // Calculate xG and xGOT to lineups
+
+            lineups.forEach(lineup => {
+                pl = lineup.player_id;
+
+                lineup.xG = Object.values(shots)
+                .filter(shot => shot.player_id === pl)
+                .reduce((sum, shot) => sum + shot.xG, 0);
+                lineup.xGOT = Object.values(shots)
+                .filter(shot => shot.player_id === pl)
+                .reduce((sum, shot) => sum + shot.xGOT, 0);
+
+            });
 
             // Set game data to page
             imgt1.src = match.club_A_crest;
