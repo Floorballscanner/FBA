@@ -100,10 +100,10 @@ function changeGame() {
             events = modifiedEvents;
 
             // Assuming events is an array of objects with 'location' and 'code' properties
-            let pd_events = events.map(event => ({ ...event })); // Clone the array of objects
+            const df_events = new DataFrame(events);
 
             // Filter shots based on the 'code' property
-            let shots = pd_events.filter(event =>
+            let shots = df_events.filter(event =>
                 ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code)
             );
 
