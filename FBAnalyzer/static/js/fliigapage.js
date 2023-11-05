@@ -76,7 +76,7 @@ function changeGame() {
         .then(data => {
             console.log(data)
             const match = data.match;
-            const events_json = match_json.events;
+            const events_json = match.events;
 
             // List of keys you want to select from matches_json
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
