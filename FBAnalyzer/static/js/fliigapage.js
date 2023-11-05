@@ -66,7 +66,7 @@ window.onload = function() {
                     s_game.appendChild(opt);
                 }
             }
-            imgcat.src = matches_json.category_logo;
+            imgcat.src = matches_json[0].category_logo;
             console.log('Success:', data);
 
         })
