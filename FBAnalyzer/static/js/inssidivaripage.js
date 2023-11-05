@@ -226,13 +226,13 @@ function drawCharts() {
     pldata.addColumn('string', 'Player');
     pldata.addColumn('string', 'Pos.');
     pldata.addColumn('number', 'Goals');
-    pldata.addColumn('number', 'Assists');
+    pldata.addColumn('number', 'Ass.');
     pldata.addColumn('number', 'Points');
     pldata.addColumn('number', 'Shots');
     pldata.addColumn('number', 'xG');
     pldata.addColumn('number', 'xGOT');
-    pldata.addColumn('number', 'Plus');
-    pldata.addColumn('number', 'Minus');
+    pldata.addColumn('number', '+');
+    pldata.addColumn('number', '-');
 
     lineup_t1.forEach(lineup => {
         pldata.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
@@ -256,13 +256,13 @@ function drawCharts() {
     pldata2.addColumn('string', 'Player');
     pldata2.addColumn('string', 'Pos.');
     pldata2.addColumn('number', 'Goals');
-    pldata2.addColumn('number', 'Assists');
+    pldata2.addColumn('number', 'Ass.');
     pldata2.addColumn('number', 'Points');
     pldata2.addColumn('number', 'Shots');
     pldata2.addColumn('number', 'xG');
     pldata2.addColumn('number', 'xGOT');
-    pldata2.addColumn('number', 'Plus');
-    pldata2.addColumn('number', 'Minus');
+    pldata2.addColumn('number', '+');
+    pldata2.addColumn('number', '-');
 
     lineup_t2.forEach(lineup => {
         pldata2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
