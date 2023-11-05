@@ -16,8 +16,8 @@ var t1xG = document.getElementById('sttotxG_1');
 var t2xG = document.getElementById('sttotxG_2');
 var t1xGOT = document.getElementById('sttotxGOT_1');
 var t2xGOT = document.getElementById('sttotxGOT_2');
-var t1name = document.getElementById('stteam_1');
-var t2name = document.getElementById('stteam_2');
+var imgt1 = document.getElementById('imgt1');
+var imgt2 = document.getElementById('imgt2');
 var t1s = document.getElementById('sttotshots_1');
 var t1s = document.getElementById('sttotshots_2');
 var t1sOT = document.getElementById('sttotsOT_1');
@@ -141,14 +141,17 @@ function changeGame() {
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
 
             t1s_temp = Object.values(shots).filter(shot => shot.team === 'A').length;
+            console.log(t1s_temp)
             t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
+            console.log(t2s_temp)
             t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
+            console.log(t1sOT_temp)
             t2sOT_temp = Object.values(shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
-
+            console.log(t2sOT_temp)
 
             // Set game data to page
-            t1name.innerHTML = match.team_A_name;
-            t2name.innerHTML = match.team_B_name;
+            imgt1.src = match.club_A_crest;
+            imgt2.src = match.club_B_crest;
             t1g.innerHTML = match.fs_A;
             t2g.innerHTML = match.fs_B;
             t1xG.innerHTML = t1xG_temp.toFixed(2);
