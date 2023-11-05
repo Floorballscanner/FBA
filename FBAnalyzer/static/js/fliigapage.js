@@ -184,9 +184,9 @@ function changeGame() {
             });
 
             lineup_t1 = Object.values(lineups)
-                .filter(lineup => lineups.team_id === match.team_A_id);
+                .filter(lineup => lineup.team_id === match.team_A_id);
             lineup_t2 = Object.values(lineups)
-                .filter(lineup => lineups.team_id === match.team_B_id);
+                .filter(lineup => lineup.team_id === match.team_B_id);
 
             // Set game data to page
             imgt1.src = match.club_A_crest;
