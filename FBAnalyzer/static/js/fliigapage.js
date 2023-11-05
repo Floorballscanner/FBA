@@ -230,7 +230,7 @@ function drawCharts() {
     pldata.addColumn('number', 'Minus');
 
     lineup_t1.forEach(lineup => {
-        pldata.addRow(["#" + lineup.shirt_number + " " lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldata.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
         lineup.points, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
     });
 
@@ -259,7 +259,7 @@ function drawCharts() {
     pldata2.addColumn('number', 'Minus');
 
     lineup_t2.forEach(lineup => {
-        pldata2.addRow(["#" + lineup.shirt_number + " " lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldata2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
         lineup.points, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
     });
 
