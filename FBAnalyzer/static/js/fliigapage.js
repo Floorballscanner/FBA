@@ -5,6 +5,7 @@ const csrftoken = getCookie('csrftoken');
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
 var events = "";
+var shots = [];
 var maxX = 1700; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxY = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var s_game = document.getElementById("select-game");
@@ -99,20 +100,13 @@ function changeGame() {
 
             events = modifiedEvents;
 
-            // Assuming events is an array of objects with 'location' and 'code' properties
-            const df_events = new DataFrame(events);
-
-            // Filter shots based on the 'code' property
-            let shots = df_events.filter(event =>
-                ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code)
-            );
-
-            // Reset the index of the filtered shots array
-            shots = shots.map((event, index) => ({ ...event, index })).map(event => ({ ...event }));
-
-            // Add 'xGOT' and 'xG' properties to each shot event
-            shots.addColumn('xGOT', 0);
-            shots.addColumn('xG', 0);
+            // Filter rows where 'code' is one of the specified values
+            shots = events.filter(event => ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code));
+            // Initialize 'xGOT' and 'xG' properties to 0
+            shots.forEach(event => {
+                event.xGOT = 0;
+                event.xG = 0;
+            });
 
             for (let i = 0; i < shots.length; i++) {
                 const st = shots[i].location.split(',');
