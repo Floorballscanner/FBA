@@ -19,6 +19,8 @@ urlpatterns = [
     path('apis/', include(accounts_urls)),
     path('live/', views.live, name="livepage"),
     path('live/<nr>', views.game, name="gamepage"),
+    path('fliigalive/', views.fliigalive, name="fliigalivepage"),
+    path('fliigalive/<nr>', views.fliigagame, name="fliigagamepage"),
     path('references/', views.references, name="references"),
 ]
 
