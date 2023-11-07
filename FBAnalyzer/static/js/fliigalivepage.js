@@ -4,7 +4,6 @@
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
 
-
 // Creates the HTML - page when the window is loaded
 
 window.onload = function() {
