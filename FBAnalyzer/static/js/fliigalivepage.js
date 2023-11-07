@@ -93,7 +93,7 @@ window.onload = function() {
                 div2.appendChild(disp);
                 div2.appendChild(button);
 
-            )};
+            });
 
             console.log('Success:', data);
         })
