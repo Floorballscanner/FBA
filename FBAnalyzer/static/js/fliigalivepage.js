@@ -11,28 +11,10 @@ window.onload = function() {
     fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&match_status=Played&competition_id=sb2023&category_id=402&group_id=2")
         .then(response => response.json())
         .then(data => {
-            const matches_json = data.matches;
-            matches_json.sort(GetSortOrder("date"));
+            const matches = data.matches;
+            matches.sort(GetSortOrder("date"));
 
-            // List of keys you want to select from matches_json
-            const selectedKeys = ['match_id','match_number','category_name','date','time','team_A_id','team_A_name','team_B_id','team_B_name','status'];
-
-            // Create a new array to store the modified JSON objects
-            const modifiedMatches = [];
-
-            // Iterate through matches_json and create new objects with selected keys
-            matches_json.forEach(match => {
-              const modifiedMatch = {};
-              selectedKeys.forEach(key => {
-                if (match.hasOwnProperty(key)) {
-                  modifiedMatch[key] = match[key];
-                }
-              });
-              modifiedMatches.push(modifiedMatch);
-            });
-
-            matches = modifiedMatches;
-            imgcat.src = matches_json[0].category_logo;
+            imgcat.src = matches[0].category_logo;
 
             matches.forEach(match => {
 
