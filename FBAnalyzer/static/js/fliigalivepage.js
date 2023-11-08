@@ -36,7 +36,7 @@ window.onload = function() {
 
             matches.forEach(match => {
 
-                console.log("For-loopin sisälle")
+                console.log(match.team_A_name + " - " + match.team_B_name)
                 const div = document.createElement('div');
                 div.setAttribute('class', 'row');
 
@@ -75,7 +75,7 @@ window.onload = function() {
                 button.innerText = "Open live";
                 button.style.paddingBottom = "5px";
 
-                document.getElementById("imgcat").appendChild(div);
+                document.getElementById("head").appendChild(div);
                 div.appendChild(div2);
                 div2.appendChild(d);
 
