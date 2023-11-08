@@ -53,17 +53,17 @@ window.onload = function() {
                 h.style.fontWeight = "bold"
 
                 const h2 = document.createElement('h1');
-                h2.innerText = match.fs_A + " - " + match.fs_B;
+                h2.innerText = match.fs_A.toString() + " - " + match.fs_B.toString();
                 h2.style.paddingTop = "5px";
                 h2.setAttribute('id', 'goals' + match.match_id);
 
                 const h3 = document.createElement('h5');
-                h3.innerText = "Period " + match.live_period;
+                h3.innerText = "Period " + match.live_period.toString();
                 h3.style.paddingTop = "5px";
                 h3.setAttribute('id', 'period' + match.match_id);
 
                 const disp = document.createElement('h3');
-                disp.innerText = match.live_time;
+                disp.innerText = match.live_time.toString();
                 disp.style.paddingTop = "5px";
                 disp.setAttribute('id', 'time' + match.match_id);
 
