@@ -207,42 +207,6 @@ function getCookie(name) {
 
 // Function updates the Live page every second
 
-function updatePage() {
-
-    fetch("https://fbscanner.io/apis/livedata/" + nr)
-        .then(response => response.json())
-        .then(jsonData => {
-
-            data = jsonData;
-            updateData();
-            updateCharts();
-
-            console.log('Success:', data);
-        })
-
-        .catch((error) => {
-          console.error('Error:', error);
-    });
-
-    t = setTimeout(function(){ updatePage() }, 1000);
-}
-
-function convertTime(arg) {
-    var date = new Date(arg * 1000);
-    var res = date.toISOString().substr(14, 5);
-    return res;
-}
-
-function convertPos(lPos, counter) {
-    res = Math.round(100 * lPos / counter);
-    return res;
-}
-
-function calcPercent(xGa, xGb) {
-    res = Math.round(xGa / (xGa + xGb) * 100);
-    return res;
-}
-
 function drawCharts() {
 
     var pldata = new google.visualization.DataTable();
@@ -442,6 +406,7 @@ function updateData() {
 
             drawCharts();
             console.log('Success:', data);
+            t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
 
         })
         .catch((error) => {
