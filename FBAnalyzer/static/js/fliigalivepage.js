@@ -66,12 +66,9 @@ window.onload = function() {
                 disp.style.paddingTop = "5px";
                 disp.setAttribute('id', 'time' + match.match_id);
 
-                const text = data[i].url;
-                const nrArray = text.split("/");
-                const nr = nrArray[nrArray.length-2];
                 const button = document.createElement('a');
                 button.setAttribute('class', 'btn btn-primary');
-                button.setAttribute('href', '/live/' + match.match_id);
+                button.setAttribute('href', '/fliigalive/' + match.match_id);
                 button.setAttribute('role', 'button');
                 button.style.paddingTop = "5px";
                 button.innerText = "Open live";
