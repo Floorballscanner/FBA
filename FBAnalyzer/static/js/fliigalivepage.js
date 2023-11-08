@@ -36,6 +36,7 @@ window.onload = function() {
 
             matches.forEach(match => {
 
+                console.log("For-loopin sisälle")
                 const div = document.createElement('div');
                 div.setAttribute('class', 'row');
 
