@@ -20,6 +20,7 @@ urlpatterns = [
     path('live/', views.live, name="livepage"),
     path('live/<nr>', views.game, name="gamepage"),
     path('fliigalive/', views.fliigalive, name="fliigalivepage"),
+    path('fliigalive/<nr>', views.fliigalive, name="fliigagamepage"),
     path('references/', views.references, name="references"),
 ]
 

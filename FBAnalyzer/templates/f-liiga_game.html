@@ -1,0 +1,67 @@
+<!--
+
+This is the live result page for a game stream
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+{% load static %}
+
+<div class="row justify-content-center" style="Padding-top: 20px;">
+    <div class="col-sm-12">
+        <div id="gstats" class="gamestats">
+            <h5 id="stdate"></h5>
+            <h3><img style="width:100px;" id="imgt1">&emsp;vs&emsp;<img style="width:100px;" id="imgt2"></h3>
+            <h5 style="Padding-top: 10px" id="periodNr"></h5>
+            <h2 id="label"></h2>
+            <h3><span id="sttotg_1">0</span>&emsp;-&emsp;<span id="sttotg_2">0</span></h3>
+            <h5><span id="sttotxG_1">0</span>&emsp;xG&emsp;<span id="sttotxG_2">0</span></h5>
+            <h5><span id="sttotxGOT_1">0</span>&emsp;xGOT&emsp;<span id="sttotxGOT_2">0</span></h5>
+            <h5><span id="sttotshots_1">0</span>&emsp;Shots&emsp;<span id="sttotshots_2">0</span></h5>
+            <h5><span id="sttotsOT_1">0</span>&emsp;Shots On Target&emsp;<span id="sttotsOT_2">0</span></h5>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center" style="Padding-top: 20px;">
+    <div class="col-sm-6">
+        <div class="team-selection">
+            <h5><span id="stt1name">Team 1</span> player stats</h5>
+            <div id="stT1_playerchart" style="height: 500px"></div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="team-selection">
+            <h5><span id="stt2name">Team 2</span> player stats</h5>
+            <div id="stT2_playerchart" style="height: 500px"></div>
+        </div>
+    </div>
+</div>
+<div class="container" style="Padding-top: 80px;">
+    <div class="row justify-content-center">
+        <div id="gstats" class="gamestats">
+            <h5 id="gamedate"></h5>
+            <h1 id="h1"><span id="homeTeam">Home</span> - <span id="awayTeam">Away</span></h1>
+            <h5 style="Padding-top: 10px" id="periodNr">Period 1</h5>
+            <h2 id="label">00:00:00</h2>
+            <h2 style="Padding-top: 20px"><span id="homeGoals">0</span> - <span id="awayGoals">0</span> (<span id="homeGoalsP">0</span> - <span id="awayGoalsP">0</span>)</h2>
+            <h4>xG: <span id="homexG">0</span> - <span id="awayxG">0</span> (<span id="homexGP">0</span> - <span id="awayxGP">0</span>)</h4>
+            <h4 style="Padding-bottom: 20px">Possession: <span id="homePos">0</span>% - <span id="awayPos">0</span>% (<span id="homePosP">0</span>% - <span id="awayPosP">0</span>%)</h4>
+        </div>
+    </div>
+
+    </div>
+    </br>
+</div>
+
+<script type="text/javascript" src="/static/js/fliigalivegame.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['table']});
+
+</script>
+
+<!-- google.charts.setOnLoadCallback(updateCharts()); -->
+
+{% endblock %}
