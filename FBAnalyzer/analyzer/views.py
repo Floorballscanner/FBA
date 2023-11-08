@@ -32,7 +32,7 @@ def game(request, nr):
 def fliigalive(request):
     return render(request, 'f-liiga_live.html')
 
-def fliigagame(request):
+def fliigagame(request, nr):
     return render(request, 'f-liiga_game.html')
 
 def references(request):
