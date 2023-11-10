@@ -8,7 +8,7 @@ var matches = "";
 
 window.onload = function() {
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&match_status=Played&competition_id=sb2023&category_id=402&group_id=2")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&match_status=Live&competition_id=sb2023&category_id=444&group_id=1")
         .then(response => response.json())
         .then(data => {
             const matches = data.matches;
@@ -18,7 +18,6 @@ window.onload = function() {
 
             matches.forEach(match => {
 
-                console.log(match.team_A_name + " - " + match.team_B_name)
                 const div = document.createElement('div');
                 div.setAttribute('class', 'row');
 
