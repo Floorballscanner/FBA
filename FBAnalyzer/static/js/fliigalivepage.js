@@ -71,7 +71,7 @@ window.onload = function() {
                     div.appendChild(div2);
                     div2.appendChild(d);
 
-                    if (match.status == "Live") {
+                    if (match.live_period != "-1") {
                         const img = document.createElement('img');
                         img.setAttribute('src',"/static/live.png");
                         img.setAttribute('width', '70px');

@@ -49,7 +49,7 @@ window.onload = function() {
             t1name = match.team_A_name;
             t2name = match.team_B_name;
 
-            if (match.status == "Live") {
+            if (match.live_period != "-1") {
                 const img = document.createElement('img');
                 img.setAttribute('src',"/static/live.png");
                 img.setAttribute('width', '100px');
@@ -403,7 +403,7 @@ function updateData() {
             t1sOT.innerHTML = t1sOT_temp;
             t2sOT.innerHTML = t2sOT_temp;
             g_date.innerHTML = match.date;
-            period.innerHTML = match.live_period;
+            period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
 
             drawCharts();
