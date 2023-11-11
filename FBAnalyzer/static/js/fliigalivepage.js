@@ -16,8 +16,6 @@ window.onload = function() {
             const matches = data.matches;
             matches.sort(GetSortOrder("date"));
 
-            imgcat.src = matches[0].category_logo;
-
             matches.forEach(match => {
 
                 // Convert string to Date using the Date constructor
@@ -31,9 +29,15 @@ window.onload = function() {
                     const div2 = document.createElement('div');
                     div2.setAttribute('class', 'col-sm-12');
 
+                    const imgcat = document.createElement('img');
+                    imgcat.setAttribute('src', match.category_logo;);
+                    imgcat.setAttribute('width', '100px');
+                    imgcat.style.paddingTop = "50px";
+                    div2.appendChild(imgcat);
+
                     const d = document.createElement('h5');
                     d.innerText = match.date;
-                    d.style.paddingTop = "25px";
+                    d.style.paddingTop = "5px";
 
                     const h = document.createElement('h1');
                     h.innerText = match.team_A_name + " - " + match.team_B_name;
