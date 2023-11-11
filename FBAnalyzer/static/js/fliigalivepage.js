@@ -20,6 +20,7 @@ window.onload = function() {
 
                 // Convert string to Date using the Date constructor
                 matchdate = new Date(match.date);
+                matchdate.setHours(0, 0, 0, 0);
                 today = new Date();
                 today.setHours(0, 0, 0, 0);
 
