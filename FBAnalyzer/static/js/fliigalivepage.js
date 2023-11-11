@@ -30,7 +30,7 @@ window.onload = function() {
                     div2.setAttribute('class', 'col-sm-12');
 
                     const imgcat = document.createElement('img');
-                    imgcat.setAttribute('src', match.category_logo;);
+                    imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '100px');
                     imgcat.style.paddingTop = "50px";
                     div2.appendChild(imgcat);
