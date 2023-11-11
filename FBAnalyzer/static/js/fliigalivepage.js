@@ -8,7 +8,7 @@ var matches = "";
 
 window.onload = function() {
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&match_status=Live&competition_id=sb2023&category_id=444&group_id=1")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=444&group_id=1")
         .then(response => response.json())
         .then(data => {
             const matches = data.matches;
@@ -18,59 +18,66 @@ window.onload = function() {
 
             matches.forEach(match => {
 
-                const div = document.createElement('div');
-                div.setAttribute('class', 'row');
+                // Convert string to Date using the Date constructor
+                matchdate = new Date(match.date);
+                today = new Date();
+                today.setHours(0, 0, 0, 0);
 
-                const div2 = document.createElement('div');
-                div2.setAttribute('class', 'col-sm-12');
+                if (matchdate == today) {
+                    const div = document.createElement('div');
+                    div.setAttribute('class', 'row');
 
-                const d = document.createElement('h5');
-                d.innerText = match.date;
-                d.style.paddingTop = "50px";
+                    const div2 = document.createElement('div');
+                    div2.setAttribute('class', 'col-sm-12');
 
-                const h = document.createElement('h1');
-                h.innerText = match.team_A_name + " - " + match.team_B_name;
-                h.style.paddingTop = "5px";
-                h.style.fontWeight = "bold"
+                    const d = document.createElement('h5');
+                    d.innerText = match.date;
+                    d.style.paddingTop = "50px";
 
-                const h2 = document.createElement('h1');
-                h2.innerText = match.fs_A.toString() + " - " + match.fs_B.toString();
-                h2.style.paddingTop = "5px";
-                h2.setAttribute('id', 'goals' + match.match_id);
+                    const h = document.createElement('h1');
+                    h.innerText = match.team_A_name + " - " + match.team_B_name;
+                    h.style.paddingTop = "5px";
+                    h.style.fontWeight = "bold"
 
-                const h3 = document.createElement('h5');
-                h3.innerText = "Period " + match.live_period.toString();
-                h3.style.paddingTop = "5px";
-                h3.setAttribute('id', 'period' + match.match_id);
+                    const h2 = document.createElement('h1');
+                    h2.innerText = match.fs_A.toString() + " - " + match.fs_B.toString();
+                    h2.style.paddingTop = "5px";
+                    h2.setAttribute('id', 'goals' + match.match_id);
 
-                const disp = document.createElement('h3');
-                disp.innerText = match.live_time.toString();
-                disp.style.paddingTop = "5px";
-                disp.setAttribute('id', 'time' + match.match_id);
+                    const h3 = document.createElement('h5');
+                    h3.innerText = "Period " + match.live_period.toString();
+                    h3.style.paddingTop = "5px";
+                    h3.setAttribute('id', 'period' + match.match_id);
 
-                const button = document.createElement('a');
-                button.setAttribute('class', 'btn btn-primary');
-                button.setAttribute('href', '/fliigalive/' + match.match_id);
-                button.setAttribute('role', 'button');
-                button.style.paddingTop = "5px";
-                button.innerText = "Open live";
-                button.style.paddingBottom = "5px";
+                    const disp = document.createElement('h3');
+                    disp.innerText = match.live_time.toString();
+                    disp.style.paddingTop = "5px";
+                    disp.setAttribute('id', 'time' + match.match_id);
 
-                document.getElementById("head").appendChild(div);
-                div.appendChild(div2);
-                div2.appendChild(d);
+                    const button = document.createElement('a');
+                    button.setAttribute('class', 'btn btn-primary');
+                    button.setAttribute('href', '/fliigalive/' + match.match_id);
+                    button.setAttribute('role', 'button');
+                    button.style.paddingTop = "5px";
+                    button.innerText = "Open live";
+                    button.style.paddingBottom = "5px";
 
-                const img = document.createElement('img');
-                img.setAttribute('src',"/static/live.png");
-                img.setAttribute('width', '70px');
-                img.style.paddingTop = "5px";
-                div2.appendChild(img);
+                    document.getElementById("head").appendChild(div);
+                    div.appendChild(div2);
+                    div2.appendChild(d);
 
-                div2.appendChild(h);
-                div2.appendChild(h2);
-                div2.appendChild(h3);
-                div2.appendChild(disp);
-                div2.appendChild(button);
+                    const img = document.createElement('img');
+                    img.setAttribute('src',"/static/live.png");
+                    img.setAttribute('width', '70px');
+                    img.style.paddingTop = "5px";
+                    div2.appendChild(img);
+
+                    div2.appendChild(h);
+                    div2.appendChild(h2);
+                    div2.appendChild(h3);
+                    div2.appendChild(disp);
+                    div2.appendChild(button);
+                }
 
             });
 

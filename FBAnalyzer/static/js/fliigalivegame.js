@@ -175,7 +175,7 @@ window.onload = function() {
             t1sOT.innerHTML = t1sOT_temp;
             t2sOT.innerHTML = t2sOT_temp;
             g_date.innerHTML = match.date;
-            period.innerHTML = match.live_period;
+            period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
 
             drawCharts();
