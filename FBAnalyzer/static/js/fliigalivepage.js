@@ -22,15 +22,9 @@ window.onload = function() {
 
                 // Convert string to Date using the Date constructor
                 matchdate = new Date(match.date);
-                matchdate.setHours(0, 0, 0, 0);
                 today = new Date();
-                today.setHours(0, 0, 0, 0);
 
-                console.log(matchdate);
-                console.log(today);
-                console.log(matchdate === today)
-
-                if (matchdate === today) {
+                if (areDatesEqual(matchdate, today))  {
                     const div = document.createElement('div');
                     div.setAttribute('class', 'row');
 
@@ -109,4 +103,13 @@ function GetSortOrder(prop) {
         }
         return 0;
     }
+}
+
+// Function to check if two dates are the same
+function areDatesEqual(date1, date2) {
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
 }
