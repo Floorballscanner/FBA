@@ -33,7 +33,7 @@ window.onload = function() {
 
                     const d = document.createElement('h5');
                     d.innerText = match.date;
-                    d.style.paddingTop = "5px";
+                    d.style.paddingTop = "25px";
 
                     const h = document.createElement('h1');
                     h.innerText = match.team_A_name + " - " + match.team_B_name;
@@ -73,12 +73,12 @@ window.onload = function() {
                         img.setAttribute('width', '70px');
                         img.style.paddingTop = "5px";
                         div2.appendChild(img);
-            }
+                    }
                     else {
                         const gametime = document.createElement('h3');
-                        disp.innerText = match.time.toString();
-                        disp.style.paddingTop = "5px";
-                        disp.setAttribute('id', 'time' + match.match_id);
+                        gametime.innerText = match.time.toString();
+                        gametime.style.paddingTop = "5px";
+                        gametime.setAttribute('id', 'time' + match.match_id);
                         div2.appendChild(gametime);
                     }
 
