@@ -3,6 +3,8 @@
 
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
+var matchdate = "";
+var today = "";
 
 // Creates the HTML - page when the window is loaded
 
@@ -23,6 +25,10 @@ window.onload = function() {
                 matchdate.setHours(0, 0, 0, 0);
                 today = new Date();
                 today.setHours(0, 0, 0, 0);
+
+                console.log(matchdate);
+                console.log(today);
+                console.log(matchdate == today)
 
                 if (matchdate == today) {
                     const div = document.createElement('div');
