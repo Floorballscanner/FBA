@@ -28,9 +28,9 @@ window.onload = function() {
 
                 console.log(matchdate);
                 console.log(today);
-                console.log(matchdate == today)
+                console.log(matchdate === today)
 
-                if (matchdate == today) {
+                if (matchdate === today) {
                     const div = document.createElement('div');
                     div.setAttribute('class', 'row');
 
