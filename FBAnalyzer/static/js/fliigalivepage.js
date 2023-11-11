@@ -33,7 +33,7 @@ window.onload = function() {
 
                     const d = document.createElement('h5');
                     d.innerText = match.date;
-                    d.style.paddingTop = "50px";
+                    d.style.paddingTop = "5px";
 
                     const h = document.createElement('h1');
                     h.innerText = match.team_A_name + " - " + match.team_B_name;
