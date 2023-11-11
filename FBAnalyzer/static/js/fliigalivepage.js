@@ -67,11 +67,20 @@ window.onload = function() {
                     div.appendChild(div2);
                     div2.appendChild(d);
 
-                    const img = document.createElement('img');
-                    img.setAttribute('src',"/static/live.png");
-                    img.setAttribute('width', '70px');
-                    img.style.paddingTop = "5px";
-                    div2.appendChild(img);
+                    if (match.status == "Live") {
+                        const img = document.createElement('img');
+                        img.setAttribute('src',"/static/live.png");
+                        img.setAttribute('width', '70px');
+                        img.style.paddingTop = "5px";
+                        div2.appendChild(img);
+            }
+                    else {
+                        const gametime = document.createElement('h3');
+                        disp.innerText = match.time.toString();
+                        disp.style.paddingTop = "5px";
+                        disp.setAttribute('id', 'time' + match.match_id);
+                        div2.appendChild(gametime);
+                    }
 
                     div2.appendChild(h);
                     div2.appendChild(h2);
