@@ -284,14 +284,6 @@ function updateData() {
             t1name = match.team_A_name;
             t2name = match.team_B_name;
 
-            if (match.status == "Live") {
-                const img = document.createElement('img');
-                img.setAttribute('src',"/static/live.png");
-                img.setAttribute('width', '100px');
-                img.style.paddingTop = "35px";
-                img.style.paddingBottom = "10px"
-                document.getElementById('gstats').prepend(img);
-            }
             // List of keys you want to select from events_json
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
 
