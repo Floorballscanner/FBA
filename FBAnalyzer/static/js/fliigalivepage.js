@@ -32,7 +32,7 @@ window.onload = function() {
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '100px');
-                    imgcat.style.paddingTop = "50px";
+                    imgcat.style.paddingTop = "20px";
                     div2.appendChild(imgcat);
 
                     const d = document.createElement('h5');
@@ -102,7 +102,7 @@ window.onload = function() {
                     hrElement.setAttribute("width", "100%");
                     hrElement.setAttribute("size", "2");
                     hrElement.setAttribute("align", "center");
-                    hrElement.style.paddingTop = "10px";
+                    hrElement.style.paddingTop = "20px";
                     hrElement.setAttribute("color", "#002072");
                     hrElement.setAttribute("noshade", "");
                     div2.appendChild(hrElement);
