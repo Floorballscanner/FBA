@@ -71,19 +71,22 @@ window.onload = function() {
                     div.appendChild(div2);
                     div2.appendChild(d);
 
-                    if (match.live_period != "-1") {
+                    if (match.live_period != "-1" && match.status != "Played") {
                         const img = document.createElement('img');
                         img.setAttribute('src',"/static/live.png");
                         img.setAttribute('width', '70px');
                         img.style.paddingTop = "5px";
                         div2.appendChild(img);
                     }
-                    else {
+                    else if (match.live_period == "-1") {
                         const gametime = document.createElement('h3');
                         gametime.innerText = match.time.toString();
                         gametime.style.paddingTop = "5px";
                         gametime.setAttribute('id', 'time' + match.match_id);
                         div2.appendChild(gametime);
+                    }
+                    else if (match.status == "Played") {
+
                     }
 
                     div2.appendChild(h);
@@ -91,6 +94,18 @@ window.onload = function() {
                     div2.appendChild(h3);
                     div2.appendChild(disp);
                     div2.appendChild(button);
+
+                    // Create a new <hr> element
+                    var hrElement = document.createElement("hr");
+
+                    // Set attributes for the <hr> element
+                    hrElement.setAttribute("width", "100%");
+                    hrElement.setAttribute("size", "2");
+                    hrElement.setAttribute("align", "center");
+                    hrElement.style.paddingTop = "10px";
+                    hrElement.setAttribute("color", "#002072");
+                    hrElement.setAttribute("noshade", "");
+                    div2.appendChild(hrElement);
                 }
 
             });

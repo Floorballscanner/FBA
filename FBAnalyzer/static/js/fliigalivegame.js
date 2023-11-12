@@ -49,9 +49,10 @@ window.onload = function() {
             t1name = match.team_A_name;
             t2name = match.team_B_name;
 
-            if (match.live_period != "-1") {
+            if (match.live_period != "-1" && match.status != "Played") {
                 const img = document.createElement('img');
                 img.setAttribute('src',"/static/live.png");
+                img.setAttribute('id', 'img' + match.match_id);
                 img.setAttribute('width', '100px');
                 img.style.paddingTop = "35px";
                 img.style.paddingBottom = "10px"
@@ -283,6 +284,12 @@ function updateData() {
             const lineups_json = match.lineups;
             t1name = match.team_A_name;
             t2name = match.team_B_name;
+
+            if (match.status == "Played") {
+                if (document.getElementById('img' + match.match_id) != null) {
+                    document.getElementById('img' + match.match_id).remove();
+                }
+            }
 
             // List of keys you want to select from events_json
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
