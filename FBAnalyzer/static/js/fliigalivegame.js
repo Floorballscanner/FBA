@@ -64,7 +64,7 @@ window.onload = function() {
                 gametime.setAttribute('id', 'time' + match.match_id);
                 gametime.innerText = match.time.toString();
                 gametime.style.paddingTop = "5px";
-                document.getElementById('stdate').appendChild(gametime);
+                document.getElementById('stdate').append(gametime);
             }
 
             // List of keys you want to select from events_json
