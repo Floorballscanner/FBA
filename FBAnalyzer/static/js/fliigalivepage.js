@@ -32,7 +32,7 @@ window.onload = function() {
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '100px');
-                    imgcat.style.paddingTop = "20px";
+                    imgcat.style.paddingTop = "10px";
                     div2.appendChild(imgcat);
 
                     const d = document.createElement('h5');
