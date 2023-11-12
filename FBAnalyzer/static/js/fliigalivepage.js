@@ -102,7 +102,7 @@ window.onload = function() {
                     hrElement.setAttribute("width", "100%");
                     hrElement.setAttribute("size", "2");
                     hrElement.setAttribute("align", "center");
-                    hrElement.style.paddingTop = "20px";
+                    hrElement.style.marginTop = "20px";
                     hrElement.setAttribute("color", "#002072");
                     hrElement.setAttribute("noshade", "");
                     div2.appendChild(hrElement);
