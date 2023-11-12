@@ -49,7 +49,7 @@ window.onload = function() {
             t1name = match.team_A_name;
             t2name = match.team_B_name;
 
-            if (match.live_period != "-1" && match.status != "Played") {
+            if (match.live_period != "" && match.status != "Played") {
                 const img = document.createElement('img');
                 img.setAttribute('src',"/static/live.png");
                 img.setAttribute('id', 'img' + match.match_id);
