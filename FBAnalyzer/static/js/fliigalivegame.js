@@ -34,6 +34,14 @@ var t1sOT = document.getElementById('sttotsOT_1');
 var t2sOT = document.getElementById('sttotsOT_2');
 var t1name = "";
 var t2name = "";
+var myImg = new Image();
+myImg.src = "/static/field-new.png";
+var cnvs = document.getElementById("liveShotMap");
+var ctx = cnvs.getContext("2d");
+var fLength = 332;
+var fWidth = 200;
+var maxX = 1700;
+var maxY = 2000;
 
 // Creates the HTML - page when the window is loaded
 
@@ -190,6 +198,7 @@ window.onload = function() {
             clock.innerHTML = match.live_time;
 
             drawCharts();
+            drawShotMap();
             console.log('Success:', data);
 
         })
@@ -279,6 +288,22 @@ function drawCharts() {
     var chart2 = new google.visualization.Table(document.getElementById('stT2_playerchart'));
     chart2.draw(pldata2, options);
     document.getElementById("stt2name").innerHTML = t2name;
+}
+
+function drawShotMap() {
+
+    ctx.drawImage(myImg,0,0,fWidth,fLength);
+    shots.forEach(event => {
+        locationString = event.location;
+        coordinates = locationString.split(',');
+        x = parseFloat(coordinates[1]);
+        y = parseFloat(coordinates[0]);
+        y = 1000 + y
+        x = fWidth * x / MaxX;
+        y = fLength * y / MaxY);
+        ctx.fillStyle = "blue";
+        ctx.fillText("M", x, y);
+    });
 }
 
 function updateData() {
@@ -457,6 +482,7 @@ function updateData() {
             clock.innerHTML = match.live_time;
 
             drawCharts();
+            drawShotMap();
             console.log('Success:', data);
             t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
 
