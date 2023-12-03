@@ -122,8 +122,8 @@ window.onload = function() {
 
             for (let i = 0; i < shots.length; i++) {
                 const st = shots[i].location.split(',');
-                const x = parseFloat(st[1]);
-                const y = parseFloat(st[0]);
+                const x = parseFloat(st[0]);
+                const y = parseFloat(st[1]);
                 const [xGOT, xG] = calcxG(x, y);
 
                 if (shots[i].code === 'laukaus' || shots[i].code === 'laukausmaali') {
@@ -425,8 +425,8 @@ function updateData() {
 
             for (let i = 0; i < shots.length; i++) {
                 const st = shots[i].location.split(',');
-                const x = parseFloat(st[1]);
-                const y = parseFloat(st[0]);
+                const x = parseFloat(st[0]);
+                const y = parseFloat(st[1]);
                 const [xGOT, xG] = calcxG(x, y);
 
                 if (shots[i].code === 'laukaus' || shots[i].code === 'laukausmaali') {
