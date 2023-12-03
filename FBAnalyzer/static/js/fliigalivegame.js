@@ -40,7 +40,7 @@ var cnvs = document.getElementById("liveShotMap");
 var ctx = cnvs.getContext("2d");
 var fLength = 332;
 var fWidth = 200;
-var maxY = 1700;
+var maxY = 3400;
 var maxX = 2000;
 
 // Creates the HTML - page when the window is loaded
@@ -296,20 +296,30 @@ function drawShotMap() {
     shots.forEach(event => {
         locationString = event.location;
         coordinates = locationString.split(',');
-        x = parseFloat(coordinates[1]);
-        y = parseFloat(coordinates[0]);
-        x = 1000 + x
-        x = fWidth * x / maxX;
-        y = fLength * y / maxY;
+        y = parseFloat(coordinates[1]);
+        x = parseFloat(coordinates[0]);
         radius = 15 * event.xG / 0.5; // Replace with your desired radius in pixels
         opacity = 0.5; // Replace with your desired opacity (0 to 1)
-
-        // Draw a blue circle
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
-        ctx.fill();
-        ctx.closePath();
+        if (event.team == "A") {
+            x = 1000 + x
+            x = fWidth * x / maxX;
+            y = fLength * y / maxY;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
+            ctx.fill();
+            ctx.closePath();
+        }
+        if (event.team == "B") {
+            x = 1000 - x
+            x = fWidth * x / maxX;
+            y = maxY - (fLength * y / maxY);
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = "rgba(0, 255, 0, " + opacity + ")"; // Blue color with specified opacity
+            ctx.fill();
+            ctx.closePath();
+        }
     });
 }
 
