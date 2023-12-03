@@ -510,14 +510,14 @@ function updateData() {
 }
 
 function calcxG(x, y) {
-    y = 1000 + y;
+    x = 1000 + x;
 
-    if (x > maxX) {
-        x = maxX - 1;
+    if (y > maxY) {
+        y = maxY - 1;
     }
 
-    const xd = 2 + Math.floor((x / maxX) * 12);
-    const yd = Math.floor((y / maxY) * 13);
+    const yd = 2 + Math.floor((y / maxY) * 12);
+    const xd = Math.floor((x / maxX) * 13);
     const xGOT = xGOT_matrix[xd][yd] / 100;
     const xG = xG_matrix[xd][yd] / 100;
 
