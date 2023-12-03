@@ -14,8 +14,8 @@ var lineups = [];
 var lineup_t1 = [];
 var lineup_t2 = [];
 var shots = [];
-var maxX = 1700; // Arvioitu, päätyviiva 0 - keskiviiva 1700
-var maxY = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
+var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
+var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var g_date = document.getElementById("stdate");
 var imgcat = document.getElementById("imgcat");
 var period = document.getElementById("periodNr");
@@ -40,8 +40,6 @@ var cnvs = document.getElementById("liveShotMap");
 var ctx = cnvs.getContext("2d");
 var fLength = 332;
 var fWidth = 200;
-var maxY = 3400;
-var maxX = 2000;
 
 // Creates the HTML - page when the window is loaded
 
