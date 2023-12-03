@@ -296,12 +296,12 @@ function drawShotMap() {
         coordinates = locationString.split(',');
         y = parseFloat(coordinates[1]);
         x = parseFloat(coordinates[0]);
-        radius = 5 + 15 * event.xG / 0.5; // Replace with your desired radius in pixels
+        radius = 1 + 10 * event.xG; // Replace with your desired radius in pixels
         opacity = 0.5; // Replace with your desired opacity (0 to 1)
         if (event.team == "A") {
             x = 1000 + x;
             x = fWidth * x / maxX;
-            y = y + 200;
+            y = y + 300;
             y = fLength * y / maxY;
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
@@ -312,7 +312,7 @@ function drawShotMap() {
         else if (event.team == "B") {
             x = 1000 - x;
             x = fWidth * x / maxX;
-            y = y + 200;
+            y = y + 300;
             y = fLength - (fLength * y / maxY);
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
