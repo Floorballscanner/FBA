@@ -307,6 +307,11 @@ function drawShotMap() {
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
             ctx.fill();
+            if (event.code == "laukausmaali") {
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = 'red';
+                ctx.stroke();
+            }
             ctx.closePath();
         }
         else if (event.team == "B") {
@@ -318,6 +323,11 @@ function drawShotMap() {
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(0, 0, 255, " + opacity + ")"; // Blue color with specified opacity
             ctx.fill();
+            if (event.code == "laukausmaali") {
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = 'blue';
+                ctx.stroke();
+            }
             ctx.closePath();
         }
     });
