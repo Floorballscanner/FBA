@@ -306,8 +306,8 @@ function drawShotMap() {
 
         // Draw a blue circle
         ctx.beginPath();
-        ctx.arc(x, y, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(0, 0, 255, " + opacity + ")"; // Blue color with specified opacity
+        ctx.arc(y, x, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
         ctx.fill();
         ctx.closePath();
     });
