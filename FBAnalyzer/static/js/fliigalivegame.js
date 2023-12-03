@@ -307,7 +307,7 @@ function drawShotMap() {
             x = 1000 + x;
             x = fWidth * x / maxX;
             y = y + 300;
-            y = fLength * y / (maxY + 300);
+            y = fLength * y / (maxY + 350);
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
@@ -323,7 +323,7 @@ function drawShotMap() {
             x = 1000 - x;
             x = fWidth * x / maxX;
             y = y + 300;
-            y = fLength - (fLength * y / (maxY + 300));
+            y = fLength - (fLength * y / (maxY + 350));
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(0, 0, 255, " + opacity + ")"; // Blue color with specified opacity
