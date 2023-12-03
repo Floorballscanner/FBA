@@ -301,26 +301,24 @@ function drawShotMap() {
         if (event.team == "A") {
             x = 1000 + x;
             x = fWidth * x / maxX;
-            y = y + 300;
+            y = y + 200;
             y = fLength * y / maxY;
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
             ctx.fill();
             ctx.closePath();
-            console.log("Team A x: " + x + " y: " + y)
         }
         else if (event.team == "B") {
             x = 1000 - x;
             x = fWidth * x / maxX;
-            y = y + 300;
+            y = y + 200;
             y = fLength - (fLength * y / maxY);
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(0, 0, 255, " + opacity + ")"; // Blue color with specified opacity
             ctx.fill();
             ctx.closePath();
-            console.log("Team B x: " + x + " y: " + y)
         }
     });
 }
