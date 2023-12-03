@@ -296,7 +296,7 @@ function drawShotMap() {
         coordinates = locationString.split(',');
         y = parseFloat(coordinates[1]);
         x = parseFloat(coordinates[0]);
-        radius = 1 + 20 * event.xG; // Replace with your desired radius in pixels
+        radius = 1 + 30 * event.xG; // Replace with your desired radius in pixels
         opacity = 0.5; // Replace with your desired opacity (0 to 1)
         if (event.team == "A") {
             x = 1000 + x;
@@ -320,7 +320,6 @@ function drawShotMap() {
             ctx.fill();
             ctx.closePath();
         }
-        console.log(radius,event.xG)
     });
 }
 
