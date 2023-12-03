@@ -299,8 +299,8 @@ function drawShotMap() {
         x = parseFloat(coordinates[1]);
         y = parseFloat(coordinates[0]);
         y = 1000 + y
-        x = fWidth * x / MaxX;
-        y = fLength * y / MaxY;
+        x = fWidth * x / maxX;
+        y = fLength * y / maxY;
         ctx.fillStyle = "blue";
         ctx.fillText("M", x, y);
     });
