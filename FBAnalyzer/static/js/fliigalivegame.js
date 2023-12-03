@@ -300,7 +300,7 @@ function drawShotMap() {
         y = parseFloat(coordinates[0]);
         y = 1000 + y
         x = fWidth * x / MaxX;
-        y = fLength * y / MaxY);
+        y = fLength * y / MaxY;
         ctx.fillStyle = "blue";
         ctx.fillText("M", x, y);
     });
