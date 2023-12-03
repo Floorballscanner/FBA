@@ -299,14 +299,14 @@ function drawShotMap() {
         x = parseFloat(coordinates[1]);
         y = parseFloat(coordinates[0]);
         y = 1000 + y
-        x = fWidth * x / maxX;
-        y = fLength * y / maxY;
-        radius = 20 * event.xG / 0.5; // Replace with your desired radius in pixels
+        y = fWidth * y / maxY;
+        x = fLength * x / maxX;
+        radius = 15 * event.xG / 0.5; // Replace with your desired radius in pixels
         opacity = 0.5; // Replace with your desired opacity (0 to 1)
 
         // Draw a blue circle
         ctx.beginPath();
-        ctx.arc(y, x, radius, 0, 2 * Math.PI);
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
         ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
         ctx.fill();
         ctx.closePath();
