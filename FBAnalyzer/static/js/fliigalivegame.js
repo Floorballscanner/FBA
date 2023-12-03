@@ -309,8 +309,9 @@ function drawShotMap() {
             ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
             ctx.fill();
             ctx.closePath();
+            console.log("x: " + x + " y: " + y)
         }
-        if (event.team == "B") {
+        else if (event.team == "B") {
             x = 1000 - x
             x = fWidth * x / maxX;
             y = maxY - (fLength * y / maxY);
@@ -319,6 +320,7 @@ function drawShotMap() {
             ctx.fillStyle = "rgba(0, 255, 0, " + opacity + ")"; // Blue color with specified opacity
             ctx.fill();
             ctx.closePath();
+            console.log("x: " + x + " y: " + y)
         }
     });
 }
