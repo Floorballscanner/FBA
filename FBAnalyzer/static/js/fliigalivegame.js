@@ -297,12 +297,17 @@ function drawShotMap() {
         y = parseFloat(coordinates[1]);
         x = parseFloat(coordinates[0]);
         radius = 1 + 20 * event.xG; // Replace with your desired radius in pixels
-        opacity = 0.5; // Replace with your desired opacity (0 to 1)
+        if (event.code == "laukausblokattu" || event.code == "laukausohi") {
+            opacity = 0.25; // Replace with your desired opacity (0 to 1)
+        }
+        else {
+            opacity = 0.5; // Replace with your desired opacity (0 to 1)
+        }
         if (event.team == "A") {
             x = 1000 + x;
             x = fWidth * x / maxX;
             y = y + 300;
-            y = fLength * y / maxY;
+            y = fLength * y / (maxY - 300);
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
@@ -318,7 +323,7 @@ function drawShotMap() {
             x = 1000 - x;
             x = fWidth * x / maxX;
             y = y + 300;
-            y = fLength - (fLength * y / maxY);
+            y = fLength - (fLength * y / (maxY - 300));
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(0, 0, 255, " + opacity + ")"; // Blue color with specified opacity
