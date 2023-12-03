@@ -299,8 +299,9 @@ function drawShotMap() {
         radius = 15 * event.xG / 0.5; // Replace with your desired radius in pixels
         opacity = 0.5; // Replace with your desired opacity (0 to 1)
         if (event.team == "A") {
-            x = 1000 + x
+            x = 1000 + x;
             x = fWidth * x / maxX;
+            y = y + 300;
             y = fLength * y / maxY;
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
@@ -310,8 +311,9 @@ function drawShotMap() {
             console.log("Team A x: " + x + " y: " + y)
         }
         else if (event.team == "B") {
-            x = 1000 - x
+            x = 1000 - x;
             x = fWidth * x / maxX;
+            y = y + 300;
             y = fLength - (fLength * y / maxY);
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
