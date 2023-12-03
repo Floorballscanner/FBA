@@ -312,7 +312,7 @@ function drawShotMap() {
         else if (event.team == "B") {
             x = 1000 - x
             x = fWidth * x / maxX;
-            y = maxY - (fLength * y / maxY);
+            y = fLength - (fLength * y / maxY);
             ctx.beginPath();
             ctx.arc(y, x, radius, 0, 2 * Math.PI);
             ctx.fillStyle = "rgba(0, 255, 0, " + opacity + ")"; // Blue color with specified opacity
