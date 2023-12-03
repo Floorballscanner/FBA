@@ -516,10 +516,10 @@ function calcxG(x, y) {
         y = maxY - 1;
     }
 
-    const yd = 2 + Math.floor((y / maxY) * 13);
+    const yd = 2 + Math.floor((y / maxY) * 12);
     const xd = Math.floor((x / maxX) * 12);
-    const xGOT = xGOT_matrix[xd][yd] / 100;
-    const xG = xG_matrix[xd][yd] / 100;
+    const xGOT = xGOT_matrix[yd][xd] / 100;
+    const xG = xG_matrix[yd][xd] / 100;
 
     return [xGOT, xG];
 }
