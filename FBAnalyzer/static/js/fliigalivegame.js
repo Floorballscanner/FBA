@@ -40,8 +40,8 @@ var cnvs = document.getElementById("liveShotMap");
 var ctx = cnvs.getContext("2d");
 var fLength = 332;
 var fWidth = 200;
-var maxX = 1700;
-var maxY = 2000;
+var maxY = 1700;
+var maxX = 2000;
 
 // Creates the HTML - page when the window is loaded
 
@@ -298,9 +298,9 @@ function drawShotMap() {
         coordinates = locationString.split(',');
         x = parseFloat(coordinates[1]);
         y = parseFloat(coordinates[0]);
-        y = 1000 + y
-        y = fWidth * y / maxY;
-        x = fLength * x / maxX;
+        x = 1000 + x
+        x = fWidth * x / maxX;
+        y = fLength * y / maxY;
         radius = 15 * event.xG / 0.5; // Replace with your desired radius in pixels
         opacity = 0.5; // Replace with your desired opacity (0 to 1)
 
