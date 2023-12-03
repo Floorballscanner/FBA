@@ -510,9 +510,10 @@ function updateData() {
 }
 
 function calcxG(x, y) {
+    console.log(x,y)
     x = 1000 + x;
 
-    if (y > maxY) {
+    if (y >= maxY) {
         y = maxY - 1;
     }
 
