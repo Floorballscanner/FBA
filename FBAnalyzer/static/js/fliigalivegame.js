@@ -54,6 +54,8 @@ window.onload = function() {
             const lineups_json = match.lineups;
             t1name = match.team_A_name;
             t2name = match.team_B_name;
+            document.getElementById('A_teamname').innerHTML = t1name
+            document.getElementById('B_teamname').innerHTML = t2name
 
             if (match.live_period != "" && match.status != "Played") {
                 const img = document.createElement('img');
@@ -313,8 +315,8 @@ function drawShotMap() {
             ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
             ctx.fill();
             if (event.code == "laukausmaali") {
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
                 ctx.stroke();
             }
             ctx.closePath();
@@ -329,8 +331,8 @@ function drawShotMap() {
             ctx.fillStyle = "rgba(0, 0, 255, " + opacity + ")"; // Blue color with specified opacity
             ctx.fill();
             if (event.code == "laukausmaali") {
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
                 ctx.stroke();
             }
             ctx.closePath();
