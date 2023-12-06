@@ -306,7 +306,7 @@ window.onload = function() {
             arrayLineups.sort((a, b) => b[1].xG - a[1].xG);
 
             pl_id1 = arrayLineups[0][1].player_id;
-            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].xG;
+            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].player_name + " " + arrayLineups[0][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
             .then(response => response.json())
             .then(data => {
@@ -316,7 +316,7 @@ window.onload = function() {
             })
 
             pl_id2 = arrayLineups[1][1].player_id;
-            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].xG;
+            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].player_name + " " + arrayLineups[1][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
             .then(response => response.json())
             .then(data => {
@@ -326,7 +326,7 @@ window.onload = function() {
             })
 
             pl_id3 = arrayLineups[2][1].player_id;
-            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].xG;
+            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].player_name + " " + arrayLineups[2][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
             .then(response => response.json())
             .then(data => {
