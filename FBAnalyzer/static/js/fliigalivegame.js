@@ -24,6 +24,7 @@ var lineup_t2l4 = [];
 var lineup_t1g = [];
 var lineup_t2g = [];
 var shots = [];
+var goaliedata = [];
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var g_date = document.getElementById("stdate");
@@ -127,10 +128,14 @@ window.onload = function() {
 
             // Filter rows where 'code' is one of the specified values
             shots = events.filter(event => ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code));
+            goaliedata = events.filter(event => ['torjunta', 'paastetty'].includes(event.code));
             // Initialize 'xGOT' and 'xG' properties to 0
             shots.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;
+            });
+            goaliedata.forEach(event => {
+                event.xGOT = 0;
             });
 
             for (let i = 0; i < shots.length; i++) {
@@ -146,6 +151,14 @@ window.onload = function() {
                 }
 
                 shots[i].xG = xG;
+            }
+
+            for (let i = 0; i < goaliedata.length; i++) {
+                const st = goaliedata[i].location.split(',');
+                const x = parseFloat(st[0]);
+                const y = parseFloat(st[1]);
+                const [xGOT, xG] = calcxG(x, y);
+                goaliedata[i].xGOT = 0;
             }
 
             // Sum all "xG" values using reduce
@@ -425,13 +438,44 @@ function drawCharts() {
     pldatat2g.addColumn('number', 'xGOTA');
     pldatat2g.addColumn('number', 'GAxG');
 
+
     lineup_t1g.forEach(lineup => {
-        pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, 0, lineup.saves,
-        0,0]);
+        ga = 0;
+        xga = 0;
+        gaxg = 0;
+        goaliedata.forEach(shot => {
+            if (shot.player_id == lineup.player_id) {
+                if (shot.code == "torjunta") {
+                    xga += shot.xGOT;
+                }
+                if (shot.code == "paastetty") {
+                    xga += shot.xGOT;
+                    ga += 1;
+                }
+            }
+        });
+        gaxg = xga - ga;
+        pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ga, lineup.saves,
+        Number(xga.toFixed(2)),Number(gaxg.toFixed(2))]);
     });
     lineup_t2g.forEach(lineup => {
-        pldatat2g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, 0, lineup.saves,
-        0,0]);
+        ga = 0;
+        xga = 0;
+        gaxg = 0;
+        goaliedata.forEach(shot => {
+            if (shot.player_id == lineup.player_id) {
+                if (shot.code == "torjunta") {
+                    xga += shot.xGOT;
+                }
+                if (shot.code == "paastetty") {
+                    xga += shot.xGOT;
+                    ga += 1;
+                }
+            }
+        });
+        gaxg = xga - ga;
+        pldatat2g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ga, lineup.saves,
+        Number(xga.toFixed(2)),Number(gaxg.toFixed(2))]);
     });
 
     var options = {
@@ -610,10 +654,14 @@ function updateData() {
 
             // Filter rows where 'code' is one of the specified values
             shots = events.filter(event => ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code));
+            goaliedata = events.filter(event => ['torjunta', 'paastetty'].includes(event.code));
             // Initialize 'xGOT' and 'xG' properties to 0
             shots.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;
+            });
+            goaliedata.forEach(event => {
+                event.xGOT = 0;
             });
 
             for (let i = 0; i < shots.length; i++) {
@@ -629,6 +677,14 @@ function updateData() {
                 }
 
                 shots[i].xG = xG;
+            }
+
+            for (let i = 0; i < goaliedata.length; i++) {
+                const st = goaliedata[i].location.split(',');
+                const x = parseFloat(st[0]);
+                const y = parseFloat(st[1]);
+                const [xGOT, xG] = calcxG(x, y);
+                goaliedata[i].xGOT = 0;
             }
 
             // Sum all "xG" values using reduce
