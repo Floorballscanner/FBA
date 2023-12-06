@@ -243,6 +243,44 @@ window.onload = function() {
                     }
             });
 
+            lineup_t1g.forEach(lineup => {
+                ga = 0;
+                xga = 0;
+                gaxg = 0;
+                goaliedata.forEach(shot => {
+                    if (shot.player_id == lineup.player_id) {
+                        if (shot.code == "torjunta") {
+                            xga += shot.xGOT;
+                        }
+                        if (shot.code == "paastetty") {
+                            xga += shot.xGOT;
+                            ga += 1;
+                        }
+                    }
+                });
+                lineup.xGOT = xga;
+                lineup.goals = ga;
+            });
+
+            lineup_t2g.forEach(lineup => {
+                ga = 0;
+                xga = 0;
+                gaxg = 0;
+                goaliedata.forEach(shot => {
+                    if (shot.player_id == lineup.player_id) {
+                        if (shot.code == "torjunta") {
+                            xga += shot.xGOT;
+                        }
+                        if (shot.code == "paastetty") {
+                            xga += shot.xGOT;
+                            ga += 1;
+                        }
+                    }
+                });
+                lineup.xGOT = xga;
+                lineup.goals = ga;
+            });
+
             // Set game data to page
             imgt1.src = match.club_A_crest;
             imgt2.src = match.club_B_crest;
@@ -441,44 +479,14 @@ function drawCharts() {
     pldatat2g.addColumn('number', 'xGOTA');
     pldatat2g.addColumn('number', 'GAxG');
 
-
     lineup_t1g.forEach(lineup => {
-        ga = 0;
-        xga = 0;
-        gaxg = 0;
-        goaliedata.forEach(shot => {
-            if (shot.player_id == lineup.player_id) {
-                if (shot.code == "torjunta") {
-                    xga += shot.xGOT;
-                }
-                if (shot.code == "paastetty") {
-                    xga += shot.xGOT;
-                    ga += 1;
-                }
-            }
-        });
-        gaxg = xga - ga;
-        pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ga, lineup.saves,
-        Number(xga.toFixed(2)),Number(gaxg.toFixed(2))]);
+        pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.saves,
+        lineup.xGOT,lineup.xGOT - lineup.goals]);
     });
+
     lineup_t2g.forEach(lineup => {
-        ga = 0;
-        xga = 0;
-        gaxg = 0;
-        goaliedata.forEach(shot => {
-            if (shot.player_id == lineup.player_id) {
-                if (shot.code == "torjunta") {
-                    xga += shot.xGOT;
-                }
-                if (shot.code == "paastetty") {
-                    xga += shot.xGOT;
-                    ga += 1;
-                }
-            }
-        });
-        gaxg = xga - ga;
-        pldatat2g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ga, lineup.saves,
-        Number(xga.toFixed(2)),Number(gaxg.toFixed(2))]);
+        pldatat2g..addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.saves,
+        lineup.xGOT,lineup.xGOT - lineup.goals]);
     });
 
     var options = {
@@ -734,6 +742,80 @@ function updateData() {
                 .filter(lineup => lineup.team_id === match.team_A_id);
             lineup_t2 = Object.values(lineups)
                 .filter(lineup => lineup.team_id === match.team_B_id);
+
+            lineup_t1.forEach(lineup => {
+                if (lineup.position == "OL/1" || lineup.position == "VL/1" || lineup.position == "KH/1" || lineup.position == "VP/1" || lineup.position == "OP/1") {
+                    lineup_t1l1.push(lineup);
+                    }
+                else if (lineup.position == "OL/2" || lineup.position == "VL/2" || lineup.position == "KH/2" || lineup.position == "VP/2" || lineup.position == "OP/2") {
+                    lineup_t1l2.push(lineup);
+                    }
+                else if (lineup.position == "OL/3" || lineup.position == "VL/3" || lineup.position == "KH/3" || lineup.position == "VP/3" || lineup.position == "OP/3") {
+                    lineup_t1l3.push(lineup);
+                    }
+                else if (lineup.position == "OL/4" || lineup.position == "VL/4" || lineup.position == "KH/4" || lineup.position == "VP/4" || lineup.position == "OP/4") {
+                    lineup_t1l4.push(lineup);
+                    }
+                else if (lineup.position == "MV/1" || lineup.position == "MV/2") {
+                    lineup_t1g.push(lineup);
+                    }
+            });
+
+            lineup_t2.forEach(lineup => {
+                if (lineup.position == "OL/1" || lineup.position == "VL/1" || lineup.position == "KH/1" || lineup.position == "VP/1" || lineup.position == "OP/1") {
+                    lineup_t2l1.push(lineup);
+                    }
+                else if (lineup.position == "OL/2" || lineup.position == "VL/2" || lineup.position == "KH/2" || lineup.position == "VP/2" || lineup.position == "OP/2") {
+                    lineup_t2l2.push(lineup);
+                    }
+                else if (lineup.position == "OL/3" || lineup.position == "VL/3" || lineup.position == "KH/3" || lineup.position == "VP/3" || lineup.position == "OP/3") {
+                    lineup_t2l3.push(lineup);
+                    }
+                else if (lineup.position == "OL/4" || lineup.position == "VL/4" || lineup.position == "KH/4" || lineup.position == "VP/4" || lineup.position == "OP/4") {
+                    lineup_t2l4.push(lineup);
+                    }
+                else if (lineup.position == "MV/1" || lineup.position == "MV/2") {
+                    lineup_t2g.push(lineup);
+                    }
+            });
+
+            lineup_t1g.forEach(lineup => {
+                ga = 0;
+                xga = 0;
+                gaxg = 0;
+                goaliedata.forEach(shot => {
+                    if (shot.player_id == lineup.player_id) {
+                        if (shot.code == "torjunta") {
+                            xga += shot.xGOT;
+                        }
+                        if (shot.code == "paastetty") {
+                            xga += shot.xGOT;
+                            ga += 1;
+                        }
+                    }
+                });
+                lineup.xGOT = xga;
+                lineup.goals = ga;
+            });
+
+            lineup_t2g.forEach(lineup => {
+                ga = 0;
+                xga = 0;
+                gaxg = 0;
+                goaliedata.forEach(shot => {
+                    if (shot.player_id == lineup.player_id) {
+                        if (shot.code == "torjunta") {
+                            xga += shot.xGOT;
+                        }
+                        if (shot.code == "paastetty") {
+                            xga += shot.xGOT;
+                            ga += 1;
+                        }
+                    }
+                });
+                lineup.xGOT = xga;
+                lineup.goals = ga;
+            });
 
             // Set game data to page
             imgt1.src = match.club_A_crest;
