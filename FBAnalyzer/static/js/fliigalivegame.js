@@ -56,6 +56,7 @@ window.onload = function() {
             t2name = match.team_B_name;
             document.getElementById('A_teamname').innerHTML = t1name
             document.getElementById('B_teamname').innerHTML = t2name
+            document.getElementById('game_attn').innerHTML = match.attendance;
 
             if (match.live_period != "" && match.status != "Played") {
                 const img = document.createElement('img');
@@ -351,6 +352,7 @@ function updateData() {
             const lineups_json = match.lineups;
             t1name = match.team_A_name;
             t2name = match.team_B_name;
+            document.getElementById('game_attn').innerHTML = match.attendance;
 
             if (match.status == "Played") {
                 if (document.getElementById('img' + match.match_id) != null) {
