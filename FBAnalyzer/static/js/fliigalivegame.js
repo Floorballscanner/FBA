@@ -276,21 +276,80 @@ function getCookie(name) {
 
 function drawCharts() {
 
-    var pldata = new google.visualization.DataTable();
-    pldata.addColumn('string', 'Player');
-    pldata.addColumn('string', 'Pos.');
-    pldata.addColumn('number', 'G');
-    pldata.addColumn('number', 'A');
-    pldata.addColumn('number', 'P');
-    pldata.addColumn('number', 'S');
-    pldata.addColumn('number', 'xG');
-    pldata.addColumn('number', 'xGOT');
-    pldata.addColumn('number', '+');
-    pldata.addColumn('number', '-');
+    document.getElementById("stt1name").innerHTML = t1name;
+    document.getElementById("stt2name").innerHTML = t2name;
+    
+    var pldatat1l1 = new google.visualization.DataTable();
+    pldatat1l1.addColumn('string', 'Player');
+    pldatat1l1.addColumn('string', 'Pos.');
+    pldatat1l1.addColumn('number', 'G');
+    pldatat1l1.addColumn('number', 'A');
+    pldatat1l1.addColumn('number', 'P');
+    pldatat1l1.addColumn('number', 'S');
+    pldatat1l1.addColumn('number', 'xG');
+    pldatat1l1.addColumn('number', 'xGOT');
+    pldatat1l1.addColumn('number', '+');
+    pldatat1l1.addColumn('number', '-');
 
-    lineup_t1.forEach(lineup => {
-        pldata.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+    var pldatat1l2 = pldatat1l1;
+    var pldatat1l3 = pldatat1l1;
+    var pldatat1l4 = pldatat1l1;
+    var pldatat2l1 = pldatat1l1;
+    var pldatat2l2 = pldatat1l1;
+    var pldatat2l3 = pldatat1l1;
+    var pldatat2l4 = pldatat1l1;
+
+    lineup_t1l1.forEach(lineup => {
+        pldatat1l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+    lineup_t1l2.forEach(lineup => {
+        pldatat1l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+    lineup_t1l3.forEach(lineup => {
+        pldatat1l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+    lineup_t1l4.forEach(lineup => {
+        pldatat1l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+    
+    lineup_t2l1.forEach(lineup => {
+        pldatat2l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+    lineup_t2l2.forEach(lineup => {
+        pldatat2l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+    lineup_t2l3.forEach(lineup => {
+        pldatat2l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+    lineup_t2l4.forEach(lineup => {
+        pldatat2l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+    });
+
+    var pldatat1g = new google.visualization.DataTable();
+    pldatat1g.addColumn('string', 'Player');
+    pldatat1g.addColumn('string', 'Pos.');
+    pldatat1g.addColumn('number', 'GA');
+    pldatat1g.addColumn('number', 'SA');
+    pldatat1g.addColumn('number', 'xGOTA');
+    pldatat1g.addColumn('number', 'GAxG');
+    
+    var pldatat2g = pldatat1g;
+
+    lineup_t1g.forEach(lineup => {
+        pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, 0, lineup.saves,
+        0,0]);
+    });
+    lineup_t2g.forEach(lineup => {
+        pldatat2g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, 0, lineup.saves,
+        0,0]);
     });
 
     var options = {
@@ -302,39 +361,26 @@ function drawCharts() {
         };
 
     // Create and draw the visualization.
-    var chart = new google.visualization.Table(document.getElementById('stT1_playerchart'));
-    chart.draw(pldata, options);
-    document.getElementById("stt1name").innerHTML = t1name;
-
-    var pldata2 = new google.visualization.DataTable();
-    pldata2.addColumn('string', 'Player');
-    pldata2.addColumn('string', 'Pos.');
-    pldata2.addColumn('number', 'G');
-    pldata2.addColumn('number', 'A');
-    pldata2.addColumn('number', 'P');
-    pldata2.addColumn('number', 'S');
-    pldata2.addColumn('number', 'xG');
-    pldata2.addColumn('number', 'xGOT');
-    pldata2.addColumn('number', '+');
-    pldata2.addColumn('number', '-');
-
-    lineup_t2.forEach(lineup => {
-        pldata2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
-    });
-
-    var options = {
-        title: 'Player stats, ' + t2name,
-        bar: {groupWidth: "95%"},
-        legend: { position: 'bottom'},
-        colors: ['#002072', '#59D9EB'],
-        hAxis: { textPosition: 'none' }
-        };
-
-    // Create and draw the visualization.
-    var chart2 = new google.visualization.Table(document.getElementById('stT2_playerchart'));
-    chart2.draw(pldata2, options);
-    document.getElementById("stt2name").innerHTML = t2name;
+    var chartt1l1 = new google.visualization.Table(document.getElementById('stT1L1_playerchart'));
+    chartt1l1.draw(pldatat1l1, options);
+    var chartt1l2 = new google.visualization.Table(document.getElementById('stT1L2_playerchart'));
+    chartt1l2.draw(pldatat1l2, options);
+    var chartt1l3 = new google.visualization.Table(document.getElementById('stT1L3_playerchart'));
+    chartt1l3.draw(pldatat1l3, options);
+    var chartt1l4 = new google.visualization.Table(document.getElementById('stT1L4_playerchart'));
+    chartt1l4.draw(pldatat1l4, options);
+    var chartt1g = new google.visualization.Table(document.getElementById('stT1G_playerchart'));
+    chartt1g.draw(pldatat1g, options);
+    var chartt2l1 = new google.visualization.Table(document.getElementById('stT2L1_playerchart'));
+    chartt2l1.draw(pldatat2l1, options);
+    var chartt2l2 = new google.visualization.Table(document.getElementById('stT2L2_playerchart'));
+    chartt2l2.draw(pldatat2l2, options);
+    var chartt2l3 = new google.visualization.Table(document.getElementById('stT2L3_playerchart'));
+    chartt2l3.draw(pldatat2l3, options);
+    var chartt2l4 = new google.visualization.Table(document.getElementById('stT2L4_playerchart'));
+    chartt2l4.draw(pldatat2l4, options);
+    var chartt2g = new google.visualization.Table(document.getElementById('stT2G_playerchart'));
+    chartt2g.draw(pldatat2g, options);
 }
 
 function drawShotMap() {
