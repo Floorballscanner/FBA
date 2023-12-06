@@ -207,42 +207,6 @@ window.onload = function() {
             lineup_t2 = Object.values(lineups)
                 .filter(lineup => lineup.team_id === match.team_B_id);
 
-            lineup_t1.forEach(lineup => {
-                if (lineup.position == "OL/1" || lineup.position == "VL/1" || lineup.position == "KH/1" || lineup.position == "VP/1" || lineup.position == "OP/1") {
-                    lineup_t1l1.push(lineup);
-                    }
-                else if (lineup.position == "OL/2" || lineup.position == "VL/2" || lineup.position == "KH/2" || lineup.position == "VP/2" || lineup.position == "OP/2") {
-                    lineup_t1l2.push(lineup);
-                    }
-                else if (lineup.position == "OL/3" || lineup.position == "VL/3" || lineup.position == "KH/3" || lineup.position == "VP/3" || lineup.position == "OP/3") {
-                    lineup_t1l3.push(lineup);
-                    }
-                else if (lineup.position == "OL/4" || lineup.position == "VL/4" || lineup.position == "KH/4" || lineup.position == "VP/4" || lineup.position == "OP/4") {
-                    lineup_t1l4.push(lineup);
-                    }
-                else if (lineup.position == "MV/1" || lineup.position == "MV/2") {
-                    lineup_t1g.push(lineup);
-                    }
-            });
-
-            lineup_t2.forEach(lineup => {
-                if (lineup.position == "OL/1" || lineup.position == "VL/1" || lineup.position == "KH/1" || lineup.position == "VP/1" || lineup.position == "OP/1") {
-                    lineup_t2l1.push(lineup);
-                    }
-                else if (lineup.position == "OL/2" || lineup.position == "VL/2" || lineup.position == "KH/2" || lineup.position == "VP/2" || lineup.position == "OP/2") {
-                    lineup_t2l2.push(lineup);
-                    }
-                else if (lineup.position == "OL/3" || lineup.position == "VL/3" || lineup.position == "KH/3" || lineup.position == "VP/3" || lineup.position == "OP/3") {
-                    lineup_t2l3.push(lineup);
-                    }
-                else if (lineup.position == "OL/4" || lineup.position == "VL/4" || lineup.position == "KH/4" || lineup.position == "VP/4" || lineup.position == "OP/4") {
-                    lineup_t2l4.push(lineup);
-                    }
-                else if (lineup.position == "MV/1" || lineup.position == "MV/2") {
-                    lineup_t2g.push(lineup);
-                    }
-            });
-
             lineup_t1g.forEach(lineup => {
                 ga = 0;
                 xga = 0;
