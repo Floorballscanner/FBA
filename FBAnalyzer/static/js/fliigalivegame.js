@@ -291,13 +291,89 @@ function drawCharts() {
     pldatat1l1.addColumn('number', '+');
     pldatat1l1.addColumn('number', '-');
 
-    var pldatat1l2 = pldatat1l1;
-    var pldatat1l3 = pldatat1l1;
-    var pldatat1l4 = pldatat1l1;
-    var pldatat2l1 = pldatat1l1;
-    var pldatat2l2 = pldatat1l1;
-    var pldatat2l3 = pldatat1l1;
-    var pldatat2l4 = pldatat1l1;
+    var pldatat1l2 = new google.visualization.DataTable();
+    pldatat1l2.addColumn('string', 'Player');
+    pldatat1l2.addColumn('string', 'Pos.');
+    pldatat1l2.addColumn('number', 'G');
+    pldatat1l2.addColumn('number', 'A');
+    pldatat1l2.addColumn('number', 'P');
+    pldatat1l2.addColumn('number', 'S');
+    pldatat1l2.addColumn('number', 'xG');
+    pldatat1l2.addColumn('number', 'xGOT');
+    pldatat1l2.addColumn('number', '+');
+    pldatat1l2.addColumn('number', '-');
+    
+    var pldatat1l3 = new google.visualization.DataTable();
+    pldatat1l3.addColumn('string', 'Player');
+    pldatat1l3.addColumn('string', 'Pos.');
+    pldatat1l3.addColumn('number', 'G');
+    pldatat1l3.addColumn('number', 'A');
+    pldatat1l3.addColumn('number', 'P');
+    pldatat1l3.addColumn('number', 'S');
+    pldatat1l3.addColumn('number', 'xG');
+    pldatat1l3.addColumn('number', 'xGOT');
+    pldatat1l3.addColumn('number', '+');
+    pldatat1l3.addColumn('number', '-');
+    
+    var pldatat1l4 = new google.visualization.DataTable();
+    pldatat1l4.addColumn('string', 'Player');
+    pldatat1l4.addColumn('string', 'Pos.');
+    pldatat1l4.addColumn('number', 'G');
+    pldatat1l4.addColumn('number', 'A');
+    pldatat1l4.addColumn('number', 'P');
+    pldatat1l4.addColumn('number', 'S');
+    pldatat1l4.addColumn('number', 'xG');
+    pldatat1l4.addColumn('number', 'xGOT');
+    pldatat1l4.addColumn('number', '+');
+    pldatat1l4.addColumn('number', '-');
+    
+    var pldatat2l1 = new google.visualization.DataTable();
+    pldatat2l1.addColumn('string', 'Player');
+    pldatat2l1.addColumn('string', 'Pos.');
+    pldatat2l1.addColumn('number', 'G');
+    pldatat2l1.addColumn('number', 'A');
+    pldatat2l1.addColumn('number', 'P');
+    pldatat2l1.addColumn('number', 'S');
+    pldatat2l1.addColumn('number', 'xG');
+    pldatat2l1.addColumn('number', 'xGOT');
+    pldatat2l1.addColumn('number', '+');
+    pldatat2l1.addColumn('number', '-');
+    
+    var pldatat2l2 = new google.visualization.DataTable();
+    pldatat2l2.addColumn('string', 'Player');
+    pldatat2l2.addColumn('string', 'Pos.');
+    pldatat2l2.addColumn('number', 'G');
+    pldatat2l2.addColumn('number', 'A');
+    pldatat2l2.addColumn('number', 'P');
+    pldatat2l2.addColumn('number', 'S');
+    pldatat2l2.addColumn('number', 'xG');
+    pldatat2l2.addColumn('number', 'xGOT');
+    pldatat2l2.addColumn('number', '+');
+    pldatat2l2.addColumn('number', '-');
+    
+    var pldatat2l3 = new google.visualization.DataTable();
+    pldatat2l3.addColumn('string', 'Player');
+    pldatat2l3.addColumn('string', 'Pos.');
+    pldatat2l3.addColumn('number', 'G');
+    pldatat2l3.addColumn('number', 'A');
+    pldatat2l3.addColumn('number', 'P');
+    pldatat2l3.addColumn('number', 'S');
+    pldatat2l3.addColumn('number', 'xG');
+    pldatat2l3.addColumn('number', 'xGOT');
+    pldatat2l3.addColumn('number', '+');
+    pldatat2l3.addColumn('number', '-');
+    
+    var pldatat2l4 = new google.visualization.DataTable();
+    pldatat2l4.addColumn('string', 'Player');
+    pldatat2l4.addColumn('string', 'Pos.');
+    pldatat2l4.addColumn('number', 'G');
+    pldatat2l4.addColumn('number', 'A');
+    pldatat2l4.addColumn('number', 'P');
+    pldatat2l4.addColumn('number', 'S');
+    pldatat2l4.addColumn('number', 'xG');
+    pldatat2l4.addColumn('number', 'xGOT');
+    pldatat2l4.addColumn('number', '+');
+    pldatat2l4.addColumn('number', '-');
 
     lineup_t1l1.forEach(lineup => {
         pldatat1l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
@@ -341,7 +417,13 @@ function drawCharts() {
     pldatat1g.addColumn('number', 'xGOTA');
     pldatat1g.addColumn('number', 'GAxG');
     
-    var pldatat2g = pldatat1g;
+    var pldatat2g = new google.visualization.DataTable();
+    pldatat2g.addColumn('string', 'Player');
+    pldatat2g.addColumn('string', 'Pos.');
+    pldatat2g.addColumn('number', 'GA');
+    pldatat2g.addColumn('number', 'SA');
+    pldatat2g.addColumn('number', 'xGOTA');
+    pldatat2g.addColumn('number', 'GAxG');
 
     lineup_t1g.forEach(lineup => {
         pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, 0, lineup.saves,
