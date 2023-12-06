@@ -194,11 +194,11 @@ window.onload = function() {
                 txg = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xG, 0);
-                lineup.xG = txg.toFixed(2);
+                lineup.xG = Number(txg.toFixed(2));
                 txg = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
-                lineup.xGOT = txg.toFixed(2);
+                lineup.xGOT = Number(txg.toFixed(2));
                 lineup.shots = Object.values(shots)
                 .filter(shot => shot.player_id === pl).length;
 
@@ -767,11 +767,11 @@ function updateData() {
                 txg = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xG, 0);
-                lineup.xG = txg.toFixed(2);
+                lineup.xG = Number(txg.toFixed(2));
                 txg = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
-                lineup.xGOT = txg.toFixed(2);
+                lineup.xGOT = Number(txg.toFixed(2));
                 lineup.shots = Object.values(shots)
                 .filter(shot => shot.player_id === pl).length;
 
