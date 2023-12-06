@@ -298,6 +298,41 @@ window.onload = function() {
             period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
 
+            // Convert the object into an array of key-value pairs
+            var arrayLineups = Object.entries(lineups);
+            // Sort the array based on xG values in descending order
+            arrayLineups.sort((a, b) => b[1].xG - a[1].xG);
+
+            pl_id1 = arrayLineups[0][1].player_id;
+            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].xG;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                document.getElementById('imgp1').src = url;
+            })
+
+            pl_id2 = arrayLineups[1][1].player_id;
+            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].xG;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                document.getElementById('imgp2').src = url;
+            })
+
+            pl_id3 = arrayLineups[2][1].player_id;
+            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].xG;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                document.getElementById('imgp3').src = url;
+            })
+
             drawCharts();
             drawShotMap();
             console.log('Success:', data);
@@ -797,6 +832,41 @@ function updateData() {
             g_date.innerHTML = match.date;
             period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
+
+            // Convert the object into an array of key-value pairs
+            var arrayLineups = Object.entries(lineups);
+            // Sort the array based on xG values in descending order
+            arrayLineups.sort((a, b) => b[1].xG - a[1].xG);
+
+            pl_id1 = arrayLineups[0][1].player_id;
+            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].xG;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                document.getElementById('imgp1').src = url;
+            })
+
+            pl_id2 = arrayLineups[1][1].player_id;
+            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].xG;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                document.getElementById('imgp2').src = url;
+            })
+
+            pl_id3 = arrayLineups[2][1].player_id;
+            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].xG;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                document.getElementById('imgp3').src = url;
+            })
 
             drawCharts();
             drawShotMap();
