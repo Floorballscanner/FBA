@@ -154,11 +154,14 @@ window.onload = function() {
             }
 
             for (let i = 0; i < goaliedata.length; i++) {
-                const st = goaliedata[i].location.split(',');
-                const x = parseFloat(st[0]);
-                const y = parseFloat(st[1]);
-                const [xGOT, xG] = calcxG(x, y);
-                goaliedata[i].xGOT = 0;
+
+                if (goaliedata[i].location != "") {
+                    const st = goaliedata[i].location.split(',');
+                    const x = parseFloat(st[0]);
+                    const y = parseFloat(st[1]);
+                    const [xGOT, xG] = calcxG(x, y);
+                    goaliedata[i].xGOT = xGOT;
+                }
             }
 
             // Sum all "xG" values using reduce
@@ -680,11 +683,13 @@ function updateData() {
             }
 
             for (let i = 0; i < goaliedata.length; i++) {
-                const st = goaliedata[i].location.split(',');
-                const x = parseFloat(st[0]);
-                const y = parseFloat(st[1]);
-                const [xGOT, xG] = calcxG(x, y);
-                goaliedata[i].xGOT = 0;
+                if (goaliedata[i].location != "") {
+                    const st = goaliedata[i].location.split(',');
+                    const x = parseFloat(st[0]);
+                    const y = parseFloat(st[1]);
+                    const [xGOT, xG] = calcxG(x, y);
+                    goaliedata[i].xGOT = xGOT;
+                }
             }
 
             // Sum all "xG" values using reduce
