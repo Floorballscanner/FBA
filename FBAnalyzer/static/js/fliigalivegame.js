@@ -485,7 +485,7 @@ function drawCharts() {
     });
 
     lineup_t2g.forEach(lineup => {
-        pldatat2g..addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.saves,
+        pldatat2g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.saves,
         lineup.xGOT,lineup.xGOT - lineup.goals]);
     });
 
