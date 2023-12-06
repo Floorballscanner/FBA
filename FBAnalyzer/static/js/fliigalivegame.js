@@ -191,12 +191,14 @@ window.onload = function() {
             lineups.forEach(lineup => {
                 pl = lineup.player_id;
 
-                lineup.xG = Object.values(shots)
+                txg = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xG, 0);
-                lineup.xGOT = Object.values(shots)
+                lineup.xG = txg.toFixed(2);
+                txg = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
+                lineup.xGOT = txg.toFixed(2);
                 lineup.shots = Object.values(shots)
                 .filter(shot => shot.player_id === pl).length;
 
@@ -762,12 +764,14 @@ function updateData() {
             lineups.forEach(lineup => {
                 pl = lineup.player_id;
 
-                lineup.xG = Object.values(shots)
+                txg = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xG, 0);
-                lineup.xGOT = Object.values(shots)
+                lineup.xG = txg.toFixed(2);
+                txg = Object.values(shots)
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
+                lineup.xGOT = txg.toFixed(2);
                 lineup.shots = Object.values(shots)
                 .filter(shot => shot.player_id === pl).length;
 
@@ -839,7 +843,7 @@ function updateData() {
             arrayLineups.sort((a, b) => b[1].xG - a[1].xG);
 
             pl_id1 = arrayLineups[0][1].player_id;
-            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].xG;
+            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].player_name + " " + arrayLineups[0][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
             .then(response => response.json())
             .then(data => {
@@ -849,7 +853,7 @@ function updateData() {
             })
 
             pl_id2 = arrayLineups[1][1].player_id;
-            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].xG;
+            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].player_name + " " + arrayLineups[1][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
             .then(response => response.json())
             .then(data => {
@@ -859,7 +863,7 @@ function updateData() {
             })
 
             pl_id3 = arrayLineups[2][1].player_id;
-            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].xG;
+            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].player_name + " " + arrayLineups[2][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
             .then(response => response.json())
             .then(data => {
