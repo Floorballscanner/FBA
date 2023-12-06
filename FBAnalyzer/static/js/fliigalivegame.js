@@ -13,6 +13,16 @@ var events = "";
 var lineups = [];
 var lineup_t1 = [];
 var lineup_t2 = [];
+var lineup_t1l1 = [];
+var lineup_t2l1 = [];
+var lineup_t1l2 = [];
+var lineup_t2l2 = [];
+var lineup_t1l3 = [];
+var lineup_t2l3 = [];
+var lineup_t1l4 = [];
+var lineup_t2l4 = [];
+var lineup_t1g = [];
+var lineup_t2g = [];
 var shots = [];
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
@@ -180,6 +190,42 @@ window.onload = function() {
                 .filter(lineup => lineup.team_id === match.team_A_id);
             lineup_t2 = Object.values(lineups)
                 .filter(lineup => lineup.team_id === match.team_B_id);
+
+            lineup_t1.forEach(lineup => {
+                if (lineup.position == "OL/1" || lineup.position == "VL/1" || lineup.position == "KH/1" || lineup.position == "VP/1" || lineup.position == "OP/1") {
+                    lineup_t1l1.addRow(lineup);
+                    }
+                else if (lineup.position == "OL/2" || lineup.position == "VL/2" || lineup.position == "KH/2" || lineup.position == "VP/2" || lineup.position == "OP/2") {
+                    lineup_t1l2.addRow(lineup);
+                    }
+                else if (lineup.position == "OL/3" || lineup.position == "VL/3" || lineup.position == "KH/3" || lineup.position == "VP/3" || lineup.position == "OP/3") {
+                    lineup_t1l3.addRow(lineup);
+                    }
+                else if (lineup.position == "OL/4" || lineup.position == "VL/4" || lineup.position == "KH/4" || lineup.position == "VP/4" || lineup.position == "OP/4") {
+                    lineup_t1l4.addRow(lineup);
+                    }
+                else if (lineup.position == "MV/1" || lineup.position == "MV/2") {
+                    lineup_t1g.addRow(lineup);
+                    }
+            });
+
+            lineup_t2.forEach(lineup => {
+                if (lineup.position == "OL/1" || lineup.position == "VL/1" || lineup.position == "KH/1" || lineup.position == "VP/1" || lineup.position == "OP/1") {
+                    lineup_t2l1.addRow(lineup);
+                    }
+                else if (lineup.position == "OL/2" || lineup.position == "VL/2" || lineup.position == "KH/2" || lineup.position == "VP/2" || lineup.position == "OP/2") {
+                    lineup_t2l2.addRow(lineup);
+                    }
+                else if (lineup.position == "OL/3" || lineup.position == "VL/3" || lineup.position == "KH/3" || lineup.position == "VP/3" || lineup.position == "OP/3") {
+                    lineup_t2l3.addRow(lineup);
+                    }
+                else if (lineup.position == "OL/4" || lineup.position == "VL/4" || lineup.position == "KH/4" || lineup.position == "VP/4" || lineup.position == "OP/4") {
+                    lineup_t2l4.addRow(lineup);
+                    }
+                else if (lineup.position == "MV/1" || lineup.position == "MV/2") {
+                    lineup_t2g.addRow(lineup);
+                    }
+            });
 
             // Set game data to page
             imgt1.src = match.club_A_crest;
