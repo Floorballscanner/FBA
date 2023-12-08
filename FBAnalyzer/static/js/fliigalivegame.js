@@ -306,33 +306,48 @@ window.onload = function() {
             arrayLineups.sort((a, b) => b[1].xG - a[1].xG);
 
             pl_id1 = arrayLineups[0][1].player_id;
-            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].player_name + " " + arrayLineups[0][1].xG;
+            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].player_name + "&emsp;" + arrayLineups[0][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
             .then(response => response.json())
             .then(data => {
                 player = data.player;
                 url = player.img_url;
-                document.getElementById('imgp1').src = url;
+                if (url != "") {
+                    document.getElementById('imgp1').src = url;
+                }
+                else {
+                    document.getElementById('imgp1').src = "/static/symbol.png";
+                }
             })
 
             pl_id2 = arrayLineups[1][1].player_id;
-            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].player_name + " " + arrayLineups[1][1].xG;
+            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].player_name + "&emsp;" + arrayLineups[1][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
             .then(response => response.json())
             .then(data => {
                 player = data.player;
                 url = player.img_url;
-                document.getElementById('imgp2').src = url;
+                if (url != "") {
+                    document.getElementById('imgp2').src = url;
+                }
+                else {
+                    document.getElementById('imgp2').src = "/static/symbol.png";
+                }
             })
 
             pl_id3 = arrayLineups[2][1].player_id;
-            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].player_name + " " + arrayLineups[2][1].xG;
+            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].player_name + "&emsp;" + arrayLineups[2][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
             .then(response => response.json())
             .then(data => {
                 player = data.player;
                 url = player.img_url;
-                document.getElementById('imgp3').src = url;
+                if (url != "") {
+                    document.getElementById('imgp3').src = url;
+                }
+                else {
+                    document.getElementById('imgp3').src = "/static/symbol.png";
+                }
             })
 
             drawCharts();
@@ -849,7 +864,12 @@ function updateData() {
             .then(data => {
                 player = data.player;
                 url = player.img_url;
-                document.getElementById('imgp1').src = url;
+                if (url != "") {
+                    document.getElementById('imgp1').src = url;
+                }
+                else {
+                    document.getElementById('imgp1').src = "/static/symbol.png";
+                }
             })
 
             pl_id2 = arrayLineups[1][1].player_id;
@@ -859,7 +879,12 @@ function updateData() {
             .then(data => {
                 player = data.player;
                 url = player.img_url;
-                document.getElementById('imgp2').src = url;
+                if (url != "") {
+                    document.getElementById('imgp2').src = url;
+                }
+                else {
+                    document.getElementById('imgp2').src = "/static/symbol.png";
+                }
             })
 
             pl_id3 = arrayLineups[2][1].player_id;
@@ -869,7 +894,12 @@ function updateData() {
             .then(data => {
                 player = data.player;
                 url = player.img_url;
-                document.getElementById('imgp3').src = url;
+                if (url != "") {
+                    document.getElementById('imgp3').src = url;
+                }
+                else {
+                    document.getElementById('imgp3').src = "/static/symbol.png";
+                }
             })
 
             drawCharts();
