@@ -317,6 +317,7 @@ window.onload = function() {
                 }
                 else {
                     document.getElementById('imgp1').src = "/static/symbol.png";
+                    document.getElementById("imgp1").style.width = "50px";
                 }
             })
 
@@ -332,6 +333,7 @@ window.onload = function() {
                 }
                 else {
                     document.getElementById('imgp2').src = "/static/symbol.png";
+                    document.getElementById("imgp2").style.width = "50px";
                 }
             })
 
@@ -347,6 +349,7 @@ window.onload = function() {
                 }
                 else {
                     document.getElementById('imgp3').src = "/static/symbol.png";
+                    document.getElementById("imgp3").style.width = "50px";
                 }
             })
 
@@ -869,6 +872,7 @@ function updateData() {
                 }
                 else {
                     document.getElementById('imgp1').src = "/static/symbol.png";
+                    document.getElementById("imgp1").style.width = "50px";
                 }
             })
 
@@ -884,6 +888,7 @@ function updateData() {
                 }
                 else {
                     document.getElementById('imgp2').src = "/static/symbol.png";
+                    document.getElementById("imgp2").style.width = "50px";
                 }
             })
 
@@ -899,6 +904,7 @@ function updateData() {
                 }
                 else {
                     document.getElementById('imgp3').src = "/static/symbol.png";
+                    document.getElementById("imgp3").style.width = "50px";
                 }
             })
 
