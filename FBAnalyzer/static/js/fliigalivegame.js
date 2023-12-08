@@ -316,8 +316,10 @@ window.onload = function() {
                     document.getElementById('imgp1').src = url;
                 }
                 else {
-                    document.getElementById('imgp1').src = "/static/symbol.png";
+                    document.getElementById('imgp1').src = "/static/symbol_transparent.png";
                     document.getElementById("imgp1").style.width = "50px";
+                    document.getElementById('p1xG').innerHTML = "&emsp;" + arrayLineups[0][1].player_name + "&emsp;" + arrayLineups[0][1].xG;
+
                 }
             })
 
@@ -332,8 +334,10 @@ window.onload = function() {
                     document.getElementById('imgp2').src = url;
                 }
                 else {
-                    document.getElementById('imgp2').src = "/static/symbol.png";
+                    document.getElementById('imgp2').src = "/static/symbol_transparent.png";
                     document.getElementById("imgp2").style.width = "50px";
+                    document.getElementById('p2xG').innerHTML = "&emsp;" + arrayLineups[1][1].player_name + "&emsp;" + arrayLineups[1][1].xG;
+
                 }
             })
 
@@ -348,8 +352,10 @@ window.onload = function() {
                     document.getElementById('imgp3').src = url;
                 }
                 else {
-                    document.getElementById('imgp3').src = "/static/symbol.png";
+                    document.getElementById('imgp3').src = "/static/symbol_transparent.png";
                     document.getElementById("imgp3").style.width = "50px";
+                    document.getElementById('p3xG').innerHTML = "&emsp;" + arrayLineups[2][1].player_name + "&emsp;" + arrayLineups[2][1].xG;
+
                 }
             })
 
@@ -861,7 +867,7 @@ function updateData() {
             arrayLineups.sort((a, b) => b[1].xG - a[1].xG);
 
             pl_id1 = arrayLineups[0][1].player_id;
-            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].player_name + " " + arrayLineups[0][1].xG;
+            document.getElementById('p1xG').innerHTML = arrayLineups[0][1].player_name + "&emsp;" + arrayLineups[0][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
             .then(response => response.json())
             .then(data => {
@@ -871,13 +877,15 @@ function updateData() {
                     document.getElementById('imgp1').src = url;
                 }
                 else {
-                    document.getElementById('imgp1').src = "/static/symbol.png";
+                    document.getElementById('imgp1').src = "/static/symbol_transparent.png";
                     document.getElementById("imgp1").style.width = "50px";
+                    document.getElementById('p1xG').innerHTML = "&emsp;" + arrayLineups[0][1].player_name + "&emsp;" + arrayLineups[0][1].xG;
+
                 }
             })
 
             pl_id2 = arrayLineups[1][1].player_id;
-            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].player_name + " " + arrayLineups[1][1].xG;
+            document.getElementById('p2xG').innerHTML = arrayLineups[1][1].player_name + "&emsp;" + arrayLineups[1][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
             .then(response => response.json())
             .then(data => {
@@ -887,13 +895,15 @@ function updateData() {
                     document.getElementById('imgp2').src = url;
                 }
                 else {
-                    document.getElementById('imgp2').src = "/static/symbol.png";
+                    document.getElementById('imgp2').src = "/static/symbol_transparent.png";
                     document.getElementById("imgp2").style.width = "50px";
+                    document.getElementById('p2xG').innerHTML = "&emsp;" + arrayLineups[1][1].player_name + "&emsp;" + arrayLineups[1][1].xG;
+
                 }
             })
 
             pl_id3 = arrayLineups[2][1].player_id;
-            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].player_name + " " + arrayLineups[2][1].xG;
+            document.getElementById('p3xG').innerHTML = arrayLineups[2][1].player_name + "&emsp;" + arrayLineups[2][1].xG;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
             .then(response => response.json())
             .then(data => {
@@ -903,8 +913,9 @@ function updateData() {
                     document.getElementById('imgp3').src = url;
                 }
                 else {
-                    document.getElementById('imgp3').src = "/static/symbol.png";
+                    document.getElementById('imgp3').src = "/static/symbol_transparent.png";
                     document.getElementById("imgp3").style.width = "50px";
+                    document.getElementById('p3xG').innerHTML = "&emsp;" + arrayLineups[2][1].player_name + " " + arrayLineups[2][1].xG;
                 }
             })
 
