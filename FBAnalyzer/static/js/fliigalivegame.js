@@ -592,8 +592,10 @@ function drawCharts() {
         legend: { position: 'bottom' },
         seriesType: 'lines',
         series: {
-            2: {type: 'bars', color: 'blue'},
-            3: {type: 'bars', color: 'red'}
+            0: {color: 'red'},
+            1: {color: 'blue'}
+            2: {type: 'bars', color: 'red'},
+            3: {type: 'bars', color: 'blue'}
         }
     };
 
@@ -655,7 +657,7 @@ function drawShotMap() {
 
 function calcxGArray() {
 
-    xGTeamArray = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+    xGTeamArray = [['Time','xG ' + t1name,'xG ' + t2name,'Goal ' + t1name,'Goal ' + t2name]];
     xG_A = 0;
     xG_B = 0;
     shots.forEach(event => {
