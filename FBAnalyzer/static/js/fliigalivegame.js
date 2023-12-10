@@ -51,6 +51,8 @@ var cnvs = document.getElementById("liveShotMap");
 var ctx = cnvs.getContext("2d");
 var fLength = 332;
 var fWidth = 200;
+var xG_t1 = [];
+var xG_t2 = [];
 
 // Creates the HTML - page when the window is loaded
 
@@ -359,6 +361,7 @@ window.onload = function() {
                 }
             })
 
+            calcXG();
             drawCharts();
             drawShotMap();
             console.log('Success:', data);
@@ -629,6 +632,36 @@ function drawShotMap() {
             ctx.closePath();
         }
     });
+}
+
+function calcXG() {
+    xG_t1 = [];
+    xG_t2 = [];
+    xG_A = 0;
+    xG_B = 0;
+    shots.forEach(event => {
+
+        // Split the string into minutes and seconds
+        var [minutes, seconds] = event.time.split(':');
+
+        // Convert minutes and seconds to numbers
+        var minutesNum = parseInt(minutes, 10);
+        var secondsNum = parseInt(seconds, 10);
+
+        // Calculate the total time in seconds
+        var totalTimeInSeconds = minutesNum * 60 + secondsNum;
+
+        if (event.team == "A") {
+
+            xG_A += event.xG;
+            xG_t1.push([totalTimeInSeconds,xG_A]);
+        }
+        else if (event.team == "B") {
+
+            xG_B += event.xG;
+            xG_t2.push([totalTimeInSeconds,xG_A]);
+        }
+    }
 }
 
 function updateData() {
@@ -919,6 +952,7 @@ function updateData() {
                 }
             })
 
+            calcXG();
             drawCharts();
             drawShotMap();
             console.log('Success:', data);
