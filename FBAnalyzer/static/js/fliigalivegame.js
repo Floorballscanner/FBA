@@ -659,7 +659,7 @@ function calcxGArray() {
         else if (event.team == "B") {
 
             xG_B += event.xG;
-            xG_t2.push([totalTimeInSeconds,xG_A]);
+            xG_t2.push([totalTimeInSeconds,xG_B]);
         }
     });
 }
