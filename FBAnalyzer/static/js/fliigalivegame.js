@@ -592,8 +592,8 @@ function drawCharts() {
         legend: { position: 'bottom' },
         seriesType: 'lines',
         series: {
-            3: {type: 'bars', color: 'blue'},
-            4: {type: 'bars', color: 'red'}
+            2: {type: 'bars', color: 'blue'},
+            3: {type: 'bars', color: 'red'}
         }
     };
 
@@ -660,25 +660,14 @@ function calcxGArray() {
     xG_B = 0;
     shots.forEach(event => {
 
-        // Split the string into minutes and seconds
-        var [minutes, seconds] = event.time.split(':');
-
-        // Convert minutes and seconds to numbers
-        var minutesNum = parseInt(minutes, 10);
-        var secondsNum = parseInt(seconds, 10);
-
-        // Calculate the total time in seconds
-        var totalTimeInSeconds = minutesNum * 60 + secondsNum;
-        var timeString = totalTimeInSeconds.toString();
-
         if (event.team == "A") {
 
             xG_A += event.xG;
             if (event.code == "laukausmaali") {
-                xGTeamArray.push([timeString,xG_A,xG_B,xG_A,0]);
+                xGTeamArray.push([event.time,xG_A,xG_B,xG_A,0]);
             }
             else {
-                xGTeamArray.push([timeString,xG_A,xG_B,0,0]);
+                xGTeamArray.push([event.time,xG_A,xG_B,0,0]);
             }
 
 
@@ -687,10 +676,10 @@ function calcxGArray() {
 
             xG_B += event.xG;
             if (event.code == "laukausmaali") {
-                xGTeamArray.push([timeString,xG_A,xG_B,0,xG_B]);
+                xGTeamArray.push([event.time,xG_A,xG_B,0,xG_B]);
             }
             else {
-                xGTeamArray.push([timeString,xG_A,xG_B,0,0]);
+                xGTeamArray.push([event.time,xG_A,xG_B,0,0]);
             }
         }
     });
