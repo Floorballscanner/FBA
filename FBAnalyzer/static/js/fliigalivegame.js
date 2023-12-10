@@ -593,7 +593,7 @@ function drawCharts() {
         seriesType: 'lines',
         series: {
             0: {color: 'red'},
-            1: {color: 'blue'}
+            1: {color: 'blue'},
             2: {type: 'bars', color: 'red'},
             3: {type: 'bars', color: 'blue'}
         }
