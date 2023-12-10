@@ -597,7 +597,7 @@ function drawCharts() {
         }
     };
 
-    var chartlivexG = new google.visualization.Table(document.getElementById('livexGmap'));
+    var chartlivexG = new google.visualization.ComboChart(document.getElementById('livexGmap'));
     chartlivexG.draw(xGLiveData, options);
 
 
