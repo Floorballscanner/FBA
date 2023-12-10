@@ -361,7 +361,7 @@ window.onload = function() {
                 }
             })
 
-            calcXG();
+            calcxGArray();
             drawCharts();
             drawShotMap();
             console.log('Success:', data);
@@ -634,7 +634,7 @@ function drawShotMap() {
     });
 }
 
-function calcXG() {
+function calcxGArray() {
     xG_t1 = [];
     xG_t2 = [];
     xG_A = 0;
@@ -661,7 +661,7 @@ function calcXG() {
             xG_B += event.xG;
             xG_t2.push([totalTimeInSeconds,xG_A]);
         }
-    }
+    });
 }
 
 function updateData() {
@@ -952,7 +952,7 @@ function updateData() {
                 }
             })
 
-            calcXG();
+            calcxGArray();
             drawCharts();
             drawShotMap();
             console.log('Success:', data);
