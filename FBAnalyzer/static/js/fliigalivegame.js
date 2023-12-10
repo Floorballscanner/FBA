@@ -51,8 +51,7 @@ var cnvs = document.getElementById("liveShotMap");
 var ctx = cnvs.getContext("2d");
 var fLength = 332;
 var fWidth = 200;
-var xG_t1 = [];
-var xG_t2 = [];
+var xGTeamArray = [];
 
 // Creates the HTML - page when the window is loaded
 
@@ -582,6 +581,26 @@ function drawCharts() {
     chartt2l4.draw(pldatat2l4, options);
     var chartt2g = new google.visualization.Table(document.getElementById('stT2G_playerchart'));
     chartt2g.draw(pldatat2g, options);
+
+
+    // Team xG Chart
+     var xGLiveData = google.visualization.arrayToDataTable(xGTeamArray);
+
+     var options = {
+        title: 'xG by Team',
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        seriesType: 'lines',
+        series: {
+            2: {type: 'bars', color: 'blue'},
+            3: {type: 'bars', color: 'red'}
+        }
+    };
+
+    var chartlivexG = new google.visualization.Table(document.getElementById('livexGmap'));
+    chartlivexG.draw(xGLiveData, options);
+
+
 }
 
 function drawShotMap() {
@@ -635,8 +654,8 @@ function drawShotMap() {
 }
 
 function calcxGArray() {
-    xG_t1 = [];
-    xG_t2 = [];
+
+    xGTeamArray = [];
     xG_A = 0;
     xG_B = 0;
     shots.forEach(event => {
@@ -654,12 +673,24 @@ function calcxGArray() {
         if (event.team == "A") {
 
             xG_A += event.xG;
-            xG_t1.push([totalTimeInSeconds,xG_A]);
+            if (event.code == "laukausmaali") {
+                xGTeamArray.push([totalTimeInSeconds,xG_A,xG_B,xG_A,0]);
+            }
+            else {
+                xGTeamArray.push([totalTimeInSeconds,xG_A,xG_B,0,0]);
+            }
+
+
         }
         else if (event.team == "B") {
 
             xG_B += event.xG;
-            xG_t2.push([totalTimeInSeconds,xG_B]);
+            if (event.code == "laukausmaali") {
+                xGTeamArray.push([totalTimeInSeconds,xG_A,xG_B,0,xG_B]);
+            }
+            else {
+                xGTeamArray.push([totalTimeInSeconds,xG_A,xG_B,0,0]);
+            }
         }
     });
 }

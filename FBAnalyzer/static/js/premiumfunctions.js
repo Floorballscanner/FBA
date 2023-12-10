@@ -5898,7 +5898,7 @@
         //  seriesType: 'lines',
          // series: {
             //  2:{type: 'bars', color: 'blue'},
-           //   3:{type: 'bars', color: 'red'}}
+           //   3:{type: 'bars', color: 'red'}},
        // };
 
         var combinedData = [];
