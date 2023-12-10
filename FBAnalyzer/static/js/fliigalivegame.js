@@ -530,7 +530,7 @@ function drawCharts() {
     pldatat1g.addColumn('number', 'GA');
     pldatat1g.addColumn('number', 'SA');
     pldatat1g.addColumn('number', 'xGOTA');
-    pldatat1g.addColumn('number', 'GAxG');
+    pldatat1g.addColumn('number', 'GSAx');
     
     var pldatat2g = new google.visualization.DataTable();
     pldatat2g.addColumn('string', 'Player');
@@ -538,7 +538,7 @@ function drawCharts() {
     pldatat2g.addColumn('number', 'GA');
     pldatat2g.addColumn('number', 'SA');
     pldatat2g.addColumn('number', 'xGOTA');
-    pldatat2g.addColumn('number', 'GAxG');
+    pldatat2g.addColumn('number', 'GSAx');
 
     lineup_t1g.forEach(lineup => {
         pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.saves,
