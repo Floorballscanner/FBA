@@ -51,7 +51,7 @@ var cnvs = document.getElementById("liveShotMap");
 var ctx = cnvs.getContext("2d");
 var fLength = 332;
 var fWidth = 200;
-var xGTeamArray = [];
+var xGTeamArray = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
 
 // Creates the HTML - page when the window is loaded
 
@@ -655,7 +655,7 @@ function drawShotMap() {
 
 function calcxGArray() {
 
-    xGTeamArray = [];
+    xGTeamArray = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
     xG_A = 0;
     xG_B = 0;
     shots.forEach(event => {
