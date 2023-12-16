@@ -365,8 +365,8 @@ window.onload = function() {
                 }
             })
             calcxGArray();
-            setTimeout(drawCharts, 500);
-            setTimeout(drawShotMap, 1000);
+            drawCharts();
+            drawShotMap();
             console.log('Success:', data);
 
         })
@@ -1005,8 +1005,8 @@ function updateData() {
             })
 
             calcxGArray();
-            drawCharts();
-            drawShotMap();
+            setTimeout(drawCharts,500);
+            setTimeout(drawShotMap,1000);
             console.log('Success:', data);
             t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
 
