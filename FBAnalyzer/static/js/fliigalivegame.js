@@ -614,7 +614,7 @@ function drawCharts() {
     var xGByLineData = google.visualization.arrayToDataTable([
          ['Line', t1name, { role: 'style' }, { role: 'annotation' }, t2name, { role: 'style' }, { role: 'annotation' } ],
          ['Line 1', xG_t1l1, 'color: red', xG_t1l1, xG_t2l1, 'color: blue', xG_t2l1 ],
-         ['Line 2', xG_t1l2, 'color: red', xG_t1l2, xG_t2l2, 'color: blue', xG_t2l12],
+         ['Line 2', xG_t1l2, 'color: red', xG_t1l2, xG_t2l2, 'color: blue', xG_t2l2 ],
          ['Line 3', xG_t1l3, 'color: red', xG_t1l3, xG_t2l3, 'color: blue', xG_t2l3 ]
       ]);
 
