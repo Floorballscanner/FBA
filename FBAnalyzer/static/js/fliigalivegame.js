@@ -25,6 +25,10 @@ var lineup_t1g = [];
 var lineup_t2g = [];
 var shots = [];
 var goaliedata = [];
+var t1color = "";
+var t2color = "";
+var t1color_rgba = "";
+var t2color_rgba = "";
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var g_date = document.getElementById("stdate");
@@ -69,6 +73,30 @@ window.onload = function() {
             document.getElementById('A_teamname').innerHTML = t1name
             document.getElementById('B_teamname').innerHTML = t2name
             document.getElementById('game_attn').innerHTML = match.attendance;
+
+            // Jersey colors
+            const kits = match.kits;
+            t1color = kits[0].kit_shirt_primary_color;
+            if (kits[0].kit_shirt_primary_color == kits[2].kit_shirt_primary_color) {
+                t2color = kits[3].kit_shirt_primary_color;
+            }
+            else {t2color = kits[2].kit_shirt_primary_color;}
+
+            // Convert hex to RGB components
+            var red = parseInt(t1color.substring(1, 3), 16);
+            var green = parseInt(t1color.substring(3, 5), 16);
+            var blue = parseInt(t1color.substring(5, 7), 16);
+
+            // Construct the rgba string
+            var t1color_rgba = "rgba(" + red + ", " + green + ", " + blue +")";
+
+            // Convert hex to RGB components
+            var red = parseInt(t2color.substring(1, 3), 16);
+            var green = parseInt(t2color.substring(3, 5), 16);
+            var blue = parseInt(t2color.substring(5, 7), 16);
+
+            // Construct the rgba string
+            var t2color_rgba = "rgba(" + red + ", " + green + ", " + blue +")";
 
             if (match.live_period != "" && match.status != "Played") {
                 const img = document.createElement('img');
@@ -556,7 +584,7 @@ function drawCharts() {
         title: 'Player stats, ' + t1name,
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
-        colors: ['#002072', '#59D9EB'],
+        colors: [t1color, t2color],
         hAxis: { textPosition: 'none' }
         };
 
@@ -592,10 +620,10 @@ function drawCharts() {
         legend: { position: 'bottom' },
         seriesType: 'lines',
         series: {
-            0: {color: 'red'},
-            1: {color: 'blue'},
-            2: {type: 'bars', color: 'red'},
-            3: {type: 'bars', color: 'blue'}
+            0: {color: t1color},
+            1: {color: t2color},
+            2: {type: 'bars', color: t1color},
+            3: {type: 'bars', color: t2color}
         }
     };
 
@@ -613,16 +641,16 @@ function drawCharts() {
 
     var xGByLineData = google.visualization.arrayToDataTable([
          ['Line', t1name, { role: 'style' }, { role: 'annotation' }, t2name, { role: 'style' }, { role: 'annotation' } ],
-         ['Line 1', xG_t1l1, 'color: red', xG_t1l1, xG_t2l1, 'color: blue', xG_t2l1 ],
-         ['Line 2', xG_t1l2, 'color: red', xG_t1l2, xG_t2l2, 'color: blue', xG_t2l2 ],
-         ['Line 3', xG_t1l3, 'color: red', xG_t1l3, xG_t2l3, 'color: blue', xG_t2l3 ]
+         ['Line 1', xG_t1l1, 'color: '+ t1color, xG_t1l1, xG_t2l1, 'color: '+ t2color, xG_t2l1 ],
+         ['Line 2', xG_t1l2, 'color: '+ t1color, xG_t1l2, xG_t2l2, 'color: '+ t2color, xG_t2l2 ],
+         ['Line 3', xG_t1l3, 'color: '+ t1color, xG_t1l3, xG_t2l3, 'color: '+ t2color, xG_t2l3 ]
       ]);
 
     var options = {
         title: 'xG by Line',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
-        colors: ['red', 'blue'],
+        colors: [t1color, t2color],
         hAxis: { textPosition: 'none' }
         };
 
@@ -652,7 +680,7 @@ function drawShotMap() {
             y = fLength * y / (maxY + 350);
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")"; // Blue color with specified opacity
+            ctx.fillStyle = t1color_rgba + opacity; // Team A jersey color
             ctx.fill();
             if (event.code == "laukausmaali") {
                 ctx.lineWidth = 1;
@@ -668,7 +696,7 @@ function drawShotMap() {
             y = fLength - (fLength * y / (maxY + 350));
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = "rgba(0, 0, 255, " + opacity + ")"; // Blue color with specified opacity
+            ctx.fillStyle = t2color_rgba + opacity; // Team B jersey color
             ctx.fill();
             if (event.code == "laukausmaali") {
                 ctx.lineWidth = 1;
