@@ -148,12 +148,14 @@ window.onload = function() {
                 const st = shots[i].location.split(',');
                 const x = parseFloat(st[0]);
                 const y = parseFloat(st[1]);
+                const xG = 0;
+                const xGOT = 0;
 
                 if (match.category_id != '384') {
-                    const [xGOT, xG] = calcxG(x, y);
+                    [xGOT, xG] = calcxG(x, y);
                 }
                 else {
-                    const [xGOT, xG] = calcxGW(x, y);
+                    [xGOT, xG] = calcxGW(x, y);
                 }
 
                 if (shots[i].code === 'laukaus' || shots[i].code === 'laukausmaali') {
@@ -171,11 +173,14 @@ window.onload = function() {
                     const st = goaliedata[i].location.split(',');
                     const x = parseFloat(st[0]);
                     const y = parseFloat(st[1]);
+                    const xG = 0;
+                    const xGOT = 0;
+
                     if (match.category_id != '384') {
-                        const [xGOT, xG] = calcxG(x, y);
+                        [xGOT, xG] = calcxG(x, y);
                     }
                     else {
-                        const [xGOT, xG] = calcxGW(x, y);
+                        [xGOT, xG] = calcxGW(x, y);
                     }
                     goaliedata[i].xGOT = xGOT;
                 }
@@ -836,12 +841,14 @@ function updateData() {
                 const st = shots[i].location.split(',');
                 const x = parseFloat(st[0]);
                 const y = parseFloat(st[1]);
+                const xG = 0;
+                const xGOT = 0;
 
                 if (match.category_id != '384') {
-                    const [xGOT, xG] = calcxG(x, y);
+                    [xGOT, xG] = calcxG(x, y);
                 }
                 else {
-                    const [xGOT, xG] = calcxGW(x, y);
+                    [xGOT, xG] = calcxGW(x, y);
                 }
 
                 if (shots[i].code === 'laukaus' || shots[i].code === 'laukausmaali') {
@@ -858,11 +865,14 @@ function updateData() {
                     const st = goaliedata[i].location.split(',');
                     const x = parseFloat(st[0]);
                     const y = parseFloat(st[1]);
+                    const xG = 0;
+                    const xGOT = 0;
+
                     if (match.category_id != '384') {
-                        const [xGOT, xG] = calcxG(x, y);
+                        [xGOT, xG] = calcxG(x, y);
                     }
                     else {
-                        const [xGOT, xG] = calcxGW(x, y);
+                        [xGOT, xG] = calcxGW(x, y);
                     }
                     goaliedata[i].xGOT = xGOT;
                 }
