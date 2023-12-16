@@ -648,7 +648,7 @@ function drawShotMap() {
             opacity = "0.25"; // Replace with your desired opacity (0 to 1)
         }
         else {
-            opacity = "0.5"; // Replace with your desired opacity (0 to 1)
+            opacity = "0.75"; // Replace with your desired opacity (0 to 1)
         }
         if (event.team == "A") {
             x = 1000 + x;
