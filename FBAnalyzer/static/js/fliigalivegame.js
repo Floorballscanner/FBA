@@ -602,7 +602,32 @@ function drawCharts() {
     var chartlivexG = new google.visualization.ComboChart(document.getElementById('livexGmap'));
     chartlivexG.draw(xGLiveData, options);
 
+    // xG by Line
 
+    xG_t1l1 = lineup_t1l1.reduce(function (sum, player) {return sum + player.xG;}, 0);
+    xG_t1l2 = lineup_t1l2.reduce(function (sum, player) {return sum + player.xG;}, 0);
+    xG_t1l3 = lineup_t1l3.reduce(function (sum, player) {return sum + player.xG;}, 0);
+    xG_t2l1 = lineup_t2l1.reduce(function (sum, player) {return sum + player.xG;}, 0);
+    xG_t2l2 = lineup_t2l2.reduce(function (sum, player) {return sum + player.xG;}, 0);
+    xG_t2l3 = lineup_t2l3.reduce(function (sum, player) {return sum + player.xG;}, 0);
+
+    var xGByLineData = google.visualization.arrayToDataTable([
+         ['Line', t1name, { role: 'style' }, { role: 'annotation' }, t2name, { role: 'style' }, { role: 'annotation' } ],
+         ['Line 1', xG_t1l1, 'color: red', xG_t1l1, xG_t2l1, 'color: blue', xG_t2l1 ],
+         ['Line 2', xG_t1l2, 'color: red', xG_t1l2, xG_t2l2, 'color: blue', xG_t2l12],
+         ['Line 3', xG_t1l3, 'color: red', xG_t1l3, xG_t2l3, 'color: blue', xG_t2l3 ]
+      ]);
+
+    var options = {
+        title: 'xG by Line',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: ['red', 'blue'],
+        hAxis: { textPosition: 'none' }
+        };
+
+    var chartxGByLine = new google.visualization.BarChart(document.getElementById('xGByLine'));
+    chartxGByLine.draw(xGByLineData, options);
 }
 
 function drawShotMap() {
