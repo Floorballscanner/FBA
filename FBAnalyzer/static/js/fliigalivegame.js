@@ -88,7 +88,7 @@ window.onload = function() {
             var blue = parseInt(t1color.substring(5, 7), 16);
 
             // Construct the rgba string
-            var t1color_rgba = "rgba(" + red + ", " + green + ", " + blue +")";
+            t1color_rgba = "rgba(" + red + ", " + green + ", " + blue +")";
 
             // Convert hex to RGB components
             var red = parseInt(t2color.substring(1, 3), 16);
@@ -96,7 +96,7 @@ window.onload = function() {
             var blue = parseInt(t2color.substring(5, 7), 16);
 
             // Construct the rgba string
-            var t2color_rgba = "rgba(" + red + ", " + green + ", " + blue +")";
+            t2color_rgba = "rgba(" + red + ", " + green + ", " + blue +")";
 
             if (match.live_period != "" && match.status != "Played") {
                 const img = document.createElement('img');
