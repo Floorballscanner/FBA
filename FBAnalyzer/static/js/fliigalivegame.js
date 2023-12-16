@@ -171,7 +171,12 @@ window.onload = function() {
                     const st = goaliedata[i].location.split(',');
                     const x = parseFloat(st[0]);
                     const y = parseFloat(st[1]);
-                    const [xGOT, xG] = calcxG(x, y);
+                    if (match.category_id != '384') {
+                        const [xGOT, xG] = calcxG(x, y);
+                    }
+                    else {
+                        const [xGOT, xG] = calcxGW(x, y);
+                    }
                     goaliedata[i].xGOT = xGOT;
                 }
             }
@@ -853,7 +858,12 @@ function updateData() {
                     const st = goaliedata[i].location.split(',');
                     const x = parseFloat(st[0]);
                     const y = parseFloat(st[1]);
-                    const [xGOT, xG] = calcxG(x, y);
+                    if (match.category_id != '384') {
+                        const [xGOT, xG] = calcxG(x, y);
+                    }
+                    else {
+                        const [xGOT, xG] = calcxGW(x, y);
+                    }
                     goaliedata[i].xGOT = xGOT;
                 }
             }
