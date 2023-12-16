@@ -25,10 +25,10 @@ var lineup_t1g = [];
 var lineup_t2g = [];
 var shots = [];
 var goaliedata = [];
-var t1color = "#ff1100";
-var t2color = "#0248ff";
-var t1color_rgba = 'rgba(255, 17, 0';
-var t2color_rgba = 'rgba(2 ,72, 255';
+var t1color = "red";
+var t2color = "blue";
+var t1color_rgba = 'rgba(255, 0, 0';
+var t2color_rgba = 'rgba(0, 0, 255';
 
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
