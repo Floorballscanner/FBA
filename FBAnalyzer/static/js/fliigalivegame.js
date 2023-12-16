@@ -148,8 +148,8 @@ window.onload = function() {
                 const st = shots[i].location.split(',');
                 const x = parseFloat(st[0]);
                 const y = parseFloat(st[1]);
-                const xG = 0;
-                const xGOT = 0;
+                xG = 0;
+                xGOT = 0;
 
                 if (match.category_id != '384') {
                     [xGOT, xG] = calcxG(x, y);
@@ -173,8 +173,8 @@ window.onload = function() {
                     const st = goaliedata[i].location.split(',');
                     const x = parseFloat(st[0]);
                     const y = parseFloat(st[1]);
-                    const xG = 0;
-                    const xGOT = 0;
+                    xG = 0;
+                    xGOT = 0;
 
                     if (match.category_id != '384') {
                         [xGOT, xG] = calcxG(x, y);
@@ -841,8 +841,8 @@ function updateData() {
                 const st = shots[i].location.split(',');
                 const x = parseFloat(st[0]);
                 const y = parseFloat(st[1]);
-                const xG = 0;
-                const xGOT = 0;
+                xG = 0;
+                xGOT = 0;
 
                 if (match.category_id != '384') {
                     [xGOT, xG] = calcxG(x, y);
@@ -865,8 +865,8 @@ function updateData() {
                     const st = goaliedata[i].location.split(',');
                     const x = parseFloat(st[0]);
                     const y = parseFloat(st[1]);
-                    const xG = 0;
-                    const xGOT = 0;
+                    xG = 0;
+                    xGOT = 0;
 
                     if (match.category_id != '384') {
                         [xGOT, xG] = calcxG(x, y);
