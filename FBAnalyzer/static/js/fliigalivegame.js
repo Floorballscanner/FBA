@@ -364,10 +364,9 @@ window.onload = function() {
 
                 }
             })
-
             calcxGArray();
-            drawCharts();
-            drawShotMap();
+            setTimeout(drawCharts, 500);
+            setTimeout(drawShotMap, 1000);
             console.log('Success:', data);
 
         })
