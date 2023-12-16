@@ -77,10 +77,7 @@ window.onload = function() {
             // Jersey colors
             const kits = match.kits;
             t1color = kits[0].kit_shirt_primary_color;
-            if (kits[0].kit_shirt_primary_color == kits[2].kit_shirt_primary_color) {
-                t2color = kits[3].kit_shirt_primary_color;
-            }
-            else {t2color = kits[2].kit_shirt_primary_color;}
+            t2color = kits[3].kit_shirt_primary_color;
 
             // Convert hex to RGB components
             var red = parseInt(t1color.substring(1, 3), 16);
@@ -650,7 +647,7 @@ function drawCharts() {
         title: 'xG by Line',
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
-        colors: [t1color, t2color],
+        colors: ['black', 'black'],
         hAxis: { textPosition: 'none' }
         };
 
