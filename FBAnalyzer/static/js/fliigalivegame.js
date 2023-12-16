@@ -25,10 +25,11 @@ var lineup_t1g = [];
 var lineup_t2g = [];
 var shots = [];
 var goaliedata = [];
-var t1color = "";
-var t2color = "";
-var t1color_rgba = "";
-var t2color_rgba = "";
+var t1color = "#002072";
+var t2color = "#3046FB";
+var t1color_rgba = 'rgba(0, 32, 114';
+var t2color_rgba = 'rgba(48, 70, 251';
+
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var g_date = document.getElementById("stdate");
@@ -73,27 +74,6 @@ window.onload = function() {
             document.getElementById('A_teamname').innerHTML = t1name
             document.getElementById('B_teamname').innerHTML = t2name
             document.getElementById('game_attn').innerHTML = match.attendance;
-
-            // Jersey colors
-            const kits = match.kits;
-            t1color = kits[0].kit_shirt_primary_color;
-            t2color = kits[3].kit_shirt_primary_color;
-
-            // Convert hex to RGB components
-            var red = parseInt(t1color.substring(1, 3), 16);
-            var green = parseInt(t1color.substring(3, 5), 16);
-            var blue = parseInt(t1color.substring(5, 7), 16);
-
-            // Construct the rgba string
-            t1color_rgba = "rgba(" + red + ", " + green + ", " + blue;
-
-            // Convert hex to RGB components
-            var red = parseInt(t2color.substring(1, 3), 16);
-            var green = parseInt(t2color.substring(3, 5), 16);
-            var blue = parseInt(t2color.substring(5, 7), 16);
-
-            // Construct the rgba string
-            t2color_rgba = "rgba(" + red + ", " + green + ", " + blue;
 
             if (match.live_period != "" && match.status != "Played") {
                 const img = document.createElement('img');
