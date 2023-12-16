@@ -365,8 +365,8 @@ window.onload = function() {
                 }
             })
             calcxGArray();
-            drawCharts();
-            drawShotMap();
+            setTimeout(drawCharts, 500);
+            setTimeout(drawShotMap, 1000);
             console.log('Success:', data);
 
         })
@@ -899,6 +899,8 @@ function updateData() {
             lineup_t2l3 = [];
             lineup_t1l4 = [];
             lineup_t2l4 = [];
+            lineup_t1g = [];
+            lineup_t2g = [];
 
             lineup_t1.forEach(lineup => {
                 if (lineup.position == "OL/1" || lineup.position == "VL/1" || lineup.position == "KH/1" || lineup.position == "VP/1" || lineup.position == "OP/1") {
@@ -1050,8 +1052,8 @@ function updateData() {
             })
 
             calcxGArray();
-            drawCharts();
-            drawShotMap();
+            setTimeout(drawCharts, 500);
+            setTimeout(drawShotMap, 1000);
             console.log('Success:', data);
             t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
 
