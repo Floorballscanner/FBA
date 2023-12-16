@@ -88,7 +88,7 @@ window.onload = function() {
             var blue = parseInt(t1color.substring(5, 7), 16);
 
             // Construct the rgba string
-            t1color_rgba = "rgba(" + red + ", " + green + ", " + blue +")";
+            t1color_rgba = "rgba(" + red + ", " + green + ", " + blue;
 
             // Convert hex to RGB components
             var red = parseInt(t2color.substring(1, 3), 16);
@@ -96,7 +96,7 @@ window.onload = function() {
             var blue = parseInt(t2color.substring(5, 7), 16);
 
             // Construct the rgba string
-            t2color_rgba = "rgba(" + red + ", " + green + ", " + blue +")";
+            t2color_rgba = "rgba(" + red + ", " + green + ", " + blue;
 
             if (match.live_period != "" && match.status != "Played") {
                 const img = document.createElement('img');
@@ -668,10 +668,10 @@ function drawShotMap() {
         x = parseFloat(coordinates[0]);
         radius = 1 + 20 * event.xG; // Replace with your desired radius in pixels
         if (event.code == "laukausblokattu" || event.code == "laukausohi") {
-            opacity = 0.25; // Replace with your desired opacity (0 to 1)
+            opacity = "0.25"; // Replace with your desired opacity (0 to 1)
         }
         else {
-            opacity = 0.5; // Replace with your desired opacity (0 to 1)
+            opacity = "0.5"; // Replace with your desired opacity (0 to 1)
         }
         if (event.team == "A") {
             x = 1000 + x;
@@ -680,7 +680,7 @@ function drawShotMap() {
             y = fLength * y / (maxY + 350);
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = t1color_rgba + opacity; // Team A jersey color
+            ctx.fillStyle = t1color_rgba + ", " + opacity + ")"; // Team A jersey color
             ctx.fill();
             if (event.code == "laukausmaali") {
                 ctx.lineWidth = 1;
@@ -696,7 +696,7 @@ function drawShotMap() {
             y = fLength - (fLength * y / (maxY + 350));
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = t2color_rgba + opacity; // Team B jersey color
+            ctx.fillStyle = t2color_rgba + ", " + opacity + ")"; // Team B jersey color
             ctx.fill();
             if (event.code == "laukausmaali") {
                 ctx.lineWidth = 1;
