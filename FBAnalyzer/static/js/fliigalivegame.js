@@ -384,12 +384,12 @@ window.onload = function() {
             if (lineup_t1g[0].position == "MV/1") {
                 pl_g1 = lineup_t1g[0].player_id;
                 temp = lineup_t1g[0].xGOT - lineup_t1g[0].goals;
-                document.getElementById('g1xG').innerHTML = lineup_t1g[0].player_name + "&emsp;" + temp;
+                document.getElementById('g1xG').innerHTML = lineup_t1g[0].player_name + "&emsp;" + temp.toFixed(2);
             }
             else {
                 pl_g1 = lineup_t1g[1].player_id;
                 temp = lineup_t1g[1].xGOT - lineup_t1g[1].goals;
-                document.getElementById('g1xG').innerHTML = lineup_t1g[1].player_name + "&emsp;" + temp;
+                document.getElementById('g1xG').innerHTML = lineup_t1g[1].player_name + "&emsp;" + temp.toFixed(2);
             }
 
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_g1)
@@ -409,12 +409,12 @@ window.onload = function() {
             if (lineup_t2g[0].position == "MV/1") {
                 pl_g2 = lineup_t2g[0].player_id;
                 temp = lineup_t2g[0].xGOT - lineup_t2g[0].goals;
-                document.getElementById('g2xG').innerHTML = lineup_t2g[0].player_name + "&emsp;" + temp;
+                document.getElementById('g2xG').innerHTML = lineup_t2g[0].player_name + "&emsp;" + temp.toFixed(2);
             }
             else {
                 pl_g2 = lineup_t2g[1].player_id;
                 temp = lineup_t2g[1].xGOT - lineup_t2g[1].goals;
-                document.getElementById('g2xG').innerHTML = lineup_t2g[1].player_name + "&emsp;" + temp;
+                document.getElementById('g2xG').innerHTML = lineup_t2g[1].player_name + "&emsp;" + temp.toFixed(2);
             }
 
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_g2)
@@ -1162,12 +1162,12 @@ function updateData() {
             if (lineup_t2g[0].position == "MV/1") {
                 pl_g2 = lineup_t2g[0].player_id;
                 temp = lineup_t2g[0].xGOT - lineup_t2g[0].goals;
-                document.getElementById('g2xG').innerHTML = lineup_t2g[0].player_name + "&emsp;" + temp;
+                document.getElementById('g2xG').innerHTML = lineup_t2g[0].player_name + "&emsp;" + temp.toFixed(2);
             }
             else {
                 pl_g2 = lineup_t2g[1].player_id;
                 temp = lineup_t2g[1].xGOT - lineup_t2g[1].goals;
-                document.getElementById('g2xG').innerHTML = lineup_t2g[1].player_name + "&emsp;" + temp;
+                document.getElementById('g2xG').innerHTML = lineup_t2g[1].player_name + "&emsp;" + temp.toFixed(2);
             }
 
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_g2)
