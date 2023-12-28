@@ -361,7 +361,7 @@ window.onload = function() {
                 else {
                     document.getElementById('imgsp2').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp2").style.width = "50px";
-                    document.getElementById('p2p').innerHTML  "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
+                    document.getElementById('p2p').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
                     arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
 
                 }
@@ -381,7 +381,7 @@ window.onload = function() {
                 else {
                     document.getElementById('imgsp3').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp3").style.width = "50px";
-                    document.getElementById('p3p').innerHTML  "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
+                    document.getElementById('p3p').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
                     arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
 
                 }
@@ -1180,7 +1180,7 @@ function updateData() {
                 else {
                     document.getElementById('imgsp2').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp2").style.width = "50px";
-                    document.getElementById('p2p').innerHTML  "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
+                    document.getElementById('p2p').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
                     arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
 
                 }
@@ -1200,7 +1200,7 @@ function updateData() {
                 else {
                     document.getElementById('imgsp3').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp3").style.width = "50px";
-                    document.getElementById('p3p').innerHTML  "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
+                    document.getElementById('p3p').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
                     arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
 
                 }
