@@ -324,6 +324,8 @@ window.onload = function() {
 
             // Convert the object into an array of key-value pairs
             var arrayPoints = Object.entries(lineups);
+            // Filter out objects with position values "MV/1" or "MV/2"
+            arrayPoints = arrayPoints.filter(obj => obj.position !== 'MV/1' && obj.position !== 'MV/2');
             // Sort the array based on xG values in descending order
             arrayPoints.sort((a, b) => b[1].goals - a[1].goals);
 
@@ -1146,6 +1148,8 @@ function updateData() {
 
             // Convert the object into an array of key-value pairs
             var arrayPoints = Object.entries(lineups);
+            // Filter out objects with position values "MV/1" or "MV/2"
+            arrayPoints = arrayPoints.filter(obj => obj.position !== 'MV/1' && obj.position !== 'MV/2');
             // Sort the array based on xG values in descending order
             arrayPoints.sort((a, b) => b[1].goals - a[1].goals);
 
