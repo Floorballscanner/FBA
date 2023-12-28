@@ -323,6 +323,71 @@ window.onload = function() {
             clock.innerHTML = match.live_time;
 
             // Convert the object into an array of key-value pairs
+            var arrayPoints = Object.entries(lineups);
+            // Sort the array based on xG values in descending order
+            arrayPoints.sort((a, b) => b[1].points - a[1].points);
+
+            pl_id1 = arrayPoints[0][1].player_id;
+            document.getElementById('p1p').innerHTML = arrayPoints[0][1].player_name + "&emsp;" +
+            arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + arrayPoints[0][1].points;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                if (url != "") {
+                    document.getElementById('imgsp1').src = url;
+                }
+                else {
+                    document.getElementById('imgsp1').src = "/static/symbol_transparent.png";
+                    document.getElementById("imgsp1").style.width = "50px";
+                    document.getElementById('p1p').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
+                    arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + arrayPoints[0][1].points;
+
+                }
+            })
+
+            pl_id2 = arrayPoints[1][1].player_id;
+            document.getElementById('p2p').innerHTML = arrayPoints[1][1].player_name + "&emsp;" +
+            arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                if (url != "") {
+                    document.getElementById('imgsp2').src = url;
+                }
+                else {
+                    document.getElementById('imgsp2').src = "/static/symbol_transparent.png";
+                    document.getElementById("imgsp2").style.width = "50px";
+                    document.getElementById('p2p').innerHTML  "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
+                    arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
+
+                }
+            })
+
+            pl_id3 = arrayPoints[2][1].player_id;
+            document.getElementById('p3p').innerHTML = arrayPoints[2][1].player_name + "&emsp;" +
+            arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                if (url != "") {
+                    document.getElementById('imgsp3').src = url;
+                }
+                else {
+                    document.getElementById('imgsp3').src = "/static/symbol_transparent.png";
+                    document.getElementById("imgsp3").style.width = "50px";
+                    document.getElementById('p3p').innerHTML  "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
+                    arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
+
+                }
+            })
+
+            // Convert the object into an array of key-value pairs
             var arrayLineups = Object.entries(lineups);
             // Sort the array based on xG values in descending order
             arrayLineups.sort((a, b) => b[1].xG - a[1].xG);
@@ -1075,6 +1140,71 @@ function updateData() {
             g_date.innerHTML = match.date;
             period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
+
+            // Convert the object into an array of key-value pairs
+            var arrayPoints = Object.entries(lineups);
+            // Sort the array based on xG values in descending order
+            arrayPoints.sort((a, b) => b[1].points - a[1].points);
+
+            pl_id1 = arrayPoints[0][1].player_id;
+            document.getElementById('p1p').innerHTML = arrayPoints[0][1].player_name + "&emsp;" +
+            arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + arrayPoints[0][1].points;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                if (url != "") {
+                    document.getElementById('imgsp1').src = url;
+                }
+                else {
+                    document.getElementById('imgsp1').src = "/static/symbol_transparent.png";
+                    document.getElementById("imgsp1").style.width = "50px";
+                    document.getElementById('p1p').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
+                    arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + arrayPoints[0][1].points;
+
+                }
+            })
+
+            pl_id2 = arrayPoints[1][1].player_id;
+            document.getElementById('p2p').innerHTML = arrayPoints[1][1].player_name + "&emsp;" +
+            arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                if (url != "") {
+                    document.getElementById('imgsp2').src = url;
+                }
+                else {
+                    document.getElementById('imgsp2').src = "/static/symbol_transparent.png";
+                    document.getElementById("imgsp2").style.width = "50px";
+                    document.getElementById('p2p').innerHTML  "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
+                    arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
+
+                }
+            })
+
+            pl_id3 = arrayPoints[2][1].player_id;
+            document.getElementById('p3p').innerHTML = arrayPoints[2][1].player_name + "&emsp;" +
+            arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
+            .then(response => response.json())
+            .then(data => {
+                player = data.player;
+                url = player.img_url;
+                if (url != "") {
+                    document.getElementById('imgsp3').src = url;
+                }
+                else {
+                    document.getElementById('imgsp3').src = "/static/symbol_transparent.png";
+                    document.getElementById("imgsp3").style.width = "50px";
+                    document.getElementById('p3p').innerHTML  "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
+                    arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
+
+                }
+            })
 
             // Convert the object into an array of key-value pairs
             var arrayLineups = Object.entries(lineups);
