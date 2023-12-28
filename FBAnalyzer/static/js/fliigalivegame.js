@@ -1152,7 +1152,7 @@ function updateData() {
             pl_id1 = arrayPoints[0][1].player_id;
             pts = arrayPoints[0][1].goals + arrayPoints[0][1].assists;
             document.getElementById('p1s').innerHTML = arrayPoints[0][1].player_name + "&emsp;" +
-            arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + pts);
+            arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + pts;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
             .then(response => response.json())
             .then(data => {
