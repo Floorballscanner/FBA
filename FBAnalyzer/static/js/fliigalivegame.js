@@ -328,7 +328,7 @@ window.onload = function() {
             arrayPoints.sort((a, b) => b[1].points - a[1].points);
 
             pl_id1 = arrayPoints[0][1].player_id;
-            document.getElementById('p1p').innerHTML = arrayPoints[0][1].player_name + "&emsp;" +
+            document.getElementById('p1s').innerHTML = arrayPoints[0][1].player_name + "&emsp;" +
             arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + arrayPoints[0][1].points;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
             .then(response => response.json())
@@ -341,14 +341,14 @@ window.onload = function() {
                 else {
                     document.getElementById('imgsp1').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp1").style.width = "50px";
-                    document.getElementById('p1p').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
+                    document.getElementById('p1s').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
                     arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + arrayPoints[0][1].points;
 
                 }
             })
 
             pl_id2 = arrayPoints[1][1].player_id;
-            document.getElementById('p2p').innerHTML = arrayPoints[1][1].player_name + "&emsp;" +
+            document.getElementById('p2s').innerHTML = arrayPoints[1][1].player_name + "&emsp;" +
             arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
             .then(response => response.json())
@@ -361,14 +361,14 @@ window.onload = function() {
                 else {
                     document.getElementById('imgsp2').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp2").style.width = "50px";
-                    document.getElementById('p2p').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
+                    document.getElementById('p2s').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
                     arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
 
                 }
             })
 
             pl_id3 = arrayPoints[2][1].player_id;
-            document.getElementById('p3p').innerHTML = arrayPoints[2][1].player_name + "&emsp;" +
+            document.getElementById('p3s').innerHTML = arrayPoints[2][1].player_name + "&emsp;" +
             arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
             .then(response => response.json())
@@ -381,7 +381,7 @@ window.onload = function() {
                 else {
                     document.getElementById('imgsp3').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp3").style.width = "50px";
-                    document.getElementById('p3p').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
+                    document.getElementById('p3s').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
                     arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
 
                 }
@@ -1147,7 +1147,7 @@ function updateData() {
             arrayPoints.sort((a, b) => b[1].points - a[1].points);
 
             pl_id1 = arrayPoints[0][1].player_id;
-            document.getElementById('p1p').innerHTML = arrayPoints[0][1].player_name + "&emsp;" +
+            document.getElementById('p1s').innerHTML = arrayPoints[0][1].player_name + "&emsp;" +
             arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + arrayPoints[0][1].points;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
             .then(response => response.json())
@@ -1160,14 +1160,14 @@ function updateData() {
                 else {
                     document.getElementById('imgsp1').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp1").style.width = "50px";
-                    document.getElementById('p1p').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
+                    document.getElementById('p1s').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
                     arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + arrayPoints[0][1].points;
 
                 }
             })
 
             pl_id2 = arrayPoints[1][1].player_id;
-            document.getElementById('p2p').innerHTML = arrayPoints[1][1].player_name + "&emsp;" +
+            document.getElementById('p2s').innerHTML = arrayPoints[1][1].player_name + "&emsp;" +
             arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
             .then(response => response.json())
@@ -1180,14 +1180,14 @@ function updateData() {
                 else {
                     document.getElementById('imgsp2').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp2").style.width = "50px";
-                    document.getElementById('p2p').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
+                    document.getElementById('p2s').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
                     arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + arrayPoints[1][1].points;
 
                 }
             })
 
             pl_id3 = arrayPoints[2][1].player_id;
-            document.getElementById('p3p').innerHTML = arrayPoints[2][1].player_name + "&emsp;" +
+            document.getElementById('p3s').innerHTML = arrayPoints[2][1].player_name + "&emsp;" +
             arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
             .then(response => response.json())
@@ -1200,7 +1200,7 @@ function updateData() {
                 else {
                     document.getElementById('imgsp3').src = "/static/symbol_transparent.png";
                     document.getElementById("imgsp3").style.width = "50px";
-                    document.getElementById('p3p').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
+                    document.getElementById('p3s').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
                     arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + arrayPoints[2][1].points;
 
                 }
