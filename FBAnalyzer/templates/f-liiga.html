@@ -11,17 +11,14 @@ This is the F-liiga result test page.
     <div class="row justify-content-center" style="Padding-top: 80px;">
         <div class="col-sm-6">
             <div class="gamestats">
-                <img src="{% static 'fliigalogo.svg' %}" width="100px"><br>
-                <h5 style="Padding-top: 20px;">Game Results</h5>
-                <a class="btn btn-primary" href="/fliiga_results" role="button">Select</a><br><br>
+                <a href="/fliiga_results"><img src="{% static 'fliigalogo.svg' %}" width="100px"></a><br>
                 <p>All Played Game Results</p>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="gamestats">
-                <img style="Padding-top: 20px;" src="{% static 'live.png' %}" width="100px"><br>
-                <img style="Padding-top: 10px;" src="{% static 'fliigalogo.svg' %}" width="100px"><br><br>
-                <a class="btn btn-primary" href="/fliigalive" role="button">Select</a><br>
+                <img style="Padding-top: 20px;" src="{% static 'live.png' %}" width="80px"><br>
+                <a href="/fliigalive"><img style="Padding-top: 10px;" src="{% static 'fliigalogo.svg' %}" width="100px"></a><br><br>
                 <p>LIVE Game Data</p>
             </div>
         </div>
