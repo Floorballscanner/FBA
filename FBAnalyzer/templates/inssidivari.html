@@ -1,0 +1,30 @@
+<!--
+
+This is the Inssi-Divari results main page.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+{% load static %}
+<div class="container-fluid no-padding">
+    <div class="row justify-content-center" style="Padding-top: 20px;">
+        <div class="col-sm-6">
+            <img src="{% static 'inssidivarilogo.png' %}" width="100px"><br>
+            <h2 style="Padding-top: 5px;">Game Results</h2><br>
+            <a class="btn btn-primary" href="/inssidivari_results" role="button">Select</a><br><br>
+            <p>All Played Game Results</p>
+        </div>
+        <div class="col-sm-6">
+            <img src="{% static 'inssidivarilogo.png' %}" width="100px"><br>
+            <img src="{% static 'live.png' %}" width="40px"><br>
+            <a class="btn btn-primary" href="/inssidivarilive" role="button">Select</a><br><br>
+            <p>LIVE Game Data</p>
+        </div>
+    </div>
+    <br><br>
+</div>
+
+<script type="text/javascript" src="/static/js/inssidivaripage.js"></script>
+
+{% endblock %}

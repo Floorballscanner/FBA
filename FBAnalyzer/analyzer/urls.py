@@ -22,6 +22,12 @@ urlpatterns = [
     path('fliigalive/', views.fliigalive, name="fliigalivepage"),
     path('fliigalive/<nr>', views.fliigagame, name="fliigagamepage"),
     path('references/', views.references, name="references"),
+    path('fliiga_results/', views.fliiga_results, name="fliiga-results"),
+    path('fliiga/', views.fliiga_main, name="fliiga-main"),
+    path('inssidivari/', views.fliiga_main, name="inssidivari-main"),
+    path('inssidivari_results/', views.inssidivari_results, name="inssidivari-results"),
+    path('inssidivarilive/', views.inssidivarilive, name="idlivepage"),
+    path('inssidivarilive/<nr>', views.inssidivarigame, name="idgamepage"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
