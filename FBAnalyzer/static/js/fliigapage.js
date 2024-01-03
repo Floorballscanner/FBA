@@ -1,6 +1,8 @@
 // This file contains the script for updating the live game stream page with live game data
 
 const csrftoken = getCookie('csrftoken');
+var s_game = document.getElementById("select-game");
+var imgcat = document.getElementById("imgcat");
 let data = 0;
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
