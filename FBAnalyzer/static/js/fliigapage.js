@@ -61,9 +61,6 @@ var xGTeamArray = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']]
 
 window.onload = function() {
 
-    opt = new Option("Select a game...");
-    s_game.appendChild(opt);
-
 }
 
 function changeGame() {
