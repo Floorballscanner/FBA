@@ -521,8 +521,7 @@ function updateData() {
 
             // Filter rows where 'code' is one of the specified values
             shots = events.filter(event => ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code));
-            //goaliedata = events.filter(event => ['torjunta', 'paastetty'].includes(event.code));
-            goaliedata = events.filter(event => ['laukaus', 'laukausmaali'].includes(event.code));
+            goaliedata = events.filter(event => ['torjunta', 'paastetty'].includes(event.code));
             // Initialize 'xGOT' and 'xG' properties to 0
             shots.forEach(event => {
                 event.xGOT = 0;
@@ -670,11 +669,11 @@ function updateData() {
                 xga = 0;
                 gaxg = 0;
                 goaliedata.forEach(shot => {
-                    if (shot.team == "B") {
-                        if (shot.code == "laukaus") {
+                    if (shot.player_id == lineup.player_id) {
+                        if (shot.code == "torjunta") {
                             xga += shot.xGOT;
                         }
-                        if (shot.code == "laukausmaali") {
+                        if (shot.code == "paastetty") {
                             xga += shot.xGOT;
                             ga += 1;
                         }
@@ -689,11 +688,11 @@ function updateData() {
                 xga = 0;
                 gaxg = 0;
                 goaliedata.forEach(shot => {
-                    if (shot.team == "A") {
-                        if (shot.code == "laukaus") {
+                    if (shot.player_id == lineup.player_id) {
+                        if (shot.code == "torjunta") {
                             xga += shot.xGOT;
                         }
-                        if (shot.code == "laukausmaali") {
+                        if (shot.code == "paastetty") {
                             xga += shot.xGOT;
                             ga += 1;
                         }
