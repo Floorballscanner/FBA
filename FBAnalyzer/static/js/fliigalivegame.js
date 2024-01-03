@@ -342,7 +342,7 @@ window.onload = function() {
                     document.getElementById('imgsp1').src = url;
                 }
                 else {
-                    document.getElementById('imgsp1').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgsp1').src = "/static/silhouette.png";
                     document.getElementById("imgsp1").style.width = "50px";
                     document.getElementById('p1s').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
                     arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + pts;
@@ -363,7 +363,7 @@ window.onload = function() {
                     document.getElementById('imgsp2').src = url;
                 }
                 else {
-                    document.getElementById('imgsp2').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgsp2').src = "/static/silhouette.png";
                     document.getElementById("imgsp2").style.width = "50px";
                     document.getElementById('p2s').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
                     arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + pts;
@@ -384,7 +384,7 @@ window.onload = function() {
                     document.getElementById('imgsp3').src = url;
                 }
                 else {
-                    document.getElementById('imgsp3').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgsp3').src = "/static/silhouette.png";
                     document.getElementById("imgsp3").style.width = "50px";
                     document.getElementById('p3s').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
                     arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + pts;
@@ -408,7 +408,7 @@ window.onload = function() {
                     document.getElementById('imgp1').src = url;
                 }
                 else {
-                    document.getElementById('imgp1').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgp1').src = "/static/silhouette.png";
                     document.getElementById("imgp1").style.width = "50px";
                     document.getElementById('p1xG').innerHTML = "&emsp;" + arrayLineups[0][1].player_name + "&emsp;" + arrayLineups[0][1].xG;
 
@@ -426,7 +426,7 @@ window.onload = function() {
                     document.getElementById('imgp2').src = url;
                 }
                 else {
-                    document.getElementById('imgp2').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgp2').src = "/static/silhouette.png";
                     document.getElementById("imgp2").style.width = "50px";
                     document.getElementById('p2xG').innerHTML = "&emsp;" + arrayLineups[1][1].player_name + "&emsp;" + arrayLineups[1][1].xG;
 
@@ -444,7 +444,7 @@ window.onload = function() {
                     document.getElementById('imgp3').src = url;
                 }
                 else {
-                    document.getElementById('imgp3').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgp3').src = "/static/silhouette.png";
                     document.getElementById("imgp3").style.width = "50px";
                     document.getElementById('p3xG').innerHTML = "&emsp;" + arrayLineups[2][1].player_name + "&emsp;" + arrayLineups[2][1].xG;
 
@@ -471,7 +471,7 @@ window.onload = function() {
                     document.getElementById('imgg1').src = url;
                 }
                 else {
-                    document.getElementById('imgg1').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgg1').src = "/static/silhouette.png";
                     document.getElementById("imgg1").style.width = "50px";
                 }
             })
@@ -496,7 +496,7 @@ window.onload = function() {
                     document.getElementById('imgg2').src = url;
                 }
                 else {
-                    document.getElementById('imgg2').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgg2').src = "/static/silhouette.png";
                     document.getElementById("imgg2").style.width = "50px";
                 }
             })
@@ -1166,7 +1166,7 @@ function updateData() {
                     document.getElementById('imgsp1').src = url;
                 }
                 else {
-                    document.getElementById('imgsp1').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgsp1').src = "/static/silhouette.png";
                     document.getElementById("imgsp1").style.width = "50px";
                     document.getElementById('p1s').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
                     arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + pts;
@@ -1187,7 +1187,7 @@ function updateData() {
                     document.getElementById('imgsp2').src = url;
                 }
                 else {
-                    document.getElementById('imgsp2').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgsp2').src = "/static/silhouette.png";
                     document.getElementById("imgsp2").style.width = "50px";
                     document.getElementById('p2s').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
                     arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + pts;
@@ -1208,7 +1208,7 @@ function updateData() {
                     document.getElementById('imgsp3').src = url;
                 }
                 else {
-                    document.getElementById('imgsp3').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgsp3').src = "/static/silhouette.png";
                     document.getElementById("imgsp3").style.width = "50px";
                     document.getElementById('p3s').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
                     arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + pts;
@@ -1232,7 +1232,7 @@ function updateData() {
                     document.getElementById('imgp1').src = url;
                 }
                 else {
-                    document.getElementById('imgp1').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgp1').src = "/static/silhouette.png";
                     document.getElementById("imgp1").style.width = "50px";
                     document.getElementById('p1xG').innerHTML = "&emsp;" + arrayLineups[0][1].player_name + "&emsp;" + arrayLineups[0][1].xG;
 
@@ -1250,7 +1250,7 @@ function updateData() {
                     document.getElementById('imgp2').src = url;
                 }
                 else {
-                    document.getElementById('imgp2').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgp2').src = "/static/silhouette.png";
                     document.getElementById("imgp2").style.width = "50px";
                     document.getElementById('p2xG').innerHTML = "&emsp;" + arrayLineups[1][1].player_name + "&emsp;" + arrayLineups[1][1].xG;
 
@@ -1268,7 +1268,7 @@ function updateData() {
                     document.getElementById('imgp3').src = url;
                 }
                 else {
-                    document.getElementById('imgp3').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgp3').src = "/static/silhouette.png";
                     document.getElementById("imgp3").style.width = "50px";
                     document.getElementById('p3xG').innerHTML = "&emsp;" + arrayLineups[2][1].player_name + " " + arrayLineups[2][1].xG;
                 }
@@ -1294,7 +1294,7 @@ function updateData() {
                     document.getElementById('imgg1').src = url;
                 }
                 else {
-                    document.getElementById('imgg1').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgg1').src = "/static/silhouette.png";
                     document.getElementById("imgg1").style.width = "50px";
                 }
             })
@@ -1319,7 +1319,7 @@ function updateData() {
                     document.getElementById('imgg2').src = url;
                 }
                 else {
-                    document.getElementById('imgg2').src = "/static/symbol_transparent.png";
+                    document.getElementById('imgg2').src = "/static/silhouette.png";
                     document.getElementById("imgg2").style.width = "50px";
                 }
             })
