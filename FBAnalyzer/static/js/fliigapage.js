@@ -670,12 +670,14 @@ function updateData() {
                 xga = 0;
                 gaxg = 0;
                 goaliedata.forEach(shot => {
-                    if (shot.code == "laukaus") {
-                        xga += shot.xGOT;
-                    }
-                    if (shot.code == "laukausmaali") {
-                        xga += shot.xGOT;
-                        ga += 1;
+                    if (shot.team == "B") {
+                        if (shot.code == "laukaus") {
+                            xga += shot.xGOT;
+                        }
+                        if (shot.code == "laukausmaali") {
+                            xga += shot.xGOT;
+                            ga += 1;
+                        }
                     }
                 });
                 lineup.xGOT = xga;
@@ -687,12 +689,14 @@ function updateData() {
                 xga = 0;
                 gaxg = 0;
                 goaliedata.forEach(shot => {
-                    if (shot.code == "laukaus") {
-                        xga += shot.xGOT;
-                    }
-                    if (shot.code == "laukausmaali") {
-                        xga += shot.xGOT;
-                        ga += 1;
+                    if (shot.team == "B") {
+                        if (shot.code == "laukaus") {
+                            xga += shot.xGOT;
+                        }
+                        if (shot.code == "laukausmaali") {
+                            xga += shot.xGOT;
+                            ga += 1;
+                        }
                     }
                 });
                 lineup.xGOT = xga;
