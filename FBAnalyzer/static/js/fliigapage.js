@@ -113,6 +113,9 @@ function changeGame() {
 function selectMen() {
 
     s_game.innerHTML = "";
+    opt = new Option("Select a game...");
+    s_game.appendChild(opt);
+
     fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=402&group_id=2")
         .then(response => response.json())
         .then(data => {
@@ -157,6 +160,9 @@ function selectMen() {
 function selectWomen() {
 
     s_game.innerHTML = "";
+    opt = new Option("Select a game...");
+    s_game.appendChild(opt);
+
     fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=384&group_id=1")
         .then(response => response.json())
         .then(data => {
