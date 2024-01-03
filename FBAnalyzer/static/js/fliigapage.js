@@ -474,47 +474,11 @@ function updateData() {
             document.getElementById('game_attn').innerHTML = match.attendance;
             document.getElementById('A_teamname').innerHTML = t1name
             document.getElementById('B_teamname').innerHTML = t2name
-
-            if (match.status == "Played") {
-                if (document.getElementById('img' + match.match_id) != null) {
-                    document.getElementById('img' + match.match_id).remove();
-                }
-                if (document.getElementById('time' + match.match_id) == null) {
-                    const gametime = document.createElement('h5');
-                    gametime.setAttribute('id', 'time' + match.match_id);
-                    gametime.innerText = match.time.toString();
-                    gametime.style.paddingTop = "5px";
-                    document.getElementById('gstats').prepend(gametime);
-                }
-            }
-
-            else if (match.status != "Played" && match.live_period == "") {
-                if (document.getElementById('img' + match.match_id) != null) {
-                    document.getElementById('img' + match.match_id).remove();
-                }
-                if (document.getElementById('time' + match.match_id) == null) {
-                    const gametime = document.createElement('h5');
-                    gametime.setAttribute('id', 'time' + match.match_id);
-                    gametime.innerText = match.time.toString();
-                    gametime.style.paddingTop = "5px";
-                    document.getElementById('gstats').prepend(gametime);
-                }
-            }
-
-            else if (match.status != "Played" && match.live_period != "") {
-                if (document.getElementById('img' + match.match_id) == null) {
-                    const img = document.createElement('img');
-                    img.setAttribute('src',"/static/live.png");
-                    img.setAttribute('id', 'img' + match.match_id);
-                    img.setAttribute('width', '100px');
-                    img.style.paddingTop = "35px";
-                    img.style.paddingBottom = "10px"
-                    document.getElementById('gstats').prepend(img);
-                }
-                if (document.getElementById('time' + match.match_id) != null) {
-                    document.getElementById('time' + match.match_id).remove();
-                }
-            }
+            const gametime = document.createElement('h5');
+            gametime.setAttribute('id', 'time' + match.match_id);
+            gametime.innerText = match.time.toString();
+            gametime.style.paddingTop = "5px";
+            document.getElementById('gstats') = gametime;
 
             // List of keys you want to select from events_json
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
