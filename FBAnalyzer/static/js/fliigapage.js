@@ -689,7 +689,7 @@ function updateData() {
                 xga = 0;
                 gaxg = 0;
                 goaliedata.forEach(shot => {
-                    if (shot.team == "B") {
+                    if (shot.team == "A") {
                         if (shot.code == "laukaus") {
                             xga += shot.xGOT;
                         }
