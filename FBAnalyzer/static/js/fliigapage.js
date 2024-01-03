@@ -472,6 +472,8 @@ function updateData() {
             t1name = match.team_A_name;
             t2name = match.team_B_name;
             document.getElementById('game_attn').innerHTML = match.attendance;
+            document.getElementById('A_teamname').innerHTML = t1name
+            document.getElementById('B_teamname').innerHTML = t2name
 
             if (match.status == "Played") {
                 if (document.getElementById('img' + match.match_id) != null) {
@@ -935,7 +937,6 @@ function updateData() {
             setTimeout(drawCharts, 500);
             setTimeout(drawShotMap, 1000);
             console.log('Success:', data);
-            t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
 
         })
         .catch((error) => {
