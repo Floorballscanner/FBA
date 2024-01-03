@@ -671,10 +671,10 @@ function updateData() {
                 gaxg = 0;
                 goaliedata.forEach(shot => {
                     if (shot.player_id == lineup.player_id) {
-                        if (shot.code == "torjunta") {
+                        if (shot.code == "laukaus") {
                             xga += shot.xGOT;
                         }
-                        if (shot.code == "paastetty") {
+                        if (shot.code == "laukausmaali") {
                             xga += shot.xGOT;
                             ga += 1;
                         }
@@ -690,10 +690,10 @@ function updateData() {
                 gaxg = 0;
                 goaliedata.forEach(shot => {
                     if (shot.player_id == lineup.player_id) {
-                        if (shot.code == "torjunta") {
+                        if (shot.code == "laukaus") {
                             xga += shot.xGOT;
                         }
-                        if (shot.code == "paastetty") {
+                        if (shot.code == "laukausmaali") {
                             xga += shot.xGOT;
                             ga += 1;
                         }
