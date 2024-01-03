@@ -478,7 +478,7 @@ function updateData() {
             gametime.setAttribute('id', 'time' + match.match_id);
             gametime.innerText = match.time.toString();
             gametime.style.paddingTop = "5px";
-            document.getElementById('gstats') = gametime;
+            document.getElementById('gstats').innerHTML = gametime.innerHTML;
 
             // List of keys you want to select from events_json
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
