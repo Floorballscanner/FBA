@@ -521,7 +521,8 @@ function updateData() {
 
             // Filter rows where 'code' is one of the specified values
             shots = events.filter(event => ['laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'].includes(event.code));
-            goaliedata = events.filter(event => ['torjunta', 'paastetty'].includes(event.code));
+            //goaliedata = events.filter(event => ['torjunta', 'paastetty'].includes(event.code));
+            goaliedata = events.filter(event => ['laukaus', 'laukausmaali'].includes(event.code));
             // Initialize 'xGOT' and 'xG' properties to 0
             shots.forEach(event => {
                 event.xGOT = 0;
