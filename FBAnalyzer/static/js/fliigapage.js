@@ -447,11 +447,16 @@ function drawCharts() {
     var dataDist = google.visualization.arrayToDataTable(matrixResult);
 
     var options = {
-        title: 'Goal Histogram',
+        title: 'Goal Probabilities',
         legend: { position: 'bottom', maxLines: 2 },
         colors: [t1color, t2color],
         interpolateNulls: false,
-        histogram: {bucketSize: 1}
+        histogram: {bucketSize: 1},
+        vAxis: {
+            minValue: 0,
+            maxValue: 100,
+            format: '#\'%\''
+        }
     };
 
     var chartDist = new google.visualization.Histogram(document.getElementById('xGDist'));
