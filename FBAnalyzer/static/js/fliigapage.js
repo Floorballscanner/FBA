@@ -446,7 +446,7 @@ function drawCharts() {
     var dataDist = google.visualization.arrayToDataTable(matrixResult);
 
     var options = {
-        title: 'Goal Histrogram',
+        title: 'Goal Histogram',
         legend: { position: 'bottom', maxLines: 2 },
         colors: [t1color, t2color],
         interpolateNulls: false,
