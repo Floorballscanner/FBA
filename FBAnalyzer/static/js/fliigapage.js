@@ -59,6 +59,7 @@ var distArray = [];
 var c_1 = 0; // Calculator for Team 1 win
 var c_even = 0;
 var c_2 = 0;
+var n_Sim = 5000; // Number of simulations
 
 
 // Creates the HTML - page when the window is loaded
@@ -523,8 +524,6 @@ function calcDistArray() {
     res2 = [];
     t1ar = shots.filter(entry => entry['team'] === "A").map(entry => entry['xGOT']);
     t2ar = shots.filter(entry => entry['team'] === "B").map(entry => entry['xGOT']);
-
-    nSim = 5000; // Number of simulations
 
     // Calculators
     c_1 = 0;
