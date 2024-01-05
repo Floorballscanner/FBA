@@ -454,6 +454,7 @@ function drawCharts() {
         legend: { position: 'top', maxLines: 2 },
         colors: [t1color, t2color],
         interpolateNulls: false,
+        orientation: 'horizontal'
     };
 
     var chartDist = new google.visualization.Histogram(document.getElementById('xGDist'));
