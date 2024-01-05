@@ -793,6 +793,8 @@ function drawCharts() {
       res2.filter(x => x === value).length,
     ]);
 
+    matrixResult.unshift([t1name, t2name]);
+
     var dataDist = google.visualization.arrayToDataTable(matrixResult);
 
     var options = {
