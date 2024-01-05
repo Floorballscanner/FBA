@@ -887,6 +887,37 @@ function calcxGArray() {
     });
 }
 
+function calcActionArray() {
+
+    actionArray = [['Time','Shots Team 1','Shots Team 2','Goals Team 1','Goals Team 2','xG Team 1','xG Team 2']];
+    for (let i = 1; i < 61; i++) {
+        actionArray.push([i,0,0,0,0,0,0])
+    }
+
+    for (let i = 1; i < actionArray.length; i++) {
+        for (let j = 0; j < shots.length; j++) {
+            temp = shots[j].time.split(':');
+            min = Number(temp[0]) + 1;
+            if (min == i) {
+                if (shots[j].team == "A") {
+                    actionArray[i][1]++;
+                    actionArray[i][5] += shots[j].xG;
+                }
+                if (shots[j].team == "B") {
+                    actionArray[i][2]++;
+                    actionArray[i][6] += shots[j].xG;
+                }
+                if (shots[j].team == "A" & shots[j].code == "laukausmaali") {
+                    actionArray[i][3]++;
+                }
+                if (shots[j].team == "B" & shots[j].code == "laukausmaali") {
+                    actionArray[i][4]++;
+                }
+            }
+        }
+    }
+}
+
 function calcDistArray() {
 
     res1 = [];
