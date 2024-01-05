@@ -788,6 +788,7 @@ function drawCharts() {
     // xG Distribution Chart
 
     var matrixResult = res1.map((value, index) => [value, res2[index]]);
+    var matrixResult = matrixResult.map(row => row.map(value => value / 50));
 
     matrixResult.unshift([t1name, t2name]);
 
@@ -798,6 +799,7 @@ function drawCharts() {
         legend: { position: 'bottom', maxLines: 2 },
         colors: [t1color, t2color],
         interpolateNulls: false,
+        histogram: {bucketSize: 1}
     };
 
     var chartDist = new google.visualization.Histogram(document.getElementById('xGDist'));
