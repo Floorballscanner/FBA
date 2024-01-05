@@ -511,10 +511,10 @@ window.onload = function() {
             calcDistArray();
 
             t1per = c_1 / n_Sim + (1/2*c_even/n_Sim);
-            t1_wp.innerHTML = t1per + " %";
+            t1_wp.innerHTML = Math.round(100*t1per) + " %";
 
             t2per = c_2 / n_Sim + (1/2*c_even/n_Sim);
-            t2_wp.innerHTML = t2per + " %";
+            t2_wp.innerHTML = Math.round(100*t2per) + " %";
 
             calcxGArray();
             setTimeout(drawCharts, 500);
@@ -1374,10 +1374,10 @@ function updateData() {
             calcDistArray();
 
             t1per = c_1 / n_Sim + (1/2*c_even/n_Sim);
-            t1_wp.innerHTML = t1per + " %";
+            t1_wp.innerHTML = Math.round(100*t1per) + " %";
 
             t2per = c_2 / n_Sim + (1/2*c_even/n_Sim);
-            t2_wp.innerHTML = t2per + " %";
+            t2_wp.innerHTML = Math.round(100*t2per) + " %";
 
             calcxGArray();
             setTimeout(drawCharts, 500);
