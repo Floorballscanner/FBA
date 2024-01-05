@@ -452,11 +452,7 @@ function drawCharts() {
         colors: [t1color, t2color],
         interpolateNulls: false,
         histogram: {bucketSize: 1},
-        vAxis: {
-            minValue: 0,
-            maxValue: 100,
-            format: '#\'%\''
-        }
+        vAxis: { ticks: [{v:500, f:'10%'}, {v:1000, f:'20%'}] }
     };
 
     var chartDist = new google.visualization.Histogram(document.getElementById('xGDist'));
