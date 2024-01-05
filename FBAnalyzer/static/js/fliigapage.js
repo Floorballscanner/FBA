@@ -439,7 +439,7 @@ function drawCharts() {
 
     // xG Distribution Chart
 
-    var matrixResult = res1.map((value, index) => [value, res2[index]]);
+    var matrixResult = res1.map((value/n_Sim, index) => [value/n_Sim, res2[index]]);
 
     matrixResult.unshift([t1name, t2name]);
 
