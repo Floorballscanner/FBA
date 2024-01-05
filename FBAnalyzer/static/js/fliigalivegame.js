@@ -48,6 +48,8 @@ var t1s = document.getElementById('sttotshots_1');
 var t2s = document.getElementById('sttotshots_2');
 var t1sOT = document.getElementById('sttotsOT_1');
 var t2sOT = document.getElementById('sttotsOT_2');
+var t1_wp = document.getElementById('stwp_1');
+var t2_wp = document.getElementById('stwp_2');
 var t1name = "";
 var t2name = "";
 var myImg = new Image();
@@ -57,6 +59,10 @@ var ctx = cnvs.getContext("2d");
 var fLength = 332;
 var fWidth = 200;
 var xGTeamArray = [['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2']];
+var distArray = [];
+var c_1 = 0; // Calculator for Team 1 win
+var c_even = 0;
+var c_2 = 0;
 
 // Creates the HTML - page when the window is loaded
 
@@ -501,6 +507,14 @@ window.onload = function() {
                 }
             })
 
+            calcDistArray();
+
+            t1per = c_1 / n_Sim + (1/2*c_even/n_Sim);
+            t1_wp.innerHTML = t1per + " %";
+
+            t2per = c_2 / n_Sim + (1/2*c_even/n_Sim);
+            t2_wp.innerHTML = t2per + " %";
+
             calcxGArray();
             setTimeout(drawCharts, 500);
             setTimeout(drawShotMap, 1000);
@@ -851,6 +865,40 @@ function calcxGArray() {
             }
         }
     });
+}
+
+function calcDistArray() {
+
+    res1 = [];
+    res2 = [];
+    t1ar = shots.filter(entry => entry['team'] === "A").map(entry => entry['xGOT']);
+    t2ar = shots.filter(entry => entry['team'] === "B").map(entry => entry['xGOT']);
+
+    nSim = 5000; // Number of simulations
+
+    // Calculators
+    c_1 = 0;
+    c_even = 0;
+    c_2 = 0;
+
+    for (let i = 0; i < nSim; i++) {
+
+        simVal1 = t1ar.map(val => Math.random() < val);
+        simVal2 = t2ar.map(val => Math.random() < val);
+
+        noSucc1 = simVal1.filter(Boolean).length;
+        noSucc2 = simVal2.filter(Boolean).length;
+
+        // Add results to tables
+        res1.push({ Simulation: i + 1, Success: noSucc1 });
+        res2.push({ Simulation: i + 1, Success: noSucc2 });
+
+        // Update calculators
+        if (noSucc1 > noSucc2) { c_1++; }
+        else if (noSucc1 === noSucc2) { c_even++; }
+        else { c_2++; }
+
+    }
 }
 
 function updateData() {
@@ -1323,6 +1371,14 @@ function updateData() {
                     document.getElementById("imgg2").style.width = "50px";
                 }
             })
+
+            calcDistArray();
+
+            t1per = c_1 / n_Sim + (1/2*c_even/n_Sim);
+            t1_wp.innerHTML = t1per + " %";
+
+            t2per = c_2 / n_Sim + (1/2*c_even/n_Sim);
+            t2_wp.innerHTML = t2per + " %";
 
             calcxGArray();
             setTimeout(drawCharts, 500);
