@@ -880,7 +880,7 @@ function calcDistArray() {
     c_even = 0;
     c_2 = 0;
 
-    for (let i = 0; i < nSim; i++) {
+    for (let i = 0; i < n_Sim; i++) {
 
         simVal1 = t1ar.map(val => Math.random() < val);
         simVal2 = t2ar.map(val => Math.random() < val);
