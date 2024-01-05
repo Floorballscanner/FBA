@@ -436,6 +436,26 @@ function drawCharts() {
 
     var chartxGByLine = new google.visualization.BarChart(document.getElementById('xGByLine'));
     chartxGByLine.draw(xGByLineData, options);
+
+    // xG Distribution Chart
+
+    var values = Array.from({ length: 20 }, (_, index) => index + 1);
+    var matrixResult = values.map(value => [
+      res1.filter(x => x === value).length,
+      res2.filter(x => x === value).length,
+    ]);
+
+    var dataDist = google.visualization.arrayToDataTable(matrixResult);
+
+    var options = {
+        title: 'Goal Histrogram',
+        legend: { position: 'top', maxLines: 2 },
+        colors: [t1color, t2color],
+        interpolateNulls: false,
+    };
+
+    var chartDist = new google.visualization.Histogram(document.getElementById('xGDist'));
+    chartDist.draw(dataDist, options);
 }
 
 function drawShotMap() {
@@ -541,8 +561,8 @@ function calcDistArray() {
         noSucc2 = simVal2.filter(Boolean).length;
 
         // Add results to tables
-        res1.push({ Simulation: i + 1, Success: noSucc1 });
-        res2.push({ Simulation: i + 1, Success: noSucc2 });
+        res1.push(noSucc1);
+        res2.push(noSucc2);
 
         // Update calculators
         if (noSucc1 > noSucc2) { c_1++; }
