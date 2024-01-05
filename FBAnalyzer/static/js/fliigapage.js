@@ -450,11 +450,7 @@ function drawCharts() {
         legend: { position: 'bottom', maxLines: 2 },
         colors: [t1color, t2color],
         interpolateNulls: false,
-        histogram: {bucketSize: 1},
-        vAxis: {
-            title: 'Custom Y-Axis Title',
-            format: '%'
-        }
+        histogram: {bucketSize: 1}
     };
 
     var chartDist = new google.visualization.Histogram(document.getElementById('xGDist'));
