@@ -798,7 +798,8 @@ function drawCharts() {
         legend: { position: 'bottom', maxLines: 2 },
         colors: [t1color, t2color],
         interpolateNulls: false,
-        histogram: {bucketSize: 1}
+        histogram: {bucketSize: 1},
+        vAxis: { ticks: [{v:500, f:'10%'}, {v:1000, f:'20%'}] }
     };
 
     var chartDist = new google.visualization.Histogram(document.getElementById('xGDist'));
