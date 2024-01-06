@@ -394,7 +394,7 @@ function drawCharts() {
     var dataDist = google.visualization.arrayToDataTable(matrixResult);
 
     var options = {
-        title: 'Goal Probabilities',
+        title: 'Goal Probabilities, 5000 sims',
         legend: { position: 'bottom', maxLines: 2 },
         colors: [t1color, t2color],
         interpolateNulls: false,
