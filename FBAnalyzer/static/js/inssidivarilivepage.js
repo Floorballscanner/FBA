@@ -61,7 +61,7 @@ window.onload = function() {
 
                     const button = document.createElement('a');
                     button.setAttribute('class', 'btn btn-primary');
-                    button.setAttribute('href', '/fliigalive/' + match.match_id);
+                    button.setAttribute('href', '/inssidivarilive/' + match.match_id);
                     button.setAttribute('role', 'button');
                     button.style.paddingTop = "5px";
                     button.innerText = "Open live";
