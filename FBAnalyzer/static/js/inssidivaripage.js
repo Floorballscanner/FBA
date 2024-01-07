@@ -494,13 +494,13 @@ function calckello() {
     let selectedColumns = ["code", "team", "time", "xGOT", "xG"];
 
 // Luo uusi taulukko valituista sarakkeista
-    let kudit = shots.map(shoot => ({
-      code: shoot.code,
-      team: (shoot.team === 'A') ? t1name : t2name,
-      time: shoot.time,
-      xGOT: shoot.xGOT,
-      xG: shoot.xG
-    }));
+    var kudit = shots.map(shoot => ({
+        code: shoot.code,
+        team: (shoot.team === 'A') ? t1name : t2name,
+        time: shoot.time,
+        xGOT: shoot.xGOT,
+        xG: shoot.xG
+     }));
     // Lisää 'aika' -sarake
     kudit.forEach(shoot => {
       let timeComponents = shoot.time.split(':');
