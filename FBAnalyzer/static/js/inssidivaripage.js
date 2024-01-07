@@ -489,6 +489,28 @@ function calcxGArray() {
     });
 }
 
+function calckello() {
+    kello = []
+    let selectedColumns = ["code", "team", "time", "xGOT", "xG"];
+
+// Luo uusi taulukko valituista sarakkeista
+    let kudit = shots.map(shoot => ({
+      code: shoot.code,
+      team: (shoot.team === 'A') ? t1name : t2name,
+      time: shoot.time,
+      xGOT: shoot.xGOT,
+      xG: shoot.xG
+    }));
+    // Lisää 'aika' -sarake
+    kudit.forEach(shoot => {
+      let timeComponents = shoot.time.split(':');
+      shoot.aika = parseInt(timeComponents[0]) * 60 + parseInt(timeComponents[1]);
+      shoot.aika = Math.ceil(shoot.aika / 60);
+    });
+
+
+}
+
 function calcDistArray() {
 
     res1 = [];
@@ -990,6 +1012,7 @@ function updateData() {
             })
 
             calcDistArray();
+            calckello();
 
             t1per = c_1 / n_Sim + (1/2*c_even/n_Sim);
             t1_wp.innerHTML = Math.round(100*t1per) + " %";
