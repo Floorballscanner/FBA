@@ -358,6 +358,29 @@ function drawCharts() {
     var chartlivexG = new google.visualization.ComboChart(document.getElementById('livexGmap'));
     chartlivexG.draw(xGLiveData, options);
 
+    // Momentum chart
+    var momm = Array.from({ length: 60 }, (_, index) => [
+        index + 1,
+        kello['momentum'][index] || 0,
+        0
+    ]);
+    momm.unshift(['Aika', 'Momentum', 'Tasaista']);
+    var momentumData = google.visualization.arrayToDataTable(momm);
+
+    var options = {
+        title: 'Momentum',
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        seriesType: 'lines',
+        series: {
+            0: {color: 'lightcoral'},
+            1: {color: 'black'}
+        }
+    };
+
+    var chartmomentum = new google.visualization.ComboChart(document.getElementById('livemomentumchart'));
+    chartmomentum.draw(momentumData, options);
+
     // xG by Line
 
     xG_t1l1 = lineup_t1l1.reduce(function (sum, player) {return sum + player.xG;}, 0);
