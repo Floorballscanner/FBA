@@ -556,10 +556,10 @@ function calcActionArray() {
 
 function calckello () {
     // Valitse halutut sarakkeet
-    var selectedColumns = ["code", "team", "time", "xGOT", "xG"];
+   var selectedColumns = ["code", "team", "time", "xGOT", "xG"];
 
     // Luo uusi taulukko valituista sarakkeista
-    var kudit = shots.map(shoot => ({
+   var kudit = shots.map(shoot => ({
       code: shoot.code,
       team: (shoot.team === 'A') ? t1name : t2name,
       time: shoot.time,
@@ -716,7 +716,8 @@ function calckello () {
     kello['momentum'] = Array(kello.length).fill(0);
     for (var i = 0; i < kello.length; i++) {
         kello['momentum'][i] = kello[t1name + 'momin'][i] - kello[t2name + 'momin'][i];
-    };
+    }
+    return kello;
 }
 
 function updateData() {
