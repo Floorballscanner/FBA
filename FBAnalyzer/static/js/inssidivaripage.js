@@ -26,8 +26,6 @@ var t1color = "#990000";
 var t2color = "#002072";
 var t1color_rgba = 'rgba(153, 0, 0';
 var t2color_rgba = 'rgba(0, 32, 114';
-var selected_columns = [];
-var kello = [];
 
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
@@ -1169,6 +1167,8 @@ function updateData() {
             setTimeout(drawCharts, 500);
             setTimeout(drawShotMap, 1000);
             console.log('Success:', data);
+
+            calckello();
 
         })
         .catch((error) => {
