@@ -491,7 +491,7 @@ function calcxGArray() {
 
 function calckello() {
     kello = []
-    let selectedColumns = ["code", "team", "time", "xGOT", "xG"];
+    selectedColumns = ["code", "team", "time", "xGOT", "xG"];
 
 // Luo uusi taulukko valituista sarakkeista
     kudit = shots.map(shoot => ({
@@ -507,7 +507,15 @@ function calckello() {
       shoot.aika = parseInt(timeComponents[0]) * 60 + parseInt(timeComponents[1]);
       shoot.aika = Math.ceil(shoot.aika / 60);
     });
+// Lisää 'xGG' -sarake
+    kudit.forEach(shoot => {
+      shoot.xGG = (parseFloat(shoot.xG) + parseFloat(shoot.xGOT)) / 2;
+      shoot.xGG = Math.round(shoot.xGG * 100) / 100; // Pyöristä kahden desimaalin tarkkuuteen
+    });
 
+    // Etsi suurin aika ja pyöristetään
+    suurinAika = Math.ceil(Math.max(...kudit.map(shoot => shoot.aika)));
+    kello = Array.from({ length: suurinAika }, (_, i) => ({ Min: i + 1 }));
 
 }
 
