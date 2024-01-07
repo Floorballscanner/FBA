@@ -560,10 +560,8 @@ var kudit = shots.map(shoot => ({
       xG: shoot.xG
     }));
 var suurinAika = Math.ceil(Math.max(...kudit.map(shoot => shoot.aika)));
-    var kello = Array.from({ length: suurinAika }, (_, i) => ({ Min: i + 1 }));
-
-    // Luo 'korjauskertoimet' -sanakirja
-    var korjauskertoimet = {
+var kello = Array.from({ length: suurinAika }, (_, i) => ({ Min: i + 1 }));
+var korjauskertoimet = {
       0: 0.00,
       1: 0.02,
       2: 0.20,
