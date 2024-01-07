@@ -359,10 +359,10 @@ function drawCharts() {
     chartlivexG.draw(xGLiveData, options);
 
     // Momentum chart
-    var momm = Array.from({ length: 60 }, (_, index) => [
-        index + 1,
-        kello['momentum'][index] || 0,
-        0
+    momm = Array.from({ length: 60 }, (_, index) => [
+       index + 1,
+       kello['momentum'][index] || 0,
+       0
     ]);
     momm.unshift(['Aika', 'Momentum', 'Tasaista']);
     var momentumData = google.visualization.arrayToDataTable(momm);
