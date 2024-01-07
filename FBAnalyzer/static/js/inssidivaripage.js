@@ -26,6 +26,8 @@ var t1color = "#990000";
 var t2color = "#002072";
 var t1color_rgba = 'rgba(153, 0, 0';
 var t2color_rgba = 'rgba(0, 32, 114';
+var selected_columns = [];
+var kello = [];
 
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
@@ -550,6 +552,171 @@ function calcActionArray() {
             }
         }
     }
+}
+
+function calckello () {
+    // Valitse halutut sarakkeet
+    var selectedColumns = ["code", "team", "time", "xGOT", "xG"];
+
+    // Luo uusi taulukko valituista sarakkeista
+    var kudit = shots.map(shoot => ({
+      code: shoot.code,
+      team: (shoot.team === 'A') ? t1name : t2name,
+      time: shoot.time,
+      xGOT: shoot.xGOT,
+      xG: shoot.xG
+    }));
+
+    // Lisää 'aika' -sarake
+    kudit.forEach(shoot => {
+      var timeComponents = shoot.time.split(':');
+      shoot.aika = parseInt(timeComponents[0]) * 60 + parseInt(timeComponents[1]);
+      shoot.aika = Math.ceil(shoot.aika / 60);
+    });
+
+    // Lisää 'xGG' -sarake
+    kudit.forEach(shoot => {
+      shoot.xGG = (parseFloat(shoot.xG) + parseFloat(shoot.xGOT)) / 2;
+      shoot.xGG = Math.round(shoot.xGG * 100) / 100; // Pyöristä kahden desimaalin tarkkuuteen
+    });
+
+    // Etsi suurin aika ja pyöristetään
+    var suurinAika = Math.ceil(Math.max(...kudit.map(shoot => shoot.aika)));
+    var kello = Array.from({ length: suurinAika }, (_, i) => ({ Min: i + 1 }));
+
+    // Luo 'korjauskertoimet' -sanakirja
+    var korjauskertoimet = {
+      0: 0.00,
+      1: 0.02,
+      2: 0.20,
+      3: 0.45,
+      4: 0.6,
+      5: 0.8,
+      6: 0.95,
+      7: 0.99,
+      8: 0.99,
+      9: 0.99,
+      10: 0.99,
+      11: 0.99,
+      12: 0.99,
+      13: 0.99,
+      14: 0.99,
+      15: 0.99,
+      16: 0.99,
+      17: 0.99,
+      18: 0.99,
+      19: 0.99,
+      20: 0.99,
+    };
+
+    // Käy läpi jokainen joukkue
+    var uniqueTeams = Array.from(new Set(kudit.map(shoot => shoot.team)));
+
+    uniqueTeams.forEach(joukkue => {
+      // Laske 'shots' -sarake
+      kello[joukkue + 'shots'] = Array.from({ length: suurinAika }, (_, i) => {
+        return kudit
+          .filter(shoot => shoot.team === joukkue && shoot.aika === i + 1)
+          .reduce((acc, shoot) => {
+            acc += 1;
+            return acc;
+          }, 0);
+      });
+    });
+
+    // Laske 'Yhteensä' -sarake
+    kello['Yhteensä'] = Array.from({ length: suurinAika }, (_, i) =>
+      uniqueTeams.reduce((acc, joukkue) => acc + (kello[joukkue + 'shots'][i] || 0), 0)
+    );
+
+    // Käy läpi jokainen joukkue
+    uniqueTeams.forEach(joukkue => {
+      // Suodata DataFrame vain "laukausmaali" -koodeilla
+      var joukkueenLaukaukset = kudit.filter(shoot => shoot.team === joukkue && shoot.code === 'laukausmaali');
+
+      // Laske 'G' -sarake
+      kello[joukkue + 'G'] = Array.from({ length: suurinAika }, (_, i) =>
+        joukkueenLaukaukset.filter(shoot => shoot.aika === i + 1).length
+      );
+    });
+
+    // Laske 'G_cumulative' -sarake
+    uniqueTeams.forEach(joukkue => {
+      kello[joukkue + 'G_cumulative'] = Array.from({ length: suurinAika }, (_, i) =>
+        kello[joukkue + 'G'].slice(0, i + 1).reduce((acc, g) => acc + g, 0)
+      );
+    });
+
+    // Laske 'erotus' -sarake
+    kello['erotus'] = Array.from({ length: suurinAika }, (_, i) => {
+      var team1G = kello[uniqueTeams[0] + 'G_cumulative'][i] || 0;
+      var team2G = kello[uniqueTeams[1] + 'G_cumulative'][i] || 0;
+      return Math.abs(team1G - team2G);
+    });
+
+
+
+    uniqueTeams.forEach(joukkue => {
+      // Laske '_xG' -sarake
+      kello[joukkue + '_xG'] = Array.from({ length: suurinAika }, (_, i) => {
+        return kudit
+          .filter(shoot => shoot.team === joukkue && shoot.aika === i)
+          .reduce((acc, shoot) => {
+            var korjauskerroin = kello['erotus'][i-2] in korjauskertoimet ? korjauskertoimet[kello['erotus'][i-2]] : 0;
+            var xGValue = shoot.xGG * (1 - korjauskerroin);
+            acc += isNaN(xGValue) ? 0 : xGValue;
+            return acc;
+          }, 0);
+      });
+    });
+
+    // Alustetaan uudet sarakkeet
+    kello['Tempo'] = Array(kello.length).fill(0);
+    kello['Tempo2'] = Array(kello.length).fill(0);
+
+    // Lasketaan Tempo-sarake
+    for (var i = 0; i < kello.length; i++) {
+        if (i === 0) {
+            kello['Tempo'][i] = 0.6 * kello['Yhteensä'][i] - 1.37;
+        } else if (i === 1) {
+            kello['Tempo'][i] = 0.6 * kello['Yhteensä'][i] + 0.4 * kello['Yhteensä'][i-1] - 1.37;
+        } else if (i === 2) {
+            kello['Tempo'][i] = 0.5 * kello['Yhteensä'][i] + 0.32 * kello['Yhteensä'][i-1] + 0.18 * kello['Yhteensä'][i-2] - 1.37;
+        } else if (i === 3) {
+            kello['Tempo'][i] = 0.35 * kello['Yhteensä'][i] + 0.28 * kello['Yhteensä'][i-1] + 0.22 * kello['Yhteensä'][i-2] + 0.15 * kello['Yhteensä'][i-3] - 1.37;
+        } else {
+            kello['Tempo'][i] = 0.3 * kello['Yhteensä'][i] + 0.25 * kello['Yhteensä'][i-1] + 0.2 * kello['Yhteensä'][i-2] + 0.15 * kello['Yhteensä'][i-3] + 0.1 * kello['Yhteensä'][i-4] - 1.37;
+        }
+    }
+
+    // Kopioidaan 'Tempo' 'Tempo2' -sarakkeeseen ja tehdään jakolasku
+    kello['Tempo2'] = kello['Tempo'].map(value => (value / 0.74).toFixed(2));
+
+    uniqueTeams.forEach(joukkue => {
+        for (var i = 0; i < kello.length; i++) {
+            // Alusta 'momin' -sarakkeet tarvittaessa
+            if (!kello[joukkue + 'momin']) {
+                kello[joukkue + 'momin'] = Array(kello.length).fill(0);
+            }
+
+            if (i === 0) {
+                kello[joukkue + 'momin'][i] = 0.6 * kello[joukkue + 'shots'][i];
+            } else if (i === 1) {
+                kello[joukkue + 'momin'][i] = 0.6 * kello[joukkue + 'shots'][i] + 0.4 * kello[joukkue + 'shots'][i-1];
+            } else if (i === 2) {
+                kello[joukkue + 'momin'][i] = 0.5 * kello[joukkue + 'shots'][i] + 0.32 * kello[joukkue + 'shots'][i-1] + 0.18 * kello[joukkue + 'shots'][i-2];
+            } else if (i === 3) {
+                kello[joukkue + 'momin'][i] = 0.35 * kello[joukkue + 'shots'][i] + 0.28 * kello[joukkue + 'shots'][i-1] + 0.22 * kello[joukkue + 'shots'][i-2] + 0.15 * kello[joukkue + 'shots'][i-3];
+            } else {
+                kello[joukkue + 'momin'][i] = 0.3 * kello[joukkue + 'shots'][i] + 0.25 * kello[joukkue + 'shots'][i-1] + 0.2 * kello[joukkue + 'shots'][i-2] + 0.15 * kello[joukkue + 'shots'][i-3] + 0.1 * kello[joukkue + 'shots'][i-4];
+            }
+        }
+    });
+
+    kello['momentum'] = Array(kello.length).fill(0);
+    for (var i = 0; i < kello.length; i++) {
+        kello['momentum'][i] = kello[t1name + 'momin'][i] - kello[t2name + 'momin'][i];
+    };
 }
 
 function updateData() {
