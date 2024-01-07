@@ -62,7 +62,7 @@ var c_even = 0;
 var c_2 = 0;
 var n_Sim = 5000; // Number of simulations
 var actionArray = [['Time','Shots Team 1','Shots Team 2','Goals Team 1','Goals Team 2','xG Team 1','xG Team 2']];
-
+var selectedColumns = ["code", "team", "time", "xGOT", "xG"];
 
 // Creates the HTML - page when the window is loaded
 
@@ -552,34 +552,14 @@ function calcActionArray() {
     }
 }
 
-function calckello () {
-    // Valitse halutut sarakkeet
-   var selectedColumns = ["code", "team", "time", "xGOT", "xG"];
-
-    // Luo uusi taulukko valituista sarakkeista
-   var kudit = shots.map(shoot => ({
+var kudit = shots.map(shoot => ({
       code: shoot.code,
       team: (shoot.team === 'A') ? t1name : t2name,
       time: shoot.time,
       xGOT: shoot.xGOT,
       xG: shoot.xG
     }));
-
-    // Lisää 'aika' -sarake
-    kudit.forEach(shoot => {
-      var timeComponents = shoot.time.split(':');
-      shoot.aika = parseInt(timeComponents[0]) * 60 + parseInt(timeComponents[1]);
-      shoot.aika = Math.ceil(shoot.aika / 60);
-    });
-
-    // Lisää 'xGG' -sarake
-    kudit.forEach(shoot => {
-      shoot.xGG = (parseFloat(shoot.xG) + parseFloat(shoot.xGOT)) / 2;
-      shoot.xGG = Math.round(shoot.xGG * 100) / 100; // Pyöristä kahden desimaalin tarkkuuteen
-    });
-
-    // Etsi suurin aika ja pyöristetään
-    var suurinAika = Math.ceil(Math.max(...kudit.map(shoot => shoot.aika)));
+var suurinAika = Math.ceil(Math.max(...kudit.map(shoot => shoot.aika)));
     var kello = Array.from({ length: suurinAika }, (_, i) => ({ Min: i + 1 }));
 
     // Luo 'korjauskertoimet' -sanakirja
@@ -606,9 +586,22 @@ function calckello () {
       19: 0.99,
       20: 0.99,
     };
+var uniqueTeams = Array.from(new Set(kudit.map(shoot => shoot.team)));
 
-    // Käy läpi jokainen joukkue
-    var uniqueTeams = Array.from(new Set(kudit.map(shoot => shoot.team)));
+function calckello () {
+
+    kudit.forEach(shoot => {
+      let timeComponents = shoot.time.split(':');
+      shoot.aika = parseInt(timeComponents[0]) * 60 + parseInt(timeComponents[1]);
+      shoot.aika = Math.ceil(shoot.aika / 60);
+    });
+
+    // Lisää 'xGG' -sarake
+    kudit.forEach(shoot => {
+      shoot.xGG = (parseFloat(shoot.xG) + parseFloat(shoot.xGOT)) / 2;
+      shoot.xGG = Math.round(shoot.xGG * 100) / 100; // Pyöristä kahden desimaalin tarkkuuteen
+    });
+
 
     uniqueTeams.forEach(joukkue => {
       // Laske 'shots' -sarake
@@ -630,7 +623,7 @@ function calckello () {
     // Käy läpi jokainen joukkue
     uniqueTeams.forEach(joukkue => {
       // Suodata DataFrame vain "laukausmaali" -koodeilla
-      var joukkueenLaukaukset = kudit.filter(shoot => shoot.team === joukkue && shoot.code === 'laukausmaali');
+      let joukkueenLaukaukset = kudit.filter(shoot => shoot.team === joukkue && shoot.code === 'laukausmaali');
 
       // Laske 'G' -sarake
       kello[joukkue + 'G'] = Array.from({ length: suurinAika }, (_, i) =>
@@ -647,8 +640,8 @@ function calckello () {
 
     // Laske 'erotus' -sarake
     kello['erotus'] = Array.from({ length: suurinAika }, (_, i) => {
-      var team1G = kello[uniqueTeams[0] + 'G_cumulative'][i] || 0;
-      var team2G = kello[uniqueTeams[1] + 'G_cumulative'][i] || 0;
+      let team1G = kello[uniqueTeams[0] + 'G_cumulative'][i] || 0;
+      let team2G = kello[uniqueTeams[1] + 'G_cumulative'][i] || 0;
       return Math.abs(team1G - team2G);
     });
 
@@ -660,8 +653,8 @@ function calckello () {
         return kudit
           .filter(shoot => shoot.team === joukkue && shoot.aika === i)
           .reduce((acc, shoot) => {
-            var korjauskerroin = kello['erotus'][i-2] in korjauskertoimet ? korjauskertoimet[kello['erotus'][i-2]] : 0;
-            var xGValue = shoot.xGG * (1 - korjauskerroin);
+            let korjauskerroin = kello['erotus'][i-2] in korjauskertoimet ? korjauskertoimet[kello['erotus'][i-2]] : 0;
+            let xGValue = shoot.xGG * (1 - korjauskerroin);
             acc += isNaN(xGValue) ? 0 : xGValue;
             return acc;
           }, 0);
@@ -673,7 +666,7 @@ function calckello () {
     kello['Tempo2'] = Array(kello.length).fill(0);
 
     // Lasketaan Tempo-sarake
-    for (var i = 0; i < kello.length; i++) {
+    for (let i = 0; i < kello.length; i++) {
         if (i === 0) {
             kello['Tempo'][i] = 0.6 * kello['Yhteensä'][i] - 1.37;
         } else if (i === 1) {
@@ -691,7 +684,7 @@ function calckello () {
     kello['Tempo2'] = kello['Tempo'].map(value => (value / 0.74).toFixed(2));
 
     uniqueTeams.forEach(joukkue => {
-        for (var i = 0; i < kello.length; i++) {
+        for (let i = 0; i < kello.length; i++) {
             // Alusta 'momin' -sarakkeet tarvittaessa
             if (!kello[joukkue + 'momin']) {
                 kello[joukkue + 'momin'] = Array(kello.length).fill(0);
@@ -712,7 +705,7 @@ function calckello () {
     });
 
     kello['momentum'] = Array(kello.length).fill(0);
-    for (var i = 0; i < kello.length; i++) {
+    for (let i = 0; i < kello.length; i++) {
         kello['momentum'][i] = kello[t1name + 'momin'][i] - kello[t2name + 'momin'][i];
     }
     return kello;
