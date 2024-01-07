@@ -358,13 +358,7 @@ function drawCharts() {
     var chartlivexG = new google.visualization.ComboChart(document.getElementById('livexGmap'));
     chartlivexG.draw(xGLiveData, options);
 
-    // Momentum chart
-    momm = Array.from({ length: 60 }, (_, index) => [
-       index + 1,
-       kello['momentum'][index] || 0,
-       0
-    ]);
-    momm.unshift(['Aika', 'Momentum', 'Tasaista']);
+
     var momentumData = google.visualization.arrayToDataTable(momm);
 
     var options = {
@@ -665,6 +659,13 @@ function calckello() {
     for (var i = 0; i < kello.length; i++) {
         kello['momentum'][i] = kello[t1name + 'momin'][i] - kello[t2name + 'momin'][i];
     };
+
+    momm = Array.from({ length: 60 }, (_, index) => [
+       index + 1,
+       kello['momentum'][index] || 0,
+       0
+    ]);
+    momm.unshift(['Aika', 'Momentum', 'Tasaista']);
    }
 
 function calcDistArray() {
