@@ -366,6 +366,7 @@ function drawCharts() {
         curveType: 'function',
         legend: { position: 'bottom' },
         seriesType: 'area',
+        areaOpacity: 0.9,
         series: {
             0: {color: 'lightcoral'},
             1: {type: 'line', color: 'black'}
