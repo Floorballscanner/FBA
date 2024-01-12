@@ -369,7 +369,8 @@ function drawCharts() {
         areaOpacity: 0.9,
         series: {
             0: {color: 'lightcoral'},
-            1: {type: 'line', color: 'black'}
+            1: {color: 'blue'}
+            2: {type: 'line', color: 'black'}
         }
     };
 
@@ -681,10 +682,11 @@ function calckello() {
 
     momm = Array.from({ length: 60 }, (_, index) => [
        index + 1,
-       kello['momentum'][index] || 0,
+       kello['momentum'][index] > 0 ? kello['momentum'][index] : 0,
+       kello['momentum'][index] < 0 ? kello['momentum'][index] : 0,
        0
     ]);
-    momm.unshift(['Aika', 'Momentum', 'Tasaista']);
+    momm.unshift(['Aika', 'Momentum ${t1name}','Momentum ${t2name}' 'Tasaista']);
 
 
     tempo = Array.from({ length: 60 }, (_, index) => [
