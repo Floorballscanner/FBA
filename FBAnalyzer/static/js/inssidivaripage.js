@@ -686,7 +686,7 @@ function calckello() {
        kello['momentum'][index] < 0 ? kello['momentum'][index] : 0,
        0
     ]);
-    momm.unshift(['Aika', 'Momentum ${t1name}','Momentum ${t2name}' 'Tasaista']);
+    momm.unshift(['Aika', 'Momentum ${t1name}','Momentum ${t2name}', 'Even']);
 
 
     tempo = Array.from({ length: 60 }, (_, index) => [
