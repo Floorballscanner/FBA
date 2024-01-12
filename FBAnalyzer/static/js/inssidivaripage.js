@@ -358,7 +358,7 @@ function drawCharts() {
     var chartlivexG = new google.visualization.ComboChart(document.getElementById('livexGmap'));
     chartlivexG.draw(xGLiveData, options);
 
-
+    // Momentumchart
     var momentumData = google.visualization.arrayToDataTable(momm);
 
     var options = {
@@ -374,6 +374,24 @@ function drawCharts() {
 
     var chartmomentum = new google.visualization.ComboChart(document.getElementById('livemomentumchart'));
     chartmomentum.draw(momentumData, options);
+
+    // Tempo chart
+
+    var tempoData = google.visualization.arrayToDataTable(tempo);
+
+    var options = {
+        title: 'More Action?',
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        seriesType: 'lines',
+        series: {
+            0: {color: 'lightcoral'},
+            1: {color: 'black'}
+        }
+    };
+
+    var charttempo = new google.visualization.ComboChart(document.getElementById('livetempochart'));
+    charttempo.draw(tempoData, options);
 
     // xG by Line
 
@@ -666,6 +684,13 @@ function calckello() {
        0
     ]);
     momm.unshift(['Aika', 'Momentum', 'Tasaista']);
+
+    tempo = Array.from({ length: 60 }, (_, index) => [
+       index + 1,
+       kello['tempo2'][index] || 0,
+       0
+    ]);
+    tempo.unshift(['Aika', 'Tempo', 'Average tempo']);
    }
 
 function calcDistArray() {
