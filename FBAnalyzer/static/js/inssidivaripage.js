@@ -365,10 +365,10 @@ function drawCharts() {
         title: 'Momentum',
         curveType: 'function',
         legend: { position: 'bottom' },
-        seriesType: 'lines',
+        seriesType: 'area',
         series: {
             0: {color: 'lightcoral'},
-            1: {color: 'black'}
+            1: {type: 'line', color: 'black'}
         }
     };
 
