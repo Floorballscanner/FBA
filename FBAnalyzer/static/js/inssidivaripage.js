@@ -651,7 +651,7 @@ function calckello() {
     }
 
     // Kopioidaan 'Tempo' 'Tempo2' -sarakkeeseen ja tehdään jakolasku
-    kello['Tempo2'] = kello['Tempo'].map(value => (value / 0.74).toFixed(2));
+    kello['Tempo2'] = kello['Tempo'].map(value => parseFloat((value / 0.74).toFixed(2)));
     uniqueTeams.forEach(joukkue => {
         for (var i = 0; i < kello.length; i++) {
         // Alusta 'momin' -sarakkeet tarvittaessa
@@ -684,6 +684,7 @@ function calckello() {
        0
     ]);
     momm.unshift(['Aika', 'Momentum', 'Tasaista']);
+
 
     tempo = Array.from({ length: 60 }, (_, index) => [
        index + 1,
