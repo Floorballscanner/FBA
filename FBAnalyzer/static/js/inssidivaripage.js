@@ -368,8 +368,8 @@ function drawCharts() {
         seriesType: 'area',
         areaOpacity: 0.9,
         series: {
-            0: {color: 'lightred'},
-            1: {color: 'lightblue'},
+            0: {color: 'lightcoral'},
+            1: {color: 'lightskyblue'},
             2: {type: 'line', color: 'black'}
         }
     };
