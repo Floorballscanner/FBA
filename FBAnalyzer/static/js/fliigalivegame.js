@@ -753,6 +753,11 @@ function drawCharts() {
             1: {color: t2color},
             2: {type: 'bars', color: t1color},
             3: {type: 'bars', color: t2color}
+        },
+        vAxis: {
+            viewWindow: {
+                min: 0
+            }
         }
     };
 
@@ -787,8 +792,9 @@ function drawCharts() {
         curveType: 'function',
         legend: { position: 'bottom' },
         seriesType: 'area',
+        areaOpacity: 0.9,
         series: {
-            0: {color: 'lawngreen'},
+            0: {color: 'forestgreen'},
             1: {color: 'red'},
             2: {type: 'line', color: 'black'}
         }
