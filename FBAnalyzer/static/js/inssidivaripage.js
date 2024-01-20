@@ -376,7 +376,7 @@ function drawCharts() {
             0: {color: t1color},
             1: {color: t2color},
             2: {type: 'line', color: 'black'}
-        }
+        },
         vAxis: {
         textPosition: 'none', // Piilottaa y-akselin labelit
         viewWindow: {
@@ -403,7 +403,7 @@ function drawCharts() {
             0: {color: 'forestgreen'},
             1: {color: 'red'},
             2: {type: 'line', color: 'black'}
-        }
+        },
         vAxis: {
         textPosition: 'none', // Piilottaa y-akselin labelit
         viewWindow: {
