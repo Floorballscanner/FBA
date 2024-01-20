@@ -764,7 +764,7 @@ function drawCharts() {
     var chartlivexG = new google.visualization.ComboChart(document.getElementById('livexGmap'));
     chartlivexG.draw(xGLiveData, options);
 
-     // Momentumchart
+    // Momentumchart
     var momentumData = google.visualization.arrayToDataTable(momm);
 
     var options = {
@@ -777,6 +777,13 @@ function drawCharts() {
             0: {color: t1color},
             1: {color: t2color},
             2: {type: 'line', color: 'black'}
+        },
+        vAxis: {
+        textPosition: 'none', // Piilottaa y-akselin labelit
+        viewWindow: {
+            min: mommmin - 0.1, // Käytä muuttujaa minimiarvona
+            max: mommmax + 0.1 // Käytä muuttujaa maksimiarvona
+            }
         }
     };
 
@@ -787,7 +794,7 @@ function drawCharts() {
 
     var tempoData = google.visualization.arrayToDataTable(tempo);
 
-    var options = {
+   var options = {
         title: 'More Action?',
         curveType: 'function',
         legend: { position: 'bottom' },
@@ -797,6 +804,13 @@ function drawCharts() {
             0: {color: 'forestgreen'},
             1: {color: 'red'},
             2: {type: 'line', color: 'black'}
+        },
+        vAxis: {
+        textPosition: 'none', // Piilottaa y-akselin labelit
+        viewWindow: {
+            min: tempmin - 0.1, // Käytä muuttujaa minimiarvona
+            max: tempmax + 0.1 // Käytä muuttujaa maksimiarvona
+            }
         }
     };
 
@@ -1158,6 +1172,15 @@ function calckello() {
     ]);
     momm.unshift(['Aika', t1name, t2name, 'Even']);
 
+    momax = momm.slice(1).map(function(rivi) {
+        return rivi[1]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
+    });
+    momin = momm.slice(2).map(function(rivi) {
+        return rivi[2]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
+    });
+    mommmax = Math.max(...momax);
+    mommmin = Math.min(...momin)
+
 
     tempo = Array.from({ length: kello.length }, (_, index) => [
        index + 1,
@@ -1166,6 +1189,17 @@ function calckello() {
        0
     ]);
     tempo.unshift(['Aika', 'Nice amount of action!','No action', 'Average tempo']);
+
+    temmax = tempo.slice(1).map(function(rivi) {
+        return rivi[1]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
+    });
+    temmin = tempo.slice(2).map(function(rivi) {
+        return rivi[2]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
+    });
+    tempmax = Math.max(...temmax);
+    tempmin = Math.min(...temmin);
+
+
    }
 
 function updateData() {
