@@ -693,10 +693,11 @@ function calckello() {
 
     tempo = Array.from({ length: 60 }, (_, index) => [
        index + 1,
-       kello['Tempo2'][index] || 0,
+       kello['Tempo2'][index] > 0 ? kello['Tempo2'][index] : 0,
+       kello['Tempo2'][index] < 0 ? kello['Tempo2'][index] : 0,
        0
     ]);
-    tempo.unshift(['Aika', 'Tempo', 'Average tempo']);
+    tempo.unshift(['Aika', 'Nice amount of action!','No action', 'Average tempo']);
    }
 
 function calcDistArray() {
