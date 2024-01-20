@@ -713,7 +713,7 @@ function calckello() {
         return rivi[1]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
     });
     momin = momm.slice(2).map(function(rivi) {
-        return rivi[1]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
+        return rivi[2]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
     });
     mommmax = Math.max(...momax);
     mommmin = Math.min(...momin)
@@ -731,7 +731,7 @@ function calckello() {
         return rivi[1]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
     });
     temmin = tempo.slice(2).map(function(rivi) {
-        return rivi[1]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
+        return rivi[2]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
     });
     tempmax = Math.max(...temmax);
     tempmin = Math.min(...temmin);
