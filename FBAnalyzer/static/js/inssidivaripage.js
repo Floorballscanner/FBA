@@ -682,7 +682,7 @@ function calckello() {
         kello['momentum'][i] = kello[t1name + 'momin'][i] - kello[t2name + 'momin'][i];
     };
 
-    momm = Array.from({ length: 60 }, (_, index) => [
+    momm = Array.from({ length: kello.lenght }, (_, index) => [
        index + 1,
        kello['momentum'][index] > 0 ? kello['momentum'][index] : 0,
        kello['momentum'][index] < 0 ? kello['momentum'][index] : 0,
