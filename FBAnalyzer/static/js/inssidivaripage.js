@@ -715,8 +715,8 @@ function calckello() {
     momin = momm.slice(2).map(function(rivi) {
         return rivi[1]; // Oletetaan, että "Tempo" on aina toisessa sarakkeessa (indeksi 1)
     });
-    mommmax = Math.max(...temmax);
-    mommmin = Math.min(...temmin)
+    mommmax = Math.max(...momax);
+    mommmin = Math.min(...momin)
 
 
     tempo = Array.from({ length: kello.length }, (_, index) => [
