@@ -368,8 +368,8 @@ function drawCharts() {
         seriesType: 'area',
         areaOpacity: 0.9,
         series: {
-            0: {color: 'lightcoral'},
-            1: {color: 'lightskyblue'},
+            0: {color: t1color},
+            1: {color: t1color},
             2: {type: 'line', color: 'black'}
         }
     };
@@ -381,14 +381,16 @@ function drawCharts() {
 
     var tempoData = google.visualization.arrayToDataTable(tempo);
 
-    var options = {
+   var options = {
         title: 'More Action?',
         curveType: 'function',
         legend: { position: 'bottom' },
-        seriesType: 'lines',
+        seriesType: 'area',
+        areaOpacity: 0.9,
         series: {
-            0: {color: 'lightcoral'},
-            1: {color: 'black'}
+            0: {color: 'forestgreen'},
+            1: {color: 'red'},
+            2: {type: 'line', color: 'black'}
         }
     };
 
@@ -686,7 +688,7 @@ function calckello() {
        kello['momentum'][index] < 0 ? kello['momentum'][index] : 0,
        0
     ]);
-    momm.unshift(['Aika', 'Momentum' + t1name,'Momentum' + t2name, 'Even']);
+    momm.unshift(['Aika', t1name, t2name, 'Even']);
 
 
     tempo = Array.from({ length: 60 }, (_, index) => [
