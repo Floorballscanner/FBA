@@ -369,7 +369,7 @@ function drawCharts() {
         areaOpacity: 0.9,
         series: {
             0: {color: t1color},
-            1: {color: t1color},
+            1: {color: t2color},
             2: {type: 'line', color: 'black'}
         }
     };
