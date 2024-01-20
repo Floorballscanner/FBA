@@ -352,6 +352,11 @@ function drawCharts() {
             1: {color: t2color},
             2: {type: 'bars', color: t1color},
             3: {type: 'bars', color: t2color}
+        },
+        vAxis: {
+            viewWindow: {
+                min: 0
+            }
         }
     };
 
