@@ -1700,6 +1700,8 @@ function calcxG(x, y) {
         y = maxY - 1;
     }
 
+    if (y < 0) { y = 0; }
+
     const yd = 2 + Math.floor((y / maxY) * 12);
     const xd = Math.floor((x / maxX) * 12);
     const xGOT = xGOT_matrix[yd][xd] / 100;
