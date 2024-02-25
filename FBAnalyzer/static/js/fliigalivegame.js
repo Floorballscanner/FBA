@@ -63,6 +63,7 @@ var distArray = [];
 var c_1 = 0; // Calculator for Team 1 win
 var c_even = 0;
 var c_2 = 0;
+var momm = 0;
 var n_Sim = 5000; // Number of simulations
 
 // Creates the HTML - page when the window is loaded
@@ -795,7 +796,7 @@ function drawCharts() {
     var tempoData = google.visualization.arrayToDataTable(tempo);
 
    var options = {
-        title: 'More Action?',
+        title: 'More Action',
         curveType: 'function',
         legend: { position: 'bottom' },
         seriesType: 'area',
@@ -1674,6 +1675,7 @@ function updateData() {
             })
 
             calcDistArray();
+            calckello();
 
             t1per = c_1 / n_Sim + (1/2*c_even/n_Sim);
             t1_wp.innerHTML = Math.round(100*t1per) + " %";

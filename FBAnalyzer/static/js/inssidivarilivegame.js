@@ -509,6 +509,7 @@ window.onload = function() {
             })
 
             calcDistArray();
+            calckello();
 
             t1per = c_1 / n_Sim + (1/2*c_even/n_Sim);
             t1_wp.innerHTML = Math.round(100*t1per) + " %";
