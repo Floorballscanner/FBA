@@ -97,7 +97,6 @@ window.onload = function() {
                     hrElement.setAttribute("width", "100%");
                     hrElement.setAttribute("size", "2");
                     hrElement.setAttribute("align", "center");
-                    hrElement.style.marginTop = "5px";
                     hrElement.setAttribute("color", "#002072");
                     hrElement.setAttribute("noshade", "");
                     row.appendChild(hrElement);
