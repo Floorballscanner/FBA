@@ -27,16 +27,16 @@ window.onload = function() {
                     row.setAttribute('class', 'row');
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
+                    div1.setAttribute('class', 'col-xs-1 px-1 position-absolute start-0 translate-middle');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-7 px-0 translate-middle');
+                    div2.setAttribute('class', 'col-xs-9 position-absolute start-20 px-0 translate-middle');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+                    div3.setAttribute('class', 'col-xs-1 position-absolute start-80 px-1 translate-middle');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+                    div4.setAttribute('class', 'col-xs-1 position-absolute start-100 px-1 translate-middle');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
