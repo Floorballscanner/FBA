@@ -30,18 +30,19 @@ window.onload = function() {
                     div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-6 px-1');
+                    div2.setAttribute('class', 'col-xs-7 px-1 translate-middle');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-3 px-1');
+                    div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-2 px-1');
+                    div4.setAttribute('class', 'col-xs-2 px-1 translate-middle');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '30px');
                     imgcat.style.paddingTop = "2px";
+                    imgcat.style.paddingLeft = "10px";
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
