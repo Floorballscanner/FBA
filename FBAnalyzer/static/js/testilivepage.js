@@ -24,7 +24,7 @@ window.onload = function() {
 
                 if (areDatesEqual(matchdate, today))  {
                     const row = document.createElement('div');
-                    row.setAttribute('class', 'row w-100');
+                    row.setAttribute('class', 'row w-100 d-flex');
 
                     const div1 = document.createElement('div');
                     div1.setAttribute('class', 'col-xs-1 px-1');
@@ -36,7 +36,7 @@ window.onload = function() {
                     div3.setAttribute('class', 'col-xs-1 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-1 px-1 justify-content-end');
+                    div4.setAttribute('class', 'col-xs-1 px-1');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
