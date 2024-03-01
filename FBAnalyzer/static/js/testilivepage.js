@@ -30,7 +30,7 @@ window.onload = function() {
                     div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-7 px-1 translate-middle');
+                    div2.setAttribute('class', 'col-xs-7 px-0 translate-middle');
 
                     const div3 = document.createElement('div');
                     div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
@@ -115,22 +115,33 @@ window.onload = function() {
                 today = new Date();
 
                 if (areDatesEqual(matchdate, today))  {
-                    const div = document.createElement('div');
-                    div.setAttribute('class', 'row');
+                    const row = document.createElement('div');
+                    row.setAttribute('class', 'row');
+
+                    const div1 = document.createElement('div');
+                    div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-sm-12');
+                    div2.setAttribute('class', 'col-xs-7 px-0 translate-middle');
+
+                    const div3 = document.createElement('div');
+                    div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+
+                    const div4 = document.createElement('div');
+                    div4.setAttribute('class', 'col-xs-2 px-1 translate-middle');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
-                    imgcat.setAttribute('width', '20px');
+                    imgcat.setAttribute('width', '30px');
                     imgcat.style.paddingTop = "2px";
-                    div2.appendChild(imgcat);
+                    imgcat.style.paddingLeft = "10px";
+                    div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    d.innerText = match.date + " P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                + match.team_A_name + " " + match.fs_A.toString() + " - "
-                                + match.fs_B.toString() + " " + match.team_B_name;
+                    //d.style.display = 'block';
+                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + "\n"
+                                + match.team_A_name + " - "  + match.team_B_name + "\n"
+                                + match.fs_A.toString() + " - " + match.fs_B.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
 
@@ -142,16 +153,19 @@ window.onload = function() {
                     button.innerText = "Open";
                     button.style.paddingBottom = "2px";
 
-                    document.getElementById("head").appendChild(div);
-                    div.appendChild(div2);
+                    document.getElementById("head").appendChild(row);
+                    row.appendChild(div1);
+                    row.appendChild(div2);
+                    row.appendChild(div3);
+                    row.appendChild(div4);
                     div2.appendChild(d);
 
                     if (match.live_period != "-1" && match.status != "Played") {
                         const img = document.createElement('img');
                         img.setAttribute('src',"/static/live.png");
-                        img.setAttribute('width', '10px');
+                        img.setAttribute('width', '50px');
                         img.style.paddingTop = "2px";
-                        div2.appendChild(img);
+                        div3.appendChild(img);
                     }
                     else if (match.live_period == "-1") {
                         const gametime = document.createElement('p');
@@ -159,25 +173,14 @@ window.onload = function() {
                         gametime.innerText = match.time.toString();
                         gametime.style.paddingTop = "2px";
                         gametime.setAttribute('id', 'time' + match.match_id);
-                        div2.appendChild(gametime);
+                        div3.appendChild(gametime);
                     }
                     else if (match.status == "Played") {
 
                     }
 
-                    div2.appendChild(button);
+                    div4.appendChild(button);
 
-                    // Create a new <hr> element
-                    var hrElement = document.createElement("hr");
-
-                    // Set attributes for the <hr> element
-                    hrElement.setAttribute("width", "100%");
-                    hrElement.setAttribute("size", "1");
-                    hrElement.setAttribute("align", "center");
-                    hrElement.style.marginTop = "3px";
-                    hrElement.setAttribute("color", "#002072");
-                    hrElement.setAttribute("noshade", "");
-                    div2.appendChild(hrElement);
                 }
 
             });
@@ -204,22 +207,33 @@ window.onload = function() {
                 today = new Date();
 
                 if (areDatesEqual(matchdate, today))  {
-                    const div = document.createElement('div');
-                    div.setAttribute('class', 'row');
+                    const row = document.createElement('div');
+                    row.setAttribute('class', 'row');
+
+                    const div1 = document.createElement('div');
+                    div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-sm-12');
+                    div2.setAttribute('class', 'col-xs-7 px-0 translate-middle');
+
+                    const div3 = document.createElement('div');
+                    div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+
+                    const div4 = document.createElement('div');
+                    div4.setAttribute('class', 'col-xs-2 px-1 translate-middle');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
-                    imgcat.setAttribute('width', '20px');
+                    imgcat.setAttribute('width', '30px');
                     imgcat.style.paddingTop = "2px";
-                    div2.appendChild(imgcat);
+                    imgcat.style.paddingLeft = "10px";
+                    div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    d.innerText = match.date + " P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                + match.team_A_name + " " + match.fs_A.toString() + " - "
-                                + match.fs_B.toString() + " " + match.team_B_name;
+                    //d.style.display = 'block';
+                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + "\n"
+                                + match.team_A_name + " - "  + match.team_B_name + "\n"
+                                + match.fs_A.toString() + " - " + match.fs_B.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
 
@@ -231,16 +245,19 @@ window.onload = function() {
                     button.innerText = "Open";
                     button.style.paddingBottom = "2px";
 
-                    document.getElementById("head").appendChild(div);
-                    div.appendChild(div2);
+                    document.getElementById("head").appendChild(row);
+                    row.appendChild(div1);
+                    row.appendChild(div2);
+                    row.appendChild(div3);
+                    row.appendChild(div4);
                     div2.appendChild(d);
 
                     if (match.live_period != "-1" && match.status != "Played") {
                         const img = document.createElement('img');
                         img.setAttribute('src',"/static/live.png");
-                        img.setAttribute('width', '10px');
+                        img.setAttribute('width', '50px');
                         img.style.paddingTop = "2px";
-                        div2.appendChild(img);
+                        div3.appendChild(img);
                     }
                     else if (match.live_period == "-1") {
                         const gametime = document.createElement('p');
@@ -248,25 +265,14 @@ window.onload = function() {
                         gametime.innerText = match.time.toString();
                         gametime.style.paddingTop = "2px";
                         gametime.setAttribute('id', 'time' + match.match_id);
-                        div2.appendChild(gametime);
+                        div3.appendChild(gametime);
                     }
                     else if (match.status == "Played") {
 
                     }
 
-                    div2.appendChild(button);
+                    div4.appendChild(button);
 
-                    // Create a new <hr> element
-                    var hrElement = document.createElement("hr");
-
-                    // Set attributes for the <hr> element
-                    hrElement.setAttribute("width", "100%");
-                    hrElement.setAttribute("size", "1");
-                    hrElement.setAttribute("align", "center");
-                    hrElement.style.marginTop = "3px";
-                    hrElement.setAttribute("color", "#002072");
-                    hrElement.setAttribute("noshade", "");
-                    div2.appendChild(hrElement);
                 }
 
             });
