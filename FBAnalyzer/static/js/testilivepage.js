@@ -45,10 +45,11 @@ window.onload = function() {
                     imgcat.style.paddingLeft = "10px";
                     div1.appendChild(imgcat);
 
-                    const d = document.createElement('p');
-                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                + match.team_A_name + " - "  + match.team_B_name + " "
-                                + match.fs_B.toString() + " - " + match.fs_A.toString();
+                    // const d = document.createElement('p');
+                    d.style.display = 'block';
+                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + "\n"
+                                + match.team_A_name + " - "  + match.team_B_name + "\n"
+                                + match.fs_A.toString() + " - " + match.fs_B.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
 
