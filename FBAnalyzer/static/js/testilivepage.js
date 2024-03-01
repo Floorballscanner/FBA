@@ -36,7 +36,7 @@ window.onload = function() {
                     div3.setAttribute('class', 'col-xs-1 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-1 px-1');
+                    div4.setAttribute('class', 'col-xs-1 px-1 justify-content-end');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
@@ -56,7 +56,7 @@ window.onload = function() {
                     d.style.paddingTop = "2px";
 
                     const button = document.createElement('a');
-                    button.setAttribute('class', 'btn btn-primary');
+                    button.setAttribute('class', 'btn btn-primary btn-sm');
                     button.setAttribute('href', '/fliigalive/' + match.match_id);
                     button.setAttribute('role', 'button');
                     button.style.paddingTop = "2px";
