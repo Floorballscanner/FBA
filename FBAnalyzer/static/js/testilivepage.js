@@ -30,13 +30,13 @@ window.onload = function() {
                     div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-7 px-0 translate-middle');
+                    div2.setAttribute('class', 'col-xs-7 px-1 translate-middle');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-2 px-0 translate-middle');
+                    div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-2 px-0 translate-middle');
+                    div4.setAttribute('class', 'col-xs-2 px-1 translate-middle');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
@@ -46,8 +46,8 @@ window.onload = function() {
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                + match.team_A_name + " - "  + match.team_B_name + " "
+                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "/n
+                                + match.team_A_name + " - "  + match.team_B_name + " " /n
                                 + match.fs_B.toString() + " - " + match.fs_A.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
