@@ -47,8 +47,8 @@ window.onload = function() {
 
                     const d = document.createElement('p');
                     d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                + match.team_A_name + " " + match.fs_A.toString() + " - "
-                                + match.fs_B.toString() + " " + match.team_B_name;
+                                + match.team_A_name + " - "  + match.team_B_name + " "
+                                + match.fs_B.toString() + " - " + match.fs_A.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
 
@@ -70,9 +70,9 @@ window.onload = function() {
                     if (match.live_period != "-1" && match.status != "Played") {
                         const img = document.createElement('img');
                         img.setAttribute('src',"/static/live.png");
-                        img.setAttribute('width', '10px');
+                        img.setAttribute('width', '50px');
                         img.style.paddingTop = "2px";
-                        div4.appendChild(img);
+                        div3.appendChild(img);
                     }
                     else if (match.live_period == "-1") {
                         const gametime = document.createElement('p');
@@ -80,13 +80,13 @@ window.onload = function() {
                         gametime.innerText = match.time.toString();
                         gametime.style.paddingTop = "2px";
                         gametime.setAttribute('id', 'time' + match.match_id);
-                        div4.appendChild(gametime);
+                        div3.appendChild(gametime);
                     }
                     else if (match.status == "Played") {
 
                     }
 
-                    div3.appendChild(button);
+                    div4.appendChild(button);
 
                 }
 
