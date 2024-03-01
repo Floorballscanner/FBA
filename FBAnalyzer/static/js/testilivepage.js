@@ -27,6 +27,8 @@ window.onload = function() {
                     row.setAttribute('class', 'row w-100');
                     row.style.marginTop = "5px";
                     row.style.marginBottom = "5px";
+                    row.style.paddingTop = "0px";
+                    row.style.paddingBottom = "0px";
 
                     const div1 = document.createElement('div');
                     div1.setAttribute('class', 'col-xs-1 px-1');
