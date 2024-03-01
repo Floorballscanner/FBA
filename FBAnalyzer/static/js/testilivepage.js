@@ -24,7 +24,7 @@ window.onload = function() {
 
                 if (areDatesEqual(matchdate, today))  {
                     const row = document.createElement('div');
-                    row.setAttribute('class', 'row w-100 d-flex');
+                    row.setAttribute('class', 'row w-100 d-inline-flex');
 
                     const div1 = document.createElement('div');
                     div1.setAttribute('class', 'col-xs-1 px-1');
