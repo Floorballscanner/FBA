@@ -42,12 +42,12 @@ window.onload = function() {
                     imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '30px');
                     imgcat.style.paddingTop = "2px";
-                    imgcat.style.paddingLeft = "10px";
+                    imgcat.style.paddingLeft = "20px";
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + "/n"
-                                + match.team_A_name + " - "  + match.team_B_name + "/n"
+                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + "<br>"
+                                + match.team_A_name + " - "  + match.team_B_name + "<br>"
                                 + match.fs_B.toString() + " - " + match.fs_A.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
