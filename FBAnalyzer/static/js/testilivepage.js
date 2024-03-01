@@ -37,7 +37,7 @@ window.onload = function() {
 
                     const d = document.createElement('p');
                     d.innerText = match.date + " P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                + match.team_A_name + " " + match.fs_A.toString() " - "
+                                + match.team_A_name + " " + match.fs_A.toString() + " - "
                                 + match.fs_B.toString() + " " + match.team_B_name;
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
@@ -126,7 +126,7 @@ window.onload = function() {
 
                     const d = document.createElement('p');
                     d.innerText = match.date + " P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                + match.team_A_name + " " + match.fs_A.toString() " - "
+                                + match.team_A_name + " " + match.fs_A.toString() + " - "
                                 + match.fs_B.toString() + " " + match.team_B_name;
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
@@ -215,7 +215,7 @@ window.onload = function() {
 
                     const d = document.createElement('p');
                     d.innerText = match.date + " P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                + match.team_A_name + " " + match.fs_A.toString() " - "
+                                + match.team_A_name + " " + match.fs_A.toString() + " - "
                                 + match.fs_B.toString() + " " + match.team_B_name;
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
