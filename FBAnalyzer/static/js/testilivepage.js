@@ -118,19 +118,19 @@ window.onload = function() {
 
                 if (areDatesEqual(matchdate, today))  {
                     const row = document.createElement('div');
-                    row.setAttribute('class', 'row');
+                    row.setAttribute('class', 'row w-100');
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
+                    div1.setAttribute('class', 'col-xs-1 px-1 position-relative');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-7 px-0 translate-middle');
+                    div2.setAttribute('class', 'col-xs-9 px-0 position-relative');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+                    div3.setAttribute('class', 'col-xs-1 px-1 position-relative');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+                    div4.setAttribute('class', 'col-xs-1 px-1 position-relative');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
@@ -140,9 +140,11 @@ window.onload = function() {
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    //d.style.display = 'block';
-                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + "\n"
-                                + match.team_A_name + " - "  + match.team_B_name + "\n"
+                    d.style.paddingLeft = "2px";
+                    d.style.paddingRight = "2px";
+                    d.style.display = 'block';
+                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
+                                + match.team_A_name + " - "  + match.team_B_name + " "
                                 + match.fs_A.toString() + " - " + match.fs_B.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
@@ -210,19 +212,19 @@ window.onload = function() {
 
                 if (areDatesEqual(matchdate, today))  {
                     const row = document.createElement('div');
-                    row.setAttribute('class', 'row');
+                    row.setAttribute('class', 'row w-100');
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
+                    div1.setAttribute('class', 'col-xs-1 px-1 position-relative');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-7 px-0 translate-middle');
+                    div2.setAttribute('class', 'col-xs-9 px-0 position-relative');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+                    div3.setAttribute('class', 'col-xs-1 px-1 position-relative');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+                    div4.setAttribute('class', 'col-xs-1 px-1 position-relative');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
@@ -232,9 +234,11 @@ window.onload = function() {
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    //d.style.display = 'block';
-                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + "\n"
-                                + match.team_A_name + " - "  + match.team_B_name + "\n"
+                    d.style.paddingLeft = "2px";
+                    d.style.paddingRight = "2px";
+                    d.style.display = 'block';
+                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
+                                + match.team_A_name + " - "  + match.team_B_name + " "
                                 + match.fs_A.toString() + " - " + match.fs_B.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
