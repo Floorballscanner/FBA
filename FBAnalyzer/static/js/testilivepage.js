@@ -30,13 +30,13 @@ window.onload = function() {
                     div1.setAttribute('class', 'col-xs-1 px-1 translate-middle');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-7 px-1 translate-middle');
+                    div2.setAttribute('class', 'col-xs-7 px-0 translate-middle');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+                    div3.setAttribute('class', 'col-xs-2 px-0 translate-middle');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-2 px-1 translate-middle');
+                    div4.setAttribute('class', 'col-xs-2 px-0 translate-middle');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
