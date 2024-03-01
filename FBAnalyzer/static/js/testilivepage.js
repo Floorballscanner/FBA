@@ -91,6 +91,7 @@ window.onload = function() {
 
                     div4.appendChild(button);
                     // Set attributes for the <hr> element
+                    var hrElement = document.createElement("hr");
                     hrElement.setAttribute("width", "100%");
                     hrElement.setAttribute("size", "2");
                     hrElement.setAttribute("align", "center");
@@ -193,6 +194,7 @@ window.onload = function() {
 
                     div4.appendChild(button);
                     // Set attributes for the <hr> element
+                    var hrElement = document.createElement("hr");
                     hrElement.setAttribute("width", "100%");
                     hrElement.setAttribute("size", "2");
                     hrElement.setAttribute("align", "center");
@@ -295,6 +297,7 @@ window.onload = function() {
 
                     div4.appendChild(button);
                     // Set attributes for the <hr> element
+                    var hrElement = document.createElement("hr");
                     hrElement.setAttribute("width", "100%");
                     hrElement.setAttribute("size", "2");
                     hrElement.setAttribute("align", "center");
