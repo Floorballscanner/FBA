@@ -27,21 +27,22 @@ window.onload = function() {
                     row.setAttribute('class', 'row');
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-xs-3 px-1');
+                    div1.setAttribute('class', 'col-xs-2 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-3 px-1');
+                    div2.setAttribute('class', 'col-xs-5 px-1');
 
                     const div3 = document.createElement('div');
                     div3.setAttribute('class', 'col-xs-3 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-3 px-1');
+                    div4.setAttribute('class', 'col-xs-2 px-1');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '30px');
                     imgcat.style.paddingTop = "2px";
+                    imgcat.style.paddingLeft = "5px";
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
