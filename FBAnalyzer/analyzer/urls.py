@@ -27,6 +27,7 @@ urlpatterns = [
     path('inssidivari/', views.inssidivari_main, name="inssidivari-main"),
     path('inssidivari_results/', views.inssidivari_results, name="inssidivari-results"),
     path('inssidivarilive/', views.inssidivarilive, name="idlivepage"),
+    path('testilive/', views.testilive, name="testilivepage"),
     path('inssidivarilive/<nr>', views.inssidivarigame, name="idgamepage"),
 ]
 

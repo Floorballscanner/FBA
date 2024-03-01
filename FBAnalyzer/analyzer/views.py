@@ -56,3 +56,6 @@ def inssidivarigame(request, nr):
 def inssidivarilive(request):
     return render(request, 'inssidivari_live.html')
 
+def testilive(request):
+    return render(request, 'testilive.html')
+

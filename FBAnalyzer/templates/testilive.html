@@ -1,0 +1,20 @@
+<!--
+
+This is the F-liiga result test page.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+{% load static %}
+<div class="container-fluid no-padding">
+    <div class="app-text" id="head" style="Padding-top: 30px;">
+        <a href="/fliiga"><img src="{% static 'back.png' %}" width="20px" style="Padding-bottom:20px;"></a><br>
+
+    </div>
+    <br><br>
+</div>
+
+<script type="text/javascript" src="/static/js/testilivepage.js"></script>
+
+{% endblock %}
