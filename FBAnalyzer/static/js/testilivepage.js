@@ -24,7 +24,7 @@ window.onload = function() {
 
                 if (areDatesEqual(matchdate, today))  {
                     const row = document.createElement('div');
-                    row.setAttribute('class', 'row');
+                    row.setAttribute('class', 'row w-100');
 
                     const div1 = document.createElement('div');
                     div1.setAttribute('class', 'col-xs-1 px-1 position-relative translate-middle');
@@ -47,8 +47,8 @@ window.onload = function() {
 
                     const d = document.createElement('p');
                     //d.style.display = 'block';
-                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + "\n"
-                                + match.team_A_name + " - "  + match.team_B_name + "\n"
+                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
+                                + match.team_A_name + " - "  + match.team_B_name + " "
                                 + match.fs_A.toString() + " - " + match.fs_B.toString();
                     d.style.fontSize = 'small';
                     d.style.paddingTop = "2px";
