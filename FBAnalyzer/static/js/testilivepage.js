@@ -31,16 +31,16 @@ window.onload = function() {
                     row.style.paddingBottom = "0px";
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-xs-1 px-1');
+                    div1.setAttribute('class', 'col-sm-1 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-9 px-0');
+                    div2.setAttribute('class', 'col-sm-9 px-0');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-1 px-1');
+                    div3.setAttribute('class', 'col-sm-1 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-1 px-1');
+                    div4.setAttribute('class', 'col-sm-1 px-1');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
