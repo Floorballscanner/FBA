@@ -90,6 +90,14 @@ window.onload = function() {
                     }
 
                     div4.appendChild(button);
+                    // Set attributes for the <hr> element
+                    hrElement.setAttribute("width", "100%");
+                    hrElement.setAttribute("size", "2");
+                    hrElement.setAttribute("align", "center");
+                    hrElement.style.marginTop = "5px";
+                    hrElement.setAttribute("color", "#002072");
+                    hrElement.setAttribute("noshade", "");
+                    row.appendChild(hrElement);
 
                 }
 
@@ -121,16 +129,16 @@ window.onload = function() {
                     row.setAttribute('class', 'row w-100');
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-xs-1 px-1 position-relative');
+                    div1.setAttribute('class', 'col-xs-1 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-9 px-0 position-relative');
+                    div2.setAttribute('class', 'col-xs-9 px-0');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-1 px-1 position-relative');
+                    div3.setAttribute('class', 'col-xs-1 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-1 px-1 position-relative');
+                    div4.setAttribute('class', 'col-xs-1 px-1');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
@@ -150,7 +158,7 @@ window.onload = function() {
                     d.style.paddingTop = "2px";
 
                     const button = document.createElement('a');
-                    button.setAttribute('class', 'btn btn-primary');
+                    button.setAttribute('class', 'btn btn-primary btn-sm');
                     button.setAttribute('href', '/fliigalive/' + match.match_id);
                     button.setAttribute('role', 'button');
                     button.style.paddingTop = "2px";
@@ -184,6 +192,14 @@ window.onload = function() {
                     }
 
                     div4.appendChild(button);
+                    // Set attributes for the <hr> element
+                    hrElement.setAttribute("width", "100%");
+                    hrElement.setAttribute("size", "2");
+                    hrElement.setAttribute("align", "center");
+                    hrElement.style.marginTop = "5px";
+                    hrElement.setAttribute("color", "#002072");
+                    hrElement.setAttribute("noshade", "");
+                    row.appendChild(hrElement);
 
                 }
 
@@ -215,16 +231,16 @@ window.onload = function() {
                     row.setAttribute('class', 'row w-100');
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-xs-1 px-1 position-relative');
+                    div1.setAttribute('class', 'col-xs-1 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-xs-9 px-0 position-relative');
+                    div2.setAttribute('class', 'col-xs-9 px-0');
 
                     const div3 = document.createElement('div');
-                    div3.setAttribute('class', 'col-xs-1 px-1 position-relative');
+                    div3.setAttribute('class', 'col-xs-1 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-xs-1 px-1 position-relative');
+                    div4.setAttribute('class', 'col-xs-1 px-1');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
@@ -244,7 +260,7 @@ window.onload = function() {
                     d.style.paddingTop = "2px";
 
                     const button = document.createElement('a');
-                    button.setAttribute('class', 'btn btn-primary');
+                    button.setAttribute('class', 'btn btn-primary btn-sm');
                     button.setAttribute('href', '/fliigalive/' + match.match_id);
                     button.setAttribute('role', 'button');
                     button.style.paddingTop = "2px";
@@ -278,6 +294,14 @@ window.onload = function() {
                     }
 
                     div4.appendChild(button);
+                    // Set attributes for the <hr> element
+                    hrElement.setAttribute("width", "100%");
+                    hrElement.setAttribute("size", "2");
+                    hrElement.setAttribute("align", "center");
+                    hrElement.style.marginTop = "5px";
+                    hrElement.setAttribute("color", "#002072");
+                    hrElement.setAttribute("noshade", "");
+                    row.appendChild(hrElement);
 
                 }
 
