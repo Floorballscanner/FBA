@@ -117,19 +117,20 @@ window.onload = function() {
                             console.log('Success:', data);
                         })
 
-                        .catch((error) => {
-                          console.error('Error:', error);
+                    .catch((error) => {
+                      console.error('Error:', error);
                     });
                 })
 
                 .catch((error) => {
                   console.error('Error:', error);
-            });
+                });
+
 
         .catch((error) => {
           console.error('Error:', error);
-      });
-  })
+        });
+    })
 
     t = setTimeout(function(){ location.reload(); }, 60000); // Update page every minute
 }
