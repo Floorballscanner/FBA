@@ -2,7 +2,8 @@
 // This file contains the script for updating the livepage with live game data
 
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
-var matches = "";
+var matches = [];
+var temp_matches = [];
 var matchdate = "";
 var today = "";
 
@@ -13,7 +14,8 @@ window.onload = function() {
     fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=402&group_id=2")
         .then(response => response.json())
         .then(data => {
-            const matches = data.matches;
+            temp_matches = temp_matches.concat(data.matches);
+            matches = data.matches;
             matches.sort(GetSortOrder("date"));
 
             matches.forEach(match => {
@@ -114,7 +116,8 @@ window.onload = function() {
     fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=384&group_id=1")
         .then(response => response.json())
         .then(data => {
-            const matches = data.matches;
+            matches = data.matches;
+            temp_matches = temp_matches.concat(data.matches);
             matches.sort(GetSortOrder("date"));
 
             matches.forEach(match => {
@@ -215,7 +218,8 @@ window.onload = function() {
     fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=444&group_id=1")
         .then(response => response.json())
         .then(data => {
-            const matches = data.matches;
+            matches = data.matches;
+            temp_matches = temp_matches.concat(data.matches);
             matches.sort(GetSortOrder("date"));
 
             matches.forEach(match => {
