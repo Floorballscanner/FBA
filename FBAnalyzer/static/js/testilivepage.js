@@ -45,11 +45,11 @@ window.onload = function() {
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '30px');
-                    imgcat.style.paddingLeft = "8px";
+                    imgcat.style.paddingLeft = "5px";
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    d.style.paddingLeft = "5px";
+                    d.style.paddingLeft = "10px";
                     d.style.paddingRight = "2px";
                     d.style.display = 'block';
                     d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
@@ -146,11 +146,11 @@ window.onload = function() {
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '30px');
-                    imgcat.style.paddingLeft = "8px";
+                    imgcat.style.paddingLeft = "5px";
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    d.style.paddingLeft = "5px";
+                    d.style.paddingLeft = "10px";
                     d.style.paddingRight = "2px";
                     d.style.display = 'block';
                     d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
@@ -247,11 +247,11 @@ window.onload = function() {
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
                     imgcat.setAttribute('width', '30px');
-                    imgcat.style.paddingLeft = "8px";
+                    imgcat.style.paddingLeft = "5px";
                     div1.appendChild(imgcat);
 
                     const d = document.createElement('p');
-                    d.style.paddingLeft = "5px";
+                    d.style.paddingLeft = "10px";
                     d.style.paddingRight = "2px";
                     d.style.display = 'block';
                     d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
