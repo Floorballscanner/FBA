@@ -31,10 +31,10 @@ window.onload = function() {
                     row.style.paddingBottom = "0px";
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-2 px-1');
+                    div1.setAttribute('class', 'col-1 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-6 px-0');
+                    div2.setAttribute('class', 'col-7 px-0');
 
                     const div3 = document.createElement('div');
                     div3.setAttribute('class', 'col-2 px-1');
@@ -131,10 +131,10 @@ window.onload = function() {
                     row.style.paddingBottom = "0px";
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-2 px-1');
+                    div1.setAttribute('class', 'col-1 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-6 px-0');
+                    div2.setAttribute('class', 'col-7 px-0');
 
                     const div3 = document.createElement('div');
                     div3.setAttribute('class', 'col-2 px-1');
@@ -231,10 +231,10 @@ window.onload = function() {
                     row.style.paddingBottom = "0px";
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-2 px-1');
+                    div1.setAttribute('class', 'col-1 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-6 px-0');
+                    div2.setAttribute('class', 'col-7 px-0');
 
                     const div3 = document.createElement('div');
                     div3.setAttribute('class', 'col-2 px-1');
