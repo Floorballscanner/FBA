@@ -39,8 +39,8 @@ window.onload = function() {
 
                                 const row = document.createElement('div');
                                 row.setAttribute('class', 'row w-100');
-                                row.style.marginTop = "5px";
-                                row.style.marginBottom = "5px";
+                                row.style.marginTop = "0px";
+                                row.style.marginBottom = "0px";
                                 row.style.paddingTop = "0px";
                                 row.style.paddingBottom = "0px";
 
@@ -114,7 +114,7 @@ window.onload = function() {
                                 hrElement.setAttribute("width", "100%");
                                 hrElement.setAttribute("size", "2");
                                 hrElement.setAttribute("align", "center");
-                                hrElement.setAttribute("color", "#002072");
+                                hrElement.setAttribute("color", "#F5F5F5");
                                 hrElement.setAttribute("noshade", "");
                                 row.appendChild(hrElement);
 
