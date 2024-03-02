@@ -39,7 +39,7 @@ window.onload = function() {
 
                                 const row = document.createElement('div');
                                 row.setAttribute('class', 'row w-100');
-                                row.style.marginTop = "5px";
+                                row.style.marginTop = "10px";
                                 row.style.marginBottom = "0px";
                                 row.style.paddingTop = "0px";
                                 row.style.paddingBottom = "0px";
