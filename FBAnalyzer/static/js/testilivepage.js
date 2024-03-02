@@ -124,7 +124,7 @@ window.onload = function() {
 
                 if (areDatesEqual(matchdate, today))  {
                     const row = document.createElement('div');
-                    row.setAttribute('class', 'row w-100');
+                    row.setAttribute('class', 'row');
                     row.style.marginTop = "5px";
                     row.style.marginBottom = "5px";
                     row.style.paddingTop = "0px";
@@ -134,7 +134,7 @@ window.onload = function() {
                     div1.setAttribute('class', 'col-sm-1 col-xs-1 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-sm-9 col-xs-1 px-0');
+                    div2.setAttribute('class', 'col-sm-9 col-xs-9 px-0');
 
                     const div3 = document.createElement('div');
                     div3.setAttribute('class', 'col-sm-1 col-xs-1 px-1');
@@ -144,7 +144,7 @@ window.onload = function() {
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
-                    imgcat.setAttribute('width', '30px');
+                    imgcat.setAttribute('width', '40px');
                     imgcat.style.paddingLeft = "10px";
                     div1.appendChild(imgcat);
 
@@ -224,7 +224,7 @@ window.onload = function() {
 
                 if (areDatesEqual(matchdate, today))  {
                     const row = document.createElement('div');
-                    row.setAttribute('class', 'row w-100');
+                    row.setAttribute('class', 'row');
                     row.style.marginTop = "5px";
                     row.style.marginBottom = "5px";
                     row.style.paddingTop = "0px";
@@ -234,7 +234,7 @@ window.onload = function() {
                     div1.setAttribute('class', 'col-sm-1 col-xs-1 px-1');
 
                     const div2 = document.createElement('div');
-                    div2.setAttribute('class', 'col-sm-9 col-xs-1 px-0');
+                    div2.setAttribute('class', 'col-sm-9 col-xs-9 px-0');
 
                     const div3 = document.createElement('div');
                     div3.setAttribute('class', 'col-sm-1 col-xs-1 px-1');
@@ -244,7 +244,7 @@ window.onload = function() {
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
-                    imgcat.setAttribute('width', '30px');
+                    imgcat.setAttribute('width', '40px');
                     imgcat.style.paddingLeft = "10px";
                     div1.appendChild(imgcat);
 
