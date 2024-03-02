@@ -103,6 +103,7 @@ window.onload = function() {
                                     const gametime = document.createElement('p');
                                     gametime.style.fontSize = 'small';
                                     gametime.innerText = "Played";
+                                    gametime.style.paddingTop = "5px";
                                     gametime.setAttribute('id', 'time' + match.match_id);
                                     div3.appendChild(gametime);
                                 }
