@@ -65,6 +65,7 @@ window.onload = function() {
                                 const d = document.createElement('p');
                                 d.style.paddingLeft = "10px";
                                 d.style.paddingRight = "2px";
+                                d.style.paddingTop = "5px";
                                 d.style.display = 'block';
                                 d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
                                             + match.team_A_name + " - "  + match.team_B_name + " "
