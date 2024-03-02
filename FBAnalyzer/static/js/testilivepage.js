@@ -99,7 +99,11 @@ window.onload = function() {
                                     div3.appendChild(gametime);
                                 }
                                 else if (match.status == "Played") {
-
+                                    const gametime = document.createElement('p');
+                                    gametime.style.fontSize = 'small';
+                                    gametime.innerText = "Played";
+                                    gametime.setAttribute('id', 'time' + match.match_id);
+                                    div3.appendChild(gametime);
                                 }
 
                                 div4.appendChild(button);
