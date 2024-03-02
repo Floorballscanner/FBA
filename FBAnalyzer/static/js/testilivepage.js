@@ -31,7 +31,7 @@ window.onload = function() {
                     row.style.paddingBottom = "0px";
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-1 px-1');
+                    div1.setAttribute('class', 'col-2 px-1');
 
                     const div2 = document.createElement('div');
                     div2.setAttribute('class', 'col-7 px-0');
@@ -40,11 +40,11 @@ window.onload = function() {
                     div3.setAttribute('class', 'col-2 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-2 px-1');
+                    div4.setAttribute('class', 'col-1 px-1');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
-                    imgcat.setAttribute('width', '40px');
+                    imgcat.setAttribute('width', '30px');
                     imgcat.style.paddingLeft = "10px";
                     div1.appendChild(imgcat);
 
@@ -61,6 +61,7 @@ window.onload = function() {
                     button.setAttribute('class', 'btn btn-primary btn-sm');
                     button.setAttribute('href', '/fliigalive/' + match.match_id);
                     button.setAttribute('role', 'button');
+                    button.style.fontSize = "small"
                     button.innerText = "Open";
 
                     document.getElementById("head").appendChild(row);
@@ -131,7 +132,7 @@ window.onload = function() {
                     row.style.paddingBottom = "0px";
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-1 px-1');
+                    div1.setAttribute('class', 'col-2 px-1');
 
                     const div2 = document.createElement('div');
                     div2.setAttribute('class', 'col-7 px-0');
@@ -140,11 +141,11 @@ window.onload = function() {
                     div3.setAttribute('class', 'col-2 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-2 px-1');
+                    div4.setAttribute('class', 'col-1 px-1');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
-                    imgcat.setAttribute('width', '40px');
+                    imgcat.setAttribute('width', '30px');
                     imgcat.style.paddingLeft = "10px";
                     div1.appendChild(imgcat);
 
@@ -161,6 +162,7 @@ window.onload = function() {
                     button.setAttribute('class', 'btn btn-primary btn-sm');
                     button.setAttribute('href', '/fliigalive/' + match.match_id);
                     button.setAttribute('role', 'button');
+                    button.style.fontSize = "small"
                     button.innerText = "Open";
 
                     document.getElementById("head").appendChild(row);
@@ -231,7 +233,7 @@ window.onload = function() {
                     row.style.paddingBottom = "0px";
 
                     const div1 = document.createElement('div');
-                    div1.setAttribute('class', 'col-1 px-1');
+                    div1.setAttribute('class', 'col-2 px-1');
 
                     const div2 = document.createElement('div');
                     div2.setAttribute('class', 'col-7 px-0');
@@ -240,11 +242,11 @@ window.onload = function() {
                     div3.setAttribute('class', 'col-2 px-1');
 
                     const div4 = document.createElement('div');
-                    div4.setAttribute('class', 'col-2 px-1');
+                    div4.setAttribute('class', 'col-1 px-1');
 
                     const imgcat = document.createElement('img');
                     imgcat.setAttribute('src', match.category_logo);
-                    imgcat.setAttribute('width', '40px');
+                    imgcat.setAttribute('width', '30px');
                     imgcat.style.paddingLeft = "10px";
                     div1.appendChild(imgcat);
 
@@ -261,6 +263,7 @@ window.onload = function() {
                     button.setAttribute('class', 'btn btn-primary btn-sm');
                     button.setAttribute('href', '/fliigalive/' + match.match_id);
                     button.setAttribute('role', 'button');
+                    button.style.fontSize = "small"
                     button.innerText = "Open";
 
                     document.getElementById("head").appendChild(row);
