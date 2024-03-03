@@ -95,7 +95,8 @@ window.onload = function() {
                                 else if (match.live_period == "-1") {
                                     const gametime = document.createElement('p');
                                     gametime.style.fontSize = 'small';
-                                    gametime.innerText = match.time.toString();
+                                    temp = match.time.toString();
+                                    gametime.innerText = temp.slice(0,5);
                                     gametime.setAttribute('id', 'time' + match.match_id);
                                     div3.appendChild(gametime);
                                 }
