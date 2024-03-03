@@ -85,7 +85,7 @@ window.onload = function() {
                                     const d = document.createElement('p');
                                     d.style.paddingLeft = "10px";
                                     d.style.paddingRight = "2px";
-                                    d.style.paddingTop = "10px";
+                                    d.style.paddingTop = "5px";
                                     d.style.display = 'block';
                                     d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
                                                 + match.team_A_name + " - "  + match.team_B_name + " "
@@ -99,13 +99,14 @@ window.onload = function() {
                                     gametime.style.fontSize = 'small';
                                     temp = match.time.toString();
                                     gametime.innerText = temp.slice(0,5);
+                                    gametime.style.paddingTop = "5px";
                                     gametime.setAttribute('id', 'time' + match.match_id);
                                     div3.appendChild(gametime);
 
                                     const d = document.createElement('p');
                                     d.style.paddingLeft = "10px";
                                     d.style.paddingRight = "2px";
-                                    d.style.paddingTop = "10px";
+                                    d.style.paddingTop = "5px";
                                     d.style.display = 'block';
                                     d.innerText = match.team_A_name + " - "  + match.team_B_name;
                                     d.style.fontSize = 'small';
@@ -123,7 +124,7 @@ window.onload = function() {
                                     const d = document.createElement('p');
                                     d.style.paddingLeft = "10px";
                                     d.style.paddingRight = "2px";
-                                    d.style.paddingTop = "10px";
+                                    d.style.paddingTop = "5px";
                                     d.style.display = 'block';
                                     d.innerText = match.team_A_name + " - "  + match.team_B_name + " "
                                                 + match.fs_A.toString() + " - " + match.fs_B.toString();
