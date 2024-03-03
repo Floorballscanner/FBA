@@ -56,21 +56,17 @@ window.onload = function() {
                                 const div4 = document.createElement('div');
                                 div4.setAttribute('class', 'col-2 px-1');
 
+                                document.getElementById("head").appendChild(row);
+                                row.appendChild(div1);
+                                row.appendChild(div2);
+                                row.appendChild(div3);
+                                row.appendChild(div4);
+
                                 const imgcat = document.createElement('img');
                                 imgcat.setAttribute('src', match.category_logo);
                                 imgcat.setAttribute('width', '30px');
                                 imgcat.style.paddingLeft = "5px";
                                 div1.appendChild(imgcat);
-
-                                const d = document.createElement('p');
-                                d.style.paddingLeft = "10px";
-                                d.style.paddingRight = "2px";
-                                d.style.paddingTop = "5px";
-                                d.style.display = 'block';
-                                d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
-                                            + match.team_A_name + " - "  + match.team_B_name + " "
-                                            + match.fs_A.toString() + " - " + match.fs_B.toString();
-                                d.style.fontSize = 'small';
 
                                 const button = document.createElement('a');
                                 button.setAttribute('class', 'btn btn-primary btn-sm');
@@ -78,19 +74,25 @@ window.onload = function() {
                                 button.setAttribute('role', 'button');
                                 button.style.fontSize = "small"
                                 button.innerText = "Open";
-
-                                document.getElementById("head").appendChild(row);
-                                row.appendChild(div1);
-                                row.appendChild(div2);
-                                row.appendChild(div3);
-                                row.appendChild(div4);
-                                div2.appendChild(d);
+                                div4.appendChild(button);
 
                                 if (match.live_period != "-1" && match.status != "Played") {
                                     const img = document.createElement('img');
                                     img.setAttribute('src',"/static/live.png");
                                     img.setAttribute('width', '50px');
                                     div3.appendChild(img);
+
+                                    const d = document.createElement('p');
+                                    d.style.paddingLeft = "10px";
+                                    d.style.paddingRight = "2px";
+                                    d.style.paddingTop = "5px";
+                                    d.style.display = 'block';
+                                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
+                                                + match.team_A_name + " - "  + match.team_B_name + " "
+                                                + match.fs_A.toString() + " - " + match.fs_B.toString();
+                                    d.style.fontSize = 'small';
+
+                                    div2.appendChild(d);
                                 }
                                 else if (match.live_period == "-1") {
                                     const gametime = document.createElement('p');
@@ -99,6 +101,16 @@ window.onload = function() {
                                     gametime.innerText = temp.slice(0,5);
                                     gametime.setAttribute('id', 'time' + match.match_id);
                                     div3.appendChild(gametime);
+
+                                    const d = document.createElement('p');
+                                    d.style.paddingLeft = "10px";
+                                    d.style.paddingRight = "2px";
+                                    d.style.paddingTop = "5px";
+                                    d.style.display = 'block';
+                                    d.innerText = match.team_A_name + " - "  + match.team_B_name;
+                                    d.style.fontSize = 'small';
+                                    div2.appendChild(d);
+
                                 }
                                 else if (match.status == "Played") {
                                     const gametime = document.createElement('p');
@@ -107,9 +119,19 @@ window.onload = function() {
                                     gametime.style.paddingTop = "5px";
                                     gametime.setAttribute('id', 'time' + match.match_id);
                                     div3.appendChild(gametime);
+
+                                    const d = document.createElement('p');
+                                    d.style.paddingLeft = "10px";
+                                    d.style.paddingRight = "2px";
+                                    d.style.paddingTop = "5px";
+                                    d.style.display = 'block';
+                                    d.innerText = match.team_A_name + " - "  + match.team_B_name + " "
+                                                + match.fs_A.toString() + " - " + match.fs_B.toString();
+                                    d.style.fontSize = 'small';
+                                    div2.appendChild(d);
+
                                 }
 
-                                div4.appendChild(button);
                                 // Set attributes for the <hr> element
                                 var hrElement = document.createElement("hr");
                                 hrElement.setAttribute("width", "100%");
