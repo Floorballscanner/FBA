@@ -119,7 +119,7 @@ window.onload = function() {
 
     // Women's F-Liiga
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=384&group_id=1")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=384&group_id=2")
         .then(response => response.json())
         .then(data => {
             const matches = data.matches;
