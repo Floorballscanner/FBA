@@ -12,7 +12,7 @@ window.onload = function() {
 
     // Men's F-Liiga
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=402&group_id=2")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=402&group_id=3")
         .then(response => response.json())
         .then(data => {
             matches = data.matches;
@@ -28,7 +28,7 @@ window.onload = function() {
 
                     // Inssidivari
 
-                    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=444&group_id=1")
+                    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=402&group_id=4")
                         .then(response => response.json())
                         .then(data => {
                             matches = matches.concat(data.matches);
