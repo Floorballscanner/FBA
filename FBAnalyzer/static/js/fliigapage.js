@@ -132,18 +132,17 @@ function selectMen() {
                     console.log('Success:', data);
 
                     })
-                    .catch((error) => {
-                      console.error('Error:', error);
-                    })
+                .catch((error) => {
+                  console.error('Error:', error);
                 });
-
+            })
             .catch((error) => {
             console.error('Error:', error);
-            })
-        });
+            });
+        })
         .catch((error) => {
           console.error('Error:', error);
-    })
+    });
 
 }
 
