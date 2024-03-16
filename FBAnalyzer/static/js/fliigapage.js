@@ -88,40 +88,62 @@ function selectMen() {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            const matches_json = data.matches;
-            matches_json.sort(GetSortOrder("date"));
+            matches_json = data.matches;
 
-            // List of keys you want to select from matches_json
-            const selectedKeys = ['match_id','match_number','category_name','date','time','team_A_id','team_A_name','team_B_id','team_B_name','status'];
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=402&group_id=3")
+                .then(response => response.json())
+                .then(data => {
+                console.log(data)
+                matches_json = matches_json.concat(data.matches);
 
-            // Create a new array to store the modified JSON objects
-            const modifiedMatches = [];
+                fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=402&group_id=4")
+                    .then(response => response.json())
+                    .then(data => {
+                    console.log(data)
+                    matches_json = matches_json.concat(data.matches);
 
-            // Iterate through matches_json and create new objects with selected keys
-            matches_json.forEach(match => {
-              const modifiedMatch = {};
-              selectedKeys.forEach(key => {
-                if (match.hasOwnProperty(key)) {
-                  modifiedMatch[key] = match[key];
-                }
-              });
-              modifiedMatches.push(modifiedMatch);
-            });
+                    matches_json.sort(GetSortOrder("date"));
 
-            matches = modifiedMatches;
+                    // List of keys you want to select from matches_json
+                    const selectedKeys = ['match_id','match_number','category_name','date','time','team_A_id','team_A_name','team_B_id','team_B_name','status'];
 
-            for (let j=0; j<matches.length; j++) {
-                if (matches[j].status == 'Played') {
-                    opt = new Option(matches[j].date + " | "  + matches[j].team_A_name + " - " + matches[j].team_B_name, matches[j].match_id);
-                    s_game.appendChild(opt);
-                }
-            }
-            console.log('Success:', data);
+                    // Create a new array to store the modified JSON objects
+                    const modifiedMatches = [];
 
-        })
+                    // Iterate through matches_json and create new objects with selected keys
+                    matches_json.forEach(match => {
+                      const modifiedMatch = {};
+                      selectedKeys.forEach(key => {
+                        if (match.hasOwnProperty(key)) {
+                          modifiedMatch[key] = match[key];
+                        }
+                      });
+                      modifiedMatches.push(modifiedMatch);
+                    });
+
+                    matches = modifiedMatches;
+
+                    for (let j=0; j<matches.length; j++) {
+                        if (matches[j].status == 'Played') {
+                            opt = new Option(matches[j].date + " | "  + matches[j].team_A_name + " - " + matches[j].team_B_name, matches[j].match_id);
+                            s_game.appendChild(opt);
+                        }
+                    }
+                    console.log('Success:', data);
+
+                    })
+                    .catch((error) => {
+                      console.error('Error:', error);
+                    })
+                });
+
+            .catch((error) => {
+            console.error('Error:', error);
+            })
+        });
         .catch((error) => {
           console.error('Error:', error);
-    });
+    })
 
 }
 
