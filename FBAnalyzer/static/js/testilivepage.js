@@ -93,8 +93,8 @@ window.onload = function() {
                                     if (min < 10) {min = "0" + min.toString()}
                                     sec = match.live_time.slice(3,5);
 
-                                    d.innerText = min.toString() + ":" + sec + " | "
-                                                + match.team_A_name + " - "  + match.team_B_name + " | "
+                                    d.innerText = min.toString() + ":" + sec + "  "
+                                                + match.team_A_name + " - "  + match.team_B_name + "  "
                                                 + match.fs_A.toString() + " - " + match.fs_B.toString();
                                     d.style.fontSize = 'small';
 
