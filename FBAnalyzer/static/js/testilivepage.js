@@ -90,6 +90,7 @@ window.onload = function() {
                                     per = Number(match.live_period);
                                     min = Number(match.live_time.slice(0,2));
                                     min = min + 20*(per-1);
+                                    if (min < 10) {min = "0" + min.toString()}
                                     sec = match.live_time.slice(3,5);
 
                                     d.innerText = min.toString() + ":" + sec + " "
