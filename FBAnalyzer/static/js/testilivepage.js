@@ -80,6 +80,7 @@ window.onload = function() {
                                     const img = document.createElement('img');
                                     img.setAttribute('src',"/static/live.png");
                                     img.setAttribute('width', '50px');
+                                    img.setAttribute('href', match.stream);
                                     div3.appendChild(img);
 
                                     const d = document.createElement('p');
