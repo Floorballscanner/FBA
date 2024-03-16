@@ -91,6 +91,7 @@ window.onload = function() {
                 img.style.paddingTop = "35px";
                 img.style.paddingBottom = "10px"
                 document.getElementById('gstats').prepend(img);
+                document.getElementById('streamBtn').setAttribute('href', match.stream);
             }
 
             else if (match.live_period == "") {
