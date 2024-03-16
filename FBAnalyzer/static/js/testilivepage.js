@@ -87,7 +87,12 @@ window.onload = function() {
                                     d.style.paddingRight = "2px";
                                     d.style.paddingTop = "5px";
                                     d.style.display = 'block';
-                                    d.innerText = "P" + match.live_period.toString() + " " + match.live_time.toString() + " "
+                                    per = Number(match.live_period);
+                                    min = Number(match.live_time_mmss.slice(0,2));
+                                    min = min + 20*(per-1);
+                                    sec = match.live_time_mmss.slice(3,5);
+
+                                    d.innerText = min.toString() + ":" + sec + " "
                                                 + match.team_A_name + " - "  + match.team_B_name + " "
                                                 + match.fs_A.toString() + " - " + match.fs_B.toString();
                                     d.style.fontSize = 'small';
