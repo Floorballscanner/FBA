@@ -77,11 +77,14 @@ window.onload = function() {
                                 div4.appendChild(button);
 
                                 if (match.live_period != "-1" && match.status != "Played") {
-                                    const img = document.createElement('a');
+                                    const imglink = document.createElement('a');
+                                    imglink.setAttribute('href', match.stream);
+                                    const img = document.createElement('img');
                                     img.setAttribute('src',"/static/live.png");
                                     img.setAttribute('width', '50px');
-                                    img.setAttribute('href', match.stream);
-                                    div3.appendChild(img);
+
+                                    imglink.appendChild(img);
+                                    div3.appendChild(imglink);
 
                                     const d = document.createElement('p');
                                     d.style.paddingLeft = "10px";
