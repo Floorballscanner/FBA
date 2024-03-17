@@ -25,7 +25,7 @@ window.onload = function() {
                     img.setAttribute('width', '100px');
                     img.style.paddingTop = "35px";
                     img.style.paddingBottom = "10px"
-                    document.getElementById('gstats').prepend(img);
+                    document.getElementById('backbutton').prepend(img);
             }
             else {
             document.getElementById('h1').style.paddingTop = "55px";
