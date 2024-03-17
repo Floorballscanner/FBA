@@ -204,6 +204,55 @@ function selectWomen() {
     });
 }
 
+function selectID() {
+
+    s_game.innerHTML = "";
+    opt = new Option("Select a game...");
+    s_game.appendChild(opt);
+
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2023-2024&competition_id=sb2023&category_id=444&group_id=1")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            matches_json = data.matches;
+
+            matches_json.sort(GetSortOrder("date"));
+
+            // List of keys you want to select from matches_json
+            const selectedKeys = ['match_id','match_number','category_name','date','time','team_A_id','team_A_name','team_B_id','team_B_name','status'];
+
+            // Create a new array to store the modified JSON objects
+            const modifiedMatches = [];
+
+            // Iterate through matches_json and create new objects with selected keys
+            matches_json.forEach(match => {
+              const modifiedMatch = {};
+              selectedKeys.forEach(key => {
+                if (match.hasOwnProperty(key)) {
+                  modifiedMatch[key] = match[key];
+                }
+              });
+              modifiedMatches.push(modifiedMatch);
+            });
+
+            matches = modifiedMatches;
+
+            for (let j=0; j<matches.length; j++) {
+                if (matches[j].status == 'Played') {
+                    opt = new Option(matches[j].date + " | "  + matches[j].team_A_name + " - " + matches[j].team_B_name, matches[j].match_id);
+                    s_game.appendChild(opt);
+                }
+            }
+            console.log('Success:', data);
+
+            })
+
+        .catch((error) => {
+              console.error('Error:', error);
+        });
+
+}
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
