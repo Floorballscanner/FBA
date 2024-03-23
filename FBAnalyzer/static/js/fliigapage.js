@@ -1200,7 +1200,7 @@ function updateData() {
             // Filter out objects with position values "MV/1" or "MV/2"
             arrayPoints = arrayPoints.filter(obj => obj[1].position !== 'MV/1' && obj[1].position !== 'MV/2');
             // Sort the array based on xG values in descending order
-            arrayPoints.sort((a, b) => b[1].goals - a[1].goals);
+            arrayPoints.sort((a, b) => b[1].points - a[1].points);
 
             pl_id1 = arrayPoints[0][1].player_id;
             pts = arrayPoints[0][1].goals + arrayPoints[0][1].assists;
