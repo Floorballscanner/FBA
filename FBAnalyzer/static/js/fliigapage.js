@@ -1213,17 +1213,23 @@ function updateData() {
                     document.getElementById("eventBar").insertAdjacentElement("afterend", imgteam);
 
                     var d = document.createElement('h7');
-                    d.innerText = event.time + " " + event.description + " Scorer: #" + event.shirt_number + " "
+                    if (array[index+1].description == event.description) {
+                        d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
+                                + event.player_name + ", #" + array[index+1].shirt_number + " " + array[index+1].player_name;
+                    }
+                    else {
+                        d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
                                 + event.player_name
+                    }
                     d.style.fontSize = 'small';
                     imgteam.insertAdjacentElement("afterend", d);
                     var br = document.createElement('br');
                     d.insertAdjacentElement("afterend", br);
-                    d.insertAdjacentElement("afterend", br);
+
                     var v = document.createElement('h7');
                     v.innerText = "|"
                     v.style.fontSize = 'small';
-                    br.insertAdjacentElement("afterend", v);
+                    document.getElementById("eventBar").insertAdjacentElement("afterend", v);
                     v.insertAdjacentElement("afterend", br);
 
                 }
