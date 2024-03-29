@@ -1223,6 +1223,7 @@ function updateData() {
                     var v = document.createElement('h7');
                     v.innerText = "|"
                     v.style.fontSize = 'small';
+                    d.insertAdjacentElement("afterend", v);
                     v.insertAdjacentElement("afterend", br);
 
                 }
