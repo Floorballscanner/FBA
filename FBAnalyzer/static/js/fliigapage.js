@@ -1204,6 +1204,8 @@ function updateData() {
                 v.innerText = "|"
                 v.style.fontSize = 'small';
                 document.getElementById("eventBar").insertAdjacentElement("afterend", v);
+                var br = document.createElement('br');
+                document.getElementById("eventBar").insertAdjacentElement("afterend", br);
 
                 if (event.code == "maali") {
 
