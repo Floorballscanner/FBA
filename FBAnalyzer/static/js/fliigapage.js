@@ -1217,6 +1217,8 @@ function updateData() {
                                 + event.player_name
                     d.style.fontSize = 'small';
                     imgteam.appendChild(d);
+                    var br = document.createElement('br');
+                    d.appendChild(br);
                 }
             });
 
