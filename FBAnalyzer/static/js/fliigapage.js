@@ -1219,10 +1219,10 @@ function updateData() {
                     imgteam.insertAdjacentElement("afterend", d);
                     var br = document.createElement('br');
                     d.insertAdjacentElement("afterend", br);
+                    d.insertAdjacentElement("afterend", br);
                     var v = document.createElement('h7');
                     v.innerText = "|"
                     v.style.fontSize = 'small';
-                    document.getElementById("eventBar").insertAdjacentElement("afterend", v);
                     v.insertAdjacentElement("afterend", br);
 
                 }
