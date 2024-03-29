@@ -1195,6 +1195,39 @@ function updateData() {
             period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
 
+            // Draw Events
+            var drawEvents = events.filter(event => ['maali', 'syotto'].includes(event.code));
+            drawEvents.forEach(event => {
+                if (event.code == "maali") {
+                    var row = document.createElement('div');
+                    row.setAttribute('class', 'row w-100');
+                    row.style.marginTop = "10px";
+                    row.style.marginBottom = "0px";
+                    row.style.paddingTop = "0px";
+                    row.style.paddingBottom = "0px";
+
+                    document.getElementById("eventBar").appendChild(row);
+
+                    var imgteam = document.createElement('img');
+                    if (event.team == "A") {
+                        imgteam.setAttribute('src', match.club_A_crest);
+                    }
+                    else if (event.team == "B") {
+                        imgteam.setAttribute('src', match.club_A_crest);
+                    }
+                    imgteam.setAttribute('width', '30px');
+                    imgteam.style.paddingLeft = "5px";
+                    row.appendChild(imgteam);
+
+                    var d = document.createElement('h7');
+                    d.innerText = event.time + " " + event.description + " Scorer: #" + event.shirt_number + " "
+                                + event.player_name
+                    d.style.fontSize = 'small';
+
+                    row.appendChild(d);
+                }
+            )};
+
             // Convert the object into an array of key-value pairs
             var arrayPoints = Object.entries(lineups);
             // Filter out objects with position values "MV/1" or "MV/2"
