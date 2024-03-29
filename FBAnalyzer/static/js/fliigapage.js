@@ -1226,7 +1226,7 @@ function updateData() {
 
                     row.appendChild(d);
                 }
-            )};
+            });
 
             // Convert the object into an array of key-value pairs
             var arrayPoints = Object.entries(lineups);
