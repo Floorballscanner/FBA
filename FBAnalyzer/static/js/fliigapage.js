@@ -1216,9 +1216,9 @@ function updateData() {
                     d.innerText = event.time + " " + event.description + " Scorer: #" + event.shirt_number + " "
                                 + event.player_name
                     d.style.fontSize = 'small';
-                    imgteam.appendChild(d);
+                    document.getElementById("eventBar").appendChild(d);
                     var br = document.createElement('br');
-                    d.appendChild(br);
+                    document.getElementById("eventBar").appendChild(br);
                 }
             });
 
