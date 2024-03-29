@@ -1198,7 +1198,7 @@ function updateData() {
             // Draw Events
             var drawEvents = events.filter(event => ['maali', 'syotto'].includes(event.code));
             drawEvents.reverse();
-            drawEvents.forEach(event => {
+            drawEvents.forEach((event, index, array) => {
                 if (event.code == "maali") {
 
                     var imgteam = document.createElement('img');
@@ -1223,7 +1223,7 @@ function updateData() {
                     var v = document.createElement('h7');
                     v.innerText = "|"
                     v.style.fontSize = 'small';
-                    d.insertAdjacentElement("afterend", v);
+                    br.insertAdjacentElement("afterend", v);
                     v.insertAdjacentElement("afterend", br);
 
                 }
