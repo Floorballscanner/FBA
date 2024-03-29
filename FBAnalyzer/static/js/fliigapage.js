@@ -74,7 +74,9 @@ window.onload = function() {
 function changeGame() {
 
     match_id = s_game.value;
-    document.getElementById('drawDiv').remove();
+    if (document.getElementById('drawDiv') != null) {
+        document.getElementById('drawDiv').remove();
+    }
     updateData();
 
 }
