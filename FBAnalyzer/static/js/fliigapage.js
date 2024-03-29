@@ -74,6 +74,7 @@ window.onload = function() {
 function changeGame() {
 
     match_id = s_game.value;
+
     updateData();
 
 }
@@ -1198,17 +1199,24 @@ function updateData() {
             // Draw Events
             var drawEvents = events.filter(event => ['maali', 'syotto'].includes(event.code));
             drawEvents.reverse();
+            var drawDiv = document.createElement('div');
+            drawDiv.setAttribute('id', 'drawDiv');
+            document.getElementById("eventBar").insertAdjacentElement("afterend", drawDiv);
             drawEvents.forEach((event, index, array) => {
 
                 if (event.code == "maali") {
 
+                    if (index < 2) {
+                        var br = document.createElement('br');
+                        drawDiv.appendChild(br);
+                    }
                     if (index > 1) {
                         var v = document.createElement('h7');
                         v.innerText = "|"
                         v.style.fontSize = 'small';
-                        document.getElementById("eventBar").insertAdjacentElement("afterend", v);
+                        drawDiv.appendChild(v);
                         var br = document.createElement('br');
-                        v.insertAdjacentElement("afterend", br);
+                        drawDiv.appendChild(br);
                     }
                     var imgteam = document.createElement('img');
                     if (event.team == "A") {
@@ -1219,7 +1227,7 @@ function updateData() {
                     }
                     imgteam.setAttribute('width', '40px');
                     imgteam.style.paddingRight = "10px";
-                    document.getElementById("eventBar").insertAdjacentElement("afterend", imgteam);
+                    drawDiv.appendChild(imgteam);
 
                     var d = document.createElement('h7');
                     if (array[index-1].player_name != "") {
