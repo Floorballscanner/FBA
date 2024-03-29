@@ -1199,6 +1199,12 @@ function updateData() {
             var drawEvents = events.filter(event => ['maali', 'syotto'].includes(event.code));
             drawEvents.reverse();
             drawEvents.forEach((event, index, array) => {
+
+                var v = document.createElement('h7');
+                v.innerText = "|"
+                v.style.fontSize = 'small';
+                document.getElementById("eventBar").insertAdjacentElement("afterend", v);
+
                 if (event.code == "maali") {
 
                     var imgteam = document.createElement('img');
@@ -1213,7 +1219,7 @@ function updateData() {
                     document.getElementById("eventBar").insertAdjacentElement("afterend", imgteam);
 
                     var d = document.createElement('h7');
-                    if (array[index-1].code == "syotto") {
+                    if (array[index-1].player_name != "") {
                         d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
                                 + event.player_name + ", #" + array[index-1].shirt_number + " " + array[index-1].player_name;
                     }
@@ -1225,13 +1231,6 @@ function updateData() {
                     imgteam.insertAdjacentElement("afterend", d);
                     var br = document.createElement('br');
                     d.insertAdjacentElement("afterend", br);
-
-                    var v = document.createElement('h7');
-                    v.innerText = "|"
-                    v.style.fontSize = 'small';
-                    document.getElementById("eventBar").insertAdjacentElement("afterend", v);
-                    v.insertAdjacentElement("afterend", br);
-
                 }
             });
 
