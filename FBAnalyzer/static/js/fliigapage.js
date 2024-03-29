@@ -1199,32 +1199,24 @@ function updateData() {
             var drawEvents = events.filter(event => ['maali', 'syotto'].includes(event.code));
             drawEvents.forEach(event => {
                 if (event.code == "maali") {
-                    var row = document.createElement('div');
-                    row.setAttribute('class', 'row w-100');
-                    row.style.marginTop = "10px";
-                    row.style.marginBottom = "0px";
-                    row.style.paddingTop = "0px";
-                    row.style.paddingBottom = "0px";
-
-                    document.getElementById("eventBar").appendChild(row);
 
                     var imgteam = document.createElement('img');
                     if (event.team == "A") {
                         imgteam.setAttribute('src', match.club_A_crest);
                     }
                     else if (event.team == "B") {
-                        imgteam.setAttribute('src', match.club_A_crest);
+                        imgteam.setAttribute('src', match.club_B_crest);
                     }
                     imgteam.setAttribute('width', '30px');
-                    imgteam.style.paddingLeft = "5px";
-                    row.appendChild(imgteam);
+                    imgteam.style.paddingLeft = "10px";
+                    imgteam.style.paddingRight = "10px";
+                    document.getElementById("eventBar").appendChild(imgteam);
 
                     var d = document.createElement('h7');
                     d.innerText = event.time + " " + event.description + " Scorer: #" + event.shirt_number + " "
                                 + event.player_name
                     d.style.fontSize = 'small';
-
-                    row.appendChild(d);
+                    imgteam.appendChild(d);
                 }
             });
 
