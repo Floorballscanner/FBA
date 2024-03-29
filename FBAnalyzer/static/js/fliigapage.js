@@ -1207,18 +1207,17 @@ function updateData() {
                     else if (event.team == "B") {
                         imgteam.setAttribute('src', match.club_B_crest);
                     }
-                    imgteam.setAttribute('width', '30px');
-                    imgteam.style.paddingLeft = "10px";
+                    imgteam.setAttribute('width', '40px');
                     imgteam.style.paddingRight = "10px";
-                    document.getElementById("eventBar").appendChild(imgteam);
+                    document.getElementById("eventBar").insertAdjacentElement("afterend", imgteam);
 
                     var d = document.createElement('h7');
                     d.innerText = event.time + " " + event.description + " Scorer: #" + event.shirt_number + " "
                                 + event.player_name
                     d.style.fontSize = 'small';
-                    document.getElementById("eventBar").appendChild(d);
+                    imgteam.insertAdjacentElement("afterend", d);
                     var br = document.createElement('br');
-                    document.getElementById("eventBar").appendChild(br);
+                    d.insertAdjacentElement("afterend", br);
                 }
             });
 
