@@ -1207,7 +1207,7 @@ function updateData() {
                     v.style.fontSize = 'small';
                     document.getElementById("eventBar").insertAdjacentElement("afterend", v);
                     var br = document.createElement('br');
-                    document.getElementById("eventBar").insertAdjacentElement("afterend", br);
+                    v.insertAdjacentElement("afterend", br);
 
                     var imgteam = document.createElement('img');
                     if (event.team == "A") {
