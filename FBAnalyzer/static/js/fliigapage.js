@@ -1213,9 +1213,9 @@ function updateData() {
                     document.getElementById("eventBar").insertAdjacentElement("afterend", imgteam);
 
                     var d = document.createElement('h7');
-                    if (array[index+1].code == "syotto") {
+                    if (array[index-1].code == "syotto") {
                         d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
-                                + event.player_name + ", #" + array[index+1].shirt_number + " " + array[index+1].player_name;
+                                + event.player_name + ", #" + array[index-1].shirt_number + " " + array[index-1].player_name;
                     }
                     else {
                         d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
