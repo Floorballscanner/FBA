@@ -1200,14 +1200,14 @@ function updateData() {
             drawEvents.reverse();
             drawEvents.forEach((event, index, array) => {
 
-                var v = document.createElement('h7');
-                v.innerText = "|"
-                v.style.fontSize = 'small';
-                document.getElementById("eventBar").insertAdjacentElement("afterend", v);
-                var br = document.createElement('br');
-                document.getElementById("eventBar").insertAdjacentElement("afterend", br);
-
                 if (event.code == "maali") {
+
+                    var v = document.createElement('h7');
+                    v.innerText = "|"
+                    v.style.fontSize = 'small';
+                    document.getElementById("eventBar").insertAdjacentElement("afterend", v);
+                    var br = document.createElement('br');
+                    document.getElementById("eventBar").insertAdjacentElement("afterend", br);
 
                     var imgteam = document.createElement('img');
                     if (event.team == "A") {
@@ -1223,7 +1223,7 @@ function updateData() {
                     var d = document.createElement('h7');
                     if (array[index-1].player_name != "") {
                         d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
-                                + event.player_name + ", #" + array[index-1].shirt_number + " " + array[index-1].player_name;
+                                + event.player_name + " (#" + array[index-1].shirt_number + " " + array[index-1].player_name + ")";
                     }
                     else {
                         d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
