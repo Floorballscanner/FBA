@@ -1222,7 +1222,7 @@ function updateData() {
                     var v = document.createElement('h7');
                     v.innerText = "|"
                     v.style.fontSize = 'small';
-                    br.insertAdjacentElement("afterend", v);
+                    document.getElementById("eventBar").insertAdjacentElement("afterend", v);
                     v.insertAdjacentElement("afterend", br);
 
                 }
