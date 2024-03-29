@@ -1202,13 +1202,14 @@ function updateData() {
 
                 if (event.code == "maali") {
 
-                    var v = document.createElement('h7');
-                    v.innerText = "|"
-                    v.style.fontSize = 'small';
-                    document.getElementById("eventBar").insertAdjacentElement("afterend", v);
-                    var br = document.createElement('br');
-                    v.insertAdjacentElement("afterend", br);
-
+                    if (index > 1) {
+                        var v = document.createElement('h7');
+                        v.innerText = "|"
+                        v.style.fontSize = 'small';
+                        document.getElementById("eventBar").insertAdjacentElement("afterend", v);
+                        var br = document.createElement('br');
+                        v.insertAdjacentElement("afterend", br);
+                    }
                     var imgteam = document.createElement('img');
                     if (event.team == "A") {
                         imgteam.setAttribute('src', match.club_A_crest);
