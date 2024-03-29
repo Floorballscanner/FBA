@@ -74,7 +74,7 @@ window.onload = function() {
 function changeGame() {
 
     match_id = s_game.value;
-
+    document.getElementById('drawDiv').remove();
     updateData();
 
 }
@@ -1198,7 +1198,6 @@ function updateData() {
 
             // Draw Events
             var drawEvents = events.filter(event => ['maali', 'syotto'].includes(event.code));
-            drawEvents.reverse();
             var drawDiv = document.createElement('div');
             drawDiv.setAttribute('id', 'drawDiv');
             document.getElementById("eventBar").insertAdjacentElement("afterend", drawDiv);
