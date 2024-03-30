@@ -331,6 +331,54 @@ window.onload = function() {
             period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
 
+            // Draw Events
+            var drawEvents = events.filter(event => ['maali', 'syotto'].includes(event.code));
+            var drawDiv = document.createElement('div');
+            drawDiv.setAttribute('id', 'drawDiv');
+            document.getElementById("eventBar").insertAdjacentElement("afterend", drawDiv);
+            drawEvents.forEach((event, index, array) => {
+
+                if (event.code == "maali") {
+
+                    if (index < 2) {
+                        var br = document.createElement('br');
+                        drawDiv.appendChild(br);
+                    }
+                    if (index > 1) {
+                        var v = document.createElement('h7');
+                        v.innerText = "|"
+                        v.style.fontSize = 'small';
+                        drawDiv.appendChild(v);
+                        var br = document.createElement('br');
+                        drawDiv.appendChild(br);
+                    }
+                    var imgteam = document.createElement('img');
+                    if (event.team == "A") {
+                        imgteam.setAttribute('src', match.club_A_crest);
+                    }
+                    else if (event.team == "B") {
+                        imgteam.setAttribute('src', match.club_B_crest);
+                    }
+                    imgteam.setAttribute('width', '40px');
+                    imgteam.style.paddingRight = "10px";
+                    drawDiv.appendChild(imgteam);
+
+                    var d = document.createElement('h7');
+                    if (array[index+1].player_name != "") {
+                        d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
+                                + event.player_name + " (#" + array[index+1].shirt_number + " " + array[index+1].player_name + ")";
+                    }
+                    else {
+                        d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
+                                + event.player_name
+                    }
+                    d.style.fontSize = 'small';
+                    imgteam.insertAdjacentElement("afterend", d);
+                    var br = document.createElement('br');
+                    d.insertAdjacentElement("afterend", br);
+                }
+            });
+
             // Convert the object into an array of key-value pairs
             var arrayPoints = Object.entries(lineups);
             // Filter out objects with position values "MV/1" or "MV/2"
@@ -1206,6 +1254,10 @@ function calckello() {
 
 function updateData() {
 
+    if (document.getElementById('drawDiv') != null) {
+        document.getElementById('drawDiv').remove();
+    }
+
     fetch("https://salibandy.api.torneopal.com/taso/rest/getMatch?api_key="+api_key+"&match_id="+match_id)
         .then(response => response.json())
         .then(data => {
@@ -1496,6 +1548,54 @@ function updateData() {
             g_date.innerHTML = match.date;
             period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
+
+            // Draw Events
+            var drawEvents = events.filter(event => ['maali', 'syotto'].includes(event.code));
+            var drawDiv = document.createElement('div');
+            drawDiv.setAttribute('id', 'drawDiv');
+            document.getElementById("eventBar").insertAdjacentElement("afterend", drawDiv);
+            drawEvents.forEach((event, index, array) => {
+
+                if (event.code == "maali") {
+
+                    if (index < 2) {
+                        var br = document.createElement('br');
+                        drawDiv.appendChild(br);
+                    }
+                    if (index > 1) {
+                        var v = document.createElement('h7');
+                        v.innerText = "|"
+                        v.style.fontSize = 'small';
+                        drawDiv.appendChild(v);
+                        var br = document.createElement('br');
+                        drawDiv.appendChild(br);
+                    }
+                    var imgteam = document.createElement('img');
+                    if (event.team == "A") {
+                        imgteam.setAttribute('src', match.club_A_crest);
+                    }
+                    else if (event.team == "B") {
+                        imgteam.setAttribute('src', match.club_B_crest);
+                    }
+                    imgteam.setAttribute('width', '40px');
+                    imgteam.style.paddingRight = "10px";
+                    drawDiv.appendChild(imgteam);
+
+                    var d = document.createElement('h7');
+                    if (array[index+1].player_name != "") {
+                        d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
+                                + event.player_name + " (#" + array[index+1].shirt_number + " " + array[index+1].player_name + ")";
+                    }
+                    else {
+                        d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
+                                + event.player_name
+                    }
+                    d.style.fontSize = 'small';
+                    imgteam.insertAdjacentElement("afterend", d);
+                    var br = document.createElement('br');
+                    d.insertAdjacentElement("afterend", br);
+                }
+            });
 
             // Convert the object into an array of key-value pairs
             var arrayPoints = Object.entries(lineups);
