@@ -2750,18 +2750,24 @@
         passer_id = 0;
         passer_str = "";
         shooter_str = "";
+        radius = 1 + 20 * dataxG; // Replace with your desired radius in pixels
+
 
         if (type == 1) {
             dataRes_str = "Missed";
+            opacity = "0.25";
         }
         else if (type == 2) {
             dataRes_str = "Saved";
+            opacity = "0.75";
         }
         else if (type == 3) {
             dataRes_str = "Blocked";
+            opacity = "0.25";
         }
         else if (type == 4) {
             dataRes_str = "Goal";
+            opacity = "0.75";
         }
 
         if (dataType == 0) { // Turnover one-timer
@@ -2802,34 +2808,45 @@
             shooting_team = name_t1;
 
             if (dataType === 0) {
-                ctx.fillStyle = "darkgreen";
-                ctx_p.fillStyle = "darkgreen";
-                ctx_g.fillStyle = "darkgreen";
+                ctx.fillStyle = 'rgba(0, 100, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(0, 100, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(0, 100, 0' + ", " + opacity + ")";
             } else if (dataType === 1) {
-                ctx.fillStyle = "lawngreen";
-                ctx_p.fillStyle = "lawngreen";
-                ctx_g.fillStyle = "lawngreen";
+                ctx.fillStyle = 'rgba(124, 252, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(124, 252, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(124, 252, 0' + ", " + opacity + ")";
             } else if (dataType === 2) {
-                ctx.fillStyle = "black";
-                ctx_p.fillStyle = "black";
-                ctx_g.fillStyle = "black";
+                ctx.fillStyle = 'rgba(0, 0, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(0, 0, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(0, 0, 0' + ", " + opacity + ")";
             } else if (dataType === 3) {
-                ctx.fillStyle = "blue";
-                ctx_p.fillStyle = "blue";
-                ctx_g.fillStyle = "blue";
+                ctx.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
             } else if (dataType === 4) {
-                ctx.fillStyle = "blue";
-                ctx_p.fillStyle = "blue";
-                ctx_g.fillStyle = "blue";
+                ctx.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
             }
 
 
             dataShot = 1;
 
             if (type == 1) {    // Shot Missed
-                ctx.fillText("M", x, y);
-                ctx_p.fillText("M", x, y);
-                ctx_g.fillText("M", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 1;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2867,9 +2884,20 @@
                 }
             }
             else if (type == 3) {   // Shot Blocked
-                ctx.fillText("B", x, y);
-                ctx_p.fillText("B", x, y);
-                ctx_g.fillText("B", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 3;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2907,9 +2935,20 @@
                 }
             }
             else if (type == 2) {   // Shot Saved
-                ctx.fillText("S", x, y);
-                ctx_p.fillText("S", x, y);
-                ctx_g.fillText("S", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 2;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2947,9 +2986,30 @@
                 }
             }
             else if (type == 4) {   // Shot Goal
-                ctx.fillText("G", x, y);
-                ctx_p.fillText("G", x, y);
-                ctx_g.fillText("G", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.lineWidth = 1;
+                ctx_p.strokeStyle = 'black';
+                ctx_p.stroke();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.lineWidth = 1;
+                ctx_g.strokeStyle = 'black';
+                ctx_g.stroke();
+                ctx_g.closePath();
+
                 dataRes = 4;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2996,33 +3056,44 @@
             shooting_team = name_t2;
 
             if (dataType === 0) {
-                ctx.fillStyle = "saddlebrown";
-                ctx_p.fillStyle = "saddlebrown";
-                ctx_g.fillStyle = "saddlebrown";
+                ctx.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
             } else if (dataType === 1) {
-                ctx.fillStyle = "orange";
-                ctx_p.fillStyle = "orange";
-                ctx_g.fillStyle = "orange";
+                ctx.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
             } else if (dataType === 2) {
-                ctx.fillStyle = "white";
-                ctx_p.fillStyle = "white";
-                ctx_g.fillStyle = "white";
+                ctx.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
             } else if (dataType === 3) {
-                ctx.fillStyle = "orangered";
-                ctx_p.fillStyle = "orangered";
-                ctx_g.fillStyle = "orangered";
+                ctx.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
             } else if (dataType === 4) {
-                ctx.fillStyle = "orangered";
-                ctx_p.fillStyle = "orangered";
-                ctx_g.fillStyle = "orangered";
+                ctx.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
             }
 
             dataShot = 2;
 
             if (type == 1) {    // Shot Missed
-                ctx.fillText("M", x, y);
-                ctx_p.fillText("M", x, y);
-                ctx_g.fillText("M", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 1;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -3048,9 +3119,20 @@
                 }
             }
             else if (type == 3) {   // Shot Blocked
-                ctx.fillText("B", x, y);
-                ctx_p.fillText("B", x, y);
-                ctx_g.fillText("B", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 3;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -3076,9 +3158,20 @@
                 }
             }
             else if (type == 2) {   // Shot Saved
-                ctx.fillText("S", x, y);
-                ctx_p.fillText("S", x, y);
-                ctx_g.fillText("S", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 2;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -3104,9 +3197,30 @@
                 }
             }
             else if (type == 4) {   // Shot Goal
-                ctx.fillText("G", x, y);
-                ctx_p.fillText("G", x, y);
-                ctx_g.fillText("G", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.lineWidth = 1;
+                ctx_p.strokeStyle = 'black';
+                ctx_p.stroke();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.lineWidth = 1;
+                ctx_g.strokeStyle = 'black';
+                ctx_g.stroke();
+                ctx_g.closePath();
+
                 dataRes = 4;
 
                 sa_p[line_on - 1].innerHTML++;
