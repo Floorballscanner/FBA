@@ -9,7 +9,7 @@
         ctx5.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
 
-        fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
+        /*fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
             .then(response => response.json())
             .then(games => {
                 console.log('Success:', games);
@@ -24,7 +24,7 @@
             })
         .catch((error) => {
             console.error('Error:', error);
-    });
+        });*/
 
     }
     window.onbeforeunload = function() {
@@ -2633,20 +2633,31 @@
         // Set possession menu items according to players on field
         l = line_on;
 
-        document.getElementById("posT1-1").innerHTML = document.getElementById("sT1L"+l+"LW").options
-                                            [document.getElementById("sT1L"+l+"LW").selectedIndex].text;
-        document.getElementById("posT1-2").innerHTML = document.getElementById("sT1L"+l+"C").options
-                                            [document.getElementById("sT1L"+l+"C").selectedIndex].text;
-        document.getElementById("posT1-3").innerHTML = document.getElementById("sT1L"+l+"RW").options
-                                            [document.getElementById("sT1L"+l+"RW").selectedIndex].text;
-        document.getElementById("posT1-4").innerHTML = document.getElementById("sT1L"+l+"LD").options
-                                            [document.getElementById("sT1L"+l+"LD").selectedIndex].text;
-        document.getElementById("posT1-5").innerHTML = document.getElementById("sT1L"+l+"RD").options
-                                            [document.getElementById("sT1L"+l+"RD").selectedIndex].text;
-        stype.style.display = "none";
-        posT1menu.style.display = "block";
-        posT1menu.style.left = stype.style.left;
-        posT1menu.style.top = stype.style.top;
+        if (line_on < 5) {  // No SH possession changes
+
+            document.getElementById("posT1-1").innerHTML = document.getElementById("sT1L"+l+"LW").options
+                                                [document.getElementById("sT1L"+l+"LW").selectedIndex].text;
+            document.getElementById("posT1-2").innerHTML = document.getElementById("sT1L"+l+"C").options
+                                                [document.getElementById("sT1L"+l+"C").selectedIndex].text;
+            document.getElementById("posT1-3").innerHTML = document.getElementById("sT1L"+l+"RW").options
+                                                [document.getElementById("sT1L"+l+"RW").selectedIndex].text;
+            document.getElementById("posT1-4").innerHTML = document.getElementById("sT1L"+l+"LD").options
+                                                [document.getElementById("sT1L"+l+"LD").selectedIndex].text;
+            document.getElementById("posT1-5").innerHTML = document.getElementById("sT1L"+l+"RD").options
+                                                [document.getElementById("sT1L"+l+"RD").selectedIndex].text;
+            stype.style.display = "none";
+            posT1menu.style.display = "block";
+            posT1menu.style.left = stype.style.left;
+            posT1menu.style.top = stype.style.top;
+
+        }
+
+        else if (line_on >= 5) {
+            stype.style.display = "none";
+            Draw(PosX,PosY,dataType);
+        }
+
+
 
 
         /*if (line_on < 4 && line_on_2 < 4) {
@@ -2695,11 +2706,11 @@
             posT1_str = document.getElementById("sT1L"+l+"RD").options
                         [document.getElementById("sT1L"+l+"RD").selectedIndex].text;
         }
-        
+
         Draw(PosX,PosY,dataType);
 
         posT1menu.style.display = "none";
-        
+
          // Set possession menu items according to players on field
         /*l = line_on_2;
 
@@ -2713,7 +2724,7 @@
                                             [document.getElementById("sT2L"+l+"LD").selectedIndex].text;
         document.getElementById("PosT2-5").innerHTML = document.getElementById("sT2L"+l+"RD").options
                                             [document.getElementById("sT2L"+l+"RD").selectedIndex].text;
-                                            
+
         posT2menu.style.display = "block";
         posT2menu.style.left = posT1.style.left;
         posT2menu.style.top = posT1.style.top;*/
@@ -3325,24 +3336,35 @@
                 }
             }
 
-            // Team 1 players on field
-            p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
-            [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
-            p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
-            [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
-            p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
-            [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
-            p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
-            [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
-            p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
-            [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
-            p_T1G_str = document.getElementById("sT1G").options
-            [document.getElementById("sT1G").selectedIndex].text;
-            p_T1X_str = "";
+            if (line_on <= 5) {
+                // Team 1 players on field
+                p_T1LW_str = document.getElementById("sT1L"+line_on+"LW").options
+                [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+                p_T1C_str = document.getElementById("sT1L"+line_on+"C").options
+                [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+                p_T1RW_str = document.getElementById("sT1L"+line_on+"RW").options
+                [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+                p_T1LD_str = document.getElementById("sT1L"+line_on+"LD").options
+                [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+                p_T1RD_str = document.getElementById("sT1L"+line_on+"RD").options
+                [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+                p_T1G_str = document.getElementById("sT1G").options
+                [document.getElementById("sT1G").selectedIndex].text;
+                p_T1X_str = "";
 
-            if (line_on == 5) {
-                p_T1X_str = document.getElementById("sT1L5X").options
-                [document.getElementById("sT1L5X").selectedIndex].text;
+                if (line_on == 5) {
+                    p_T1X_str = document.getElementById("sT1L5X").options
+                    [document.getElementById("sT1L5X").selectedIndex].text;
+                }
+            }
+
+            else if (line_on > 5) { // If SH line on field
+                p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
+                p_T1G_str = p_T1X_str = "";
+                posT1_id = 0;
+                posT1_str = "";
+                posT2_id = 0;
+                posT2_str = "";
             }
 
             p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
@@ -5377,6 +5399,7 @@
             xaT2_g[i].innerHTML = undo_object.xaT2_g[i];
         }
 
+        data_object_stringified = JSON.parse(JSON.stringify(data_object));
         document.getElementById("undo").disabled = true; // Disable Undo-button
     }
 
@@ -5412,12 +5435,6 @@
             };
 
         var chart = new google.visualization.BarChart(document.getElementById('xGGame_chart'));
-
-        /*// Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_xGGame_chart = chart.getImageURI();
-        });*/
-
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
@@ -5503,14 +5520,14 @@
 
         var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
-        pldata.addColumn('number', 'Shot xG');
-        pldata.addColumn('number', 'Pass xG');
-        pldata.addColumn('number', 'Shot xG PP');
-        pldata.addColumn('number', 'Pass xG PP');
-        pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Ass.');
+        pldata.addColumn('number', 'ixG');
+        pldata.addColumn('number', 'ixAss');
+        pldata.addColumn('number', 'ixG PP');
+        pldata.addColumn('number', 'ixAss PP');
+        pldata.addColumn('number', 'iGoals');
+        pldata.addColumn('number', 'iAss');
         pldata.addColumn('number', 'Shots');
-        pldata.addColumn('number', 'Shotass.');
+        pldata.addColumn('number', 'Passes');
         pldata.addColumn('number', 'Possession +');
         pldata.addColumn('number', 'Possession -');
 
@@ -5520,14 +5537,14 @@
 
         var pldata_p = new google.visualization.DataTable();
         pldata_p.addColumn('string', 'Name');
-        pldata_p.addColumn('number', 'Shot xG');
-        pldata_p.addColumn('number', 'Pass xG');
-        pldata_p.addColumn('number', 'Shot xG PP');
-        pldata_p.addColumn('number', 'Pass xG PP');
-        pldata_p.addColumn('number', 'Goals');
-        pldata_p.addColumn('number', 'Ass.');
+        pldata_p.addColumn('number', 'ixG');
+        pldata_p.addColumn('number', 'ixAss');
+        pldata_p.addColumn('number', 'ixG PP');
+        pldata_p.addColumn('number', 'ixAss PP');
+        pldata_p.addColumn('number', 'iGoals');
+        pldata_p.addColumn('number', 'iAss');
         pldata_p.addColumn('number', 'Shots');
-        pldata_p.addColumn('number', 'Shotass.');
+        pldata_p.addColumn('number', 'Passes');
         pldata_p.addColumn('number', 'Possession +');
         pldata_p.addColumn('number', 'Possession -');
 
@@ -5569,14 +5586,14 @@
 
         var pldata = new google.visualization.DataTable();
         pldata.addColumn('string', 'Name');
-        pldata.addColumn('number', 'Shot xG');
-        pldata.addColumn('number', 'Pass xG');
-        pldata.addColumn('number', 'Shot xG PP');
-        pldata.addColumn('number', 'Pass xG PP');
-        pldata.addColumn('number', 'Goals');
-        pldata.addColumn('number', 'Ass.');
+        pldata.addColumn('number', 'ixG');
+        pldata.addColumn('number', 'ixAss');
+        pldata.addColumn('number', 'iXG PP');
+        pldata.addColumn('number', 'ixAss PP');
+        pldata.addColumn('number', 'iGoals');
+        pldata.addColumn('number', 'iAss');
         pldata.addColumn('number', 'Shots');
-        pldata.addColumn('number', 'Shotass.');
+        pldata.addColumn('number', 'Passes');
         pldata.addColumn('number', 'Possession +');
         pldata.addColumn('number', 'Possession -');
 
@@ -5586,14 +5603,14 @@
 
         var pldata_p = new google.visualization.DataTable();
         pldata_p.addColumn('string', 'Name');
-        pldata_p.addColumn('number', 'Shot xG');
-        pldata_p.addColumn('number', 'Pass xG');
-        pldata_p.addColumn('number', 'Shot xG PP');
-        pldata_p.addColumn('number', 'Pass xG PP');
-        pldata_p.addColumn('number', 'Goals');
-        pldata_p.addColumn('number', 'Ass.');
+        pldata_p.addColumn('number', 'ixG');
+        pldata_p.addColumn('number', 'ixAss');
+        pldata_p.addColumn('number', 'ixG PP');
+        pldata_p.addColumn('number', 'ixAss PP');
+        pldata_p.addColumn('number', 'iGoals');
+        pldata_p.addColumn('number', 'iAss.');
         pldata_p.addColumn('number', 'Shots');
-        pldata_p.addColumn('number', 'Shotass.');
+        pldata_p.addColumn('number', 'Passes');
         pldata_p.addColumn('number', 'Possession +');
         pldata_p.addColumn('number', 'Possession -');
 
@@ -5881,7 +5898,7 @@
         //  seriesType: 'lines',
          // series: {
             //  2:{type: 'bars', color: 'blue'},
-           //   3:{type: 'bars', color: 'red'}}
+           //   3:{type: 'bars', color: 'red'}},
        // };
 
         var combinedData = [];
@@ -6203,8 +6220,4 @@
         .catch((error) => {
             console.error('Error:', error);
         });
-    }
-
-    function options(nr) {
-
     }
