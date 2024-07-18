@@ -518,7 +518,7 @@
             pocT1_str = [];
             pocT1_id = [];
             pocT2_str = [];
-            posT2_id = [];
+            pocT2_id = [];
 
             if (line_on < 4) {
                 pocT1_str[0] = document.getElementById("sT1L"+line_on+"LW").options
@@ -607,29 +607,29 @@
             }
             
             if (line_on_2 < 4) {
-                pocT2_str[0] = document.getElementById("sT2L"+line_on+"LW").options
-                        [document.getElementById("sT2L"+line_on+"LW").selectedIndex].text;
-                pocT2_str[1] = document.getElementById("sT2L"+line_on+"C").options
-                        [document.getElementById("sT2L"+line_on+"C").selectedIndex].text;
-                pocT2_str[2] = document.getElementById("sT2L"+line_on+"RW").options
-                        [document.getElementById("sT2L"+line_on+"RW").selectedIndex].text;
-                pocT2_str[3] = document.getElementById("sT2L"+line_on+"LD").options
-                        [document.getElementById("sT2L"+line_on+"LD").selectedIndex].text;
-                pocT2_str[4] = document.getElementById("sT2L"+line_on+"RD").options
-                        [document.getElementById("sT2L"+line_on+"RD").selectedIndex].text;
+                pocT2_str[0] = document.getElementById("sT2L"+line_on_2+"LW").options
+                        [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
+                pocT2_str[1] = document.getElementById("sT2L"+line_on_2+"C").options
+                        [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
+                pocT2_str[2] = document.getElementById("sT2L"+line_on_2+"RW").options
+                        [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
+                pocT2_str[3] = document.getElementById("sT2L"+line_on_2+"LD").options
+                        [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
+                pocT2_str[4] = document.getElementById("sT2L"+line_on_2+"RD").options
+                        [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
                 pocT2_str[5] = document.getElementById("sT2G").options
                         [document.getElementById("sT2G").selectedIndex].text;
 
-                pocT2_id[0] = document.getElementById("sT2L"+line_on+"LW").options
-                        [document.getElementById("sT2L"+line_on+"LW").selectedIndex].value;
-                pocT2_id[1] = document.getElementById("sT2L"+line_on+"C").options
-                        [document.getElementById("sT2L"+line_on+"C").selectedIndex].value;
-                pocT2_id[2] = document.getElementById("sT2L"+line_on+"RW").options
-                        [document.getElementById("sT2L"+line_on+"RW").selectedIndex].value;
-                pocT2_id[3] = document.getElementById("sT2L"+line_on+"LD").options
-                        [document.getElementById("sT2L"+line_on+"LD").selectedIndex].value;
-                pocT2_id[4] = document.getElementById("sT2L"+line_on+"RD").options
-                        [document.getElementById("sT2L"+line_on+"RD").selectedIndex].value;
+                pocT2_id[0] = document.getElementById("sT2L"+line_on_2+"LW").options
+                        [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
+                pocT2_id[1] = document.getElementById("sT2L"+line_on_2+"C").options
+                        [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
+                pocT2_id[2] = document.getElementById("sT2L"+line_on_2+"RW").options
+                        [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
+                pocT2_id[3] = document.getElementById("sT2L"+line_on_2+"LD").options
+                        [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
+                pocT2_id[4] = document.getElementById("sT2L"+line_on_2+"RD").options
+                        [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
                 pocT2_id[5] = document.getElementById("sT2G").options
                         [document.getElementById("sT2G").selectedIndex].value;
             }
