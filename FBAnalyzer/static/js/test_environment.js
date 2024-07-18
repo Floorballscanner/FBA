@@ -500,31 +500,310 @@
     function Count() {
          if (is_on == 1) {
 
-             Toc_p[line_on - 1]++;
-             Toc_g[line_on - 1]++;
-             Toc_p[7]++;
-             Toc_g[7]++;
+            // Team Time On Court
 
-             TocT2_p[line_on_2 - 1]++;
-             TocT2_g[line_on_2 - 1]++;
-             TocT2_p[7]++;
-             TocT2_g[7]++;
+            Toc_p[line_on - 1]++;
+            Toc_g[line_on - 1]++;
+            Toc_p[7]++;
+            Toc_g[7]++;
 
-             if (Ball_pos == 1) {
-                Pos_p[line_on - 1]++;
-                Pos_g[line_on - 1]++;
-                shiftPos++;
-                Pos_g[7]++;
-                Pos_p[7]++;
+            TocT2_p[line_on_2 - 1]++;
+            TocT2_g[line_on_2 - 1]++;
+            TocT2_p[7]++;
+            TocT2_g[7]++;
+
+            // Player Time on Court
+            // Find players on court
+
+            pocT1_str = [];
+            pocT1_id = [];
+            pocT2_str = [];
+            posT2_id = [];
+
+            if (line_on < 4) {
+                pocT1_str[0] = document.getElementById("sT1L"+line_on+"LW").options
+                        [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+                pocT1_str[1] = document.getElementById("sT1L"+line_on+"C").options
+                        [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+                pocT1_str[2] = document.getElementById("sT1L"+line_on+"RW").options
+                        [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+                pocT1_str[3] = document.getElementById("sT1L"+line_on+"LD").options
+                        [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+                pocT1_str[4] = document.getElementById("sT1L"+line_on+"RD").options
+                        [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+                pocT1_str[5] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].text;
+
+                pocT1_id[0] = document.getElementById("sT1L"+line_on+"LW").options
+                        [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
+                pocT1_id[1] = document.getElementById("sT1L"+line_on+"C").options
+                        [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
+                pocT1_id[2] = document.getElementById("sT1L"+line_on+"RW").options
+                        [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
+                pocT1_id[3] = document.getElementById("sT1L"+line_on+"LD").options
+                        [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
+                pocT1_id[4] = document.getElementById("sT1L"+line_on+"RD").options
+                        [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
+                pocT1_id[5] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].value;
+            }
+            if (line_on == 4) {
+                pocT1_str[0] = document.getElementById("sT1L4LW").options
+                        [document.getElementById("sT1L4LW").selectedIndex].text;
+                pocT1_str[1] = document.getElementById("sT1L4C").options
+                        [document.getElementById("sT1L4C").selectedIndex].text;
+                pocT1_str[2] = document.getElementById("sT1L4RW").options
+                        [document.getElementById("sT1L4RW").selectedIndex].text;
+                pocT1_str[3] = document.getElementById("sT1L4LD").options
+                        [document.getElementById("sT1L4LD").selectedIndex].text;
+                pocT1_str[4] = document.getElementById("sT1L4RD").options
+                        [document.getElementById("sT1L4RD").selectedIndex].text;
+                pocT1_str[5] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].text;
+
+                pocT1_id[0] = document.getElementById("sT1L4LW").options
+                        [document.getElementById("sT1L4LW").selectedIndex].value;
+                pocT1_id[1] = document.getElementById("sT1L4C").options
+                        [document.getElementById("sT1L4C").selectedIndex].value;
+                pocT1_id[2] = document.getElementById("sT1L4RW").options
+                        [document.getElementById("sT1L4RW").selectedIndex].value;
+                pocT1_id[3] = document.getElementById("sT1L4LD").options
+                        [document.getElementById("sT1L4LD").selectedIndex].value;
+                pocT1_id[4] = document.getElementById("sT1L4RD").options
+                        [document.getElementById("sT1L4RD").selectedIndex].value;
+                pocT1_id[5] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].value;
+            }
+            if (line_on == 5) {
+                pocT1_str[0] = document.getElementById("sT1L5LW").options
+                        [document.getElementById("sT1L5LW").selectedIndex].text;
+                pocT1_str[1] = document.getElementById("sT1L5C").options
+                        [document.getElementById("sT1L5C").selectedIndex].text;
+                pocT1_str[2] = document.getElementById("sT1L5RW").options
+                        [document.getElementById("sT1L5RW").selectedIndex].text;
+                pocT1_str[3] = document.getElementById("sT1L5LD").options
+                        [document.getElementById("sT1L5LD").selectedIndex].text;
+                pocT1_str[4] = document.getElementById("sT1L5RD").options
+                        [document.getElementById("sT1L5RD").selectedIndex].text;
+                pocT1_str[5] = document.getElementById("sT1L5X").options
+                        [document.getElementById("sT1L5X").selectedIndex].text;
+                pocT1_str[6] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].text;
+
+                pocT1_id[0] = document.getElementById("sT1L5LW").options
+                        [document.getElementById("sT1L5LW").selectedIndex].value;
+                pocT1_id[1] = document.getElementById("sT1L5C").options
+                        [document.getElementById("sT1L5C").selectedIndex].value;
+                pocT1_id[2] = document.getElementById("sT1L5RW").options
+                        [document.getElementById("sT1L5RW").selectedIndex].value;
+                pocT1_id[3] = document.getElementById("sT1L5LD").options
+                        [document.getElementById("sT1L5LD").selectedIndex].value;
+                pocT1_id[4] = document.getElementById("sT1L5RD").options
+                        [document.getElementById("sT1L5RD").selectedIndex].value;
+                pocT1_id[5] = document.getElementById("sT1L5X").options
+                        [document.getElementById("sT1L5X").selectedIndex].value;
+                pocT1_id[6] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].value;
+            }
+            
+            if (line_on_2 < 4) {
+                pocT2_str[0] = document.getElementById("sT2L"+line_on+"LW").options
+                        [document.getElementById("sT2L"+line_on+"LW").selectedIndex].text;
+                pocT2_str[1] = document.getElementById("sT2L"+line_on+"C").options
+                        [document.getElementById("sT2L"+line_on+"C").selectedIndex].text;
+                pocT2_str[2] = document.getElementById("sT2L"+line_on+"RW").options
+                        [document.getElementById("sT2L"+line_on+"RW").selectedIndex].text;
+                pocT2_str[3] = document.getElementById("sT2L"+line_on+"LD").options
+                        [document.getElementById("sT2L"+line_on+"LD").selectedIndex].text;
+                pocT2_str[4] = document.getElementById("sT2L"+line_on+"RD").options
+                        [document.getElementById("sT2L"+line_on+"RD").selectedIndex].text;
+                pocT2_str[5] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].text;
+
+                pocT2_id[0] = document.getElementById("sT2L"+line_on+"LW").options
+                        [document.getElementById("sT2L"+line_on+"LW").selectedIndex].value;
+                pocT2_id[1] = document.getElementById("sT2L"+line_on+"C").options
+                        [document.getElementById("sT2L"+line_on+"C").selectedIndex].value;
+                pocT2_id[2] = document.getElementById("sT2L"+line_on+"RW").options
+                        [document.getElementById("sT2L"+line_on+"RW").selectedIndex].value;
+                pocT2_id[3] = document.getElementById("sT2L"+line_on+"LD").options
+                        [document.getElementById("sT2L"+line_on+"LD").selectedIndex].value;
+                pocT2_id[4] = document.getElementById("sT2L"+line_on+"RD").options
+                        [document.getElementById("sT2L"+line_on+"RD").selectedIndex].value;
+                pocT2_id[5] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].value;
+            }
+            if (line_on_2 == 4) {
+                pocT2_str[0] = document.getElementById("sT2L4LW").options
+                        [document.getElementById("sT2L4LW").selectedIndex].text;
+                pocT2_str[1] = document.getElementById("sT2L4C").options
+                        [document.getElementById("sT2L4C").selectedIndex].text;
+                pocT2_str[2] = document.getElementById("sT2L4RW").options
+                        [document.getElementById("sT2L4RW").selectedIndex].text;
+                pocT2_str[3] = document.getElementById("sT2L4LD").options
+                        [document.getElementById("sT2L4LD").selectedIndex].text;
+                pocT2_str[4] = document.getElementById("sT2L4RD").options
+                        [document.getElementById("sT2L4RD").selectedIndex].text;
+                pocT2_str[5] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].text;
+
+                pocT2_id[0] = document.getElementById("sT2L4LW").options
+                        [document.getElementById("sT2L4LW").selectedIndex].value;
+                pocT2_id[1] = document.getElementById("sT2L4C").options
+                        [document.getElementById("sT2L4C").selectedIndex].value;
+                pocT2_id[2] = document.getElementById("sT2L4RW").options
+                        [document.getElementById("sT2L4RW").selectedIndex].value;
+                pocT2_id[3] = document.getElementById("sT2L4LD").options
+                        [document.getElementById("sT2L4LD").selectedIndex].value;
+                pocT2_id[4] = document.getElementById("sT2L4RD").options
+                        [document.getElementById("sT2L4RD").selectedIndex].value;
+                pocT2_id[5] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].value;
+            }
+            if (line_on_2 == 5) {
+                pocT2_str[0] = document.getElementById("sT2L5LW").options
+                        [document.getElementById("sT2L5LW").selectedIndex].text;
+                pocT2_str[1] = document.getElementById("sT2L5C").options
+                        [document.getElementById("sT2L5C").selectedIndex].text;
+                pocT2_str[2] = document.getElementById("sT2L5RW").options
+                        [document.getElementById("sT2L5RW").selectedIndex].text;
+                pocT2_str[3] = document.getElementById("sT2L5LD").options
+                        [document.getElementById("sT2L5LD").selectedIndex].text;
+                pocT2_str[4] = document.getElementById("sT2L5RD").options
+                        [document.getElementById("sT2L5RD").selectedIndex].text;
+                pocT2_str[5] = document.getElementById("sT2L5X").options
+                        [document.getElementById("sT2L5X").selectedIndex].text;
+                pocT2_str[6] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].text;
+
+                pocT2_id[0] = document.getElementById("sT2L5LW").options
+                        [document.getElementById("sT2L5LW").selectedIndex].value;
+                pocT2_id[1] = document.getElementById("sT2L5C").options
+                        [document.getElementById("sT2L5C").selectedIndex].value;
+                pocT2_id[2] = document.getElementById("sT2L5RW").options
+                        [document.getElementById("sT2L5RW").selectedIndex].value;
+                pocT2_id[3] = document.getElementById("sT2L5LD").options
+                        [document.getElementById("sT2L5LD").selectedIndex].value;
+                pocT2_id[4] = document.getElementById("sT2L5RD").options
+                        [document.getElementById("sT2L5RD").selectedIndex].value;
+                pocT2_id[5] = document.getElementById("sT2L5X").options
+                        [document.getElementById("sT2L5X").selectedIndex].value;
+                pocT2_id[6] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].value;
             }
 
-             if (Ball_pos == 2) {
+            // Add TOC to player game charts
+            for (let p=0;p<pocT1_str.length;p++) {
+                found = 0;
+                for (let i=0;i<plT1_array.length;i++) {
+                    if (pocT1_id[p] == plT1_array[i][0]) {
+                        if (line_on < 4) {
+                            plT1_array[i][12] = plT1_array[i][12] + 1; // Add 1 second to toc
+                        }
+                        if (line_on == 4 || line_on == 5) {
+                            plT1_array[i][13] = plT1_array[i][13] + 1; // Add 1 second to toc on powerplay
+                        }
+                        found = 1;
+                    }
+                }
+                if (found == 0) { // Player not found, adding new row to the array
+                    if (line_on < 4) {
+                        plT1_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
+                    }
+                    if (line_on == 4 || line_on == 5) {
+                        plT1_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
+                    }
+                }
+                plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
+            }
+            for (let p=0;p<pocT2_str.length;p++) {
+                found = 0;
+                for (let i=0;i<plT2_array.length;i++) {
+                    if (pocT2_id[p] == plT2_array[i][0]) {
+                        if (line_on < 4) {
+                            plT2_array[i][12] = plT2_array[i][12] + 1; // Add 1 second to toc
+                        }
+                        if (line_on == 4 || line_on == 5) {
+                            plT2_array[i][13] = plT2_array[i][13] + 1; // Add 1 second to toc on powerplay
+                        }
+                        found = 1;
+                    }
+                }
+                if (found == 0) { // Player not found, adding new row to the array
+                    if (line_on < 4) {
+                        plT2_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
+                    }
+                    if (line_on == 4 || line_on == 5) {
+                        plT2_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
+                    }
+                }
+                plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
+            }
+                
+
+            // Add TOC to player period charts
+            for (let p=0;p<pocT1_str.length;p++) {
+                found = 0;
+                for (let i=0;i<plT1p_array.length;i++) {
+                    if (pocT1_id[p] == plT1p_array[i][0]) {
+                        if (line_on < 4) {
+                            plT1p_array[i][12] = plT1p_array[i][12] + 1; // Add 1 second to toc
+                        }
+                        if (line_on == 4 || line_on == 5) {
+                            plT1p_array[i][13] = plT1p_array[i][13] + 1; // Add 1 second to toc on powerplay
+                        }
+                        found = 1;
+                    }
+                }
+                if (found == 0) { // Player not found, adding new row to the array
+                    if (line_on < 4) {
+                        plT1p_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
+                    }
+                    if (line_on == 4 || line_on == 5) {
+                        plT1p_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
+                    }
+                }
+                plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
+            }
+            for (let p=0;p<pocT2_str.length;p++) {
+                found = 0;
+                for (let i=0;i<plT2p_array.length;i++) {
+                    if (pocT2_id[p] == plT2p_array[i][0]) {
+                        if (line_on < 4) {
+                            plT2p_array[i][12] = plT2p_array[i][12] + 1; // Add 1 second to toc
+                        }
+                        if (line_on == 4 || line_on == 5) {
+                            plT2p_array[i][13] = plT2p_array[i][13] + 1; // Add 1 second to toc on powerplay
+                        }
+                        found = 1;
+                    }
+                }
+                if (found == 0) { // Player not found, adding new row to the array
+                    if (line_on < 4) {
+                        plT2p_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
+                    }
+                    if (line_on == 4 || line_on == 5) {
+                        plT2p_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
+                    }
+                }
+                plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
+            }
+
+            if (Ball_pos == 1) {
+            Pos_p[line_on - 1]++;
+            Pos_g[line_on - 1]++;
+            shiftPos++;
+            Pos_g[7]++;
+            Pos_p[7]++;
+            }
+
+            if (Ball_pos == 2) {
                 PosT2_p[line_on_2 - 1]++;
                 PosT2_g[line_on_2 - 1]++;
                 shiftPos_2++;
                 PosT2_g[7]++;
                 PosT2_p[7]++;
-             }
+            }
 
          else {
 
@@ -3529,8 +3808,8 @@
                 }
             }
             if (found == 0) { // Player not found, adding new row to the array
-                if (dataType == 5) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);}
-                if (dataType == 6) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);}
+                if (dataType == 5) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);}
+                if (dataType == 6) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]);}
             }
 
             plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -4091,20 +4370,20 @@
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
                 if (line_on < 4 || line_on > 5) {
-                    plT1p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT1p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
                 if (line_on == 4 || line_on == 5) {
-                    plT1p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT1p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
                 if (line_on < 4 || line_on > 5) {
-                    plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                    plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
                 if (line_on == 4 || line_on == 5) {
-                    plT1p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                    plT1p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
             }
             plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -4142,20 +4421,20 @@
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
                 if (line_on_2 < 4 || line_on_2 > 5) {
-                    plT2p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT2p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
                 if (line_on_2 == 4 || line_on_2 == 5) {
-                    plT2p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT2p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
                 if (line_on_2 < 4 || line_on_2 > 5) {
-                    plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                    plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
                 if (line_on_2 == 4 || line_on_2 == 5) {
-                    plT2p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                    plT2p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
             }
             plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
