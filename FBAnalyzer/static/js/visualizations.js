@@ -205,9 +205,21 @@
                     pldata.addColumn('number', 'Shotass.');
                     pldata.addColumn('number', 'Possession +');
                     pldata.addColumn('number', 'Possession -');
+                    pldata.addColumn('string', 'ToC 5v5');
+                    pldata.addColumn('string', 'ToC PP');
 
                     for(i = 1; i < gd.plT1_array.length; i++){
-                        pldata.addRow([gd.plT1_array[i][1], gd.plT1_array[i][2], gd.plT1_array[i][3], gd.plT1_array[i][4], gd.plT1_array[i][5], gd.plT1_array[i][6], gd.plT1_array[i][7], gd.plT1_array[i][8], gd.plT1_array[i][9], gd.plT1_array[i][10], gd.plT1_array[i][11]]);
+                        if (gd.plT1_array[0].length == 15) {
+                            toc_5v5 = new Date(gd.plT1_array[i][12] * 1000);
+                            toc_pp = new Date(gd.plT1_array[i][13] * 1000);
+                            d5v5 = toc_5v5.toISOString().substr(14, 5);
+                            dpp = toc_pp.toISOString().substr(14, 5);
+                        }
+                        else {
+                            d5v5 = "0:00";
+                            dpp = "0:00";
+                        }
+                        pldata.addRow([gd.plT1_array[i][1], gd.plT1_array[i][2], gd.plT1_array[i][3], gd.plT1_array[i][4], gd.plT1_array[i][5], gd.plT1_array[i][6], gd.plT1_array[i][7], gd.plT1_array[i][8], gd.plT1_array[i][9], gd.plT1_array[i][10], gd.plT1_array[i][11], d5v5, dpp]);
                     }
 
                     var options = {
@@ -245,9 +257,22 @@
                     pldata.addColumn('number', 'Shotass.');
                     pldata.addColumn('number', 'Possession +');
                     pldata.addColumn('number', 'Possession -');
+                    pldata.addColumn('string', 'ToC 5v5');
+                    pldata.addColumn('string', 'ToC PP');
 
                     for(i = 1; i < gd.plT2_array.length; i++){
-                        pldata.addRow([gd.plT2_array[i][1], gd.plT2_array[i][2], gd.plT2_array[i][3], gd.plT2_array[i][4], gd.plT2_array[i][5], gd.plT2_array[i][6], gd.plT2_array[i][7], gd.plT2_array[i][8], gd.plT2_array[i][9], gd.plT2_array[i][10], gd.plT2_array[i][11]]);
+                        if (gd.plT2_array[0].length == 15) {
+                            toc_5v5 = new Date(gd.plT2_array[i][12] * 1000);
+                            toc_pp = new Date(gd.plT2_array[i][13] * 1000);
+                            d5v5 = toc_5v5.toISOString().substr(14, 5);
+                            dpp = toc_pp.toISOString().substr(14, 5);
+                        }
+                        else {
+                            d5v5 = "0:00";
+                            dpp = "0:00";
+                        }
+
+                        pldata.addRow([gd.plT2_array[i][1], gd.plT2_array[i][2], gd.plT2_array[i][3], gd.plT2_array[i][4], gd.plT2_array[i][5], gd.plT2_array[i][6], gd.plT2_array[i][7], gd.plT2_array[i][8], gd.plT2_array[i][9], gd.plT2_array[i][10], gd.plT2_array[i][11], d5v5, dpp]);
                     }
 
                     var options = {

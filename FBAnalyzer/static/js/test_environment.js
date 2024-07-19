@@ -700,7 +700,7 @@
                         if (line_on < 4) {
                             plT1_array[i][12] = plT1_array[i][12] + 1; // Add 1 second to toc
                         }
-                        if (line_on == 4 || line_on == 5) {
+                        if (line_on == 4) {
                             plT1_array[i][13] = plT1_array[i][13] + 1; // Add 1 second to toc on powerplay
                         }
                         found = 1;
@@ -710,7 +710,7 @@
                     if (line_on < 4) {
                         plT1_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
                     }
-                    if (line_on == 4 || line_on == 5) {
+                    if (line_on == 4) {
                         plT1_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
                     }
                 }
@@ -723,7 +723,7 @@
                         if (line_on < 4) {
                             plT2_array[i][12] = plT2_array[i][12] + 1; // Add 1 second to toc
                         }
-                        if (line_on == 4 || line_on == 5) {
+                        if (line_on == 4) {
                             plT2_array[i][13] = plT2_array[i][13] + 1; // Add 1 second to toc on powerplay
                         }
                         found = 1;
@@ -733,7 +733,7 @@
                     if (line_on < 4) {
                         plT2_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
                     }
-                    if (line_on == 4 || line_on == 5) {
+                    if (line_on == 4) {
                         plT2_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
                     }
                 }
@@ -749,7 +749,7 @@
                         if (line_on < 4) {
                             plT1p_array[i][12] = plT1p_array[i][12] + 1; // Add 1 second to toc
                         }
-                        if (line_on == 4 || line_on == 5) {
+                        if (line_on == 4) {
                             plT1p_array[i][13] = plT1p_array[i][13] + 1; // Add 1 second to toc on powerplay
                         }
                         found = 1;
@@ -759,7 +759,7 @@
                     if (line_on < 4) {
                         plT1p_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
                     }
-                    if (line_on == 4 || line_on == 5) {
+                    if (line_on == 4) {
                         plT1p_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
                     }
                 }
@@ -772,7 +772,7 @@
                         if (line_on < 4) {
                             plT2p_array[i][12] = plT2p_array[i][12] + 1; // Add 1 second to toc
                         }
-                        if (line_on == 4 || line_on == 5) {
+                        if (line_on == 4) {
                             plT2p_array[i][13] = plT2p_array[i][13] + 1; // Add 1 second to toc on powerplay
                         }
                         found = 1;
@@ -782,7 +782,7 @@
                     if (line_on < 4) {
                         plT2p_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
                     }
-                    if (line_on == 4 || line_on == 5) {
+                    if (line_on == 4) {
                         plT2p_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
                     }
                 }
@@ -3069,18 +3069,18 @@
             ctx.fillStyle = "blue";
             ctx_p.fillStyle = "blue";
             ctx_g.fillStyle = "blue";
-            ctx.fillText("o", x, y);
-            ctx_p.fillText("o", x, y);
-            ctx_g.fillText("o", x, y);
+            ctx.fillText("+", x, y);
+            ctx_p.fillText("+", x, y);
+            ctx_g.fillText("+", x, y);
         }
         else if (dataType == 6) {
             dataRes_str = "Possession -"
             ctx.fillStyle = "red";
             ctx_p.fillStyle = "red";
             ctx_g.fillStyle = "red";
-            ctx.fillText("o", x, y);
-            ctx_p.fillText("o", x, y);
-            ctx_g.fillText("o", x, y);
+            ctx.fillText("-", x, y);
+            ctx_p.fillText("-", x, y);
+            ctx_g.fillText("-", x, y);
         }
 
         if (Ball_pos === 1) {
