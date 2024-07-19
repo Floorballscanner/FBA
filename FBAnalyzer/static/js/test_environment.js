@@ -5923,9 +5923,11 @@
         pldata.addColumn('number', 'Passes');
         pldata.addColumn('number', 'Possession +');
         pldata.addColumn('number', 'Possession -');
+        pldata.addColumn('number', 'ToC 5v5');
+        pldata.addColumn('number', 'ToC PP');
 
         for(i = 1; i < plT1_array.length; i++){
-            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7], plT1_array[i][8], plT1_array[i][9], plT1_array[i][10], plT1_array[i][11]]);
+            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7], plT1_array[i][8], plT1_array[i][9], plT1_array[i][10], plT1_array[i][11], plT1_array[i][12], plT1_array[i][13]]);
         }
 
         var pldata_p = new google.visualization.DataTable();
@@ -5940,9 +5942,11 @@
         pldata_p.addColumn('number', 'Passes');
         pldata_p.addColumn('number', 'Possession +');
         pldata_p.addColumn('number', 'Possession -');
+        pldata_p.addColumn('number', 'ToC 5v5');
+        pldata_p.addColumn('number', 'ToC PP');
 
         for(i = 1; i < plT1p_array.length; i++){
-            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7], plT1p_array[i][8], plT1p_array[i][9], plT1p_array[i][10], plT1p_array[i][11]]);
+            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7], plT1p_array[i][8], plT1p_array[i][9], plT1p_array[i][10], plT1p_array[i][11], plT1p_array[i][12], plT1p_array[i][13]]);
         }
 
         var options = {
@@ -5989,9 +5993,11 @@
         pldata.addColumn('number', 'Passes');
         pldata.addColumn('number', 'Possession +');
         pldata.addColumn('number', 'Possession -');
+        pldata.addColumn('number', 'ToC 5v5');
+        pldata.addColumn('number', 'ToC PP');
 
         for(i = 1; i < plT2_array.length; i++){
-            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7], plT2_array[i][8], plT2_array[i][9], plT2_array[i][10], plT2_array[i][11]]);
+            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7], plT2_array[i][8], plT2_array[i][9], plT2_array[i][10], plT2_array[i][11], plT2_array[i][12], plT2_array[i][13]]);
         }
 
         var pldata_p = new google.visualization.DataTable();
@@ -6006,9 +6012,11 @@
         pldata_p.addColumn('number', 'Passes');
         pldata_p.addColumn('number', 'Possession +');
         pldata_p.addColumn('number', 'Possession -');
+        pldata_p.addColumn('number', 'ToC 5v5');
+        pldata_p.addColumn('number', 'ToC PP');
 
         for(i = 1; i < plT2p_array.length; i++){
-            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7], plT2p_array[i][8], plT2p_array[i][9], plT2p_array[i][10], plT2p_array[i][11]]);
+            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7], plT2p_array[i][8], plT2p_array[i][9], plT2p_array[i][10], plT2p_array[i][11], plT2p_array[i][12], plT2p_array[i][13]]);
         }
 
         var options = {
