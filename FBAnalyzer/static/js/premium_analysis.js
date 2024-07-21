@@ -433,6 +433,7 @@ function changeGame() {
             playerData_5v5[l][21] = ixPoints_p.toFixed(2);
             xG_shot = Number(playerData_5v5[l][4]) / playerData_5v5[l][9];
             playerData_5v5[l][24] = xG_shot.toFixed(2);
+            console.log('Pääsin tänne: ' + l)
         }
         console.log("drawCharts - function")
         drawCharts();
