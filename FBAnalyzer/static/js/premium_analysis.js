@@ -283,7 +283,7 @@ function changeGame() {
         }
         sumofxG = 0;
         sumofxAss = 0;
-        console.log('Pääsin tänne')
+
         for (let j=1;j<shotData.length; j++) {
 
             if ((shotData[j][4] == gd.name_t1) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // My team shot
@@ -408,11 +408,13 @@ function changeGame() {
                     }
                 }
             }
+            console.log('Pääsin tänne: ' + j)
         }
 
         for (l=1;l<playerData_5v5.length;l++) {
             sumofxG = sumofxG + Number(playerData_5v5[l][4]);
             sumofxAss = sumofxAss + Number(playerData_5v5[l][7]);
+            console.log('Pääsin tänne: ' + l)
         }
         for (l=1;l<playerData_5v5.length;l++) {
             xG_p = Number(playerData_5v5[l][4]) / sumofxG;
