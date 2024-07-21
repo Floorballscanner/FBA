@@ -233,7 +233,7 @@ def test_environment(request):
 def premium_analysis(request):
 
     if request.user.id == 3 or request.user.id == 2:
-        games = Game.objects.filter(date__gte=datetime(2023, 9, 1)).order_by('date')
+        games = Game.objects.filter(date__gte=datetime(2024, 4, 1)).order_by('date')
 
     else:
         games = Game.objects.filter(user=request.user).order_by('date')
