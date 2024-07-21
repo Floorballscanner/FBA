@@ -283,7 +283,7 @@ function changeGame() {
         }
         sumofxG = 0;
         sumofxAss = 0;
-
+        console.log('Pääsin tänne: ' + l)
         for (let j=1;j<shotData.length; j++) {
 
             if ((shotData[j][4] == gd.name_t1) && (shotData[j][5] != "Possession +") && (shotData[j][5] != "Possession -")) { // My team shot
@@ -433,7 +433,7 @@ function changeGame() {
             playerData_5v5[l][21] = ixPoints_p.toFixed(2);
             xG_shot = Number(playerData_5v5[l][4]) / playerData_5v5[l][9];
             playerData_5v5[l][24] = xG_shot.toFixed(2);
-            console.log('Pääsin tänne: ' + l)
+            console.log('Pääsin luupin sisälle: ' + l)
         }
         console.log("drawCharts - function")
         drawCharts();
