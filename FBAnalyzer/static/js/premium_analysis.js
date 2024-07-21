@@ -410,11 +410,10 @@ function changeGame() {
             }
             console.log('Pääsin tänne: ' + j)
         }
-
+        console.log("PlayerData5v5.length: " + playerData_5v5.length)
         for (l=1;l<playerData_5v5.length;l++) {
             sumofxG = sumofxG + Number(playerData_5v5[l][4]);
             sumofxAss = sumofxAss + Number(playerData_5v5[l][7]);
-            console.log('Pääsin tänne: ' + l)
         }
         for (l=1;l<playerData_5v5.length;l++) {
             xG_p = Number(playerData_5v5[l][4]) / sumofxG;
