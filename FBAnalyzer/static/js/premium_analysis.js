@@ -408,7 +408,6 @@ function changeGame() {
                     }
                 }
             }
-            console.log('Pääsin tänne: ' + j)
         }
         console.log("PlayerData5v5.length: " + playerData_5v5.length)
         for (l=1;l<playerData_5v5.length;l++) {
@@ -434,11 +433,10 @@ function changeGame() {
             playerData_5v5[l][21] = ixPoints_p.toFixed(2);
             xG_shot = Number(playerData_5v5[l][4]) / playerData_5v5[l][9];
             playerData_5v5[l][24] = xG_shot.toFixed(2);
-            console.log('Pääsin luupin sisälle: ' + l)
         }
         console.log("drawCharts - function")
         drawCharts();
-    }, 500 + (500 * selectedValues.length));
+    }, 1000 + (500 * selectedValues.length));
 }
 
 function drawCharts() {
