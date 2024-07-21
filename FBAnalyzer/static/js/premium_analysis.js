@@ -1,8 +1,8 @@
 
     var s_game = document.getElementById("select-game");
-    var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
-    var playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
-    var playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
+    var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
+    var playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
+    var playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
     var playerData_60 = [['ID','Name','Games','ixG/Game','ixAss/Game','ixG_PP/Game','ixGAss_PP/Game','xPoints/Game','Goals/Game','Assists/Game',
                         'Points/Game','Shots/Game','Passes/Game','Possession+/Game','Possession-/Game']];
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
@@ -77,13 +77,24 @@ async function getGameData(game_ids) {
                         playerData[k][10] = playerData[k][10] + data[j][9];
                         playerData[k][11] = playerData[k][11] + data[j][10];
                         playerData[k][12] = playerData[k][12] + data[j][11];
+                        if (data[j].length == 15) {
+                            playerData[k][13] = playerData[k][13] + data[j][12];
+                            playerData[k][14] = playerData[k][14] + data[j][13];
+                            playerData[k][15] = playerData[k][15] + data[j][14];
+                        }
+                        else {
+                            playerData[k][13] = playerData[k][13] + 0;
+                            playerData[k][14] = playerData[k][14] + 0;
+                            playerData[k][15] = playerData[k][15] + 0;
+                        }
+
                     }
                 }
                 if (found == 0) { // Player not found, adding to list
                     playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
-                    data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
-                    playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
-                    playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                    data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], data[j][12], data[j][13], data[j][14]]);
+                    playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][12]]);
+                    playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][13]]);
                 }
             }
         }
@@ -152,13 +163,23 @@ async function getGameData(game_ids) {
                             playerData[k][10] = playerData[k][10] + data[j][9];
                             playerData[k][11] = playerData[k][11] + data[j][10];
                             playerData[k][12] = playerData[k][12] + data[j][11];
+                            if (data[j].length == 15) {
+                            playerData[k][13] = playerData[k][13] + data[j][12];
+                            playerData[k][14] = playerData[k][14] + data[j][13];
+                            playerData[k][15] = playerData[k][15] + data[j][14];
+                            }
+                            else {
+                                playerData[k][13] = playerData[k][13] + 0;
+                                playerData[k][14] = playerData[k][14] + 0;
+                                playerData[k][15] = playerData[k][15] + 0;
+                            }
                         }
                     }
                     if (found == 0) { // Player not found, adding to list
                         playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
-                        data[j][6], data[j][7], data[j][8], data[j][9], data[j][10],data[j][11]]);
-                        playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
-                        playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                        data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], data[j][12], data[j][13], data[j][14]]);
+                        playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][12]]);
+                        playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][13]]);
                     }
                 }
             }
@@ -198,9 +219,9 @@ async function getGameData(game_ids) {
 
 function changeGame() {
 
-    playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-']];
-    playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
-    playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot']];
+    var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
+    var playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
+    var playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
     gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     xGtypeData = [['xGFDir%','xGADir%','xGFTO%','xGATO%']];
     shotData = [];
@@ -594,6 +615,7 @@ function drawCharts() {
     var pldata = new google.visualization.DataTable();
     pldata.addColumn('string', 'Player Name');
     pldata.addColumn('number', 'Games');
+    pldata.addColumn('string', 'ToC');
     pldata.addColumn('number', 'ixG%');
     pldata.addColumn('number', 'ixG');
     pldata.addColumn('number', 'iGoals');
@@ -618,7 +640,9 @@ function drawCharts() {
     pldata.addColumn('number', 'SA');
 
     for (i = 1; i < playerData_5v5.length; i++) {
-        pldata.addRow([playerData_5v5[i][1], Number(playerData_5v5[i][2]), Number(playerData_5v5[i][3]), Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), Number(playerData_5v5[i][6]), Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), Number(playerData_5v5[i][24]), Number(playerData_5v5[i][22]), Number(playerData_5v5[i][23]), Number(playerData_5v5[i][9]), Number(playerData_5v5[i][25]), Number(playerData_5v5[i][10]), Number(playerData_5v5[i][11]), Number(playerData_5v5[i][12]), Number(playerData_5v5[i][13]), Number(playerData_5v5[i][14]), Number(playerData_5v5[i][15]), Number(playerData_5v5[i][16]), Number(playerData_5v5[i][17]), Number(playerData_5v5[i][18]), Number(playerData_5v5[i][19]), Number(playerData_5v5[i][20])]);
+        toc_5v5 = new Date(playerData_5v5[i][26] * 1000);
+        d5v5 = toc_5v5.toISOString().substr(14, 5);
+        pldata.addRow([playerData_5v5[i][1], Number(playerData_5v5[i][2]), d5v5, Number(playerData_5v5[i][3]), Number(playerData_5v5[i][4]), Number(playerData_5v5[i][5]), Number(playerData_5v5[i][6]), Number(playerData_5v5[i][7]), Number(playerData_5v5[i][8]), Number(playerData_5v5[i][24]), Number(playerData_5v5[i][22]), Number(playerData_5v5[i][23]), Number(playerData_5v5[i][9]), Number(playerData_5v5[i][25]), Number(playerData_5v5[i][10]), Number(playerData_5v5[i][11]), Number(playerData_5v5[i][12]), Number(playerData_5v5[i][13]), Number(playerData_5v5[i][14]), Number(playerData_5v5[i][15]), Number(playerData_5v5[i][16]), Number(playerData_5v5[i][17]), Number(playerData_5v5[i][18]), Number(playerData_5v5[i][19]), Number(playerData_5v5[i][20])]);
     }
 
 /*    var cssClassNames = {
