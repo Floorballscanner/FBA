@@ -82,19 +82,21 @@ async function getGameData(game_ids) {
                             playerData[k][14] = playerData[k][14] + data[j][13];
                             playerData[k][15] = playerData[k][15] + data[j][14];
                         }
-                        else {
-                            playerData[k][13] = playerData[k][13] + 0;
-                            playerData[k][14] = playerData[k][14] + 0;
-                            playerData[k][15] = playerData[k][15] + 0;
-                        }
-
                     }
                 }
                 if (found == 0) { // Player not found, adding to list
-                    playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
-                    data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], data[j][12], data[j][13], data[j][14]]);
-                    playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][12]]);
-                    playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][13]]);
+                    if (data[j].length == 15) {
+                        playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
+                        data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], data[j][12], data[j][13], data[j][14]]);
+                        playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][12]]);
+                        playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][13]]);
+                    }
+                    else {
+                        playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
+                        data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], 0, 0, 0]);
+                        playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                        playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                    }
                 }
             }
         }
@@ -164,9 +166,9 @@ async function getGameData(game_ids) {
                             playerData[k][11] = playerData[k][11] + data[j][10];
                             playerData[k][12] = playerData[k][12] + data[j][11];
                             if (data[j].length == 15) {
-                            playerData[k][13] = playerData[k][13] + data[j][12];
-                            playerData[k][14] = playerData[k][14] + data[j][13];
-                            playerData[k][15] = playerData[k][15] + data[j][14];
+                                playerData[k][13] = playerData[k][13] + data[j][12];
+                                playerData[k][14] = playerData[k][14] + data[j][13];
+                                playerData[k][15] = playerData[k][15] + data[j][14];
                             }
                             else {
                                 playerData[k][13] = playerData[k][13] + 0;
@@ -176,10 +178,18 @@ async function getGameData(game_ids) {
                         }
                     }
                     if (found == 0) { // Player not found, adding to list
-                        playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
-                        data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], data[j][12], data[j][13], data[j][14]]);
-                        playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][12]]);
-                        playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][13]]);
+                        if (data[j].length == 15) {
+                            playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
+                            data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], data[j][12], data[j][13], data[j][14]]);
+                            playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][12]]);
+                            playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][13]]);
+                        }
+                        else {
+                            playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
+                            data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], 0, 0, 0]);
+                            playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                            playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                        }
                     }
                 }
             }
@@ -420,9 +430,9 @@ function changeGame() {
             iPoints = playerData_5v5[l][5] + playerData_5v5[l][8];
             playerData_5v5[l][23] = iPoints;
             ixPoints_p = ixPoints / (sumofxG + sumofxAss);
-            playerData_5v5[l][24] = ixPoints_p.toFixed(2);
+            playerData_5v5[l][21] = ixPoints_p.toFixed(2);
             xG_shot = Number(playerData_5v5[l][4]) / playerData_5v5[l][9];
-            playerData_5v5[l][25] = xG_shot.toFixed(2);
+            playerData_5v5[l][24] = xG_shot.toFixed(2);
         }
         console.log("drawCharts - function")
         drawCharts();
