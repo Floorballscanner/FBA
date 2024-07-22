@@ -9,6 +9,7 @@
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     var xGtypeData = [['xGFDir%','xGADir%','xGFTO%','xGATO%']];
     var shotData = [];
+    var selectedValues = [];
     var data = 0;
     var idleTime = 0;
     var fLength = 332;
@@ -231,14 +232,14 @@ async function getGameData(game_ids) {
 
 function changeGame() {
 
-    var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
-    var playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
+    playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
+    playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
     console.log("Intialized 5v5 array")
-    var playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
+    playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
     gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     xGtypeData = [['xGFDir%','xGADir%','xGFTO%','xGATO%']];
     shotData = [];
-    var selectedValues = [];
+    selectedValues = [];
 
     ctx1.drawImage(myImg,0,0,fWidth,fLength);
     ctx2.drawImage(myImg,0,0,fWidth,fLength);
