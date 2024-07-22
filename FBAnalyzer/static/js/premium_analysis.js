@@ -149,7 +149,7 @@ async function getGameData(game_ids) {
                     found = 0;
 
                     for (k=1;k<playerData.length;k++) { // Sum game datas
-                        found = 0;
+
                         if (data[j][0] == playerData[k][0]) { // Player found
                             found = 1;
                             playerData[k][2]++;
@@ -183,12 +183,14 @@ async function getGameData(game_ids) {
                             data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], data[j][12], data[j][13], data[j][14]]);
                             playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][12]]);
                             playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,data[j][13]]);
+                            console.log('Added player on 5v5 array')
                         }
                         else {
                             playerData.push([data[j][0], data[j][1], 1, data[j][2], data[j][3], data[j][4], data[j][5],
                             data[j][6], data[j][7], data[j][8], data[j][9], data[j][10], data[j][11], 0, 0, 0]);
                             playerData_5v5.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
                             playerData_PP.push([data[j][0],data[j][1],1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+                            console.log('Added player on 5v5 array')
                         }
                     }
                 }
@@ -231,6 +233,7 @@ function changeGame() {
 
     var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
     var playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
+    console.log("Intialized 5v5 array")
     var playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
     gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     xGtypeData = [['xGFDir%','xGADir%','xGFTO%','xGATO%']];
