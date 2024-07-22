@@ -149,7 +149,7 @@ async function getGameData(game_ids) {
                     found = 0;
 
                     for (k=1;k<playerData.length;k++) { // Sum game datas
-
+                        found = 0;
                         if (data[j][0] == playerData[k][0]) { // Player found
                             found = 1;
                             playerData[k][2]++;
