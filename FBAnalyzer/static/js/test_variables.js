@@ -48,7 +48,8 @@
     var data_url = "null"; // Live data url
     var today = new Date();
     var live = 0; // If live updates are sent to API 1 yes / 0 no
-    var shooter_select = 0; // If user wants to tag shooter
+    var shooter_select = 0; // If user wants to tag shooter for Team 1
+    var shooterT2_select = 0; // If user wants to tag shooter for Team 1 and Team 2
     var user_id = JSON.parse(document.getElementById('user_id').textContent); // user id number
     var game_id = 0; // game id number
     var shot_on = 0; // Shot tag process on/off

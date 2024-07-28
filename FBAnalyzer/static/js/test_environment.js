@@ -4704,6 +4704,15 @@
         }
     }
 
+    function checkT2Shooter() {
+
+        if (!document.getElementById("ck3a").disabled) {
+            if (shooterT2_select == 1) {shooterT2_select= 0;}
+
+            else if (shooterT2_select == 0) {shooterT2_select = 1;}
+        }
+    }
+
     function changeLevel(t) {
 
         if (t == "T1") {
