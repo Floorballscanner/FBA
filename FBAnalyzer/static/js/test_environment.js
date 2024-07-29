@@ -304,7 +304,6 @@
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
-                document.getElementById("load-game").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 
