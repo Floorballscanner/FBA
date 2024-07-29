@@ -145,11 +145,11 @@ It extends app_layout.html with Django
                     </label>
                 </div>
             </div>
-            <div class="row justify-content-center">
+<!--            <div class="row justify-content-center">
                 <select disabled onchange="loadGame()" id="load-game" class="form-control-sm custom-select">
                     <option selected disabled>Load game...</option>
                 </select>
-            </div>
+            </div>-->
         </div>
     </div>
     <div class="lineup-selection">
@@ -382,7 +382,7 @@ It extends app_layout.html with Django
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="toGame_chart" style="height: 200px"></div>
+                <div id="xGGame_chart" style="height: 200px"></div>
             </div>
             <div class="linestats" style="Padding-top: 40px">
                 <div id="T1_st_piechart"></div>
@@ -390,7 +390,7 @@ It extends app_layout.html with Django
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="pmGame_chart" style="height: 200px"></div>
+                <div id="xG%Game_chart" style="height: 200px"></div>
             </div>
             <div class="linestats" style="Padding-top: 40px">
                 <div id="T2_st_piechart"></div>
@@ -407,12 +407,12 @@ It extends app_layout.html with Django
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart"></div>
+                <div id="toGame_chart"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart"></div>
+                <div id="pmGame_chart"></div>
             </div>
         </div>
     </div>

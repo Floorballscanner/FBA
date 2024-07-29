@@ -6219,29 +6219,21 @@
         // Pie Chart, xG per type Team 1
 
         var data = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnovers, Cross-Pass', stxGT1Teamg_array[0]],
-        ['Turnovers, direct', stxGT1Teamg_array[1]],
-        ['Org.attack, Cross-Pass', stxGT1Teamg_array[2]],
-        ['Org.attack, direct', stxGT1Teamg_array[4]],
-        ['Rebounds',  stxGT1Teamg_array[3]]
+        ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', stxGT1Teamg_array[2] + stxGT1Teamg_array[4] + stxGT1Teamg_array[3], 'color: #002072', stxGT1Teamg_array[2] + stxGT1Teamg_array[4] + stxGT1Teamg_array[3]],
+        ['Turnover Attack', stxGT1Teamg_array[0] + stxGT1Teamg_array[1], 'color: #59D9EB', stxGT1Teamg_array[0] + stxGT1Teamg_array[1]]
 
         ]);
 
         var data_p = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnovers, Cross-Pass', stxGT1Teamp_array[0]],
-        ['Turnovers, direct', stxGT1Teamp_array[1]],
-        ['Org.attack, Cross-Pass', stxGT1Teamp_array[2]],
-        ['Org.attack, direct', stxGT1Teamp_array[4]],
-        ['Rebounds',  stxGT1Teamp_array[3]]
+        ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', stxGT1Teamp_array[2] + stxGT1Teamp_array[4] + stxGT1Teamp_array[3], 'color: #002072', stxGT1Teamp_array[2] + stxGT1Teamp_array[4] + stxGT1Teamp_array[3]],
+        ['Turnover Attack', stxGT1Teamp_array[0] + stxGT1Teamp_array[1], 'color: #59D9EB', stxGT1Teamp_array[0] + stxGT1Teamp_array[1]]
 
         ]);
 
         var options2 = {
-        title: 'Share of xG by attack types',
-        colors: ['#006400', '#7CFC00','#000000','#0000FF','#D3D3D3'],
-        is3D: true,
+        title: 'Share of xG by attack types, Team 1',
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
@@ -6268,29 +6260,21 @@
         // Pie Chart, xG per type Team 2
 
         var data2 = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnover, Cross-Pass', stxGT2Teamg_array[0]],
-        ['Turnover, direct', + stxGT2Teamg_array[1]],
-        ['Org. attack, Cross-Pass', stxGT2Teamg_array[2]],
-        ['Org. attack, direct', stxGT2Teamg_array[4]],
-        ['Rebound', stxGT2Teamg_array[3]]
+        ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', stxGT2Teamg_array[2] + stxGT2Teamg_array[4] + stxGT2Teamg_array[3], 'color: #002072', stxGT2Teamg_array[2] + stxGT2Teamg_array[4] + stxGT2Teamg_array[3]],
+        ['Turnover Attack', stxGT2Teamg_array[0] + stxGT2Teamg_array[1], 'color: #59D9EB', stxGT2Teamg_array[0] + stxGT2Teamg_array[1]]
 
         ]);
 
         var data2_p = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnover, Cross-Pass', stxGT2Teamp_array[0]],
-        ['Turnover, direct', + stxGT2Teamp_array[1]],
-        ['Org. attack, Cross-Pass', stxGT2Teamp_array[2]],
-        ['Org. attack, direct', stxGT2Teamp_array[4]],
-        ['Rebounds', stxGT2Teamp_array[3]]
+        ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', stxGT2Teamp_array[2] + stxGT2Teamp_array[4] + stxGT2Teamp_array[3], 'color: #002072', stxGT2Teamp_array[2] + stxGT2Teamp_array[4] + stxGT2Teamp_array[3]],
+        ['Turnover Attack', stxGT2Teamp_array[0] + stxGT2Teamp_array[1], 'color: #59D9EB', stxGT2Teamp_array[0] + stxGT2Teamp_array[1]]
 
         ]);
 
         var options2 = {
-        title: 'Share of xG by attack/shot types',
-        colors: ['#8B4513', '#FFA500','#FFFFFF','#FF4500', '#D3D3D3'],
-        is3D: true,
+        title: 'Share of xG by attack types, Team 2',
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
@@ -6373,7 +6357,8 @@
             ['Goals', Number(gf_g[7].textContent), Number(ga_g[7]. textContent)],
 	        ['xG', Number(xf_g[7].textContent), Number(xa_g[7]. textContent)],
 	        ['xGOT',  xGOTf_g[7], xGOTa_g[7]],
-	        ['Shots', Number(sf_g[7].textContent), Number(sa_g[7]. textContent)]
+	        ['Shots', Number(sf_g[7].textContent), Number(sa_g[7]. textContent)],
+	        ['Shots on Goal', Number(saf_g[7].textContent) + Number(gf_g[7].textContent), Number(saa_g[7].textContent) + Number(ga_g[7].textContent)]
 
     ]);
 
@@ -6404,14 +6389,13 @@
             pedata19.addRows([
                 ['Goals', Number(gf_p[7].textContent), Number(ga_p[7]. textContent)],
                 ['xG', Number(xf_p[7].textContent), Number(xa_p[7]. textContent)],
+                ['xGOT', xGOTf_p[7], xGOTa_p[7]],
                 ['Shots', Number(sf_p[7].textContent), Number(sa_p[7]. textContent)],
+                ['Shots on Goal', Number(saf_p[7].textContent) + Number(gf_p[7].textContent), Number(saa_p[7].textContent) + Number(ga_p[7].textContent)]
     ]);
         //Create and draw visualisation
         var chart_pe = new google.visualization.Table(document.getElementById('Summary_game_' + periodN));
         chart_pe.draw(pedata19, options);
-
-
-
 
 
         // Line 1 xG Chart
