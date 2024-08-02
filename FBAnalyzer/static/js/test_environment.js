@@ -6486,9 +6486,9 @@
 
          var chartData = google.visualization.arrayToDataTable([
              ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
-             ['Line 1', stT1L1p_array[0] + stT1L1p_array[1], 'color: #002072', stT1L1p_array[0] + stT1L1p_array[1], stT2L1p_array[0] + stT2L1p_array[1], 'color: #0000FF', stT2L1p_array[0] + stT2L1p_array[1]],
-             ['Line 2', stT1L2p_array[0] + stT1L2p_array[1], 'color: #002072', stT1L2p_array[0] + stT1L2p_array[1], stT2L2p_array[0] + stT2L2p_array[1], 'color: #0000FF', stT2L2p_array[0] + stT2L2p_array[1]],
-             ['Line 3', stT1L3p_array[0] + stT1L3p_array[1], 'color: #002072', stT1L3p_array[0] + stT1L3p_array[1], stT2L3p_array[0] + stT2L3p_array[1], 'color: #0000FF', stT2L3p_array[0] + stT2L3p_array[1]
+             ['Line 1', stT1L1p_array[0] + stT1L1p_array[1], 'color: #002072', stT1L1p_array[0] + stT1L1p_array[1], stT2L1p_array[0] + stT2L1p_array[1], 'color: #59D9EB', stT2L1p_array[0] + stT2L1p_array[1]],
+             ['Line 2', stT1L2p_array[0] + stT1L2p_array[1], 'color: #002072', stT1L2p_array[0] + stT1L2p_array[1], stT2L2p_array[0] + stT2L2p_array[1], 'color: #59D9EB', stT2L2p_array[0] + stT2L2p_array[1]],
+             ['Line 3', stT1L3p_array[0] + stT1L3p_array[1], 'color: #002072', stT1L3p_array[0] + stT1L3p_array[1], stT2L3p_array[0] + stT2L3p_array[1], 'color: #59D9EB', stT2L3p_array[0] + stT2L3p_array[1]
              ]
           ]);
 
