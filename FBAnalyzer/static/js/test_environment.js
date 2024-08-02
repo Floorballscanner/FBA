@@ -6481,6 +6481,27 @@
 
         var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
         chart1.draw(chartData, options);
+        
+        // Turnover period chart
+
+         var chartData = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', stT1L1p_array[0] + stT1L1p_array[1], 'color: #002072', stT1L1p_array[0] + stT1L1p_array[1], stT2L1p_array[0] + stT2L1p_array[1], 'color: #0000FF', stT2L1p_array[0] + stT2L1p_array[1]],
+             ['Line 2', stT1L2p_array[0] + stT1L2p_array[1], 'color: #002072', stT1L2p_array[0] + stT1L2p_array[1], stT2L2p_array[0] + stT2L2p_array[1], 'color: #0000FF', stT2L2p_array[0] + stT2L2p_array[1]],
+             ['Line 3', stT1L3p_array[0] + stT1L3p_array[1], 'color: #002072', stT1L3p_array[0] + stT1L3p_array[1], stT2L3p_array[0] + stT2L3p_array[1], 'color: #0000FF', stT2L3p_array[0] + stT2L3p_array[1]
+             ]
+          ]);
+
+        var options = {
+            title: 'Turnovers by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart_' + periodN));
+        chart1.draw(chartData, options);
 
         // Plusminus Game Chart
 
@@ -6490,7 +6511,6 @@
             ['Line 2', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, 'color: #002072', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML, 'color: #59D9EB', ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML],
             ['Line 3', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, 'color: #002072', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML, 'color: #59D9EB', ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML],
         ]);
-
 
         var options = {
             title: '+- by Line',
@@ -6502,38 +6522,26 @@
 
         var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart'));
         chart.draw(chartData, options);
-
-        var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
-
-        // Team 2 typechart
-
-        var chartDataY = google.visualization.arrayToDataTable([
-            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT2L1g_array[0], 'color: #8B4513', stT2L1g_array[0], stT2L1g_array[1], 'color: #FFA500', stT2L1g_array[1], stT2L1g_array[2], 'color: #FFFFFF', stT2L1g_array[2], stT2L1g_array[4], 'color: #FF4500', stT2L1g_array[4]],
-            ['Line2', stT2L2g_array[0], 'color: #8B4513', stT2L2g_array[0], stT2L2g_array[1], 'color: #FFA500', stT2L2g_array[1], stT2L2g_array[2], 'color: #FFFFFF', stT2L2g_array[2], stT2L2g_array[4], 'color: #FF4500', stT2L2g_array[4]],
-            ['Line3', stT2L3g_array[0], 'color: #8B4513', stT2L3g_array[0], stT2L3g_array[1], 'color: #FFA500', stT2L3g_array[1], stT2L3g_array[2], 'color: #FFFFFF', stT2L3g_array[2], stT2L3g_array[4], 'color: #FF4500', stT2L3g_array[4]
-            ]
-         ]);
-
-        var chartDataY_p = google.visualization.arrayToDataTable([
-            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT2L1p_array[0], 'color: #8B4513', stT2L1p_array[0], stT2L1p_array[1], 'color: #FFA500', stT2L1p_array[1], stT2L1p_array[2], 'color: #FFFFFF', stT2L1p_array[2], stT2L1p_array[4], 'color: #FF4500', stT2L1p_array[4]],
-            ['Line2', stT2L2p_array[0], 'color: #8B4513', stT2L2p_array[0], stT2L2p_array[1], 'color: #FFA500', stT2L2p_array[1], stT2L2p_array[2], 'color: #FFFFFF', stT2L2p_array[2], stT2L2p_array[4], 'color: #FF4500', stT2L2p_array[4]],
-            ['Line3', stT2L3p_array[0], 'color: #8B4513', stT2L3p_array[0], stT2L3p_array[1], 'color: #FFA500', stT2L3p_array[1], stT2L3p_array[2], 'color: #FFFFFF', stT2L3p_array[2], stT2L3p_array[4], 'color: #FF4500', stT2L3p_array[4]
-            ]
-         ]);
+        
+        // Plusminus Period Chart
+        
+        var chartData = google.visualization.arrayToDataTable([
+            ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
+            ['Line 1', ~~gfL1p.innerHTML - ~~gaL1p.innerHTML, 'color: #002072', ~~gfL1p.innerHTML - ~~gaL1p.innerHTML, ~~gfL1T2p.innerHTML - ~~gaL1T2p.innerHTML, 'color: #59D9EB', ~~gfL1T2p.innerHTML - ~~gaL1T2p.innerHTML],
+            ['Line 2', ~~gfL2p.innerHTML - ~~gaL2p.innerHTML, 'color: #002072', ~~gfL2p.innerHTML - ~~gaL2p.innerHTML, ~~gfL2T2p.innerHTML - ~~gaL2T2p.innerHTML, 'color: #59D9EB', ~~gfL2T2p.innerHTML - ~~gaL2T2p.innerHTML],
+            ['Line 3', ~~gfL3p.innerHTML - ~~gaL3p.innerHTML, 'color: #002072', ~~gfL3p.innerHTML - ~~gaL3p.innerHTML, ~~gfL3T2p.innerHTML - ~~gaL3T2p.innerHTML, 'color: #59D9EB', ~~gfL3T2p.innerHTML - ~~gaL3T2p.innerHTML],
+        ]);
 
         var options = {
-            title: 'Shot types, Team 2',
-            bar: {groupWidth: "75%"},
+            title: '+- by Line',
+            bar: {groupWidth: "95%"},
             legend: { position: 'bottom'},
-            colors: ['#8B4513', '#FFA500','#FFFFFF','#FF4500'],
+            colors: ['#002072', '#59D9EB'],
             hAxis: { textPosition: 'none' }
             };
 
-        var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
-
-        chartX_per.draw(chartDataY_p, options);
+        var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart_' + periodN ));
+        chart.draw(chartData, options);
 
     }
 
