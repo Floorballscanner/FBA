@@ -6237,22 +6237,9 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_T1_st_piechart = chart.getImageURI();
-        });*/
-
         chart.draw(data, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per, 'ready', function () {
-            if (periodN == 1) {p_T1_st_piechart_1 = chart_per.getImageURI();}
-            else if (periodN == 2) {p_T1_st_piechart_2 = chart_per.getImageURI();}
-            else if (periodN == 3) {p_T1_st_piechart_3 = chart_per.getImageURI();}
-            else if (periodN == 4) {p_T1_st_piechart_4 = chart_per.getImageURI();}
-        });*/
 
         chart_per.draw(data_p, options2);
 
@@ -6278,24 +6265,68 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_T2_st_piechart = chart.getImageURI();
-        });*/
-
         chart.draw(data2, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per, 'ready', function () {
-            if (periodN == 1) {p_T2_st_piechart_1 = chart_per.getImageURI();}
-            else if (periodN == 2) {p_T2_st_piechart_2 = chart_per.getImageURI();}
-            else if (periodN == 3) {p_T2_st_piechart_3 = chart_per.getImageURI();}
-            else if (periodN == 4) {p_T2_st_piechart_4 = chart_per.getImageURI();}
-        });*/
-
         chart_per.draw(data2_p, options2);
+
+        // Pie Chart, Goals per type Team 1
+
+        var gtT1TeamD = 0;
+        var gtT2TeamD = 0;
+        var gtT1TeamT = 0;
+        var gtT2TeamT = 0;
+
+        for (i=1;i<premShotData.length;i++) {
+            if (premShotData[i][3] == 1 && premShotData[i][4] == 4) { // Team 1 Goal
+                if (premShotData[i][5] == 2 || premShotData[i][5] == 3 || premShotData[i][5] == 4 ) { // Org attack
+                    gtT1TeamD++;
+                }
+                if (premShotData[i][5] == 0 || premShotData[i][5] == 1) { // Turnover attack
+                    gtT1TeamT++;
+                }
+            }
+            if (premShotData[i][3] == 2 && premShotData[i][4] == 4) { // Team 2 Goal
+                if (premShotData[i][5] == 2 || premShotData[i][5] == 3 || premShotData[i][5] == 4 ) { // Org attack
+                    gtT2TeamD++;
+                }
+                if (premShotData[i][5] == 0 || premShotData[i][5] == 1) { // Turnover attack
+                    gtT2TeamT++;
+                }
+            }
+        }
+
+        var data = new google.visualization.arrayToDataTable([
+        ['Type of Goals', 'Goals', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', gtT1TeamD, 'color: #002072', gtT1TeamD],
+        ['Turnover Attack', gtT1TeamT, 'color: #59D9EB', gtT1TeamT]
+
+        ]);
+
+        var options2 = {
+        title: 'Share of Goals by attack types, Team 1',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('T1_gt_piechart'));
+
+        chart.draw(data, options2);
+
+        // Pie Chart, Goals per type Team 2
+
+        var data2 = new google.visualization.arrayToDataTable([
+        ['Type of Goals', 'Goals', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', gtT2TeamD, 'color: #002072', gtT2TeamD],
+        ['Turnover Attack', gtT2TeamT, 'color: #59D9EB', gtT2TeamT]
+        ]);
+
+        var options2 = {
+        title: 'Share of Goals by attack types, Team 2',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('T2_gt_piechart'));
+
+        chart.draw(data2, options2);
 
         // Team xG Chart
         // var data = google.visualization.arrayToDataTable(xGTeam_array);
