@@ -365,10 +365,15 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
+    <!-- Game stats-->
+
     <hr width="100%" size="2" align="center" color="#002072" noshade>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Game statistics</h4>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 10px;">
         <div id="Summary_game" style="height: 200px"></div>
     </div>
@@ -384,10 +389,10 @@ It extends app_layout.html with Django
             <div class="linestats">
                 <div id="xGGame_chart" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
+            <div class="linestats" style="Padding-top: 20px">
                 <div id="T1_st_piechart"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
+            <div class="linestats" style="Padding-top: 20px">
                 <div id="T1_gt_piechart"></div>
             </div>
         </div>
@@ -395,10 +400,10 @@ It extends app_layout.html with Django
             <div class="linestats">
                 <div id="xG%Game_chart" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
+            <div class="linestats" style="Padding-top: 20px">
                 <div id="T2_st_piechart"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
+            <div class="linestats" style="Padding-top: 20px">
                 <div id="T2_gt_piechart"></div>
             </div>
         </div>
@@ -417,7 +422,7 @@ It extends app_layout.html with Django
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div id="xGTeam_chart" style="height: 300px"></div>
         </div>
@@ -429,6 +434,7 @@ It extends app_layout.html with Django
             <div style="text-align: center;" id="T1plstats"></div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <h5 style="text-align: center;">Team 2 player stats</h5>
@@ -450,45 +456,52 @@ It extends app_layout.html with Django
         </div>
     </div>
 
+    <!-- Period 1 stats-->
+
     <hr width="100%" size="2" align="center" color="#002072" noshade>
-     <div class="row justify-content-center" style="Padding-top: 40px;">
+
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Period 1 stats</h4>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 10px;">
         <div id="Summary_game_1" style="height: 200px"></div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-4">
             <div class="shot-map">
+                <h5>Game shotmap</h5>
                 <canvas id="myCanvas_1" width="300" height="500"></canvas>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart_1"></div>
+                <div id="xGGame_chart_1" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
+            <div class="linestats" style="Padding-top: 20px">
                 <div id="T1_st_piechart_1"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart_1"></div>
+                <div id="xG%Game_chart_1" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
+            <div class="linestats" style="Padding-top: 20px">
                 <div id="T2_st_piechart_1"></div>
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart_1"></div>
+                <div id="toGame_chart_1"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart_1"></div>
+                <div id="pmGame_chart_1"></div>
             </div>
         </div>
     </div>
@@ -501,6 +514,7 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats" style="Padding-top: 40px" >
@@ -518,6 +532,7 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
@@ -526,45 +541,53 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
+    <!-- Period 2 stats-->
+
     <hr width="100%" size="2" align="center" color="#002072" noshade>
-     <div class="row justify-content-center" style="Padding-top: 40px;">
+
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Period 2 stats</h4>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 10px;">
         <div id="Summary_game_2" style="height: 200px"></div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-4">
             <div class="shot-map">
+                <h5>Game shotmap</h5>
                 <canvas id="myCanvas_2" width="300" height="500"></canvas>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart_2"></div>
+                <div id="xGGame_chart_2" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
+            <div class="linestats" style="Padding-top: 20px">
                 <div id="T1_st_piechart_2"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart_2"></div>
+                <div id="xG%Game_chart_2" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
-                <div  id="T2_st_piechart_2"></div>
+            <div class="linestats" style="Padding-top: 20px">
+                <div id="T2_st_piechart_2"></div>
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart_2"></div>
+                <div id="toGame_chart_2"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart_2"></div>
+                <div id="pmGame_chart_2"></div>
             </div>
         </div>
     </div>
@@ -577,6 +600,7 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats" style="Padding-top: 40px" >
@@ -594,6 +618,7 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
@@ -602,45 +627,53 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
-     <hr width="100%" size="2" align="center" color="#002072" noshade>
-     <div class="row justify-content-center" style="Padding-top: 40px;">
+
+    <!-- Period 3 stats-->
+
+    <hr width="100%" size="2" align="center" color="#002072" noshade>
+
+    <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Period 3 stats</h4>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 10px;">
         <div id="Summary_game_3" style="height: 200px"></div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-4">
             <div class="shot-map">
+                <h5>Game shotmap</h5>
                 <canvas id="myCanvas_3" width="300" height="500"></canvas>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart_3"></div>
+                <div id="xGGame_chart_3" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
-                <div  id="T1_st_piechart_3"></div>
+            <div class="linestats" style="Padding-top: 20px">
+                <div id="T1_st_piechart_3"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart_3"></div>
+                <div id="xG%Game_chart_3" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
-                <div  id="T2_st_piechart_3"></div>
+            <div class="linestats" style="Padding-top: 20px">
+                <div id="T2_st_piechart_3"></div>
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart_3"></div>
+                <div id="toGame_chart_3"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart_3"></div>
+                <div id="pmGame_chart_3"></div>
             </div>
         </div>
     </div>
@@ -653,6 +686,7 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats" style="Padding-top: 40px" >
@@ -670,6 +704,7 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
@@ -678,45 +713,53 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
+    <!-- Overtime stats-->
+
     <hr width="100%" size="2" align="center" color="#002072" noshade>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4>Overtime stats</h4>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 10px;">
         <div id="Summary_game_4" style="height: 200px"></div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-4">
             <div class="shot-map">
+                <h5>Game shotmap</h5>
                 <canvas id="myCanvas_4" width="300" height="500"></canvas>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T1_typechart_4"></div>
+                <div id="xGGame_chart_4" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
-                <div  id="T1_st_piechart_4"></div>
+            <div class="linestats" style="Padding-top: 20px">
+                <div id="T1_st_piechart_4"></div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="linestats">
-                <div id="T2_typechart_4"></div>
+                <div id="xG%Game_chart_4" style="height: 200px"></div>
             </div>
-            <div class="linestats" style="Padding-top: 40px">
-                <div  id="T2_st_piechart_4"></div>
+            <div class="linestats" style="Padding-top: 20px">
+                <div id="T2_st_piechart_4"></div>
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xGGame_chart_4"></div>
+                <div id="toGame_chart_4"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="linestats">
-                <div id="xG%Game_chart_4"></div>
+                <div id="pmGame_chart_4"></div>
             </div>
         </div>
     </div>
@@ -729,6 +772,7 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats" style="Padding-top: 40px" >
@@ -746,6 +790,7 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <div class="col-sm-12">
             <div class="linestats">
@@ -754,9 +799,11 @@ It extends app_layout.html with Django
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center" style="Padding-top: 40px;">
         <h4><span id="name_t1_3">Team 1</span></h4>
     </div>
+
     <div class="row">
         <div class="col-sm-3">
             <div id="sL1" class="stats-L1">

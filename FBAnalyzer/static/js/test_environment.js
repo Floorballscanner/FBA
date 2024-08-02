@@ -1167,6 +1167,10 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -1259,6 +1263,9 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1550,6 +1557,10 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -1641,6 +1652,9 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1938,6 +1952,10 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -2042,6 +2060,10 @@
                 xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
+
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
 
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -2386,6 +2408,10 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
                 // undo_array.push([xGaT2_p[line_on_2 - 1],dxG])
 
@@ -2522,6 +2548,10 @@
                 xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
+
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -5430,6 +5460,8 @@
             "xGa_g" : xGa_g,
             "xGOTf_g" : xGOTf_g,
             "xGOTa_g" : xGOTa_g,
+            "xGOTf_p" : xGOTf_p,
+            "xGOTa_p" : xGOTa_p,
             "TocT2_p" : TocT2_p,
             "TocT2_g" : TocT2_g,
             "PosT2_p" : PosT2_p,
@@ -5715,6 +5747,9 @@
         xGf_p = undo_object.xGf_p;
         xGf_g = undo_object.xGf_g;
         xGOTf_g = undo_object.xGOTf_g;
+        xGOTf_p = undo_object.xGOTf_p;
+        xGOTa_g = undo_object.xGOTa_g;
+        xGOTa_p = undo_object.xGOTa_p;
         xGa_p = undo_object.xGa_p;
         xGa_g = undo_object.xGa_g;
         xGOTa_g = undo_object.xGOTa_g;
@@ -5840,14 +5875,6 @@
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per, 'ready', function () {
-            if (periodN == 1) {p_xGGame_chart_1 = chart_per.getImageURI();}
-            else if (periodN == 2) {p_xGGame_chart_2 = chart_per.getImageURI();}
-            else if (periodN == 3) {p_xGGame_chart_3 = chart_per.getImageURI();}
-            else if (periodN == 4) {p_xGGame_chart_4 = chart_per.getImageURI();}
-        });*/
-
         chart_per.draw(chartData_p, options);
 
         //xG% GameChart
@@ -5898,22 +5925,9 @@
 
         var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_xG_per_Game_chart = chart.getImageURI();
-        });*/
-
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per, 'ready', function () {
-            if (periodN == 1) {p_xG_per_Game_chart_1 = chart_per.getImageURI();}
-            else if (periodN == 2) {p_xG_per_Game_chart_2 = chart_per.getImageURI();}
-            else if (periodN == 3) {p_xG_per_Game_chart_3 = chart_per.getImageURI();}
-            else if (periodN == 4) {p_xG_per_Game_chart_4 = chart_per.getImageURI();}
-        });*/
 
         chart_per.draw(chartData_p, options);
 
@@ -6328,19 +6342,6 @@
 
         chart.draw(data2, options2);
 
-        // Team xG Chart
-        // var data = google.visualization.arrayToDataTable(xGTeam_array);
-
-        // var options = {
-        //  title: 'xG by Team',
-        //  curveType: 'function',
-         // legend: { position: 'bottom' },
-        //  seriesType: 'lines',
-         // series: {
-            //  2:{type: 'bars', color: 'blue'},
-           //   3:{type: 'bars', color: 'red'}},
-       // };
-
         var combinedData = [];
         for (var i = 0; i < xGTeam_array.length; i++) {
             combinedData.push([xGTeam_array[i][0], xGTeam_array[i][1], xGTeam_array[i][2], xGOTTeam_array[i][1], xGOTTeam_array[i][2], xGTeam_array[i][3], xGTeam_array[i][4]]);
@@ -6364,11 +6365,6 @@
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_xGTeam_chart = chart.getImageURI();
-        });*/
-
         chart.draw(data, options);
 
         // Summary chart
@@ -6377,11 +6373,6 @@
         pldata19.addColumn('string', 'Team');
         pldata19.addColumn('number', '1');
         pldata19.addColumn('number', '2');
-        //pldata19.addColumn('number', 'xG T1');
-        //pldata19.addColumn('number', 'xG T2');
-        //pldata19.addColumn('number', 'xGOT T1');
-        //pldata19.addColumn('number', 'xGOT T2');
-
 
         pldata19.addRows([
             ['Goals', Number(gf_g[7].textContent), Number(ga_g[7]. textContent)],
@@ -6410,16 +6401,10 @@
             pedata19.addColumn('string', 'Team');
             pedata19.addColumn('number', '1');
             pedata19.addColumn('number', '2');
-            //pldata19.addColumn('number', 'xG T1');
-            //pldata19.addColumn('number', 'xG T2');
-            //pldata19.addColumn('number', 'xGOT T1');
-            //pldata19.addColumn('number', 'xGOT T2');
-
 
             pedata19.addRows([
                 ['Goals', Number(gf_p[7].textContent), Number(ga_p[7]. textContent)],
                 ['xG', Number(xf_p[7].textContent), Number(xa_p[7]. textContent)],
-                ['xGOT', xGOTf_p[7], xGOTa_p[7]],
                 ['Shots', Number(sf_p[7].textContent), Number(sa_p[7]. textContent)],
                 ['Shots on Goal', Number(saf_p[7].textContent) + Number(gf_p[7].textContent), Number(saa_p[7].textContent) + Number(ga_p[7].textContent)]
     ]);
@@ -6499,15 +6484,12 @@
 
         // Plusminus Game Chart
 
-    //pmPPT1 = data.gfGameT1L4+data.gfGameT1L5-data.gaGameT1L4+data.gaGameT1L5;
-    //pmPPT2 = data.gfGameT2L4+data.gfGameT2L5-data.gaGameT2L4+data.gaGameT2L5;
-
         var chartData = google.visualization.arrayToDataTable([
-    ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
-    ['Line 1', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, 'color: #002072', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML, 'color: #59D9EB', ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML],
-    ['Line 2', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, 'color: #002072', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML, 'color: #59D9EB', ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML],
-    ['Line 3', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, 'color: #002072', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML, 'color: #59D9EB', ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML],
-]);
+            ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
+            ['Line 1', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, 'color: #002072', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML, 'color: #59D9EB', ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML],
+            ['Line 2', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, 'color: #002072', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML, 'color: #59D9EB', ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML],
+            ['Line 3', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, 'color: #002072', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML, 'color: #59D9EB', ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML],
+        ]);
 
 
         var options = {
@@ -6521,53 +6503,7 @@
         var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart'));
         chart.draw(chartData, options);
 
-
-       // Team 1 typechart
-
-        // var chartDataX = google.visualization.arrayToDataTable([
-          //  ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-         //   ['Line1', stT1L1g_array[0], 'color: #006400', stT1L1g_array[0], stT1L1g_array[1], 'color: #7CFC00', stT1L1g_array[1], stT1L1g_array[2], 'color: #000000', stT1L1g_array[2], stT1L1g_array[4], 'color: #0000FF', stT1L1g_array[4]],
-         //   ['Line2', stT1L2g_array[0], 'color: #006400', stT1L2g_array[0], stT1L2g_array[1], 'color: #7CFC00', stT1L2g_array[1], stT1L2g_array[2], 'color: #000000', stT1L2g_array[2], stT1L2g_array[4], 'color: #0000FF', stT1L2g_array[4]],
-         //   ['Line3', stT1L3g_array[0], 'color: #006400', stT1L3g_array[0], stT1L3g_array[1], 'color: #7CFC00', stT1L3g_array[1], stT1L3g_array[2], 'color: #000000', stT1L3g_array[2], stT1L3g_array[4], 'color: #0000FF', stT1L3g_array[4]
-         //   ]
-         //]);
-
-       //  var chartDataX_p = google.visualization.arrayToDataTable([
-         //   ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-         //   ['Line1', stT1L1p_array[0], 'color: #006400', stT1L1p_array[0], stT1L1p_array[1], 'color: #7CFC00', stT1L1p_array[1], stT1L1p_array[2], 'color: #000000', stT1L1p_array[2], stT1L1p_array[4], 'color: #0000FF', stT1L1p_array[4]],
-         //   ['Line2', stT1L2p_array[0], 'color: #006400', stT1L2p_array[0], stT1L2p_array[1], 'color: #7CFC00', stT1L2p_array[1], stT1L2p_array[2], 'color: #000000', stT1L2p_array[2], stT1L2p_array[4], 'color: #0000FF', stT1L2p_array[4]],
-          //  ['Line3', stT1L3p_array[0], 'color: #006400', stT1L3p_array[0], stT1L3p_array[1], 'color: #7CFC00', stT1L3p_array[1], stT1L3p_array[2], 'color: #000000', stT1L3p_array[2], stT1L3p_array[4], 'color: #0000FF', stT1L3p_array[4]
-        //    ]
-        // ]);
-
-      //  var options = {
-         //   title: 'Shot types, Team 1',
-           // bar: {groupWidth: "75%"},
-         //   legend: { position: 'bottom'},
-          //  colors: ['#006400', '#7CFC00','#000000','#0000FF'],
-          //  hAxis: { textPosition: 'none' }
-          //  };
-
-        // var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart2, 'ready', function () {
-            p_T1_typechart = chart2.getImageURI();
-        });*/
-
-        //chart2.draw(chartDataX, options);
-
         var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart2_per, 'ready', function () {
-            if (periodN == 1) {p_T1_typechart_1 = chart2_per.getImageURI();}
-            else if (periodN == 2) {p_T1_typechart_2 = chart2_per.getImageURI();}
-            else if (periodN == 3) {p_T1_typechart_3 = chart2_per.getImageURI();}
-            else if (periodN == 4) {p_T1_typechart_4 = chart2_per.getImageURI();}
-        });*/
-
-      //  chart2_per.draw(chartDataX_p, options);
 
         // Team 2 typechart
 
@@ -6595,24 +6531,7 @@
             hAxis: { textPosition: 'none' }
             };
 
-        //var chartX = new google.visualization.ColumnChart(document.getElementById('T2_typechart'));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chartX, 'ready', function () {
-            p_T2_typechart = chartX.getImageURI();
-        });*/
-
-        //chartX.draw(chartDataY, options);
-
         var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chartX_per, 'ready', function () {
-            if (periodN == 1) {p_T2_typechart_1 = chartX_per.getImageURI();}
-            else if (periodN == 2) {p_T2_typechart_2 = chartX_per.getImageURI();}
-            else if (periodN == 3) {p_T2_typechart_3 = chartX_per.getImageURI();}
-            else if (periodN == 4) {p_T2_typechart_4 = chartX_per.getImageURI();}
-        });*/
 
         chartX_per.draw(chartDataY_p, options);
 
