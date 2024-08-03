@@ -3860,6 +3860,66 @@
 
             if (shooter_select == 1) { // If Shooter tagging is on
 
+                if ((Ball_pos == 1 && line_on <= 5)) {
+                    // Set menu items according to players on field
+                    l = line_on;
+
+                    document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+                                                    [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
+                    document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
+                    document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
+                    document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
+                    document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
+                    if (l == 5) { // 6 vs 5
+
+                        document.getElementById("shooter-6").innerHTML = document.getElementById("sT"+Ball_pos+"L5X").options
+                                                            [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
+                        document.getElementById("sh-6").removeAttribute("hidden");
+
+                    }
+
+                    shootertype.style.display = "block";
+                    shootertype.style.left = stype.style.left;
+                    shootertype.style.top = stype.style.top;
+                    console.log("Shooter menu open")
+
+                }
+                if ((Ball_pos == 1 && line_on > 5)) {
+                    p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
+                    p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
+                    p_T1G = document.getElementById("sT1G").options
+                    [document.getElementById("sT1G").selectedIndex].value;
+                    p_T1G_str = document.getElementById("sT1G").options
+                    [document.getElementById("sT1G").selectedIndex].text;
+                    p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
+                    p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
+                    p_T2G = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].value;
+                    p_T2G_str = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].text;
+
+                    premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
+                                dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
+                                p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+
+                    printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
+
+                    if (shotCounter > 1) {
+                        document.getElementById("undo").disabled = false;
+                    }
+                    shot_on = 0; // End the shot tag process
+                    shotCounter++;
+                    updateSaveData();
+                }
+            } // Tag only Team 1 shooter & passer
+            if (shooterT2_select == 1) { // If Shooter tagging is on
+
                 if ((Ball_pos == 1 && line_on <= 5) || (Ball_pos == 2 && line_on_2 <= 5)) {
                     // Set menu items according to players on field
                     if (Ball_pos == 1) {
@@ -3922,8 +3982,8 @@
                     shotCounter++;
                     updateSaveData();
                 }
-            }
-            else if (shooter_select == 0) {
+            } // Tag Team 1 and Team 2 shooter & passer
+            else if (shooter_select == 0 && shooterT2_select == 0) {
 
                 if (line_on <= 5) {
                     p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
@@ -4022,7 +4082,7 @@
                 shot_on = 0; // End the shot tag process
                 shotCounter++;
                 updateSaveData();
-            }
+            } // No shooter and passer tagging
 
         }
 
@@ -4729,7 +4789,13 @@
         if (!document.getElementById("ck2a").disabled) {
             if (shooter_select == 1) {shooter_select= 0;}
 
-            else if (shooter_select == 0) {shooter_select = 1;}
+            else if (shooter_select == 0) {
+                shooter_select = 1;
+                if (shooterT2_select == 1) {
+                    shooterT2_select = 0;
+                    document.getElementById("ck3a").checked = false
+                }
+            }
         }
     }
 
@@ -4738,7 +4804,13 @@
         if (!document.getElementById("ck3a").disabled) {
             if (shooterT2_select == 1) {shooterT2_select= 0;}
 
-            else if (shooterT2_select == 0) {shooterT2_select = 1;}
+            else if (shooterT2_select == 0) {
+                shooterT2_select = 1;
+                if (shooter_select == 1) {
+                    shooter_select = 0;
+                    document.getElementById("ck2a").checked = false
+                }
+            }
         }
     }
 
