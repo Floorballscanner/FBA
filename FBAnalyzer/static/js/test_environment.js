@@ -3903,7 +3903,7 @@
                     shotCounter++;
                     updateSaveData();
                 }
-                if ((Ball_pos == 2) {
+                if (Ball_pos == 2) {
                     p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
                     p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
                     p_T1G = document.getElementById("sT1G").options
