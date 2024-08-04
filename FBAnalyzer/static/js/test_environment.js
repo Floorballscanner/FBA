@@ -422,8 +422,8 @@
                 stT2L3p_array = [0,0,0,0,0];
                 posplusT1p_array = [0,0,0,0];
                 posplusT2p_array = [0,0,0,0];
-                plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
-                plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
+                plT1p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
+                plT2p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
 
 
                 for (let i = 0; i < 8; i++) {
@@ -3806,8 +3806,8 @@
                 }
             }
             if (found == 0) { // Player not found, adding new row to the array
-                if (dataType == 5) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);}
-                if (dataType == 6) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);}
+                if (dataType == 5) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);}
+                if (dataType == 6) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]);}
             }
 
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -4367,20 +4367,20 @@
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
                 if (line_on < 4 || line_on > 5) {
-                    plT1_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT1_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
                 if (line_on == 4 || line_on == 5) {
-                    plT1_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT1_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
                 if (line_on < 4 || line_on > 5) {
-                    plT1_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                    plT1_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
                 if (line_on == 4 || line_on == 5) {
-                    plT1_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                    plT1_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
             }
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -4418,20 +4418,20 @@
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
                 if (line_on_2 < 4 || line_on_2 > 5) {
-                    plT2_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT2_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
                 if (line_on_2 == 4 || line_on_2 == 5) {
-                    plT2_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT2_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
                 if (line_on_2 < 4 || line_on_2 > 5) {
-                    plT2_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                    plT2_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
                 if (line_on_2 == 4 || line_on_2 == 5) {
-                    plT2_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                    plT2_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
