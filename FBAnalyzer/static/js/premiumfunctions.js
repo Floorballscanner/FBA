@@ -304,7 +304,6 @@
                 document.getElementById("period").disabled = false;
                 document.getElementById("reset").disabled = false;
                 document.getElementById("ck1a").disabled = true;
-                document.getElementById("load-game").disabled = true;
                 started = 1;
                 sData.style.display = "block";
 
@@ -423,8 +422,8 @@
                 stT2L3p_array = [0,0,0,0,0];
                 posplusT1p_array = [0,0,0,0];
                 posplusT2p_array = [0,0,0,0];
-                plT1p_array = [['ID', 'Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
-                plT2p_array = [['ID','Name', 'Shot_xG','Passed_xG','Goals','Assists','Shots', 'Shot Assists','Possession+','Possession-']];
+                plT1p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
+                plT2p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
 
 
                 for (let i = 0; i < 8; i++) {
@@ -500,31 +499,310 @@
     function Count() {
          if (is_on == 1) {
 
-             Toc_p[line_on - 1]++;
-             Toc_g[line_on - 1]++;
-             Toc_p[7]++;
-             Toc_g[7]++;
+            // Team Time On Court
 
-             TocT2_p[line_on_2 - 1]++;
-             TocT2_g[line_on_2 - 1]++;
-             TocT2_p[7]++;
-             TocT2_g[7]++;
+            Toc_p[line_on - 1]++;
+            Toc_g[line_on - 1]++;
+            Toc_p[7]++;
+            Toc_g[7]++;
 
-             if (Ball_pos == 1) {
-                Pos_p[line_on - 1]++;
-                Pos_g[line_on - 1]++;
-                shiftPos++;
-                Pos_g[7]++;
-                Pos_p[7]++;
+            TocT2_p[line_on_2 - 1]++;
+            TocT2_g[line_on_2 - 1]++;
+            TocT2_p[7]++;
+            TocT2_g[7]++;
+
+            // Player Time on Court
+            // Find players on court
+
+            pocT1_str = [];
+            pocT1_id = [];
+            pocT2_str = [];
+            pocT2_id = [];
+
+            if (line_on < 4) {
+                pocT1_str[0] = document.getElementById("sT1L"+line_on+"LW").options
+                        [document.getElementById("sT1L"+line_on+"LW").selectedIndex].text;
+                pocT1_str[1] = document.getElementById("sT1L"+line_on+"C").options
+                        [document.getElementById("sT1L"+line_on+"C").selectedIndex].text;
+                pocT1_str[2] = document.getElementById("sT1L"+line_on+"RW").options
+                        [document.getElementById("sT1L"+line_on+"RW").selectedIndex].text;
+                pocT1_str[3] = document.getElementById("sT1L"+line_on+"LD").options
+                        [document.getElementById("sT1L"+line_on+"LD").selectedIndex].text;
+                pocT1_str[4] = document.getElementById("sT1L"+line_on+"RD").options
+                        [document.getElementById("sT1L"+line_on+"RD").selectedIndex].text;
+                pocT1_str[5] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].text;
+
+                pocT1_id[0] = document.getElementById("sT1L"+line_on+"LW").options
+                        [document.getElementById("sT1L"+line_on+"LW").selectedIndex].value;
+                pocT1_id[1] = document.getElementById("sT1L"+line_on+"C").options
+                        [document.getElementById("sT1L"+line_on+"C").selectedIndex].value;
+                pocT1_id[2] = document.getElementById("sT1L"+line_on+"RW").options
+                        [document.getElementById("sT1L"+line_on+"RW").selectedIndex].value;
+                pocT1_id[3] = document.getElementById("sT1L"+line_on+"LD").options
+                        [document.getElementById("sT1L"+line_on+"LD").selectedIndex].value;
+                pocT1_id[4] = document.getElementById("sT1L"+line_on+"RD").options
+                        [document.getElementById("sT1L"+line_on+"RD").selectedIndex].value;
+                pocT1_id[5] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].value;
+            }
+            if (line_on == 4) {
+                pocT1_str[0] = document.getElementById("sT1L4LW").options
+                        [document.getElementById("sT1L4LW").selectedIndex].text;
+                pocT1_str[1] = document.getElementById("sT1L4C").options
+                        [document.getElementById("sT1L4C").selectedIndex].text;
+                pocT1_str[2] = document.getElementById("sT1L4RW").options
+                        [document.getElementById("sT1L4RW").selectedIndex].text;
+                pocT1_str[3] = document.getElementById("sT1L4LD").options
+                        [document.getElementById("sT1L4LD").selectedIndex].text;
+                pocT1_str[4] = document.getElementById("sT1L4RD").options
+                        [document.getElementById("sT1L4RD").selectedIndex].text;
+                pocT1_str[5] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].text;
+
+                pocT1_id[0] = document.getElementById("sT1L4LW").options
+                        [document.getElementById("sT1L4LW").selectedIndex].value;
+                pocT1_id[1] = document.getElementById("sT1L4C").options
+                        [document.getElementById("sT1L4C").selectedIndex].value;
+                pocT1_id[2] = document.getElementById("sT1L4RW").options
+                        [document.getElementById("sT1L4RW").selectedIndex].value;
+                pocT1_id[3] = document.getElementById("sT1L4LD").options
+                        [document.getElementById("sT1L4LD").selectedIndex].value;
+                pocT1_id[4] = document.getElementById("sT1L4RD").options
+                        [document.getElementById("sT1L4RD").selectedIndex].value;
+                pocT1_id[5] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].value;
+            }
+            if (line_on == 5) {
+                pocT1_str[0] = document.getElementById("sT1L5LW").options
+                        [document.getElementById("sT1L5LW").selectedIndex].text;
+                pocT1_str[1] = document.getElementById("sT1L5C").options
+                        [document.getElementById("sT1L5C").selectedIndex].text;
+                pocT1_str[2] = document.getElementById("sT1L5RW").options
+                        [document.getElementById("sT1L5RW").selectedIndex].text;
+                pocT1_str[3] = document.getElementById("sT1L5LD").options
+                        [document.getElementById("sT1L5LD").selectedIndex].text;
+                pocT1_str[4] = document.getElementById("sT1L5RD").options
+                        [document.getElementById("sT1L5RD").selectedIndex].text;
+                pocT1_str[5] = document.getElementById("sT1L5X").options
+                        [document.getElementById("sT1L5X").selectedIndex].text;
+                pocT1_str[6] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].text;
+
+                pocT1_id[0] = document.getElementById("sT1L5LW").options
+                        [document.getElementById("sT1L5LW").selectedIndex].value;
+                pocT1_id[1] = document.getElementById("sT1L5C").options
+                        [document.getElementById("sT1L5C").selectedIndex].value;
+                pocT1_id[2] = document.getElementById("sT1L5RW").options
+                        [document.getElementById("sT1L5RW").selectedIndex].value;
+                pocT1_id[3] = document.getElementById("sT1L5LD").options
+                        [document.getElementById("sT1L5LD").selectedIndex].value;
+                pocT1_id[4] = document.getElementById("sT1L5RD").options
+                        [document.getElementById("sT1L5RD").selectedIndex].value;
+                pocT1_id[5] = document.getElementById("sT1L5X").options
+                        [document.getElementById("sT1L5X").selectedIndex].value;
+                pocT1_id[6] = document.getElementById("sT1G").options
+                        [document.getElementById("sT1G").selectedIndex].value;
             }
 
-             if (Ball_pos == 2) {
+            if (line_on_2 < 4) {
+                pocT2_str[0] = document.getElementById("sT2L"+line_on_2+"LW").options
+                        [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
+                pocT2_str[1] = document.getElementById("sT2L"+line_on_2+"C").options
+                        [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
+                pocT2_str[2] = document.getElementById("sT2L"+line_on_2+"RW").options
+                        [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
+                pocT2_str[3] = document.getElementById("sT2L"+line_on_2+"LD").options
+                        [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
+                pocT2_str[4] = document.getElementById("sT2L"+line_on_2+"RD").options
+                        [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
+                pocT2_str[5] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].text;
+
+                pocT2_id[0] = document.getElementById("sT2L"+line_on_2+"LW").options
+                        [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
+                pocT2_id[1] = document.getElementById("sT2L"+line_on_2+"C").options
+                        [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
+                pocT2_id[2] = document.getElementById("sT2L"+line_on_2+"RW").options
+                        [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
+                pocT2_id[3] = document.getElementById("sT2L"+line_on_2+"LD").options
+                        [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
+                pocT2_id[4] = document.getElementById("sT2L"+line_on_2+"RD").options
+                        [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
+                pocT2_id[5] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].value;
+            }
+            if (line_on_2 == 4) {
+                pocT2_str[0] = document.getElementById("sT2L4LW").options
+                        [document.getElementById("sT2L4LW").selectedIndex].text;
+                pocT2_str[1] = document.getElementById("sT2L4C").options
+                        [document.getElementById("sT2L4C").selectedIndex].text;
+                pocT2_str[2] = document.getElementById("sT2L4RW").options
+                        [document.getElementById("sT2L4RW").selectedIndex].text;
+                pocT2_str[3] = document.getElementById("sT2L4LD").options
+                        [document.getElementById("sT2L4LD").selectedIndex].text;
+                pocT2_str[4] = document.getElementById("sT2L4RD").options
+                        [document.getElementById("sT2L4RD").selectedIndex].text;
+                pocT2_str[5] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].text;
+
+                pocT2_id[0] = document.getElementById("sT2L4LW").options
+                        [document.getElementById("sT2L4LW").selectedIndex].value;
+                pocT2_id[1] = document.getElementById("sT2L4C").options
+                        [document.getElementById("sT2L4C").selectedIndex].value;
+                pocT2_id[2] = document.getElementById("sT2L4RW").options
+                        [document.getElementById("sT2L4RW").selectedIndex].value;
+                pocT2_id[3] = document.getElementById("sT2L4LD").options
+                        [document.getElementById("sT2L4LD").selectedIndex].value;
+                pocT2_id[4] = document.getElementById("sT2L4RD").options
+                        [document.getElementById("sT2L4RD").selectedIndex].value;
+                pocT2_id[5] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].value;
+            }
+            if (line_on_2 == 5) {
+                pocT2_str[0] = document.getElementById("sT2L5LW").options
+                        [document.getElementById("sT2L5LW").selectedIndex].text;
+                pocT2_str[1] = document.getElementById("sT2L5C").options
+                        [document.getElementById("sT2L5C").selectedIndex].text;
+                pocT2_str[2] = document.getElementById("sT2L5RW").options
+                        [document.getElementById("sT2L5RW").selectedIndex].text;
+                pocT2_str[3] = document.getElementById("sT2L5LD").options
+                        [document.getElementById("sT2L5LD").selectedIndex].text;
+                pocT2_str[4] = document.getElementById("sT2L5RD").options
+                        [document.getElementById("sT2L5RD").selectedIndex].text;
+                pocT2_str[5] = document.getElementById("sT2L5X").options
+                        [document.getElementById("sT2L5X").selectedIndex].text;
+                pocT2_str[6] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].text;
+
+                pocT2_id[0] = document.getElementById("sT2L5LW").options
+                        [document.getElementById("sT2L5LW").selectedIndex].value;
+                pocT2_id[1] = document.getElementById("sT2L5C").options
+                        [document.getElementById("sT2L5C").selectedIndex].value;
+                pocT2_id[2] = document.getElementById("sT2L5RW").options
+                        [document.getElementById("sT2L5RW").selectedIndex].value;
+                pocT2_id[3] = document.getElementById("sT2L5LD").options
+                        [document.getElementById("sT2L5LD").selectedIndex].value;
+                pocT2_id[4] = document.getElementById("sT2L5RD").options
+                        [document.getElementById("sT2L5RD").selectedIndex].value;
+                pocT2_id[5] = document.getElementById("sT2L5X").options
+                        [document.getElementById("sT2L5X").selectedIndex].value;
+                pocT2_id[6] = document.getElementById("sT2G").options
+                        [document.getElementById("sT2G").selectedIndex].value;
+            }
+
+            // Add TOC to player game charts
+            for (let p=0;p<pocT1_str.length;p++) {
+                found = 0;
+                for (let i=0;i<plT1_array.length;i++) {
+                    if (pocT1_id[p] == plT1_array[i][0]) {
+                        if (line_on < 4) {
+                            plT1_array[i][12] = plT1_array[i][12] + 1; // Add 1 second to toc
+                        }
+                        if (line_on == 4) {
+                            plT1_array[i][13] = plT1_array[i][13] + 1; // Add 1 second to toc on powerplay
+                        }
+                        found = 1;
+                    }
+                }
+                if (found == 0) { // Player not found, adding new row to the array
+                    if (line_on < 4) {
+                        plT1_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
+                    }
+                    if (line_on == 4) {
+                        plT1_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
+                    }
+                }
+                plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
+            }
+            for (let p=0;p<pocT2_str.length;p++) {
+                found = 0;
+                for (let i=0;i<plT2_array.length;i++) {
+                    if (pocT2_id[p] == plT2_array[i][0]) {
+                        if (line_on < 4) {
+                            plT2_array[i][12] = plT2_array[i][12] + 1; // Add 1 second to toc
+                        }
+                        if (line_on == 4) {
+                            plT2_array[i][13] = plT2_array[i][13] + 1; // Add 1 second to toc on powerplay
+                        }
+                        found = 1;
+                    }
+                }
+                if (found == 0) { // Player not found, adding new row to the array
+                    if (line_on < 4) {
+                        plT2_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
+                    }
+                    if (line_on == 4) {
+                        plT2_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
+                    }
+                }
+                plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
+            }
+
+
+            // Add TOC to player period charts
+            for (let p=0;p<pocT1_str.length;p++) {
+                found = 0;
+                for (let i=0;i<plT1p_array.length;i++) {
+                    if (pocT1_id[p] == plT1p_array[i][0]) {
+                        if (line_on < 4) {
+                            plT1p_array[i][12] = plT1p_array[i][12] + 1; // Add 1 second to toc
+                        }
+                        if (line_on == 4) {
+                            plT1p_array[i][13] = plT1p_array[i][13] + 1; // Add 1 second to toc on powerplay
+                        }
+                        found = 1;
+                    }
+                }
+                if (found == 0) { // Player not found, adding new row to the array
+                    if (line_on < 4) {
+                        plT1p_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
+                    }
+                    if (line_on == 4) {
+                        plT1p_array.push([pocT1_id[p], pocT1_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
+                    }
+                }
+                plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
+            }
+            for (let p=0;p<pocT2_str.length;p++) {
+                found = 0;
+                for (let i=0;i<plT2p_array.length;i++) {
+                    if (pocT2_id[p] == plT2p_array[i][0]) {
+                        if (line_on < 4) {
+                            plT2p_array[i][12] = plT2p_array[i][12] + 1; // Add 1 second to toc
+                        }
+                        if (line_on == 4) {
+                            plT2p_array[i][13] = plT2p_array[i][13] + 1; // Add 1 second to toc on powerplay
+                        }
+                        found = 1;
+                    }
+                }
+                if (found == 0) { // Player not found, adding new row to the array
+                    if (line_on < 4) {
+                        plT2p_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
+                    }
+                    if (line_on == 4) {
+                        plT2p_array.push([pocT2_id[p], pocT2_str[p], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);
+                    }
+                }
+                plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
+            }
+
+            if (Ball_pos == 1) {
+            Pos_p[line_on - 1]++;
+            Pos_g[line_on - 1]++;
+            shiftPos++;
+            Pos_g[7]++;
+            Pos_p[7]++;
+            }
+
+            if (Ball_pos == 2) {
                 PosT2_p[line_on_2 - 1]++;
                 PosT2_g[line_on_2 - 1]++;
                 shiftPos_2++;
                 PosT2_g[7]++;
                 PosT2_p[7]++;
-             }
+            }
 
          else {
 
@@ -889,6 +1167,10 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -981,6 +1263,9 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1272,6 +1557,10 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -1363,6 +1652,9 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -1660,6 +1952,10 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
                 xGaT2_p[7] = Math.round((xGaT2_p[7] + dxG) * 100) / 100;
@@ -1764,6 +2060,10 @@
                 xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
+
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
 
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
@@ -2108,6 +2408,10 @@
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
 
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
+
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
                 // undo_array.push([xGaT2_p[line_on_2 - 1],dxG])
 
@@ -2244,6 +2548,10 @@
                 xGOTf_g[line_on - 1] = Math.round((xGOTf_g[line_on - 1] + dxGOT) * 100) / 100;
 
                 xGOTf_g[7] = Math.round((xGOTf_g[7] + dxGOT) * 100) / 100;
+
+                xGOTf_p[line_on - 1] = Math.round((xGOTf_p[line_on - 1] + dxGOT) * 100) / 100;
+
+                xGOTf_p[7] = Math.round((xGOTf_p[7] + dxGOT) * 100) / 100;
 
                 xGaT2_p[line_on_2 - 1] = Math.round((xGaT2_p[line_on_2 - 1] + dxG) * 100) / 100;
 
@@ -2750,18 +3058,24 @@
         passer_id = 0;
         passer_str = "";
         shooter_str = "";
+        radius = 1 + 20 * dataxG; // Replace with your desired radius in pixels
+
 
         if (type == 1) {
             dataRes_str = "Missed";
+            opacity = "0.25";
         }
         else if (type == 2) {
             dataRes_str = "Saved";
+            opacity = "0.75";
         }
         else if (type == 3) {
             dataRes_str = "Blocked";
+            opacity = "0.25";
         }
         else if (type == 4) {
             dataRes_str = "Goal";
+            opacity = "0.75";
         }
 
         if (dataType == 0) { // Turnover one-timer
@@ -2784,52 +3098,63 @@
             ctx.fillStyle = "blue";
             ctx_p.fillStyle = "blue";
             ctx_g.fillStyle = "blue";
-            ctx.fillText("o", x, y);
-            ctx_p.fillText("o", x, y);
-            ctx_g.fillText("o", x, y);
+            ctx.fillText("+", x, y);
+            ctx_p.fillText("+", x, y);
+            ctx_g.fillText("+", x, y);
         }
         else if (dataType == 6) {
             dataRes_str = "Possession -"
             ctx.fillStyle = "red";
             ctx_p.fillStyle = "red";
             ctx_g.fillStyle = "red";
-            ctx.fillText("o", x, y);
-            ctx_p.fillText("o", x, y);
-            ctx_g.fillText("o", x, y);
+            ctx.fillText("-", x, y);
+            ctx_p.fillText("-", x, y);
+            ctx_g.fillText("-", x, y);
         }
 
         if (Ball_pos === 1) {
             shooting_team = name_t1;
 
             if (dataType === 0) {
-                ctx.fillStyle = "darkgreen";
-                ctx_p.fillStyle = "darkgreen";
-                ctx_g.fillStyle = "darkgreen";
+                ctx.fillStyle = 'rgba(0, 100, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(0, 100, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(0, 100, 0' + ", " + opacity + ")";
             } else if (dataType === 1) {
-                ctx.fillStyle = "lawngreen";
-                ctx_p.fillStyle = "lawngreen";
-                ctx_g.fillStyle = "lawngreen";
+                ctx.fillStyle = 'rgba(124, 252, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(124, 252, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(124, 252, 0' + ", " + opacity + ")";
             } else if (dataType === 2) {
-                ctx.fillStyle = "black";
-                ctx_p.fillStyle = "black";
-                ctx_g.fillStyle = "black";
+                ctx.fillStyle = 'rgba(0, 0, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(0, 0, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(0, 0, 0' + ", " + opacity + ")";
             } else if (dataType === 3) {
-                ctx.fillStyle = "blue";
-                ctx_p.fillStyle = "blue";
-                ctx_g.fillStyle = "blue";
+                ctx.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
             } else if (dataType === 4) {
-                ctx.fillStyle = "blue";
-                ctx_p.fillStyle = "blue";
-                ctx_g.fillStyle = "blue";
+                ctx.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(0, 0, 255' + ", " + opacity + ")";
             }
 
 
             dataShot = 1;
 
             if (type == 1) {    // Shot Missed
-                ctx.fillText("M", x, y);
-                ctx_p.fillText("M", x, y);
-                ctx_g.fillText("M", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 1;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2867,9 +3192,20 @@
                 }
             }
             else if (type == 3) {   // Shot Blocked
-                ctx.fillText("B", x, y);
-                ctx_p.fillText("B", x, y);
-                ctx_g.fillText("B", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 3;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2907,9 +3243,20 @@
                 }
             }
             else if (type == 2) {   // Shot Saved
-                ctx.fillText("S", x, y);
-                ctx_p.fillText("S", x, y);
-                ctx_g.fillText("S", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 2;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2947,9 +3294,30 @@
                 }
             }
             else if (type == 4) {   // Shot Goal
-                ctx.fillText("G", x, y);
-                ctx_p.fillText("G", x, y);
-                ctx_g.fillText("G", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.lineWidth = 1;
+                ctx_p.strokeStyle = 'black';
+                ctx_p.stroke();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.lineWidth = 1;
+                ctx_g.strokeStyle = 'black';
+                ctx_g.stroke();
+                ctx_g.closePath();
+
                 dataRes = 4;
 
                 sf_p[line_on - 1].innerHTML++;
@@ -2996,33 +3364,44 @@
             shooting_team = name_t2;
 
             if (dataType === 0) {
-                ctx.fillStyle = "saddlebrown";
-                ctx_p.fillStyle = "saddlebrown";
-                ctx_g.fillStyle = "saddlebrown";
+                ctx.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
             } else if (dataType === 1) {
-                ctx.fillStyle = "orange";
-                ctx_p.fillStyle = "orange";
-                ctx_g.fillStyle = "orange";
+                ctx.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
             } else if (dataType === 2) {
-                ctx.fillStyle = "white";
-                ctx_p.fillStyle = "white";
-                ctx_g.fillStyle = "white";
+                ctx.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
             } else if (dataType === 3) {
-                ctx.fillStyle = "orangered";
-                ctx_p.fillStyle = "orangered";
-                ctx_g.fillStyle = "orangered";
+                ctx.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
             } else if (dataType === 4) {
-                ctx.fillStyle = "orangered";
-                ctx_p.fillStyle = "orangered";
-                ctx_g.fillStyle = "orangered";
+                ctx.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
+                ctx_p.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
+                ctx_g.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
             }
 
             dataShot = 2;
 
             if (type == 1) {    // Shot Missed
-                ctx.fillText("M", x, y);
-                ctx_p.fillText("M", x, y);
-                ctx_g.fillText("M", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 1;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -3048,9 +3427,20 @@
                 }
             }
             else if (type == 3) {   // Shot Blocked
-                ctx.fillText("B", x, y);
-                ctx_p.fillText("B", x, y);
-                ctx_g.fillText("B", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 3;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -3076,9 +3466,20 @@
                 }
             }
             else if (type == 2) {   // Shot Saved
-                ctx.fillText("S", x, y);
-                ctx_p.fillText("S", x, y);
-                ctx_g.fillText("S", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.closePath();
                 dataRes = 2;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -3104,9 +3505,30 @@
                 }
             }
             else if (type == 4) {   // Shot Goal
-                ctx.fillText("G", x, y);
-                ctx_p.fillText("G", x, y);
-                ctx_g.fillText("G", x, y);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+                ctx.closePath();
+
+                ctx_p.beginPath();
+                ctx_p.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_p.fill();
+                ctx_p.lineWidth = 1;
+                ctx_p.strokeStyle = 'black';
+                ctx_p.stroke();
+                ctx_p.closePath();
+
+                ctx_g.beginPath();
+                ctx_g.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx_g.fill();
+                ctx_g.lineWidth = 1;
+                ctx_g.strokeStyle = 'black';
+                ctx_g.stroke();
+                ctx_g.closePath();
+
                 dataRes = 4;
 
                 sa_p[line_on - 1].innerHTML++;
@@ -3370,20 +3792,6 @@
             p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
             p_T2G_str = p_T2X_str = "";
 
-            // Team 2 players on field
-            /*p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
-            [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
-            p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
-            [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
-            p_T2RW_str = document.getElementById("sT2L"+line_on_2+"RW").options
-            [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
-            p_T2LD_str = document.getElementById("sT2L"+line_on_2+"LD").options
-            [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
-            p_T2RD_str = document.getElementById("sT2L"+line_on_2+"RD").options
-            [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
-            p_T2G_str = document.getElementById("sT2G").options
-            [document.getElementById("sT2G").selectedIndex].text;*/
-
             dataxG = 0;
             dataxGOT = 0;
 
@@ -3398,8 +3806,8 @@
                 }
             }
             if (found == 0) { // Player not found, adding new row to the array
-                if (dataType == 5) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);}
-                if (dataType == 6) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);}
+                if (dataType == 5) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);}
+                if (dataType == 6) {plT1_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]);}
             }
 
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -3415,8 +3823,8 @@
                 }
             }
             if (found == 0) { // Player not found, adding new row to the array
-                if (dataType == 5) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]);}
-                if (dataType == 6) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);}
+                if (dataType == 5) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);}
+                if (dataType == 6) {plT1p_array.push([posT1_id, posT1_str, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]);}
             }
 
             plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -3437,6 +3845,95 @@
             shotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2), dataAngle.toFixed(2), dataxG.toFixed(2), dataPp, dataSh]);
 
             if (shooter_select == 1) { // If Shooter tagging is on
+
+                if ((Ball_pos == 1 && line_on <= 5)) {
+                    // Set menu items according to players on field
+                    l = line_on;
+
+                    document.getElementById("shooter-1").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LW").options
+                                                    [document.getElementById("sT"+Ball_pos+"L"+l+"LW").selectedIndex].text;
+                    document.getElementById("shooter-2").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"C").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"C").selectedIndex].text;
+                    document.getElementById("shooter-3").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RW").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"RW").selectedIndex].text;
+                    document.getElementById("shooter-4").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"LD").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"LD").selectedIndex].text;
+                    document.getElementById("shooter-5").innerHTML = document.getElementById("sT"+Ball_pos+"L"+l+"RD").options
+                                                        [document.getElementById("sT"+Ball_pos+"L"+l+"RD").selectedIndex].text;
+                    if (l == 5) { // 6 vs 5
+
+                        document.getElementById("shooter-6").innerHTML = document.getElementById("sT"+Ball_pos+"L5X").options
+                                                            [document.getElementById("sT"+Ball_pos+"L5X").selectedIndex].text;
+                        document.getElementById("sh-6").removeAttribute("hidden");
+
+                    }
+
+                    shootertype.style.display = "block";
+                    shootertype.style.left = stype.style.left;
+                    shootertype.style.top = stype.style.top;
+                    console.log("Shooter menu open")
+
+                }
+                if ((Ball_pos == 1 && line_on > 5)) {
+                    p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
+                    p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
+                    p_T1G = document.getElementById("sT1G").options
+                    [document.getElementById("sT1G").selectedIndex].value;
+                    p_T1G_str = document.getElementById("sT1G").options
+                    [document.getElementById("sT1G").selectedIndex].text;
+                    p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
+                    p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
+                    p_T2G = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].value;
+                    p_T2G_str = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].text;
+
+                    premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
+                                dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
+                                p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+
+                    printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
+
+                    if (shotCounter > 1) {
+                        document.getElementById("undo").disabled = false;
+                    }
+                    shot_on = 0; // End the shot tag process
+                    shotCounter++;
+                    updateSaveData();
+                }
+                if (Ball_pos == 2) {
+                    p_T1LW = p_T1C = p_T1RW = p_T1LD = p_T1RD = "";
+                    p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = "";
+                    p_T1G = document.getElementById("sT1G").options
+                    [document.getElementById("sT1G").selectedIndex].value;
+                    p_T1G_str = document.getElementById("sT1G").options
+                    [document.getElementById("sT1G").selectedIndex].text;
+                    p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = "";
+                    p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = "";
+                    p_T2G = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].value;
+                    p_T2G_str = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].text;
+
+                    premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
+                                dataAngle.toFixed(2), dataxG.toFixed(2), shooter_id, passer_id, p_T1LW, p_T1C, p_T1RW, p_T1LD, p_T1RD, p_T1G,
+                                p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G, dataPp, dataSh]);
+
+                    printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
+                            passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
+                            p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
+
+                    if (shotCounter > 1) {
+                        document.getElementById("undo").disabled = false;
+                    }
+                    shot_on = 0; // End the shot tag process
+                    shotCounter++;
+                    updateSaveData();
+                }
+            } // Tag only Team 1 shooter & passer
+            if (shooterT2_select == 1) { // If Shooter tagging is on
 
                 if ((Ball_pos == 1 && line_on <= 5) || (Ball_pos == 2 && line_on_2 <= 5)) {
                     // Set menu items according to players on field
@@ -3500,8 +3997,8 @@
                     shotCounter++;
                     updateSaveData();
                 }
-            }
-            else if (shooter_select == 0) {
+            } // Tag Team 1 and Team 2 shooter & passer
+            else if (shooter_select == 0 && shooterT2_select == 0) {
 
                 if (line_on <= 5) {
                     p_T1LW = document.getElementById("sT1L"+line_on+"LW").options
@@ -3600,7 +4097,7 @@
                 shot_on = 0; // End the shot tag process
                 shotCounter++;
                 updateSaveData();
-            }
+            } // No shooter and passer tagging
 
         }
 
@@ -3870,20 +4367,20 @@
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
                 if (line_on < 4 || line_on > 5) {
-                    plT1_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT1_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
                 if (line_on == 4 || line_on == 5) {
-                    plT1_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT1_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
                 if (line_on < 4 || line_on > 5) {
-                    plT1_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                    plT1_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
                 if (line_on == 4 || line_on == 5) {
-                    plT1_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                    plT1_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
             }
             plT1_array = plT1_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -3921,20 +4418,20 @@
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
                 if (line_on_2 < 4 || line_on_2 > 5) {
-                    plT2_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT2_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
                 if (line_on_2 == 4 || line_on_2 == 5) {
-                    plT2_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT2_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
                 if (line_on_2 < 4 || line_on_2 > 5) {
-                    plT2_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                    plT2_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
                 if (line_on_2 == 4 || line_on_2 == 5) {
-                    plT2_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                    plT2_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
             }
             plT2_array = plT2_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -3977,20 +4474,20 @@
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
                 if (line_on < 4 || line_on > 5) {
-                    plT1p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT1p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
                 if (line_on == 4 || line_on == 5) {
-                    plT1p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT1p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
                 if (line_on < 4 || line_on > 5) {
-                    plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                    plT1p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
                 if (line_on == 4 || line_on == 5) {
-                    plT1p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                    plT1p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
             }
             plT1p_array = plT1p_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -4028,20 +4525,20 @@
                 gxG = 0;
                 if (dataRes == 4) {gxG = 1};
                 if (line_on_2 < 4 || line_on_2 > 5) {
-                    plT2p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT2p_array.push([shooter_id, shooter_str, dataxG, 0, 0, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
                 if (line_on_2 == 4 || line_on_2 == 5) {
-                    plT2p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0]);
+                    plT2p_array.push([shooter_id, shooter_str, 0, 0, dataxG, 0, gxG, 0, 1, 0, 0, 0, 0, 0, 0]);
                 }
             }
             if (found_p == 0) { // Passer not found, adding new row to the array
                 pxG = 0;
                 if (dataRes == 4) {pxG = 1};
                 if (line_on_2 < 4 || line_on_2 > 5) {
-                    plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0]);
+                    plT2p_array.push([passer_id, passer_str, 0, dataxG, 0, 0, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
                 if (line_on_2 == 4 || line_on_2 == 5) {
-                    plT2p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0]);
+                    plT2p_array.push([passer_id, passer_str, 0, 0, 0, dataxG, 0, pxG, 0, 1, 0, 0, 0, 0, 0]);
                 }
             }
             plT2p_array = plT2p_array.sort((a, b) => b[1] - a[1]) // Sort the array
@@ -4307,7 +4804,28 @@
         if (!document.getElementById("ck2a").disabled) {
             if (shooter_select == 1) {shooter_select= 0;}
 
-            else if (shooter_select == 0) {shooter_select = 1;}
+            else if (shooter_select == 0) {
+                shooter_select = 1;
+                if (shooterT2_select == 1) {
+                    shooterT2_select = 0;
+                    document.getElementById("ck3a").checked = false
+                }
+            }
+        }
+    }
+
+    function checkT2Shooter() {
+
+        if (!document.getElementById("ck3a").disabled) {
+            if (shooterT2_select == 1) {shooterT2_select= 0;}
+
+            else if (shooterT2_select == 0) {
+                shooterT2_select = 1;
+                if (shooter_select == 1) {
+                    shooter_select = 0;
+                    document.getElementById("ck2a").checked = false
+                }
+            }
         }
     }
 
@@ -5029,6 +5547,8 @@
             "xGa_g" : xGa_g,
             "xGOTf_g" : xGOTf_g,
             "xGOTa_g" : xGOTa_g,
+            "xGOTf_p" : xGOTf_p,
+            "xGOTa_p" : xGOTa_p,
             "TocT2_p" : TocT2_p,
             "TocT2_g" : TocT2_g,
             "PosT2_p" : PosT2_p,
@@ -5314,6 +5834,9 @@
         xGf_p = undo_object.xGf_p;
         xGf_g = undo_object.xGf_g;
         xGOTf_g = undo_object.xGOTf_g;
+        xGOTf_p = undo_object.xGOTf_p;
+        xGOTa_g = undo_object.xGOTa_g;
+        xGOTa_p = undo_object.xGOTa_p;
         xGa_p = undo_object.xGa_p;
         xGa_g = undo_object.xGa_g;
         xGOTa_g = undo_object.xGOTa_g;
@@ -5439,14 +5962,6 @@
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xGGame_chart_' + periodN));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per, 'ready', function () {
-            if (periodN == 1) {p_xGGame_chart_1 = chart_per.getImageURI();}
-            else if (periodN == 2) {p_xGGame_chart_2 = chart_per.getImageURI();}
-            else if (periodN == 3) {p_xGGame_chart_3 = chart_per.getImageURI();}
-            else if (periodN == 4) {p_xGGame_chart_4 = chart_per.getImageURI();}
-        });*/
-
         chart_per.draw(chartData_p, options);
 
         //xG% GameChart
@@ -5497,22 +6012,9 @@
 
         var chart = new google.visualization.BarChart(document.getElementById('xG%Game_chart'));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_xG_per_Game_chart = chart.getImageURI();
-        });*/
-
         chart.draw(chartData, options);
 
         var chart_per = new google.visualization.BarChart(document.getElementById('xG%Game_chart_' + periodN));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per, 'ready', function () {
-            if (periodN == 1) {p_xG_per_Game_chart_1 = chart_per.getImageURI();}
-            else if (periodN == 2) {p_xG_per_Game_chart_2 = chart_per.getImageURI();}
-            else if (periodN == 3) {p_xG_per_Game_chart_3 = chart_per.getImageURI();}
-            else if (periodN == 4) {p_xG_per_Game_chart_4 = chart_per.getImageURI();}
-        });*/
 
         chart_per.draw(chartData_p, options);
 
@@ -5530,9 +6032,15 @@
         pldata.addColumn('number', 'Passes');
         pldata.addColumn('number', 'Possession +');
         pldata.addColumn('number', 'Possession -');
+        pldata.addColumn('string', 'ToC 5v5');
+        pldata.addColumn('string', 'ToC PP');
 
         for(i = 1; i < plT1_array.length; i++){
-            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7], plT1_array[i][8], plT1_array[i][9], plT1_array[i][10], plT1_array[i][11]]);
+            toc_5v5 = new Date(plT1_array[i][12] * 1000);
+            toc_pp = new Date(plT1_array[i][13] * 1000);
+            d5v5 = toc_5v5.toISOString().substr(14, 5);
+            dpp = toc_pp.toISOString().substr(14, 5);
+            pldata.addRow([plT1_array[i][1], plT1_array[i][2], plT1_array[i][3], plT1_array[i][4], plT1_array[i][5], plT1_array[i][6], plT1_array[i][7], plT1_array[i][8], plT1_array[i][9], plT1_array[i][10], plT1_array[i][11], d5v5, dpp]);
         }
 
         var pldata_p = new google.visualization.DataTable();
@@ -5547,9 +6055,15 @@
         pldata_p.addColumn('number', 'Passes');
         pldata_p.addColumn('number', 'Possession +');
         pldata_p.addColumn('number', 'Possession -');
+        pldata_p.addColumn('string', 'ToC 5v5');
+        pldata_p.addColumn('string', 'ToC PP');
 
         for(i = 1; i < plT1p_array.length; i++){
-            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7], plT1p_array[i][8], plT1p_array[i][9], plT1p_array[i][10], plT1p_array[i][11]]);
+            toc_5v5 = new Date(plT1p_array[i][12] * 1000);
+            toc_pp = new Date(plT1p_array[i][13] * 1000);
+            d5v5 = toc_5v5.toISOString().substr(14, 5);
+            dpp = toc_pp.toISOString().substr(14, 5);
+            pldata_p.addRow([plT1p_array[i][1], plT1p_array[i][2], plT1p_array[i][3], plT1p_array[i][4], plT1p_array[i][5], plT1p_array[i][6], plT1p_array[i][7], plT1p_array[i][8], plT1p_array[i][9], plT1p_array[i][10], plT1p_array[i][11], d5v5, dpp]);
         }
 
         var options = {
@@ -5596,9 +6110,15 @@
         pldata.addColumn('number', 'Passes');
         pldata.addColumn('number', 'Possession +');
         pldata.addColumn('number', 'Possession -');
+        pldata.addColumn('string', 'ToC 5v5');
+        pldata.addColumn('string', 'ToC PP');
 
         for(i = 1; i < plT2_array.length; i++){
-            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7], plT2_array[i][8], plT2_array[i][9], plT2_array[i][10], plT2_array[i][11]]);
+            toc_5v5 = new Date(plT2_array[i][12] * 1000);
+            toc_pp = new Date(plT2_array[i][13] * 1000);
+            d5v5 = toc_5v5.toISOString().substr(14, 5);
+            dpp = toc_pp.toISOString().substr(14, 5);
+            pldata.addRow([plT2_array[i][1], plT2_array[i][2], plT2_array[i][3], plT2_array[i][4], plT2_array[i][5],plT2_array[i][6], plT2_array[i][7], plT2_array[i][8], plT2_array[i][9], plT2_array[i][10], plT2_array[i][11], d5v5, dpp]);
         }
 
         var pldata_p = new google.visualization.DataTable();
@@ -5613,9 +6133,15 @@
         pldata_p.addColumn('number', 'Passes');
         pldata_p.addColumn('number', 'Possession +');
         pldata_p.addColumn('number', 'Possession -');
+        pldata_p.addColumn('string', 'ToC 5v5');
+        pldata_p.addColumn('string', 'ToC PP');
 
         for(i = 1; i < plT2p_array.length; i++){
-            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7], plT2p_array[i][8], plT2p_array[i][9], plT2p_array[i][10], plT2p_array[i][11]]);
+            toc_5v5 = new Date(plT2p_array[i][12] * 1000);
+            toc_pp = new Date(plT2p_array[i][13] * 1000);
+            d5v5 = toc_5v5.toISOString().substr(14, 5);
+            dpp = toc_pp.toISOString().substr(14, 5);
+            pldata_p.addRow([plT2p_array[i][1], plT2p_array[i][2], plT2p_array[i][3], plT2p_array[i][4], plT2p_array[i][5], plT2p_array[i][6], plT2p_array[i][7], plT2p_array[i][8], plT2p_array[i][9], plT2p_array[i][10], plT2p_array[i][11], d5v5, dpp]);
         }
 
         var options = {
@@ -5793,113 +6319,115 @@
         // Pie Chart, xG per type Team 1
 
         var data = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnovers, Cross-Pass', stxGT1Teamg_array[0]],
-        ['Turnovers, direct', stxGT1Teamg_array[1]],
-        ['Org.attack, Cross-Pass', stxGT1Teamg_array[2]],
-        ['Org.attack, direct', stxGT1Teamg_array[4]],
-        ['Rebounds',  stxGT1Teamg_array[3]]
+        ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', stxGT1Teamg_array[2] + stxGT1Teamg_array[4] + stxGT1Teamg_array[3], 'color: #002072', stxGT1Teamg_array[2] + stxGT1Teamg_array[4] + stxGT1Teamg_array[3]],
+        ['Turnover Attack', stxGT1Teamg_array[0] + stxGT1Teamg_array[1], 'color: #59D9EB', stxGT1Teamg_array[0] + stxGT1Teamg_array[1]]
 
         ]);
 
         var data_p = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnovers, Cross-Pass', stxGT1Teamp_array[0]],
-        ['Turnovers, direct', stxGT1Teamp_array[1]],
-        ['Org.attack, Cross-Pass', stxGT1Teamp_array[2]],
-        ['Org.attack, direct', stxGT1Teamp_array[4]],
-        ['Rebounds',  stxGT1Teamp_array[3]]
+        ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', stxGT1Teamp_array[2] + stxGT1Teamp_array[4] + stxGT1Teamp_array[3], 'color: #002072', stxGT1Teamp_array[2] + stxGT1Teamp_array[4] + stxGT1Teamp_array[3]],
+        ['Turnover Attack', stxGT1Teamp_array[0] + stxGT1Teamp_array[1], 'color: #59D9EB', stxGT1Teamp_array[0] + stxGT1Teamp_array[1]]
 
         ]);
 
         var options2 = {
-        title: 'Share of xG by attack types',
-        colors: ['#006400', '#7CFC00','#000000','#0000FF','#D3D3D3'],
-        is3D: true,
+        title: 'Share of xG by attack types, Team 1',
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('T1_st_piechart'));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_T1_st_piechart = chart.getImageURI();
-        });*/
-
         chart.draw(data, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T1_st_piechart_' + periodN));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per, 'ready', function () {
-            if (periodN == 1) {p_T1_st_piechart_1 = chart_per.getImageURI();}
-            else if (periodN == 2) {p_T1_st_piechart_2 = chart_per.getImageURI();}
-            else if (periodN == 3) {p_T1_st_piechart_3 = chart_per.getImageURI();}
-            else if (periodN == 4) {p_T1_st_piechart_4 = chart_per.getImageURI();}
-        });*/
 
         chart_per.draw(data_p, options2);
 
         // Pie Chart, xG per type Team 2
 
         var data2 = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnover, Cross-Pass', stxGT2Teamg_array[0]],
-        ['Turnover, direct', + stxGT2Teamg_array[1]],
-        ['Org. attack, Cross-Pass', stxGT2Teamg_array[2]],
-        ['Org. attack, direct', stxGT2Teamg_array[4]],
-        ['Rebound', stxGT2Teamg_array[3]]
+        ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', stxGT2Teamg_array[2] + stxGT2Teamg_array[4] + stxGT2Teamg_array[3], 'color: #002072', stxGT2Teamg_array[2] + stxGT2Teamg_array[4] + stxGT2Teamg_array[3]],
+        ['Turnover Attack', stxGT2Teamg_array[0] + stxGT2Teamg_array[1], 'color: #59D9EB', stxGT2Teamg_array[0] + stxGT2Teamg_array[1]]
 
         ]);
 
         var data2_p = new google.visualization.arrayToDataTable([
-        ['Type', 'xG'],
-        ['Turnover, Cross-Pass', stxGT2Teamp_array[0]],
-        ['Turnover, direct', + stxGT2Teamp_array[1]],
-        ['Org. attack, Cross-Pass', stxGT2Teamp_array[2]],
-        ['Org. attack, direct', stxGT2Teamp_array[4]],
-        ['Rebounds', stxGT2Teamp_array[3]]
+        ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', stxGT2Teamp_array[2] + stxGT2Teamp_array[4] + stxGT2Teamp_array[3], 'color: #002072', stxGT2Teamp_array[2] + stxGT2Teamp_array[4] + stxGT2Teamp_array[3]],
+        ['Turnover Attack', stxGT2Teamp_array[0] + stxGT2Teamp_array[1], 'color: #59D9EB', stxGT2Teamp_array[0] + stxGT2Teamp_array[1]]
 
         ]);
 
         var options2 = {
-        title: 'Share of xG by attack/shot types',
-        colors: ['#8B4513', '#FFA500','#FFFFFF','#FF4500', '#D3D3D3'],
-        is3D: true,
+        title: 'Share of xG by attack types, Team 2',
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('T2_st_piechart'));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_T2_st_piechart = chart.getImageURI();
-        });*/
 
         chart.draw(data2, options2);
 
         var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart_per, 'ready', function () {
-            if (periodN == 1) {p_T2_st_piechart_1 = chart_per.getImageURI();}
-            else if (periodN == 2) {p_T2_st_piechart_2 = chart_per.getImageURI();}
-            else if (periodN == 3) {p_T2_st_piechart_3 = chart_per.getImageURI();}
-            else if (periodN == 4) {p_T2_st_piechart_4 = chart_per.getImageURI();}
-        });*/
-
         chart_per.draw(data2_p, options2);
 
-        // Team xG Chart
-        // var data = google.visualization.arrayToDataTable(xGTeam_array);
+        // Pie Chart, Goals per type Team 1
 
-        // var options = {
-        //  title: 'xG by Team',
-        //  curveType: 'function',
-         // legend: { position: 'bottom' },
-        //  seriesType: 'lines',
-         // series: {
-            //  2:{type: 'bars', color: 'blue'},
-           //   3:{type: 'bars', color: 'red'}},
-       // };
+        var gtT1TeamD = 0;
+        var gtT2TeamD = 0;
+        var gtT1TeamT = 0;
+        var gtT2TeamT = 0;
+
+        for (i=1;i<premShotData.length;i++) {
+            if (premShotData[i][3] == 1 && premShotData[i][4] == 4) { // Team 1 Goal
+                if (premShotData[i][5] == 2 || premShotData[i][5] == 3 || premShotData[i][5] == 4 ) { // Org attack
+                    gtT1TeamD++;
+                }
+                if (premShotData[i][5] == 0 || premShotData[i][5] == 1) { // Turnover attack
+                    gtT1TeamT++;
+                }
+            }
+            if (premShotData[i][3] == 2 && premShotData[i][4] == 4) { // Team 2 Goal
+                if (premShotData[i][5] == 2 || premShotData[i][5] == 3 || premShotData[i][5] == 4 ) { // Org attack
+                    gtT2TeamD++;
+                }
+                if (premShotData[i][5] == 0 || premShotData[i][5] == 1) { // Turnover attack
+                    gtT2TeamT++;
+                }
+            }
+        }
+
+        var data = new google.visualization.arrayToDataTable([
+        ['Type of Goals', 'Goals', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', gtT1TeamD, 'color: #002072', gtT1TeamD],
+        ['Turnover Attack', gtT1TeamT, 'color: #59D9EB', gtT1TeamT]
+
+        ]);
+
+        var options2 = {
+        title: 'Share of Goals by attack types, Team 1',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('T1_gt_piechart'));
+
+        chart.draw(data, options2);
+
+        // Pie Chart, Goals per type Team 2
+
+        var data2 = new google.visualization.arrayToDataTable([
+        ['Type of Goals', 'Goals', { role: 'style' }, { role: 'annotation' } ],
+        ['Direct Attack', gtT2TeamD, 'color: #002072', gtT2TeamD],
+        ['Turnover Attack', gtT2TeamT, 'color: #59D9EB', gtT2TeamT]
+        ]);
+
+        var options2 = {
+        title: 'Share of Goals by attack types, Team 2',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('T2_gt_piechart'));
+
+        chart.draw(data2, options2);
 
         var combinedData = [];
         for (var i = 0; i < xGTeam_array.length; i++) {
@@ -5924,11 +6452,6 @@
 
         var chart = new google.visualization.ComboChart(document.getElementById('xGTeam_chart'));
 
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart, 'ready', function () {
-            p_xGTeam_chart = chart.getImageURI();
-        });*/
-
         chart.draw(data, options);
 
         // Summary chart
@@ -5937,17 +6460,13 @@
         pldata19.addColumn('string', 'Team');
         pldata19.addColumn('number', '1');
         pldata19.addColumn('number', '2');
-        //pldata19.addColumn('number', 'xG T1');
-        //pldata19.addColumn('number', 'xG T2');
-        //pldata19.addColumn('number', 'xGOT T1');
-        //pldata19.addColumn('number', 'xGOT T2');
-
 
         pldata19.addRows([
             ['Goals', Number(gf_g[7].textContent), Number(ga_g[7]. textContent)],
 	        ['xG', Number(xf_g[7].textContent), Number(xa_g[7]. textContent)],
 	        ['xGOT',  xGOTf_g[7], xGOTa_g[7]],
-	        ['Shots', Number(sf_g[7].textContent), Number(sa_g[7]. textContent)]
+	        ['Shots', Number(sf_g[7].textContent), Number(sa_g[7]. textContent)],
+	        ['Shots on Goal', Number(saf_g[7].textContent) + Number(gf_g[7].textContent), Number(saa_g[7].textContent) + Number(ga_g[7].textContent)]
 
     ]);
 
@@ -5969,23 +6488,16 @@
             pedata19.addColumn('string', 'Team');
             pedata19.addColumn('number', '1');
             pedata19.addColumn('number', '2');
-            //pldata19.addColumn('number', 'xG T1');
-            //pldata19.addColumn('number', 'xG T2');
-            //pldata19.addColumn('number', 'xGOT T1');
-            //pldata19.addColumn('number', 'xGOT T2');
-
 
             pedata19.addRows([
                 ['Goals', Number(gf_p[7].textContent), Number(ga_p[7]. textContent)],
                 ['xG', Number(xf_p[7].textContent), Number(xa_p[7]. textContent)],
                 ['Shots', Number(sf_p[7].textContent), Number(sa_p[7]. textContent)],
+                ['Shots on Goal', Number(saf_p[7].textContent) + Number(gf_p[7].textContent), Number(saa_p[7].textContent) + Number(ga_p[7].textContent)]
     ]);
         //Create and draw visualisation
         var chart_pe = new google.visualization.Table(document.getElementById('Summary_game_' + periodN));
         chart_pe.draw(pedata19, options);
-
-
-
 
 
         // Line 1 xG Chart
@@ -6057,18 +6569,35 @@
         var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart'));
         chart1.draw(chartData, options);
 
+        // Turnover period chart
+
+         var chartData = google.visualization.arrayToDataTable([
+             ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' } ],
+             ['Line 1', stT1L1p_array[0] + stT1L1p_array[1], 'color: #002072', stT1L1p_array[0] + stT1L1p_array[1], stT2L1p_array[0] + stT2L1p_array[1], 'color: #59D9EB', stT2L1p_array[0] + stT2L1p_array[1]],
+             ['Line 2', stT1L2p_array[0] + stT1L2p_array[1], 'color: #002072', stT1L2p_array[0] + stT1L2p_array[1], stT2L2p_array[0] + stT2L2p_array[1], 'color: #59D9EB', stT2L2p_array[0] + stT2L2p_array[1]],
+             ['Line 3', stT1L3p_array[0] + stT1L3p_array[1], 'color: #002072', stT1L3p_array[0] + stT1L3p_array[1], stT2L3p_array[0] + stT2L3p_array[1], 'color: #59D9EB', stT2L3p_array[0] + stT2L3p_array[1]
+             ]
+          ]);
+
+        var options = {
+            title: 'Turnovers by Line',
+            bar: {groupWidth: "95%"},
+            legend: { position: 'bottom'},
+            colors: ['#002072', '#59D9EB'],
+            hAxis: { textPosition: 'none' }
+            };
+
+        var chart1 = new google.visualization.BarChart(document.getElementById('toGame_chart_' + periodN));
+        chart1.draw(chartData, options);
+
         // Plusminus Game Chart
 
-    //pmPPT1 = data.gfGameT1L4+data.gfGameT1L5-data.gaGameT1L4+data.gaGameT1L5;
-    //pmPPT2 = data.gfGameT2L4+data.gfGameT2L5-data.gaGameT2L4+data.gaGameT2L5;
-
         var chartData = google.visualization.arrayToDataTable([
-    ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
-    ['Line 1', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, 'color: #002072', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML, 'color: #59D9EB', ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML],
-    ['Line 2', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, 'color: #002072', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML, 'color: #59D9EB', ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML],
-    ['Line 3', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, 'color: #002072', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML, 'color: #59D9EB', ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML],
-]);
-
+            ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
+            ['Line 1', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, 'color: #002072', ~~gfL1g.innerHTML - ~~gaL1g.innerHTML, ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML, 'color: #59D9EB', ~~gfL1T2g.innerHTML - ~~gaL1T2g.innerHTML],
+            ['Line 2', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, 'color: #002072', ~~gfL2g.innerHTML - ~~gaL2g.innerHTML, ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML, 'color: #59D9EB', ~~gfL2T2g.innerHTML - ~~gaL2T2g.innerHTML],
+            ['Line 3', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, 'color: #002072', ~~gfL3g.innerHTML - ~~gaL3g.innerHTML, ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML, 'color: #59D9EB', ~~gfL3T2g.innerHTML - ~~gaL3T2g.innerHTML],
+        ]);
 
         var options = {
             title: '+- by Line',
@@ -6081,100 +6610,25 @@
         var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart'));
         chart.draw(chartData, options);
 
+        // Plusminus Period Chart
 
-       // Team 1 typechart
-
-        // var chartDataX = google.visualization.arrayToDataTable([
-          //  ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-         //   ['Line1', stT1L1g_array[0], 'color: #006400', stT1L1g_array[0], stT1L1g_array[1], 'color: #7CFC00', stT1L1g_array[1], stT1L1g_array[2], 'color: #000000', stT1L1g_array[2], stT1L1g_array[4], 'color: #0000FF', stT1L1g_array[4]],
-         //   ['Line2', stT1L2g_array[0], 'color: #006400', stT1L2g_array[0], stT1L2g_array[1], 'color: #7CFC00', stT1L2g_array[1], stT1L2g_array[2], 'color: #000000', stT1L2g_array[2], stT1L2g_array[4], 'color: #0000FF', stT1L2g_array[4]],
-         //   ['Line3', stT1L3g_array[0], 'color: #006400', stT1L3g_array[0], stT1L3g_array[1], 'color: #7CFC00', stT1L3g_array[1], stT1L3g_array[2], 'color: #000000', stT1L3g_array[2], stT1L3g_array[4], 'color: #0000FF', stT1L3g_array[4]
-         //   ]
-         //]);
-
-       //  var chartDataX_p = google.visualization.arrayToDataTable([
-         //   ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-         //   ['Line1', stT1L1p_array[0], 'color: #006400', stT1L1p_array[0], stT1L1p_array[1], 'color: #7CFC00', stT1L1p_array[1], stT1L1p_array[2], 'color: #000000', stT1L1p_array[2], stT1L1p_array[4], 'color: #0000FF', stT1L1p_array[4]],
-         //   ['Line2', stT1L2p_array[0], 'color: #006400', stT1L2p_array[0], stT1L2p_array[1], 'color: #7CFC00', stT1L2p_array[1], stT1L2p_array[2], 'color: #000000', stT1L2p_array[2], stT1L2p_array[4], 'color: #0000FF', stT1L2p_array[4]],
-          //  ['Line3', stT1L3p_array[0], 'color: #006400', stT1L3p_array[0], stT1L3p_array[1], 'color: #7CFC00', stT1L3p_array[1], stT1L3p_array[2], 'color: #000000', stT1L3p_array[2], stT1L3p_array[4], 'color: #0000FF', stT1L3p_array[4]
-        //    ]
-        // ]);
-
-      //  var options = {
-         //   title: 'Shot types, Team 1',
-           // bar: {groupWidth: "75%"},
-         //   legend: { position: 'bottom'},
-          //  colors: ['#006400', '#7CFC00','#000000','#0000FF'],
-          //  hAxis: { textPosition: 'none' }
-          //  };
-
-        // var chart2 = new google.visualization.ColumnChart(document.getElementById('T1_typechart'));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart2, 'ready', function () {
-            p_T1_typechart = chart2.getImageURI();
-        });*/
-
-        //chart2.draw(chartDataX, options);
-
-        var chart2_per = new google.visualization.ColumnChart(document.getElementById('T1_typechart_' + periodN));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chart2_per, 'ready', function () {
-            if (periodN == 1) {p_T1_typechart_1 = chart2_per.getImageURI();}
-            else if (periodN == 2) {p_T1_typechart_2 = chart2_per.getImageURI();}
-            else if (periodN == 3) {p_T1_typechart_3 = chart2_per.getImageURI();}
-            else if (periodN == 4) {p_T1_typechart_4 = chart2_per.getImageURI();}
-        });*/
-
-      //  chart2_per.draw(chartDataX_p, options);
-
-        // Team 2 typechart
-
-        var chartDataY = google.visualization.arrayToDataTable([
-            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT2L1g_array[0], 'color: #8B4513', stT2L1g_array[0], stT2L1g_array[1], 'color: #FFA500', stT2L1g_array[1], stT2L1g_array[2], 'color: #FFFFFF', stT2L1g_array[2], stT2L1g_array[4], 'color: #FF4500', stT2L1g_array[4]],
-            ['Line2', stT2L2g_array[0], 'color: #8B4513', stT2L2g_array[0], stT2L2g_array[1], 'color: #FFA500', stT2L2g_array[1], stT2L2g_array[2], 'color: #FFFFFF', stT2L2g_array[2], stT2L2g_array[4], 'color: #FF4500', stT2L2g_array[4]],
-            ['Line3', stT2L3g_array[0], 'color: #8B4513', stT2L3g_array[0], stT2L3g_array[1], 'color: #FFA500', stT2L3g_array[1], stT2L3g_array[2], 'color: #FFFFFF', stT2L3g_array[2], stT2L3g_array[4], 'color: #FF4500', stT2L3g_array[4]
-            ]
-         ]);
-
-        var chartDataY_p = google.visualization.arrayToDataTable([
-            ['Type', 'TO Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'TO Direct', {role:'style'}, {role: 'annotation '}, 'Cross-Pass', {role: 'style'}, {role: 'annotation'}, 'Direct', {role: 'style'}, {role: 'annotation'}],
-            ['Line1', stT2L1p_array[0], 'color: #8B4513', stT2L1p_array[0], stT2L1p_array[1], 'color: #FFA500', stT2L1p_array[1], stT2L1p_array[2], 'color: #FFFFFF', stT2L1p_array[2], stT2L1p_array[4], 'color: #FF4500', stT2L1p_array[4]],
-            ['Line2', stT2L2p_array[0], 'color: #8B4513', stT2L2p_array[0], stT2L2p_array[1], 'color: #FFA500', stT2L2p_array[1], stT2L2p_array[2], 'color: #FFFFFF', stT2L2p_array[2], stT2L2p_array[4], 'color: #FF4500', stT2L2p_array[4]],
-            ['Line3', stT2L3p_array[0], 'color: #8B4513', stT2L3p_array[0], stT2L3p_array[1], 'color: #FFA500', stT2L3p_array[1], stT2L3p_array[2], 'color: #FFFFFF', stT2L3p_array[2], stT2L3p_array[4], 'color: #FF4500', stT2L3p_array[4]
-            ]
-         ]);
+        var chartData = google.visualization.arrayToDataTable([
+            ['Line', name_t1, { role: 'style' }, { role: 'annotation' }, name_t2, { role: 'style' }, { role: 'annotation' }],
+            ['Line 1', ~~gfL1p.innerHTML - ~~gaL1p.innerHTML, 'color: #002072', ~~gfL1p.innerHTML - ~~gaL1p.innerHTML, ~~gfL1T2p.innerHTML - ~~gaL1T2p.innerHTML, 'color: #59D9EB', ~~gfL1T2p.innerHTML - ~~gaL1T2p.innerHTML],
+            ['Line 2', ~~gfL2p.innerHTML - ~~gaL2p.innerHTML, 'color: #002072', ~~gfL2p.innerHTML - ~~gaL2p.innerHTML, ~~gfL2T2p.innerHTML - ~~gaL2T2p.innerHTML, 'color: #59D9EB', ~~gfL2T2p.innerHTML - ~~gaL2T2p.innerHTML],
+            ['Line 3', ~~gfL3p.innerHTML - ~~gaL3p.innerHTML, 'color: #002072', ~~gfL3p.innerHTML - ~~gaL3p.innerHTML, ~~gfL3T2p.innerHTML - ~~gaL3T2p.innerHTML, 'color: #59D9EB', ~~gfL3T2p.innerHTML - ~~gaL3T2p.innerHTML],
+        ]);
 
         var options = {
-            title: 'Shot types, Team 2',
-            bar: {groupWidth: "75%"},
+            title: '+- by Line',
+            bar: {groupWidth: "95%"},
             legend: { position: 'bottom'},
-            colors: ['#8B4513', '#FFA500','#FFFFFF','#FF4500'],
+            colors: ['#002072', '#59D9EB'],
             hAxis: { textPosition: 'none' }
             };
 
-        //var chartX = new google.visualization.ColumnChart(document.getElementById('T2_typechart'));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chartX, 'ready', function () {
-            p_T2_typechart = chartX.getImageURI();
-        });*/
-
-        //chartX.draw(chartDataY, options);
-
-        var chartX_per = new google.visualization.ColumnChart(document.getElementById('T2_typechart_' + periodN));
-
-/*        // Wait for the chart to finish drawing before calling the getImageURI() method.
-        google.visualization.events.addListener(chartX_per, 'ready', function () {
-            if (periodN == 1) {p_T2_typechart_1 = chartX_per.getImageURI();}
-            else if (periodN == 2) {p_T2_typechart_2 = chartX_per.getImageURI();}
-            else if (periodN == 3) {p_T2_typechart_3 = chartX_per.getImageURI();}
-            else if (periodN == 4) {p_T2_typechart_4 = chartX_per.getImageURI();}
-        });*/
-
-        chartX_per.draw(chartDataY_p, options);
+        var chart = new google.visualization.BarChart(document.getElementById('pmGame_chart_' + periodN ));
+        chart.draw(chartData, options);
 
     }
 
