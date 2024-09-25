@@ -3368,19 +3368,23 @@
                 ctx.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
                 ctx_p.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
                 ctx_g.fillStyle = 'rgba(139, 69, 19' + ", " + opacity + ")";
-            } else if (dataType === 1) {
+            }
+            else if (dataType === 1) {
                 ctx.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
                 ctx_p.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
                 ctx_g.fillStyle = 'rgba(255, 165, 0' + ", " + opacity + ")";
-            } else if (dataType === 2) {
+            }
+            else if (dataType === 2) {
                 ctx.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
                 ctx_p.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
                 ctx_g.fillStyle = 'rgba(255, 255, 255' + ", " + opacity + ")";
-            } else if (dataType === 3) {
+            }
+            else if (dataType === 3) {
                 ctx.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
                 ctx_p.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
                 ctx_g.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
-            } else if (dataType === 4) {
+            }
+            else if (dataType === 4) {
                 ctx.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
                 ctx_p.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
                 ctx_g.fillStyle = 'rgba(255, 69, 0' + ", " + opacity + ")";
@@ -3945,6 +3949,48 @@
                     }
                     else if (line_on > 5) {
                         p_T1LW_str = p_T1C_str = p_T1RW_str = p_T1LD_str = p_T1RD_str = p_T1G_str = p_T1X_str = "";
+                    }
+
+                    if (line_on_2 < 6) {
+            p_T2LW = document.getElementById("sT2L"+line_on_2+"LW").options
+                    [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].value;
+            p_T2C = document.getElementById("sT2L"+line_on_2+"C").options
+                    [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].value;
+            p_T2RW = document.getElementById("sT2L"+line_on_2+"RW").options
+                    [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].value;
+            p_T2LD = document.getElementById("sT2L"+line_on_2+"LD").options
+                    [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].value;
+            p_T2RD = document.getElementById("sT2L"+line_on_2+"RD").options
+                    [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].value;
+            p_T2G = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].value;
+        }
+                    else if (line_on_2 > 5) {
+                        p_T2LW = p_T2C = p_T2RW = p_T2LD = p_T2RD = p_T2G = "";
+                    }
+
+                    if (line_on_2 < 6) {
+            p_T2LW_str = document.getElementById("sT2L"+line_on_2+"LW").options
+                    [document.getElementById("sT2L"+line_on_2+"LW").selectedIndex].text;
+            p_T2C_str = document.getElementById("sT2L"+line_on_2+"C").options
+                    [document.getElementById("sT2L"+line_on_2+"C").selectedIndex].text;
+            p_T2RW_str = document.getElementById("sT2L"+line_on_2+"RW").options
+                    [document.getElementById("sT2L"+line_on_2+"RW").selectedIndex].text;
+            p_T2LD_str = document.getElementById("sT2L"+line_on_2+"LD").options
+                    [document.getElementById("sT2L"+line_on_2+"LD").selectedIndex].text;
+            p_T2RD_str = document.getElementById("sT2L"+line_on_2+"RD").options
+                    [document.getElementById("sT2L"+line_on_2+"RD").selectedIndex].text;
+            p_T2G_str = document.getElementById("sT2G").options
+                    [document.getElementById("sT2G").selectedIndex].text;
+            p_T2X_str = "";
+
+            if (line_on_2 == 5) {
+                p_T2X_str = document.getElementById("sT2L5X").options
+                        [document.getElementById("sT2L5X").selectedIndex].text;
+            }
+        }
+                    else if (line_on_2 > 5) {
+                        p_T2LW_str = p_T2C_str = p_T2RW_str = p_T2LD_str = p_T2RD_str = p_T2G_str = p_T2X_str = "";
                     }
 
                     premShotData.push([user_id, game_id, gameCounter, Ball_pos, dataRes, dataType, dataDis.toFixed(2),
