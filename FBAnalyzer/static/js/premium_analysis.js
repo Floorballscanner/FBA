@@ -82,6 +82,8 @@ async function getGameData(game_ids) {
                             playerData[k][13] = playerData[k][13] + data[j][12];
                             playerData[k][14] = playerData[k][14] + data[j][13];
                             playerData[k][15] = playerData[k][15] + data[j][14];
+                            playerData_5v5[k][25] = playerData_5v5[k][25] + data[j][12];
+                            playerData_PP[k][25] = playerData_PP[k][25] + data[j][13];
                         }
                     }
                 }
@@ -170,11 +172,15 @@ async function getGameData(game_ids) {
                                 playerData[k][13] = playerData[k][13] + data[j][12];
                                 playerData[k][14] = playerData[k][14] + data[j][13];
                                 playerData[k][15] = playerData[k][15] + data[j][14];
+                                playerData_5v5[k][25] = playerData_5v5[k][25] + data[j][12];
+                                playerData_PP[k][25] = playerData_PP[k][25] + data[j][13];
                             }
                             else {
                                 playerData[k][13] = playerData[k][13] + 0;
                                 playerData[k][14] = playerData[k][14] + 0;
                                 playerData[k][15] = playerData[k][15] + 0;
+                                playerData_5v5[k][25] = playerData_5v5[k][25] + 0;
+                                playerData_PP[k][25] = playerData_PP[k][25] + 0;
                             }
                         }
                     }
