@@ -32,17 +32,11 @@ def game(request, nr):
 def references(request):
     return render(request, 'references.html')
 
-def fliigalive(request):
-    return render(request, 'f-liiga_live.html')
+def fliigalive_front(request):
+    return render(request, 'f-liiga_live_front.html')
 
-def fliigagame(request, nr):
-    return render(request, 'f-liiga_game.html')
-
-def fliiga_results(request):
-    return render(request, 'f-liiga_results.html')
-
-def fliiga_main(request):
-    return render(request, 'f-liiga.html')
+def fliiga_main_front(request):
+    return render(request, 'f-liiga_front.html')
 
 def inssidivari_main(request):
     return render(request, 'inssidivari.html')

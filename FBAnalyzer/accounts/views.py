@@ -270,3 +270,16 @@ class UpdatePlayer(generics.UpdateAPIView):
         self.perform_update(serializer)
 
         return Response(serializer.data)
+
+@login_required
+def fliigagame(request, nr):
+    return render(request, 'f-liiga_game.html')
+@login_required
+def fliiga_main(request):
+    return render(request, 'f-liiga.html')
+@login_required
+def fliiga_results(request):
+    return render(request, 'f-liiga_results.html')
+@login_required
+def fliigalive(request):
+    return render(request, 'f-liiga_live.html')
