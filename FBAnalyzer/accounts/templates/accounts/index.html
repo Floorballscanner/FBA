@@ -21,7 +21,15 @@ It extends app_layout.html with Django
 			</div>
 		</div>
 		<div class="row" style="Padding-top: 20px;">
-			<div class="col-sm-4">
+			<div class="col-sm-3">
+				{% load static %}
+				<img src="{% static 'fliigalogo.svg' %}" width="40px" height="40px"><br>
+				<h2 style="Padding-top: 5px;">F-Liiga results</h2><br>
+				<a class="btn btn-primary" href="/accounts/fliiga" role="button">Select</a><br><br>
+				<p>Finnish F-Liiga and Inssi-Divari Results</p>
+				<br><br>
+			</div>
+			<div class="col-sm-3">
 				{% load static %}
 				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
 				<h2 style="Padding-top: 5px;">Edit data</h2><br>
@@ -29,14 +37,14 @@ It extends app_layout.html with Django
 				<p>Edit level / team / player data</p>
 				<br><br>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
 				<h2 style="Padding-top: 5px;">My Games</h2><br>
 				<a class="btn btn-primary" href="/accounts/saved_games" role="button">Select</a><br><br>
 				<p>Visualise all your analysed games<br>and see how you have performed</p>
 				<br><br>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
 				<h2 style="Padding-top: 5px;">Analyse new game</h2><br>
 				<a class="btn btn-primary" href="/accounts/premium_game" role="button">Select</a><br><br>
