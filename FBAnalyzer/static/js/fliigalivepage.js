@@ -70,7 +70,7 @@ window.onload = function() {
 
                                 const button = document.createElement('a');
                                 button.setAttribute('class', 'btn btn-primary btn-sm');
-                                button.setAttribute('href', '/fliigalive/' + match.match_id);
+                                button.setAttribute('href', '/accounts/fliigalive/' + match.match_id);
                                 button.setAttribute('role', 'button');
                                 button.style.fontSize = "small"
                                 button.innerText = "Open";
