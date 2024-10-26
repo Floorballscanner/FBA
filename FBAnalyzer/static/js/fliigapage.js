@@ -93,7 +93,7 @@ function selectMen() {
             console.log(data)
             matches_json = data.matches;
 
-            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=402&group_id=3")
+/*            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=402&group_id=3")
                 .then(response => response.json())
                 .then(data => {
                 console.log(data)
@@ -103,7 +103,7 @@ function selectMen() {
                     .then(response => response.json())
                     .then(data => {
                     console.log(data)
-                    matches_json = matches_json.concat(data.matches);
+                    matches_json = matches_json.concat(data.matches);*/
 
                     matches_json.sort(GetSortOrder("date"));
 
@@ -134,14 +134,14 @@ function selectMen() {
                     }
                     console.log('Success:', data);
 
-                    })
+/*                    })
                 .catch((error) => {
                   console.error('Error:', error);
                 });
             })
             .catch((error) => {
             console.error('Error:', error);
-            });
+            });*/
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -161,11 +161,11 @@ function selectWomen() {
             console.log(data)
             matches_json = data.matches;
 
-            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=384&group_id=2")
+/*            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=384&group_id=2")
                     .then(response => response.json())
                     .then(data => {
                         console.log(data)
-                        matches_json = matches_json.concat(data.matches);
+                        matches_json = matches_json.concat(data.matches);*/
 
                         matches_json.sort(GetSortOrder("date"));
 
@@ -196,11 +196,11 @@ function selectWomen() {
                         }
                         console.log('Success:', data);
 
-                        })
+/*                        })
 
                     .catch((error) => {
                           console.error('Error:', error);
-                    });
+                    });*/
         })
         .catch((error) => {
           console.error('Error:', error);
