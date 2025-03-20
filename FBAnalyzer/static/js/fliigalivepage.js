@@ -12,7 +12,7 @@ window.onload = function() {
 
     // Men's F-Liiga
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=402&group_id=1")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=402&group_id=2")
         .then(response => response.json())
         .then(data => {
             matches = data.matches;
@@ -20,7 +20,7 @@ window.onload = function() {
 
             // Women's F-Liiga
 
-            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=384&group_id=1")
+            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=384&group_id=2")
                 .then(response => response.json())
                 .then(data => {
                     matches = matches.concat(data.matches);

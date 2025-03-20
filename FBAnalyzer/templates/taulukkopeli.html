@@ -1,0 +1,196 @@
+<!--
+
+This is the pricing - infopage of the application.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% block content %}
+ <div class="banner">
+    <div class="app-text">
+        <div class="container py-5">
+            <h1 class="text-center mb-4">Floorball Tournament</h1>
+
+            <!-- Setup Section -->
+            <div id="setupSection" class="mb-4">
+                <h3>Setup Tournament</h3>
+                <form id="setupForm">
+                    <div class="mb-3">
+                        <label for="numPlayers" class="form-label">Number of Players</label>
+                        <select id="numPlayers" class="form-select" required>
+                            <!-- Options dynamically generated -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gameLength" class="form-label">Game Length (minutes)</label>
+                        <select id="gameLength" class="form-select" required>
+                            <!-- Options dynamically generated -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="playersPerSide" class="form-label">Players per Side</label>
+                        <select id="playersPerSide" class="form-select" required>
+                            <!-- Options dynamically generated -->
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="nextToPlayerInput">Next</button>
+                </form>
+            </div>
+
+            <!-- Player Input Section -->
+            <div id="playerInputSection" class="mb-4" style="display: none;">
+                <h3>Enter Player Names</h3>
+                <form id="playerForm">
+                    <div id="playerInputs" class="mb-3">
+                        <!-- Player inputs dynamically generated -->
+                    </div>
+                    <button type="button" class="btn btn-success" id="acceptSetup">Accept</button>
+                </form>
+            </div>
+
+            <!-- Tournament Section -->
+            <div id="tournamentSection" style="display: none;">
+                <h3>Current Round</h3>
+                <div id="currentTeams" class="mb-3">
+                    <!-- Team display dynamically generated -->
+                </div>
+                <div id="gameControls" class="mb-3">
+                    <button type="button" class="btn btn-primary" id="startRound">Start Round</button>
+                    <button type="button" class="btn btn-warning" id="pauseRound" disabled>Pause</button>
+                    <button type="button" class="btn btn-danger" id="stopRound" disabled>Stop</button>
+                </div>
+                <div id="gameClock" class="mb-3 fs-4">Time Left: 0:00</div>
+                <div id="scoreInput" class="mb-3">
+                    <h4>Score Input</h4>
+                    <form id="scoreForm">
+                        <div class="mb-3">
+                            <label for="scoringPlayer" class="form-label">Scorer</label>
+                            <select id="scoringPlayer" class="form-select" required>
+                                <!-- Player options dynamically generated -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="teamScored" class="form-label">Team</label>
+                            <select id="teamScored" class="form-select" required>
+                                <option value="Team 1">Team 1</option>
+                                <option value="Team 2">Team 2</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-success" id="addScore">Add Score</button>
+                    </form>
+                </div>
+                <div id="currentScore" class="mb-3 fs-5">Team 1: 0 | Team 2: 0</div>
+            </div>
+
+            <!-- Scoreboard Section -->
+            <div id="scoreboardSection" style="display: none;">
+                <h3>Scoreboard</h3>
+                <div id="playerPoints" class="mb-3">
+                    <!-- Points scoreboard dynamically generated -->
+                </div>
+                <div id="playerGoals" class="mb-3">
+                    <!-- Goals scoreboard dynamically generated -->
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Variables to store data
+        let players = [];
+        let currentTeams = [];
+        let team1 = [];
+        let team2 = [];
+        let scores = { 'Team 1': 0, 'Team 2': 0 };
+        let playerStats = {};
+        let timer = null;
+        let timeLeft = 0;
+
+        // Populate dropdowns
+        function populateDropdown(id, min, max, step) {
+            const dropdown = document.getElementById(id);
+            for (let i = min; i <= max; i += step) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                dropdown.appendChild(option);
+            }
+        }
+
+        populateDropdown('numPlayers', 4, 12, 1);
+        populateDropdown('gameLength', 2, 10, 1);
+
+        document.getElementById('numPlayers').addEventListener('change', function () {
+            const numPlayers = parseInt(this.value);
+            const playersPerSide = document.getElementById('playersPerSide');
+            playersPerSide.innerHTML = '';
+            for (let i = 2; i <= Math.floor(numPlayers / 2); i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `${i} vs ${i}`;
+                playersPerSide.appendChild(option);
+            }
+        });
+
+        document.getElementById('nextToPlayerInput').addEventListener('click', function () {
+            const numPlayers = parseInt(document.getElementById('numPlayers').value);
+            const playerInputs = document.getElementById('playerInputs');
+            playerInputs.innerHTML = '';
+
+            for (let i = 1; i <= numPlayers; i++) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'form-control mb-2';
+                input.placeholder = `Player ${i} Name`;
+                input.required = true;
+                playerInputs.appendChild(input);
+            }
+
+            document.getElementById('setupSection').style.display = 'none';
+            document.getElementById('playerInputSection').style.display = 'block';
+        });
+
+        document.getElementById('acceptSetup').addEventListener('click', function () {
+            const inputs = document.querySelectorAll('#playerInputs input');
+            players = Array.from(inputs).map(input => input.value);
+
+            // Initialize player stats
+            players.forEach(player => {
+                playerStats[player] = { points: 0, goals: 0 };
+            });
+
+            document.getElementById('playerInputSection').style.display = 'none';
+            document.getElementById('tournamentSection').style.display = 'block';
+        });
+
+        // Timer functions
+        function startTimer(duration) {
+            timeLeft = duration;
+            updateClock();
+            timer = setInterval(() => {
+                timeLeft--;
+                updateClock();
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                }
+            }, 1000);
+        }
+
+        function updateClock() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('gameClock').textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        document.getElementById('startRound').addEventListener('click', function () {
+            const gameLength = parseInt(document.getElementById('gameLength').value) * 60;
+            startTimer(gameLength);
+            this.disabled = true;
+            document.getElementById('pauseRound').disabled = false;
+            document.getElementById
+    </script>
+{% endblock %}
