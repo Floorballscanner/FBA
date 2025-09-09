@@ -87,7 +87,7 @@ function selectMen() {
     opt = new Option("Select a game...");
     s_game.appendChild(opt);
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=402&group_id=2")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=402&group_id=1")
         .then(response => response.json())
         .then(data => {
             console.log(data)
@@ -155,7 +155,7 @@ function selectWomen() {
     opt = new Option("Select a game...");
     s_game.appendChild(opt);
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=384&group_id=2")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=384&group_id=1")
         .then(response => response.json())
         .then(data => {
             console.log(data)
@@ -213,7 +213,7 @@ function selectID() {
     opt = new Option("Select a game...");
     s_game.appendChild(opt);
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=444&group_id=1")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=444&group_id=1")
         .then(response => response.json())
         .then(data => {
             console.log(data)
