@@ -21,6 +21,8 @@ function round(x, decimals = 0) {
 // Parametrit
 const maxY = 1700;
 const maxX = 2000;
+var t1color = "#990000";
+var t2color = "#002072";
 
 // Funktiot laskemaan xG ja xGOT
 function calcxG(x, y) {
