@@ -245,7 +245,7 @@ async function main() {
     st_teamchart_data.addColumn('number', 'GAAxG');
 
     teamStats.forEach(team => {
-        st_teamchart.addRow([team.team_name, team.Games, team.GF, team.GA, team.GDiff, team.SF, team.SA, team.SDiff,
+        st_teamchart_data.addRow([team.team_name, team.Games, team.GF, team.GA, team.GDiff, team.SF, team.SA, team.SDiff,
                              team.xGF, team.xGA, team.xGDiff, team.xGperc, team.xGOTF, team.xGOTA, team.xGOTperc, team.GFAxG, team.GAAxG]);
     });
 
