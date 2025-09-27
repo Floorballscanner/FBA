@@ -1,0 +1,36 @@
+<!--
+
+This is the F-liiga statistics page.
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block content %}
+{% load static %}
+<div class="container" style="Padding-top: 40px;">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="team-selection">
+                <a href="/accounts/fliiga"><img src="{% static 'back.png' %}" width="20px" style="Padding-bottom:20px;"></a><br>
+                <h2 style="Padding-top:20px;">Push logo to select league</h2><br>
+                <img style="width:60px;" src="{% static 'f-liiga_logo_men.png' %}" onclick="selectMen()" id="imgcatm">&emsp;
+                <img style="width:60px;" src="{% static 'f-liiga_logo_women.png' %}" onclick="selectWomen()" id="imgcatw">
+                <img style="width:60px;Padding-left:10px;" src="{% static 'inssidivarilogo.png' %}" onclick="selectID()" id="imgcatid"><br><br>
+            </div>
+            <hr width="100%" size="2" align="center" color="#002072" noshade>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="Padding-top: 20px;">
+
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/fliigastatspage.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['table']});
+</script>
+
+
+{% endblock %}

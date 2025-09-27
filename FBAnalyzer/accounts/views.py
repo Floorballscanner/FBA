@@ -283,3 +283,6 @@ def fliiga_results(request):
 @login_required
 def fliigalive(request):
     return render(request, 'f-liiga_live.html')
+@login_required
+def fliiga_statistics(request):
+    return render(request, 'f-liiga_statistics.html')
