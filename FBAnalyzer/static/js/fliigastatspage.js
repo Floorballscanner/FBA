@@ -232,6 +232,7 @@ async function main() {
         bar: {groupWidth: "95%"},
         legend: { position: 'bottom'},
         colors: [t1color, t2color],
+        frozenColumns:1,
         hAxis: { textPosition: 'none' }
         };
 
@@ -261,7 +262,6 @@ async function main() {
 
     var st_teamchart_var = new google.visualization.Table(document.getElementById('st_teamchart'));
     st_teamchart_var.draw(st_teamchart_data, options);
-    st_teamchart_var.setOption("frozenColumns", 1)
     console.log(teamStats);
 }
 
