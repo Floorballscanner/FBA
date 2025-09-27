@@ -227,7 +227,7 @@ async function main() {
 
     var st_teamchart = new google.visualization.DataTable();
     st_teamchart.addColumn('string', 'Team');
-    st_teamchart.addColumn('string', 'Games');
+    st_teamchart.addColumn('number', 'Games');
     st_teamchart.addColumn('number', 'GF');
     st_teamchart.addColumn('number', 'GA');
     st_teamchart.addColumn('number', 'GDiff');
