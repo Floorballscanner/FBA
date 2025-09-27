@@ -237,6 +237,30 @@ function selectMen() {
 
     main().catch(err => console.error(err));
 
+    var st_teamchart = new google.visualization.DataTable();
+    st_teamchart.addColumn('string', 'Team');
+    st_teamchart.addColumn('string', 'Games');
+    st_teamchart.addColumn('number', 'GF');
+    st_teamchart.addColumn('number', 'GA');
+    st_teamchart.addColumn('number', 'GDiff');
+    st_teamchart.addColumn('number', 'SF');
+    st_teamchart.addColumn('number', 'SA');
+    st_teamchart.addColumn('number', 'SDiff');
+    st_teamchart.addColumn('number', 'xGF');
+    st_teamchart.addColumn('number', 'xGA');
+    st_teamchart.addColumn('number', 'xGDiff');
+    st_teamchart.addColumn('number', 'xG%');
+    st_teamchart.addColumn('number', 'xGOTF');
+    st_teamchart.addColumn('number', 'xGOTA');
+    st_teamchart.addColumn('number', 'xGOT%');
+    st_teamchart.addColumn('number', 'GFAxG');
+    st_teamchart.addColumn('number', 'GAAxG');
+
+    teamStats.forEach(team => {
+        st_teamchart.addRow([team.team_name, team.Games, team.GF, team.GA, team.GDiff, team.SF, team.SA, team.SDiff,
+                             team.xGF, team.xGA, team.xGDiff, geam.xG%, team.XGOTF, team.xGOTA, team.xGOT%, team.GFAxG, team.GAAxG]);
+    });
+
 }
 
 function selectWomen() {
