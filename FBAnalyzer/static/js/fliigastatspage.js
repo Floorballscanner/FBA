@@ -225,6 +225,14 @@ async function main() {
     // Sorttaus xGDiff suuruusjärjestykseen laskevasti
     teamStats.sort((a, b) => b.xGDiff - a.xGDiff);
 
+    var options = {
+        title: 'Team stats',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: [t1color, t2color],
+        hAxis: { textPosition: 'none' }
+        };
+
     var st_teamchart_data = new google.visualization.DataTable();
     st_teamchart_data.addColumn('string', 'Team');
     st_teamchart_data.addColumn('number', 'Games');
