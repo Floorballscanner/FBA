@@ -225,30 +225,32 @@ async function main() {
     // Sorttaus xGDiff suuruusjärjestykseen laskevasti
     teamStats.sort((a, b) => b.xGDiff - a.xGDiff);
 
-    var st_teamchart = new google.visualization.DataTable();
-    st_teamchart.addColumn('string', 'Team');
-    st_teamchart.addColumn('number', 'Games');
-    st_teamchart.addColumn('number', 'GF');
-    st_teamchart.addColumn('number', 'GA');
-    st_teamchart.addColumn('number', 'GDiff');
-    st_teamchart.addColumn('number', 'SF');
-    st_teamchart.addColumn('number', 'SA');
-    st_teamchart.addColumn('number', 'SDiff');
-    st_teamchart.addColumn('number', 'xGF');
-    st_teamchart.addColumn('number', 'xGA');
-    st_teamchart.addColumn('number', 'xGDiff');
-    st_teamchart.addColumn('number', 'xG%');
-    st_teamchart.addColumn('number', 'xGOTF');
-    st_teamchart.addColumn('number', 'xGOTA');
-    st_teamchart.addColumn('number', 'xGOT%');
-    st_teamchart.addColumn('number', 'GFAxG');
-    st_teamchart.addColumn('number', 'GAAxG');
+    var st_teamchart_data = new google.visualization.DataTable();
+    st_teamchart_data.addColumn('string', 'Team');
+    st_teamchart_data.addColumn('number', 'Games');
+    st_teamchart_data.addColumn('number', 'GF');
+    st_teamchart_data.addColumn('number', 'GA');
+    st_teamchart_data.addColumn('number', 'GDiff');
+    st_teamchart_data.addColumn('number', 'SF');
+    st_teamchart_data.addColumn('number', 'SA');
+    st_teamchart_data.addColumn('number', 'SDiff');
+    st_teamchart_data.addColumn('number', 'xGF');
+    st_teamchart_data.addColumn('number', 'xGA');
+    st_teamchart_data.addColumn('number', 'xGDiff');
+    st_teamchart_data.addColumn('number', 'xG%');
+    st_teamchart_data.addColumn('number', 'xGOTF');
+    st_teamchart_data.addColumn('number', 'xGOTA');
+    st_teamchart_data.addColumn('number', 'xGOT%');
+    st_teamchart_data.addColumn('number', 'GFAxG');
+    st_teamchart_data.addColumn('number', 'GAAxG');
 
     teamStats.forEach(team => {
         st_teamchart.addRow([team.team_name, team.Games, team.GF, team.GA, team.GDiff, team.SF, team.SA, team.SDiff,
                              team.xGF, team.xGA, team.xGDiff, team.xGperc, team.xGOTF, team.xGOTA, team.xGOTperc, team.GFAxG, team.GAAxG]);
     });
 
+    var st_teamchart_var = new google.visualization.Table(document.getElementById('st_teamchart'));
+    st_teamchart_var.draw(st_teamchart_data, options);
     console.log(teamStats);
 }
 
