@@ -240,10 +240,10 @@ function changeGame() {
 
 function selectMen() {
     // --- API‑haun osat ---
-    const api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
-    const comp_id = 'sb2025';
-    const cat_id = '402';
-    const group_id = '1';
+    api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
+    comp_id = 'sb2025';
+    cat_id = '402';
+    group_id = '1';
 
     main().catch(err => console.error(err));
 }
