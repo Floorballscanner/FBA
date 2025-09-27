@@ -225,18 +225,6 @@ async function main() {
     // Sorttaus xGDiff suuruusjärjestykseen laskevasti
     teamStats.sort((a, b) => b.xGDiff - a.xGDiff);
 
-    console.log(teamStats);
-}
-
-function selectMen() {
-
-    api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
-    comp_id = 'sb2025';
-    cat_id = '402';
-    group_id = '1';
-
-    main().catch(err => console.error(err));
-
     var st_teamchart = new google.visualization.DataTable();
     st_teamchart.addColumn('string', 'Team');
     st_teamchart.addColumn('string', 'Games');
@@ -260,6 +248,18 @@ function selectMen() {
         st_teamchart.addRow([team.team_name, team.Games, team.GF, team.GA, team.GDiff, team.SF, team.SA, team.SDiff,
                              team.xGF, team.xGA, team.xGDiff, team.xGperc, team.xGOTF, team.xGOTA, team.xGOTperc, team.GFAxG, team.GAAxG]);
     });
+
+    console.log(teamStats);
+}
+
+function selectMen() {
+
+    api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
+    comp_id = 'sb2025';
+    cat_id = '402';
+    group_id = '1';
+
+    main().catch(err => console.error(err));
 
 }
 
