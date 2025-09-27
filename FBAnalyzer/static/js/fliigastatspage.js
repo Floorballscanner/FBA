@@ -7,8 +7,6 @@ window.onload = function() {
 }
 
 // --- "importit" / tuonnit ---
-const fetch = require('node-fetch');  // jos Node.js
-// muista tehdä `npm install node-fetch` tms.
 
 // Matalan tason funktiot JS:ssä
 function floor(x) {
