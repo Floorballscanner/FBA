@@ -258,7 +258,7 @@ function selectMen() {
 
     teamStats.forEach(team => {
         st_teamchart.addRow([team.team_name, team.Games, team.GF, team.GA, team.GDiff, team.SF, team.SA, team.SDiff,
-                             team.xGF, team.xGA, team.xGDiff, team.xG%, team.xGOTF, team.xGOTA, team.xGOT%, team.GFAxG, team.GAAxG]);
+                             team.xGF, team.xGA, team.xGDiff, team.xGperc, team.xGOTF, team.xGOTA, team.xGOTperc, team.GFAxG, team.GAAxG]);
     });
 
 }
