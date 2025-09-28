@@ -287,7 +287,7 @@ async function main() {
     }
 
     // Muodostetaan strukturoitu lista pelaajista kuten DataFrame
-    const pd_players = playersAll.map(p => ({
+    pd_players = playersAll.map(p => ({
         ID: p.player_id,
         Team: p.Team,
         Name: p.Name,
