@@ -375,7 +375,7 @@ async function main() {
         m.Goalie_A = null;
         m.Goalie_B = null;
     }
-
+    console.log(matchesPlayed)
     // Lasketaan laukaukset ja maalit per ottelu sekä selvitetään maalivahdit
     for (const m of matchesPlayed) {
         const mid = m.match_id;
@@ -464,7 +464,7 @@ async function main() {
 
     // Suodata pelaajat, joiden position on "mv" (maalivahti)
     const goalies = playersAll.filter(p => p.position === 'mv');
-
+    console.log(goalies)
     // Tee strukturoitu lista maalivahdeista
     pd_goalies = goalies.map(g => ({
         Name: g.Name,
