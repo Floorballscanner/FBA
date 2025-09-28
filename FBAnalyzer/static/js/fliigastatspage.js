@@ -305,6 +305,8 @@ async function main() {
         GAxG: 0,
     }));
 
+    pd_players = pd_players.filter(p => p.Games > 0);
+
     // Lasketaan xG ja xGOT pelaajille
     for (const pl of pd_players) {
         for (const shot of shots) {
