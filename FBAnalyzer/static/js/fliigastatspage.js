@@ -85,7 +85,7 @@ async function fetchTeamPlayers(teamId) {
     });
 }
 
-// Funktio hakemaan kokoonpano ja maalivahdit yhdelle ottelulle
+// Funktio hakemaan joukkueen maalivahdit (sukunimi, etunimi)
 async function fetchTeamGoalies(teamId) {
     const url = `https://salibandy.api.torneopal.com/taso/rest/getTeam?api_key=${api_key}&team_id=${teamId}&competition_id=${comp_id}&category_id=${cat_id}`;
     const resp = await fetch(url);
@@ -520,7 +520,6 @@ async function main() {
             g.GSAxPerGame = 0;
         }
     }
-    console.log(pd_goalies)
     // Suodatetaan pois ne, joilla ei ole pelejä
     pd_goalies = pd_goalies.filter(g => g.Games > 0);
 
@@ -529,7 +528,33 @@ async function main() {
 
     console.log("Goalie Stats:", pd_goalies);
 
-    // Palautetaan (tai käytetään) kaikki tilastot
+    var options = {
+        title: 'Goalie stats',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: [t1color, t2color],
+        frozenColumns:1,
+        hAxis: { textPosition: 'none' }
+        };
+
+    var st_goaliechart_data = new google.visualization.DataTable();
+    st_goaliechart_data.addColumn('string', 'Goalie');
+    st_goaliechart_data.addColumn('string', 'Team');
+    st_goaliechart_data.addColumn('number', 'Games');
+    st_goaliechart_data.addColumn('number', 'xGOTA');
+    st_goaliechart_data.addColumn('number', 'GA');
+    st_goaliechart_data.addColumn('number', 'SA');
+    st_goaliechart_data.addColumn('number', 'Saves');
+    st_goaliechart_data.addColumn('number', 'GSAx');
+    st_goaliechart_data.addColumn('number', 'GSAx/Game');
+
+    pd_goalies.forEach(goalie => {
+        st_goaliechart_data.addRow([goalie.Name, goalie.Team, goalie.Games, goalie.xGOTA, goalie.GA, goalie.SA, goalie.Saves,
+                             goalie.GSAx, goalie.GSAxPerGame]);
+    });
+
+    var st_goaliechart_var = new google.visualization.Table(document.getElementById('st_goaliechart'));
+    st_goaliechart_var.draw(st_goaliechart_data, options);
 
 }
 
