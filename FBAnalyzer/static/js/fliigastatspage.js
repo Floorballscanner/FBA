@@ -480,7 +480,7 @@ async function main() {
         GSAx: 0,
         GSAxPerGame: 0,
     }));
-
+    console.log(matchesPlayed)
     // Käydään jokainen maalivahti läpi ja lasketaan tilastot otteluiden perusteella
     for (const g of pd_goalies) {
         for (const m of matchesPlayed) {
