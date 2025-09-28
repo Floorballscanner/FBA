@@ -510,7 +510,7 @@ async function main() {
     // Järjestetään maalivahdit GSAxPerGame mukaan
     pd_goalies.sort((a, b) => b.GSAxPerGame - a.GSAxPerGame);
 
-    console.log("Goalie Stats:", filtered_goalies);
+    console.log("Goalie Stats:", pd_goalies);
 
     // Palautetaan (tai käytetään) kaikki tilastot
 
