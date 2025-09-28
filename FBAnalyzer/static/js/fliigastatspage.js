@@ -461,18 +461,12 @@ async function main() {
     }
 
     // Nyt kokoamme maalivahtien tilastot
-    // Haetaan kaikki joukkueiden pelaajat
-    playersAll = [];
-    for (const team of teams) {
-        const teamPlayers = await fetchTeamPlayers(team.team_id);
-        playersAll = playersAll.concat(teamPlayers);
-    }
 
     // Suodata pelaajat, joiden position on "mv" (maalivahti)
     const goalies = playersAll.filter(p => p.position === 'mv');
 
     // Tee strukturoitu lista maalivahdeista
-    const pd_goalies = goalies.map(g => ({
+    pd_goalies = goalies.map(g => ({
         Name: g.Name,
         Team: g.Team,
         Games: 0,
@@ -509,22 +503,16 @@ async function main() {
             g.GSAxPerGame = 0;
         }
     }
-
+    console.log(pd_goalies)
     // Suodatetaan pois ne, joilla ei ole pelejä
-    const filtered_goalies = pd_goalies.filter(g => g.Games > 0);
+    pd_goalies = pd_goalies.filter(g => g.Games > 0);
 
     // Järjestetään maalivahdit GSAxPerGame mukaan
-    filtered_goalies.sort((a, b) => b.GSAxPerGame - a.GSAxPerGame);
+    pd_goalies.sort((a, b) => b.GSAxPerGame - a.GSAxPerGame);
 
     console.log("Goalie Stats:", filtered_goalies);
 
     // Palautetaan (tai käytetään) kaikki tilastot
-    // Voit palauttaa objektin, jossa on teamStats, playerStats, goalieStats
-    return {
-        teamStats,
-        playerStats: pd_players.filter(p => p.Games > 0),  // aiempi pelaajalista suodatettuna
-        goalieStats: filtered_goalies,
-    };
 
 }
 
