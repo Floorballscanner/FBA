@@ -86,11 +86,17 @@ async function fetchTeamPlayers(teamId) {
 }
 
 // Funktio hakemaan kokoonpano ja maalivahdit yhdelle ottelulle
-async function fetchMatchLineups(matchId) {
-    const url = `https://salibandy.api.torneopal.com/taso/rest/getMatch?api_key=${api_key}&match_id=${matchId}`;
+async function fetchTeamGoalies(teamId) {
+    const url = `https://salibandy.api.torneopal.com/taso/rest/getTeam?api_key=${api_key}&team_id=${teamId}&competition_id=${comp_id}&category_id=${cat_id}`;
     const resp = await fetch(url);
     const temp = await resp.json();
-    return temp.match.lineups;  // oletetaan, että tämä on lista lineup-olioista
+    return temp.team.players.map(player => {
+        return {
+            ...player,
+            Team: temp.team.team_name,
+            Name: `${player.last_name} ${player.first_name}`,
+        };
+    });
 }
 
 // Pääfunktio, joka yhdistää kaiken
@@ -462,7 +468,7 @@ async function main() {
     // Nyt kokoamme maalivahtien tilastot
     playersAll = [];
     for (const team of teams) {
-        const teamPlayers = await fetchTeamPlayers(team.team_id);
+        const teamPlayers = await fetchTeamGoalies(team.team_id);
         playersAll = playersAll.concat(teamPlayers);
     }
     // Suodata pelaajat, joiden position on "mv" (maalivahti)
@@ -480,7 +486,7 @@ async function main() {
         GSAx: 0,
         GSAxPerGame: 0,
     }));
-    console.log(matchesPlayed)
+
     // Käydään jokainen maalivahti läpi ja lasketaan tilastot otteluiden perusteella
     for (const g of pd_goalies) {
         for (const m of matchesPlayed) {
