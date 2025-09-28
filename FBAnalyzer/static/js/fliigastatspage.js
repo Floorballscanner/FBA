@@ -465,9 +465,8 @@ async function main() {
         const teamPlayers = await fetchTeamPlayers(team.team_id);
         playersAll = playersAll.concat(teamPlayers);
     }
-    console.log(playersAll)
     // Suodata pelaajat, joiden position on "mv" (maalivahti)
-    const goalies = playersAll.filter(p => p.position === 'mv');
+    const goalies = playersAll.filter(p => p.position === 'MV');
 
     // Tee strukturoitu lista maalivahdeista
     pd_goalies = goalies.map(g => ({
