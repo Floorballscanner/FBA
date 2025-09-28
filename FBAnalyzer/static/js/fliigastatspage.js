@@ -331,7 +331,7 @@ async function main() {
     var st_playerchart_data = new google.visualization.DataTable();
     st_playerchart_data.addColumn('string', 'Team');
     st_playerchart_data.addColumn('string', 'Player');
-    st_playerchart_data.addColumn('number', 'Nr');
+    st_playerchart_data.addColumn('string', 'Nr');
     st_playerchart_data.addColumn('number', 'Games');
     st_playerchart_data.addColumn('number', 'G');
     st_playerchart_data.addColumn('number', 'A');
