@@ -71,6 +71,20 @@ async function fetchMatchEvents(matchId) {
     return temp.match.events;
 }
 
+// Funktio hakemaan joukkueen pelaajat
+async function fetchTeamPlayers(teamId) {
+    const url = `https://salibandy.api.torneopal.com/taso/rest/getTeam?api_key=${api_key}&team_id=${teamId}&competition_id=${comp_id}&category_id=${cat_id}`;
+    const resp = await fetch(url);
+    const temp = await resp.json();
+    return temp.team.players.map(player => {
+        return {
+            ...player,
+            Team: temp.team.team_name,
+            Name: `${player.first_name} ${player.last_name}`,
+        };
+    });
+}
+
 // Pääfunktio, joka yhdistää kaiken
 async function main() {
     const matches = await fetchMatches();
@@ -226,6 +240,7 @@ async function main() {
 
     // Sorttaus xGDiff suuruusjärjestykseen laskevasti
     teamStats.sort((a, b) => b.xGDiff - a.xGDiff);
+    console.log(teamStats);
 
     var options = {
         title: 'Team stats',
@@ -263,6 +278,81 @@ async function main() {
     var st_teamchart_var = new google.visualization.Table(document.getElementById('st_teamchart'));
     st_teamchart_var.draw(st_teamchart_data, options);
     console.log(teamStats);
+
+       // --- Uusi osa: pelaajat ja heidän xG-laskelmat ---
+    let playersAll = [];
+    for (const team of teams) {
+        const teamPlayers = await fetchTeamPlayers(team.team_id);
+        playersAll = playersAll.concat(teamPlayers);
+    }
+
+    // Muodostetaan strukturoitu lista pelaajista kuten DataFrame
+    const pd_players = playersAll.map(p => ({
+        ID: p.player_id,
+        Team: p.Team,
+        Name: p.Name,
+        Nr: p.shirt_number,
+        Games: p.matches,
+        G: p.goals,
+        A: p.assists,
+        P: p.points,
+        S: p.shots_total,
+        SM: p.shots_off_target,
+        plus: p.plus,
+        minus: p.minus,
+        xG: 0,
+        xGOT: 0,
+        GAxG: 0,
+    }));
+
+    // Lasketaan xG ja xGOT pelaajille
+    for (const pl of pd_players) {
+        for (const shot of shots) {
+            if (shot.player_id === pl.ID) {
+                pl.xG += shot.xG;
+                pl.xGOT += shot.xGOT;
+            }
+        }
+        pl.GAxG = pl.G - pl.xG;
+    }
+
+    // Sortataan GAxG suurimmasta pienimpään
+    pd_players.sort((a, b) => b.GAxG - a.GAxG);
+
+    var options = {
+        title: 'Player stats',
+        bar: {groupWidth: "95%"},
+        legend: { position: 'bottom'},
+        colors: [t1color, t2color],
+        frozenColumns:1,
+        hAxis: { textPosition: 'none' }
+        };
+
+    var st_playerchart_data = new google.visualization.DataTable();
+    st_playerchart_data.addColumn('string', 'Team');
+    st_playerchart_data.addColumn('string', 'Player');
+    st_playerchart_data.addColumn('string', 'Nr');
+    st_playerchart_data.addColumn('number', 'Games');
+    st_playerchart_data.addColumn('number', 'G');
+    st_playerchart_data.addColumn('number', 'A');
+    st_playerchart_data.addColumn('number', 'P');
+    st_playerchart_data.addColumn('number', 'S');
+    st_playerchart_data.addColumn('number', 'SM');
+    st_playerchart_data.addColumn('number', '+');
+    st_playerchart_data.addColumn('number', '-');
+    st_playerchart_data.addColumn('number', 'xG');
+    st_playerchart_data.addColumn('number', 'xGOT');
+    st_playerchart_data.addColumn('number', 'GAxG');
+
+    pd_players.forEach(player => {
+        st_playerchart_data.addRow([player.Team, player.Name, player.Nr, player.Games, player.G, player.A, player.P, player.S,
+                             player.SM, player.plus, player.minus, player.xG, player.xGOT, player.GAxG]);
+    });
+
+    var st_playerchart_var = new google.visualization.Table(document.getElementById('st_playerchart'));
+    st_playerchart_var.draw(st_playerchart_data, options);
+    console.log(pd_players);
+
 }
 
 function selectMen() {
