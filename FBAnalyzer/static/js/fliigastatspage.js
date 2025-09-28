@@ -306,7 +306,6 @@ async function main() {
     }));
 
     pd_players = pd_players.filter(p => p.Games > 0);
-    pd_players = pd_players.filter(p => p.xG > 0);
 
     // Lasketaan xG ja xGOT pelaajille
     for (const pl of pd_players) {
@@ -318,6 +317,8 @@ async function main() {
         }
         pl.GAxG = pl.G - pl.xG;
     }
+
+    pd_players = pd_players.filter(p => p.xG > 0);
 
     // Sortataan GAxG suurimmasta pienimpään
     pd_players.sort((a, b) => b.GAxG - a.GAxG);
