@@ -99,6 +99,14 @@ async function fetchTeamGoalies(teamId) {
     });
 }
 
+// Funktio hakemaan kokoonpano ja maalivahdit yhdelle ottelulle
+async function fetchMatchLineups(matchId) {
+    const url = `https://salibandy.api.torneopal.com/taso/rest/getMatch?api_key=${api_key}&match_id=${matchId}`;
+    const resp = await fetch(url);
+    const temp = await resp.json();
+    return temp.match.lineups;  // oletetaan, että tämä on lista lineup-olioista
+}
+
 // Pääfunktio, joka yhdistää kaiken
 async function main() {
     const matches = await fetchMatches();
