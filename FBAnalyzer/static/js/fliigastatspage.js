@@ -462,7 +462,7 @@ async function main() {
 
     // Nyt kokoamme maalivahtien tilastot
     // Haetaan kaikki joukkueiden pelaajat
-    let playersAll = [];
+    playersAll = [];
     for (const team of teams) {
         const teamPlayers = await fetchTeamPlayers(team.team_id);
         playersAll = playersAll.concat(teamPlayers);
