@@ -333,8 +333,8 @@ async function main() {
         };
 
     var st_playerchart_data = new google.visualization.DataTable();
-    st_playerchart_data.addColumn('string', 'Team');
     st_playerchart_data.addColumn('string', 'Player');
+    st_playerchart_data.addColumn('string', 'Team');
     st_playerchart_data.addColumn('string', 'Nr');
     st_playerchart_data.addColumn('string', 'Games');
     st_playerchart_data.addColumn('string', 'G');
@@ -349,7 +349,7 @@ async function main() {
     st_playerchart_data.addColumn('number', 'GAxG');
 
     pd_players.forEach(player => {
-        st_playerchart_data.addRow([player.Team, player.Name, player.Nr, player.Games, player.G, player.A, player.P, player.S,
+        st_playerchart_data.addRow([player.Name, player.Team, player.Nr, player.Games, player.G, player.A, player.P, player.S,
                              player.SM, player.plus, player.minus, player.xG, player.xGOT, player.GAxG]);
     });
 
