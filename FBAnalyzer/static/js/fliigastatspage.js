@@ -85,6 +85,14 @@ async function fetchTeamPlayers(teamId) {
     });
 }
 
+// Funktio hakemaan kokoonpano ja maalivahdit yhdelle ottelulle
+async function fetchMatchLineups(matchId) {
+    const url = `https://salibandy.api.torneopal.com/taso/rest/getMatch?api_key=${api_key}&match_id=${matchId}`;
+    const resp = await fetch(url);
+    const temp = await resp.json();
+    return temp.match.lineups;  // oletetaan, että tämä on lista lineup-olioista
+}
+
 // Pääfunktio, joka yhdistää kaiken
 async function main() {
     const matches = await fetchMatches();
@@ -356,6 +364,167 @@ async function main() {
     var st_playerchart_var = new google.visualization.Table(document.getElementById('st_playerchart'));
     st_playerchart_var.draw(st_playerchart_data, options);
     console.log(pd_players);
+
+    // Alusta jokaiselle ottelulle lisäkentät, mukaan lukien maalivahdit
+    for (const m of matchesPlayed) {
+        m.S_A = 0; m.S_B = 0;
+        m.SOG_A = 0; m.SOG_B = 0;
+        m.G_A = 0; m.G_B = 0;
+        m.xG_A = 0; m.xG_B = 0;
+        m.xGOT_A = 0; m.xGOT_B = 0;
+        m.Goalie_A = null;
+        m.Goalie_B = null;
+    }
+
+    // Lasketaan laukaukset ja maalit per ottelu sekä selvitetään maalivahdit
+    for (const m of matchesPlayed) {
+        const mid = m.match_id;
+        const matchShots = shots.filter(s => s.match_id === mid);
+
+        const sA = matchShots.filter(s => s.team_id === m.team_A_id);
+        const sB = matchShots.filter(s => s.team_id === m.team_B_id);
+
+        const sogA = sA.filter(s => (s.code === 'laukausmaali' || s.code === 'laukaus'));
+        const sogB = sB.filter(s => (s.code === 'laukausmaali' || s.code === 'laukaus'));
+
+        const gA = sA.filter(s => s.code === 'laukausmaali');
+        const gB = sB.filter(s => s.code === 'laukausmaali');
+
+        let xGOT_a = 0, xG_a = 0, xGOT_b = 0, xG_b = 0;
+        for (const s of sA) {
+            xGOT_a += s.xGOT;
+            xG_a += s.xG;
+        }
+        for (const s of sB) {
+            xGOT_b += s.xGOT;
+            xG_b += s.xG;
+        }
+
+        m.xG_A = round(xG_a, 2);
+        m.xG_B = round(xG_b, 2);
+        m.xGOT_A = round(xGOT_a, 2);
+        m.xGOT_B = round(xGOT_b, 2);
+
+        m.S_A = sA.length;
+        m.S_B = sB.length;
+        m.SOG_A = sogA.length;
+        m.SOG_B = sogB.length;
+        m.G_A = gA.length;
+        m.G_B = gB.length;
+
+        // Hae linjaukset (lineups) tälle ottelulle ja selvitä maalivahdit
+        const lineups = await fetchMatchLineups(mid);
+        for (const lin of lineups) {
+            // Oletetaan lineup-olioissa kentät: team_id, position, player_name
+            if (lin.team_id === m.team_A_id && lin.position === 'MV/1') {
+                m.Goalie_A = lin.player_name;
+            }
+            if (lin.team_id === m.team_B_id && lin.position === 'MV/1') {
+                m.Goalie_B = lin.player_name;
+            }
+        }
+    }
+
+    // Jos halutaan, käsitellään myös RL / TM tapahtumat — voit lisätä vastaavan logiikan JS:ssä
+    // Esimerkiksi:
+    const rlEvents = allEvents.filter(e => {
+        return e.description && (e.description.includes("rl") || e.description.includes("RL"));
+    });
+    for (const ev of rlEvents) {
+        const mid = ev.match_id;
+        const match = matchesPlayed.find(m => m.match_id === mid);
+        if (!match) continue;
+        if (ev.team === "A") {
+            match.xG_B += 0.5;
+            match.xGOT_B += 0.5;
+        }
+        if (ev.team === "B") {
+            match.xG_A += 0.5;
+            match.xGOT_A += 0.5;
+        }
+    }
+    const tmEvents = allEvents.filter(e => {
+        return e.description && (e.description.includes("tm") || e.description.includes("TM"));
+    });
+    for (const ev of tmEvents) {
+        const mid = ev.match_id;
+        const match = matchesPlayed.find(m => m.match_id === mid);
+        if (!match) continue;
+        if (ev.team === "A") {
+            match.G_A -= 1;
+            match.S_A -= 1;
+        }
+        if (ev.team === "B") {
+            match.G_B -= 1;
+            match.S_B -= 1;
+        }
+    }
+
+    // Nyt kokoamme maalivahtien tilastot
+    // Haetaan kaikki joukkueiden pelaajat
+    let playersAll = [];
+    for (const team of teams) {
+        const teamPlayers = await fetchTeamPlayers(team.team_id);
+        playersAll = playersAll.concat(teamPlayers);
+    }
+
+    // Suodata pelaajat, joiden position on "mv" (maalivahti)
+    const goalies = playersAll.filter(p => p.position === 'mv');
+
+    // Tee strukturoitu lista maalivahdeista
+    const pd_goalies = goalies.map(g => ({
+        Name: g.Name,
+        Team: g.Team,
+        Games: 0,
+        xGOTA: 0,
+        GA: 0,
+        SA: 0,
+        Saves: 0,
+        GSAx: 0,
+        GSAxPerGame: 0,
+    }));
+
+    // Käydään jokainen maalivahti läpi ja lasketaan tilastot otteluiden perusteella
+    for (const g of pd_goalies) {
+        for (const m of matchesPlayed) {
+            if (m.Goalie_A === g.Name) {
+                g.Games += 1;
+                g.xGOTA += m.xGOT_B;
+                g.GA += m.G_B;
+                g.SA += m.SOG_B;
+                g.Saves += (m.SOG_B - m.G_B);
+            }
+            if (m.Goalie_B === g.Name) {
+                g.Games += 1;
+                g.xGOTA += m.xGOT_A;
+                g.GA += m.G_A;
+                g.SA += m.SOG_A;
+                g.Saves += (m.SOG_A - m.G_A);
+            }
+        }
+        g.GSAx = g.xGOTA - g.GA;
+        if (g.Games > 0) {
+            g.GSAxPerGame = round(g.GSAx / g.Games, 2);
+        } else {
+            g.GSAxPerGame = 0;
+        }
+    }
+
+    // Suodatetaan pois ne, joilla ei ole pelejä
+    const filtered_goalies = pd_goalies.filter(g => g.Games > 0);
+
+    // Järjestetään maalivahdit GSAxPerGame mukaan
+    filtered_goalies.sort((a, b) => b.GSAxPerGame - a.GSAxPerGame);
+
+    console.log("Goalie Stats:", filtered_goalies);
+
+    // Palautetaan (tai käytetään) kaikki tilastot
+    // Voit palauttaa objektin, jossa on teamStats, playerStats, goalieStats
+    return {
+        teamStats,
+        playerStats: pd_players.filter(p => p.Games > 0),  // aiempi pelaajalista suodatettuna
+        goalieStats: filtered_goalies,
+    };
 
 }
 
