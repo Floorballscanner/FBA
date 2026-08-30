@@ -39,13 +39,25 @@ def license_required(*tiers):
                 return view_func(request, *args, **kwargs)
 
             if license is not None and not license.is_active:
+                # Expired/inactive license: 'home' (index) requires an active license
+                # too, so redirecting there would just bounce straight back out here —
+                # send them to the public frontpage instead.
                 messages.error(
                     request,
                     f"Your {license.get_tier_display().lower()} license has expired. "
                     f"Please purchase a license at {BUY_LICENSE_URL} to keep using Floorball Scanner.",
                 )
-            else:
+                return redirect('frontpage')
+
+            if license is not None and license.is_active:
+                # Active license, just the wrong tier for this specific page (e.g. a
+                # trial or F-Liiga-only user hitting a full-app page). They still have
+                # a working dashboard, so keep them inside the app instead of kicking
+                # them out to the public site.
                 messages.error(request, "Your subscription doesn't include access to this page.")
+                return redirect('home')
+
+            messages.error(request, "Your subscription doesn't include access to this page.")
             return redirect('frontpage')
         return wrapped
     return decorator

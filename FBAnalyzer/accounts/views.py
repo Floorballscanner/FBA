@@ -1,6 +1,8 @@
 # Views is the file that contains information and functions of different html-views.
 
 
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -50,6 +52,13 @@ def start_trial(request):
 
             license = License.objects.create(tier='trial', max_seats=1)
             LicenseSeat.objects.create(license=license, user=user, email=user.email)
+
+            send_mail(
+                subject="New trial license created",
+                message=f"A new 14-day trial license was created for {user.email}.",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],
+            )
 
             messages.success(
                 request,
