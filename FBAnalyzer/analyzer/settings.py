@@ -165,21 +165,23 @@ REST_FRAMEWORK = {
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
+# EXTRA_CORS_ORIGINS / EXTRA_CSRF_TRUSTED_ORIGINS let a non-production environment (e.g.
+# staging on a *.herokuapp.com domain) add its own origin without touching the production list.
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',  # for localhost (REACT Default)
     'http://192.168.0.50:3000',  # for network
     'http://localhost:8080',  # for localhost (Developlemt)
     'http://192.168.0.50:8080',  # for network (Development)
-    'https://*.fbscanner.io'
-)
+    'https://*.fbscanner.io',
+) + tuple(filter(None, os.environ.get('EXTRA_CORS_ORIGINS', '').split(',')))
 
 CSRF_TRUSTED_ORIGINS = [
     'https://fbscanner.io/livedata',
     'https://www.fbscanner.io/livedata',
-    'https://*.fbscanner.io'
-]
+    'https://*.fbscanner.io',
+] + list(filter(None, os.environ.get('EXTRA_CSRF_TRUSTED_ORIGINS', '').split(',')))
 
-CSRF_COOKIE_DOMAIN = '.fbscanner.io'
+CSRF_COOKIE_DOMAIN = os.environ.get('CSRF_COOKIE_DOMAIN', '.fbscanner.io')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
