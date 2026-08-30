@@ -5,62 +5,79 @@ This is the about - infopage of the application.
 -->
 
 {% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container-fluid no-padding">
-    <div class="app-text" style="Padding-top: 60px;">
-        {% load static %}
-        <div class="row">
-            <div class="col-sm-12">
-                </br></br>
-                {% load static %}
-                <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
-                <h2>What is Floorball Scanner?</h2></br>
-                <p>Floorball Scanner gives you insight into your team's performance in real-time during
-                the game. You are able to see how each line performs and take actions based on the data.</p>
-                </br>
-                <iframe width="350" height="197" src="https://www.youtube.com/embed/faYZwFfryfc" title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-                </br></br>
-                <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px">
-            </div>
-        </div>
-        </br></br></br></br>
-        <div class="row">
-            <div class="col-sm-6">
-                <h3>Shotmap</h3></br>
-                <p>Map easily your and opponents shots and get a picture of how shots are distributed on the field.</p>
-            </div>
-            <div class="col-sm-6">
-                <img class="img-fluid" src="{% static 'shotmap.jpg' %}">
-            </div>
-        </div>
-        </br></br></br></br>
-        <div class="row">
-            <div class="col-sm-6">
-                <img src="{% static 'aboutpage_players.png' %}" height="300px">
-                <img src="{% static 'aboutpage_lines.png' %}" height="300px">
-            </div>
-            <div class="col-sm-6">
-                <h3>Advanced statistics</h3></br>
-                <p>See deeper into the game result with advanced statistics, such as expected goals (xG) and ball possessions
-                of each line individually. With advanced statistics provided by Floorball Scanner you are able to make better
-                and more informed decisions also during game.</p>
-            </div>
-        </div>
-        </br></br></br></br>
-        <div class="row">
-            <div class="col-sm-6">
-                <h3>Intuitive visualizations</h3></br>
-                <p>Sophisticated graphs and pictures help you form a better understanding of how your team and lines
-                are doing against the opponent.</p>
-            </div>
-            <div class="col-sm-6">
-                <img class="img-fluid" src="{% static 'aboutpage_graphs.png' %}">
-            </div>
-        </div>
-        </br></br>
-        <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
+<div class="landing">
+
+    <div class="landing-page-header">
+        <img src="{% static 'symbol_transparent.png' %}" width="72" height="72" alt="">
+        <h1>What is Floorball Scanner?</h1>
+        <p>
+            Floorball Scanner gives you insight into your team's performance in real-time
+            during the game. You are able to see how each line performs and take actions
+            based on the data.
+        </p>
     </div>
+
+    <!--
+    Demo video removed: the previous YouTube embed (faYZwFfryfc) returns
+    "Error 153 - Video player configuration error" directly from YouTube's
+    own embed URL, independent of this site (confirmed public, embedding
+    allowed, no copyright notices) — a broken encode on YouTube's side, not
+    a fixable setting. Re-add once a replacement video is ready.
+    -->
+
+    <section class="landing-feature">
+        <div class="landing-feature__media">
+            <img src="{% static 'shotmap.jpg' %}" alt="Example shot map">
+        </div>
+        <div class="landing-feature__text">
+            <h2>Shot map</h2>
+            <p>
+                Map easily your and opponents' shots and get a picture of how shots are
+                distributed on the field.
+            </p>
+        </div>
+    </section>
+
+    <section class="landing-feature landing-feature--reverse">
+        <div class="landing-feature__media landing-media-pair">
+            <img src="{% static 'aboutpage_players.png' %}" alt="Player statistics view">
+            <img src="{% static 'aboutpage_lines.png' %}" alt="Line statistics view">
+        </div>
+        <div class="landing-feature__text">
+            <h2>Advanced statistics</h2>
+            <p>
+                See deeper into the game result with advanced statistics, such as expected
+                goals (xG) and ball possession of each line individually. With advanced
+                statistics provided by Floorball Scanner you are able to make better and
+                more informed decisions also during the game.
+            </p>
+        </div>
+    </section>
+
+    <section class="landing-feature">
+        <div class="landing-feature__media">
+            <img src="{% static 'aboutpage_graphs.png' %}" alt="Performance graphs">
+        </div>
+        <div class="landing-feature__text">
+            <h2>Intuitive visualizations</h2>
+            <p>
+                Sophisticated graphs and pictures help you form a better understanding of
+                how your team and lines are doing against the opponent.
+            </p>
+        </div>
+    </section>
+
+    <section class="landing__section landing-footer-cta">
+        <h2>Ready to see it for yourself?</h2>
+        <a class="landing-btn landing-btn--primary" href="/signup" role="button">Sign up</a>
+    </section>
+
 </div>
 {% endblock %}

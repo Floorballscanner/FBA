@@ -1,7 +1,10 @@
 /*
-Landing page (index.html) styling only — scoped under .landing so it can never
-leak into the shared styles.css used by the rest of the app (team-selection,
-shot-map, editors, etc).
+Public/pre-login pages styling (index.html, about.html, sign_up.html,
+registration/login.html, f-liiga_front.html, f-liiga_live_front.html,
+references.html) — scoped under .landing so it can never leak into the
+shared styles.css used by the logged-in app (team-selection, shot-map,
+editors, etc). The name predates covering more than the homepage; kept
+as-is to avoid an unnecessary rename across already-shipped templates.
 */
 
 .landing {
@@ -145,6 +148,12 @@ shot-map, editors, etc).
     flex: 1 1 440px;
 }
 
+.landing-media-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
 .landing-feature__media img {
     width: 100%;
     height: auto;
@@ -282,4 +291,219 @@ shot-map, editors, etc).
         margin-left: auto;
         margin-right: auto;
     }
+
+    .landing-media-pair {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Page header — intro block for interior pages (about, references, f-liiga) */
+
+.landing-page-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 24px 32px;
+}
+
+.landing-page-header img {
+    margin: 0 auto 24px;
+    display: block;
+}
+
+.landing-page-header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+    margin: 0 0 16px;
+}
+
+.landing-page-header p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--landing-muted);
+    margin: 0;
+}
+
+/* Card grid — used for the F-Liiga hub links and references/testimonials */
+
+.landing-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 32px 24px 88px;
+}
+
+.landing-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 28px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 20px 40px -28px rgba(20, 22, 31, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: block;
+}
+
+a.landing-card:hover {
+    text-decoration: none;
+    color: inherit;
+    transform: translateY(-4px);
+    box-shadow: 0 24px 44px -24px rgba(20, 22, 31, 0.3);
+}
+
+.landing-card img {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.landing-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+    margin: 0 0 8px;
+}
+
+.landing-card p {
+    font-size: 15px;
+    color: var(--landing-muted);
+    margin: 0;
+}
+
+/* Testimonial cards (references.html) */
+
+.landing-testimonial {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 20px 40px -28px rgba(20, 22, 31, 0.25);
+}
+
+.landing-testimonial p.landing-quote {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--landing-ink);
+    margin: 0 0 20px;
+    font-style: italic;
+}
+
+.landing-testimonial .landing-quote-placeholder {
+    color: var(--landing-muted);
+    font-style: italic;
+}
+
+.landing-testimonial-author {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+}
+
+.landing-testimonial-role {
+    font-size: 13px;
+    color: var(--landing-muted);
+}
+
+/* Centered content card — login form, simple message pages */
+
+.landing-narrow {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 72px 24px 96px;
+}
+
+.landing-form-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 32px;
+    box-shadow: 0 20px 40px -28px rgba(20, 22, 31, 0.25);
+    text-align: center;
+}
+
+.landing-form-card h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+    margin: 0 0 12px;
+}
+
+.landing-form-card > p {
+    font-size: 15px;
+    color: var(--landing-muted);
+    margin: 0 0 28px;
+}
+
+.landing-form-card form p {
+    text-align: left;
+    margin: 0 0 18px;
+}
+
+.landing-form-card form label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--landing-ink);
+    margin: 0 0 6px;
+}
+
+.landing-form-card form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #d8dae3;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.landing-form-card form input:focus {
+    outline: none;
+    border-color: var(--landing-navy);
+    box-shadow: 0 0 0 3px rgba(0, 32, 114, 0.12);
+}
+
+.landing-form-card form input[type="submit"] {
+    background: var(--landing-navy);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.landing-form-card form input[type="submit"]:hover {
+    box-shadow: 0 12px 24px -10px rgba(0, 32, 114, 0.55);
+}
+
+/* Social icon row (sign_up.html) */
+
+.landing-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 28px 0;
+}
+
+.landing-social a {
+    display: block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 12px 24px -14px rgba(20, 22, 31, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease;
+}
+
+.landing-social a:hover {
+    transform: translateY(-3px);
+}
+
+.landing-social img {
+    width: 26px;
+    height: 26px;
 }
