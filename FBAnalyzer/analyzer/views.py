@@ -35,9 +35,6 @@ def references(request):
 def fliigalive_front(request):
     return render(request, 'f-liiga_live_front.html')
 
-def fliiga_main_front(request):
-    return render(request, 'f-liiga_front.html')
-
 def inssidivari_main(request):
     return render(request, 'inssidivari.html')
 
