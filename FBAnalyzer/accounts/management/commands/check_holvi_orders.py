@@ -1,4 +1,5 @@
 import email
+import html as html_module
 import imaplib
 import re
 
@@ -50,12 +51,34 @@ def get_plain_text_body(msg):
         for part in msg.walk():
             if part.get_content_type() == 'text/html':
                 charset = part.get_content_charset() or 'utf-8'
-                html = part.get_payload(decode=True).decode(charset, errors='replace')
-                return re.sub(r'<[^<]+?>', ' ', html)
+                raw_html = part.get_payload(decode=True).decode(charset, errors='replace')
+                return html_to_text(raw_html)
         return ''
     charset = msg.get_content_charset() or 'utf-8'
     payload = msg.get_payload(decode=True)
-    return payload.decode(charset, errors='replace') if payload else ''
+    if not payload:
+        return ''
+    text = payload.decode(charset, errors='replace')
+    if msg.get_content_type() == 'text/html':
+        return html_to_text(text)
+    return text
+
+
+def html_to_text(raw_html):
+    """Converts an HTML order email into readable lines, one per table row/paragraph,
+    with cells separated by tabs — matching the layout of the plain-text version Holvi
+    also sends, which the parsing functions above are written against."""
+    text = re.sub(r'(?is)<style.*?</style>', '', raw_html)
+    text = re.sub(r'(?is)<script.*?</script>', '', text)
+    text = re.sub(r'(?i)<t[dh][^>]*>', '\t', text)
+    text = re.sub(r'(?i)<(br|/tr|/p|/div|/li|/h[1-6])\s*/?>', '\n', text)
+    text = re.sub(r'<[^<]+?>', '', text)
+    text = html_module.unescape(text)
+    # Collapse repeated blank lines/tabs left behind by stripped layout tags, without
+    # touching single spaces within normal sentence/product-name text.
+    text = re.sub(r'[ \t]{2,}', '\t', text)
+    text = re.sub(r'\n{2,}', '\n', text)
+    return text
 
 
 class Command(BaseCommand):
@@ -89,7 +112,10 @@ class Command(BaseCommand):
         self.stdout.write(f"Found {len(message_ids)} unread Holvi order email(s).")
 
         for msg_id in message_ids:
-            status, msg_data = imap.fetch(msg_id, '(RFC822)')
+            # BODY.PEEK[] (not RFC822) so merely inspecting a message never marks it \Seen
+            # as a side effect — only the explicit store() calls below should do that,
+            # and only when not dry_run.
+            status, msg_data = imap.fetch(msg_id, '(BODY.PEEK[])')
             if status != 'OK' or not msg_data or msg_data[0] is None:
                 continue
             msg = email.message_from_bytes(msg_data[0][1])
