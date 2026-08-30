@@ -1,0 +1,32 @@
+<!--
+
+Self-service 14-day trial signup. No admin step — creates the User, License,
+and LicenseSeat immediately on submit.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="landing-narrow">
+        <div class="landing-form-card">
+            <h1>Start your free trial</h1>
+            <p>
+                14 days of full access to Floorball Scanner — everything except
+                F-Liiga results. No payment required.
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Start trial">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

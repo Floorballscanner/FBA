@@ -8,9 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from rest_framework.response import Response
 
-from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time, LicenseSeat
+from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time, License, LicenseSeat
 from django.http import HttpResponseRedirect
-from accounts.forms import AddNewPlayer
+from accounts.forms import AddNewPlayer, TrialSignupForm
 from accounts.decorators import license_required
 from datetime import datetime
 from rest_framework import viewsets, generics
@@ -39,13 +39,36 @@ def activate(request, token):
 
     return render(request, 'accounts/activate.html', {'form': form, 'seat': seat})
 
+
+def start_trial(request):
+    if request.method == 'POST':
+        form = TrialSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.email = form.cleaned_data['email']
+            user.save()
+
+            license = License.objects.create(tier='trial', max_seats=1)
+            LicenseSeat.objects.create(license=license, user=user, email=user.email)
+
+            messages.success(
+                request,
+                "Your 14-day trial is ready. Please log in — it includes full access "
+                "except F-Liiga results."
+            )
+            return redirect('login')
+    else:
+        form = TrialSignupForm()
+
+    return render(request, 'accounts/start_trial.html', {'form': form})
+
 @login_required
-@license_required('fliiga', 'team', 'club')
+@license_required('fliiga', 'team', 'club', 'trial')
 def index(request):
     return render(request,'accounts/index.html')
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def new_game(request):
     levels = Level.objects.all().order_by('name')
 
@@ -55,7 +78,7 @@ def new_game(request):
     return render(request, 'accounts/newgame.html', context=context)
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def edit_players(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -70,7 +93,7 @@ def edit_players(request):
     return render(request, 'accounts/edit_players.html', context=context)
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def edit_levels(request):
     levels = Level.objects.all().order_by('name')
 
@@ -91,7 +114,7 @@ def edit_levels(request):
     return render(request, 'accounts/edit_levels.html', context=context)
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def edit_teams(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -104,7 +127,7 @@ def edit_teams(request):
     return render(request, 'accounts/edit_teams.html', context=context)
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def analyse(request):
 
     if request.user.is_staff:
@@ -129,7 +152,7 @@ def lite(request):
     return render(request, 'accounts/lite.html')
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def add_new_player(request):
 
     """View function for adding a new player to the team."""
@@ -237,7 +260,7 @@ class GameList(generics.ListAPIView):
         return queryset
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def premium_game(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -251,7 +274,7 @@ def premium_game(request):
     return render(request, 'accounts/premiumgame.html', context=context)
 
 @login_required
-@license_required('fliiga', 'team', 'club')
+@license_required('fliiga', 'team', 'club', 'trial')
 def test_environment(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -265,7 +288,7 @@ def test_environment(request):
     return render(request, 'accounts/test_environment.html', context=context)
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def premium_analysis(request):
 
     if request.user.is_staff:
@@ -281,18 +304,18 @@ def premium_analysis(request):
     return render(request, 'accounts/premium_analysis.html', context=context)
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def edit_data(request):
 
     return render(request, 'accounts/editdata.html')
 
 @login_required
-@license_required('team', 'club')
+@license_required('team', 'club', 'trial')
 def saved_games(request):
     return render(request,'accounts/saved_games.html')
 
 @login_required
-@license_required('fliiga', 'team', 'club')
+@license_required('fliiga', 'team', 'club', 'trial')
 def update_info(request):
 
     return render(request, 'accounts/update_info.html')
