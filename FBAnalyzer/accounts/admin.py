@@ -1,9 +1,9 @@
-from django.conf import settings
 from django.contrib import admin, messages
-from django.core.mail import send_mail
-from django.urls import reverse
+from django.core.exceptions import ValidationError
+from django.forms import BaseInlineFormSet
 
-from .models import Player, Team, Game, Level, Shot, Line, Position, LiveData, Time, License
+from .licensing import send_activation_email
+from .models import Player, Team, Game, Level, Shot, Line, Position, LiveData, Time, License, LicenseSeat
 # Register your models here.
 
 admin.site.register(Player)
@@ -17,30 +17,63 @@ admin.site.register(LiveData)
 admin.site.register(Time)
 
 
+class LicenseSeatInlineFormSet(BaseInlineFormSet):
+    """Model-level LicenseSeat.clean() can't see sibling forms submitted in the same
+    request (they're all still unsaved when each one validates), so max_seats has to be
+    enforced here across the whole formset instead."""
+
+    def clean(self):
+        super().clean()
+        if any(self.errors):
+            return
+        max_seats = self.instance.max_seats
+        if max_seats is None:
+            return
+        count = sum(
+            1 for form in self.forms
+            if form.cleaned_data and not form.cleaned_data.get('DELETE', False)
+        )
+        if count > max_seats:
+            raise ValidationError(f"This license allows at most {max_seats} seat(s), but {count} are set.")
+
+
+class LicenseSeatInline(admin.TabularInline):
+    model = LicenseSeat
+    formset = LicenseSeatInlineFormSet
+    extra = 0
+    fields = ('email', 'user', 'activation_token')
+    readonly_fields = ('activation_token',)
+
+
 @admin.register(License)
 class LicenseAdmin(admin.ModelAdmin):
-    list_display = ('email', 'tier', 'user', 'is_active', 'starts_at', 'expires_at')
+    list_display = ('tier', 'seat_count', 'max_seats', 'is_active', 'starts_at', 'expires_at')
     list_filter = ('tier', 'is_active')
-    search_fields = ('email', 'user__username')
-    actions = ['send_activation_email']
+    inlines = [LicenseSeatInline]
 
-    @admin.action(description="Send activation email to selected (unclaimed) licenses")
-    def send_activation_email(self, request, queryset):
+    @admin.display(description="Seats")
+    def seat_count(self, obj):
+        return obj.seats.count()
+
+
+@admin.register(LicenseSeat)
+class LicenseSeatAdmin(admin.ModelAdmin):
+    list_display = ('email', 'license', 'user', 'is_claimed')
+    list_filter = ('license__tier',)
+    search_fields = ('email', 'user__username')
+    actions = ['send_activation_email_action']
+
+    @admin.display(description="Claimed", boolean=True)
+    def is_claimed(self, obj):
+        return obj.user is not None
+
+    @admin.action(description="Send activation email to selected (unclaimed) seats")
+    def send_activation_email_action(self, request, queryset):
         unclaimed = queryset.filter(user__isnull=True)
+        base_url = request.build_absolute_uri('/')
         sent = 0
-        for license in unclaimed:
-            activation_url = request.build_absolute_uri(
-                reverse('license-activate', args=[license.activation_token])
-            )
-            send_mail(
-                subject="Activate your Floorball Scanner license",
-                message=(
-                    f"Your Floorball Scanner license is ready to activate.\n\n"
-                    f"Set up your username and password here:\n{activation_url}"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[license.email],
-            )
+        for seat in unclaimed:
+            send_activation_email(seat, base_url)
             sent += 1
         skipped = queryset.count() - sent
         if sent:
@@ -48,6 +81,6 @@ class LicenseAdmin(admin.ModelAdmin):
         if skipped:
             self.message_user(
                 request,
-                f"Skipped {skipped} license(s) that already have a user.",
+                f"Skipped {skipped} seat(s) that already have a user.",
                 level=messages.WARNING,
             )

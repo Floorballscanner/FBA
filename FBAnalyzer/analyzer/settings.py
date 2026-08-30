@@ -191,6 +191,10 @@ CSRF_COOKIE_DOMAIN = os.environ.get('CSRF_COOKIE_DOMAIN', '.fbscanner.io')
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'True') == 'True'
 
+# Site root used to build absolute links (e.g. license activation emails) outside of a
+# request context, such as in management commands.
+SITE_URL = os.environ.get('SITE_URL', 'https://fbscanner.io')
+
 # Defaults to printing emails to the console/log so no environment ever sends real email
 # unless EMAIL_HOST_USER/EMAIL_HOST_PASSWORD are explicitly set (production only, via
 # Gmail SMTP + an account App Password — not the regular Gmail password).

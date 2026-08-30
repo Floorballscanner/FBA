@@ -5,10 +5,10 @@ from django.shortcuts import redirect
 
 
 def get_active_license(user):
-    """Returns the user's License if it exists and is currently active, else None."""
-    license = getattr(user, 'license', None)
-    if license is not None and license.is_active:
-        return license
+    """Returns the user's seat's License if it exists and is currently active, else None."""
+    seat = getattr(user, 'licenseseat', None)
+    if seat is not None and seat.license.is_active:
+        return seat.license
     return None
 
 

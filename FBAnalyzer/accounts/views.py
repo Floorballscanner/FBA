@@ -8,49 +8,44 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from rest_framework.response import Response
 
-from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time, License
+from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time, LicenseSeat
 from django.http import HttpResponseRedirect
 from accounts.forms import AddNewPlayer
 from accounts.decorators import license_required
-from datetime import datetime, timedelta
-from django.utils import timezone
+from datetime import datetime
 from rest_framework import viewsets, generics
 from django.forms import modelformset_factory
 from .serializers import UserSerializer, TeamSerializer, LineSerializer, PositionSerializer, LevelSerializer, TimeSerializer
 from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerializer, LiveDataSerializer, ShotSerializer
 
-LICENSE_DURATION = timedelta(days=365)
-
 
 def activate(request, token):
-    license = get_object_or_404(License, activation_token=token, user__isnull=True)
+    seat = get_object_or_404(LicenseSeat, activation_token=token, user__isnull=True)
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.email = license.email
+            user.email = seat.email
             user.save()
 
-            license.user = user
-            license.starts_at = timezone.now()
-            license.expires_at = license.starts_at + LICENSE_DURATION
-            license.save()
+            seat.user = user
+            seat.save()
 
             messages.success(request, "Your account is ready. Please log in.")
             return redirect('login')
     else:
         form = UserCreationForm()
 
-    return render(request, 'accounts/activate.html', {'form': form, 'license': license})
+    return render(request, 'accounts/activate.html', {'form': form, 'seat': seat})
 
 @login_required
-@license_required('fliiga', 'full')
+@license_required('fliiga', 'team', 'club')
 def index(request):
     return render(request,'accounts/index.html')
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def new_game(request):
     levels = Level.objects.all().order_by('name')
 
@@ -60,7 +55,7 @@ def new_game(request):
     return render(request, 'accounts/newgame.html', context=context)
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def edit_players(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -75,7 +70,7 @@ def edit_players(request):
     return render(request, 'accounts/edit_players.html', context=context)
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def edit_levels(request):
     levels = Level.objects.all().order_by('name')
 
@@ -96,7 +91,7 @@ def edit_levels(request):
     return render(request, 'accounts/edit_levels.html', context=context)
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def edit_teams(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -109,7 +104,7 @@ def edit_teams(request):
     return render(request, 'accounts/edit_teams.html', context=context)
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def analyse(request):
 
     if request.user.is_staff:
@@ -134,7 +129,7 @@ def lite(request):
     return render(request, 'accounts/lite.html')
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def add_new_player(request):
 
     """View function for adding a new player to the team."""
@@ -242,7 +237,7 @@ class GameList(generics.ListAPIView):
         return queryset
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def premium_game(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -256,7 +251,7 @@ def premium_game(request):
     return render(request, 'accounts/premiumgame.html', context=context)
 
 @login_required
-@license_required('fliiga', 'full')
+@license_required('fliiga', 'team', 'club')
 def test_environment(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -270,7 +265,7 @@ def test_environment(request):
     return render(request, 'accounts/test_environment.html', context=context)
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def premium_analysis(request):
 
     if request.user.is_staff:
@@ -286,18 +281,18 @@ def premium_analysis(request):
     return render(request, 'accounts/premium_analysis.html', context=context)
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def edit_data(request):
 
     return render(request, 'accounts/editdata.html')
 
 @login_required
-@license_required('full')
+@license_required('team', 'club')
 def saved_games(request):
     return render(request,'accounts/saved_games.html')
 
 @login_required
-@license_required('fliiga', 'full')
+@license_required('fliiga', 'team', 'club')
 def update_info(request):
 
     return render(request, 'accounts/update_info.html')
@@ -316,22 +311,22 @@ class UpdatePlayer(generics.UpdateAPIView):
         return Response(serializer.data)
 
 @login_required
-@license_required('fliiga', 'full')
+@license_required('fliiga', 'team', 'club')
 def fliigagame(request, nr):
     return render(request, 'f-liiga_game.html')
 @login_required
-@license_required('fliiga', 'full')
+@license_required('fliiga', 'team', 'club')
 def fliiga_main(request):
     return render(request, 'f-liiga.html')
 @login_required
-@license_required('fliiga', 'full')
+@license_required('team', 'club')
 def fliiga_results(request):
     return render(request, 'f-liiga_results.html')
 @login_required
-@license_required('fliiga', 'full')
+@license_required('fliiga', 'team', 'club')
 def fliigalive(request):
     return render(request, 'f-liiga_live.html')
 @login_required
-@license_required('fliiga', 'full')
+@license_required('team', 'club')
 def fliiga_statistics(request):
     return render(request, 'f-liiga_statistics.html')
