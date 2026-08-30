@@ -37,13 +37,17 @@ if os.path.isfile(dotenv_file):
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!bxves#1y8oy5trf7_kmc*z)-_1tyv77trs)4b#wm4w06w4x^!'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    '!bxves#1y8oy5trf7_kmc*z)-_1tyv77trs)4b#wm4w06w4x^!',  # local-dev fallback only
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Defaults preserve current (pre-refactor) behavior so this change is a no-op until
+# DEBUG / ALLOWED_HOSTS config vars are explicitly set per environment (see staging plan).
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-# ALLOWED_HOSTS = ['192.168.68.114','localhost','172.20.10.3']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
