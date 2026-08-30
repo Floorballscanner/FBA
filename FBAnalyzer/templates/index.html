@@ -25,7 +25,6 @@ This is the landing page of the application.
             </p>
             <div class="landing-cta">
                 <a class="landing-btn landing-btn--primary" href="/signup" role="button">Sign up</a>
-                <a class="landing-btn landing-btn--ghost" href="#demo" role="button">Watch demo</a>
             </div>
             <p class="landing-trust">
                 Trusted by elite teams in Finland, Czech Republic, and Switzerland.
@@ -70,15 +69,25 @@ This is the landing page of the application.
         </div>
     </section>
 
+    <!--
+    Demo video removed: the previous YouTube embed (faYZwFfryfc) returns
+    "Error 153 - Video player configuration error" directly from YouTube's
+    own embed URL, independent of this site (confirmed public, embedding
+    allowed, no copyright notices) — a broken encode on YouTube's side, not
+    a fixable setting. Once a new video is ready (YouTube or elsewhere,
+    e.g. a self-hosted mp4 or Vimeo), re-add a section here:
+
     <section class="landing-demo" id="demo">
         <h2>See it in action</h2>
         <div class="landing-video">
-            <iframe src="https://www.youtube.com/embed/faYZwFfryfc" title="Floorball Scanner demo video"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
+            ... embed or <video> tag goes inside .landing-video, which
+            already provides the rounded box / shadow / 16:9 aspect ratio
+            regardless of the video source ...
         </div>
     </section>
+
+    and restore the "Watch demo" button in the hero CTA (points to #demo).
+    -->
 
     <section class="landing__section landing-footer-cta">
         <h2>Ready to get ahead of your opponent?</h2>
