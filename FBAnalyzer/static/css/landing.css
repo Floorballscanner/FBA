@@ -211,6 +211,7 @@ as-is to avoid an unnecessary rename across already-shipped templates.
 .landing-demo {
     text-align: center;
     background: #fff;
+    padding: 72px 24px;
 }
 
 .landing-demo h2 {
