@@ -162,6 +162,19 @@ as-is to avoid an unnecessary rename across already-shipped templates.
     display: block;
 }
 
+/* shotmap.jpg is a small, low-res source image (180x285) — stretching it to
+   the full column width like the other feature photos makes it look blurry.
+   Cap it near its native size instead of scaling it up. */
+.landing-feature__media--compact {
+    display: flex;
+    justify-content: center;
+}
+
+.landing-feature__media--compact img {
+    width: auto;
+    max-width: 200px;
+}
+
 .landing-feature h2 {
     font-size: 30px;
     font-weight: 700;
