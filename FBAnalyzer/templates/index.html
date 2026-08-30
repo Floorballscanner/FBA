@@ -5,72 +5,86 @@ This is the landing page of the application.
 -->
 
 {% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container-fluid no-padding">
-    <div class="app-text" style="Padding-top: 30px;">
-        <div class="row">
-            <div class="col-sm-6">
-                <h3>Welcome to Floorball Scanner, the best analyzer software.</h3></br>
-                <p>Floorball Scanner is a web-based tool for Floorball coaches to start analysing their game.
-                    Floorball Scanner is very easy to use and it gives you data about your team, line, and individual player performance.
-                    Make data-based decisions that keep you ahead of your opponent.</p></br>
-                <p>Floorball Scanner is used by several Elite-teams in multiple countries, such as Finland, Czech Republic, and Switzerland.
-                    It was founded by two former Finnish Elite-players and analytics coaches.</p></br>
-                <a class="btn btn-secondary" href="/signup" role="button">Sign up</a>
-                <p> </p></br>
+<div class="landing">
+
+    <section class="landing-hero">
+        <div class="landing-hero__text">
+            <p class="landing-eyebrow">Floorball Analytics Platform</p>
+            <h1>Make data-driven decisions that keep you ahead of your opponent.</h1>
+            <p class="landing-lead">
+                Floorball Scanner is a web-based tool for floorball coaches to analyse their game.
+                Get instant insight into team, line, and individual player performance — built by
+                two former Finnish Elite-league players and analytics coaches.
+            </p>
+            <div class="landing-cta">
+                <a class="landing-btn landing-btn--primary" href="/signup" role="button">Sign up</a>
+                <a class="landing-btn landing-btn--ghost" href="#demo" role="button">Watch demo</a>
             </div>
-            <div class="col-sm-6 px-0">
-                {% load static %}
-                <img class="img-fluid" src="{% static 'background2.jpg' %}" width="100%" >
-            </div>
+            <p class="landing-trust">
+                Trusted by elite teams in Finland, Czech Republic, and Switzerland.
+            </p>
         </div>
-        </br></br>
-        {% load static %}
-        <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px">
-        </br></br>
-        <div class="row">
-             <div class="col-sm-6 px-0">
-                {% load static %}
-                <img class="img-fluid" src="{% static 'background1.jpg' %}" width="100%">
-            </div>
-            <div class="col-sm-6">
-                <h3>Analyse your team performance</h3></br>
-                <p>Floorball Scanner gives you information about your team performance. With the software you
-                are able to see how your team and each line performs on the field.</p></br>
-            </div>
+        <div class="landing-hero__media">
+            <img src="{% static 'background2.jpg' %}" alt="Floorball Scanner analytics in use during a game">
         </div>
-        </br></br>
-        {% load static %}
-        <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
-        <div class="row">
-            <div class="col-sm-6">
-                <h3>Real-time data</h3></br>
-                <p>With Floorball Scanner you have access to real-time data of your team during the game.</p></br>
-                <ul>
-                    <li>Ball possession</li>
-                    <li>Time on court and ball with averages</li>
-                    <li>Saved, missed, and blocked shots with shotmap</li>
-                    <li>Goals and Plusminus</li>
-                    <li>Expected Goals (xG)</li>
-                </ul>
-                </br></br>
-            </div>
-            <div class="col-sm-6 px-0">
-                {% load static %}
-                <img class="img-fluid" src="{% static 'background3.jpg' %}" width="100%">
-            </div>
+    </section>
+
+    <section class="landing-feature">
+        <div class="landing-feature__media">
+            <img src="{% static 'background1.jpg' %}" alt="Coach analysing team performance data">
         </div>
-        </br></br>
-        {% load static %}
-        <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
-        <iframe width="350" height="197" src="https://www.youtube.com/embed/faYZwFfryfc" title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-        </br></br>
-        {% load static %}
-        <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
-        <h2>Contact information</h2></br>
-        <a href="mailto:floorballscanner@gmail.com">floorballscanner@gmail.com</a></br></br>
-    </div>
+        <div class="landing-feature__text">
+            <h2>Analyse your team performance</h2>
+            <p>
+                Floorball Scanner gives you information about your team performance. With the
+                software you are able to see how your team and each line performs on the field —
+                turning game footage into decisions you can act on before the next shift.
+            </p>
+        </div>
+    </section>
+
+    <section class="landing-feature landing-feature--reverse">
+        <div class="landing-feature__media">
+            <img src="{% static 'background3.jpg' %}" alt="Real-time floorball match data on screen">
+        </div>
+        <div class="landing-feature__text">
+            <h2>Real-time data, live</h2>
+            <p>
+                With Floorball Scanner you have access to real-time data of your team during
+                the game.
+            </p>
+            <ul class="landing-checklist">
+                <li>Ball possession</li>
+                <li>Time on court and ball with averages</li>
+                <li>Saved, missed, and blocked shots with shot map</li>
+                <li>Goals and plus/minus</li>
+                <li>Expected Goals (xG)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="landing-demo" id="demo">
+        <h2>See it in action</h2>
+        <div class="landing-video">
+            <iframe src="https://www.youtube.com/embed/faYZwFfryfc" title="Floorball Scanner demo video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section class="landing__section landing-footer-cta">
+        <h2>Ready to get ahead of your opponent?</h2>
+        <a class="landing-btn landing-btn--primary" href="/signup" role="button">Sign up</a>
+        <p>Questions? <a href="mailto:floorballscanner@gmail.com">floorballscanner@gmail.com</a></p>
+    </section>
+
 </div>
 {% endblock %}
