@@ -24,13 +24,19 @@ EMAIL_RE = re.compile(r'[\w.+-]+@[\w-]+\.[\w.-]+')
 
 
 def extract_buyer_email(body):
-    """The order email also contains our own merchant address on a separate
-    "Holvi-kauppias" line, so this only looks at the "Maksaja" (payer) line."""
-    for line in body.splitlines():
-        if line.strip().lower().startswith('maksaja'):
-            match = EMAIL_RE.search(line)
-            if match:
-                return match.group(0)
+    """The order email also contains our own merchant address earlier, under a separate
+    "Holvi-kauppias" line, so this starts looking only after the "Maksaja" (payer) line.
+    "Maksaja" sits alone on its own line, followed by the payer's name/company/country/
+    email/phone each on their own line in turn — so this checks the next several lines,
+    not just the "Maksaja" line itself."""
+    lines = body.splitlines()
+    for i, line in enumerate(lines):
+        if line.strip().lower() == 'maksaja':
+            for candidate in lines[i + 1:i + 10]:
+                match = EMAIL_RE.search(candidate)
+                if match:
+                    return match.group(0)
+            break
     return None
 
 
