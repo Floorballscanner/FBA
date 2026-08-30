@@ -1,68 +1,33 @@
 <!--
 
 This is the Signup - html - page content file. It is shown when the sign up - button is pressed.
-It extends base_layout.html with Django and also utilizes Django's existing signup functionalities.
 
 -->
 
 {% extends 'base_layout.html' %}
 {% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
 {% block content %}
+<div class="landing">
 
-<div class="container-fluid no-padding">
-    <div class="app-text" style="Padding-top: 40px;">
-        <h3>Sign up to Floorball Scanner</h3></br>
-        <p>Send us a message in social media and we'll be in contact</p></br>
-        <a href="https://instagram.com/floorballscanner"><img src="{% static 'instagram_icon.png' %}" width="100px"</a></br></br>
-        <a href="https://twitter.com/floorballscnr"><img src="{% static 'twitter_icon.png' %}" width="100px"></a></br></br></br>
-
-        <!--<p>You can also use the contact form, send us your detail information and we'll be in contact.</p></br></br>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <form>
-                    <input required id="first-name" name="firstname" autocomplete="given-name" placeholder="First name" maxlength="20">
-                    </br></br>
-                    <input required id="last-name" name="lastname" autocomplete="family-name" placeholder="Last name" maxlength="20">
-                    </br></br>
-                    <input required id="email-addr" name="emailaddr" autocomplete="email" placeholder="Email address" maxlength="50">
-                    </br></br>
-                    <textarea id="message" name="messagefield" rows="10" maxlength="2000" wrap="on">I want to know about Floorball Scanner, please send me more information.</textarea>
-                    </br></br>
-                    <button id="sendmail" class="btn btn-secondary" onclick="SendMail()">Submit</button>
-                </form>
-            </div>
-        </div>
-        </br></br>-->
-
-    {% load static %}
-    <img src="{% static 'symbol_transparent.png' %}" width="100px" height="100px"></br></br>
+    <div class="landing-page-header">
+        <img src="{% static 'symbol_transparent.png' %}" width="72" height="72" alt="">
+        <h1>Sign up to Floorball Scanner</h1>
+        <p>Send us a message on social media and we'll be in touch.</p>
     </div>
+
+    <div class="landing-social">
+        <a href="https://instagram.com/floorballscanner" aria-label="Floorball Scanner on Instagram">
+            <img src="{% static 'instagram_icon.png' %}" alt="">
+        </a>
+        <a href="https://twitter.com/floorballscnr" aria-label="Floorball Scanner on Twitter">
+            <img src="{% static 'twitter_icon.png' %}" alt="">
+        </a>
+    </div>
+
 </div>
-
-<script>
-
-function SendMail() {
-
-    var fname = document.getElementById("first-name").value;
-    var lname = document.getElementById("last-name").value;
-    var email = document.getElementById("email-addr").value;
-    var msg = document.getElementById("message").value;
-
-    Email.send({
-        SecureToken : "3b145e7d-a832-4993-b00e-15a5d25b5b98",
-        To : 'floorballscanner@gmail.com',
-        From : 'floorballscanner@gmail.com',
-        Subject : "Website Inquiry from Floorball Scanner",
-        Body : "<html><h2>"+ fname +" "+ lname +" wants to know about Floorball Scanner</h2></br></br><p>Sender email: "+ email +"</p></br><p>"+ msg +"</p></html>",
-        }).then(
-            message => alert(message)
-    );
-
-    alert("Email successfully sent")
-    window.location.href = '/';
-}
-
-</script>
-
 {% endblock %}
