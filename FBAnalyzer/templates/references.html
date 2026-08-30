@@ -1,19 +1,49 @@
 <!--
 
-This is the about - infopage of the application.
+This is the references/testimonials page. Content is placeholder — replace the
+quotes and names below with real quotes from coaches/teams once available.
 
 -->
 
 {% extends 'base_layout.html' %}
-{% block content %}
 {% load static %}
-<div class="container-fluid no-padding">
-    <div class="app-text" style="Padding-top: 60px;">
-        <div class="row">
-            <div class="col-sm-12">
 
-            </div>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+
+    <div class="landing-page-header">
+        <img src="{% static 'symbol_transparent.png' %}" width="72" height="72" alt="">
+        <h1>What coaches say</h1>
+        <p>Floorball Scanner is used by elite teams in Finland, Czech Republic, and Switzerland.</p>
+    </div>
+
+    <div class="landing-card-grid">
+        <div class="landing-testimonial">
+            <p class="landing-quote landing-quote-placeholder">
+                “Placeholder — replace with a real quote from a coach or team.”
+            </p>
+            <div class="landing-testimonial-author">Team name</div>
+            <div class="landing-testimonial-role">Coach / role</div>
+        </div>
+        <div class="landing-testimonial">
+            <p class="landing-quote landing-quote-placeholder">
+                “Placeholder — replace with a real quote from a coach or team.”
+            </p>
+            <div class="landing-testimonial-author">Team name</div>
+            <div class="landing-testimonial-role">Coach / role</div>
+        </div>
+        <div class="landing-testimonial">
+            <p class="landing-quote landing-quote-placeholder">
+                “Placeholder — replace with a real quote from a coach or team.”
+            </p>
+            <div class="landing-testimonial-author">Team name</div>
+            <div class="landing-testimonial-role">Coach / role</div>
         </div>
     </div>
+
 </div>
 {% endblock %}

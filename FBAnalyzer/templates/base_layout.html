@@ -48,10 +48,13 @@ when there is not a logged in user.
                     <a class="nav-link" href="/live">LIVE</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/trial">Free Trial</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="https://holvi.com/shop/fbscanner/">Buy Licence</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About Us</a>
+                    <a class="nav-link" href="/references">References</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/signup">Contact Us</a>
@@ -63,6 +66,14 @@ when there is not a logged in user.
           </div>
         </nav>
     </div>
+
+    {% if messages %}
+    <div class="container-fluid" style="padding-top: 16px;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <!-- This is where the extended content is placed -->
         {% block content %}

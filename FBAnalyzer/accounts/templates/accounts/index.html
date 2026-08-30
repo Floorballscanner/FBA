@@ -6,53 +6,48 @@ It extends app_layout.html with Django
 -->
 
 {% extends 'app_layout.html' %}
-{% block content %}
 {% load static %}
-<div class="container" style="Padding-top: 10px;">
-	<div class="frontpage-choices">
-		<div class="row">
-			<div class="col-sm-12">
-				<h4>Information</h4>
-				<br>
-				<p>If you're having problems with the Floorball Scanner, please try first with a different
-				browser. We recommend Google Chrome or Safari.</p>
-				<p>10.9.2024 New Season Update published. Read more about the new release <a href="/accounts/update_info">here.</a></p>
-				<hr width="100%" size="2" align="center" color="#002072" noshade>
-			</div>
-		</div>
-		<div class="row" style="Padding-top: 20px;">
-			<div class="col-sm-3">
-				{% load static %}
-				<img src="{% static 'fliigalogo.svg' %}" width="40px" height="40px"><br>
-				<h2 style="Padding-top: 5px;">F-Liiga results</h2><br>
-				<a class="btn btn-primary" href="/accounts/fliiga" role="button">Select</a><br><br>
-				<p>Finnish F-Liiga and Inssi-Divari Results</p>
-				<br><br>
-			</div>
-			<div class="col-sm-3">
-				{% load static %}
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
-				<h2 style="Padding-top: 5px;">Edit data</h2><br>
-				<a class="btn btn-primary" href="/accounts/edit_data" role="button">Select</a><br><br>
-				<p>Edit level / team / player data</p>
-				<br><br>
-			</div>
-			<div class="col-sm-3">
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
-				<h2 style="Padding-top: 5px;">My Games</h2><br>
-				<a class="btn btn-primary" href="/accounts/saved_games" role="button">Select</a><br><br>
-				<p>Visualise all your analysed games<br>and see how you have performed</p>
-				<br><br>
-			</div>
-			<div class="col-sm-3">
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
-				<h2 style="Padding-top: 5px;">Analyse new game</h2><br>
-				<a class="btn btn-primary" href="/accounts/premium_game" role="button">Select</a><br><br>
-				<p>Start analyzing a new game</p>
-				<br><br>
-			</div>
-		</div>
-	</div>
-</div>
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+
+    <div class="landing-page-header">
+        <h1>Welcome back</h1>
+        <p>
+            If you're having problems with the Floorball Scanner, please try first with a
+            different browser — we recommend Google Chrome or Safari.
+            New here? <a href="https://youtu.be/faYZwFfryfc" target="_blank" rel="noopener">Watch the how-to video</a>
+            for a quick walkthrough. 10.9.2024 New Season Update published — read more
+            <a href="/accounts/update_info">here</a>.
+        </p>
+    </div>
+
+    <div class="landing-card-grid">
+        <a class="landing-card" href="/accounts/fliiga">
+            <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+            <h3>F-Liiga results</h3>
+            <p>Finnish F-Liiga and Inssi-Divari results.</p>
+        </a>
+        <a class="landing-card" href="/accounts/edit_data">
+            <img src="{% static 'symbol_transparent.png' %}" width="60" alt="">
+            <h3>Edit data</h3>
+            <p>Edit level / team / player data.</p>
+        </a>
+        <a class="landing-card" href="/accounts/saved_games">
+            <img src="{% static 'symbol_transparent.png' %}" width="60" alt="">
+            <h3>My Games</h3>
+            <p>Visualise all your analysed games and see how you have performed.</p>
+        </a>
+        <a class="landing-card" href="/accounts/premium_game">
+            <img src="{% static 'symbol_transparent.png' %}" width="60" alt="">
+            <h3>Analyse new game</h3>
+            <p>Start analyzing a new game.</p>
+        </a>
+    </div>
+
+</div>
 {% endblock %}

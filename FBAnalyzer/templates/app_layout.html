@@ -18,6 +18,7 @@ when the user has logged in successfully.
     <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
+    {% block extra_css %}{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="0G4LRoNP-1vwJXnGckjN_p_ZdGB01eg3aZqsebUemJQ" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMTSGWEP4V"></script>
@@ -61,6 +62,14 @@ when the user has logged in successfully.
             </div>
         </nav>
     </div>
+    {% if messages %}
+    <div class="container-fluid" style="padding-top: 16px;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- This is where the extended content is placed -->
     {% block content %}
     {% endblock %}

@@ -1,6 +1,10 @@
 # This is the file where Django backend models = database tables are created
 
+from datetime import timedelta
+
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 import uuid
 from django.contrib.auth.models import User
 
@@ -369,3 +373,45 @@ class LiveData(models.Model):
 
     def __str__(self):
         return f'{self.nameT1} - {self.nameT2}'
+
+class License(models.Model):
+    TIER_CHOICES = [('trial', 'Trial'), ('fliiga', 'F-Liiga'), ('team', 'Team'), ('club', 'Club')]
+    LICENSE_DURATION = timedelta(days=365)
+    TRIAL_DURATION = timedelta(days=14)
+
+    tier = models.CharField(choices=TIER_CHOICES, max_length=10)
+    max_seats = models.PositiveIntegerField(
+        null=True, blank=True,
+        help_text="1 for Team/F-Liiga/Trial. Leave blank for Club (unlimited seats).",
+    )
+    is_active = models.BooleanField(default=True)
+    starts_at = models.DateTimeField(null=True, blank=True)
+    expires_at = models.DateTimeField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.starts_at is None:
+            self.starts_at = timezone.now()
+            duration = self.TRIAL_DURATION if self.tier == 'trial' else self.LICENSE_DURATION
+            self.expires_at = self.starts_at + duration
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.get_tier_display()} ({self.seats.count()} seat(s))'
+
+
+class LicenseSeat(models.Model):
+    license = models.ForeignKey(License, related_name='seats', on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
+    email = models.EmailField()
+    activation_token = models.UUIDField(default=uuid.uuid4, unique=True)
+
+    def clean(self):
+        if self.license.max_seats is not None:
+            existing = self.license.seats.exclude(pk=self.pk).count()
+            if existing >= self.license.max_seats:
+                raise ValidationError(
+                    f"This license already has its maximum of {self.license.max_seats} seat(s)."
+                )
+
+    def __str__(self):
+        return f'{self.email} ({self.license.tier})'

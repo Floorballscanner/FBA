@@ -1,7 +1,21 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from .models import Player, Team, Level
+from .models import Player, Team, Level, LicenseSeat
 from django.forms import ModelForm
+
+
+class TrialSignupForm(UserCreationForm):
+    email = forms.EmailField(help_text="We'll only use this to identify your account.")
+
+    class Meta(UserCreationForm.Meta):
+        fields = ('username', 'email')
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if LicenseSeat.objects.filter(email__iexact=email).exists():
+            raise ValidationError("An account already exists for this email address.")
+        return email
 
 class AddNewPlayer(forms.Form):
 

@@ -4,6 +4,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from accounts import urls as accounts_urls
+from accounts import views as accounts_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
 
@@ -15,6 +16,8 @@ urlpatterns = [
     path('', include("accounts.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', views.signup, name="sign-up"),
+    path('get-started/', views.get_started, name="get-started"),
+    path('trial/', accounts_views.start_trial, name="start-trial"),
     path('sitemap', views.sitemap, name="sitemap"),
     path('apis/', include(accounts_urls)),
     path('live/', views.live, name="livepage"),

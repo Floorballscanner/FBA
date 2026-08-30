@@ -1,0 +1,29 @@
+<!--
+
+This is the license activation page. A buyer lands here from the activation
+email link and sets up their own username/password.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="landing-narrow">
+        <div class="landing-form-card">
+            <h1>Activate your license</h1>
+            <p>Choose a username and password to finish setting up your account.</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Create account">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
