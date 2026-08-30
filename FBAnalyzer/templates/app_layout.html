@@ -70,6 +70,16 @@ when the user has logged in successfully.
     </div>
     {% endif %}
 
+    {% if license_tier_display %}
+    <div class="container-fluid" style="padding-top: 8px;">
+        <div class="alert {% if license_days_left <= 7 %}alert-warning{% else %}alert-info{% endif %} py-2 mb-0" role="alert">
+            {% if license_days_left == 0 %}Your {{ license_tier_display }} license expires today.
+            {% elif license_days_left == 1 %}1 day left in your {{ license_tier_display }} license.
+            {% else %}{{ license_days_left }} days left in your {{ license_tier_display }} license.{% endif %}
+        </div>
+    </div>
+    {% endif %}
+
     <!-- This is where the extended content is placed -->
     {% block content %}
     {% endblock %}
