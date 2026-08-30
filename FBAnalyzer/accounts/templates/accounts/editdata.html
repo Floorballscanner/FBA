@@ -2,42 +2,41 @@
  teams, players, and series -->
 
 {% extends 'app_layout.html' %}
-{% block content %}
 {% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div class="container" style="Padding-top: 40px;">
-	<div class="frontpage-choices">
-		<div class="row justify-content-center">
-			<div class="col-sm-4" style="Padding-top: 20px;">
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
-				<h2 style="Padding-top: 10px;">Edit Levels</h2>
-				<p>Edit level data</p>
-                <p>Add / Delete / Edit data</p>
-				<a class="btn btn-primary" href="/accounts/edit_levels" role="button">Select</a>
-				<br><br>
-			</div>
-			<div class="col-sm-4" style="Padding-top: 20px;">
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
-				<h2 style="Padding-top: 10px;">Edit Teams</h2>
-				<p>Edit team data</p>
-				<p>Add / Delete / Edit data</p>
-				<a class="btn btn-primary" href="/accounts/edit_teams" role="button">Select</a>
-				<br><br>
-			</div>
-			<div class="col-sm-4" style="Padding-top: 20px;">
-				<img src="{% static 'symbol_transparent.png' %}" width="40px" height="40px"><br>
-				<h2 style="Padding-top: 10px;">Edit Players</h2>
-				<p>Edit player data</p>
-				<p>Add / Delete / Edit data</p>
-				<a class="btn btn-primary" href="/accounts/edit_players" role="button">Select</a>
-				<br><br>
-			</div>
-		</div>
-	</div>
+<div class="landing">
+
+    <div class="landing-page-header">
+        <h1>Edit data</h1>
+        <p>Add, edit, or delete your levels, teams, and players.</p>
+    </div>
+
+    <div class="landing-card-grid">
+        <a class="landing-card" href="/accounts/edit_levels">
+            <img src="{% static 'symbol_transparent.png' %}" width="60" alt="">
+            <h3>Edit Levels</h3>
+            <p>Add / delete / edit level data.</p>
+        </a>
+        <a class="landing-card" href="/accounts/edit_teams">
+            <img src="{% static 'symbol_transparent.png' %}" width="60" alt="">
+            <h3>Edit Teams</h3>
+            <p>Add / delete / edit team data.</p>
+        </a>
+        <a class="landing-card" href="/accounts/edit_players">
+            <img src="{% static 'symbol_transparent.png' %}" width="60" alt="">
+            <h3>Edit Players</h3>
+            <p>Add / delete / edit player data.</p>
+        </a>
+    </div>
+
 </div>
-
-
 
 <script type="text/javascript" src="/static/js/editvariables.js"></script>
 {% endblock %}
