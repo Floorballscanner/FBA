@@ -15,6 +15,7 @@ from pathlib import Path
 import django_heroku
 import dj_database_url
 import dotenv
+from django.contrib.messages import constants as message_constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = Path(__file__).resolve().parent.parent
@@ -144,6 +145,10 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = 'home' # Redirect to views.function Name = "home"
 LOGOUT_REDIRECT_URL = 'frontpage' # Redirect to views.function Name = "frontpage"
 
+MESSAGE_TAGS = {
+    message_constants.ERROR: 'danger',
+}
+
 django_heroku.settings(locals())
 
 # This is new
@@ -185,3 +190,18 @@ CSRF_COOKIE_DOMAIN = os.environ.get('CSRF_COOKIE_DOMAIN', '.fbscanner.io')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'True') == 'True'
+
+# Defaults to printing emails to the console/log so no environment ever sends real email
+# unless EMAIL_HOST_USER/EMAIL_HOST_PASSWORD are explicitly set (production only, via
+# Gmail SMTP + an account App Password — not the regular Gmail password).
+if os.environ.get('EMAIL_HOST_USER'):
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+    EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'floorballscanner@gmail.com'

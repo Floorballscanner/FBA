@@ -369,3 +369,17 @@ class LiveData(models.Model):
 
     def __str__(self):
         return f'{self.nameT1} - {self.nameT2}'
+
+class License(models.Model):
+    TIER_CHOICES = [('fliiga', 'F-Liiga'), ('full', 'Full')]
+
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
+    email = models.EmailField()
+    tier = models.CharField(choices=TIER_CHOICES, max_length=10)
+    activation_token = models.UUIDField(default=uuid.uuid4, unique=True)
+    starts_at = models.DateTimeField(null=True, blank=True)
+    expires_at = models.DateTimeField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.email} ({self.tier})'

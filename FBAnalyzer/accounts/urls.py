@@ -28,6 +28,7 @@ router.register(r'positions', PositionViewSet)
 router.register(r'livedata', LiveDataViewSet)
 
 urlpatterns = [
+    path('accounts/activate/<uuid:token>/', views.activate, name="license-activate"),
     path('accounts', views.index, name="home"),
     path('accounts/new_game/', views.new_game, name="new-game"),
     path('accounts/premium_game/', views.premium_game, name="new-game-premium"),

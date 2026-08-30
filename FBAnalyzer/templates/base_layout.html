@@ -67,6 +67,14 @@ when there is not a logged in user.
         </nav>
     </div>
 
+    {% if messages %}
+    <div class="container-fluid" style="padding-top: 16px;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- This is where the extended content is placed -->
         {% block content %}
         {% endblock %}
