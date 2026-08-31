@@ -23,6 +23,9 @@ It extends base_layout.html with Django, and utilizes Django's existing login - 
                 {{ form.as_p }}
                 <input type="submit" value="Login">
             </form>
+            <p style="margin:16px 0 0;font-size:14px;">
+                <a href="{% url 'password_reset' %}">Forgot your password?</a>
+            </p>
         </div>
     </div>
 </div>
