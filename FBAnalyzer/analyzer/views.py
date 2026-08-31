@@ -35,6 +35,9 @@ def game(request, nr):
 def references(request):
     return render(request, 'references.html')
 
+def fliiga_product(request):
+    return render(request, 'f-liiga_product.html')
+
 def fliigalive_front(request):
     return render(request, 'f-liiga_live_front.html')
 

@@ -1,0 +1,72 @@
+<!--
+
+This is the F-Liiga product page — the marketing landing page for the standalone
+F-Liiga license, reached from the homepage's F-Liiga feature section. Explains
+what the license includes and links straight to the Holvi purchase page.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+
+    <div class="landing-page-header">
+        <img src="{% static 'fliigalogo.svg' %}" width="72" alt="F-Liiga logo">
+        <h1>F-Liiga live results &amp; expected goals</h1>
+        <p>
+            The only place to see expected goals (xG) for the Finnish F-Liiga — live,
+            for every match of the day, men's and women's series alike.
+        </p>
+    </div>
+
+    <div class="landing__section">
+        <div style="max-width:560px;margin:0 auto;text-align:center;">
+            <h2 style="font-size:24px;font-weight:700;color:var(--landing-navy-dark);margin:0 0 8px;">
+                What's included
+            </h2>
+        </div>
+        <ul class="landing-checklist" style="max-width:560px;margin:24px auto 0;text-align:left;">
+            <li>The only source for F-Liiga expected goals (xG)</li>
+            <li>Live coverage of every match played that day</li>
+            <li>Expected goals (xG) broken down by player, by line, and by team</li>
+            <li>Win probability and win probability distribution</li>
+            <li>Shot map</li>
+            <li>Covers both men's and women's F-Liiga</li>
+        </ul>
+    </div>
+
+    <section class="landing-feature landing-feature--reverse">
+        <div class="landing-feature__media" style="display:flex;align-items:center;justify-content:center;">
+            <img src="{% static 'fliigalogo.svg' %}" style="width:160px;height:auto;" alt="F-Liiga logo">
+        </div>
+        <div class="landing-feature__text">
+            <h2>Want the full archive too?</h2>
+            <p>
+                A Team or Club license includes F-Liiga and unlocks everything else
+                Floorball Scanner offers: statistics for every match already played
+                this season, plus season-long team, skater, and goalkeeper statistics
+                — expected goals, scoring efficiency, and goalkeeper performance
+                against expected goals. Still covering both men's and women's F-Liiga.
+            </p>
+            <p><a href="/get-started">See Team &amp; Club licenses &rarr;</a></p>
+        </div>
+    </section>
+
+    <section class="landing-demo">
+        <h2>Ready to follow F-Liiga live?</h2>
+        <a class="landing-btn landing-btn--primary"
+           href="https://holvi.com/shop/fbscanner/product/ddcccc0367d4c59d44fc66317ec87e6e/"
+           role="button">Buy F-Liiga license</a>
+        <p style="margin:20px 0 0;font-size:15px;">
+            <a href="/get-started">Or see all license options</a>
+        </p>
+    </section>
+
+</div>
+{% endblock %}
