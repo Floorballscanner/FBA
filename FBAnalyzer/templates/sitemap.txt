@@ -1,5 +1,4 @@
 https://fbscanner.io/accounts/login/
 https://fbscanner.io/
-https://fbscanner.io/about/
 https://fbscanner.io/signup/
 https://fbscanner.io/accounts/login/

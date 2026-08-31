@@ -4,7 +4,7 @@ views.function returns a HttpResponse - that is the .html file content
 
 """
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 def homepage(request):
@@ -20,9 +20,6 @@ def signup(request):
 def get_started(request):
     return render(request, 'get_started.html')
 
-def about(request):
-    return render(request, 'about.html')
-
 def sitemap(request):
     return render(request, 'sitemap.txt')
 
@@ -35,8 +32,13 @@ def game(request, nr):
 def references(request):
     return render(request, 'references.html')
 
+def fliiga_product(request):
+    return render(request, 'f-liiga_product.html')
+
 def fliigalive_front(request):
-    return render(request, 'f-liiga_live_front.html')
+    # This free service ended and moved into the F-Liiga license — send old
+    # bookmarks/links straight to its current product page instead of a dead end.
+    return redirect('fliiga-product')
 
 def inssidivari_main(request):
     return render(request, 'inssidivari.html')
