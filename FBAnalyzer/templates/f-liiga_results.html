@@ -54,84 +54,92 @@ This is the F-liiga result test page.
     <p id="no-games-message" style="display:none;text-align:center;color:var(--landing-muted);padding-bottom:24px;">
         No games yet for this selection.
     </p>
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <hr width="100%" size="2" align="center" color="#002072" noshade>
+    <div id="gstats" class="landing-result">
+        <p class="landing-result__meta" id="stdate"></p>
+        <p class="landing-result__meta">Attendance: <span id="game_attn"></span></p>
+
+        <div class="landing-result__teams">
+            <img id="imgt1" alt="">
+            <span class="landing-result__vs">vs</span>
+            <img id="imgt2" alt="">
         </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <div class="col-sm-12">
-            <div id="gstats" class="gamestats">
-                <h5 id="stdate"></h5>
-                <h6>Attendance: <span id="game_attn"></span></h6>
-                <h3 style="Padding-top: 20px"><img style="width:100px;" id="imgt1">&emsp;vs&emsp;<img style="width:100px;" id="imgt2"></h3>
-                <h5 style="Padding-top: 10px" id="periodNr"></h5>
-                <h2 id="label"></h2>
-                <h3><span id="sttotg_1">0</span>&emsp;-&emsp;<span id="sttotg_2">0</span></h3>
-                <h5><span id="sttotxG_1">0</span>&emsp;xG&emsp;<span id="sttotxG_2">0</span></h5>
-                <h5><span id="sttotxGOT_1">0</span>&emsp;xGOT&emsp;<span id="sttotxGOT_2">0</span></h5>
-                <h5><span id="sttotshots_1">0</span>&emsp;Shots&emsp;<span id="sttotshots_2">0</span></h5>
-                <h5><span id="sttotsOT_1">0</span>&emsp;Shots On Target&emsp;<span id="sttotsOT_2">0</span></h5><br>
-                <h5><span id="stwp_1">0 %</span>&emsp;Win Probability&emsp;<span id="stwp_2">0 %</span></h5><br>
-                <h7 style="Padding-top: 30px">Events</h7>
-                <hr width="100%" size="2" color="#002072" id="eventBar" noshade>
-                <br><h7 style="Padding-top: 30px">Top Scorers</h7>
-                <hr width="100%" size="2" color="#002072" noshade>
-                <img style="width:50px;Padding-top:10px;" id="imgsp1"><h7><small> <span id="p1s"></span></small></h7><br>
-                <img style="width:50px;Padding-top:10px;" id="imgsp2"><h7><small> <span id="p2s"></span></small></h7><br>
-                <img style="width:50px;Padding-top:10px;" id="imgsp3"><h7><small> <span id="p3s"></span></small></h7><br><br>
-                <h7 style="Padding-top: 30px">Top xG players</h7>
-                <hr width="100%" size="2" color="#002072" noshade>
-                <img style="width:50px;Padding-top:10px;" id="imgp1"><h7><small> <span id="p1xG"></span> xG</small></h7><br>
-                <img style="width:50px;Padding-top:10px;" id="imgp2"><h7><small> <span id="p2xG"></span> xG</small></h7><br>
-                <img style="width:50px;Padding-top:10px;" id="imgp3"><h7><small> <span id="p3xG"></span> xG</small></h7><br><br>
-                <h7 style="Padding-top: 30px">Starting Goalies</h7>
-                <hr width="100%" size="2" color="#002072" noshade>
-                <img style="width:50px;Padding-top:10px;" id="imgg1"><h7><small> <span id="g1xG"></span> GSAx</small></h7><br>
-                <img style="width:50px;Padding-top:10px;" id="imgg2"><h7><small> <span id="g2xG"></span> GSAx</small></h7><br><br>
-                <h7 style="Padding-top: 30px">xG by Line and Team</h7>
-                <hr width="100%" size="2" color="#002072" noshade>
-                <div id="xGByLine"></div>
+        <p class="landing-result__period" id="periodNr"></p>
+        <p class="landing-result__period" id="label"></p>
+
+        <div class="landing-result__score">
+            <span id="sttotg_1">0</span> - <span id="sttotg_2">0</span>
+        </div>
+
+        <div class="landing-result__stats">
+            <div class="landing-result__stat-row">
+                <span id="sttotxG_1">0</span><span class="landing-result__stat-label">xG</span><span id="sttotxG_2">0</span>
+            </div>
+            <div class="landing-result__stat-row">
+                <span id="sttotxGOT_1">0</span><span class="landing-result__stat-label">xGOT</span><span id="sttotxGOT_2">0</span>
+            </div>
+            <div class="landing-result__stat-row">
+                <span id="sttotshots_1">0</span><span class="landing-result__stat-label">Shots</span><span id="sttotshots_2">0</span>
+            </div>
+            <div class="landing-result__stat-row">
+                <span id="sttotsOT_1">0</span><span class="landing-result__stat-label">Shots On Target</span><span id="sttotsOT_2">0</span>
+            </div>
+            <div class="landing-result__stat-row">
+                <span id="stwp_1">0 %</span><span class="landing-result__stat-label">Win Probability</span><span id="stwp_2">0 %</span>
             </div>
         </div>
+
+        <h3 class="landing-result__section-title">Events</h3>
+        <hr id="eventBar" style="display:none;">
+
+        <h3 class="landing-result__section-title">Top Scorers</h3>
+        <div class="landing-result__player-row"><img id="imgsp1" alt=""><span id="p1s"></span></div>
+        <div class="landing-result__player-row"><img id="imgsp2" alt=""><span id="p2s"></span></div>
+        <div class="landing-result__player-row"><img id="imgsp3" alt=""><span id="p3s"></span></div>
+
+        <h3 class="landing-result__section-title">Top xG players</h3>
+        <div class="landing-result__player-row"><img id="imgp1" alt=""><span id="p1xG"></span> xG</div>
+        <div class="landing-result__player-row"><img id="imgp2" alt=""><span id="p2xG"></span> xG</div>
+        <div class="landing-result__player-row"><img id="imgp3" alt=""><span id="p3xG"></span> xG</div>
+
+        <h3 class="landing-result__section-title">Starting Goalies</h3>
+        <div class="landing-result__player-row"><img id="imgg1" alt=""><span id="g1xG"></span> GSAx</div>
+        <div class="landing-result__player-row"><img id="imgg2" alt=""><span id="g2xG"></span> GSAx</div>
+
+        <h3 class="landing-result__section-title">xG by Line and Team</h3>
+        <div class="landing-result__card" id="xGByLine"></div>
     </div>
-    <div class="row justify-content-center" style="Padding-top: 5px;">
-        <div class="col-sm-12">
-            <div class="team-selection">
-                <div id="livexGmap"></div>
-                <div style="Padding-top: 50px" id="xGDist"></div>
-                <div style="Padding-top: 50px" id="livemomentumchart"></div>
-                <div style="Padding-top: 50px" id="livetempochart"></div><br>
-                <h7 style="Padding-top: 50px">LIVE Shotmap</h7><br>
-                <hr width="100%" size="2" color="#002072" noshade>
-            </div>
+
+    <div class="landing-result">
+        <div class="landing-result__card">
+            <div id="livexGmap"></div>
+            <div style="padding-top:40px;" id="xGDist"></div>
+            <div style="padding-top:40px;" id="livemomentumchart"></div>
+            <div style="padding-top:40px;" id="livetempochart"></div>
+        </div>
+
+        <h3 class="landing-result__section-title">Live Shotmap</h3>
+        <div class="landing-result__card">
+            <p class="landing-result__shotmap-label"><span id="A_teamname"></span> shotmap</p>
+            <canvas id="liveShotMap" width="200" height="332"></canvas>
+            <p class="landing-result__shotmap-label"><span id="B_teamname"></span> shotmap</p>
         </div>
     </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <div class="col-sm-12">
-            <div class="team-selection">
-                <h6><span id="A_teamname"></span> shotmap</h6>
-                <canvas id="liveShotMap" width="200" height="332"></canvas>
-                <h6><span id="B_teamname"></span> shotmap</h6>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
+
+    <div class="row justify-content-center" style="padding-top:20px;">
         <div class="col-sm-6">
-            <div class="team-selection">
-                <h7><span id="stt1name">Team 1</span> player stats</h7><br>
-                <hr style="text-align: center;" width="100%" size="2" color="#002072" noshade>
-                <p style="Padding-top:15px;">Line 1</p>
+            <div class="landing-result">
+                <h3 class="landing-result__section-title" style="margin-top:0;"><span id="stt1name">Team 1</span> player stats</h3>
+                <p style="padding-top:15px;">Line 1</p>
                 <div id="stT1L1_playerchart"></div>
-                <p style="Padding-top:15px;">Line 2</p>
+                <p style="padding-top:15px;">Line 2</p>
                 <div id="stT1L2_playerchart"></div>
-                <p style="Padding-top:15px;">Line 3</p>
+                <p style="padding-top:15px;">Line 3</p>
                 <div id="stT1L3_playerchart"></div>
-                <p style="Padding-top:15px;">Line 4</p>
+                <p style="padding-top:15px;">Line 4</p>
                 <div id="stT1L4_playerchart"></div>
-                <p style="Padding-top:15px;">Goalies</p>
+                <p style="padding-top:15px;">Goalies</p>
                 <div id="stT1G_playerchart"></div>
-                <p style="font-size:8px;Padding-top:10px;">
+                <p class="landing-result__legend">
                 <b>Pos</b> = Player lineup position,
                 <b>G</b> = Goals scored by player,
                 <b>A</b> = Assists by player,
@@ -145,20 +153,19 @@ This is the F-liiga result test page.
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="team-selection">
-                <h7><span id="stt2name">Team 2</span> player stats</h7><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <p style="Padding-top:15px;">Line 1</p>
+            <div class="landing-result">
+                <h3 class="landing-result__section-title" style="margin-top:0;"><span id="stt2name">Team 2</span> player stats</h3>
+                <p style="padding-top:15px;">Line 1</p>
                 <div id="stT2L1_playerchart"></div>
-                <p style="Padding-top:15px;">Line 2</p>
+                <p style="padding-top:15px;">Line 2</p>
                 <div id="stT2L2_playerchart"></div>
-                <p style="Padding-top:15px;">Line 3</p>
+                <p style="padding-top:15px;">Line 3</p>
                 <div id="stT2L3_playerchart"></div>
-                <p style="Padding-top:15px;">Line 4</p>
+                <p style="padding-top:15px;">Line 4</p>
                 <div id="stT2L4_playerchart"></div>
-                <p style="Padding-top:15px;">Goalies</p>
+                <p style="padding-top:15px;">Goalies</p>
                 <div id="stT2G_playerchart"></div>
-                <p style="font-size:8px;Padding-top:10px;">
+                <p class="landing-result__legend">
                 <b>Pos</b> = Player lineup position,
                 <b>G</b> = Goals scored by player,
                 <b>A</b> = Assists by player,
@@ -172,7 +179,6 @@ This is the F-liiga result test page.
             </div>
         </div>
     </div>
-    </br></br>
 </div>
 
 <script type="text/javascript" src="/static/js/fliigapage.js"></script>

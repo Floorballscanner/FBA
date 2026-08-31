@@ -566,6 +566,168 @@ a.landing-card:hover {
     box-shadow: 0 0 0 3px rgba(0, 32, 114, 0.12);
 }
 
+/* F-Liiga match result (f-liiga_results.html) — CSS-only restyle of markup
+   whose element IDs are relied on by fliigapage.js, so structure/IDs are
+   untouched; only classes, wrapping, and presentation changed. */
+
+.landing-result {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+}
+
+.landing-result__meta {
+    text-align: center;
+    color: var(--landing-muted);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.landing-result__teams {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    margin: 20px 0 4px;
+}
+
+.landing-result__teams img {
+    width: 84px;
+    height: auto;
+}
+
+.landing-result__vs {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--landing-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.landing-result__period {
+    text-align: center;
+    color: var(--landing-muted);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 12px 0 0;
+}
+
+.landing-result__score {
+    text-align: center;
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--landing-navy-dark);
+    line-height: 1;
+    margin: 4px 0 24px;
+}
+
+.landing-result__stats {
+    display: grid;
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto 8px;
+}
+
+.landing-result__stat-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--landing-ink);
+}
+
+.landing-result__stat-row > span:first-child {
+    text-align: right;
+}
+
+.landing-result__stat-row > span:last-child {
+    text-align: left;
+}
+
+.landing-result__stat-label {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--landing-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.landing-result__section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 44px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--landing-navy);
+}
+
+.landing-result__player-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 15px;
+    color: var(--landing-ink);
+}
+
+.landing-result__player-row img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #eef0f5;
+}
+
+.landing-result__event-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 14px;
+    color: var(--landing-ink);
+}
+
+.landing-result__event-row img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.landing-result__card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -28px rgba(20, 22, 31, 0.25);
+    padding: 28px;
+    margin-top: 16px;
+}
+
+.landing-result__legend {
+    font-size: 12px;
+    color: var(--landing-muted);
+    margin-top: 16px;
+    line-height: 1.6;
+}
+
+.landing-result__shotmap-label {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+    margin: 12px 0 8px;
+}
+
+.landing-result canvas#liveShotMap {
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
 /* Testimonial cards (references.html) */
 
 .landing-testimonial {
