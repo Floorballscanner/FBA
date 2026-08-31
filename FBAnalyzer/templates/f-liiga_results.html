@@ -5,21 +5,57 @@ This is the F-liiga result test page.
 -->
 
 {% extends 'app_layout.html' %}
-{% block content %}
 {% load static %}
-<div class="container" style="Padding-top: 40px;">
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="landing-page-header">
+        <a href="/accounts/fliiga" aria-label="Back" style="display:inline-block;margin-bottom:12px;">
+            <img src="{% static 'back.png' %}" width="20" alt="">
+        </a>
+        <h1>F-Liiga results</h1>
+        <p>Choose a league, season, and stage, then pick a game to see its results.</p>
+    </div>
+    <div class="landing-match-selector">
+        <div class="landing-select-group">
+            <label for="select-league">League</label>
+            <select id="select-league" onchange="maybeLoadGames()">
+                <option value="" selected disabled>Select...</option>
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+            </select>
+        </div>
+        <div class="landing-select-group">
+            <label for="select-season">Season</label>
+            <select id="select-season" onchange="maybeLoadGames()">
+                <option value="2026-2027">2026-2027</option>
+                <option value="2025-2026" selected>2025-2026</option>
+                <option value="2024-2025">2024-2025</option>
+            </select>
+        </div>
+        <div class="landing-select-group">
+            <label for="select-stage">Stage</label>
+            <select id="select-stage" onchange="maybeLoadGames()">
+                <option value="regular" selected>Regular season</option>
+                <option value="playoffs">Playoffs</option>
+            </select>
+        </div>
+        <div class="landing-select-group">
+            <label for="select-game">Game</label>
+            <select onchange="changeGame()" id="select-game">
+                <option selected disabled>Select a game...</option>
+            </select>
+        </div>
+    </div>
+    <p id="no-games-message" style="display:none;text-align:center;color:var(--landing-muted);padding-bottom:24px;">
+        No games yet for this selection.
+    </p>
     <div class="row justify-content-center">
         <div class="col-sm-12">
-            <div class="team-selection">
-                <a href="/accounts/fliiga"><img src="{% static 'back.png' %}" width="20px" style="Padding-bottom:20px;"></a><br>
-                <h2 style="Padding-top:20px;">Push logo to select league</h2><br>
-                <img style="width:60px;" src="{% static 'f-liiga_logo_men.png' %}" onclick="selectMen()" id="imgcatm">&emsp;
-                <img style="width:60px;" src="{% static 'f-liiga_logo_women.png' %}" onclick="selectWomen()" id="imgcatw">
-                <img style="width:60px;Padding-left:10px;" src="{% static 'inssidivarilogo.png' %}" onclick="selectID()" id="imgcatid"><br><br>
-                <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
-                    <option selected disabled>Select a game...</option>
-                </select>
-            </div>
             <hr width="100%" size="2" align="center" color="#002072" noshade>
         </div>
     </div>
