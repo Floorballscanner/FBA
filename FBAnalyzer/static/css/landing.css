@@ -1,6 +1,6 @@
 /*
 Public/pre-login pages styling (index.html, about.html, sign_up.html,
-registration/login.html, f-liiga_front.html, f-liiga_live_front.html,
+registration/login.html, f-liiga_front.html, f-liiga_product.html,
 references.html) — scoped under .landing so it can never leak into the
 shared styles.css used by the logged-in app (team-selection, shot-map,
 editors, etc). The name predates covering more than the homepage; kept
