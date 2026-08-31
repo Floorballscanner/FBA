@@ -20,9 +20,6 @@ def signup(request):
 def get_started(request):
     return render(request, 'get_started.html')
 
-def about(request):
-    return render(request, 'about.html')
-
 def sitemap(request):
     return render(request, 'sitemap.txt')
 

@@ -1,5 +1,5 @@
 /*
-Public/pre-login pages styling (index.html, about.html, sign_up.html,
+Public/pre-login pages styling (index.html, sign_up.html,
 registration/login.html, f-liiga_front.html, f-liiga_product.html,
 references.html) — scoped under .landing so it can never leak into the
 shared styles.css used by the logged-in app (team-selection, shot-map,
@@ -311,7 +311,7 @@ as-is to avoid an unnecessary rename across already-shipped templates.
     }
 }
 
-/* Page header — intro block for interior pages (about, references, f-liiga) */
+/* Page header — intro block for interior pages (sign up, references, f-liiga) */
 
 .landing-page-header {
     text-align: center;
