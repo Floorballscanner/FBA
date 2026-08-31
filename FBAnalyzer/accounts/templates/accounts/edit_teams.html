@@ -2,60 +2,80 @@
  team data -->
 
 {% extends 'app_layout.html' %}
-{% block content %}
 {% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div class="container" style="Padding-top: 80px;">
-    <a href="/accounts/edit_data"><img src="{% static 'back.png' %}" height="30px"></a>
-    <h2 style="Padding-top:20px;">Edit Teams</h2>
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="team-selection">
-                <select onchange="selectTeamLevel()" id="select-team-level" class="form-control-sm custom-select">
+<div class="landing" style="--landing-bg: #ffffff;">
+
+    <div class="landing-page-header">
+        <a href="/accounts/edit_data" aria-label="Back" style="display:inline-block;margin-bottom:12px;">
+            <img src="{% static 'back.png' %}" width="20" alt="">
+        </a>
+        <h1>Edit Teams</h1>
+    </div>
+
+    <div class="landing-edit-layout">
+        <div class="landing-edit-selectors">
+            <div class="landing-select-group">
+                <label for="select-team-level">Level</label>
+                <select onchange="selectTeamLevel()" id="select-team-level">
                     <option selected disabled>Select a level...</option>
                     {% for level in levels %}
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
                 </select>
-                <br><br>
-                <select onchange="editTeam()" id="edit-team" class="form-control-sm custom-select" disabled>
+            </div>
+            <div class="landing-select-group">
+                <label for="edit-team">Team</label>
+                <select onchange="editTeam()" id="edit-team" disabled>
                     <option selected disabled>Select a team..</option>
                     <option value="new_team">Add new team...</option>
                 </select>
-                <br><br>
-                <img src="{% static 'symbol_transparent.png' %}">
-                <br><br>
             </div>
+            <img src="{% static 'symbol_transparent.png' %}" alt="">
         </div>
-        <div class="col-sm-6">
-            <div class="team-selection">
-                <form>
-                    <label class="form-label" for="edit_team_name">Team Name:</label><br>
-                    <input type="text" id="edit_team_name" name="edit_team_name" disabled><br>
-                    <label class="form-label" for="edit_team_id">ID:</label><br>
-                    <input type="text" id="edit_team_id" name="edit_team_id" disabled><br>
-                    <label class="form-label" for="edit_team_level">Level:</label><br>
-                    <select class="form-control-sm custom-select" onchange="changeTeamLevel()" id="edit_team_level" name="edit_team_level" disabled><br>
-                        <option selected disabled>Select a level...</option>
-                    </select><br><br>
-                    <input type="checkbox" id="edit_team_isSenior" name="edit_team_isSenior" disabled><br><br>
-                    <label class="form-label" for="edit_team_isSenior">Senior (Adult) Team?:</label><br><br>
-                    <input type="checkbox" id="edit_team_isMale" name="edit_team_isMale" disabled><br><br>
-                    <label class="form-label" for="edit_team_isMale">Men's Team?:</label><br><br>
-                    <input type="checkbox" id="edit_team_isNational" name="edit_team_isNational" disabled><br><br>
-                    <label class="form-label" for="edit_team_isNational">National Team?:</label><br><br>
-                    <input class="btn btn-primary" type="button" id="edit_team_button" onclick="editTeamButton()" value="Save" disabled><br><br>
-                    <img src="{% static 'delete.png' %}" id="edit_team_delete" onclick="deleteTeamButton()">
-                </form>
-                <br><br>
-            </div>
+
+        <div class="landing-form-card" style="text-align:left;">
+            <form>
+                <label for="edit_team_name">Team Name</label>
+                <input type="text" id="edit_team_name" name="edit_team_name" disabled>
+
+                <label for="edit_team_id">ID</label>
+                <input type="text" id="edit_team_id" name="edit_team_id" disabled>
+
+                <label for="edit_team_level">Level</label>
+                <select onchange="changeTeamLevel()" id="edit_team_level" name="edit_team_level" disabled>
+                    <option selected disabled>Select a level...</option>
+                </select>
+
+                <div class="landing-checkbox-row">
+                    <input type="checkbox" id="edit_team_isSenior" name="edit_team_isSenior" disabled>
+                    <label for="edit_team_isSenior">Senior (Adult) Team?</label>
+                </div>
+                <div class="landing-checkbox-row">
+                    <input type="checkbox" id="edit_team_isMale" name="edit_team_isMale" disabled>
+                    <label for="edit_team_isMale">Men's Team?</label>
+                </div>
+                <div class="landing-checkbox-row">
+                    <input type="checkbox" id="edit_team_isNational" name="edit_team_isNational" disabled>
+                    <label for="edit_team_isNational">National Team?</label>
+                </div>
+
+                <input type="button" id="edit_team_button" onclick="editTeamButton()" value="Save" disabled>
+                <img src="{% static 'delete.png' %}" class="landing-delete-icon" id="edit_team_delete" onclick="deleteTeamButton()" alt="Delete">
+            </form>
         </div>
     </div>
+
 </div>
 
 <script type="text/javascript" src="/static/js/editvariables.js"></script>
 <script type="text/javascript" src="/static/js/editfunctions.js"></script>
-
 
 {% endblock %}
