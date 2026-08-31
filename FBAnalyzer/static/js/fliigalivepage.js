@@ -37,6 +37,11 @@ window.onload = function() {
                 row.setAttribute('class', 'landing-match-row');
                 row.setAttribute('href', '/accounts/fliigalive/' + match.match_id);
 
+                const logo = document.createElement('img');
+                logo.setAttribute('class', 'landing-match-row__logo');
+                logo.setAttribute('src', match.category_logo);
+                logo.setAttribute('alt', '');
+
                 const status = document.createElement('span');
                 status.setAttribute('class', 'landing-match-row__status');
 
@@ -69,6 +74,7 @@ window.onload = function() {
                     score.innerText = match.fs_A.toString() + " - " + match.fs_B.toString();
                 }
 
+                row.appendChild(logo);
                 row.appendChild(status);
                 row.appendChild(teams);
                 row.appendChild(score);

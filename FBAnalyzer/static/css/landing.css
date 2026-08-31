@@ -558,8 +558,15 @@ a.landing-card:hover {
     border-bottom: none;
 }
 
+.landing-match-row__logo {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
 .landing-match-row__status {
-    flex: 0 0 56px;
+    flex: 0 0 52px;
     font-size: 13px;
     font-weight: 700;
     color: var(--landing-muted);
