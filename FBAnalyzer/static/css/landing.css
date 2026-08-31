@@ -122,10 +122,56 @@ as-is to avoid an unnecessary rename across already-shipped templates.
     border-color: var(--landing-navy);
 }
 
-.landing-trust {
-    font-size: 14px;
+.landing-stats-section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 64px 24px;
+    text-align: center;
+}
+
+.landing-stats {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    flex-wrap: wrap;
+}
+
+.landing-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: landingStatIn 0.6s ease-out both;
+}
+
+.landing-stat:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+@keyframes landingStatIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.landing-stat__number {
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--landing-accent);
+    line-height: 1;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+.landing-stat__label {
+    font-size: 15px;
+    font-weight: 600;
     color: var(--landing-muted);
-    margin: 0;
+    margin-top: 6px;
 }
 
 /* Feature rows */
@@ -297,6 +343,15 @@ as-is to avoid an unnecessary rename across already-shipped templates.
 
     .landing-cta {
         justify-content: center;
+    }
+
+    .landing-stats {
+        justify-content: center;
+        gap: 40px;
+    }
+
+    .landing-stat__number {
+        font-size: 48px;
     }
 
     .landing-checklist {
