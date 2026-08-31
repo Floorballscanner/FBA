@@ -45,6 +45,7 @@ urlpatterns = [
     path('accounts/fliigalive/<nr>', views.fliigagame, name="fliigagamepage"),
     path('accounts/fliiga_results/', views.fliiga_results, name="fliiga-results"),
     path('accounts/fliiga_statistics/', views.fliiga_statistics, name="fliiga-statistics"),
+    path('accounts/fliiga_stats_api/', views.fliiga_stats_api, name="fliiga-stats-api"),
     path('accounts/fliiga/', views.fliiga_main, name="fliiga-main"),
     path('lite/', views.lite, name="lite-game"),
     path('apis/teamlist/', views.TeamList.as_view(), name="team-list"),
