@@ -2,7 +2,6 @@
 
 const csrftoken = getCookie('csrftoken');
 var s_game = document.getElementById("select-game");
-var imgcat = document.getElementById("imgcat");
 let data = 0;
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = "";
@@ -30,8 +29,6 @@ var t2color_rgba = 'rgba(0, 32, 114';
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var g_date = document.getElementById("stdate");
-var imgcatm = document.getElementById("imgcatm");
-var imgcatw = document.getElementById("imgcatw");
 var period = document.getElementById("periodNr");
 var clock = document.getElementById("label");
 var t1g = document.getElementById('sttotg_1');
@@ -81,143 +78,54 @@ function changeGame() {
 
 }
 
-function selectMen() {
+// season_id -> competition_id. Torneopal's competition_id follows the
+// season's starting year (e.g. season 2025-2026 -> competition sb2025).
+const SEASON_COMPETITION_IDS = {
+    '2024-2025': 'sb2024',
+    '2025-2026': 'sb2025',
+    '2026-2027': 'sb2026',
+};
 
-    s_game.innerHTML = "";
-    opt = new Option("Select a game...");
-    s_game.appendChild(opt);
+// League -> category_id (confirmed against the Torneopal API's own category_name).
+const LEAGUE_CATEGORY_IDS = {
+    men: '402',
+    women: '384',
+};
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=402&group_id=2")
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            matches_json = data.matches;
+// Stage -> group_id (confirmed against the API's own group_name: 1 = "Runkosarja"
+// (regular season), 2 = "Pudotuspelit" (playoffs)).
+const STAGE_GROUP_IDS = {
+    regular: '1',
+    playoffs: '2',
+};
 
-/*            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=402&group_id=3")
-                .then(response => response.json())
-                .then(data => {
-                console.log(data)
-                matches_json = matches_json.concat(data.matches);
+// Fires whenever the league/season/stage selectors change. Only loads games
+// once all three have a value.
+function maybeLoadGames() {
 
-                fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=402&group_id=4")
-                    .then(response => response.json())
-                    .then(data => {
-                    console.log(data)
-                    matches_json = matches_json.concat(data.matches);*/
+    const league = document.getElementById('select-league').value;
+    const season = document.getElementById('select-season').value;
+    const stage = document.getElementById('select-stage').value;
 
-                    matches_json.sort(GetSortOrder("date"));
+    if (!league || !season || !stage) {
+        return;
+    }
 
-                    // List of keys you want to select from matches_json
-                    const selectedKeys = ['match_id','match_number','category_name','date','time','team_A_id','team_A_name','team_B_id','team_B_name','status'];
-
-                    // Create a new array to store the modified JSON objects
-                    const modifiedMatches = [];
-
-                    // Iterate through matches_json and create new objects with selected keys
-                    matches_json.forEach(match => {
-                      const modifiedMatch = {};
-                      selectedKeys.forEach(key => {
-                        if (match.hasOwnProperty(key)) {
-                          modifiedMatch[key] = match[key];
-                        }
-                      });
-                      modifiedMatches.push(modifiedMatch);
-                    });
-
-                    matches = modifiedMatches;
-
-                    for (let j=0; j<matches.length; j++) {
-                        if (matches[j].status == 'Played') {
-                            opt = new Option(matches[j].date + " | "  + matches[j].team_A_name + " - " + matches[j].team_B_name, matches[j].match_id);
-                            s_game.appendChild(opt);
-                        }
-                    }
-                    console.log('Success:', data);
-
-/*                    })
-                .catch((error) => {
-                  console.error('Error:', error);
-                });
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });*/
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-    });
-
+    loadGames(season, SEASON_COMPETITION_IDS[season], LEAGUE_CATEGORY_IDS[league], STAGE_GROUP_IDS[stage]);
 }
 
-function selectWomen() {
+function loadGames(season_id, competition_id, category_id, group_id) {
 
     s_game.innerHTML = "";
     opt = new Option("Select a game...");
     s_game.appendChild(opt);
+    document.getElementById('no-games-message').style.display = "none";
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=384&group_id=2")
+    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id="+season_id+"&competition_id="+competition_id+"&category_id="+category_id+"&group_id="+group_id)
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            matches_json = data.matches;
-
-/*            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2024-2025&competition_id=sb2024&category_id=384&group_id=2")
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data)
-                        matches_json = matches_json.concat(data.matches);*/
-
-                        matches_json.sort(GetSortOrder("date"));
-
-                        // List of keys you want to select from matches_json
-                        const selectedKeys = ['match_id','match_number','category_name','date','time','team_A_id','team_A_name','team_B_id','team_B_name','status'];
-
-                        // Create a new array to store the modified JSON objects
-                        const modifiedMatches = [];
-
-                        // Iterate through matches_json and create new objects with selected keys
-                        matches_json.forEach(match => {
-                          const modifiedMatch = {};
-                          selectedKeys.forEach(key => {
-                            if (match.hasOwnProperty(key)) {
-                              modifiedMatch[key] = match[key];
-                            }
-                          });
-                          modifiedMatches.push(modifiedMatch);
-                        });
-
-                        matches = modifiedMatches;
-
-                        for (let j=0; j<matches.length; j++) {
-                            if (matches[j].status == 'Played') {
-                                opt = new Option(matches[j].date + " | "  + matches[j].team_A_name + " - " + matches[j].team_B_name, matches[j].match_id);
-                                s_game.appendChild(opt);
-                            }
-                        }
-                        console.log('Success:', data);
-
-/*                        })
-
-                    .catch((error) => {
-                          console.error('Error:', error);
-                    });*/
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-    });
-}
-
-function selectID() {
-
-    s_game.innerHTML = "";
-    opt = new Option("Select a game...");
-    s_game.appendChild(opt);
-
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=444&group_id=2")
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            matches_json = data.matches;
+            matches_json = data.matches || [];
 
             matches_json.sort(GetSortOrder("date"));
 
@@ -240,19 +148,24 @@ function selectID() {
 
             matches = modifiedMatches;
 
+            let playedCount = 0;
             for (let j=0; j<matches.length; j++) {
                 if (matches[j].status == 'Played') {
                     opt = new Option(matches[j].date + " | "  + matches[j].team_A_name + " - " + matches[j].team_B_name, matches[j].match_id);
                     s_game.appendChild(opt);
+                    playedCount++;
                 }
             }
+
+            if (playedCount === 0) {
+                document.getElementById('no-games-message').style.display = "block";
+            }
+
             console.log('Success:', data);
-
-            })
-
+        })
         .catch((error) => {
-              console.error('Error:', error);
-        });
+          console.error('Error:', error);
+    });
 
 }
 
@@ -1207,18 +1120,9 @@ function updateData() {
 
                 if (event.code == "maali") {
 
-                    if (index < 2) {
-                        var br = document.createElement('br');
-                        drawDiv.appendChild(br);
-                    }
-                    if (index > 1) {
-                        var v = document.createElement('h7');
-                        v.innerText = "|"
-                        v.style.fontSize = 'small';
-                        drawDiv.appendChild(v);
-                        var br = document.createElement('br');
-                        drawDiv.appendChild(br);
-                    }
+                    var row = document.createElement('div');
+                    row.setAttribute('class', 'landing-result__event-row');
+
                     var imgteam = document.createElement('img');
                     if (event.team == "A") {
                         imgteam.setAttribute('src', match.club_A_crest);
@@ -1226,11 +1130,9 @@ function updateData() {
                     else if (event.team == "B") {
                         imgteam.setAttribute('src', match.club_B_crest);
                     }
-                    imgteam.setAttribute('width', '40px');
-                    imgteam.style.paddingRight = "10px";
-                    drawDiv.appendChild(imgteam);
+                    row.appendChild(imgteam);
 
-                    var d = document.createElement('h7');
+                    var d = document.createElement('span');
                     if (array[index+1] != undefined) {
                         if (array[index+1].code == "syotto") {
                             d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
@@ -1245,10 +1147,9 @@ function updateData() {
                         d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
                                 + event.player_name
                     }
-                    d.style.fontSize = 'small';
-                    imgteam.insertAdjacentElement("afterend", d);
-                    var br = document.createElement('br');
-                    d.insertAdjacentElement("afterend", br);
+                    row.appendChild(d);
+
+                    drawDiv.appendChild(row);
                 }
             });
 
