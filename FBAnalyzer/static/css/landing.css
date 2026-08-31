@@ -442,6 +442,89 @@ a.landing-card:hover {
     margin: 0;
 }
 
+/* Match cards (live.html, built by livepage.js) */
+
+.landing-match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 32px 24px 88px;
+}
+
+.landing-match-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 20px 40px -28px rgba(20, 22, 31, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.landing-match-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.landing-match-card__date {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--landing-muted);
+}
+
+.landing-match-card__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #d92d20;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.landing-match-card__live::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d92d20;
+    animation: landingLivePulse 1.4s ease-in-out infinite;
+}
+
+@keyframes landingLivePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.landing-match-card__teams {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+}
+
+.landing-match-card__score {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--landing-accent);
+    line-height: 1;
+}
+
+.landing-match-card__meta {
+    display: flex;
+    gap: 16px;
+    font-size: 14px;
+    color: var(--landing-muted);
+}
+
+.landing-match-card .landing-btn {
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
 /* Testimonial cards (references.html) */
 
 .landing-testimonial {
