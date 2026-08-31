@@ -33,7 +33,6 @@ var t2color_rgba = 'rgba(0, 32, 114';
 var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var g_date = document.getElementById("stdate");
-var imgcat = document.getElementById("imgcat");
 var period = document.getElementById("periodNr");
 var clock = document.getElementById("label");
 var t1g = document.getElementById('sttotg_1');
@@ -340,18 +339,9 @@ window.onload = function() {
 
                 if (event.code == "maali") {
 
-                    if (index < 2) {
-                        var br = document.createElement('br');
-                        drawDiv.appendChild(br);
-                    }
-                    if (index > 1) {
-                        var v = document.createElement('h7');
-                        v.innerText = "|"
-                        v.style.fontSize = 'small';
-                        drawDiv.appendChild(v);
-                        var br = document.createElement('br');
-                        drawDiv.appendChild(br);
-                    }
+                    var row = document.createElement('div');
+                    row.setAttribute('class', 'landing-result__event-row');
+
                     var imgteam = document.createElement('img');
                     if (event.team == "A") {
                         imgteam.setAttribute('src', match.club_A_crest);
@@ -359,11 +349,9 @@ window.onload = function() {
                     else if (event.team == "B") {
                         imgteam.setAttribute('src', match.club_B_crest);
                     }
-                    imgteam.setAttribute('width', '40px');
-                    imgteam.style.paddingRight = "10px";
-                    drawDiv.appendChild(imgteam);
+                    row.appendChild(imgteam);
 
-                    var d = document.createElement('h7');
+                    var d = document.createElement('span');
                     if (array[index+1] != undefined) {
                         if (array[index+1].code == "syotto") {
                             d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
@@ -378,10 +366,9 @@ window.onload = function() {
                         d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
                                 + event.player_name
                     }
-                    d.style.fontSize = 'small';
-                    imgteam.insertAdjacentElement("afterend", d);
-                    var br = document.createElement('br');
-                    d.insertAdjacentElement("afterend", br);
+                    row.appendChild(d);
+
+                    drawDiv.appendChild(row);
                 }
             });
 
@@ -1564,18 +1551,9 @@ function updateData() {
 
                 if (event.code == "maali") {
 
-                    if (index < 2) {
-                        var br = document.createElement('br');
-                        drawDiv.appendChild(br);
-                    }
-                    if (index > 1) {
-                        var v = document.createElement('h7');
-                        v.innerText = "|"
-                        v.style.fontSize = 'small';
-                        drawDiv.appendChild(v);
-                        var br = document.createElement('br');
-                        drawDiv.appendChild(br);
-                    }
+                    var row = document.createElement('div');
+                    row.setAttribute('class', 'landing-result__event-row');
+
                     var imgteam = document.createElement('img');
                     if (event.team == "A") {
                         imgteam.setAttribute('src', match.club_A_crest);
@@ -1583,11 +1561,9 @@ function updateData() {
                     else if (event.team == "B") {
                         imgteam.setAttribute('src', match.club_B_crest);
                     }
-                    imgteam.setAttribute('width', '40px');
-                    imgteam.style.paddingRight = "10px";
-                    drawDiv.appendChild(imgteam);
+                    row.appendChild(imgteam);
 
-                    var d = document.createElement('h7');
+                    var d = document.createElement('span');
                     if (array[index+1] != undefined) {
                         if (array[index+1].code == "syotto") {
                             d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
@@ -1602,10 +1578,9 @@ function updateData() {
                         d.innerText = event.time + " " + event.description + " #" + event.shirt_number + " "
                                 + event.player_name
                     }
-                    d.style.fontSize = 'small';
-                    imgteam.insertAdjacentElement("afterend", d);
-                    var br = document.createElement('br');
-                    d.insertAdjacentElement("afterend", br);
+                    row.appendChild(d);
+
+                    drawDiv.appendChild(row);
                 }
             });
 
