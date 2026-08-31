@@ -160,18 +160,25 @@ class Command(BaseCommand):
             self.stdout.write(f"  No matches yet for {season_id}/{category}/{stage}, nothing to cache.")
             return
 
-        teams = api_get(
-            'getTeams',
-            competition_id=SEASON_COMPETITION_IDS[season_id],
-            category_id=CATEGORY_IDS[category],
-        ).get('teams') or []
-
         matches_played = [m for m in matches if m.get('status') == 'Played']
         is_final = len(matches_played) == len(matches)
 
         if not matches_played:
             self.stdout.write(f"  No played matches yet for {season_id}/{category}/{stage}, nothing to cache.")
             return
+
+        # Deliberately not using getTeams here: it returns every team ever
+        # registered under this category_id, including teams that actually
+        # compete at a different level and never appear in this stage's
+        # matches at all (confirmed: getTeams returned 18 teams for men's
+        # 2024-2025, but only 12 of them ever played a regular-season match).
+        # The team list for this stage is exactly the teams that appear in
+        # its own matches.
+        teams_by_id = {}
+        for m in matches_played:
+            teams_by_id[str(m['team_A_id'])] = m['team_A_name']
+            teams_by_id[str(m['team_B_id'])] = m['team_B_name']
+        teams = [{'team_id': team_id, 'team_name': name} for team_id, name in teams_by_id.items()]
 
         # One getMatch call per played match, in parallel. events + lineups
         # both come back in this single response.
