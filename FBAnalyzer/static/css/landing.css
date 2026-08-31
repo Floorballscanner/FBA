@@ -525,6 +525,90 @@ a.landing-card:hover {
     margin-top: 4px;
 }
 
+/* Compact single-row-per-game list (f-liiga_live.html "Today's Matches") —
+   deliberately not a card grid, so many games are scannable at a glance,
+   especially on mobile. */
+
+.landing-match-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 8px 24px 88px;
+}
+
+.landing-match-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 8px;
+    border-bottom: 1px solid #eceef3;
+    font-size: 14px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.landing-match-row:hover {
+    background: #f8f9fc;
+    text-decoration: none;
+    color: inherit;
+}
+
+.landing-match-row:last-child {
+    border-bottom: none;
+}
+
+.landing-match-row__status {
+    flex: 0 0 56px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--landing-muted);
+    white-space: nowrap;
+}
+
+.landing-match-row__status--live {
+    color: #d92d20;
+    display: flex;
+    align-items: center;
+}
+
+.landing-match-row__status--live::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d92d20;
+    margin-right: 5px;
+    flex: 0 0 auto;
+    animation: landingLivePulse 1.4s ease-in-out infinite;
+}
+
+.landing-match-row__teams {
+    flex: 1 1 auto;
+    font-weight: 600;
+    color: var(--landing-ink);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.landing-match-row__score {
+    flex: 0 0 auto;
+    font-weight: 800;
+    color: var(--landing-accent);
+    font-size: 15px;
+    min-width: 44px;
+    text-align: right;
+}
+
+.landing-match-row__chevron {
+    flex: 0 0 auto;
+    color: var(--landing-muted);
+    font-size: 20px;
+    line-height: 1;
+}
+
 /* Match selector (f-liiga_results.html: league/season/stage/game dropdowns) */
 
 .landing-match-selector {

@@ -33,62 +33,48 @@ window.onload = function() {
 
             matches.forEach(match => {
 
-                const card = document.createElement('div');
-                card.setAttribute('class', 'landing-match-card');
+                const row = document.createElement('a');
+                row.setAttribute('class', 'landing-match-row');
+                row.setAttribute('href', '/accounts/fliigalive/' + match.match_id);
 
-                const top = document.createElement('div');
-                top.setAttribute('class', 'landing-match-card__top');
+                const status = document.createElement('span');
+                status.setAttribute('class', 'landing-match-row__status');
 
-                const dateEl = document.createElement('span');
-                dateEl.setAttribute('class', 'landing-match-card__date');
-                top.appendChild(dateEl);
-
-                const teams = document.createElement('div');
-                teams.setAttribute('class', 'landing-match-card__teams');
+                const teams = document.createElement('span');
+                teams.setAttribute('class', 'landing-match-row__teams');
                 teams.innerText = match.team_A_name + " - " + match.team_B_name;
 
-                const score = document.createElement('div');
-                score.setAttribute('class', 'landing-match-card__score');
+                const score = document.createElement('span');
+                score.setAttribute('class', 'landing-match-row__score');
 
-                const button = document.createElement('a');
-                button.setAttribute('class', 'landing-btn landing-btn--primary');
-                button.setAttribute('href', '/accounts/fliigalive/' + match.match_id);
-                button.setAttribute('role', 'button');
-                button.innerText = "Open live";
+                const chevron = document.createElement('span');
+                chevron.setAttribute('class', 'landing-match-row__chevron');
+                chevron.innerText = "›";
 
                 if (match.live_period != "-1" && match.status != "Played") {
                     // Live now
-                    const live = document.createElement('span');
-                    live.setAttribute('class', 'landing-match-card__live');
-                    live.innerText = "Live";
-                    top.appendChild(live);
-
-                    let per = Number(match.live_period);
-                    let min = Number(match.live_time.slice(0, 2));
-                    min = min + 20 * (per - 1);
-                    if (min < 10) { min = "0" + min.toString(); }
-                    let sec = match.live_time.slice(3, 5);
-                    dateEl.innerText = min.toString() + ":" + sec;
+                    status.classList.add('landing-match-row__status--live');
+                    status.innerText = "Live";
 
                     score.innerText = match.fs_A.toString() + " - " + match.fs_B.toString();
                 }
                 else if (match.live_period == "-1") {
                     // Not started yet
-                    dateEl.innerText = match.time.toString().slice(0, 5);
+                    status.innerText = match.time.toString().slice(0, 5);
                     score.innerText = "vs";
                 }
                 else if (match.status == "Played") {
                     // Finished
-                    dateEl.innerText = "Played";
+                    status.innerText = "Played";
                     score.innerText = match.fs_A.toString() + " - " + match.fs_B.toString();
                 }
 
-                card.appendChild(top);
-                card.appendChild(teams);
-                card.appendChild(score);
-                card.appendChild(button);
+                row.appendChild(status);
+                row.appendChild(teams);
+                row.appendChild(score);
+                row.appendChild(chevron);
 
-                document.getElementById("head").appendChild(card);
+                document.getElementById("head").appendChild(row);
             });
 
             console.log('Success:', matches);
