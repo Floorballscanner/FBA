@@ -14,70 +14,72 @@ window.onload = function() {
             data.sort(GetSortOrder("date"))
             let rows = data.length;
 
+            const emptyState = document.getElementById("empty-state");
+            if (rows > 0 && emptyState) {
+                emptyState.style.display = "none";
+            }
+
             for (let i = 0; i < rows ; i++) {
 
-                const div = document.createElement('div');
-                div.setAttribute('class', 'row');
+                const card = document.createElement('div');
+                card.setAttribute('class', 'landing-match-card');
 
-                const div2 = document.createElement('div');
-                div2.setAttribute('class', 'col-sm-12');
+                const top = document.createElement('div');
+                top.setAttribute('class', 'landing-match-card__top');
 
-                const d = document.createElement('h5');
-                d.innerText = data[i].date.substr(0, 10);
-                d.style.paddingTop = "50px";
+                const dateEl = document.createElement('span');
+                dateEl.setAttribute('class', 'landing-match-card__date');
+                dateEl.innerText = data[i].date.substr(0, 10);
+                top.appendChild(dateEl);
 
-                const h = document.createElement('h1');
-                h.innerText = data[i].nameT1 + " - " + data[i].nameT2;
-                h.style.paddingTop = "5px";
-                h.style.fontWeight = "bold"
+                if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
+                    const live = document.createElement('span');
+                    live.setAttribute('class', 'landing-match-card__live');
+                    live.innerText = "Live";
+                    top.appendChild(live);
+                }
 
-                const h2 = document.createElement('h1');
-                h2.innerText = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
-                h2.style.paddingTop = "5px";
-                h2.setAttribute('id', 'goals' + i);
+                const teams = document.createElement('div');
+                teams.setAttribute('class', 'landing-match-card__teams');
+                teams.innerText = data[i].nameT1 + " - " + data[i].nameT2;
 
-                const h3 = document.createElement('h5');
-                h3.innerText = "Period " + data[i].periodNr;
-                h3.style.paddingTop = "5px";
-                h3.setAttribute('id', 'period' + i);
+                const score = document.createElement('div');
+                score.setAttribute('class', 'landing-match-card__score');
+                score.innerText = data[i].goalsGameT1 + " - " + data[i].goalsGameT2;
+                score.setAttribute('id', 'goals' + i);
+
+                const meta = document.createElement('div');
+                meta.setAttribute('class', 'landing-match-card__meta');
+
+                const period = document.createElement('span');
+                period.innerText = "Period " + data[i].periodNr;
+                period.setAttribute('id', 'period' + i);
 
                 var date = new Date(data[i].periodClock * 1000);
                 var display = date.toISOString().substr(11, 8);
-                const disp = document.createElement('h3');
-                disp.innerText = display;
-                disp.style.paddingTop = "5px";
-                disp.setAttribute('id', 'time' + i);
+                const clock = document.createElement('span');
+                clock.innerText = display;
+                clock.setAttribute('id', 'time' + i);
+
+                meta.appendChild(period);
+                meta.appendChild(clock);
 
                 const text = data[i].url;
                 const nrArray = text.split("/");
                 const nr = nrArray[nrArray.length-2];
                 const button = document.createElement('a');
-                button.setAttribute('class', 'btn btn-primary');
+                button.setAttribute('class', 'landing-btn landing-btn--primary');
                 button.setAttribute('href', '/live/' + nr);
                 button.setAttribute('role', 'button');
-                button.style.paddingTop = "5px";
                 button.innerText = "Open live";
-                button.style.paddingBottom = "5px";
 
-                document.getElementById("head").appendChild(div);
-                div.appendChild(div2);
-                div2.appendChild(d);
+                card.appendChild(top);
+                card.appendChild(teams);
+                card.appendChild(score);
+                card.appendChild(meta);
+                card.appendChild(button);
 
-                if (Date.now() - Date.parse(data[i].date) <= 3600000) { // max 1 hour from last update
-                    const img = document.createElement('img');
-                    img.setAttribute('src',"/static/live.png");
-                    img.setAttribute('width', '70px');
-                    img.style.paddingTop = "5px";
-                    div2.appendChild(img);
-                }
-                //else {h.style.paddingTop = "55px";}
-
-                div2.appendChild(h);
-                div2.appendChild(h2);
-                div2.appendChild(h3);
-                div2.appendChild(disp);
-                div2.appendChild(button);
-
+                document.getElementById("head").appendChild(card);
             }
 
             console.log('Success:', data);
