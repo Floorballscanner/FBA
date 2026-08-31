@@ -122,10 +122,26 @@ as-is to avoid an unnecessary rename across already-shipped templates.
     border-color: var(--landing-navy);
 }
 
-.landing-trust {
+.landing-stats {
+    display: flex;
+    gap: 40px;
+}
+
+.landing-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-stat__number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+    line-height: 1.1;
+}
+
+.landing-stat__label {
     font-size: 14px;
     color: var(--landing-muted);
-    margin: 0;
 }
 
 /* Feature rows */
@@ -296,6 +312,10 @@ as-is to avoid an unnecessary rename across already-shipped templates.
     }
 
     .landing-cta {
+        justify-content: center;
+    }
+
+    .landing-stats {
         justify-content: center;
     }
 
