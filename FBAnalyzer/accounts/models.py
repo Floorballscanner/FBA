@@ -415,3 +415,33 @@ class LicenseSeat(models.Model):
 
     def __str__(self):
         return f'{self.email} ({self.license.tier})'
+
+
+class FliigaSeasonStats(models.Model):
+    """Cached team/player/goalie statistics for one F-Liiga season/category/stage
+    combination, computed by the compute_fliiga_stats management command instead
+    of on every page load (the underlying computation needs hundreds of Torneopal
+    API calls). is_final is set once every match in the combination has been
+    played, so the nightly job can skip it forever afterwards."""
+
+    CATEGORY_CHOICES = [('men', 'Men'), ('women', 'Women')]
+    STAGE_CHOICES = [('regular', 'Regular season'), ('playoffs', 'Playoffs')]
+
+    season_id = models.CharField(max_length=20)
+    category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
+    stage = models.CharField(max_length=10, choices=STAGE_CHOICES)
+
+    team_stats = models.JSONField(default=list)
+    player_stats = models.JSONField(default=list)
+    goalie_stats = models.JSONField(default=list)
+
+    is_final = models.BooleanField(default=False)
+    computed_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['season_id', 'category', 'stage'], name='unique_fliiga_stats_combo')
+        ]
+
+    def __str__(self):
+        return f'{self.season_id} {self.category} {self.stage}{" (final)" if self.is_final else ""}'

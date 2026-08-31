@@ -10,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from rest_framework.response import Response
 
-from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time, License, LicenseSeat
-from django.http import HttpResponseRedirect
+from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time, License, LicenseSeat, FliigaSeasonStats
+from django.http import HttpResponseRedirect, JsonResponse
 from accounts.forms import AddNewPlayer, TrialSignupForm
 from accounts.decorators import license_required
 from datetime import datetime
@@ -362,3 +362,31 @@ def fliigalive(request):
 @license_required('team', 'club')
 def fliiga_statistics(request):
     return render(request, 'f-liiga_statistics.html')
+
+@login_required
+@license_required('team', 'club')
+def fliiga_stats_api(request):
+    """Serves a cached FliigaSeasonStats table (team/player/goalie), computed
+    ahead of time by the compute_fliiga_stats management command instead of
+    on every request. Returns status='pending' if that combination hasn't
+    been computed yet (e.g. a brand new stage with no scheduler run since)."""
+
+    season_id = request.GET.get('season')
+    category = request.GET.get('category')
+    stage = request.GET.get('stage')
+    table = request.GET.get('table')
+
+    table_field = {'teams': 'team_stats', 'players': 'player_stats', 'goalies': 'goalie_stats'}.get(table)
+    if not (season_id and category and stage and table_field):
+        return JsonResponse({'error': 'season, category, stage, and table are required'}, status=400)
+
+    row = FliigaSeasonStats.objects.filter(season_id=season_id, category=category, stage=stage).first()
+    if row is None:
+        return JsonResponse({'status': 'pending'})
+
+    return JsonResponse({
+        'status': 'ready',
+        'is_final': row.is_final,
+        'computed_at': row.computed_at.isoformat(),
+        'rows': getattr(row, table_field),
+    })
