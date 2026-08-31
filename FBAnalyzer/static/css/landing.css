@@ -677,10 +677,11 @@ a.landing-card:hover {
 }
 
 .landing-result__player-row img {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
+    height: 48px;
+    width: auto;
+    max-width: 48px;
+    border-radius: 8px;
+    object-fit: contain;
     background: #eef0f5;
 }
 
