@@ -1,175 +1,101 @@
 
-// This file contains the script for updating the livepage with live game data
+// This file contains the script for updating the F-Liiga "Today's Matches"
+// page with today's live/finished game cards.
 
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = [];
-var matchdate = "";
 var today = new Date().toISOString().split('T')[0]; // Get YYYY-MM-DD format
+
+// Men/women, regular season (group_id=1, "Runkosarja") and playoffs
+// (group_id=2, "Pudotuspelit") — confirmed against the Torneopal API's own
+// group_name field. Inssi-Divari is no longer offered.
+const FETCH_URLS = [
+    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=402&group_id=1",
+    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=402&group_id=2",
+    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=384&group_id=1",
+    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=384&group_id=2",
+];
 
 // Creates the HTML - page when the window is loaded
 
 window.onload = function() {
 
-    // Men's F-Liiga
+    Promise.all(FETCH_URLS.map(url => fetch(url).then(response => response.json())))
+        .then(results => {
+            matches = results.flatMap(data => data.matches || []);
+            matches = matches.filter(match => match.date === today);
+            matches.sort(GetSortOrderRev("time"));
 
-    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=402&group_id=2")
-        .then(response => response.json())
-        .then(data => {
-            matches = data.matches;
-            console.log('Success:', data);
+            const emptyState = document.getElementById('empty-state');
+            if (matches.length === 0 && emptyState) {
+                emptyState.style.display = "block";
+            }
 
-            // Women's F-Liiga
+            matches.forEach(match => {
 
-            fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=384&group_id=2")
-                .then(response => response.json())
-                .then(data => {
-                    matches = matches.concat(data.matches);
-                    console.log('Success:', data);
+                const card = document.createElement('div');
+                card.setAttribute('class', 'landing-match-card');
 
-                    // Inssidivari
+                const top = document.createElement('div');
+                top.setAttribute('class', 'landing-match-card__top');
 
-                    fetch("https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=444&group_id=2")
-                        .then(response => response.json())
-                        .then(data => {
-                            matches = matches.concat(data.matches);
-                            matches = matches.filter(match => match.date === today);
-                            matches.sort(GetSortOrderRev("time"));
+                const dateEl = document.createElement('span');
+                dateEl.setAttribute('class', 'landing-match-card__date');
+                top.appendChild(dateEl);
 
-                            matches.forEach(match => {
+                const teams = document.createElement('div');
+                teams.setAttribute('class', 'landing-match-card__teams');
+                teams.innerText = match.team_A_name + " - " + match.team_B_name;
 
-                                const row = document.createElement('div');
-                                row.setAttribute('class', 'row w-100');
-                                row.style.marginTop = "10px";
-                                row.style.marginBottom = "0px";
-                                row.style.paddingTop = "0px";
-                                row.style.paddingBottom = "0px";
+                const score = document.createElement('div');
+                score.setAttribute('class', 'landing-match-card__score');
 
-                                const div1 = document.createElement('div');
-                                div1.setAttribute('class', 'col-1 px-1');
+                const button = document.createElement('a');
+                button.setAttribute('class', 'landing-btn landing-btn--primary');
+                button.setAttribute('href', '/accounts/fliigalive/' + match.match_id);
+                button.setAttribute('role', 'button');
+                button.innerText = "Open live";
 
-                                const div2 = document.createElement('div');
-                                div2.setAttribute('class', 'col-7 px-0');
+                if (match.live_period != "-1" && match.status != "Played") {
+                    // Live now
+                    const live = document.createElement('span');
+                    live.setAttribute('class', 'landing-match-card__live');
+                    live.innerText = "Live";
+                    top.appendChild(live);
 
-                                const div3 = document.createElement('div');
-                                div3.setAttribute('class', 'col-2 px-1');
+                    let per = Number(match.live_period);
+                    let min = Number(match.live_time.slice(0, 2));
+                    min = min + 20 * (per - 1);
+                    if (min < 10) { min = "0" + min.toString(); }
+                    let sec = match.live_time.slice(3, 5);
+                    dateEl.innerText = min.toString() + ":" + sec;
 
-                                const div4 = document.createElement('div');
-                                div4.setAttribute('class', 'col-2 px-1');
+                    score.innerText = match.fs_A.toString() + " - " + match.fs_B.toString();
+                }
+                else if (match.live_period == "-1") {
+                    // Not started yet
+                    dateEl.innerText = match.time.toString().slice(0, 5);
+                    score.innerText = "vs";
+                }
+                else if (match.status == "Played") {
+                    // Finished
+                    dateEl.innerText = "Played";
+                    score.innerText = match.fs_A.toString() + " - " + match.fs_B.toString();
+                }
 
-                                document.getElementById("head").appendChild(row);
-                                row.appendChild(div1);
-                                row.appendChild(div2);
-                                row.appendChild(div3);
-                                row.appendChild(div4);
+                card.appendChild(top);
+                card.appendChild(teams);
+                card.appendChild(score);
+                card.appendChild(button);
 
-                                const imgcat = document.createElement('img');
-                                imgcat.setAttribute('src', match.category_logo);
-                                imgcat.setAttribute('width', '30px');
-                                imgcat.style.paddingLeft = "5px";
-                                div1.appendChild(imgcat);
+                document.getElementById("head").appendChild(card);
+            });
 
-                                const button = document.createElement('a');
-                                button.setAttribute('class', 'btn btn-primary btn-sm');
-                                button.setAttribute('href', '/accounts/fliigalive/' + match.match_id);
-                                button.setAttribute('role', 'button');
-                                button.style.fontSize = "small"
-                                button.innerText = "Open";
-                                div4.appendChild(button);
-
-                                if (match.live_period != "-1" && match.status != "Played") {
-                                    const imglink = document.createElement('a');
-                                    imglink.setAttribute('href', match.stream);
-                                    const img = document.createElement('img');
-                                    img.setAttribute('src',"/static/live.png");
-                                    img.setAttribute('width', '50px');
-
-                                    imglink.appendChild(img);
-                                    div3.appendChild(imglink);
-
-                                    const d = document.createElement('p');
-                                    d.style.paddingLeft = "10px";
-                                    d.style.paddingRight = "2px";
-                                    d.style.paddingTop = "5px";
-                                    d.style.display = 'block';
-                                    per = Number(match.live_period);
-                                    min = Number(match.live_time.slice(0,2));
-                                    min = min + 20*(per-1);
-                                    if (min < 10) {min = "0" + min.toString()}
-                                    sec = match.live_time.slice(3,5);
-
-                                    d.innerText = min.toString() + ":" + sec + "  "
-                                                + match.team_A_name + " - "  + match.team_B_name + "  "
-                                                + match.fs_A.toString() + " - " + match.fs_B.toString();
-                                    d.style.fontSize = 'small';
-
-                                    div2.appendChild(d);
-                                }
-                                else if (match.live_period == "-1") {
-                                    const gametime = document.createElement('p');
-                                    gametime.style.fontSize = 'small';
-                                    temp = match.time.toString();
-                                    gametime.innerText = temp.slice(0,5);
-                                    gametime.style.paddingTop = "5px";
-                                    gametime.setAttribute('id', 'time' + match.match_id);
-                                    div3.appendChild(gametime);
-
-                                    const d = document.createElement('p');
-                                    d.style.paddingLeft = "10px";
-                                    d.style.paddingRight = "2px";
-                                    d.style.paddingTop = "5px";
-                                    d.style.display = 'block';
-                                    d.innerText = match.team_A_name + " - "  + match.team_B_name;
-                                    d.style.fontSize = 'small';
-                                    div2.appendChild(d);
-
-                                }
-                                else if (match.status == "Played") {
-                                    const gametime = document.createElement('p');
-                                    gametime.style.fontSize = 'small';
-                                    gametime.innerText = "Played";
-                                    gametime.style.paddingTop = "5px";
-                                    gametime.setAttribute('id', 'time' + match.match_id);
-                                    div3.appendChild(gametime);
-
-                                    const d = document.createElement('p');
-                                    d.style.paddingLeft = "10px";
-                                    d.style.paddingRight = "2px";
-                                    d.style.paddingTop = "5px";
-                                    d.style.display = 'block';
-                                    d.innerText = match.team_A_name + " - "  + match.team_B_name + " "
-                                                + match.fs_A.toString() + " - " + match.fs_B.toString();
-                                    d.style.fontSize = 'small';
-                                    div2.appendChild(d);
-
-                                }
-
-                                // Set attributes for the <hr> element
-                                var hrElement = document.createElement("hr");
-                                hrElement.setAttribute("width", "100%");
-                                hrElement.setAttribute("size", "2");
-                                hrElement.setAttribute("align", "center");
-                                hrElement.setAttribute("color", "#F5F5F5");
-                                hrElement.setAttribute("noshade", "");
-                                row.appendChild(hrElement);
-
-                            });
-
-                            console.log('Success:', data);
-                        })
-
-                    .catch((error) => {
-                      console.error('Error:', error);
-                    });
-                })
-
-                .catch((error) => {
-                  console.error('Error:', error);
-                });
-
+            console.log('Success:', matches);
         })
         .catch((error) => {
           console.error('Error:', error);
-        });
+    });
 
     t = setTimeout(function(){ location.reload(); }, 60000); // Update page every minute
 }

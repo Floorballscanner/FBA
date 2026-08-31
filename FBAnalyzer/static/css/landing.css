@@ -584,6 +584,20 @@ a.landing-card:hover {
     margin: 0 0 4px;
 }
 
+/* fliigalivegame.js prepends a live badge (img) or scheduled kickoff time
+   (h5) as the first child of #gstats depending on match state. */
+.landing-result > img {
+    display: block;
+    margin: 0 auto 12px;
+}
+
+.landing-result > h5 {
+    text-align: center;
+    color: var(--landing-muted);
+    font-weight: 600;
+    margin: 0 0 12px;
+}
+
 .landing-result__teams {
     display: flex;
     align-items: center;

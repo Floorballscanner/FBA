@@ -1,23 +1,36 @@
 <!--
 
-This is the F-liiga result test page.
+This is the F-Liiga "Today's Matches" page — lists today's F-Liiga games (men and
+women, regular season and playoffs) as cards, each linking to its own live game
+page. Card markup is built by fliigalivepage.js; this template just provides the
+shell, matching the public /live/ page's design.
 
 -->
 
 {% extends 'app_layout.html' %}
-{% block content %}
 {% load static %}
-<div class="container-fluid">
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <a href="/accounts/fliiga"><img src="{% static 'back.png' %}" width="20px" style="Padding-bottom:20px;"></a><br>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 10px;">
-        <h6>Today's Matches</h6><br><br>
-    </div>
-    <div class="row justify-content-center" id="head" style="Padding-top: 10px;">
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+
+    <div class="landing-page-header">
+        <a href="/accounts/fliiga" aria-label="Back" style="display:inline-block;margin-bottom:12px;">
+            <img src="{% static 'back.png' %}" width="20" alt="">
+        </a>
+        <h1>Today's matches</h1>
+        <p>Live and finished F-Liiga games for today.</p>
     </div>
-    <br><br>
+
+    <p id="empty-state" style="display:none;text-align:center;color:var(--landing-muted);">
+        No F-Liiga matches today.
+    </p>
+
+    <div id="head" class="landing-match-grid"></div>
+
 </div>
 
 <script type="text/javascript" src="/static/js/fliigalivepage.js"></script>
