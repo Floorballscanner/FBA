@@ -657,6 +657,94 @@ a.landing-card:hover {
     box-shadow: 0 0 0 3px rgba(0, 32, 114, 0.12);
 }
 
+/* Edit levels/teams/players (accounts/edit_levels.html, edit_teams.html,
+   edit_players.html) — CSS-only restyle; editfunctions.js/editvariables.js
+   only ever look elements up by id and set .value/.checked/.disabled, so
+   the surrounding markup and classes are free to change. */
+
+.landing-edit-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 88px;
+    align-items: start;
+}
+
+@media (max-width: 860px) {
+    .landing-edit-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.landing-edit-selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.landing-edit-selectors img {
+    display: block;
+    margin: 8px auto 0;
+    max-width: 140px;
+}
+
+.landing-form-card .landing-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0 18px;
+}
+
+.landing-form-card .landing-checkbox-row label {
+    display: inline;
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.landing-form-card .landing-checkbox-row input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--landing-navy);
+}
+
+.landing-form-card form input[type="button"] {
+    background: var(--landing-navy);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    width: auto;
+    padding: 12px 30px;
+}
+
+.landing-form-card form input[type="button"]:hover {
+    box-shadow: 0 12px 24px -10px rgba(0, 32, 114, 0.55);
+}
+
+.landing-form-card form input:disabled,
+.landing-form-card form select:disabled {
+    background: #f5f6fa;
+    color: var(--landing-muted);
+    cursor: not-allowed;
+}
+
+.landing-delete-icon {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    margin-top: 16px;
+    cursor: pointer;
+    opacity: 0.65;
+    transition: opacity 0.15s ease;
+}
+
+.landing-delete-icon:hover {
+    opacity: 1;
+}
+
 /* F-Liiga match result (f-liiga_results.html) — CSS-only restyle of markup
    whose element IDs are relied on by fliigapage.js, so structure/IDs are
    untouched; only classes, wrapping, and presentation changed. */
