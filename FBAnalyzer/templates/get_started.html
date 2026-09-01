@@ -42,19 +42,34 @@ directly.
         <p style="font-size:15px;color:var(--landing-muted);margin-bottom:16px;">
             Prefer to pay by card, Apple Pay, Google Pay, or MobilePay?
         </p>
-        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <form method="post" action="{% url 'stripe-checkout' 'team' %}" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" class="landing-btn landing-btn--ghost">Buy Team license</button>
-            </form>
-            <form method="post" action="{% url 'stripe-checkout' 'club' %}" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" class="landing-btn landing-btn--ghost">Buy Club license</button>
-            </form>
-            <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" class="landing-btn landing-btn--ghost">Buy F-Liiga license</button>
-            </form>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:flex-start;">
+            <div style="max-width:220px;">
+                <form method="post" action="{% url 'stripe-checkout' 'team' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="landing-btn landing-btn--ghost">Buy Team license</button>
+                </form>
+                <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
+                    Floorball Scanner + F-Liiga, 12 months, for one team.
+                </p>
+            </div>
+            <div style="max-width:220px;">
+                <form method="post" action="{% url 'stripe-checkout' 'club' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="landing-btn landing-btn--ghost">Buy Club license</button>
+                </form>
+                <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
+                    Floorball Scanner + F-Liiga, 12 months, for your entire club.
+                </p>
+            </div>
+            <div style="max-width:220px;">
+                <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="landing-btn landing-btn--ghost">Buy F-Liiga license</button>
+                </form>
+                <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
+                    Live tracking of today's F-Liiga matches, 12 months.
+                </p>
+            </div>
         </div>
     </div>
 
