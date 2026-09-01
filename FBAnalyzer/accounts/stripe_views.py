@@ -41,6 +41,7 @@ def start_checkout(request, tier):
         allow_promotion_codes=True,
         metadata={'tier': tier},
         branding_settings=BRANDING_SETTINGS,
+        payment_method_types=settings.STRIPE_PAYMENT_METHOD_TYPES,
         success_url=request.build_absolute_uri('/buy/success/'),
         cancel_url=request.build_absolute_uri('/get-started/'),
     )
