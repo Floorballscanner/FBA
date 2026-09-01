@@ -44,9 +44,10 @@ log in and land here instead of hitting a bare login error.
 
     <section class="landing-demo">
         <h2>Ready to keep following F-Liiga live?</h2>
-        <a class="landing-btn landing-btn--primary"
-           href="https://holvi.com/shop/fbscanner/product/ad2423a19501be31d93808d0ce7e93a3/"
-           role="button">Buy F-Liiga license</a>
+        <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="landing-btn landing-btn--primary">Buy F-Liiga license</button>
+        </form>
         <p style="margin:20px 0 0;font-size:15px;">
             <a href="/get-started">Or see all license options</a>
         </p>

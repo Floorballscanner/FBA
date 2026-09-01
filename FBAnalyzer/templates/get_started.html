@@ -2,7 +2,7 @@
 
 This is the "get started" decision page — reached from the landing page's main
 CTA. Presents the two paths: a self-service free trial, or buying a license
-directly.
+directly through Stripe Checkout.
 
 -->
 
@@ -21,7 +21,7 @@ directly.
         <p>Try it free for 14 days, or buy a license now if you already know it's for you.</p>
     </div>
 
-    <div class="landing-card-grid">
+    <div class="landing-card-grid" style="max-width:480px;">
         <a class="landing-card" href="/trial">
             <h3>Start a free trial</h3>
             <p>
@@ -29,24 +29,17 @@ directly.
                 No payment required.
             </p>
         </a>
-        <a class="landing-card" href="https://holvi.com/shop/fbscanner/">
-            <h3>Buy a license</h3>
-            <p>
-                Team, Club, or F-Liiga-only — pick the license that fits your team
-                and get started right away.
-            </p>
-        </a>
     </div>
 
     <div style="text-align:center;margin:0 0 64px;">
-        <p style="font-size:15px;color:var(--landing-muted);margin-bottom:16px;">
-            Prefer to pay by card, Apple Pay, Google Pay, or MobilePay?
-        </p>
+        <h2 style="font-size:26px;font-weight:700;color:var(--landing-navy-dark);margin:0 0 24px;">
+            Buy a license
+        </h2>
         <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:flex-start;">
             <div style="max-width:220px;">
                 <form method="post" action="{% url 'stripe-checkout' 'team' %}">
                     {% csrf_token %}
-                    <button type="submit" class="landing-btn landing-btn--ghost">Buy Team license</button>
+                    <button type="submit" class="landing-btn landing-btn--primary">Buy Team license</button>
                 </form>
                 <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
                     Floorball Scanner + F-Liiga, 12 months, for one team.
@@ -55,7 +48,7 @@ directly.
             <div style="max-width:220px;">
                 <form method="post" action="{% url 'stripe-checkout' 'club' %}">
                     {% csrf_token %}
-                    <button type="submit" class="landing-btn landing-btn--ghost">Buy Club license</button>
+                    <button type="submit" class="landing-btn landing-btn--primary">Buy Club license</button>
                 </form>
                 <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
                     Floorball Scanner + F-Liiga, 12 months, for your entire club.
@@ -64,7 +57,7 @@ directly.
             <div style="max-width:220px;">
                 <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}">
                     {% csrf_token %}
-                    <button type="submit" class="landing-btn landing-btn--ghost">Buy F-Liiga license</button>
+                    <button type="submit" class="landing-btn landing-btn--primary">Buy F-Liiga license</button>
                 </form>
                 <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
                     Live tracking of today's F-Liiga matches, 12 months.

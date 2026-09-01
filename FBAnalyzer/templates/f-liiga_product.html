@@ -2,7 +2,7 @@
 
 This is the F-Liiga product page — the marketing landing page for the standalone
 F-Liiga license, reached from the homepage's F-Liiga feature section. Explains
-what the license includes and links straight to the Holvi purchase page.
+what the license includes and buys it directly through Stripe Checkout.
 
 -->
 
@@ -85,13 +85,10 @@ what the license includes and links straight to the Holvi purchase page.
             Live tracking of today's F-Liiga matches. License valid for 12 months.
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <a class="landing-btn landing-btn--primary"
-               href="https://holvi.com/shop/fbscanner/product/ad2423a19501be31d93808d0ce7e93a3/"
-               role="button">Buy F-Liiga license</a>
             <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;">
                 {% csrf_token %}
-                <button type="submit" class="landing-btn landing-btn--ghost">
-                    Buy with card / Apple Pay / Google Pay
+                <button type="submit" class="landing-btn landing-btn--primary">
+                    Buy F-Liiga license
                 </button>
             </form>
             <a class="landing-btn landing-btn--ghost" href="/f-liiga/trial/" role="button">
