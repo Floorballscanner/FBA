@@ -1,0 +1,56 @@
+<!--
+
+Shown instead of the app when a 7-day F-Liiga trial license has expired.
+Reached via license_required's redirect (accounts/decorators.py) — the user's
+account stays active after the trial expires specifically so they can still
+log in and land here instead of hitting a bare login error.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+
+    <div class="landing-page-header">
+        <img src="{% static 'fliigalogo.svg' %}" width="72" alt="F-Liiga logo">
+        <h1>Your F-Liiga trial has expired</h1>
+        <p>
+            Your 7-day F-Liiga trial has ended. Buy the F-Liiga license to keep
+            following live results and expected goals.
+        </p>
+    </div>
+
+    <section class="landing-feature">
+        <div class="landing-feature__media landing-media-pair">
+            <img src="{% static 'fliiga_match_stats.jpg' %}" alt="Live F-Liiga match score, xG and win probability">
+            <img src="{% static 'fliiga_players_xg.jpg' %}" alt="Top F-Liiga players by expected goals">
+        </div>
+        <div class="landing-feature__text">
+            <h2>What you had during your trial</h2>
+            <ul class="landing-checklist">
+                <li>The only source for F-Liiga expected goals (xG)</li>
+                <li>Live coverage of every match played that day</li>
+                <li>Score, expected goals, and win probability updating live</li>
+                <li>Covers both men's and women's F-Liiga</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="landing-demo">
+        <h2>Ready to keep following F-Liiga live?</h2>
+        <a class="landing-btn landing-btn--primary"
+           href="https://holvi.com/shop/fbscanner/product/ad2423a19501be31d93808d0ce7e93a3/"
+           role="button">Buy F-Liiga license</a>
+        <p style="margin:20px 0 0;font-size:15px;">
+            <a href="/get-started">Or see all license options</a>
+        </p>
+    </section>
+
+</div>
+{% endblock %}

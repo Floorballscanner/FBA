@@ -71,8 +71,46 @@ def start_trial(request):
 
     return render(request, 'accounts/start_trial.html', {'form': form})
 
+
+def start_fliiga_trial(request):
+    if request.method == 'POST':
+        form = TrialSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.email = form.cleaned_data['email']
+            user.save()
+
+            license = License.objects.create(tier='fliiga_trial', max_seats=1)
+            LicenseSeat.objects.create(license=license, user=user, email=user.email)
+
+            send_mail(
+                subject="New F-Liiga trial license created",
+                message=f"A new 7-day F-Liiga trial license was created for {user.email}.",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],
+            )
+
+            messages.success(
+                request,
+                "Your 7-day F-Liiga trial is ready. Please log in — it includes the "
+                "F-Liiga live page."
+            )
+            return redirect('login')
+    else:
+        form = TrialSignupForm()
+
+    return render(request, 'accounts/start_fliiga_trial.html', {'form': form})
+
+
+def trial_expired(request):
+    return render(request, 'accounts/trial_expired.html')
+
+
+def fliiga_trial_expired(request):
+    return render(request, 'accounts/fliiga_trial_expired.html')
+
 @login_required
-@license_required('fliiga', 'team', 'club', 'trial')
+@license_required('fliiga', 'fliiga_trial', 'team', 'club', 'trial')
 def index(request):
     return render(request,'accounts/index.html')
 
@@ -343,11 +381,11 @@ class UpdatePlayer(generics.UpdateAPIView):
         return Response(serializer.data)
 
 @login_required
-@license_required('fliiga', 'team', 'club')
+@license_required('fliiga', 'fliiga_trial', 'team', 'club')
 def fliigagame(request, nr):
     return render(request, 'f-liiga_game.html')
 @login_required
-@license_required('fliiga', 'team', 'club')
+@license_required('fliiga', 'fliiga_trial', 'team', 'club')
 def fliiga_main(request):
     return render(request, 'f-liiga.html')
 @login_required
@@ -355,7 +393,7 @@ def fliiga_main(request):
 def fliiga_results(request):
     return render(request, 'f-liiga_results.html')
 @login_required
-@license_required('fliiga', 'team', 'club')
+@license_required('fliiga', 'fliiga_trial', 'team', 'club')
 def fliigalive(request):
     return render(request, 'f-liiga_live.html')
 @login_required

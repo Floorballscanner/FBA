@@ -1,0 +1,33 @@
+<!--
+
+Self-service 7-day F-Liiga trial signup. Reachable only from the F-Liiga product
+page (fbscanner.io/f-liiga), not linked from the general /trial flow. No admin
+step — creates the User, License, and LicenseSeat immediately on submit.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="landing-narrow">
+        <div class="landing-form-card">
+            <h1>Try F-Liiga free for 7 days</h1>
+            <p>
+                7 days of live F-Liiga access — score, expected goals (xG), and win
+                probability updating live for every match. No payment required.
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Start F-Liiga trial">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -375,14 +375,21 @@ class LiveData(models.Model):
         return f'{self.nameT1} - {self.nameT2}'
 
 class License(models.Model):
-    TIER_CHOICES = [('trial', 'Trial'), ('fliiga', 'F-Liiga'), ('team', 'Team'), ('club', 'Club')]
+    TIER_CHOICES = [
+        ('trial', 'Trial'),
+        ('fliiga_trial', 'F-Liiga Trial'),
+        ('fliiga', 'F-Liiga'),
+        ('team', 'Team'),
+        ('club', 'Club'),
+    ]
     LICENSE_DURATION = timedelta(days=365)
     TRIAL_DURATION = timedelta(days=14)
+    FLIIGA_TRIAL_DURATION = timedelta(days=7)
 
-    tier = models.CharField(choices=TIER_CHOICES, max_length=10)
+    tier = models.CharField(choices=TIER_CHOICES, max_length=15)
     max_seats = models.PositiveIntegerField(
         null=True, blank=True,
-        help_text="1 for Team/F-Liiga/Trial. Leave blank for Club (unlimited seats).",
+        help_text="1 for Team/F-Liiga/Trial/F-Liiga Trial. Leave blank for Club (unlimited seats).",
     )
     is_active = models.BooleanField(default=True)
     starts_at = models.DateTimeField(null=True, blank=True)
@@ -391,7 +398,12 @@ class License(models.Model):
     def save(self, *args, **kwargs):
         if self.starts_at is None:
             self.starts_at = timezone.now()
-            duration = self.TRIAL_DURATION if self.tier == 'trial' else self.LICENSE_DURATION
+            if self.tier == 'trial':
+                duration = self.TRIAL_DURATION
+            elif self.tier == 'fliiga_trial':
+                duration = self.FLIIGA_TRIAL_DURATION
+            else:
+                duration = self.LICENSE_DURATION
             self.expires_at = self.starts_at + duration
         super().save(*args, **kwargs)
 
