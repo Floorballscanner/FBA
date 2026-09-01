@@ -1,0 +1,32 @@
+<!--
+
+Stripe Hosted Checkout success_url landing page. Reached right after a successful
+payment — the actual License/LicenseSeat is created by the stripe_webhook view
+(accounts/stripe_views.py), which usually fires within a second or two of this page
+loading, so this is intentionally just a static confirmation, not a status poll.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="landing-narrow">
+        <div class="landing-form-card" style="text-align:center;">
+            <h1>Thank you for your purchase!</h1>
+            <p>
+                Your payment was successful. Check your inbox for an email with a link
+                to activate your account — it should arrive within a few minutes.
+            </p>
+            <a class="landing-btn landing-btn--primary" href="/accounts/login/" role="button">
+                Go to login
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

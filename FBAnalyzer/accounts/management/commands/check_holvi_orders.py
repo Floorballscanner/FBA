@@ -6,10 +6,9 @@ import re
 from django.conf import settings
 from django.core.mail import send_mail
 from django.core.management.base import BaseCommand
-from django.utils import timezone
 
-from accounts.licensing import send_activation_email
-from accounts.models import License, LicenseSeat
+from accounts.licensing import create_or_renew_license
+from accounts.models import LicenseSeat
 
 HOLVI_SENDER = 'orders@holvi.com'
 
@@ -151,30 +150,15 @@ class Command(BaseCommand):
             existing_seat = LicenseSeat.objects.filter(email__iexact=buyer_email).first()
 
             if existing_seat:
-                license = existing_seat.license
                 self.stdout.write(
                     f"{'[dry-run] ' if dry_run else ''}Renewing {buyer_email} -> tier={tier} "
-                    f"(license id={license.pk})"
+                    f"(license id={existing_seat.license.pk})"
                 )
-                if not dry_run:
-                    now = timezone.now()
-                    base = license.expires_at if license.expires_at and license.expires_at > now else now
-                    license.tier = tier
-                    license.max_seats = None if tier == 'club' else 1
-                    license.expires_at = base + License.LICENSE_DURATION
-                    license.is_active = True
-                    license.save()
-                    for seat in license.seats.all():
-                        if seat.user is not None:
-                            seat.user.is_active = True
-                            seat.user.save(update_fields=['is_active'])
-                    imap.store(msg_id, '+FLAGS', '\\Seen')
             else:
                 self.stdout.write(f"{'[dry-run] ' if dry_run else ''}Creating new {tier} license for {buyer_email}")
-                if not dry_run:
-                    license = License.objects.create(tier=tier, max_seats=None if tier == 'club' else 1)
-                    seat = LicenseSeat.objects.create(license=license, email=buyer_email)
-                    send_activation_email(seat, settings.SITE_URL)
-                    imap.store(msg_id, '+FLAGS', '\\Seen')
+
+            if not dry_run:
+                create_or_renew_license(buyer_email, tier)
+                imap.store(msg_id, '+FLAGS', '\\Seen')
 
         imap.logout()

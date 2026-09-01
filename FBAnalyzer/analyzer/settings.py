@@ -210,3 +210,37 @@ if os.environ.get('EMAIL_HOST_USER'):
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_EMAIL = 'floorballscanner@gmail.com'
+
+# Stripe: kept unset (empty string) in any environment that hasn't configured it yet, so
+# views can check `if not settings.STRIPE_SECRET_KEY` rather than crashing on import.
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY', '')
+STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', '')
+
+# One Stripe Price ID per license tier, set via Heroku config vars once the Price objects
+# exist in the Stripe Dashboard (test mode first, then live mode after go-live).
+STRIPE_PRICE_IDS = {
+    'team': os.environ.get('STRIPE_PRICE_ID_TEAM', ''),
+    'club': os.environ.get('STRIPE_PRICE_ID_CLUB', ''),
+    'fliiga': os.environ.get('STRIPE_PRICE_ID_FLIIGA', ''),
+}
+
+# Stripe File id (purpose='business_icon') for the Checkout page's brand icon — the
+# logo files in static/ have a white wordmark meant for the navy nav bar, which is
+# invisible on Checkout's light background, so only the icon (no wordmark) is used
+# there; the business name is shown as text instead via branding_settings.display_name.
+STRIPE_BRANDING_ICON_FILE_ID = os.environ.get('STRIPE_BRANDING_ICON_FILE_ID', '')
+
+# Restricts Checkout to just these payment methods instead of Stripe's automatic/dynamic
+# selection, which otherwise surfaces every payment method capability active on the
+# account (Bancontact, EPS, Klarna, Satispay, etc. — mostly irrelevant to our customers).
+# 'mobilepay' and 'pay_by_bank' (Finnish online banking, e.g. OP/Nordea) require their
+# capabilities to be individually enabled per Stripe account (Dashboard → Settings →
+# Payment methods) before they can be listed here, which is why this defaults to just
+# 'card' — always safe — until a fuller list is explicitly set via env var (e.g. once
+# those capabilities are turned on for live mode). Apple Pay / Google Pay aren't separate
+# types — they piggyback on 'card' and appear automatically when the buyer's browser/
+# device supports them.
+STRIPE_PAYMENT_METHOD_TYPES = [
+    t.strip() for t in os.environ.get('STRIPE_PAYMENT_METHOD_TYPES', 'card').split(',') if t.strip()
+]

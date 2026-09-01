@@ -122,6 +122,20 @@ as-is to avoid an unnecessary rename across already-shipped templates.
     border-color: var(--landing-navy);
 }
 
+/* Lets a <button> (e.g. a Stripe checkout <form>) match the look of the <a>-based
+   .landing-btn used everywhere else. Only resets native button chrome (OS-drawn
+   border/background, UI font) — never sets border/background/color itself, so
+   .landing-btn--primary/--ghost stay in full control of those despite this rule's
+   higher specificity (button.landing-btn beats a single .landing-btn--ghost class). */
+button.landing-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: inherit;
+    cursor: pointer;
+    line-height: normal;
+}
+
 .landing-stats-section {
     max-width: 1120px;
     margin: 0 auto;
