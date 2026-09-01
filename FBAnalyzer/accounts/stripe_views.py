@@ -7,6 +7,7 @@ import stripe
 
 from django.conf import settings
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
@@ -75,5 +76,20 @@ def stripe_webhook(request):
         email = customer_details.get('email')
         if tier and email:
             create_or_renew_license(email, tier)
+
+            amount_total = session.get('amount_total')
+            currency = (session.get('currency') or '').upper()
+            amount_str = f"{amount_total / 100:.2f} {currency}" if amount_total is not None else "unknown amount"
+            send_mail(
+                subject="New Stripe payment received",
+                message=(
+                    f"A new Stripe payment was completed.\n\n"
+                    f"Tier: {tier}\n"
+                    f"Email: {email}\n"
+                    f"Amount: {amount_str}\n"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],
+            )
 
     return HttpResponse(status=200)
