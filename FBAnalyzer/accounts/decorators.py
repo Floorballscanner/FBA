@@ -3,16 +3,6 @@ from functools import wraps
 from django.contrib import messages
 from django.shortcuts import redirect
 
-BUY_LICENSE_URL = 'https://holvi.com/shop/fbscanner/'
-FLIIGA_PRODUCT_URL = 'https://holvi.com/shop/fbscanner/product/ad2423a19501be31d93808d0ce7e93a3/'
-
-# Tiers that should point straight at their own product page instead of the
-# general shop front when their license expires.
-TIER_BUY_URLS = {
-    'fliiga': FLIIGA_PRODUCT_URL,
-    'fliiga_trial': FLIIGA_PRODUCT_URL,
-}
-
 # Self-service trial tiers (the only ones whose User stays active past expiry,
 # see deactivate_expired_licenses) get sent to their own dedicated "trial
 # expired" landing page instead of a banner message, so it can remind them
@@ -58,20 +48,22 @@ def license_required(*tiers):
             if license is not None and not license.is_active:
                 # Expired/inactive license. Trial tiers get their own dedicated
                 # "trial expired" landing page (reminds them what they had, sells
-                # them straight into the matching product). Any other tier falls
-                # back to a banner message — 'home' (index) requires an active
-                # license too, so redirecting there would just bounce straight
-                # back out here, hence the public frontpage instead.
+                # them straight into the matching product). Paid tiers (rarely seen
+                # here in practice — deactivate_expired_licenses locks their User
+                # out entirely, so this mostly only fires in the window before that
+                # job next runs) go to get-started, which has a one-click Stripe
+                # buy button for every tier — 'home' (index) requires an active
+                # license too, so redirecting there would just bounce straight back
+                # out here.
                 if license.tier in TRIAL_EXPIRED_URL_NAMES:
                     return redirect(TRIAL_EXPIRED_URL_NAMES[license.tier])
 
-                buy_url = TIER_BUY_URLS.get(license.tier, BUY_LICENSE_URL)
                 messages.error(
                     request,
                     f"Your {license.get_tier_display().lower()} license has expired. "
-                    f"Please purchase a license at {buy_url} to keep using Floorball Scanner.",
+                    f"Please buy a new license to keep using Floorball Scanner.",
                 )
-                return redirect('frontpage')
+                return redirect('get-started')
 
             if license is not None and license.is_active:
                 # Active license, just the wrong tier for this specific page (e.g. a
