@@ -16,6 +16,17 @@ from accounts.licensing import create_or_renew_license
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+# Matches --landing-navy / --landing-bg in static/css/landing.css, so Checkout's button
+# and background colors read as the same brand as the rest of the site.
+BRANDING_SETTINGS = {
+    'display_name': 'Floorball Scanner',
+    'border_style': 'rounded',
+    'background_color': '#f5f6fa',
+    'button_color': '#002072',
+}
+if settings.STRIPE_BRANDING_ICON_FILE_ID:
+    BRANDING_SETTINGS['icon'] = {'type': 'file', 'file': settings.STRIPE_BRANDING_ICON_FILE_ID}
+
 
 @require_POST
 def start_checkout(request, tier):
@@ -29,6 +40,7 @@ def start_checkout(request, tier):
         line_items=[{'price': price_id, 'quantity': 1}],
         allow_promotion_codes=True,
         metadata={'tier': tier},
+        branding_settings=BRANDING_SETTINGS,
         success_url=request.build_absolute_uri('/buy/success/'),
         cancel_url=request.build_absolute_uri('/get-started/'),
     )

@@ -224,3 +224,9 @@ STRIPE_PRICE_IDS = {
     'club': os.environ.get('STRIPE_PRICE_ID_CLUB', ''),
     'fliiga': os.environ.get('STRIPE_PRICE_ID_FLIIGA', ''),
 }
+
+# Stripe File id (purpose='business_icon') for the Checkout page's brand icon — the
+# logo files in static/ have a white wordmark meant for the navy nav bar, which is
+# invisible on Checkout's light background, so only the icon (no wordmark) is used
+# there; the business name is shown as text instead via branding_settings.display_name.
+STRIPE_BRANDING_ICON_FILE_ID = os.environ.get('STRIPE_BRANDING_ICON_FILE_ID', '')
