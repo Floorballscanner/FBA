@@ -50,6 +50,11 @@ def stripe_webhook(request):
     except (ValueError, stripe.SignatureVerificationError):
         return HttpResponseBadRequest()
 
+    # construct_event returns Stripe SDK objects (Event/Session), not plain dicts — they
+    # support attribute and [] access but NOT .get(), so convert to a plain dict up front
+    # rather than fighting the SDK's object wrappers field by field.
+    event = event.to_dict()
+
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         tier = (session.get('metadata') or {}).get('tier')
