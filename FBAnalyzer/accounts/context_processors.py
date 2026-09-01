@@ -18,4 +18,5 @@ def license_status(request):
     return {
         'license_days_left': max(days_left, 0),
         'license_tier_display': license.get_tier_display(),
+        'license_tier': license.tier,
     }

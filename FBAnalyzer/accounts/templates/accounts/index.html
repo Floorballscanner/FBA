@@ -27,11 +27,20 @@ It extends app_layout.html with Django
     </div>
 
     <div class="landing-card-grid">
+        {% if license_tier == 'trial' %}
+        <a class="landing-card landing-card--locked" href="/f-liiga/">
+            <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+            <h3>F-Liiga results</h3>
+            <p>Finnish F-Liiga results.</p>
+            <span class="landing-card__badge">Available in paid license &rarr;</span>
+        </a>
+        {% else %}
         <a class="landing-card" href="/accounts/fliiga">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
             <h3>F-Liiga results</h3>
             <p>Finnish F-Liiga results.</p>
         </a>
+        {% endif %}
         <a class="landing-card" href="/accounts/edit_data">
             <img src="{% static 'symbol_transparent.png' %}" width="60" alt="">
             <h3>Edit data</h3>

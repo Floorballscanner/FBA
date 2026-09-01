@@ -20,21 +20,39 @@ This is the F-liiga hub page — links to results, live data, and statistics.
     </div>
 
     <div class="landing-card-grid">
+        {% if license_tier == 'fliiga' or license_tier == 'fliiga_trial' %}
+        <a class="landing-card landing-card--locked" href="/get-started">
+            <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+            <h3>Results</h3>
+            <p>All played game results from Finnish F-Liiga.</p>
+            <span class="landing-card__badge">Team &amp; Club license &rarr;</span>
+        </a>
+        {% else %}
         <a class="landing-card" href="/accounts/fliiga_results">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
             <h3>Results</h3>
             <p>All played game results from Finnish F-Liiga.</p>
         </a>
+        {% endif %}
         <a class="landing-card" href="/accounts/fliigalive">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
             <h3>Live</h3>
             <p>Live game data from Finnish F-Liiga.</p>
         </a>
+        {% if license_tier == 'fliiga' or license_tier == 'fliiga_trial' %}
+        <a class="landing-card landing-card--locked" href="/get-started">
+            <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+            <h3>Statistics</h3>
+            <p>Advanced F-Liiga statistics.</p>
+            <span class="landing-card__badge">Team &amp; Club license &rarr;</span>
+        </a>
+        {% else %}
         <a class="landing-card" href="/accounts/fliiga_statistics">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
             <h3>Statistics</h3>
             <p>Advanced F-Liiga statistics.</p>
         </a>
+        {% endif %}
     </div>
 
 </div>
