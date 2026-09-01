@@ -4,6 +4,14 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 BUY_LICENSE_URL = 'https://holvi.com/shop/fbscanner/'
+FLIIGA_PRODUCT_URL = 'https://holvi.com/shop/fbscanner/product/ad2423a19501be31d93808d0ce7e93a3/'
+
+# Tiers that should point straight at their own product page instead of the
+# general shop front when their license expires.
+TIER_BUY_URLS = {
+    'fliiga': FLIIGA_PRODUCT_URL,
+    'fliiga_trial': FLIIGA_PRODUCT_URL,
+}
 
 
 def get_license(user):
@@ -42,10 +50,11 @@ def license_required(*tiers):
                 # Expired/inactive license: 'home' (index) requires an active license
                 # too, so redirecting there would just bounce straight back out here —
                 # send them to the public frontpage instead.
+                buy_url = TIER_BUY_URLS.get(license.tier, BUY_LICENSE_URL)
                 messages.error(
                     request,
                     f"Your {license.get_tier_display().lower()} license has expired. "
-                    f"Please purchase a license at {BUY_LICENSE_URL} to keep using Floorball Scanner.",
+                    f"Please purchase a license at {buy_url} to keep using Floorball Scanner.",
                 )
                 return redirect('frontpage')
 

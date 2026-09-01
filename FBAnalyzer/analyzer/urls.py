@@ -25,6 +25,7 @@ urlpatterns = [
     # path('fliigalive/<nr>', views.fliigagame, name="fliigagamepage"),
     path('references/', views.references, name="references"),
     path('f-liiga/', views.fliiga_product, name="fliiga-product"),
+    path('f-liiga/trial/', accounts_views.start_fliiga_trial, name="start-fliiga-trial"),
     # path('fliiga_results/', views.fliiga_results, name="fliiga-results"),
     # path('inssidivari/', views.inssidivari_main, name="inssidivari-main"),
     # path('inssidivari_results/', views.inssidivari_results, name="inssidivari-results"),
