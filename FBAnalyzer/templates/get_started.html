@@ -38,5 +38,25 @@ directly.
         </a>
     </div>
 
+    <div style="text-align:center;margin:0 0 64px;">
+        <p style="font-size:15px;color:var(--landing-muted);margin-bottom:16px;">
+            Prefer to pay by card, Apple Pay, Google Pay, or MobilePay?
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+            <form method="post" action="{% url 'stripe-checkout' 'team' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="landing-btn landing-btn--ghost">Buy Team license</button>
+            </form>
+            <form method="post" action="{% url 'stripe-checkout' 'club' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="landing-btn landing-btn--ghost">Buy Club license</button>
+            </form>
+            <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="landing-btn landing-btn--ghost">Buy F-Liiga license</button>
+            </form>
+        </div>
+    </div>
+
 </div>
 {% endblock %}

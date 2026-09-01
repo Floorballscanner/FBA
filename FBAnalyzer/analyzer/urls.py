@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.urls import path, include
 from accounts import urls as accounts_urls
 from accounts import views as accounts_views
+from accounts import stripe_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
 
@@ -18,6 +19,11 @@ urlpatterns = [
     path('get-started/', views.get_started, name="get-started"),
     path('trial/', accounts_views.start_trial, name="start-trial"),
     path('trial-expired/', accounts_views.trial_expired, name="trial-expired"),
+    # 'buy/success/' must come before 'buy/<str:tier>/' — otherwise it'd match the
+    # tier-capturing pattern first, with tier='success'.
+    path('buy/success/', stripe_views.checkout_success, name="stripe-checkout-success"),
+    path('buy/<str:tier>/', stripe_views.start_checkout, name="stripe-checkout"),
+    path('stripe/webhook/', stripe_views.stripe_webhook, name="stripe-webhook"),
     path('sitemap', views.sitemap, name="sitemap"),
     path('apis/', include(accounts_urls)),
     path('live/', views.live, name="livepage"),

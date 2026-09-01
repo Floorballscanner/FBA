@@ -85,6 +85,12 @@ what the license includes and links straight to the Holvi purchase page.
             <a class="landing-btn landing-btn--primary"
                href="https://holvi.com/shop/fbscanner/product/ad2423a19501be31d93808d0ce7e93a3/"
                role="button">Buy F-Liiga license</a>
+            <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="landing-btn landing-btn--ghost">
+                    Buy with card / Apple Pay / Google Pay
+                </button>
+            </form>
             <a class="landing-btn landing-btn--ghost" href="/f-liiga/trial/" role="button">
                 Try free for 7 days
             </a>

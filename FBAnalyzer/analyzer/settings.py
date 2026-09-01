@@ -210,3 +210,17 @@ if os.environ.get('EMAIL_HOST_USER'):
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_EMAIL = 'floorballscanner@gmail.com'
+
+# Stripe: kept unset (empty string) in any environment that hasn't configured it yet, so
+# views can check `if not settings.STRIPE_SECRET_KEY` rather than crashing on import.
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY', '')
+STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', '')
+
+# One Stripe Price ID per license tier, set via Heroku config vars once the Price objects
+# exist in the Stripe Dashboard (test mode first, then live mode after go-live).
+STRIPE_PRICE_IDS = {
+    'team': os.environ.get('STRIPE_PRICE_ID_TEAM', ''),
+    'club': os.environ.get('STRIPE_PRICE_ID_CLUB', ''),
+    'fliiga': os.environ.get('STRIPE_PRICE_ID_FLIIGA', ''),
+}
