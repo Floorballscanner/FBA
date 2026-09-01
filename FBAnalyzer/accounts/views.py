@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time, License, LicenseSeat, FliigaSeasonStats
 from django.http import HttpResponseRedirect, JsonResponse
 from accounts.forms import AddNewPlayer, TrialSignupForm
-from accounts.decorators import license_required
+from accounts.decorators import license_required, get_active_license
 from datetime import datetime
 from rest_framework import viewsets, generics
 from django.forms import modelformset_factory
@@ -112,6 +112,12 @@ def fliiga_trial_expired(request):
 @login_required
 @license_required('fliiga', 'fliiga_trial', 'team', 'club', 'trial')
 def index(request):
+    license = get_active_license(request.user)
+    if license is not None and license.tier in ('fliiga', 'fliiga_trial'):
+        # F-Liiga-only tiers don't have anything else to do in the full app —
+        # send them straight to the page they actually have access to instead
+        # of a dashboard full of links they can't use.
+        return redirect('fliiga-main')
     return render(request,'accounts/index.html')
 
 @login_required
