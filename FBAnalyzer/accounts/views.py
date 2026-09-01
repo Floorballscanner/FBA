@@ -101,6 +101,14 @@ def start_fliiga_trial(request):
 
     return render(request, 'accounts/start_fliiga_trial.html', {'form': form})
 
+
+def trial_expired(request):
+    return render(request, 'accounts/trial_expired.html')
+
+
+def fliiga_trial_expired(request):
+    return render(request, 'accounts/fliiga_trial_expired.html')
+
 @login_required
 @license_required('fliiga', 'fliiga_trial', 'team', 'club', 'trial')
 def index(request):

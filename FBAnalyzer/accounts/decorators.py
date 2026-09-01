@@ -13,6 +13,15 @@ TIER_BUY_URLS = {
     'fliiga_trial': FLIIGA_PRODUCT_URL,
 }
 
+# Self-service trial tiers (the only ones whose User stays active past expiry,
+# see deactivate_expired_licenses) get sent to their own dedicated "trial
+# expired" landing page instead of a banner message, so it can remind them
+# what they had and sell them straight into the right product.
+TRIAL_EXPIRED_URL_NAMES = {
+    'trial': 'trial-expired',
+    'fliiga_trial': 'fliiga-trial-expired',
+}
+
 
 def get_license(user):
     """Returns the user's seat's License regardless of whether it's still active, or
@@ -47,9 +56,15 @@ def license_required(*tiers):
                 return view_func(request, *args, **kwargs)
 
             if license is not None and not license.is_active:
-                # Expired/inactive license: 'home' (index) requires an active license
-                # too, so redirecting there would just bounce straight back out here —
-                # send them to the public frontpage instead.
+                # Expired/inactive license. Trial tiers get their own dedicated
+                # "trial expired" landing page (reminds them what they had, sells
+                # them straight into the matching product). Any other tier falls
+                # back to a banner message — 'home' (index) requires an active
+                # license too, so redirecting there would just bounce straight
+                # back out here, hence the public frontpage instead.
+                if license.tier in TRIAL_EXPIRED_URL_NAMES:
+                    return redirect(TRIAL_EXPIRED_URL_NAMES[license.tier])
+
                 buy_url = TIER_BUY_URLS.get(license.tier, BUY_LICENSE_URL)
                 messages.error(
                     request,

@@ -1,0 +1,55 @@
+<!--
+
+Shown instead of the app when a 14-day trial license has expired. Reached via
+license_required's redirect (accounts/decorators.py) — the user's account stays
+active after a trial expires specifically so they can still log in and land
+here instead of hitting a bare login error.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+
+    <div class="landing-page-header">
+        <img src="{% static 'symbol_transparent.png' %}" width="72" height="72" alt="">
+        <h1>Your free trial has expired</h1>
+        <p>
+            Your 14-day Floorball Scanner trial has ended. Buy a Team or Club license
+            to keep your data and keep making data-driven decisions.
+        </p>
+    </div>
+
+    <section class="landing-feature">
+        <div class="landing-feature__media">
+            <img src="{% static 'aboutpage_players.png' %}" alt="Player statistics view">
+        </div>
+        <div class="landing-feature__text">
+            <h2>Everything you had during your trial</h2>
+            <ul class="landing-checklist">
+                <li>Team, line, and individual player performance analysis</li>
+                <li>Real-time data during the game — possession, time on court, shots, goals</li>
+                <li>Expected goals (xG) and shot maps</li>
+                <li>Advanced statistics broken down by line and by player</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="landing-demo">
+        <h2>Ready to keep going?</h2>
+        <a class="landing-btn landing-btn--primary" href="https://holvi.com/shop/fbscanner/" role="button">
+            Buy a license
+        </a>
+        <p style="margin:20px 0 0;font-size:15px;">
+            <a href="/get-started">Or see all license options</a>
+        </p>
+    </section>
+
+</div>
+{% endblock %}
