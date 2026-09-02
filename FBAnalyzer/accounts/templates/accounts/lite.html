@@ -8,6 +8,7 @@ It extends app_layout.html with Django
 -->
 
 {% extends 'base_layout.html' %}
+{% block title %}Free LITE | Floorball Scanner{% endblock %}
 {% block content %}
 {% load static %}
 {{ request.user.id|json_script:"user_id" }}
