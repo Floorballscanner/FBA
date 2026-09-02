@@ -3,229 +3,212 @@
 This is the analysis - html - page content file. It is shown when the user is logged in and
 presses Analyse data - button at the index - page.
 
-It extends app_layout.html with Django
+It extends app_layout.html with Django. Visual layer only — every element id below is read by
+static/js/premium_analysis.js via getElementById, so ids (and the canvas width/height
+attributes, which the drawing code addresses in pixels) must stay exactly as they are. Styling
+lives in static/css/premium_analysis.css, scoped under .premium-analyse-page.
 
 -->
 
 {% extends 'app_layout.html' %}
-{% block content %}
 {% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/premium_analysis.css' %}">
+{% endblock %}
+{% block content %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div class="container" style="Padding-top: 80px;">
-    <a href="/accounts/saved_games"><img src="{% static 'back.png' %}" height="30px"></a>
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="team-selection">
-                <h2 style="Padding-top:20px;">Select games</h2><br>
-                <select id="select-game" class="form-control-sm custom-select" multiple>
-                    <option disabled>Select games...</option>
-                    {% for game in games reversed %}
-                        <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.game_data.name_t1}} - {{game.game_data.name_t2}}</option>
-                    {% endfor %}
-                </select>
-                <button onclick="changeGame()" class="btn btn-secondary" style="font-size:12px;">Load</button>
-            </div>
-            <hr width="100%" size="2" align="center" color="#002072" noshade>
+<div class="premium-analyse-page">
+
+    <div class="pa-toolbar">
+        <a class="pa-back" href="/accounts/saved_games" aria-label="Back to saved games">
+            <img src="{% static 'back.png' %}" alt="">
+        </a>
+        <h1 class="pa-title">Premium analysis</h1>
+    </div>
+
+    <div class="pa-games-card">
+        <span class="pa-games-card__label">Select games</span>
+        <div class="pa-games-row">
+            <select id="select-game" class="pa-select" multiple>
+                <option disabled>Select games...</option>
+                {% for game in games reversed %}
+                    <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.game_data.name_t1}} - {{game.game_data.name_t2}}</option>
+                {% endfor %}
+            </select>
+            <button type="button" onclick="changeGame()" class="pa-btn">Load</button>
         </div>
     </div>
-    <div class="row justify-content-center" style="Padding-top: 40px;">
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div style="text-align: center;" id="gameStatsF"></div>
-                <div style="text-align: center;" id="gameStatsA"></div>
+
+    <section class="pa-section">
+        <h2 class="pa-section__title">Team comparison</h2>
+        <div class="pa-grid-2up">
+            <div class="pa-card">
+                <div class="pa-chart" id="gameStatsF"></div>
+                <div class="pa-chart" id="gameStatsA"></div>
+            </div>
+            <div class="pa-card">
+                <div class="pa-chart" id="xGTypeStatsF"></div>
+                <div class="pa-chart" id="xGTypeStatsA"></div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div style="text-align: center;" id="xGTypeStatsF"></div>
-                <div style="text-align: center;" id="xGTypeStatsA"></div>
+    </section>
+
+    <section class="pa-section">
+        <h2 class="pa-section__title">Game stats</h2>
+        <div class="pa-card">
+            <div class="pa-chart" id="gameData"></div>
+            <div class="pa-legend">
+                <span><b>xGF</b> = expected Goals For Team 1</span>
+                <span><b>xGA</b> = expected Goals Against Team 1</span>
+                <span><b>xGOTF</b> = expected Goals (On-Target shots) For Team 1</span>
+                <span><b>xGOTA</b> = expected Goals (On-Target shots) Against Team 1</span>
+                <span><b>GF</b> = Goals For Team 1</span>
+                <span><b>GA</b> = Goals Against Team 1</span>
+                <span><b>SF</b> = Shots For Team 1</span>
+                <span><b>SA</b> = Shots Against Team 1</span>
+                <span><b>xGFDir%</b> = % of expected Goals For Team 1 from Direct attacks (Shot types: Direct, Rebound, Cross-pass)</span>
+                <span><b>xGADir%</b> = % of expected Goals Against Team 1 from Direct attacks</span>
+                <span><b>xGFTO%</b> = % of expected Goals For Team 1 from TurnOver attacks (Shot types: Turn-over | Direct, Turn-over | Cross-pass)</span>
+                <span><b>xGATO%</b> = % of expected Goals Against Team 1 from TurnOver attacks</span>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 40px;">
-        <div class="col-sm-12">
-            <h5 style="text-align: center;">Game stats</h5>
-            <div class="linestats">
-                <div style="text-align: center;" id="gameData"></div>
-                <p style="font-size:8px;Padding-top:5px;">
-                <b>xGF</b> = expected Goals For Team 1,
-                <b>xGA</b> = expected Goals Against Team 1,
-                <b>xGOTF</b> = expected Goals (On-Target shots) For Team 1,
-                <b>xGOTA</b> = expected Goals (On-Target shots) Against Team 1,
-                <b>GF</b> = Goals For Team 1,
-                <b>GA</b> = Goals Against Team 1,
-                <b>SF</b> = Shots For Team 1,
-                <b>SA</b> = Shots Against Team 1,
-                <b>xGFDir%</b> = % of expected Goals For Team 1 from Direct attacks (Shot types: Direct, Rebound, Cross-pass),
-                <b>xGADir%</b> = % of expected Goals Against Team 1 from Direct attacks,
-                <b>xGFTO%</b> = % of expected Goals For Team 1 from TurnOver attacks (Shot types: Turn-over | Direct, Turn-over | Cross-pass),
-                <b>xGATO%</b> = % of expected Goals Against Team 1 from TurnOver attacks
-                </p>
+    </section>
+
+    <section class="pa-section">
+        <h2 class="pa-section__title">Game xG stats | 5v5 | PP | SH</h2>
+        <div class="pa-card">
+            <div class="pa-chart" id="gameDataST"></div>
+        </div>
+    </section>
+
+    <section class="pa-section">
+        <h2 class="pa-section__title">Player stats | 5 vs 5</h2>
+        <div class="pa-grid-2up">
+            <div class="pa-card">
+                <div class="pa-chart" style="height:500px;width:100%;" id="GAxG_plot"></div>
+            </div>
+            <div class="pa-card">
+                <div class="pa-chart" style="height:500px;" id="GAxAss_plot"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 40px;">
-        <div class="col-sm-12">
-            <h5 style="text-align: center;">Game xG stats | 5v5 | PP | SH</h5>
-            <div class="linestats">
-                <div style="text-align: center;" id="gameDataST"></div>
+        <div class="pa-grid-2up">
+            <div class="pa-card">
+                <div class="pa-chart" style="height:500px;width:100%;" id="GAxPoints_plot"></div>
+            </div>
+            <div class="pa-card">
+                <div class="pa-chart" style="height:500px;" id="xG%_plot"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h5 style="text-align: center;">Player stats | 5 vs 5</h5>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div style="text-align:center;height:500px;width:100%;" id="GAxG_plot"></div>
+        <div class="pa-card">
+            <div class="pa-chart" id="playerData"></div>
+            <div class="pa-legend">
+                <span><b>ixG%</b> = % of individual (player) expected Goals in relation to team xG</span>
+                <span><b>ixG</b> = individual expected Goals</span>
+                <span><b>iGoals</b> = individual Goals</span>
+                <span><b>ixAss%</b> = % of individual expected Assists in relation to team xAssists</span>
+                <span><b>ixAss</b> = individual expected Assists</span>
+                <span><b>iAss</b> = individual Assists (passes leading to goal)</span>
+                <span><b>ixPo%</b> = % of individual expected Points in relation to team xPoints</span>
+                <span><b>ixPo</b> = individual expected Points</span>
+                <span><b>iPo</b> = individual Points</span>
+                <span><b>iSF</b> = individual Shots For</span>
+                <span><b>ixG/iSF</b> = individual expected Goals / individual Shots for</span>
+                <span><b>iPa</b> = individual Passes (leading to a shot)</span>
+                <span><b>Pos+</b> = number of Possession gained</span>
+                <span><b>Pos-</b> = number of Possession lost</span>
+                <span><b>xGF</b> = Team expected Goals For while player on field</span>
+                <span><b>xGA</b> = Team expected Goals Against while player on field</span>
+                <span><b>xG%</b> = % of expected Goals For in relation to expected Goals Against</span>
+                <span><b>GF</b> = Team Goals For while player on field</span>
+                <span><b>GA</b> = Team Goals Against while player on field</span>
+                <span><b>+-</b> = Player plus minus</span>
+                <span><b>SF</b> = Team Shots For while player on field</span>
+                <span><b>SA</b> = Team Shots Against while player on field</span>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div style="text-align:center;height:500px;" id="GAxAss_plot"></div>
+    </section>
+
+    <section class="pa-section">
+        <h2 class="pa-section__title">Player shotmaps</h2>
+
+        <div class="pa-card" style="margin-bottom:16px;">
+            <div class="pa-player-row">
+                <div class="pa-player-row__controls">
+                    <select id="select-p1" class="pa-select">
+                        <option selected disabled>Select player...</option>
+                    </select>
+                    <button type="button" onclick="drawMap(1)" class="pa-btn">Draw</button>
+                    <div class="pa-player-row__canvases">
+                        <canvas id="p1Map" width="200" height="332"></canvas>
+                        <canvas id="p1PosMap" width="200" height="332"></canvas>
+                    </div>
+                </div>
+                <div class="pa-player-row__data" id="p1Data"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 10px;">
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div style="text-align:center;height:500px;width:100%;" id="GAxPoints_plot"></div>
+
+        <div class="pa-card" style="margin-bottom:16px;">
+            <div class="pa-player-row">
+                <div class="pa-player-row__controls">
+                    <select id="select-p2" class="pa-select">
+                        <option selected disabled>Select player...</option>
+                    </select>
+                    <button type="button" onclick="drawMap(2)" class="pa-btn">Draw</button>
+                    <div class="pa-player-row__canvases">
+                        <canvas id="p2Map" width="200" height="332"></canvas>
+                    </div>
+                </div>
+                <div class="pa-player-row__data" id="p2Data"></div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div style="text-align:center;height:500px;" id="xG%_plot"></div>
+
+        <div class="pa-card" style="margin-bottom:16px;">
+            <div class="pa-player-row">
+                <div class="pa-player-row__controls">
+                    <select id="select-p3" class="pa-select">
+                        <option selected disabled>Select player...</option>
+                    </select>
+                    <button type="button" onclick="drawMap(3)" class="pa-btn">Draw</button>
+                    <div class="pa-player-row__canvases">
+                        <canvas id="p3Map" width="200" height="332"></canvas>
+                    </div>
+                </div>
+                <div class="pa-player-row__data" id="p3Data"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 10px;">
-        <div class="col-sm-12">
-            <div class="linestats">
-                <div style="text-align: center;" id="playerData"></div>
-                <p style="font-size:8px;Padding-top:5px;">
-                <b>ixG%</b> = % of individual (player) expected Goals in relation to team xG,
-                <b>ixG</b> = individual expected Goals,
-                <b>iGoals</b> = individual Goals,
-                <b>ixAss%</b> = % of individual expected Assists in relation to team xAssists,
-                <b>ixAss</b> = individual expected Assists,
-                <b>iAss</b> = individual Assists (passes leading to goal),
-                <b>ixPo%</b> = % of individual expected Points in relation to team xPoints,
-                <b>ixPo</b> = individual expected Points,
-                <b>iPo</b> = individual Points,
-                <b>iSF</b> = individual Shots For,
-                <b>ixG/iSF</b> = individual expected Goals / individual Shots for,
-                <b>iPa</b> = individual Passes (leading to a shot),
-                <b>Pos+</b> = number of Possession gained,
-                <b>Pos-</b> = number of Possession lost,
-                <b>xGF</b> = Team expected Goals For while player on field,
-                <b>xGA</b> = Team expected Goals Against while player on field,
-                <b>xG%</b> = % of expected Goals For in relation to expected Goals Against
-                <b>GF</b> = Team Goals For while player on field,
-                <b>GA</b> = Team Goals Against while player on field,
-                <b>+-</b> = Player plus minus,
-                <b>SF</b> = Team Shots For while player on field,
-                <b>SA</b> = Team Shots Against while player on field
-                </p>
+
+        <div class="pa-card" style="margin-bottom:16px;">
+            <div class="pa-player-row">
+                <div class="pa-player-row__controls">
+                    <select id="select-p4" class="pa-select">
+                        <option selected disabled>Select player...</option>
+                    </select>
+                    <button type="button" onclick="drawMap(4)" class="pa-btn">Draw</button>
+                    <div class="pa-player-row__canvases">
+                        <canvas id="p4Map" width="200" height="332"></canvas>
+                    </div>
+                </div>
+                <div class="pa-player-row__data" id="p4Data"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h5 style="text-align: center;">Player Shotmaps</h5>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <div class="col-sm-4">
-            <div class="linestats">
-                <select id="select-p1" class="form-control-sm custom-select" style="Padding-top:5px;">
-                    <option selected disabled>Select player...</option>
-                </select>
-                <br><br>
-                <button onclick="drawMap(1)" class="btn btn-secondary" style="font-size:12px;">Draw</button>
-                <br>
-                <canvas id="p1Map" width="200" height="332" style="Padding-top: 10px;"></canvas>
-                <canvas id="p1PosMap" width="200" height="332" style="Padding-top: 10px;"></canvas>
+
+        <div class="pa-card">
+            <div class="pa-player-row">
+                <div class="pa-player-row__controls">
+                    <select id="select-p5" class="pa-select">
+                        <option selected disabled>Select player...</option>
+                    </select>
+                    <button type="button" onclick="drawMap(5)" class="pa-btn">Draw</button>
+                    <div class="pa-player-row__canvases">
+                        <canvas id="p5Map" width="200" height="332"></canvas>
+                    </div>
+                </div>
+                <div class="pa-player-row__data" id="p5Data"></div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="linestats">
-                <div style="text-align: center;" id="p1Data"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <div class="col-sm-4">
-            <div class="linestats">
-                <select id="select-p2" class="form-control-sm custom-select" style="Padding-top:5px;">
-                    <option selected disabled>Select player...</option>
-                </select>
-                <br><br>
-                <button onclick="drawMap(2)" class="btn btn-secondary" style="font-size:12px;">Draw</button>
-                <br>
-                <canvas id="p2Map" width="200" height="332" style="Padding-top: 10px;"></canvas>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="linestats">
-                <div style="text-align: center;" id="p2Data"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <div class="col-sm-4">
-            <div class="linestats">
-                <select id="select-p3" class="form-control-sm custom-select" style="Padding-top:5px;">
-                    <option selected disabled>Select player...</option>
-                </select>
-                <br><br>
-                <button onclick="drawMap(3)" class="btn btn-secondary" style="font-size:12px;">Draw</button>
-                <br>
-                <canvas id="p3Map" width="200" height="332" style="Padding-top: 10px;"></canvas>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="linestats">
-                <div style="text-align: center;" id="p3Data"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <div class="col-sm-4">
-            <div class="linestats">
-                <select id="select-p4" class="form-control-sm custom-select" style="Padding-top:5px;">
-                    <option selected disabled>Select player...</option>
-                </select>
-                <br><br>
-                <button onclick="drawMap(4)" class="btn btn-secondary" style="font-size:12px;">Draw</button>
-                <br>
-                <canvas id="p4Map" width="200" height="332" style="Padding-top: 10px;"></canvas>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="linestats">
-                <div style="text-align: center;" id="p4Data"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 20px;">
-        <div class="col-sm-4">
-            <div class="linestats">
-                <select id="select-p5" class="form-control-sm custom-select" style="Padding-top:5px;">
-                    <option selected disabled>Select player...</option>
-                </select>
-                <br><br>
-                <button onclick="drawMap(5)" class="btn btn-secondary" style="font-size:12px;">Draw</button>
-                <br>
-                <canvas id="p5Map" width="200" height="332" style="Padding-top: 10px;"></canvas>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="linestats">
-                <div style="text-align: center;" id="p5Data"></div>
-            </div>
-        </div>
-    </div>
-    <br><br>
+    </section>
+
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

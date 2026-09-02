@@ -1,0 +1,248 @@
+/*
+
+Visual layer for accounts/premium_analysis.html only, scoped under .premium-analyse-page so
+nothing here touches the shared app styles.css (team-selection, shot-map, linestats, etc.
+used by other logged-in pages) or analysis.css (accounts/analysis.html). Every element id
+inside .premium-analyse-page is read by static/js/premium_analysis.js via getElementById —
+this file only restyles, it never renames or removes an id, and canvas width/height stay as
+HTML attributes since the drawing code addresses pixels 1:1 against them.
+
+*/
+
+.premium-analyse-page {
+    --pa-navy: #002072;
+    --pa-navy-dark: #001648;
+    --pa-accent: #3046FB;
+    --pa-ink: #14161f;
+    --pa-muted: #5b5f6e;
+    --pa-border: #e4e6f0;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 20px 64px;
+    color: var(--pa-ink);
+}
+
+/* Toolbar */
+
+.pa-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid var(--pa-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.25);
+    margin-bottom: 20px;
+}
+
+.pa-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f5f6fa;
+    flex: 0 0 auto;
+    transition: background 0.15s ease;
+}
+
+.pa-back:hover {
+    background: #e9ebf6;
+}
+
+.pa-back img {
+    width: 16px;
+    height: 16px;
+}
+
+.pa-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--pa-navy-dark);
+    margin: 0;
+    flex: 1 1 auto;
+}
+
+/* Games picker */
+
+.pa-games-card {
+    background: #fff;
+    border: 1px solid var(--pa-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.25);
+    padding: 20px;
+    margin-bottom: 32px;
+}
+
+.pa-games-card__label {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    color: var(--pa-muted);
+    margin: 0 0 10px;
+}
+
+.pa-games-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pa-select {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid var(--pa-border);
+    background: #fff;
+    color: var(--pa-ink);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.pa-select[multiple] {
+    height: auto;
+    min-height: 110px;
+    min-width: 280px;
+    padding: 8px 10px;
+    flex: 1 1 320px;
+}
+
+.pa-btn {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 8px;
+    border: none;
+    background: var(--pa-navy);
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    flex: 0 0 auto;
+}
+
+.pa-btn:hover:not(:disabled) {
+    background: var(--pa-accent);
+}
+
+.pa-btn:disabled {
+    background: #c7cadb;
+    cursor: not-allowed;
+}
+
+/* Sections & cards */
+
+.pa-section {
+    margin-bottom: 36px;
+}
+
+.pa-section__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--pa-navy-dark);
+    margin: 0 0 14px;
+}
+
+.pa-card {
+    background: #fff;
+    border: 1px solid var(--pa-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.2);
+    padding: 20px;
+}
+
+.pa-chart {
+    width: 100%;
+    text-align: center;
+}
+
+.pa-grid-2up {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.pa-grid-2up:last-child {
+    margin-bottom: 0;
+}
+
+/* Glossary — was an 8px inline paragraph, now a readable legend */
+
+.pa-legend {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--pa-border);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 6px 24px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--pa-muted);
+}
+
+.pa-legend b {
+    color: var(--pa-ink);
+}
+
+/* Player shotmap rows */
+
+.pa-player-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) 1fr;
+    gap: 20px;
+}
+
+.pa-player-row__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pa-player-row__controls .pa-select {
+    width: 100%;
+}
+
+.pa-player-row__canvases {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pa-player-row__canvases canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.pa-player-row__data {
+    text-align: center;
+    overflow-x: auto;
+}
+
+@media (max-width: 720px) {
+    .pa-grid-2up {
+        grid-template-columns: 1fr;
+    }
+
+    .pa-player-row {
+        grid-template-columns: 1fr;
+    }
+
+    .pa-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pa-select[multiple] {
+        min-width: 0;
+    }
+}
