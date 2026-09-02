@@ -1,0 +1,179 @@
+/*
+
+Visual layer for accounts/lite.html only, scoped under .lite-page. The Bootstrap carousel
+structure (#myCarousel, .carousel-item, indicators, controls) and the #myCanvas element are
+left functionally untouched — litefunctions.js maps click coordinates against the canvas's
+native 300x500 pixel size (fWidth/fLength), so the canvas must never be responsively resized
+via CSS, and the carousel markup/classes/data-attributes must stay exactly as Bootstrap's JS
+carousel component expects them.
+
+*/
+
+.lite-page {
+    --lp-navy: #002072;
+    --lp-navy-dark: #001648;
+    --lp-accent: #3046FB;
+    --lp-ink: #14161f;
+    --lp-muted: #5b5f6e;
+    --lp-border: #e4e6f0;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 24px 20px 64px;
+    color: var(--lp-ink);
+}
+
+.lite-page__header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lite-page__header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--lp-navy-dark);
+    margin: 0 0 6px;
+}
+
+.lite-page__header p {
+    font-size: 14.5px;
+    color: var(--lp-muted);
+    margin: 0;
+}
+
+.lite-page #myCarousel {
+    background: #fff;
+    border: 1px solid var(--lp-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.25);
+    padding: 24px 16px 16px;
+}
+
+.lite-page .carousel-item .container {
+    max-width: 100%;
+    padding: 0;
+}
+
+.lite-page .form-group label {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    color: var(--lp-muted);
+    margin-bottom: 6px;
+}
+
+.lite-page .form-control {
+    border: 1px solid var(--lp-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 15px;
+    text-align: center;
+    resize: none;
+}
+
+.lite-page .form-control:focus {
+    outline: none;
+    border-color: var(--lp-accent);
+    box-shadow: 0 0 0 3px rgba(48, 70, 251, 0.15);
+}
+
+.lite-page .shot-map {
+    margin: 16px 0;
+}
+
+.lite-page .shot-map canvas {
+    border-radius: 8px;
+    border: 1px solid var(--lp-border);
+}
+
+.lite-page__stats-panel img {
+    width: 120px;
+}
+
+.lite-page__stats-panel h4 {
+    color: var(--lp-navy);
+}
+
+.lite-page__stats-panel .lite-page__matchup {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--lp-navy-dark);
+    margin: 8px 0 0;
+}
+
+.lite-page__stats-panel .lite-page__stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--lp-muted);
+    margin: 16px 0 2px;
+}
+
+.lite-page__stats-panel .lite-page__stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--lp-ink);
+    margin: 0;
+}
+
+.lite-page__info-panel h3 {
+    color: var(--lp-navy-dark);
+    font-weight: 700;
+    margin: 0 0 12px;
+}
+
+.lite-page__info-panel p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--lp-ink);
+}
+
+.lite-page__info-panel ul {
+    text-align: left;
+    max-width: 260px;
+    margin: 12px auto;
+    padding-left: 20px;
+}
+
+.lite-page__info-panel li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--lp-ink);
+}
+
+.lite-page .carousel-indicators {
+    position: static;
+    margin: 16px 0 0;
+}
+
+.lite-page .carousel-indicators li {
+    background-color: var(--lp-border);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 1;
+}
+
+.lite-page .carousel-indicators .active {
+    background-color: var(--lp-navy);
+}
+
+.lite-page .carousel-control-prev,
+.lite-page .carousel-control-next {
+    width: 32px;
+    opacity: 1;
+}
+
+.lite-page .carousel-control-prev-icon,
+.lite-page .carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23002072' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+    width: 24px;
+    height: 24px;
+}
+
+.lite-page .carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23002072' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
