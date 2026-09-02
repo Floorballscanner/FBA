@@ -1,102 +1,95 @@
 <!--
 
-This is the live result page for a game stream
+This is the live result page for a game stream. Visual layer only — every element id below
+is read by static/js/livegame.js via getElementById, so ids must stay exactly as they are.
+Styling lives in static/css/game.css, scoped under .game-page. livegame.js reads the game
+number from window.location.pathname client-side, no server context is needed.
 
 -->
 
 {% extends 'base_layout.html' %}
-{% block title %}Live Match | Floorball Scanner{% endblock %}
-{% block content %}
 {% load static %}
-<div class="container" style="Padding-top: 80px;">
-    <div class="row justify-content-center">
-        <div id="gstats" class="gamestats">
-            <a id="backbutton" href="/live"><img src="{% static 'back.png' %}" width="20px" style="Padding-bottom:20px;"></a>
-            <h5 id="gamedate"></h5>
-            <h1 id="h1"><span id="homeTeam">Home</span> - <span id="awayTeam">Away</span></h1>
-            <h5 style="Padding-top: 10px" id="periodNr">Period 1</h5>
+{% block title %}Live Match | Floorball Scanner{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/game.css' %}">
+{% endblock %}
+{% block content %}
+<div class="game-page">
+
+    <a id="backbutton" class="gp-back" href="/live" aria-label="Back to live matches">
+        <img src="{% static 'back.png' %}" alt="">
+    </a>
+
+    <div class="gp-scoreboard" id="gstats">
+        <h5 id="gamedate" class="gp-scoreboard__date"></h5>
+        <h1 id="h1" class="gp-scoreboard__teams"><span id="homeTeam">Home</span> - <span id="awayTeam">Away</span></h1>
+        <div class="gp-scoreboard__period">
+            <h5 id="periodNr">Period 1</h5>
             <h2 id="label">00:00:00</h2>
-            <h2 style="Padding-top: 20px"><span id="homeGoals">0</span> - <span id="awayGoals">0</span> (<span id="homeGoalsP">0</span> - <span id="awayGoalsP">0</span>)</h2>
+        </div>
+        <div class="gp-scoreboard__stats">
+            <h2><span id="homeGoals">0</span> - <span id="awayGoals">0</span> (<span id="homeGoalsP">0</span> - <span id="awayGoalsP">0</span>)</h2>
             <h4>xG: <span id="homexG">0</span> - <span id="awayxG">0</span> (<span id="homexGP">0</span> - <span id="awayxGP">0</span>)</h4>
-            <h4 style="Padding-bottom: 20px">Possession: <span id="homePos">0</span>% - <span id="awayPos">0</span>% (<span id="homePosP">0</span>% - <span id="awayPosP">0</span>%)</h4>
+            <h4>Possession: <span id="homePos">0</span>% - <span id="awayPos">0</span>% (<span id="homePosP">0</span>% - <span id="awayPosP">0</span>%)</h4>
         </div>
     </div>
-    <h5 style="text-align: center">Game statistics</h5>
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="linestats">
+
+    <section class="gp-section">
+        <h2 class="gp-section__title">Game statistics</h2>
+        <div class="gp-grid-2up">
+            <div class="gp-card">
                 <div id="xGGame_chart" style="height: 200px"></div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats">
+            <div class="gp-card">
                 <div id="xG%Game_chart" style="height: 200px"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="linestats">
+        <div class="gp-grid-2up">
+            <div class="gp-card">
                 <div id="posGame_chart" style="height: 200px"></div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats">
+            <div class="gp-card">
                 <div id="TOCGame_chart" style="height: 200px"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="linestats">
+        <div class="gp-grid-2up">
+            <div class="gp-card">
                 <div id="pmGame_chart" style="height: 200px"></div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats">
+            <div class="gp-card">
                 <div id="toGame_chart" style="height: 200px"></div>
             </div>
         </div>
-    </div>
-    </br>
-    <h5 style="text-align: center">Period statistics</h5>
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="linestats">
+    </section>
+
+    <section class="gp-section">
+        <h2 class="gp-section__title">Period statistics</h2>
+        <div class="gp-grid-2up">
+            <div class="gp-card">
                 <div id="xGPeriod_chart" style="height: 200px"></div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats">
+            <div class="gp-card">
                 <div id="xG%Period_chart" style="height: 200px"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="linestats">
+        <div class="gp-grid-2up">
+            <div class="gp-card">
                 <div id="posPeriod_chart" style="height: 200px"></div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats">
+            <div class="gp-card">
                 <div id="TOCPeriod_chart" style="height: 200px"></div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="linestats">
+        <div class="gp-grid-2up">
+            <div class="gp-card">
                 <div id="pmPeriod_chart" style="height: 200px"></div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats">
+            <div class="gp-card">
                 <div id="toPeriod_chart" style="height: 200px"></div>
             </div>
         </div>
-    </div>
-    </br>
+    </section>
+
 </div>
 
 <script type="text/javascript" src="/static/js/livegame.js"></script>

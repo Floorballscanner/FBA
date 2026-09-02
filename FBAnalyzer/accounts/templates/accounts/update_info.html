@@ -1,119 +1,152 @@
 <!--
 
 This is the index - html - page content file that is the first web page after login.
-It extends app_layout.html with Django
+It extends app_layout.html with Django. This page has no JS on it (pure changelog content),
+so the visual layer is free to restructure the markup. Styling lives in
+static/css/update_info.css, scoped under .update-info-page.
 
 -->
 
 {% extends 'app_layout.html' %}
-{% block title %}Update Info | Floorball Scanner{% endblock %}
-{% block content %}
 {% load static %}
-<div class="container" style="Padding-top: 10px;">
-    <div class="row">
-        <div class="col-sm-12 text-left">
-            <div class="update-info">
-                <h2>New update info 10.9.2024</h2><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>New Season Upgrade - new functionality and visualizations</h5><br>
-                <p>Floorball Scanner has been updated for new season 2024 - 2025. More functionalities has been added to the user interface and visualizations have been modified.</p>
-                <ul>
-                    <li style="list-style-type:circle">You can now see players' time on court. If you are utilizing lineups and game clock
-                    you are now able to see and track player time on court from a single game and multiple games on premium
-                    analysis. This includes both 5v5 and PP.</li>
-                    <li style="list-style-type:circle">Select between T1 or T1 and T2 shooter and passer tagging. If you only
-                    want to tag your teams shooters and passers, you no longer need to tag other team players. You can select
-                    T1 players and T1&T2 players accordingly from the user interface (under Start - button)</li>
-                    <li style="list-style-type:circle">Improved shotmap visualization. Shots are now shown as circles instead of
-                    letters. Size of the circle represents amount of xG (bigger circle, more xG), color of the circle type of
-                    shot type and team, opacity shot result (shots not on goal are transparent), and goals have a black line</li>
-                    <li style="list-style-type:circle">Improved game statistics visualization. Game statistics now include
-                    more relevant information, e.g. Share of xG and goals by attack type (direct attack, turnover attack)</li>
-                </ul><br><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h2>New update info 26.10.2023</h2><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Premium Analysis - functionality published in Beta mode</h5>
-                <ul>
-                    <li style="list-style-type:circle">New, sophisticated Premium Analysis - functionality enables
-                    users to see their team and player performance from multiple games. Premium Analysis can be found from
-                    the updated My Games Menu at the front page</li>
-                    <li style="list-style-type:circle">In premium analysis you can select one or multiple games from the
-                    selection list. After selection, press load button to load data. Loading takes a few seconds. If nothing happens, try pressing the data
-                    button again.</li>
-                    <li style="list-style-type:circle">Premium Analysis feature is still in Beta mode, which means that there may
-                    be bugs and the functionality is far from ready. We wanted to publish it already because it is really
-                    sophisticated and useful feature to see how your players and team performs on the long run.</li>
-                </ul><br><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h2>New update info 30.9.2023</h2><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Reload if application not used in 20 minutes</h5>
-                <ul>
-                    <li style="list-style-type:circle">For memory issues, we included a reload functionality that
-                    redirects the application to front page if it is not used in 60 minutes. Pressing a button or moving
-                    the mouse will restart the calculation. </li>
-                </ul><br><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h2>New update info 26.9.2023</h2><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Download CSV feature added to Saved Games</h5>
-                <ul>
-                    <li style="list-style-type:circle">You can now download the shot csv - file from Saved Games -page.
-                    Simply press the Download Shots - button after loading the game.</li>
-                </ul><br><br>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h2>New update info 16.9.2023</h2><br>
-                <p>NEW functionality added to Floorball Scanner.</p>
-                <p>Based on user requests we have updated the software to include ball possession gains and losses
-                that can now be tagged to shotmap both line and player based.</p>
-                <p>New update functionalities:</p>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Possession + and Possession -</h5>
-                <ul>
-                    <li style="list-style-type:circle">Pressing the shotmap opens up a more extensive list of shot types, now with Possession + and
-                    Possession -. If Shooter tagging is on, it is also possible to tag which player lost or gained ball possession.
-                    Possession + and - only works for Team 1 and Ball possession selection does not affect the player selection
-                    but only Team 1 players can be selected.</li>
-                    <li style="list-style-type:circle">Blue o symbol means gained ball possession (your player takes ball possession from the opponent),
-                    red o symbol means lost ball possession.</li>
-                    <li style="list-style-type:circle">Player and line possession + and - are also added to Line and Player charts</li>
-                </ul>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Automatic Team 2 line change removed</h5>
-                <ul>
-                    <li style="list-style-type:circle">Automatic Team 2 line change for 5-5 lines (lines 1 - 3) are removed, because it enables future
-                    development to calculate automatically number of shifts started with or without ball for lines.</li>
-                    <li style="list-style-type:circle">Automatic Team 2 line change is still working for Powerplay and Shorthanded lines</li>
-                </ul>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Shooter and Passer tagging on Powerplay and 6v5</h5>
-                <ul>
-                    <li style="list-style-type:circle">It is now possible to tag shooter and passer on Powerplay and 6v5 special teams.</li>
-                    <li style="list-style-type:circle">Shot xG and pass xG are calculated on respective columns on line and player tables so
-                    they can be seen separately from 5-5 xG.</li>
-                </ul>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Improved charts and print view</h5>
-                <ul>
-                    <li style="list-style-type:circle">Game and period charts are improved and print pdf file is also more
-                    classified and more clear.</li>
-                </ul>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Live page and Shooter tagging off by default</h5>
-                <ul>
-                    <li style="list-style-type:circle">Live page and shooter and passer options are now off by default.
-                    If you want to send results to https://fbscanner.io/live - live page, select LIVE box on.</li>
-                    <li style="list-style-type:circle">If you want to tag shooter, passer, and possession + and - by
-                    players, select Shooter&Passer box on.</li>
-                </ul>
-                <hr width="100%" size="2" align="center" color="#002072" noshade>
-                <h5>Player line placement logic change</h5>
-                <ul>
-                    <li style="list-style-type:circle">It is now possible to include a player in multiple lines. Player positions
-                    are no longer saved and reloaded, but you need to rebuild roster before each game. This is for simplicity.</li>
-                </ul>
-            </div>
+{% block title %}Update Info | Floorball Scanner{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/update_info.css' %}">
+{% endblock %}
+{% block content %}
+<div class="update-info-page">
+    <h1 class="update-info-page__title">What's new</h1>
+
+    <div class="ui-entry ui-entry--highlight">
+        <span class="ui-entry__date">2.9.2026</span>
+        <h2>A modernized look for Floorball Scanner</h2>
+        <p>
+            We know Floorball Scanner's user interface has been looking a bit dated for a
+            while — you're not wrong. We've started giving the application a visual
+            refresh, page by page, moving to a cleaner, more modern design.
+        </p>
+        <p>
+            To be clear: the functionality is exactly the same as before. This is a visual
+            update only — nothing about how you use the application has changed. We do plan
+            to develop new functionality further later this year, so there's more to come.
+        </p>
+    </div>
+
+    <div class="ui-entry">
+        <span class="ui-entry__date">10.9.2024</span>
+        <h2>New Season Upgrade - new functionality and visualizations</h2>
+        <p>Floorball Scanner has been updated for new season 2024 - 2025. More functionalities has been added to the user interface and visualizations have been modified.</p>
+        <ul>
+            <li>You can now see players' time on court. If you are utilizing lineups and game clock
+            you are now able to see and track player time on court from a single game and multiple games on premium
+            analysis. This includes both 5v5 and PP.</li>
+            <li>Select between T1 or T1 and T2 shooter and passer tagging. If you only
+            want to tag your teams shooters and passers, you no longer need to tag other team players. You can select
+            T1 players and T1&T2 players accordingly from the user interface (under Start - button)</li>
+            <li>Improved shotmap visualization. Shots are now shown as circles instead of
+            letters. Size of the circle represents amount of xG (bigger circle, more xG), color of the circle type of
+            shot type and team, opacity shot result (shots not on goal are transparent), and goals have a black line</li>
+            <li>Improved game statistics visualization. Game statistics now include
+            more relevant information, e.g. Share of xG and goals by attack type (direct attack, turnover attack)</li>
+        </ul>
+    </div>
+
+    <div class="ui-entry">
+        <span class="ui-entry__date">26.10.2023</span>
+        <h2>Premium Analysis - functionality published in Beta mode</h2>
+        <ul>
+            <li>New, sophisticated Premium Analysis - functionality enables
+            users to see their team and player performance from multiple games. Premium Analysis can be found from
+            the updated My Games Menu at the front page</li>
+            <li>In premium analysis you can select one or multiple games from the
+            selection list. After selection, press load button to load data. Loading takes a few seconds. If nothing happens, try pressing the data
+            button again.</li>
+            <li>Premium Analysis feature is still in Beta mode, which means that there may
+            be bugs and the functionality is far from ready. We wanted to publish it already because it is really
+            sophisticated and useful feature to see how your players and team performs on the long run.</li>
+        </ul>
+    </div>
+
+    <div class="ui-entry">
+        <span class="ui-entry__date">30.9.2023</span>
+        <h2>Reload if application not used in 20 minutes</h2>
+        <ul>
+            <li>For memory issues, we included a reload functionality that
+            redirects the application to front page if it is not used in 60 minutes. Pressing a button or moving
+            the mouse will restart the calculation.</li>
+        </ul>
+    </div>
+
+    <div class="ui-entry">
+        <span class="ui-entry__date">26.9.2023</span>
+        <h2>Download CSV feature added to Saved Games</h2>
+        <ul>
+            <li>You can now download the shot csv - file from Saved Games -page.
+            Simply press the Download Shots - button after loading the game.</li>
+        </ul>
+    </div>
+
+    <div class="ui-entry">
+        <span class="ui-entry__date">16.9.2023</span>
+        <h2>NEW functionality added to Floorball Scanner</h2>
+        <p>Based on user requests we have updated the software to include ball possession gains and losses
+        that can now be tagged to shotmap both line and player based.</p>
+
+        <div class="ui-entry__subsection">
+            <h5>Possession + and Possession -</h5>
+            <ul>
+                <li>Pressing the shotmap opens up a more extensive list of shot types, now with Possession + and
+                Possession -. If Shooter tagging is on, it is also possible to tag which player lost or gained ball possession.
+                Possession + and - only works for Team 1 and Ball possession selection does not affect the player selection
+                but only Team 1 players can be selected.</li>
+                <li>Blue o symbol means gained ball possession (your player takes ball possession from the opponent),
+                red o symbol means lost ball possession.</li>
+                <li>Player and line possession + and - are also added to Line and Player charts</li>
+            </ul>
+        </div>
+
+        <div class="ui-entry__subsection">
+            <h5>Automatic Team 2 line change removed</h5>
+            <ul>
+                <li>Automatic Team 2 line change for 5-5 lines (lines 1 - 3) are removed, because it enables future
+                development to calculate automatically number of shifts started with or without ball for lines.</li>
+                <li>Automatic Team 2 line change is still working for Powerplay and Shorthanded lines</li>
+            </ul>
+        </div>
+
+        <div class="ui-entry__subsection">
+            <h5>Shooter and Passer tagging on Powerplay and 6v5</h5>
+            <ul>
+                <li>It is now possible to tag shooter and passer on Powerplay and 6v5 special teams.</li>
+                <li>Shot xG and pass xG are calculated on respective columns on line and player tables so
+                they can be seen separately from 5-5 xG.</li>
+            </ul>
+        </div>
+
+        <div class="ui-entry__subsection">
+            <h5>Improved charts and print view</h5>
+            <ul>
+                <li>Game and period charts are improved and print pdf file is also more
+                classified and more clear.</li>
+            </ul>
+        </div>
+
+        <div class="ui-entry__subsection">
+            <h5>Live page and Shooter tagging off by default</h5>
+            <ul>
+                <li>Live page and shooter and passer options are now off by default.
+                If you want to send results to https://fbscanner.io/live - live page, select LIVE box on.</li>
+                <li>If you want to tag shooter, passer, and possession + and - by
+                players, select Shooter&Passer box on.</li>
+            </ul>
+        </div>
+
+        <div class="ui-entry__subsection">
+            <h5>Player line placement logic change</h5>
+            <ul>
+                <li>It is now possible to include a player in multiple lines. Player positions
+                are no longer saved and reloaded, but you need to rebuild roster before each game. This is for simplicity.</li>
+            </ul>
         </div>
     </div>
 </div>
