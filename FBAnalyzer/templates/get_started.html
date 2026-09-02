@@ -38,7 +38,7 @@ directly through Stripe Checkout.
         </h2>
         <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:flex-start;">
             <div style="max-width:220px;">
-                <form method="post" action="{% url 'stripe-checkout' 'team' %}">
+                <form method="post" action="{% url 'stripe-checkout' 'team' %}" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 300, items: [{item_id: 'team', item_name: 'Team license'}]});">
                     {% csrf_token %}
                     <button type="submit" class="landing-btn landing-btn--primary">Buy Team license</button>
                 </form>
@@ -47,7 +47,7 @@ directly through Stripe Checkout.
                 </p>
             </div>
             <div style="max-width:220px;">
-                <form method="post" action="{% url 'stripe-checkout' 'club' %}">
+                <form method="post" action="{% url 'stripe-checkout' 'club' %}" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 600, items: [{item_id: 'club', item_name: 'Club license'}]});">
                     {% csrf_token %}
                     <button type="submit" class="landing-btn landing-btn--primary">Buy Club license</button>
                 </form>
@@ -56,7 +56,7 @@ directly through Stripe Checkout.
                 </p>
             </div>
             <div style="max-width:220px;">
-                <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}">
+                <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 39, items: [{item_id: 'fliiga', item_name: 'F-Liiga license'}]});">
                     {% csrf_token %}
                     <button type="submit" class="landing-btn landing-btn--primary">Buy F-Liiga license</button>
                 </form>

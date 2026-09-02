@@ -45,7 +45,7 @@ log in and land here instead of hitting a bare login error.
 
     <section class="landing-demo">
         <h2>Ready to keep following F-Liiga live?</h2>
-        <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;">
+        <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 39, items: [{item_id: 'fliiga', item_name: 'F-Liiga license'}]});">
             {% csrf_token %}
             <button type="submit" class="landing-btn landing-btn--primary">Buy F-Liiga license</button>
         </form>

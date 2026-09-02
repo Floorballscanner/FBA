@@ -86,7 +86,7 @@ what the license includes and buys it directly through Stripe Checkout.
             Live tracking of today's F-Liiga matches. License valid for 12 months.
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;">
+            <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 39, items: [{item_id: 'fliiga', item_name: 'F-Liiga license'}]});">
                 {% csrf_token %}
                 <button type="submit" class="landing-btn landing-btn--primary">
                     Buy F-Liiga license

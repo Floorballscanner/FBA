@@ -43,14 +43,35 @@ def start_checkout(request, tier):
         metadata={'tier': tier},
         branding_settings=BRANDING_SETTINGS,
         payment_method_types=settings.STRIPE_PAYMENT_METHOD_TYPES,
-        success_url=request.build_absolute_uri('/buy/success/'),
+        success_url=request.build_absolute_uri('/buy/success/') + '?session_id={CHECKOUT_SESSION_ID}',
         cancel_url=request.build_absolute_uri('/get-started/'),
     )
     return redirect(session.url)
 
 
 def checkout_success(request):
-    return render(request, 'accounts/stripe_checkout_success.html')
+    # session_id lets the success page report a real purchase event (value/currency/tier)
+    # to GA instead of a generic pageview — best-effort only, the license itself is always
+    # provisioned by the webhook regardless of whether this lookup succeeds.
+    purchase = None
+    session_id = request.GET.get('session_id')
+    if session_id:
+        try:
+            session = stripe.checkout.Session.retrieve(session_id)
+        except stripe.StripeError:
+            session = None
+        if session is not None:
+            # session.metadata is itself a StripeObject, not a plain dict — it supports []
+            # but not .get(), same gotcha as the webhook payload (see stripe_webhook above).
+            tier = session.metadata['tier'] if session.metadata and 'tier' in session.metadata else None
+            if tier and session.amount_total is not None:
+                purchase = {
+                    'transaction_id': session.id,
+                    'value': session.amount_total / 100,
+                    'currency': (session.currency or 'eur').upper(),
+                    'tier': tier,
+                }
+    return render(request, 'accounts/stripe_checkout_success.html', {'purchase': purchase})
 
 
 @csrf_exempt

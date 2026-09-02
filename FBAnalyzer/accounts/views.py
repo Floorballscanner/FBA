@@ -4,6 +4,7 @@
 from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -65,7 +66,7 @@ def start_trial(request):
                 "Your 14-day trial is ready. Please log in — it includes full access "
                 "except F-Liiga results."
             )
-            return redirect('login')
+            return redirect(reverse('login') + '?trial_started=trial')
     else:
         form = TrialSignupForm()
 
@@ -95,7 +96,7 @@ def start_fliiga_trial(request):
                 "Your 7-day F-Liiga trial is ready. Please log in — it includes the "
                 "F-Liiga live page."
             )
-            return redirect('login')
+            return redirect(reverse('login') + '?trial_started=fliiga_trial')
     else:
         form = TrialSignupForm()
 

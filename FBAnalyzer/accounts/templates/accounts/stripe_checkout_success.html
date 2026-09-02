@@ -31,4 +31,14 @@ loading, so this is intentionally just a static confirmation, not a status poll.
         </div>
     </div>
 </div>
+{% if purchase %}
+<script>
+gtag('event', 'purchase', {
+    transaction_id: '{{ purchase.transaction_id }}',
+    value: {{ purchase.value }},
+    currency: '{{ purchase.currency }}',
+    items: [{item_id: '{{ purchase.tier }}'}]
+});
+</script>
+{% endif %}
 {% endblock %}
