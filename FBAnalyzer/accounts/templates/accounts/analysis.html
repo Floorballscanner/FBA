@@ -3,161 +3,153 @@
 This is the analysis - html - page content file. It is shown when the user is logged in and
 presses Analyse data - button at the index - page.
 
-It extends app_layout.html with Django
+It extends app_layout.html with Django. Visual layer only — every element id below is read by
+static/js/visualizations.js via getElementById, so ids (and the canvas width/height attributes,
+which the drawing code addresses in pixels) must stay exactly as they are. Styling lives in
+static/css/analysis.css, scoped under .analyse-page.
 
 -->
 
 {% extends 'app_layout.html' %}
-{% block content %}
 {% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/analysis.css' %}">
+{% endblock %}
+{% block content %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div class="container" style="Padding-top: 80px;">
-    <a href="/accounts/saved_games"><img src="{% static 'back.png' %}" height="30px"></a>
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="team-selection">
-                <h2 style="Padding-top:20px;">My saved games</h2><br>
-                <button id="dl_csv" type="button" onclick="downloadCsv()" disabled="true" class="btn btn-secondary" style="font-size:8px;">Download Shots</button>
-                <select onchange="changeGame()" id="select-game" class="form-control-sm custom-select">
-                    <option selected disabled>Select a game...</option>
-                    {% for game in games reversed %}
-                        <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.game_data.name_t1}} - {{game.game_data.name_t2}}</option>
-                    {% endfor %}
-                </select>
-                <img src="{% static 'delete.png' %}" id="analyse_delete" onclick="deleteGameButton()" disabled>
-            </div>
+<div class="analyse-page">
+
+    <div class="analyse-toolbar">
+        <a class="analyse-back" href="/accounts/saved_games" aria-label="Back to saved games">
+            <img src="{% static 'back.png' %}" alt="">
+        </a>
+        <h1 class="analyse-title">Game analysis</h1>
+        <div class="analyse-toolbar__controls">
+            <select onchange="changeGame()" id="select-game" class="analyse-select">
+                <option selected disabled>Select a game...</option>
+                {% for game in games reversed %}
+                    <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.game_data.name_t1}} - {{game.game_data.name_t2}}</option>
+                {% endfor %}
+            </select>
+            <button id="dl_csv" type="button" onclick="downloadCsv()" disabled="true" class="analyse-btn">Download Shots</button>
+            <button id="analyse_delete" type="button" onclick="deleteGameButton()" disabled class="analyse-delete-btn">
+                <img src="{% static 'delete.png' %}" alt="" class="analyse-delete-btn__icon">
+                Delete
+            </button>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="team-selection">
-                <h5 id="stdate"></h5>
-                <h3><span id="stteam_1"></span> - <span id="stteam_2"></span></h3></br>
-                <h4 id="stperiodNr">Period 1</h4>
-                <h3 id="stlabel">00:00:00</h3></br>
+
+    <div class="analyse-scoreboard">
+        <h5 id="stdate" class="analyse-scoreboard__date"></h5>
+        <h3 class="analyse-scoreboard__teams"><span id="stteam_1"></span><span class="analyse-scoreboard__vs">-</span><span id="stteam_2"></span></h3>
+        <div class="analyse-scoreboard__period">
+            <h4 id="stperiodNr">Period 1</h4>
+            <h3 id="stlabel">00:00:00</h3>
+        </div>
+        <div class="analyse-scoreboard__stats">
+            <div class="analyse-scoreboard__stat">
+                <span class="analyse-scoreboard__stat-label">Goals</span>
                 <h3><span id="sttotg_1">0</span> - <span id="sttotg_2">0</span></h3>
-                <h5>xG <span id="sttotxG_1">0</span> - <span id="sttotxG_2">0</span></h5>
-                <h5>xGOT <span id="sttotxGOT_1">0</span> - <span id="sttotxGOT_2">0</span></h5>
+            </div>
+            <div class="analyse-scoreboard__stat">
+                <span class="analyse-scoreboard__stat-label">xG</span>
+                <h5><span id="sttotxG_1">0</span> - <span id="sttotxG_2">0</span></h5>
+            </div>
+            <div class="analyse-scoreboard__stat">
+                <span class="analyse-scoreboard__stat-label">xGOT</span>
+                <h5><span id="sttotxGOT_1">0</span> - <span id="sttotxGOT_2">0</span></h5>
             </div>
         </div>
     </div>
 
-    <div class="row justify-content-center" style="Padding-top: 10px;">
-        <div class="col-sm-3">
-            <div class="shot-map">
+    <section class="analyse-section">
+        <h2 class="analyse-section__title">Shot maps</h2>
+        <div class="analyse-shotmap-grid">
+            <div class="analyse-card analyse-shotmap">
                 <p>Period 1</p>
                 <canvas id="stmyCanvas_p1" width="200" height="332"></canvas>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="shot-map">
+            <div class="analyse-card analyse-shotmap">
                 <p>Period 2</p>
                 <canvas id="stmyCanvas_p2" width="200" height="332"></canvas>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="shot-map">
+            <div class="analyse-card analyse-shotmap">
                 <p>Period 3</p>
                 <canvas id="stmyCanvas_p3" width="200" height="332"></canvas>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="shot-map">
+            <div class="analyse-card analyse-shotmap">
                 <p>Period 4</p>
                 <canvas id="stmyCanvas_p4" width="200" height="332"></canvas>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="row justify-content-center" style="Padding-top: 40px;">
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div id="stxGGame_chart" style="height: 200px"></div>
+    <section class="analyse-section">
+        <h2 class="analyse-section__title">Team comparison</h2>
+        <div class="analyse-chart-grid--2up">
+            <div class="analyse-card">
+                <div id="stxGGame_chart" class="analyse-chart" style="height: 200px"></div>
+            </div>
+            <div class="analyse-card">
+                <div id="stxG%Game_chart" class="analyse-chart" style="height: 200px"></div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div id="stxG%Game_chart" style="height: 200px"></div>
+        <div class="analyse-chart-grid--2up">
+            <div class="analyse-card">
+                <div id="stT1_typechart" class="analyse-chart" style="height: 200px"></div>
+            </div>
+            <div class="analyse-card">
+                <div id="stT2_typechart" class="analyse-chart" style="height: 200px"></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="row justify-content-center" style="Padding-top: 40px;">
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div id="stT1_typechart" style="height: 200px"></div>
-            </div>
+    <section class="analyse-section">
+        <h2 class="analyse-section__title"><span id="stt1name1">Team 1</span> Player stats</h2>
+        <div class="analyse-card analyse-card--full">
+            <div id="stT1plstats" class="analyse-chart" style="height: 600px"></div>
         </div>
-        <div class="col-sm-6">
-            <div class="linestats">
-                <div id="stT2_typechart" style="height: 200px"></div>
-            </div>
-        </div>
-    </div>
+    </section>
 
-    <div class="row justify-content-center" style="Padding-top: 200px;">
-        <div class="col-sm-12">
-            <div class="linestats">
-                <h5><span id="stt1name1">Team 1</span> player stats</h5>
-                <div  id="stT1plstats" style="height: 600px"></div>
-            </div>
+    <section class="analyse-section">
+        <h2 class="analyse-section__title"><span id="stt2name1">Team 2</span> Player stats</h2>
+        <div class="analyse-card analyse-card--full">
+            <div id="stT2plstats" class="analyse-chart" style="height: 600px"></div>
         </div>
-    </div>
-    <div class="row justify-content-center" style="Padding-top: 200px;">
-        <div class="col-sm-12">
-            <div class="linestats">
-                <h5><span id="stt2name1">Team 2</span> player stats</h5>
-                <div  id="stT2plstats" style="height: 600px"></div>
-            </div>
-        </div>
-    </div>
+    </section>
 
-    <div class="row justify-content-center">
-        <h4><span id="stt1name2">Team 1</span> line stats</h4>
-    </div>
+    <section class="analyse-section">
+        <h2 class="analyse-section__title"><span id="stt1name2">Team 1</span> line stats</h2>
+        <div class="analyse-card analyse-card--full">
+            <div id="stT1linestats" class="analyse-chart" style="height: 300px"></div>
+        </div>
+    </section>
 
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="linestats">
-                <div id="stT1linestats" style="height: 300px"></div>
+    <section class="analyse-section">
+        <h2 class="analyse-section__title"><span id="stt2name2">Team 2</span> line stats</h2>
+        <div class="analyse-card analyse-card--full">
+            <div id="stT2linestats" class="analyse-chart" style="height: 300px"></div>
+        </div>
+    </section>
+
+    <section class="analyse-section">
+        <div class="analyse-chart-grid--2up">
+            <div class="analyse-card">
+                <div id="stT1_st_piechart" class="analyse-chart" style="height: 300px"></div>
+            </div>
+            <div class="analyse-card">
+                <div id="stT2_st_piechart" class="analyse-chart" style="height: 300px"></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="row justify-content-center">
-        <h4><span id="stt2name2">Team 2</span> line stats</h4>
-    </div>
+    <section class="analyse-section">
+        <div class="analyse-card analyse-card--full">
+            <div id="stxGTeam_chart" class="analyse-chart" style="height: 300px"></div>
+        </div>
+    </section>
 
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="linestats">
-                <div id="stT2linestats" style="height: 300px"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px">
-                <div  id="stT1_st_piechart" style="height: 300px"></div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="linestats" style="Padding-top: 50px" >
-                <div id="stT2_st_piechart" style="height: 300px"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="linestats" style="Padding-top: 50px">
-                <div id="stxGTeam_chart" style="height: 300px"></div>
-            </div>
-        </div>
-    </div>
-    <br>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

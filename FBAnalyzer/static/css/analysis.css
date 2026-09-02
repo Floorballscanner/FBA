@@ -1,0 +1,293 @@
+/*
+
+Visual layer for accounts/analysis.html only, scoped under .analyse-page so nothing here
+touches the shared app styles.css (team-selection, shot-map, linestats, etc. used by other
+logged-in pages). Every element id inside .analyse-page is read by static/js/visualizations.js
+via getElementById — this file only restyles, it never renames or removes an id, and canvas
+width/height stay as HTML attributes since the drawing code addresses pixels 1:1 against them.
+
+*/
+
+.analyse-page {
+    --analyse-navy: #002072;
+    --analyse-navy-dark: #001648;
+    --analyse-accent: #3046FB;
+    --analyse-ink: #14161f;
+    --analyse-muted: #5b5f6e;
+    --analyse-border: #e4e6f0;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 20px 64px;
+    color: var(--analyse-ink);
+}
+
+/* Toolbar */
+
+.analyse-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid var(--analyse-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.25);
+    margin-bottom: 20px;
+}
+
+.analyse-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--analyse-bg, #f5f6fa);
+    flex: 0 0 auto;
+    transition: background 0.15s ease;
+}
+
+.analyse-back:hover {
+    background: #e9ebf6;
+}
+
+.analyse-back img {
+    width: 16px;
+    height: 16px;
+}
+
+.analyse-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--analyse-navy-dark);
+    margin: 0;
+    flex: 1 1 auto;
+}
+
+.analyse-toolbar__controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.analyse-select {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid var(--analyse-border);
+    background: #fff;
+    color: var(--analyse-ink);
+    font-family: inherit;
+    font-size: 14px;
+    min-width: 240px;
+}
+
+.analyse-btn {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 8px;
+    border: none;
+    background: var(--analyse-navy);
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.analyse-btn:hover:not(:disabled) {
+    background: var(--analyse-accent);
+}
+
+.analyse-btn:disabled {
+    background: #c7cadb;
+    cursor: not-allowed;
+}
+
+.analyse-delete-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 1px solid #f3b4b4;
+    background: #fdecec;
+    color: #c62828;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.analyse-delete-btn:hover:not(:disabled) {
+    background: #fbdada;
+    border-color: #e88a8a;
+}
+
+.analyse-delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.analyse-delete-btn__icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* Scoreboard */
+
+.analyse-scoreboard {
+    background: #fff;
+    border: 1px solid var(--analyse-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.25);
+    padding: 28px 20px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.analyse-scoreboard__date {
+    color: var(--analyse-muted);
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0 0 6px;
+}
+
+.analyse-scoreboard__teams {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--analyse-navy-dark);
+    margin: 0 0 12px;
+}
+
+.analyse-scoreboard__vs {
+    color: var(--analyse-muted);
+    font-weight: 400;
+    padding: 0 8px;
+}
+
+.analyse-scoreboard__period {
+    margin-bottom: 18px;
+}
+
+.analyse-scoreboard__period h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--analyse-muted);
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.analyse-scoreboard__period h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--analyse-ink);
+    margin: 0;
+}
+
+.analyse-scoreboard__stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.analyse-scoreboard__stat-label {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--analyse-muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.analyse-scoreboard__stat h3,
+.analyse-scoreboard__stat h5 {
+    margin: 0;
+    font-weight: 700;
+    color: var(--analyse-navy);
+}
+
+/* Sections & cards */
+
+.analyse-section {
+    margin-bottom: 36px;
+}
+
+.analyse-section__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--analyse-navy-dark);
+    margin: 0 0 14px;
+}
+
+.analyse-card {
+    background: #fff;
+    border: 1px solid var(--analyse-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.2);
+    padding: 20px;
+}
+
+.analyse-card--full {
+    padding: 20px;
+}
+
+.analyse-chart {
+    width: 100%;
+}
+
+/* Grids */
+
+.analyse-shotmap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.analyse-shotmap {
+    text-align: center;
+}
+
+.analyse-shotmap p {
+    margin: 0 0 12px;
+    font-weight: 600;
+    color: var(--analyse-muted);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.analyse-shotmap canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.analyse-chart-grid--2up {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 720px) {
+    .analyse-chart-grid--2up {
+        grid-template-columns: 1fr;
+    }
+
+    .analyse-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .analyse-select {
+        min-width: 0;
+    }
+}
