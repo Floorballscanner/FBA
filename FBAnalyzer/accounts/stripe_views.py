@@ -13,7 +13,7 @@ from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from accounts.licensing import create_or_renew_license
+from accounts.licensing import create_or_renew_license, send_renewal_email
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -75,7 +75,9 @@ def stripe_webhook(request):
         customer_details = session.get('customer_details') or {}
         email = customer_details.get('email')
         if tier and email:
-            create_or_renew_license(email, tier)
+            seat, is_new = create_or_renew_license(email, tier)
+            if not is_new:
+                send_renewal_email(seat, settings.SITE_URL)
 
             amount_total = session.get('amount_total')
             currency = (session.get('currency') or '').upper()
