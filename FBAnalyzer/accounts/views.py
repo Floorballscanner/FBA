@@ -123,16 +123,6 @@ def index(request):
 
 @login_required
 @license_required('team', 'club', 'trial')
-def new_game(request):
-    levels = Level.objects.all().order_by('name')
-
-    context = {
-        'levels': levels,
-    }
-    return render(request, 'accounts/newgame.html', context=context)
-
-@login_required
-@license_required('team', 'club', 'trial')
 def edit_players(request):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -326,20 +316,6 @@ def premium_game(request):
         'players': players,
     }
     return render(request, 'accounts/premiumgame.html', context=context)
-
-@login_required
-@license_required('fliiga', 'team', 'club', 'trial')
-def test_environment(request):
-    teams = Team.objects.all().order_by('name')
-    levels = Level.objects.all().order_by('name')
-    players = Player.objects.all().order_by('jersey_number')
-
-    context = {
-        'teams': teams,
-        'levels': levels,
-        'players': players,
-    }
-    return render(request, 'accounts/test_environment.html', context=context)
 
 @login_required
 @license_required('team', 'club', 'trial')

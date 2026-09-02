@@ -1,385 +1,379 @@
 <!--
 
-This is the New Game Analysis Premium - html - page content file. It contains all the functionality of game analysis.
-It extends app_layout.html with Django
+This is the New Game Analysis Premium - html - page content file. It contains all the
+functionality of game analysis. It extends app_layout.html with Django.
+
+Visual layer only — every element id below is read by static/js/premiumfunctions.js (and
+variables.js / livedata.js) via getElementById, so ids must stay exactly as they are. The
+top row (Date/Team pickers, shotmap, scoreboard, controls) is a dense CSS Grid so it fits a
+tablet screen in landscape without scrolling — this app is only ever used on a tablet or
+laptop. Team Lineups sits in its own full-width section below that row and can be scrolled
+to. The shotmap canvases keep their native width="300" height="500": variables.js
+hardcodes fWidth=300/fLength=500 and every click coordinate is mapped against those exact
+pixels, so they must never be responsively resized via CSS. Below Team Lineups, the
+results section (game/period stats, line-by-line detail) reuses the existing shared classes
+(.linestats, .shot-map, .stats-L1 etc.) and is a CSS-only reskin — that markup is unchanged.
+Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
 
 -->
 
 {% extends 'app_layout.html' %}
-{% block title %}New Game (Premium) | Floorball Scanner{% endblock %}
-{% block content %}
 {% load static %}
+{% block title %}New Game (Premium) | Floorball Scanner{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/premiumgame.css' %}">
+{% endblock %}
+{% block content %}
 {{ request.user.id|json_script:"user_id" }}
 
-<div class="container" style="Padding-top: 30px;">
-    <div class="row justify-content-center">
-        <div class="col-sm-4">
-            <div class="team-selection">
-                <h2>Date</h2>
+<div class="premiumgame-page">
+
+    <div class="pg-panel">
+
+        <div class="pg-setup pg-card">
+            <div class="pg-setup__group">
+                <span class="pg-setup__group-label">Date</span>
                 <input id="select-date" type="date">
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="team-selection">
-                <h2>Team 1</h2>
-                <select onchange="changeLevel('T1')" id="select-level-t1" class="form-control-sm custom-select">
+            <div class="pg-setup__group">
+                <span class="pg-setup__group-label">Team 1</span>
+                <select onchange="changeLevel('T1')" id="select-level-t1" class="pg-select">
                     <option selected disabled>Select a level...</option>
                     {% for level in levels %}
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
                 </select>
-                <select disabled onchange="changeTeam1()" id="select-team-1" class="form-control-sm custom-select">
+                <select disabled onchange="changeTeam1()" id="select-team-1" class="pg-select">
                     <option selected disabled>Select a team...</option>
                 </select>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="team-selection">
-                <h2>Team 2</h2>
-                <select onchange="changeLevel('T2')" id="select-level-t2" class="form-control-sm custom-select">
+            <div class="pg-setup__group">
+                <span class="pg-setup__group-label">Team 2</span>
+                <select onchange="changeLevel('T2')" id="select-level-t2" class="pg-select">
                     <option selected disabled>Select a level...</option>
                     {% for level in levels %}
                         <option value="{{level.id}}">{{level.name}}</option>
                     {% endfor %}
                 </select>
-                <select disabled onchange="changeTeam2()" id="select-team-2" class="form-control-sm custom-select">
+                <select disabled onchange="changeTeam2()" id="select-team-2" class="pg-select">
                     <option selected disabled>Select a team...</option>
                 </select>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-4">
-            <div class="shot-map">
-                <p style="font-size:8px;Padding-bottom:0px;">
-                <b style="color:blue;">Direct Shot and Rebound Team 1</b>,
-                <b style="color:#7CFC00;">Turnover|Direct Shot Team 1</b>,
-                <b style="color:#000000;">Cross-pass Team 1</b>,
-                <b style="color:#006400;">Turnover|Cross-pass Team 1</b>,
-                <b style="color:blue;">+ = Possession gained</b>,
-                <b style="color:red;">- = Possession lost</b>
-                </p>
-                <p style="margin:0px;"><span id="name_t1_21">Team 1</span> attack</p>
-                <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
-                <p><span id="name_t2_21">Team 2</span> attack</p>
-                <p style="font-size:8px;Padding-top:0px;">
-                <b style="color:red;">Direct Shot and Rebound Team 2</b>,
-                <b style="color:#FFA500;">Turnover|Direct Shot Team 2</b>,
-                <b style="color:#EBEBEB;">Cross-pass Team 2</b>,
-                <b style="color:#8B4513;">Turnover|Cross-pass Team 2</b>,
-                </p>
-            </div>
+
+        <div class="pg-canvas-col pg-card">
+            <p class="pg-canvas-col__legend">
+            <b style="color:blue;">Direct Shot and Rebound Team 1</b>,
+            <b style="color:#7CFC00;">Turnover|Direct Shot Team 1</b>,
+            <b style="color:#000000;">Cross-pass Team 1</b>,
+            <b style="color:#006400;">Turnover|Cross-pass Team 1</b>,
+            <b style="color:blue;">+ = Possession gained</b>,
+            <b style="color:red;">- = Possession lost</b>
+            </p>
+            <p class="pg-canvas-col__team-label"><span id="name_t1_21">Team 1</span> attack</p>
+            <canvas id="myCanvas" onmousedown="GetCoordinates()" width="300" height="500"></canvas>
+            <p class="pg-canvas-col__team-label"><span id="name_t2_21">Team 2</span> attack</p>
+            <p class="pg-canvas-col__legend">
+            <b style="color:red;">Direct Shot and Rebound Team 2</b>,
+            <b style="color:#FFA500;">Turnover|Direct Shot Team 2</b>,
+            <b style="color:#EBEBEB;">Cross-pass Team 2</b>,
+            <b style="color:#8B4513;">Turnover|Cross-pass Team 2</b>,
+            </p>
         </div>
-        <div class="col-sm-4" style="Padding-top: 10px;">
-            <div class="row justify-content-center" style="Padding-top: 10px;">
-                <div class="game-clock">
-                    <h4 id="periodNr">Period 1</h4>
-                    <h2 id="label">00:00:00</h2>
-                    <h4 id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span> (<span id="totp_1">0</span> - <span id="totp_2">0</span>)</h4>
-                    <h5 id="gxG">xG <span id="totxG_1">0</span> - <span id="totxG_2">0</span> (<span id="totxGp_1">0</span> - <span id="totxGp_2">0</span>)</h5>
-                    <h5 id="gxGOT">xGOT <span id="totxGOT_1">0</span> - <span id="totxGOT_2">0</span> (<span id="totxGOTp_1">0</span> - <span id="totxGOTp_2">0</span>)</h5>
-                </div>
-            </div>
-            <div class="row justify-content-center" style="Padding-top: 0px;">
-                <div class="button-input">
-                    <p><span id="name_t1_1">Team 1</span> line on court</p>
-                    <div class="line-btn btn-group" role="group" aria-label="Line buttons">
-                        <button id="L1" type="button" style="background-color: #3046FB" onclick="Line_change(1)" class="btn btn-secondary">Line 1</button>
-                        <button id="L2" type="button" onclick="Line_change(2)" class="btn btn-secondary">Line 2</button>
-                        <button id="L3" type="button" onclick="Line_change(3)" class="btn btn-secondary">Line 3</button>
+
+        <div class="pg-score-col pg-card">
+            <div class="pg-score-col__scoreboard">
+                <div class="pg-score-col__period" id="periodNr">Period 1</div>
+                <div class="pg-score-col__clock" id="label">00:00:00</div>
+                <div class="pg-score-col__goals" id="gres"><span id="totg_1">0</span> - <span id="totg_2">0</span> (<span id="totp_1">0</span> - <span id="totp_2">0</span>)</div>
+                <div class="pg-score-col__xg-row">
+                    <div class="pg-score-col__xg" id="gxG">
+                        <span class="pg-score-col__xg-label">xG</span>
+                        <span class="pg-score-col__xg-value"><span id="totxG_1">0</span> - <span id="totxG_2">0</span></span>
+                        <span class="pg-score-col__xg-value">(<span id="totxGp_1">0</span> - <span id="totxGp_2">0</span>)</span>
                     </div>
-                    <div class="line-btn btn-group-sm" role="group" aria-label="Line buttons">
-                        <button id="Pp1" type="button" onclick="Line_change(4)" class="btn btn-secondary">PP 1</button>
-                        <button id="Pp2" type="button" onclick="Line_change(5)" class="btn btn-secondary">6vs5</button>
-                        <button id="Sh1" type="button" onclick="Line_change(6)" class="btn btn-secondary">SH 1</button>
-                        <button id="Sh2" type="button" onclick="Line_change(7)" class="btn btn-secondary">5vs6</button>
+                    <div class="pg-score-col__xg" id="gxGOT">
+                        <span class="pg-score-col__xg-label">xGOT</span>
+                        <span class="pg-score-col__xg-value"><span id="totxGOT_1">0</span> - <span id="totxGOT_2">0</span></span>
+                        <span class="pg-score-col__xg-value">(<span id="totxGOTp_1">0</span> - <span id="totxGOTp_2">0</span>)</span>
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center" style="Padding-top: 0px;">
-                <div class="button-input-2">
-                    <p><span id="name_t2_1">Team 2</span> line on court</p>
-                    <div class="line-btn-2 btn-group" role="group" aria-label="Line buttons Team 2">
-                        <button id="L1T2" type="button" style="background-color: #3046FB" onclick="Line_change_2(1)" class="btn btn-secondary">Line 1</button>
-                        <button id="L2T2" type="button" onclick="Line_change_2(2)" class="btn btn-secondary">Line 2</button>
-                        <button id="L3T2" type="button" onclick="Line_change_2(3)" class="btn btn-secondary">Line 3</button>
-                    </div>
-                    <div class="line-btn-2 btn-group-sm" role="group" aria-label="Line buttons Team 2">
-                        <button id="Pp1T2" type="button" onclick="Line_change_2(4)" class="btn btn-secondary">PP 1</button>
-                        <button id="Pp2T2" type="button" onclick="Line_change_2(5)" class="btn btn-secondary">6vs5</button>
-                        <button id="Sh1T2" type="button" onclick="Line_change_2(6)" class="btn btn-secondary">SH 1</button>
-                        <button id="Sh2T2" type="button" onclick="Line_change_2(7)" class="btn btn-secondary">5vs6</button>
-                    </div>
-                </div>
+            <hr>
+            <p class="pg-lines-col__team-label"><span id="name_t1_1">Team 1</span> line on court</p>
+            <div class="line-btn btn-group" role="group" aria-label="Line buttons">
+                <button id="L1" type="button" onclick="Line_change(1)" class="pg-btn pg-btn--active">Line 1</button>
+                <button id="L2" type="button" onclick="Line_change(2)" class="pg-btn">Line 2</button>
+                <button id="L3" type="button" onclick="Line_change(3)" class="pg-btn">Line 3</button>
+                <button id="Pp1" type="button" onclick="Line_change(4)" class="pg-btn">PP 1</button>
+                <button id="Pp2" type="button" onclick="Line_change(5)" class="pg-btn">6vs5</button>
+                <button id="Sh1" type="button" onclick="Line_change(6)" class="pg-btn">SH 1</button>
+                <button id="Sh2" type="button" onclick="Line_change(7)" class="pg-btn">5vs6</button>
             </div>
-            <div class="row justify-content-center" style="Padding-top: 30px;">
-                <button id="undo" type="button" onclick="undoButton()" disabled="true" class="btn btn-secondary btn-sm">Undo Last Shot</button>
+            <hr>
+            <p class="pg-lines-col__team-label"><span id="name_t2_1">Team 2</span> line on court</p>
+            <div class="line-btn-2 btn-group" role="group" aria-label="Line buttons Team 2">
+                <button id="L1T2" type="button" onclick="Line_change_2(1)" class="pg-btn pg-btn--active">Line 1</button>
+                <button id="L2T2" type="button" onclick="Line_change_2(2)" class="pg-btn">Line 2</button>
+                <button id="L3T2" type="button" onclick="Line_change_2(3)" class="pg-btn">Line 3</button>
+                <button id="Pp1T2" type="button" onclick="Line_change_2(4)" class="pg-btn">PP 1</button>
+                <button id="Pp2T2" type="button" onclick="Line_change_2(5)" class="pg-btn">6vs5</button>
+                <button id="Sh1T2" type="button" onclick="Line_change_2(6)" class="pg-btn">SH 1</button>
+                <button id="Sh2T2" type="button" onclick="Line_change_2(7)" class="pg-btn">5vs6</button>
             </div>
+            <button id="undo" type="button" onclick="undoButton()" disabled="true" class="pg-lines-col__undo">Undo Last Shot</button>
         </div>
-        <div class="col-sm-4">
-            <div class="row justify-content-center" style="Padding-top: 30px;">
-                <div class="pos-input">
-                    <p style="Margin: 0px;">Possession</p>
-<!--                    <input type="image" id="changeorder" onclick="ChangeOrder()" src="{% static 'change_icon.jpeg' %}" width="15" alt="order" style="Padding: 0px">-->
-                    <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
-                        <button id="TeamR" type="button" onclick="BallTeamR()" class="btn btn-secondary"><span id="name_t2_2">Team 2</span></button>
-                    </div>
-                    <div class="pos-btn btn-group-lg" role="group" aria-label="Position buttons">
-                        <button id="TeamL" type="button" style="background-color: #3046FB" onclick="BallTeamL()" class="btn btn-secondary"><span id="name_t1_2">Team 1</span></button>
-                    </div>
-                </div>
+
+        <div class="pg-controls-col pg-card">
+            <div>
+                <div class="pg-controls-col__label">Possession</div>
+                <button id="TeamR" type="button" onclick="BallTeamR()" class="pg-possession-btn"><span id="name_t2_2">Team 2</span></button>
+                <button id="TeamL" type="button" onclick="BallTeamL()" class="pg-possession-btn pg-btn--active"><span id="name_t1_2">Team 1</span></button>
             </div>
-            <div class="row justify-content-center" style="Padding-top: 30px;">
-                <div class="game-btn" role="group" aria-label="Game buttons">
-                    <button id="reset" type="button" onclick="Reset()" disabled="true" class="btn btn-secondary">Reset</button>
-                    <button id="start" type="button" onclick="Start()" class="btn btn-secondary btn-lg">Start game</button>
-                    <button id="period" type="button" onclick="Period()" disabled="true" class="btn btn-secondary">Period</button>
-                </div>
+            <div>
+                <button id="reset" type="button" onclick="Reset()" disabled="true" class="pg-game-btn">Reset</button>
+                <button id="start" type="button" onclick="Start()" class="pg-game-btn">Start game</button>
+                <button id="period" type="button" onclick="Period()" disabled="true" class="pg-game-btn">Period</button>
             </div>
-            <div class="row justify-content-center">
-                <div style="Padding-top: 20px" class="custom-control custom-checkbox image-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="ck1a" onclick="checkLive()">
-                    <label class="custom-control-label" for="ck1a">
-                        <img src="{% static 'live.png' %}" alt="#" class="img-fluid" width="70px">
+            <div class="pg-toggle-group">
+                <div class="pg-toggle">
+                    <input type="checkbox" id="ck1a" onclick="checkLive()" class="pg-toggle__input">
+                    <label for="ck1a" class="pg-toggle__label">
+                        <span class="pg-toggle__icon"><img src="{% static 'live.png' %}" alt=""></span>
+                        <span class="pg-toggle__text">Send to LIVE page</span>
+                        <span class="pg-toggle__switch"></span>
+                    </label>
+                </div>
+                <div class="pg-toggle">
+                    <input type="checkbox" id="ck2a" onclick="checkShooter()" class="pg-toggle__input">
+                    <label for="ck2a" class="pg-toggle__label">
+                        <span class="pg-toggle__icon"><img src="{% static 'shooterT1.png' %}" alt=""></span>
+                        <span class="pg-toggle__text">Tag Team 1 shooters &amp; passers</span>
+                        <span class="pg-toggle__switch"></span>
+                    </label>
+                </div>
+                <div class="pg-toggle">
+                    <input type="checkbox" id="ck3a" onclick="checkT2Shooter()" class="pg-toggle__input">
+                    <label for="ck3a" class="pg-toggle__label">
+                        <span class="pg-toggle__icon"><img src="{% static 'shooterT1T2.png' %}" alt=""></span>
+                        <span class="pg-toggle__text">Tag Team 1 &amp; 2 shooters &amp; passers</span>
+                        <span class="pg-toggle__switch"></span>
                     </label>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div style="Padding-top: 5px" class="custom-control custom-checkbox image-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="ck2a" onclick="checkShooter()">
-                    <label class="custom-control-label" for="ck2a">
-                        <img src="{% static 'shooterT1.png' %}" alt="#" class="img-fluid" width="70px">
-                    </label>
+        </div>
+
+    </div>
+
+    <div class="pg-lineups pg-card">
+        <div class="pg-lineups__title">Team Lineups</div>
+        <div class="pg-lineups-goalies">
+                <div class="pg-lineups-goalies__team">
+                    <h5><span id="name_t1_20">Team 1</span></h5>
+                    <select disabled onchange="changePlayer('sT1G',0,8)" id="sT1G" class="pg-select">
+                        <option selected disabled>Select a goalie...</option>
+                    </select>
+                </div>
+                <div class="pg-lineups-goalies__team">
+                    <h5><span id="name_t2_20">Team 2</span></h5>
+                    <select disabled onchange="changePlayer('sT2G',0,8)" id="sT2G" class="pg-select">
+                        <option selected disabled>Select a goalie...</option>
+                    </select>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div style="Padding-top: 5px" class="custom-control custom-checkbox image-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="ck3a" onclick="checkT2Shooter()">
-                    <label class="custom-control-label" for="ck3a">
-                        <img src="{% static 'shooterT1T2.png' %}" alt="#" class="img-fluid" width="70px">
-                    </label>
+            <div class="pg-lineups-grid">
+                <div>
+                    <h5>Line 1</h5>
+                    <select disabled onchange="changePlayer('sT1L1LW',2,3)" id="sT1L1LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L1C',2,4)" id="sT1L1C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L1RW',2,5)" id="sT1L1RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L1LD',2,6)" id="sT1L1LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L1RD',2,7)" id="sT1L1RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                </div>
+                <div>
+                    <h5>Line 2</h5>
+                    <select disabled onchange="changePlayer('sT1L2LW',3,3)" id="sT1L2LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L2C',3,4)" id="sT1L2C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L2RW',3,5)" id="sT1L2RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L2LD',3,6)" id="sT1L2LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L2RD',3,7)" id="sT1L2RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                </div>
+                <div>
+                    <h5>Line 3</h5>
+                    <select disabled onchange="changePlayer('sT1L3LW',4,3)" id="sT1L3LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L3C',4,4)" id="sT1L3C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L3RW',4,5)" id="sT1L3RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L3LD',4,6)" id="sT1L3LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L3RD',4,7)" id="sT1L3RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                </div>
+                <div>
+                    <h5>Line 1</h5>
+                    <select disabled onchange="changePlayer('sT2L1LW',2,3)" id="sT2L1LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L1C',2,4)" id="sT2L1C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L1RW',2,5)" id="sT2L1RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L1LD',2,6)" id="sT2L1LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L1RD',2,7)" id="sT2L1RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                </div>
+                <div>
+                    <h5>Line 2</h5>
+                    <select disabled onchange="changePlayer('sT2L2LW',3,3)" id="sT2L2LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L2C',3,4)" id="sT2L2C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L2RW',3,5)" id="sT2L2RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L2LD',3,6)" id="sT2L2LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L2RD',3,7)" id="sT2L2RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                </div>
+                <div>
+                    <h5>Line 3</h5>
+                    <select disabled onchange="changePlayer('sT2L3LW',4,3)" id="sT2L3LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L3C',4,4)" id="sT2L3C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L3RW',4,5)" id="sT2L3RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L3LD',4,6)" id="sT2L3LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L3RD',4,7)" id="sT2L3RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
                 </div>
             </div>
-<!--            <div class="row justify-content-center">
-                <select disabled onchange="loadGame()" id="load-game" class="form-control-sm custom-select">
-                    <option selected disabled>Load game...</option>
-                </select>
-            </div>-->
-        </div>
-    </div>
-    <div class="lineup-selection">
-        <div class="row justify-content-center" style="Padding-top: 10px;">
-            <h4>Team Lineups</h4>
-        </div>
-        <div class="row justify-content-center" style="Padding-top: 10px;">
-            <div class="col-sm-6">
-                <h5><span id="name_t1_20">Team 1</span></h5>
-                <select disabled onchange="changePlayer('sT1G',0,8)" id="sT1G" class="form-control-sm custom-select">
-                    <option selected disabled>Select a goalie...</option>
-                </select>
-            </div>
-            <div class="col-sm-6">
-                <h5><span id="name_t2_20">Team 2</span></h5>
-                <select disabled onchange="changePlayer('sT2G',0,8)" id="sT2G" class="form-control-sm custom-select">
-                    <option selected disabled>Select a goalie...</option>
-                </select>
-            </div>
-        </div>
-        <div class="row justify-content-center" style="Padding-top: 10px;">
-            <div class="col-sm-2">
-                <h5>Line 1</h5>
-                <select disabled onchange="changePlayer('sT1L1LW',2,3)" id="sT1L1LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L1C',2,4)" id="sT1L1C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L1RW',2,5)" id="sT1L1RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L1LD',2,6)" id="sT1L1LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L1RD',2,7)" id="sT1L1RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-                <h5>Line 2</h5>
-                <select disabled onchange="changePlayer('sT1L2LW',3,3)" id="sT1L2LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L2C',3,4)" id="sT1L2C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L2RW',3,5)" id="sT1L2RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L2LD',3,6)" id="sT1L2LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L2RD',3,7)" id="sT1L2RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-                <h5>Line 3</h5>
-                <select disabled onchange="changePlayer('sT1L3LW',4,3)" id="sT1L3LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L3C',4,4)" id="sT1L3C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L3RW',4,5)" id="sT1L3RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L3LD',4,6)" id="sT1L3LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L3RD',4,7)" id="sT1L3RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-                <h5>Line 1</h5>
-                <select disabled onchange="changePlayer('sT2L1LW',2,3)" id="sT2L1LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L1C',2,4)" id="sT2L1C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L1RW',2,5)" id="sT2L1RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L1LD',2,6)" id="sT2L1LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L1RD',2,7)" id="sT2L1RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-                <h5>Line 2</h5>
-                <select disabled onchange="changePlayer('sT2L2LW',3,3)" id="sT2L2LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L2C',3,4)" id="sT2L2C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L2RW',3,5)" id="sT2L2RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L2LD',3,6)" id="sT2L2LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L2RD',3,7)" id="sT2L2RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-                <h5>Line 3</h5>
-                <select disabled onchange="changePlayer('sT2L3LW',4,3)" id="sT2L3LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L3C',4,4)" id="sT2L3C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L3RW',4,5)" id="sT2L3RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L3LD',4,6)" id="sT2L3LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L3RD',4,7)" id="sT2L3RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
+            <div class="pg-lineups-grid">
+                <div>
+                    <h5>PP1</h5>
+                    <select disabled onchange="changePlayer('sT1L4LW',5,3)" id="sT1L4LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L4C',5,4)" id="sT1L4C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L4RW',5,5)" id="sT1L4RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L4LW',5,6)" id="sT1L4LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L4LW',5,7)" id="sT1L4RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                </div>
+                <div>
+                    <h5>6vs5</h5>
+                    <select disabled onchange="changePlayer('sT1L5LW',5,3)" id="sT1L5LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L5C',5,4)" id="sT1L5C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L5RW',5,5)" id="sT1L5RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L5LW',5,6)" id="sT1L5LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L5LW',5,7)" id="sT1L5RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT1L5X',5,7)" id="sT1L5X" class="pg-select">
+                        <option selected disabled>Select X...</option>
+                    </select>
+                </div>
+                <div></div>
+                <div>
+                    <h5>PP1</h5>
+                    <select disabled onchange="changePlayer('sT2L4LW',5,3)" id="sT2L4LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L4C',5,4)" id="sT2L4C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L4RW',5,5)" id="sT2L4RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L4LW',5,6)" id="sT2L4LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L4LW',5,7)" id="sT2L4RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                </div>
+                <div>
+                    <h5>6vs5</h5>
+                    <select disabled onchange="changePlayer('sT2L5LW',5,3)" id="sT2L5LW" class="pg-select">
+                        <option selected disabled>Select LW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L5C',5,4)" id="sT2L5C" class="pg-select">
+                        <option selected disabled>Select C...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L5RW',5,5)" id="sT2L5RW" class="pg-select">
+                        <option selected disabled>Select RW...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L5LW',5,6)" id="sT2L5LD" class="pg-select">
+                        <option selected disabled>Select LD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L5LW',5,7)" id="sT2L5RD" class="pg-select">
+                        <option selected disabled>Select RD...</option>
+                    </select>
+                    <select disabled onchange="changePlayer('sT2L5X',5,7)" id="sT2L5X" class="pg-select">
+                        <option selected disabled>Select X...</option>
+                    </select>
+                </div>
+                <div></div>
             </div>
         </div>
-        <div class="row justify-content-center" style="Padding-top: 10px;">
-            <div class="col-sm-2">
-                <h5>PP1</h5>
-                <select disabled onchange="changePlayer('sT1L4LW',5,3)" id="sT1L4LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L4C',5,4)" id="sT1L4C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L4RW',5,5)" id="sT1L4RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L4LW',5,6)" id="sT1L4LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L4LW',5,7)" id="sT1L4RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-                <h5>6vs5</h5>
-                <select disabled onchange="changePlayer('sT1L5LW',5,3)" id="sT1L5LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L5C',5,4)" id="sT1L5C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L5RW',5,5)" id="sT1L5RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L5LW',5,6)" id="sT1L5LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L5LW',5,7)" id="sT1L5RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT1L5X',5,7)" id="sT1L5X" class="form-control-sm custom-select">
-                    <option selected disabled>Select X...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-            </div>
-            <div class="col-sm-2">
-                <h5>PP1</h5>
-                <select disabled onchange="changePlayer('sT2L4LW',5,3)" id="sT2L4LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L4C',5,4)" id="sT2L4C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L4RW',5,5)" id="sT2L4RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L4LW',5,6)" id="sT2L4LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L4LW',5,7)" id="sT2L4RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-                <h5>6vs5</h5>
-                <select disabled onchange="changePlayer('sT2L5LW',5,3)" id="sT2L5LW" class="form-control-sm custom-select">
-                    <option selected disabled>Select LW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L5C',5,4)" id="sT2L5C" class="form-control-sm custom-select">
-                    <option selected disabled>Select C...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L5RW',5,5)" id="sT2L5RW" class="form-control-sm custom-select">
-                    <option selected disabled>Select RW...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L5LW',5,6)" id="sT2L5LD" class="form-control-sm custom-select">
-                    <option selected disabled>Select LD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L5LW',5,7)" id="sT2L5RD" class="form-control-sm custom-select">
-                    <option selected disabled>Select RD...</option>
-                </select>
-                <select disabled onchange="changePlayer('sT2L5X',5,7)" id="sT2L5X" class="form-control-sm custom-select">
-                    <option selected disabled>Select X...</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-            </div>
-        </div>
-    </div>
 
     <!-- Game stats-->
 

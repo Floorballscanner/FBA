@@ -1,0 +1,695 @@
+/*
+
+Visual layer for accounts/premiumgame.html only, scoped under .premiumgame-page. This page is
+used on tablets/laptops in landscape orientation, never mobile, while actively recording a
+game. The control panel (Date/Team pickers through the possession/game controls) is a dense
+CSS Grid so it fits a tablet screen in landscape without scrolling — canvas, score/clock, line
+buttons, possession, game controls and the three toggles are all reachable without scrolling
+mid-game, in the same left-to-right / top-to-bottom order as the original layout so nothing
+needs to be relearned. Team Lineups sits in its own full-width section right below — it's only
+set up once per game, so scrolling to reach it is fine. Below that, the results section
+(game/period stats, line-by-line detail) reuses the existing shared classes (.linestats,
+.shot-map, .stats-L1 etc.) so it's a pure CSS reskin — none of that markup was touched.
+
+The shotmap canvases (#myCanvas, #myCanvas_1..5) MUST keep their native width="300"
+height="500" both as HTML attributes and as rendered CSS size — static/js/variables.js
+hardcodes fWidth=300/fLength=500 and premiumfunctions.js maps every click coordinate against
+those exact pixels (see GetCoordinates/FindPosition). Never apply responsive scaling to them.
+
+*/
+
+.premiumgame-page {
+    --pg-navy: #002072;
+    --pg-navy-dark: #001648;
+    --pg-accent: #3046FB;
+    --pg-ink: #14161f;
+    --pg-muted: #5b5f6e;
+    --pg-border: #e4e6f0;
+    --pg-bg: #f5f6fa;
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 10px 20px 64px;
+    color: var(--pg-ink);
+    font-size: 14px;
+}
+
+.premiumgame-page h1,
+.premiumgame-page h2,
+.premiumgame-page h3,
+.premiumgame-page h4,
+.premiumgame-page h5 {
+    margin: 0;
+}
+
+/* ============ Control panel (must fit a tablet screen without scrolling) ============ */
+
+.pg-panel {
+    display: grid;
+    grid-template-columns: 340px 340px 300px;
+    grid-template-areas:
+        "setup   setup  setup"
+        "canvas  score  controls";
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.pg-card {
+    background: #fff;
+    border: 1px solid var(--pg-border);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px -12px rgba(0, 32, 114, 0.25);
+    padding: 12px 14px;
+}
+
+/* Setup bar: Date / Team 1 / Team 2 */
+
+.pg-setup {
+    grid-area: setup;
+    display: flex;
+    gap: 10px;
+    padding: 8px 16px;
+}
+
+.pg-setup__group {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pg-setup__group-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--pg-muted);
+    white-space: nowrap;
+}
+
+.pg-setup input[type="date"],
+.pg-select {
+    height: 32px;
+    padding: 0 8px;
+    border-radius: 6px;
+    border: 1px solid var(--pg-border);
+    background: #fff;
+    color: var(--pg-ink);
+    font-family: inherit;
+    font-size: 13px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.pg-select:disabled {
+    background: var(--pg-bg);
+    color: var(--pg-muted);
+}
+
+/* Canvas column */
+
+.pg-canvas-col {
+    grid-area: canvas;
+    text-align: center;
+    padding: 8px 10px;
+}
+
+.pg-canvas-col__legend {
+    font-size: 9.5px;
+    line-height: 1.4;
+    color: var(--pg-muted);
+    margin: 0 0 3px;
+}
+
+.pg-canvas-col__legend b {
+    font-weight: 700;
+}
+
+.pg-canvas-col__team-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pg-navy);
+    margin: 2px 0;
+}
+
+.pg-canvas-col canvas {
+    border-radius: 6px;
+    border: 1px solid var(--pg-border);
+}
+
+/* Score column: score/clock, then Team 1 lines, then Team 2 lines, then undo */
+
+.pg-score-col {
+    grid-area: score;
+    padding: 12px 14px;
+}
+
+.pg-score-col__scoreboard {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.pg-score-col__period {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--pg-muted);
+    margin-bottom: 2px;
+}
+
+.pg-score-col__clock {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--pg-navy-dark);
+    margin-bottom: 8px;
+}
+
+.pg-score-col__goals {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--pg-ink);
+    margin-bottom: 8px;
+}
+
+.pg-score-col__xg-row {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+.pg-score-col__xg {
+    text-align: center;
+}
+
+.pg-score-col__xg-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pg-accent);
+    margin-bottom: 2px;
+}
+
+.pg-score-col__xg-value {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--pg-navy-dark);
+}
+
+.pg-score-col hr {
+    margin: 10px 0;
+    border-top: 1px solid var(--pg-border);
+}
+
+.pg-lines-col__team-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--pg-navy);
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.pg-score-col .line-btn,
+.pg-score-col .line-btn-2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.pg-btn {
+    height: 30px;
+    padding: 0 4px;
+    border-radius: 6px;
+    border: 1px solid var(--pg-border);
+    background: #fff;
+    color: var(--pg-ink);
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.pg-btn:hover:not(:disabled) {
+    border-color: var(--pg-accent);
+}
+
+.pg-btn:disabled {
+    color: var(--pg-muted);
+    cursor: not-allowed;
+}
+
+.pg-btn.pg-btn--active {
+    background: var(--pg-navy);
+    border-color: var(--pg-navy);
+    color: #fff;
+}
+
+.pg-lines-col__undo {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid var(--pg-border);
+    background: var(--pg-bg);
+    color: var(--pg-ink);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pg-lines-col__undo:disabled {
+    color: var(--pg-muted);
+    cursor: not-allowed;
+}
+
+/* Controls column: possession / game controls / toggles */
+
+.pg-controls-col {
+    grid-area: controls;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pg-controls-col__label {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--pg-muted);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.pg-possession-btn {
+    display: block;
+    width: 100%;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid var(--pg-border);
+    background: #fff;
+    color: var(--pg-ink);
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+
+.pg-possession-btn.pg-btn--active {
+    background: var(--pg-navy);
+    border-color: var(--pg-navy);
+    color: #fff;
+}
+
+.pg-game-btn {
+    display: block;
+    width: 100%;
+    height: 34px;
+    border-radius: 8px;
+    border: none;
+    background: var(--pg-navy);
+    color: #fff;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+
+.pg-game-btn:hover:not(:disabled) {
+    background: var(--pg-accent);
+}
+
+.pg-game-btn:disabled {
+    background: var(--pg-border);
+    color: var(--pg-muted);
+    cursor: not-allowed;
+}
+
+/* Toggles: real checkbox input + label built as a switch, so :checked can drive the look */
+
+.pg-toggle-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pg-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.pg-toggle__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.pg-toggle__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--pg-border);
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.pg-toggle__input:checked + .pg-toggle__label {
+    background: #eef0ff;
+    border-color: var(--pg-accent);
+}
+
+.pg-toggle__icon {
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--pg-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+}
+
+.pg-toggle__input:checked + .pg-toggle__label .pg-toggle__icon {
+    background: #fff;
+}
+
+.pg-toggle__icon img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.pg-toggle__text {
+    flex: 1 1 auto;
+    font-size: 11.5px;
+    line-height: 1.3;
+    color: var(--pg-muted);
+}
+
+.pg-toggle__input:checked + .pg-toggle__label .pg-toggle__text {
+    color: var(--pg-navy-dark);
+    font-weight: 600;
+}
+
+.pg-toggle__switch {
+    flex: 0 0 auto;
+    width: 30px;
+    height: 17px;
+    border-radius: 999px;
+    background: var(--pg-border);
+    position: relative;
+    transition: background 0.15s ease;
+}
+
+.pg-toggle__switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease;
+}
+
+.pg-toggle__input:checked + .pg-toggle__label .pg-toggle__switch {
+    background: var(--pg-navy);
+}
+
+.pg-toggle__input:checked + .pg-toggle__label .pg-toggle__switch::after {
+    transform: translateX(13px);
+}
+
+/* ============ Team Lineups: full-width section, own space below the panel ============ */
+
+.pg-lineups {
+    margin-bottom: 32px;
+}
+
+.pg-lineups__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--pg-navy-dark);
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.pg-lineups-goalies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 640px;
+    margin: 0 auto 18px;
+}
+
+.pg-lineups-goalies__team {
+    text-align: center;
+}
+
+.pg-lineups-goalies__team h5 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pg-navy);
+    margin-bottom: 6px;
+}
+
+.pg-lineups-goalies .pg-select {
+    max-width: 260px;
+    margin: 0 auto;
+}
+
+.pg-lineups-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.pg-lineups-grid h5 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--pg-muted);
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.pg-lineups-grid .pg-select {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    height: 32px;
+    font-size: 12.5px;
+}
+
+/* ============ Shot-tagging popup menus (shared classes, restyled for this page only) ============ */
+
+.premiumgame-page .shot-menu,
+.premiumgame-page .shot-type,
+.premiumgame-page .shooter-type,
+.premiumgame-page .passer-type,
+.premiumgame-page .posT1-type,
+.premiumgame-page .posT2-type,
+.premiumgame-page .option-menu {
+    background: #fff;
+    border: 1px solid var(--pg-border);
+    border-radius: 10px;
+    box-shadow: 0 12px 28px -12px rgba(0, 32, 114, 0.35);
+    overflow: hidden;
+}
+
+.premiumgame-page .shot-menu ul,
+.premiumgame-page .shot-type ul,
+.premiumgame-page .shooter-type ul,
+.premiumgame-page .passer-type ul,
+.premiumgame-page .posT1-type ul,
+.premiumgame-page .posT2-type ul,
+.premiumgame-page .option-menu ul {
+    min-width: 160px;
+}
+
+.premiumgame-page .shot-menu ul li,
+.premiumgame-page .shot-type ul li,
+.premiumgame-page .shooter-type ul li,
+.premiumgame-page .passer-type ul li,
+.premiumgame-page .posT1-type ul li,
+.premiumgame-page .posT2-type ul li,
+.premiumgame-page .option-menu ul li {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--pg-ink);
+    border-bottom: 1px solid var(--pg-border);
+}
+
+.premiumgame-page .shot-menu ul li:last-child,
+.premiumgame-page .shot-type ul li:last-child,
+.premiumgame-page .shooter-type ul li:last-child,
+.premiumgame-page .passer-type ul li:last-child,
+.premiumgame-page .posT1-type ul li:last-child,
+.premiumgame-page .posT2-type ul li:last-child,
+.premiumgame-page .option-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.premiumgame-page .shot-menu ul li:hover,
+.premiumgame-page .shot-type ul li:hover,
+.premiumgame-page .shooter-type ul li:hover,
+.premiumgame-page .passer-type ul li:hover,
+.premiumgame-page .posT1-type ul li:hover,
+.premiumgame-page .posT2-type ul li:hover,
+.premiumgame-page .option-menu ul li:hover {
+    background: #eef0ff;
+}
+
+/* ============ Results section: CSS-only reskin of unchanged markup ============ */
+
+.premiumgame-page hr {
+    border: none;
+    border-top: 1px solid var(--pg-border);
+    margin: 32px 0;
+}
+
+.premiumgame-page .row {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.premiumgame-page .row > h4 {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--pg-navy-dark);
+    padding: 0 8px;
+}
+
+.premiumgame-page .linestats,
+.premiumgame-page .shot-map {
+    background: #fff;
+    border: 1px solid var(--pg-border);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px -12px rgba(0, 32, 114, 0.2);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.premiumgame-page .shot-map h5 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--pg-navy-dark);
+    margin-bottom: 10px;
+}
+
+.premiumgame-page .shot-map canvas {
+    border-radius: 6px;
+    border: 1px solid var(--pg-border);
+}
+
+.premiumgame-page h5[style*="text-align: center"] {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--pg-navy-dark);
+    margin-bottom: 12px;
+}
+
+.premiumgame-page .stats-L1,
+.premiumgame-page .stats-L2,
+.premiumgame-page .stats-L3,
+.premiumgame-page .stats-Team,
+.premiumgame-page .stats-PP1,
+.premiumgame-page .stats-PP2,
+.premiumgame-page .stats-SH1,
+.premiumgame-page .stats-SH2,
+.premiumgame-page .stats-L1T2,
+.premiumgame-page .stats-L2T2,
+.premiumgame-page .stats-L3T2,
+.premiumgame-page .stats-TeamT2,
+.premiumgame-page .stats-PP1T2,
+.premiumgame-page .stats-PP2T2,
+.premiumgame-page .stats-SH1T2,
+.premiumgame-page .stats-SH2T2 {
+    background: #fff;
+    border: 1px solid var(--pg-border);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px -12px rgba(0, 32, 114, 0.2);
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 12.5px;
+}
+
+.premiumgame-page .stats-L1 h4,
+.premiumgame-page .stats-L2 h4,
+.premiumgame-page .stats-L3 h4,
+.premiumgame-page .stats-Team h4,
+.premiumgame-page .stats-PP1 h4,
+.premiumgame-page .stats-PP2 h4,
+.premiumgame-page .stats-SH1 h4,
+.premiumgame-page .stats-SH2 h4,
+.premiumgame-page .stats-L1T2 h4,
+.premiumgame-page .stats-L2T2 h4,
+.premiumgame-page .stats-L3T2 h4,
+.premiumgame-page .stats-TeamT2 h4,
+.premiumgame-page .stats-PP1T2 h4,
+.premiumgame-page .stats-PP2T2 h4,
+.premiumgame-page .stats-SH1T2 h4,
+.premiumgame-page .stats-SH2T2 h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--pg-navy-dark);
+}
+
+.premiumgame-page .stats-L1 hr,
+.premiumgame-page .stats-L2 hr,
+.premiumgame-page .stats-L3 hr,
+.premiumgame-page .stats-Team hr,
+.premiumgame-page .stats-PP1 hr,
+.premiumgame-page .stats-PP2 hr,
+.premiumgame-page .stats-SH1 hr,
+.premiumgame-page .stats-SH2 hr,
+.premiumgame-page .stats-L1T2 hr,
+.premiumgame-page .stats-L2T2 hr,
+.premiumgame-page .stats-L3T2 hr,
+.premiumgame-page .stats-TeamT2 hr,
+.premiumgame-page .stats-PP1T2 hr,
+.premiumgame-page .stats-PP2T2 hr,
+.premiumgame-page .stats-SH1T2 hr,
+.premiumgame-page .stats-SH2T2 hr {
+    display: none;
+}
+
+.premiumgame-page .stats-L1 p,
+.premiumgame-page .stats-L2 p,
+.premiumgame-page .stats-L3 p,
+.premiumgame-page .stats-Team p,
+.premiumgame-page .stats-PP1 p,
+.premiumgame-page .stats-PP2 p,
+.premiumgame-page .stats-SH1 p,
+.premiumgame-page .stats-SH2 p,
+.premiumgame-page .stats-L1T2 p,
+.premiumgame-page .stats-L2T2 p,
+.premiumgame-page .stats-L3T2 p,
+.premiumgame-page .stats-TeamT2 p,
+.premiumgame-page .stats-PP1T2 p,
+.premiumgame-page .stats-PP2T2 p,
+.premiumgame-page .stats-SH1T2 p,
+.premiumgame-page .stats-SH2T2 p {
+    margin: 0 0 4px;
+    line-height: 1.5;
+}
