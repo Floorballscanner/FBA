@@ -130,16 +130,16 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
                 <button id="TeamR" type="button" onclick="BallTeamR()" class="pg-possession-btn"><span id="name_t2_2">Team 2</span></button>
                 <button id="TeamL" type="button" onclick="BallTeamL()" class="pg-possession-btn pg-btn--active"><span id="name_t1_2">Team 1</span></button>
             </div>
-            <div>
-                <button id="reset" type="button" onclick="Reset()" disabled="true" class="pg-game-btn">Reset</button>
-                <button id="start" type="button" onclick="Start()" class="pg-game-btn">Start game</button>
-                <button id="period" type="button" onclick="Period()" disabled="true" class="pg-game-btn">Period</button>
+            <div class="pg-game-btn-row">
+                <button id="reset" type="button" onclick="Reset()" disabled="true" class="pg-game-btn pg-game-btn--secondary">Reset</button>
+                <button id="start" type="button" onclick="Start()" class="pg-game-btn pg-game-btn--primary">Start game</button>
+                <button id="period" type="button" onclick="Period()" disabled="true" class="pg-game-btn pg-game-btn--secondary">Period</button>
             </div>
             <div class="pg-toggle-group">
                 <div class="pg-toggle">
                     <input type="checkbox" id="ck1a" onclick="checkLive()" class="pg-toggle__input">
                     <label for="ck1a" class="pg-toggle__label">
-                        <span class="pg-toggle__icon"><img src="{% static 'live.png' %}" alt=""></span>
+                        <span class="pg-toggle__icon pg-toggle__icon--live"><span class="pg-live-dot"></span></span>
                         <span class="pg-toggle__text">Send to LIVE page</span>
                         <span class="pg-toggle__switch"></span>
                     </label>

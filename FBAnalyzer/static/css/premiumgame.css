@@ -308,9 +308,19 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
     color: #fff;
 }
 
+/* Reset/Start/Period sit in one row, same as the original layout, but Start is taller and
+   bolder since it's the button used constantly through a game (clock start/stop) while
+   Reset and Period are occasional. */
+.pg-game-btn-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
 .pg-game-btn {
     display: block;
-    width: 100%;
+    flex: 1 1 0;
     height: 34px;
     border-radius: 8px;
     border: none;
@@ -320,7 +330,6 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
     font-size: 13.5px;
     font-weight: 700;
     cursor: pointer;
-    margin-bottom: 6px;
 }
 
 .pg-game-btn:hover:not(:disabled) {
@@ -331,6 +340,17 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
     background: var(--pg-border);
     color: var(--pg-muted);
     cursor: not-allowed;
+}
+
+.pg-game-btn--primary {
+    flex: 1.6 1 0;
+    height: 50px;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+}
+
+.pg-game-btn--secondary {
+    font-size: 12px;
 }
 
 /* Toggles: real checkbox input + label built as a switch, so :checked can drive the look */
@@ -390,6 +410,32 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
     width: 18px;
     height: 18px;
     object-fit: contain;
+}
+
+/* LIVE toggle: a plain dot when off, a pulsing red "on air" dot when the game is being
+   pushed to /live/ — more legible at a glance than a static picture. */
+.pg-live-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--pg-muted);
+    transition: background 0.15s ease;
+}
+
+.pg-toggle__input:checked + .pg-toggle__label .pg-live-dot {
+    background: #e53935;
+    animation: pg-live-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pg-live-pulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.5);
+    }
+    50% {
+        opacity: 0.55;
+        box-shadow: 0 0 0 5px rgba(229, 57, 53, 0);
+    }
 }
 
 .pg-toggle__text {
@@ -498,15 +544,21 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
     font-size: 12.5px;
 }
 
-/* ============ Shot-tagging popup menus (shared classes, restyled for this page only) ============ */
+/* ============ Shot-tagging popup menus ============
+   These divs (#shotmenu, #shottype, #shooter, #passer, #posT1menu, #posT2menu, #options)
+   sit outside .premiumgame-page in the DOM (appended after the page wrapper closes, since
+   premiumfunctions.js positions them with document-relative absolute coordinates), so they
+   cannot be scoped under .premiumgame-page — these selectors intentionally target the
+   shared classes directly. The functional baseline (position: absolute, display: none,
+   toggled by JS) still comes from static/css/styles.css; this only reskins the look. */
 
-.premiumgame-page .shot-menu,
-.premiumgame-page .shot-type,
-.premiumgame-page .shooter-type,
-.premiumgame-page .passer-type,
-.premiumgame-page .posT1-type,
-.premiumgame-page .posT2-type,
-.premiumgame-page .option-menu {
+.shot-menu,
+.shot-type,
+.shooter-type,
+.passer-type,
+.posT1-type,
+.posT2-type,
+.option-menu {
     background: #fff;
     border: 1px solid var(--pg-border);
     border-radius: 10px;
@@ -514,23 +566,23 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
     overflow: hidden;
 }
 
-.premiumgame-page .shot-menu ul,
-.premiumgame-page .shot-type ul,
-.premiumgame-page .shooter-type ul,
-.premiumgame-page .passer-type ul,
-.premiumgame-page .posT1-type ul,
-.premiumgame-page .posT2-type ul,
-.premiumgame-page .option-menu ul {
+.shot-menu ul,
+.shot-type ul,
+.shooter-type ul,
+.passer-type ul,
+.posT1-type ul,
+.posT2-type ul,
+.option-menu ul {
     min-width: 160px;
 }
 
-.premiumgame-page .shot-menu ul li,
-.premiumgame-page .shot-type ul li,
-.premiumgame-page .shooter-type ul li,
-.premiumgame-page .passer-type ul li,
-.premiumgame-page .posT1-type ul li,
-.premiumgame-page .posT2-type ul li,
-.premiumgame-page .option-menu ul li {
+.shot-menu ul li,
+.shot-type ul li,
+.shooter-type ul li,
+.passer-type ul li,
+.posT1-type ul li,
+.posT2-type ul li,
+.option-menu ul li {
     padding: 10px 14px;
     font-size: 13px;
     font-weight: 500;
@@ -538,23 +590,23 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
     border-bottom: 1px solid var(--pg-border);
 }
 
-.premiumgame-page .shot-menu ul li:last-child,
-.premiumgame-page .shot-type ul li:last-child,
-.premiumgame-page .shooter-type ul li:last-child,
-.premiumgame-page .passer-type ul li:last-child,
-.premiumgame-page .posT1-type ul li:last-child,
-.premiumgame-page .posT2-type ul li:last-child,
-.premiumgame-page .option-menu ul li:last-child {
+.shot-menu ul li:last-child,
+.shot-type ul li:last-child,
+.shooter-type ul li:last-child,
+.passer-type ul li:last-child,
+.posT1-type ul li:last-child,
+.posT2-type ul li:last-child,
+.option-menu ul li:last-child {
     border-bottom: none;
 }
 
-.premiumgame-page .shot-menu ul li:hover,
-.premiumgame-page .shot-type ul li:hover,
-.premiumgame-page .shooter-type ul li:hover,
-.premiumgame-page .passer-type ul li:hover,
-.premiumgame-page .posT1-type ul li:hover,
-.premiumgame-page .posT2-type ul li:hover,
-.premiumgame-page .option-menu ul li:hover {
+.shot-menu ul li:hover,
+.shot-type ul li:hover,
+.shooter-type ul li:hover,
+.passer-type ul li:hover,
+.posT1-type ul li:hover,
+.posT2-type ul li:hover,
+.option-menu ul li:hover {
     background: #eef0ff;
 }
 
