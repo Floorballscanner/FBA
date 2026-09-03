@@ -51,6 +51,9 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
         "canvas  score  controls";
     gap: 12px;
     margin-bottom: 20px;
+    /* Columns are fixed-width, so on a wide laptop screen the grid container is wider
+       than its tracks — center the tracks instead of leaving them left-aligned. */
+    justify-content: center;
 }
 
 .pg-card {
