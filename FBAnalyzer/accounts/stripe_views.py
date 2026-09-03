@@ -96,6 +96,16 @@ def stripe_webhook(request):
         customer_details = session.get('customer_details') or {}
         email = customer_details.get('email')
         if tier and email:
+            # Checkout collects the buyer's email but never wires it into the charge's
+            # receipt_email, so Stripe's "Successful payments" email-receipt setting has
+            # nothing to send to unless we set it explicitly here.
+            payment_intent_id = session.get('payment_intent')
+            if payment_intent_id:
+                try:
+                    stripe.PaymentIntent.modify(payment_intent_id, receipt_email=email)
+                except stripe.StripeError:
+                    pass
+
             seat, is_new = create_or_renew_license(email, tier)
             if not is_new:
                 send_renewal_email(seat, settings.SITE_URL)
