@@ -192,9 +192,18 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
 }
 
 .pg-score-col__xg-value {
-    font-size: 19px;
+    display: block;
+    font-size: 20px;
     font-weight: 700;
     color: var(--pg-navy-dark);
+    white-space: nowrap;
+}
+
+.pg-score-col__xg-value--period {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--pg-muted);
+    margin-top: 1px;
 }
 
 .pg-score-col hr {
@@ -212,10 +221,21 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
 
 .pg-score-col .line-btn,
 .pg-score-col .line-btn-2 {
+    margin-bottom: 5px;
+}
+
+/* Line 1-3 (5-vs-5 play) get their own row, separate from the special-teams
+   lines (powerplay/shorthanded) below them. */
+.pg-line-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 5px;
     margin-bottom: 5px;
+}
+
+.pg-line-row--special {
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 0;
 }
 
 .pg-btn {
@@ -274,6 +294,7 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
     padding: 14px 16px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 12px;
 }
 
