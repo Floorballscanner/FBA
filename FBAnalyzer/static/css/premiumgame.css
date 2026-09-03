@@ -221,6 +221,10 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
 
 .pg-score-col .line-btn,
 .pg-score-col .line-btn-2 {
+    /* Overrides Bootstrap's .btn-group { display: inline-flex }, which would
+       otherwise lay the two .pg-line-row children out side by side instead
+       of stacked. */
+    display: block;
     margin-bottom: 5px;
 }
 
