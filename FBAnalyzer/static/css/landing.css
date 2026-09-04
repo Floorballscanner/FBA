@@ -862,6 +862,51 @@ a.landing-card:hover {
     margin: 4px 0 24px;
 }
 
+/* Live power-play banner (#ppIndicator, f-liiga_game.html only) - a bit of
+   visual tension while a team has the man advantage, goal chance is high. */
+.pp-indicator {
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 20px;
+    padding: 10px 22px;
+    max-width: 360px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--landing-accent), var(--landing-navy));
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    box-shadow: 0 8px 24px -8px rgba(48, 70, 251, 0.6);
+    animation: pp-indicator-pulse 1.4s ease-in-out infinite;
+}
+
+.pp-indicator__dot {
+    width: 10px;
+    height: 10px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #fff;
+    animation: pp-indicator-dot 1.4s ease-in-out infinite;
+}
+
+.pp-indicator__time {
+    font-variant-numeric: tabular-nums;
+    background: rgba(255, 255, 255, 0.22);
+    padding: 2px 9px;
+    border-radius: 999px;
+}
+
+@keyframes pp-indicator-pulse {
+    0%, 100% { box-shadow: 0 8px 24px -8px rgba(48, 70, 251, 0.6); transform: scale(1); }
+    50% { box-shadow: 0 10px 32px -4px rgba(48, 70, 251, 0.9); transform: scale(1.03); }
+}
+
+@keyframes pp-indicator-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
 .landing-result__stats {
     display: grid;
     gap: 10px;

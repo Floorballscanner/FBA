@@ -41,6 +41,8 @@ var t1xG = document.getElementById('sttotxG_1');
 var t2xG = document.getElementById('sttotxG_2');
 var t1xGOT = document.getElementById('sttotxGOT_1');
 var t2xGOT = document.getElementById('sttotxGOT_2');
+var t1xGPP = document.getElementById('sttotxGPP_1');
+var t2xGPP = document.getElementById('sttotxGPP_2');
 var imgt1 = document.getElementById('imgt1');
 var imgt2 = document.getElementById('imgt2');
 var t1s = document.getElementById('sttotshots_1');
@@ -152,6 +154,8 @@ window.onload = function() {
                 event.xGOT = 0;
             });
 
+            const shotSituations = computeShotSituations(events, match.period_lengths_sec);
+
             for (let i = 0; i < shots.length; i++) {
                 const st = shots[i].location.split(',');
                 const x = parseFloat(st[0]);
@@ -173,6 +177,12 @@ window.onload = function() {
                 }
 
                 shots[i].xG = xG;
+
+                if (shots[i].code === 'laukausmaali') {
+                    shots[i].situation = situationFromGoalTag(findGoalTag(events, shots[i]));
+                } else {
+                    shots[i].situation = shotSituations[shots[i].event_id] || 'EVEN';
+                }
             }
 
             for (let i = 0; i < goaliedata.length; i++) {
@@ -211,6 +221,14 @@ window.onload = function() {
                 .filter(shot => shot.team === 'B')
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
 
+            t1xGPP_temp = Object.values(shots)
+                .filter(shot => shot.team === 'A' && shot.situation === 'PP')
+                .reduce((sum, shot) => sum + shot.xG, 0);
+
+            t2xGPP_temp = Object.values(shots)
+                .filter(shot => shot.team === 'B' && shot.situation === 'PP')
+                .reduce((sum, shot) => sum + shot.xG, 0);
+
             t1s_temp = Object.values(shots).filter(shot => shot.team === 'A').length;
             t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
             t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
@@ -229,6 +247,10 @@ window.onload = function() {
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
                 lineup.xGOT = Number(txg.toFixed(2));
+                txg = Object.values(shots)
+                .filter(shot => shot.player_id === pl && shot.situation === 'PP')
+                .reduce((sum, shot) => sum + shot.xG, 0);
+                lineup.xGPP = Number(txg.toFixed(2));
                 lineup.shots = Object.values(shots)
                 .filter(shot => shot.player_id === pl).length;
 
@@ -322,6 +344,9 @@ window.onload = function() {
             t2xG.innerHTML = t2xG_temp.toFixed(2);
             t1xGOT.innerHTML = t1xGOT_temp.toFixed(2);
             t2xGOT.innerHTML = t2xGOT_temp.toFixed(2);
+            t1xGPP.innerHTML = t1xGPP_temp.toFixed(2);
+            t2xGPP.innerHTML = t2xGPP_temp.toFixed(2);
+            updatePPIndicator(events, match.period_lengths_sec, t1name, t2name);
             t1s.innerHTML = t1s_temp;
             t2s.innerHTML = t2s_temp;
             t1sOT.innerHTML = t1sOT_temp;
@@ -605,6 +630,7 @@ function drawCharts() {
     pldatat1l1.addColumn('number', 'S');
     pldatat1l1.addColumn('number', 'xG');
     pldatat1l1.addColumn('number', 'xGOT');
+    pldatat1l1.addColumn('number', 'xGPP');
     pldatat1l1.addColumn('number', '+');
     pldatat1l1.addColumn('number', '-');
 
@@ -617,6 +643,7 @@ function drawCharts() {
     pldatat1l2.addColumn('number', 'S');
     pldatat1l2.addColumn('number', 'xG');
     pldatat1l2.addColumn('number', 'xGOT');
+    pldatat1l2.addColumn('number', 'xGPP');
     pldatat1l2.addColumn('number', '+');
     pldatat1l2.addColumn('number', '-');
     
@@ -629,6 +656,7 @@ function drawCharts() {
     pldatat1l3.addColumn('number', 'S');
     pldatat1l3.addColumn('number', 'xG');
     pldatat1l3.addColumn('number', 'xGOT');
+    pldatat1l3.addColumn('number', 'xGPP');
     pldatat1l3.addColumn('number', '+');
     pldatat1l3.addColumn('number', '-');
     
@@ -641,6 +669,7 @@ function drawCharts() {
     pldatat1l4.addColumn('number', 'S');
     pldatat1l4.addColumn('number', 'xG');
     pldatat1l4.addColumn('number', 'xGOT');
+    pldatat1l4.addColumn('number', 'xGPP');
     pldatat1l4.addColumn('number', '+');
     pldatat1l4.addColumn('number', '-');
     
@@ -653,6 +682,7 @@ function drawCharts() {
     pldatat2l1.addColumn('number', 'S');
     pldatat2l1.addColumn('number', 'xG');
     pldatat2l1.addColumn('number', 'xGOT');
+    pldatat2l1.addColumn('number', 'xGPP');
     pldatat2l1.addColumn('number', '+');
     pldatat2l1.addColumn('number', '-');
     
@@ -665,6 +695,7 @@ function drawCharts() {
     pldatat2l2.addColumn('number', 'S');
     pldatat2l2.addColumn('number', 'xG');
     pldatat2l2.addColumn('number', 'xGOT');
+    pldatat2l2.addColumn('number', 'xGPP');
     pldatat2l2.addColumn('number', '+');
     pldatat2l2.addColumn('number', '-');
     
@@ -677,6 +708,7 @@ function drawCharts() {
     pldatat2l3.addColumn('number', 'S');
     pldatat2l3.addColumn('number', 'xG');
     pldatat2l3.addColumn('number', 'xGOT');
+    pldatat2l3.addColumn('number', 'xGPP');
     pldatat2l3.addColumn('number', '+');
     pldatat2l3.addColumn('number', '-');
     
@@ -689,41 +721,42 @@ function drawCharts() {
     pldatat2l4.addColumn('number', 'S');
     pldatat2l4.addColumn('number', 'xG');
     pldatat2l4.addColumn('number', 'xGOT');
+    pldatat2l4.addColumn('number', 'xGPP');
     pldatat2l4.addColumn('number', '+');
     pldatat2l4.addColumn('number', '-');
 
     lineup_t1l1.forEach(lineup => {
         pldatat1l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t1l2.forEach(lineup => {
         pldatat1l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t1l3.forEach(lineup => {
         pldatat1l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t1l4.forEach(lineup => {
         pldatat1l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     
     lineup_t2l1.forEach(lineup => {
         pldatat2l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t2l2.forEach(lineup => {
         pldatat2l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t2l3.forEach(lineup => {
         pldatat2l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t2l4.forEach(lineup => {
         pldatat2l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
     });
 
     var pldatat1g = new google.visualization.DataTable();
@@ -869,11 +902,18 @@ function drawCharts() {
     xG_t2l2 = lineup_t2l2.reduce(function (sum, player) {return sum + player.xG;}, 0);
     xG_t2l3 = lineup_t2l3.reduce(function (sum, player) {return sum + player.xG;}, 0);
 
+    xG_t1PP = Object.values(shots).filter(s => s.team === 'A' && s.situation === 'PP').reduce((sum, s) => sum + s.xG, 0);
+    xG_t2PP = Object.values(shots).filter(s => s.team === 'B' && s.situation === 'PP').reduce((sum, s) => sum + s.xG, 0);
+    xG_t1SH = Object.values(shots).filter(s => s.team === 'A' && s.situation === 'SH').reduce((sum, s) => sum + s.xG, 0);
+    xG_t2SH = Object.values(shots).filter(s => s.team === 'B' && s.situation === 'SH').reduce((sum, s) => sum + s.xG, 0);
+
     var xGByLineData = google.visualization.arrayToDataTable([
          ['Line', t1name, { role: 'style' }, { role: 'annotation' }, t2name, { role: 'style' }, { role: 'annotation' } ],
          ['Line 1', xG_t1l1, 'color: '+ t1color, xG_t1l1, xG_t2l1, 'color: '+ t2color, xG_t2l1 ],
          ['Line 2', xG_t1l2, 'color: '+ t1color, xG_t1l2, xG_t2l2, 'color: '+ t2color, xG_t2l2 ],
-         ['Line 3', xG_t1l3, 'color: '+ t1color, xG_t1l3, xG_t2l3, 'color: '+ t2color, xG_t2l3 ]
+         ['Line 3', xG_t1l3, 'color: '+ t1color, xG_t1l3, xG_t2l3, 'color: '+ t2color, xG_t2l3 ],
+         ['PP', xG_t1PP, 'color: '+ t1color, xG_t1PP, xG_t2PP, 'color: '+ t2color, xG_t2PP ],
+         ['SH', xG_t1SH, 'color: '+ t1color, xG_t1SH, xG_t2SH, 'color: '+ t2color, xG_t2SH ]
       ]);
 
     var options = {
@@ -1354,6 +1394,8 @@ function updateData() {
                 event.xGOT = 0;
             });
 
+            const shotSituations = computeShotSituations(events, match.period_lengths_sec);
+
             for (let i = 0; i < shots.length; i++) {
                 const st = shots[i].location.split(',');
                 const x = parseFloat(st[0]);
@@ -1375,6 +1417,12 @@ function updateData() {
                 }
 
                 shots[i].xG = xG;
+
+                if (shots[i].code === 'laukausmaali') {
+                    shots[i].situation = situationFromGoalTag(findGoalTag(events, shots[i]));
+                } else {
+                    shots[i].situation = shotSituations[shots[i].event_id] || 'EVEN';
+                }
             }
 
             for (let i = 0; i < goaliedata.length; i++) {
@@ -1412,6 +1460,14 @@ function updateData() {
                 .filter(shot => shot.team === 'B')
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
 
+            t1xGPP_temp = Object.values(shots)
+                .filter(shot => shot.team === 'A' && shot.situation === 'PP')
+                .reduce((sum, shot) => sum + shot.xG, 0);
+
+            t2xGPP_temp = Object.values(shots)
+                .filter(shot => shot.team === 'B' && shot.situation === 'PP')
+                .reduce((sum, shot) => sum + shot.xG, 0);
+
             t1s_temp = Object.values(shots).filter(shot => shot.team === 'A').length;
             t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
             t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
@@ -1430,6 +1486,10 @@ function updateData() {
                 .filter(shot => shot.player_id === pl)
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
                 lineup.xGOT = Number(txg.toFixed(2));
+                txg = Object.values(shots)
+                .filter(shot => shot.player_id === pl && shot.situation === 'PP')
+                .reduce((sum, shot) => sum + shot.xG, 0);
+                lineup.xGPP = Number(txg.toFixed(2));
                 lineup.shots = Object.values(shots)
                 .filter(shot => shot.player_id === pl).length;
 
@@ -1534,6 +1594,9 @@ function updateData() {
             t2xG.innerHTML = t2xG_temp.toFixed(2);
             t1xGOT.innerHTML = t1xGOT_temp.toFixed(2);
             t2xGOT.innerHTML = t2xGOT_temp.toFixed(2);
+            t1xGPP.innerHTML = t1xGPP_temp.toFixed(2);
+            t2xGPP.innerHTML = t2xGPP_temp.toFixed(2);
+            updatePPIndicator(events, match.period_lengths_sec, t1name, t2name);
             t1s.innerHTML = t1s_temp;
             t2s.innerHTML = t2s_temp;
             t1sOT.innerHTML = t1sOT_temp;
@@ -1781,6 +1844,172 @@ function updateData() {
         .catch((error) => {
           console.error('Error:', error);
     });
+}
+
+// ============ Special teams (Powerplay/Shorthanded) derivation ============
+// Ruleset confirmed against real Torneopal match data (2025-2026 season):
+// - Penalty codes are "<N>min" or "<N>_<M>min" (e.g. "2min", "2_2min", "2_10min").
+//   Only components of minor/major length (<=5 min) create a skater-count
+//   disadvantage; a paired 10/20-min component is a misconduct served without one.
+// - A power-play goal ends the conceding team's soonest-to-expire active penalty,
+//   same as ice hockey. If that was the first half of a double-minor, the second
+//   half starts immediately from the goal.
+// - Goals must NOT use this derivation - read Torneopal's own description tag
+//   instead (situationFromGoalTag), since a delayed-penalty ('SR') goal has no
+//   backing penalty event to derive a window from.
+
+function parsePenaltySegments(code) {
+    const m = /^(\d+)(?:_(\d+))?min$/.exec(code || '');
+    if (!m) return null;
+    const segments = [parseInt(m[1], 10) * 60];
+    if (m[2] && parseInt(m[2], 10) <= 5) {
+        segments.push(parseInt(m[2], 10) * 60);
+    }
+    return segments;
+}
+
+function absGameTime(period, timeSec, periodLengths) {
+    let elapsed = 0;
+    const p = parseInt(period, 10);
+    for (let i = 1; i < p; i++) {
+        elapsed += (periodLengths && periodLengths[i]) || 1200;
+    }
+    return elapsed + parseInt(timeSec, 10);
+}
+
+// Torneopal tags goal events' description with the situation directly (space-
+// separated from the running score, e.g. "YV  2-7"). YV/YV2 = power play (one
+// or two-man advantage), AV = shorthanded, SR = delayed-penalty goal (treated
+// as power-play-equivalent - the offending team never gets a formal penalty
+// event since the goal itself cancels it), everything else (including TV, both
+// teams simultaneously penalized) is even strength for this purpose.
+function situationFromGoalTag(description) {
+    const tag = (description || '').trim().split(/\s+/)[0];
+    if (tag === 'YV' || tag === 'YV2' || tag === 'SR') return 'PP';
+    if (tag === 'AV') return 'SH';
+    return 'EVEN';
+}
+
+// Simulates penalty windows chronologically over the full event list and
+// returns event_id -> situation ('PP'/'SH'/'EVEN') for every non-scoring shot.
+function computeShotSituations(allEvents, periodLengths) {
+    const timed = allEvents
+        .map(e => Object.assign({}, e, { _t: absGameTime(e.period, e.time_sec, periodLengths) }))
+        .sort((a, b) => a._t - b._t);
+
+    const active = []; // { team, start, end, pendingNext }
+
+    function activeCount(team, t) {
+        return active.filter(w => w.team === team && w.start <= t && t < w.end).length;
+    }
+
+    // A power-play goal ends the conceding team's active penalty that's due to
+    // expire soonest (same rule as ice hockey for simultaneous penalties). If
+    // that penalty had a pending second segment (double-minor), it starts now.
+    function endSoonest(concedingTeam, t) {
+        const candidates = active.filter(w => w.team === concedingTeam && w.start <= t && t < w.end);
+        if (!candidates.length) return;
+        candidates.sort((a, b) => a.end - b.end);
+        const ending = candidates[0];
+        const pending = ending.pendingNext;
+        ending.end = t;
+        ending.pendingNext = null;
+        if (pending) {
+            active.push({ team: concedingTeam, start: t, end: t + pending, pendingNext: null });
+        }
+    }
+
+    const situations = {};
+
+    timed.forEach(e => {
+        const segs = parsePenaltySegments(e.code);
+        if (segs) {
+            active.push({ team: e.team, start: e._t, end: e._t + segs[0], pendingNext: segs[1] || null });
+            return;
+        }
+        if (e.code === 'maali') {
+            endSoonest(e.team === 'A' ? 'B' : 'A', e._t);
+            return;
+        }
+        if (e.code === 'laukaus' || e.code === 'laukausohi' || e.code === 'laukausblokattu') {
+            const other = e.team === 'A' ? 'B' : 'A';
+            const mine = activeCount(e.team, e._t);
+            const theirs = activeCount(other, e._t);
+            situations[e.event_id] = mine < theirs ? 'PP' : (mine > theirs ? 'SH' : 'EVEN');
+        }
+    });
+
+    return situations;
+}
+
+// A laukausmaali (goal-shot) shares time/period/team/player with its paired
+// maali event, which carries the authoritative situation tag.
+function findGoalTag(allEvents, shot) {
+    const goal = allEvents.find(e => e.code === 'maali' && e.team === shot.team
+        && e.period === shot.period && e.time === shot.time && e.player_id === shot.player_id);
+    return goal ? goal.description : '';
+}
+
+// Current special-teams state "as of now" (the latest processed event), for
+// the live PP indicator: which team (if any) is on a power play, and for how
+// much longer. Returns null if nobody is currently shorthanded.
+function currentSpecialTeams(allEvents, periodLengths) {
+    const timed = allEvents
+        .map(e => Object.assign({}, e, { _t: absGameTime(e.period, e.time_sec, periodLengths) }))
+        .sort((a, b) => a._t - b._t);
+    if (!timed.length) return null;
+    const now = timed[timed.length - 1]._t;
+
+    const active = [];
+    function endSoonest(concedingTeam, t) {
+        const candidates = active.filter(w => w.team === concedingTeam && w.start <= t && t < w.end);
+        if (!candidates.length) return;
+        candidates.sort((a, b) => a.end - b.end);
+        const ending = candidates[0];
+        const pending = ending.pendingNext;
+        ending.end = t;
+        ending.pendingNext = null;
+        if (pending) {
+            active.push({ team: concedingTeam, start: t, end: t + pending, pendingNext: null });
+        }
+    }
+    timed.forEach(e => {
+        const segs = parsePenaltySegments(e.code);
+        if (segs) {
+            active.push({ team: e.team, start: e._t, end: e._t + segs[0], pendingNext: segs[1] || null });
+        } else if (e.code === 'maali') {
+            endSoonest(e.team === 'A' ? 'B' : 'A', e._t);
+        }
+    });
+
+    const stillActive = active.filter(w => w.start <= now && now < w.end);
+    if (!stillActive.length) return null;
+
+    const countA = stillActive.filter(w => w.team === 'A').length;
+    const countB = stillActive.filter(w => w.team === 'B').length;
+    if (countA === countB) return null; // e.g. both teams penalized (TV) - net even
+
+    const shorthandedTeam = countA > countB ? 'A' : 'B';
+    const endsAt = Math.max(...stillActive.filter(w => w.team === shorthandedTeam).map(w => w.end));
+    return { shorthandedTeam, remainingSec: Math.max(0, endsAt - now) };
+}
+
+// Shows/hides the live power-play banner (#ppIndicator in f-liiga_game.html).
+// Refreshes once per poll (every 10s), matching the rest of the live page.
+function updatePPIndicator(allEvents, periodLengths, teamAName, teamBName) {
+    const indicator = document.getElementById('ppIndicator');
+    if (!indicator) return;
+    const st = currentSpecialTeams(allEvents, periodLengths);
+    if (!st) {
+        indicator.style.display = 'none';
+        return;
+    }
+    const ppTeamName = st.shorthandedTeam === 'A' ? teamBName : teamAName;
+    const mins = Math.floor(st.remainingSec / 60);
+    const secs = Math.floor(st.remainingSec % 60);
+    document.getElementById('ppIndicatorTeam').innerText = ppTeamName;
+    document.getElementById('ppIndicatorTime').innerText = mins + ':' + (secs < 10 ? '0' : '') + secs;
+    indicator.style.display = 'flex';
 }
 
 function calcxG(x, y) {
