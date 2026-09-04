@@ -375,6 +375,8 @@ class Command(BaseCommand):
             match['xG_B'] = round2(sum(s['xG'] for s in shots_b))
             match['xGOT_A'] = round2(sum(s['xGOT'] for s in shots_a))
             match['xGOT_B'] = round2(sum(s['xGOT'] for s in shots_b))
+            match['xGPP_A'] = round2(sum(s['xG'] for s in shots_a if s.get('situation') == 'PP'))
+            match['xGPP_B'] = round2(sum(s['xG'] for s in shots_b if s.get('situation') == 'PP'))
             match['S_A'], match['S_B'] = len(shots_a), len(shots_b)
             match['SOG_A'], match['SOG_B'] = len(sog_a), len(sog_b)
             match['G_A'], match['G_B'] = len(goals_a), len(goals_b)
@@ -419,6 +421,7 @@ class Command(BaseCommand):
                 'Games': 0, 'GF': 0, 'GA': 0, 'GDiff': 0, 'SF': 0, 'SA': 0, 'SDiff': 0,
                 'xGF': 0.0, 'xGA': 0.0, 'xGDiff': 0.0, 'xGperc': 0.0,
                 'xGOTF': 0.0, 'xGOTA': 0.0, 'xGOTperc': 0.0, 'GFAxG': 0.0, 'GAAxG': 0.0,
+                'xGFPP': 0.0, 'xGAPP': 0.0,
             }
             for match in matches_played:
                 if match['team_A_name'] == name:
@@ -427,12 +430,14 @@ class Command(BaseCommand):
                     ts['SF'] += match['S_A']; ts['SA'] += match['S_B']
                     ts['xGF'] += match['xG_A']; ts['xGA'] += match['xG_B']
                     ts['xGOTF'] += match['xGOT_A']; ts['xGOTA'] += match['xGOT_B']
+                    ts['xGFPP'] += match['xGPP_A']; ts['xGAPP'] += match['xGPP_B']
                 if match['team_B_name'] == name:
                     ts['Games'] += 1
                     ts['GF'] += match['G_B']; ts['GA'] += match['G_A']
                     ts['SF'] += match['S_B']; ts['SA'] += match['S_A']
                     ts['xGF'] += match['xG_B']; ts['xGA'] += match['xG_A']
                     ts['xGOTF'] += match['xGOT_B']; ts['xGOTA'] += match['xGOT_A']
+                    ts['xGFPP'] += match['xGPP_B']; ts['xGAPP'] += match['xGPP_A']
 
             ts['xGDiff'] = round2(ts['xGF'] - ts['xGA'])
             ts['xGperc'] = round2(ts['xGF'] / (ts['xGF'] + ts['xGA'])) if (ts['xGF'] + ts['xGA']) else 0
@@ -443,6 +448,7 @@ class Command(BaseCommand):
             ts['xGOTperc'] = round2(ts['xGOTF'] / (ts['xGOTF'] + ts['xGOTA'])) if (ts['xGOTF'] + ts['xGOTA']) else 0
             ts['xGF'] = round2(ts['xGF']); ts['xGA'] = round2(ts['xGA'])
             ts['xGOTF'] = round2(ts['xGOTF']); ts['xGOTA'] = round2(ts['xGOTA'])
+            ts['xGFPP'] = round2(ts['xGFPP']); ts['xGAPP'] = round2(ts['xGAPP'])
             team_stats.append(ts)
 
         team_stats.sort(key=lambda t: t['xGDiff'], reverse=True)
