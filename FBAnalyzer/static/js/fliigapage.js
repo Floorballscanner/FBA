@@ -502,7 +502,8 @@ function drawCharts() {
 
     var options = {
         title: 'xG by Line',
-        bar: {groupWidth: "95%"},
+        height: 320,
+        bar: {groupWidth: "75%"},
         legend: { position: 'bottom'},
         colors: [t1color, t2color],
         hAxis: { textPosition: 'none' }

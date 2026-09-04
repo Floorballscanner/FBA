@@ -21,6 +21,8 @@ const TABLE_COLUMNS = {
         ['xGOTF', 'number', 'xGOTF'],
         ['xGOTA', 'number', 'xGOTA'],
         ['xGOTperc', 'number', 'xGOT%'],
+        ['xGFPP', 'number', 'xGFPP'],
+        ['xGAPP', 'number', 'xGAPP'],
         ['GFAxG', 'number', 'GFAxG'],
         ['GAAxG', 'number', 'GAAxG'],
     ],
