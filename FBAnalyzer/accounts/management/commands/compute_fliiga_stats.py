@@ -25,6 +25,7 @@ including an already-final one, e.g. for the initial backfill.
 """
 
 import json
+import re
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from math import floor
@@ -97,6 +98,108 @@ def calc_xg(x, y):
     yd = max(0, min(yd, len(XG_MATRIX) - 1))
     xd = max(0, min(xd, len(XG_MATRIX[0]) - 1))
     return {'xGOT': XGOT_MATRIX[yd][xd] / 100, 'xG': XG_MATRIX[yd][xd] / 100}
+
+
+# ============ Special teams (Powerplay/Shorthanded) derivation ============
+# Mirrored from static/js/fliigalivegame.js (the live game page) - kept as a
+# deliberate copy since there's no shared runtime between the client JS and
+# this server-side batch job. Ruleset confirmed against real Torneopal match
+# data (2025-2026 season):
+# - Penalty codes are "<N>min" or "<N>_<M>min" (e.g. "2min", "2_2min",
+#   "2_10min"). Only components of minor/major length (<=5 min) create a
+#   skater-count disadvantage; a paired 10/20-min component is a misconduct
+#   served without one.
+# - A power-play goal ends the conceding team's soonest-to-expire active
+#   penalty, same as ice hockey. If that was the first half of a
+#   double-minor, the second half starts immediately from the goal.
+# - Goals must NOT use this derivation - read Torneopal's own description tag
+#   instead (situation_from_goal_tag), since a delayed-penalty ('SR') goal has
+#   no backing penalty event to derive a window from.
+
+PENALTY_CODE_RE = re.compile(r'^(\d+)(?:_(\d+))?min$')
+
+
+def parse_penalty_segments(code):
+    m = PENALTY_CODE_RE.match(code or '')
+    if not m:
+        return None
+    segments = [int(m.group(1)) * 60]
+    if m.group(2) and int(m.group(2)) <= 5:
+        segments.append(int(m.group(2)) * 60)
+    return segments
+
+
+def abs_game_time(period, time_sec, period_lengths):
+    period = int(period)
+    elapsed = sum((period_lengths[i] if i < len(period_lengths) else 1200) for i in range(1, period))
+    return elapsed + int(time_sec)
+
+
+def situation_from_goal_tag(description):
+    tag = (description or '').strip().split()[0] if (description or '').strip() else ''
+    if tag in ('YV', 'YV2', 'SR'):
+        return 'PP'
+    if tag == 'AV':
+        return 'SH'
+    return 'EVEN'
+
+
+def compute_shot_situations(all_events, period_lengths):
+    """Simulates penalty windows chronologically and returns event_id -> situation
+    ('PP'/'SH'/'EVEN') for every non-scoring shot event."""
+    timed = sorted(
+        all_events,
+        key=lambda e: abs_game_time(e.get('period'), e.get('time_sec'), period_lengths),
+    )
+
+    active = []  # list of dicts: {team, start, end, pending_next}
+
+    def active_count(team, t):
+        return sum(1 for w in active if w['team'] == team and w['start'] <= t < w['end'])
+
+    def end_soonest(conceding_team, t):
+        candidates = [w for w in active if w['team'] == conceding_team and w['start'] <= t < w['end']]
+        if not candidates:
+            return
+        ending = min(candidates, key=lambda w: w['end'])
+        pending = ending['pending_next']
+        ending['end'] = t
+        ending['pending_next'] = None
+        if pending:
+            active.append({'team': conceding_team, 'start': t, 'end': t + pending, 'pending_next': None})
+
+    situations = {}
+
+    for e in timed:
+        t = abs_game_time(e.get('period'), e.get('time_sec'), period_lengths)
+        segs = parse_penalty_segments(e.get('code'))
+        if segs:
+            active.append({
+                'team': e.get('team'), 'start': t, 'end': t + segs[0],
+                'pending_next': segs[1] if len(segs) > 1 else None,
+            })
+            continue
+        if e.get('code') == 'maali':
+            end_soonest('B' if e.get('team') == 'A' else 'A', t)
+            continue
+        if e.get('code') in ('laukaus', 'laukausohi', 'laukausblokattu'):
+            other = 'B' if e.get('team') == 'A' else 'A'
+            mine = active_count(e.get('team'), t)
+            theirs = active_count(other, t)
+            situations[e.get('event_id')] = 'PP' if mine < theirs else ('SH' if mine > theirs else 'EVEN')
+
+    return situations
+
+
+def find_goal_tag(all_events, shot):
+    """A laukausmaali (goal-shot) shares time/period/team/player with its paired
+    maali event, which carries the authoritative situation tag."""
+    for e in all_events:
+        if (e.get('code') == 'maali' and e.get('team') == shot.get('team')
+                and e.get('period') == shot.get('period') and e.get('time') == shot.get('time')
+                and e.get('player_id') == shot.get('player_id')):
+            return e.get('description')
+    return ''
 
 
 def api_get(endpoint, **params):
@@ -233,6 +336,8 @@ class Command(BaseCommand):
         for match in matches_played:
             match_id = match['match_id']
             events = match_details.get(match_id, {}).get('events') or []
+            period_lengths = match_details.get(match_id, {}).get('period_lengths_sec') or [0, 1200, 1200, 1200, 300]
+            shot_situations = compute_shot_situations(events, period_lengths)
             for event in events:
                 if event.get('code') not in ('laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'):
                     continue
@@ -248,6 +353,10 @@ class Command(BaseCommand):
                 shot['player_id'] = event.get('player_id')
                 shot['xG'] = res['xG']
                 shot['xGOT'] = res['xGOT'] if event.get('code') in ('laukaus', 'laukausmaali') else 0
+                if event.get('code') == 'laukausmaali':
+                    shot['situation'] = situation_from_goal_tag(find_goal_tag(events, shot))
+                else:
+                    shot['situation'] = shot_situations.get(event.get('event_id'), 'EVEN')
                 shots.append(shot)
 
         # --- Per-match aggregates (shots/goals/xG, SOG, goalies) ---
@@ -357,7 +466,7 @@ class Command(BaseCommand):
                     'SM': num(p.get('shots_off_target'), int),
                     'plus': num(p.get('plus'), int),
                     'minus': num(p.get('minus'), int),
-                    'xG': 0.0, 'xGOT': 0.0, 'GAxG': 0.0,
+                    'xG': 0.0, 'xGOT': 0.0, 'xGPP': 0.0, 'GAxG': 0.0,
                 })
 
         player_stats = [p for p in players_all if p['Games'] > 0]
@@ -366,8 +475,11 @@ class Command(BaseCommand):
                 if str(shot.get('player_id')) == player['ID']:
                     player['xG'] += shot['xG']
                     player['xGOT'] += shot['xGOT']
+                    if shot.get('situation') == 'PP':
+                        player['xGPP'] += shot['xG']
             player['xG'] = round2(player['xG'])
             player['xGOT'] = round2(player['xGOT'])
+            player['xGPP'] = round2(player['xGPP'])
             player['GAxG'] = round2(player['G'] - player['xG'])
 
         player_stats = [p for p in player_stats if p['xG'] > 0]

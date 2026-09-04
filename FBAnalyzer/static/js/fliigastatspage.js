@@ -38,6 +38,7 @@ const TABLE_COLUMNS = {
         ['minus', 'number', '-'],
         ['xG', 'number', 'xG'],
         ['xGOT', 'number', 'xGOT'],
+        ['xGPP', 'number', 'xGPP'],
         ['GAxG', 'number', 'GAxG'],
     ],
     goalies: [
