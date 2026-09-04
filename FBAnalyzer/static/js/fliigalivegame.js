@@ -104,7 +104,7 @@ window.onload = function() {
             }
 
             // List of keys you want to select from events_json
-            const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
+            const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','time_sec','period','code_fi','description','location','placement','team'];
 
             // List of keys you want to select from lineups_json
             const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','position','shots','saves','goals','assists','points','plus','minus'];
@@ -1344,7 +1344,7 @@ function updateData() {
             }
 
             // List of keys you want to select from events_json
-            const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','period','code_fi','description','location','placement','team'];
+            const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','time_sec','period','code_fi','description','location','placement','team'];
 
             // List of keys you want to select from lineups_json
             const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','position','shots','saves','goals','assists','points','plus','minus'];
