@@ -1,2 +1,2 @@
-web: python manage.py runserver 0.0.0.0:$PORT
+web: gunicorn analyzer.wsgi --workers 3 --log-file -
 release: python manage.py migrate
