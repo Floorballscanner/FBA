@@ -7,8 +7,15 @@ HistoricalBaseline population percentiles the live insight engine uses
 (insights.live_insights), via the shared insights.percentiles.percentile_rank,
 so "extreme" means the same thing in both places. The text leads with
 whichever angle scores most extreme tonight, with up to two more as support,
-plus a head-to-head note if the teams have met this season. If nothing
-clears the notability bar, it falls back to a plain "even matchup" framing.
+plus a head-to-head note if the teams have met recently. If nothing clears
+the notability bar, it falls back to a plain "even matchup" framing.
+
+Team history (_team_history/_head_to_head) is NOT season-scoped: regular-
+season history is compared against regular-season history and playoffs
+against playoffs (matching on category+stage), but pools every season
+currently ingested - same as HistoricalBaseline, which has no season_id
+either. This is what keeps week-1-of-a-new-season pregame text meaningful
+instead of empty.
 
 Computed either by the compute_pregame management command (ahead of
 kickoff) or lazily on first request via the pregame API endpoint - whichever
@@ -37,8 +44,13 @@ def is_penalty(code):
     return bool(PENALTY_CODE_RE.match(code or ''))
 
 
-def _team_history(team_id, season_id, category, stage, before_date=None):
-    """Team's own past 'played' matches this season, chronological.
+def _team_history(team_id, category, stage, before_date=None):
+    """Team's own past 'played' matches, chronological - not season-scoped:
+    regular-season history compares against regular-season history and
+    playoffs against playoffs (same stage), but pools every season currently
+    ingested, same as HistoricalBaseline itself (which has no season_id).
+    Early in a new season this is what lets a team's carried-over record/
+    streak/rates still mean something instead of showing nothing.
 
     The status='played' filter alone already excludes the match this is
     being computed for (it's still 'scheduled'). before_date is a second,
@@ -51,7 +63,7 @@ def _team_history(team_id, season_id, category, stage, before_date=None):
     """
     qs = MatchState.objects.filter(
         Q(team_a_id=team_id) | Q(team_b_id=team_id),
-        season_id=season_id, category=category, stage=stage, status='played',
+        category=category, stage=stage, status='played',
     )
     if before_date:
         qs = qs.filter(date__lt=before_date)
@@ -154,10 +166,11 @@ def _recent_goalie(team_id, matches):
     }
 
 
-def _head_to_head(team_a_id, team_b_id, season_id, category, stage):
+def _head_to_head(team_a_id, team_b_id, category, stage):
+    """Not season-scoped, same reasoning as _team_history - see there."""
     matches = MatchState.objects.filter(
         Q(team_a_id=team_a_id, team_b_id=team_b_id) | Q(team_a_id=team_b_id, team_b_id=team_a_id),
-        season_id=season_id, category=category, stage=stage, status='played',
+        category=category, stage=stage, status='played',
     )
     games = matches.count()
     if not games:
@@ -178,8 +191,8 @@ def compute_pregame_analysis(match_id, force=False):
     if state is None or not state.team_a_id or not state.team_b_id:
         return None
 
-    history_a = _team_history(state.team_a_id, state.season_id, state.category, state.stage, before_date=state.date)
-    history_b = _team_history(state.team_b_id, state.season_id, state.category, state.stage, before_date=state.date)
+    history_a = _team_history(state.team_a_id, state.category, state.stage, before_date=state.date)
+    history_b = _team_history(state.team_b_id, state.category, state.stage, before_date=state.date)
 
     rates_a = _rate_stats(state.team_a_id, history_a)
     rates_b = _rate_stats(state.team_b_id, history_b)
@@ -189,7 +202,7 @@ def compute_pregame_analysis(match_id, force=False):
     top_b = _top_scorer(state.team_b_id, history_b)
     goalie_a = _recent_goalie(state.team_a_id, history_a)
     goalie_b = _recent_goalie(state.team_b_id, history_b)
-    h2h = _head_to_head(state.team_a_id, state.team_b_id, state.season_id, state.category, state.stage)
+    h2h = _head_to_head(state.team_a_id, state.team_b_id, state.category, state.stage)
 
     baselines = {
         bt: HistoricalBaseline.objects.filter(baseline_type=bt, category=state.category, stage=state.stage).first()
@@ -225,7 +238,7 @@ def compute_pregame_analysis(match_id, force=False):
         if top and top['goals'] >= MIN_GOALS_FOR_TOP_SCORER:
             candidates.append({
                 'key': 'scorer', 'score': min(100.0, top['goals'] * 6),
-                'text': f"{top['name']} ({team_name}) leads the way with {top['goals']} goals this season.",
+                'text': f"{top['name']} ({team_name}) leads the way with {top['goals']} goals over that stretch.",
             })
 
     baseline = baselines['team_gf_axg_per_game']
@@ -239,7 +252,7 @@ def compute_pregame_analysis(match_id, force=False):
                 'key': 'luck', 'score': abs(rank - 50) * 2,
                 'text': (
                     f"{team_name} have scored {abs(rates['gf_axg_per_game']):.1f} goals per game {direction} "
-                    f"their expected goals this season - a pace that tends to even out."
+                    f"their expected goals over their last {rates['games']} games - a pace that tends to even out."
                 ),
             })
 
@@ -256,7 +269,7 @@ def compute_pregame_analysis(match_id, force=False):
             'key': 'xg_gap', 'score': abs(rank_a - rank_b),
             'text': (
                 f"{leader} hold the clear underlying edge: {lead_val:.2f} to {trail_val:.2f} expected goals "
-                f"per game this season."
+                f"per game over their recent form."
             ),
         })
 
@@ -267,7 +280,7 @@ def compute_pregame_analysis(match_id, force=False):
             'key': 'special_teams', 'score': min(100.0, gap * 150),
             'text': (
                 f"Special teams could decide this one: {better} convert power plays at a notably higher "
-                f"rate than their opponent this season."
+                f"rate than their opponent recently."
             ),
         })
 
@@ -282,13 +295,13 @@ def compute_pregame_analysis(match_id, force=False):
         if rates_a and rates_b:
             text_parts.append(
                 f"{state.team_a_name} average {rates_a['xgf_per_game']:.2f} expected goals per game to "
-                f"{state.team_b_name}'s {rates_b['xgf_per_game']:.2f} this season."
+                f"{state.team_b_name}'s {rates_b['xgf_per_game']:.2f} recently."
             )
 
     if h2h:
         text_parts.append(
-            f"{state.team_a_name} and {state.team_b_name} have met {h2h['games']} time(s) already this "
-            f"season ({h2h['wins_a']}-{h2h['wins_b']})."
+            f"{state.team_a_name} and {state.team_b_name} have met {h2h['games']} time(s) recently "
+            f"({h2h['wins_a']}-{h2h['wins_b']})."
         )
 
     facts = {
