@@ -4,16 +4,21 @@
 
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = [];
-var today = new Date().toISOString().split('T')[0]; // Get YYYY-MM-DD format
+// TEMPORARY (staging only): the 2025-2026 season is fully finished, so
+// "today" would show nothing real to test insights against. Pinned to
+// 2026-09-12, a real date early in the new 2026-2027 season with several
+// scheduled fixtures - revert both this and FETCH_URLS below to the dynamic
+// today/2025-2026 pairing before this goes anywhere near production.
+var today = '2026-09-12';
 
 // Men/women, regular season (group_id=1, "Runkosarja") and playoffs
 // (group_id=2, "Pudotuspelit") — confirmed against the Torneopal API's own
 // group_name field. Inssi-Divari is no longer offered.
 const FETCH_URLS = [
-    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=402&group_id=1",
-    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=402&group_id=2",
-    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=384&group_id=1",
-    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2025-2026&competition_id=sb2025&category_id=384&group_id=2",
+    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2026-2027&competition_id=sb2026&category_id=402&group_id=1",
+    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2026-2027&competition_id=sb2026&category_id=402&group_id=2",
+    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2026-2027&competition_id=sb2026&category_id=384&group_id=1",
+    "https://salibandy.api.torneopal.com/taso/rest/getMatches?api_key="+api_key+"&season_id=2026-2027&competition_id=sb2026&category_id=384&group_id=2",
 ];
 
 // Creates the HTML - page when the window is loaded
