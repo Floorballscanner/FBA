@@ -141,6 +141,8 @@ window.onload = function() {
 
             events = modifiedEvents;
             lineups = modifiedLineups;
+            pushMatchEvents(match, modifiedEvents);
+            updateInsightsPanel(match);
             lineups.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;
@@ -633,6 +635,118 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+// Pushes this tick's match + event data to the insight engine's ingestion
+// endpoint. All xG/xGOT/situation derivation happens server-side (see
+// insights/views.py), so only Torneopal's own raw fields are sent. Fire-
+// and-forget: a failed push must never block the page's own rendering.
+function pushMatchEvents(match, events) {
+    const payload = {
+        match_id: match.match_id,
+        category_id: match.category_id,
+        season_id: match.season_id,
+        group_id: match.group_id,
+        date: match.date,
+        status: match.status,
+        live_period: match.live_period,
+        period_lengths_sec: match.period_lengths_sec,
+        team_a_id: match.team_A_id,
+        team_b_id: match.team_B_id,
+        team_a_name: match.team_A_name,
+        team_b_name: match.team_B_name,
+        score_a: match.fs_A,
+        score_b: match.fs_B,
+        events: events,
+    };
+
+    fetch("/apis/insights/events/", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(payload),
+    })
+        .then(response => {
+            if (!response.ok) {
+                console.error('Insights push failed:', response.status);
+            }
+        })
+        .catch((error) => {
+            console.error('Error pushing match events to insights:', error);
+        });
+}
+
+// Renders the pregame/live/post-game analysis section (insights.views).
+// Which endpoint gets hit follows the same status/live_period branching
+// used throughout this file to tell scheduled/live/played apart.
+function updateInsightsPanel(match) {
+    const section = document.getElementById('insightsSection');
+    if (section == null) {
+        return;
+    }
+    const titleEl = document.getElementById('insightsSectionTitle');
+    const textEl = document.getElementById('insightsText');
+    const feedEl = document.getElementById('insightsFeed');
+
+    const isPlayed = match.status === 'Played';
+    const isLive = !isPlayed && match.live_period !== '';
+
+    section.style.display = '';
+    feedEl.style.display = 'none';
+    feedEl.innerHTML = '';
+    textEl.style.display = '';
+    textEl.textContent = 'Loading...';
+
+    if (isPlayed) {
+        titleEl.textContent = 'Post-Game Analysis';
+        fetch('/apis/insights/postgame/' + match.match_id + '/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'ready') {
+                    textEl.textContent = data.text;
+                } else {
+                    section.style.display = 'none';
+                }
+            })
+            .catch(() => { section.style.display = 'none'; });
+    } else if (isLive) {
+        titleEl.textContent = 'Live Insights';
+        textEl.style.display = 'none';
+        fetch('/apis/insights/live/' + match.match_id + '/')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.insights || data.insights.length === 0) {
+                    section.style.display = 'none';
+                    return;
+                }
+                feedEl.style.display = '';
+                data.insights.forEach(insight => {
+                    const li = document.createElement('li');
+                    const timeEl = document.createElement('time');
+                    timeEl.textContent = new Date(insight.created_at).toLocaleTimeString(
+                        [], {hour: '2-digit', minute: '2-digit'}
+                    );
+                    li.appendChild(document.createTextNode(insight.text));
+                    li.appendChild(timeEl);
+                    feedEl.appendChild(li);
+                });
+            })
+            .catch(() => { section.style.display = 'none'; });
+    } else {
+        titleEl.textContent = 'Pregame Analysis';
+        fetch('/apis/insights/pregame/' + match.match_id + '/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'ready') {
+                    textEl.textContent = data.text;
+                } else {
+                    section.style.display = 'none';
+                }
+            })
+            .catch(() => { section.style.display = 'none'; });
+    }
 }
 
 // Function updates the Live page every second
@@ -1415,6 +1529,8 @@ function updateData() {
 
             events = modifiedEvents;
             lineups = modifiedLineups;
+            pushMatchEvents(match, modifiedEvents);
+            updateInsightsPanel(match);
             lineups.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;

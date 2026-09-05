@@ -810,6 +810,33 @@ a.landing-card:hover {
     margin: 0 0 4px;
 }
 
+/* Live/pregame/post-game analysis text and the live insight feed
+   (insights.views.pregame_analysis/post_game_analysis/live_insights) */
+.insights-feed {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    text-align: left;
+}
+
+.insights-feed li {
+    padding: 8px 0;
+    border-top: 1px solid rgba(20, 22, 31, 0.08);
+    font-size: 14px;
+    color: var(--landing-ink);
+}
+
+.insights-feed li:first-child {
+    border-top: none;
+}
+
+.insights-feed li time {
+    display: block;
+    color: var(--landing-muted);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
 /* fliigalivegame.js prepends a live badge (img) or scheduled kickoff time
    (h5) as the first child of #gstats depending on match state. */
 .landing-result > img {

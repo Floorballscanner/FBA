@@ -191,6 +191,77 @@ function getCookie(name) {
     return cookieValue;
 }
 
+// Renders the pregame/live/post-game analysis section (insights.views).
+// Which endpoint gets hit follows the same status/live_period branching
+// used throughout this file to tell scheduled/live/played apart.
+function updateInsightsPanel(match) {
+    const section = document.getElementById('insightsSection');
+    if (section == null) {
+        return;
+    }
+    const titleEl = document.getElementById('insightsSectionTitle');
+    const textEl = document.getElementById('insightsText');
+    const feedEl = document.getElementById('insightsFeed');
+
+    const isPlayed = match.status === 'Played';
+    const isLive = !isPlayed && match.live_period !== '';
+
+    section.style.display = '';
+    feedEl.style.display = 'none';
+    feedEl.innerHTML = '';
+    textEl.style.display = '';
+    textEl.textContent = 'Loading...';
+
+    if (isPlayed) {
+        titleEl.textContent = 'Post-Game Analysis';
+        fetch('/apis/insights/postgame/' + match.match_id + '/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'ready') {
+                    textEl.textContent = data.text;
+                } else {
+                    section.style.display = 'none';
+                }
+            })
+            .catch(() => { section.style.display = 'none'; });
+    } else if (isLive) {
+        titleEl.textContent = 'Live Insights';
+        textEl.style.display = 'none';
+        fetch('/apis/insights/live/' + match.match_id + '/')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.insights || data.insights.length === 0) {
+                    section.style.display = 'none';
+                    return;
+                }
+                feedEl.style.display = '';
+                data.insights.forEach(insight => {
+                    const li = document.createElement('li');
+                    const timeEl = document.createElement('time');
+                    timeEl.textContent = new Date(insight.created_at).toLocaleTimeString(
+                        [], {hour: '2-digit', minute: '2-digit'}
+                    );
+                    li.appendChild(document.createTextNode(insight.text));
+                    li.appendChild(timeEl);
+                    feedEl.appendChild(li);
+                });
+            })
+            .catch(() => { section.style.display = 'none'; });
+    } else {
+        titleEl.textContent = 'Pregame Analysis';
+        fetch('/apis/insights/pregame/' + match.match_id + '/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'ready') {
+                    textEl.textContent = data.text;
+                } else {
+                    section.style.display = 'none';
+                }
+            })
+            .catch(() => { section.style.display = 'none'; });
+    }
+}
+
 // Sort JSON array by date, sorting function
 
 function GetSortOrder(prop) {
@@ -897,6 +968,7 @@ function updateData() {
         .then(data => {
             console.log(data)
             const match = data.match;
+            updateInsightsPanel(match);
             const events_json = match.events;
             const lineups_json = match.lineups;
             t1name = match.team_A_name;
