@@ -26,6 +26,7 @@ urlpatterns = [
     path('stripe/webhook/', stripe_views.stripe_webhook, name="stripe-webhook"),
     path('sitemap', views.sitemap, name="sitemap"),
     path('apis/', include(accounts_urls)),
+    path('apis/insights/', include('insights.urls')),
     path('live/', views.live, name="livepage"),
     path('live/<nr>', views.game, name="gamepage"),
     path('fliigalive/', views.fliigalive_front, name="fliigalivepage_front"),
