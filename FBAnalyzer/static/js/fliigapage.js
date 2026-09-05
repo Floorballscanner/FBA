@@ -45,6 +45,10 @@ var t1s = document.getElementById('sttotshots_1');
 var t2s = document.getElementById('sttotshots_2');
 var t1sOT = document.getElementById('sttotsOT_1');
 var t2sOT = document.getElementById('sttotsOT_2');
+var t1sPP = document.getElementById('sttotsPP_1');
+var t2sPP = document.getElementById('sttotsPP_2');
+var t1pp = document.getElementById('sttotpp_1');
+var t2pp = document.getElementById('sttotpp_2');
 var t1_wp = document.getElementById('stwp_1');
 var t2_wp = document.getElementById('stwp_2');
 var t1name = "";
@@ -214,6 +218,8 @@ function drawCharts() {
     pldatat1l1.addColumn('number', 'S');
     pldatat1l1.addColumn('number', 'xG');
     pldatat1l1.addColumn('number', 'xGOT');
+    pldatat1l1.addColumn('number', 'PPG');
+    pldatat1l1.addColumn('number', 'PPS');
     pldatat1l1.addColumn('number', 'xGPP');
     pldatat1l1.addColumn('number', '+');
     pldatat1l1.addColumn('number', '-');
@@ -227,6 +233,8 @@ function drawCharts() {
     pldatat1l2.addColumn('number', 'S');
     pldatat1l2.addColumn('number', 'xG');
     pldatat1l2.addColumn('number', 'xGOT');
+    pldatat1l2.addColumn('number', 'PPG');
+    pldatat1l2.addColumn('number', 'PPS');
     pldatat1l2.addColumn('number', 'xGPP');
     pldatat1l2.addColumn('number', '+');
     pldatat1l2.addColumn('number', '-');
@@ -240,6 +248,8 @@ function drawCharts() {
     pldatat1l3.addColumn('number', 'S');
     pldatat1l3.addColumn('number', 'xG');
     pldatat1l3.addColumn('number', 'xGOT');
+    pldatat1l3.addColumn('number', 'PPG');
+    pldatat1l3.addColumn('number', 'PPS');
     pldatat1l3.addColumn('number', 'xGPP');
     pldatat1l3.addColumn('number', '+');
     pldatat1l3.addColumn('number', '-');
@@ -253,6 +263,8 @@ function drawCharts() {
     pldatat1l4.addColumn('number', 'S');
     pldatat1l4.addColumn('number', 'xG');
     pldatat1l4.addColumn('number', 'xGOT');
+    pldatat1l4.addColumn('number', 'PPG');
+    pldatat1l4.addColumn('number', 'PPS');
     pldatat1l4.addColumn('number', 'xGPP');
     pldatat1l4.addColumn('number', '+');
     pldatat1l4.addColumn('number', '-');
@@ -266,6 +278,8 @@ function drawCharts() {
     pldatat2l1.addColumn('number', 'S');
     pldatat2l1.addColumn('number', 'xG');
     pldatat2l1.addColumn('number', 'xGOT');
+    pldatat2l1.addColumn('number', 'PPG');
+    pldatat2l1.addColumn('number', 'PPS');
     pldatat2l1.addColumn('number', 'xGPP');
     pldatat2l1.addColumn('number', '+');
     pldatat2l1.addColumn('number', '-');
@@ -279,6 +293,8 @@ function drawCharts() {
     pldatat2l2.addColumn('number', 'S');
     pldatat2l2.addColumn('number', 'xG');
     pldatat2l2.addColumn('number', 'xGOT');
+    pldatat2l2.addColumn('number', 'PPG');
+    pldatat2l2.addColumn('number', 'PPS');
     pldatat2l2.addColumn('number', 'xGPP');
     pldatat2l2.addColumn('number', '+');
     pldatat2l2.addColumn('number', '-');
@@ -292,6 +308,8 @@ function drawCharts() {
     pldatat2l3.addColumn('number', 'S');
     pldatat2l3.addColumn('number', 'xG');
     pldatat2l3.addColumn('number', 'xGOT');
+    pldatat2l3.addColumn('number', 'PPG');
+    pldatat2l3.addColumn('number', 'PPS');
     pldatat2l3.addColumn('number', 'xGPP');
     pldatat2l3.addColumn('number', '+');
     pldatat2l3.addColumn('number', '-');
@@ -305,42 +323,44 @@ function drawCharts() {
     pldatat2l4.addColumn('number', 'S');
     pldatat2l4.addColumn('number', 'xG');
     pldatat2l4.addColumn('number', 'xGOT');
+    pldatat2l4.addColumn('number', 'PPG');
+    pldatat2l4.addColumn('number', 'PPS');
     pldatat2l4.addColumn('number', 'xGPP');
     pldatat2l4.addColumn('number', '+');
     pldatat2l4.addColumn('number', '-');
 
     lineup_t1l1.forEach(lineup => {
         pldatat1l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t1l2.forEach(lineup => {
         pldatat1l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t1l3.forEach(lineup => {
         pldatat1l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t1l4.forEach(lineup => {
         pldatat1l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
     });
 
     lineup_t2l1.forEach(lineup => {
         pldatat2l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t2l2.forEach(lineup => {
         pldatat2l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t2l3.forEach(lineup => {
         pldatat2l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
     });
     lineup_t2l4.forEach(lineup => {
         pldatat2l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
     });
 
     var pldatat1g = new google.visualization.DataTable();
@@ -1020,6 +1040,15 @@ function updateData() {
             t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
             t2sOT_temp = Object.values(shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
 
+            t1sPP_temp = Object.values(shots).filter(shot => shot.team === 'A' && shot.situation === 'PP').length;
+            t2sPP_temp = Object.values(shots).filter(shot => shot.team === 'B' && shot.situation === 'PP').length;
+            const penEventsA = events.filter(e => e.team === 'A' && parsePenaltySegments(e.code)).length;
+            const penEventsB = events.filter(e => e.team === 'B' && parsePenaltySegments(e.code)).length;
+            t1ppOpp_temp = penEventsB; // team A's PP opportunities = team B's penalty events
+            t2ppOpp_temp = penEventsA;
+            t1ppGoals_temp = Object.values(shots).filter(shot => shot.team === 'A' && shot.code === 'laukausmaali' && shot.situation === 'PP').length;
+            t2ppGoals_temp = Object.values(shots).filter(shot => shot.team === 'B' && shot.code === 'laukausmaali' && shot.situation === 'PP').length;
+
             // Calculate xG and xGOT to lineups
 
             lineups.forEach(lineup => {
@@ -1037,6 +1066,10 @@ function updateData() {
                 .filter(shot => shot.player_id === pl && shot.situation === 'PP')
                 .reduce((sum, shot) => sum + shot.xG, 0);
                 lineup.xGPP = Number(txg.toFixed(2));
+                lineup.PPG = Object.values(shots)
+                .filter(shot => shot.player_id === pl && shot.situation === 'PP' && shot.code === 'laukausmaali').length;
+                lineup.PPS = Object.values(shots)
+                .filter(shot => shot.player_id === pl && shot.situation === 'PP').length;
                 lineup.shots = Object.values(shots)
                 .filter(shot => shot.player_id === pl).length;
 
@@ -1147,6 +1180,10 @@ function updateData() {
             t2s.innerHTML = t2s_temp;
             t1sOT.innerHTML = t1sOT_temp;
             t2sOT.innerHTML = t2sOT_temp;
+            t1sPP.innerHTML = t1sPP_temp;
+            t2sPP.innerHTML = t2sPP_temp;
+            t1pp.innerHTML = t1ppGoals_temp + '/' + t1ppOpp_temp;
+            t2pp.innerHTML = t2ppGoals_temp + '/' + t2ppOpp_temp;
             g_date.innerHTML = match.date;
             period.innerHTML = "Period " + match.live_period;
             clock.innerHTML = match.live_time;
