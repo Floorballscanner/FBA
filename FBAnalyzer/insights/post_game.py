@@ -150,7 +150,7 @@ def compute_post_game_analysis(match_id):
             if not goalie or not goalie['name']:
                 continue
             rank = percentile_rank(goalie['gsax'], baseline.percentiles)
-            quality = 'stood on her head' if goalie['gsax'] > 0 else 'had a night to forget'
+            quality = 'stood tall' if goalie['gsax'] > 0 else 'had a night to forget'
             candidates.append({
                 'key': 'goalie', 'score': abs(rank - 50) * 2,
                 'text': f"{goalie['name']} ({team_name}) {quality} in net: {goalie['gsax']:+.2f} goals saved above expected.",
