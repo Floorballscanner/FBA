@@ -236,12 +236,16 @@ def compute_pregame_analysis(match_id, force=False):
                 f"{team_name} arrive on a {n}-game winning streak.",
                 f"{team_name} have won {n} in a row coming into tonight.",
                 f"Momentum is with {team_name}, winners of {n} straight.",
+                f"{team_name} ride a {n}-game winning streak into this one.",
+                f"It's been all good news for {team_name} lately - {n} straight wins.",
             ]
         else:
             options = [
                 f"{team_name} arrive on a {n}-game losing streak.",
                 f"{team_name} have dropped {n} in a row coming into tonight.",
                 f"{team_name} will be looking to snap a {n}-game skid.",
+                f"Things haven't gone {team_name}'s way lately - {n} straight losses.",
+                f"{team_name} are searching for answers after {n} consecutive defeats.",
             ]
         candidates.append({
             'key': 'streak', 'score': min(100.0, n * 20),
@@ -265,6 +269,10 @@ def compute_pregame_analysis(match_id, force=False):
                     f"expected per game over the last {starts}.",
                     f"Goaltending favors {team_name} tonight - {goalie['name']} has been stopping far more than "
                     f"expected lately ({gsax:+.2f} GSAx/game over the last {starts}).",
+                    f"{goalie['name']} has been a wall for {team_name}, {gsax:+.2f} goals saved above expected "
+                    f"per game over the last {starts}.",
+                    f"Few goalies have been better than {goalie['name']} ({team_name}) lately - {gsax:+.2f} "
+                    f"GSAx/game over the last {starts}.",
                 ]
             else:
                 options = [
@@ -274,6 +282,10 @@ def compute_pregame_analysis(match_id, force=False):
                     f"expected per game over the last {starts}.",
                     f"{team_name} may be vulnerable in net tonight - {goalie['name']} has allowed more than "
                     f"expected lately ({gsax:+.2f} GSAx/game over the last {starts}).",
+                    f"It's been a tough stretch in net for {team_name} - {goalie['name']} sits at {gsax:+.2f} "
+                    f"GSAx/game over the last {starts}.",
+                    f"{team_name}'s goaltending has been a concern lately - {goalie['name']} at {gsax:+.2f} "
+                    f"GSAx/game over the last {starts}.",
                 ]
             candidates.append({
                 'key': 'goalie', 'score': abs(rank - 50) * 2,
@@ -290,6 +302,10 @@ def compute_pregame_analysis(match_id, force=False):
                 f"Keep an eye on {top['name']} ({team_name}) - {top['goals']} goals in their last {games}.",
                 f"{team_name}'s offense runs through {top['name']}, who has {top['goals']} goals over their last "
                 f"{games}.",
+                f"{top['name']} has been on a tear for {team_name}, scoring {top['goals']} times in their last "
+                f"{games}.",
+                f"No one on either roster has more goals recently than {top['name']} ({team_name}), with "
+                f"{top['goals']} over their last {games}.",
             ]
             candidates.append({
                 'key': 'scorer', 'score': min(100.0, top['goals'] * 6),
@@ -311,6 +327,10 @@ def compute_pregame_analysis(match_id, force=False):
                     f"last {games} - a pace that tends to even out.",
                     f"{team_name} have been finishing at a hot clip lately, {luck:.1f} goals per game above "
                     f"expected over their last {games}.",
+                    f"{team_name}'s finishing has been better than the underlying chances suggest, +{luck:.1f} "
+                    f"goals per game over their last {games}.",
+                    f"Puck luck has been on {team_name}'s side lately - {luck:.1f} goals per game above "
+                    f"expected over their last {games}.",
                 ]
             else:
                 options = [
@@ -318,6 +338,10 @@ def compute_pregame_analysis(match_id, force=False):
                     f"their last {games} - a pace that tends to even out.",
                     f"{team_name} have been snakebitten lately, {abs(luck):.1f} goals per game below expected "
                     f"over their last {games}.",
+                    f"{team_name} haven't been finishing their chances lately - {abs(luck):.1f} goals per game "
+                    f"below expected over their last {games}.",
+                    f"The bounces haven't gone {team_name}'s way recently - {abs(luck):.1f} goals per game "
+                    f"below expected over their last {games}.",
                 ]
             candidates.append({
                 'key': 'luck', 'score': abs(rank - 50) * 2,
@@ -339,6 +363,10 @@ def compute_pregame_analysis(match_id, force=False):
             f"game over their recent form.",
             f"{leader} have been generating far more quality chances lately - {lead_val:.2f} expected goals "
             f"per game to their opponent's {trail_val:.2f}.",
+            f"On paper this favors {leader}, who average {lead_val:.2f} expected goals per game to their "
+            f"opponent's {trail_val:.2f}.",
+            f"The chance-quality gap is real here: {leader} sit at {lead_val:.2f} xG per game versus "
+            f"{trail_val:.2f} for their opponent.",
         ]
         candidates.append({
             'key': 'xg_gap', 'score': abs(rank_a - rank_b),
@@ -360,6 +388,10 @@ def compute_pregame_analysis(match_id, force=False):
             f"compared to their opponent's {other_val:.2f}.",
             f"Defense could be the separator tonight - {stingier} concede only {stingy_val:.2f} expected goals "
             f"per game, well below {other_val:.2f}.",
+            f"{stingier} have tightened things up defensively, giving up just {stingy_val:.2f} xG per game to "
+            f"their opponent's {other_val:.2f}.",
+            f"Don't expect much room to operate against {stingier}, who allow only {stingy_val:.2f} expected "
+            f"goals per game.",
         ]
         candidates.append({
             'key': 'xga_gap', 'score': abs(rank_a - rank_b),
@@ -375,6 +407,9 @@ def compute_pregame_analysis(match_id, force=False):
             f"than their opponent recently.",
             f"{better} have had the sharper power play lately - worth watching if either team draws penalties "
             f"tonight.",
+            f"{better}'s power play has been clicking lately, converting at a much higher rate than their "
+            f"opponent.",
+            f"If this one comes down to special teams, {better} have the edge with the man advantage.",
         ]
         candidates.append({
             'key': 'special_teams_pp', 'score': min(100.0, gap * 150),
@@ -388,6 +423,8 @@ def compute_pregame_analysis(match_id, force=False):
         options = [
             f"{better} have been excellent killing penalties recently, well above their opponent's rate.",
             f"Penalty killing favors {better} tonight - their shorthanded unit has been sharper lately.",
+            f"{better}'s penalty kill has been rock-solid lately, notably better than their opponent's.",
+            f"Down a player is a good place to be for {better} lately - their kill rate has been strong.",
         ]
         candidates.append({
             'key': 'special_teams_sh', 'score': min(100.0, gap * 150),
@@ -408,6 +445,10 @@ def compute_pregame_analysis(match_id, force=False):
                 f"meetings.",
                 f"History favors {dominant} here - {dom_wins} wins in their last {h2h['games']} head-to-head "
                 f"meetings.",
+                f"{dominant} have had this team's number recently, {dom_wins} wins in the last {h2h['games']} "
+                f"meetings between these two.",
+                f"Recent history is lopsided: {dominant} have taken {dom_wins} of the last {h2h['games']} "
+                f"meetings between these two.",
             ]
             candidates.append({
                 'key': 'head_to_head', 'score': min(100.0, lopsidedness * 100),
@@ -422,7 +463,13 @@ def compute_pregame_analysis(match_id, force=False):
     if lead:
         text_parts = [lead['text']] + [c['text'] for c in support]
     else:
-        text_parts = [f"A close matchup on paper between {state.team_a_name} and {state.team_b_name}."]
+        even_options = [
+            f"A close matchup on paper between {state.team_a_name} and {state.team_b_name}.",
+            f"{state.team_a_name} and {state.team_b_name} look evenly matched heading into tonight.",
+            f"Not much separates these two on paper tonight.",
+            f"This one looks like a coin flip on paper.",
+        ]
+        text_parts = [vary(seed('even_matchup'), even_options)]
         if rates_a and rates_b:
             text_parts.append(
                 f"{state.team_a_name} average {rates_a['xgf_per_game']:.2f} expected goals per game to "

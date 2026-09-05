@@ -170,11 +170,17 @@ def compute_post_game_analysis(match_id):
                 options = [
                     f"{team_name} finished {luck:.1f} goals above their expected goals tonight.",
                     f"{team_name} were clinical in front of net, {luck:.1f} goals above expected tonight.",
+                    f"{team_name} made the most of their chances tonight, finishing {luck:.1f} goals above "
+                    f"expected.",
+                    f"Finishing carried {team_name} tonight - {luck:.1f} goals above what the chances suggested.",
                 ]
             else:
                 options = [
                     f"{team_name} finished {abs(luck):.1f} goals below their expected goals tonight.",
                     f"{team_name} couldn't buy a goal tonight, finishing {abs(luck):.1f} below their expected goals.",
+                    f"{team_name} left plenty on the table tonight, {abs(luck):.1f} goals below what their "
+                    f"chances deserved.",
+                    f"The finishing let {team_name} down tonight - {abs(luck):.1f} goals below expected.",
                 ]
             candidates.append({
                 'key': 'xg_over_under', 'score': abs(rank - 50) * 2,
@@ -194,6 +200,10 @@ def compute_post_game_analysis(match_id):
                     f"above expected.",
                     f"{goalie['name']} ({team_name}) was the difference tonight, {goalie['gsax']:+.2f} goals "
                     f"saved above expected.",
+                    f"{goalie['name']} kept {team_name} in it all night: {goalie['gsax']:+.2f} goals saved "
+                    f"above expected.",
+                    f"A big performance in net from {goalie['name']} ({team_name}): {goalie['gsax']:+.2f} "
+                    f"goals saved above expected.",
                 ]
             else:
                 options = [
@@ -201,6 +211,10 @@ def compute_post_game_analysis(match_id):
                     f"goals saved above expected.",
                     f"{goalie['name']} ({team_name}) couldn't find a rhythm tonight: {goalie['gsax']:+.2f} "
                     f"goals saved above expected.",
+                    f"It wasn't {goalie['name']}'s night in net for {team_name}: {goalie['gsax']:+.2f} goals "
+                    f"saved above expected.",
+                    f"{team_name} didn't get much help in net tonight - {goalie['name']} finished at "
+                    f"{goalie['gsax']:+.2f} GSAx.",
                 ]
             candidates.append({
                 'key': 'goalie', 'score': abs(rank - 50) * 2,
@@ -217,6 +231,10 @@ def compute_post_game_analysis(match_id):
             options = [
                 f"{top['name']} ({team_name}) had a big night: {top['points']} points ({top['goals']} goals).",
                 f"{top['name']} ({team_name}) was the standout performer, racking up {top['points']} points "
+                f"({top['goals']} goals).",
+                f"{top['name']} put on a show for {team_name} tonight - {top['points']} points, {top['goals']} "
+                f"of them goals.",
+                f"{team_name} can thank {top['name']} for tonight's performance: {top['points']} points "
                 f"({top['goals']} goals).",
             ]
             candidates.append({
@@ -235,6 +253,7 @@ def compute_post_game_analysis(match_id):
                 f"{team_name} were clinical on the power play, converting {facts['PPG']}/{facts['PPOpp']}.",
                 f"{team_name}'s power play was the story tonight, scoring on {facts['PPG']} of {facts['PPOpp']} "
                 f"chances.",
+                f"{team_name} made their power plays count tonight, cashing in {facts['PPG']}/{facts['PPOpp']}.",
             ]
             candidates.append({
                 'key': 'special_teams_pp', 'score': max(0.0, rank - 50) * 2,
@@ -253,6 +272,8 @@ def compute_post_game_analysis(match_id):
                 f"{team_name}'s penalty kill was excellent tonight, stopping {kills}/{facts['SHOpp']} "
                 f"shorthanded situations.",
                 f"{team_name} came up big down a player, killing off {kills} of {facts['SHOpp']} penalties.",
+                f"{team_name}'s penalty kill bailed them out tonight, {kills}/{facts['SHOpp']} shorthanded "
+                f"situations killed off.",
             ]
             candidates.append({
                 'key': 'special_teams_sh', 'score': max(0.0, rank - 50) * 2,
@@ -274,6 +295,8 @@ def compute_post_game_analysis(match_id):
                 f"average of {own_rates['xgf_per_game']:.2f} per game.",
                 f"This was a season-best-caliber night for {team_name}'s attack: {facts['xG']:.2f} xG, well "
                 f"above their usual {own_rates['xgf_per_game']:.2f} per game.",
+                f"{team_name} generated far more than they usually do tonight - {facts['xG']:.2f} xG compared "
+                f"to their typical {own_rates['xgf_per_game']:.2f} per game.",
             ]
         else:
             options = [
@@ -281,6 +304,8 @@ def compute_post_game_analysis(match_id):
                 f"their own average of {own_rates['xgf_per_game']:.2f} per game.",
                 f"{team_name}'s attack never got going tonight - {facts['xG']:.2f} xG, down from their usual "
                 f"{own_rates['xgf_per_game']:.2f} per game.",
+                f"Tonight was a quiet one for {team_name}'s offense - just {facts['xG']:.2f} xG against their "
+                f"normal {own_rates['xgf_per_game']:.2f} per game.",
             ]
         candidates.append({
             'key': 'vs_own_average', 'score': min(100.0, abs(diff) * 25),
@@ -299,6 +324,8 @@ def compute_post_game_analysis(match_id):
             f"in expected goals.",
             f"The underlying numbers were one-sided: {leader} held a {lead_val:.2f} to {trail_val:.2f} edge "
             f"in expected goals.",
+            f"{leader} dominated the underlying play tonight, {lead_val:.2f} to {trail_val:.2f} in expected "
+            f"goals.",
         ]
         candidates.append({
             'key': 'xg_margin', 'score': min(100.0, abs(xg_margin) * 20),
