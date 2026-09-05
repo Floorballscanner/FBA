@@ -143,6 +143,7 @@ window.onload = function() {
             lineups = modifiedLineups;
             pushMatchEvents(match, modifiedEvents);
             updateInsightsPanel(match);
+            updatePregameLayout(match, lineups);
             lineups.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;
@@ -681,6 +682,21 @@ function pushMatchEvents(match, events) {
 // Renders the pregame/live/post-game analysis section (insights.views).
 // Which endpoint gets hit follows the same status/live_period branching
 // used throughout this file to tell scheduled/live/played apart.
+function renderInsightBullets(feedEl, sentences) {
+    feedEl.innerHTML = '';
+    sentences.forEach(sentence => {
+        const li = document.createElement('li');
+        const icon = document.createElement('span');
+        icon.className = 'bullet-icon';
+        const textSpan = document.createElement('span');
+        textSpan.className = 'bullet-text';
+        textSpan.textContent = sentence;
+        li.appendChild(icon);
+        li.appendChild(textSpan);
+        feedEl.appendChild(li);
+    });
+}
+
 function updateInsightsPanel(match) {
     const section = document.getElementById('insightsSection');
     if (section == null) {
@@ -704,8 +720,14 @@ function updateInsightsPanel(match) {
         fetch('/apis/insights/postgame/' + match.match_id + '/')
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'ready') {
+                const bullets = data.status === 'ready' && data.facts && data.facts.bullets;
+                if (bullets && bullets.length > 0) {
+                    renderInsightBullets(feedEl, bullets);
+                    feedEl.style.display = '';
+                    textEl.style.display = 'none';
+                } else if (data.status === 'ready') {
                     textEl.textContent = data.text;
+                    textEl.style.display = '';
                 } else {
                     section.style.display = 'none';
                 }
@@ -713,7 +735,6 @@ function updateInsightsPanel(match) {
             .catch(() => { section.style.display = 'none'; });
     } else if (isLive) {
         titleEl.textContent = 'Live Insights';
-        textEl.style.display = 'none';
         fetch('/apis/insights/live/' + match.match_id + '/')
             .then(response => response.json())
             .then(data => {
@@ -721,15 +742,24 @@ function updateInsightsPanel(match) {
                     section.style.display = 'none';
                     return;
                 }
+                textEl.style.display = 'none';
                 feedEl.style.display = '';
                 data.insights.forEach(insight => {
                     const li = document.createElement('li');
+                    const icon = document.createElement('img');
+                    icon.className = 'bullet-icon';
+                    icon.src = '/static/logo_transparent.png';
+                    icon.alt = '';
+                    const textSpan = document.createElement('span');
+                    textSpan.className = 'bullet-text';
+                    textSpan.textContent = insight.text;
                     const timeEl = document.createElement('time');
                     timeEl.textContent = new Date(insight.created_at).toLocaleTimeString(
                         [], {hour: '2-digit', minute: '2-digit'}
                     );
-                    li.appendChild(document.createTextNode(insight.text));
-                    li.appendChild(timeEl);
+                    textSpan.appendChild(timeEl);
+                    li.appendChild(icon);
+                    li.appendChild(textSpan);
                     feedEl.appendChild(li);
                 });
             })
@@ -739,13 +769,42 @@ function updateInsightsPanel(match) {
         fetch('/apis/insights/pregame/' + match.match_id + '/')
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'ready') {
+                const bullets = data.status === 'ready' && data.facts && data.facts.bullets;
+                if (bullets && bullets.length > 0) {
+                    renderInsightBullets(feedEl, bullets);
+                    feedEl.style.display = '';
+                    textEl.style.display = 'none';
+                } else if (data.status === 'ready') {
                     textEl.textContent = data.text;
+                    textEl.style.display = '';
                 } else {
                     section.style.display = 'none';
                 }
             })
             .catch(() => { section.style.display = 'none'; });
+    }
+}
+
+// Before a match has started there's nothing to show yet - hide score/xG/
+// events/charts sections and only surface the header (logos/date/time/
+// attendance), the pregame analysis, and (once rosters are out) the player
+// stats tables, so the page doesn't look broken/empty pregame.
+function updatePregameLayout(match, lineups) {
+    const isPlayed = match.status === 'Played';
+    const isScheduled = !isPlayed && match.live_period === '';
+
+    ['periodBlock', 'scoreBlock', 'statsBlock', 'eventsSection', 'topScorersSection',
+     'topXgSection', 'goaliesSection', 'xgByLineSection', 'chartsSection'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el != null) {
+            el.style.display = isScheduled ? 'none' : '';
+        }
+    });
+
+    const playerStats = document.getElementById('playerStatsSection');
+    if (playerStats != null) {
+        const hasLineups = lineups != null && lineups.length > 0;
+        playerStats.style.display = (isScheduled && !hasLineups) ? 'none' : '';
     }
 }
 
@@ -1531,6 +1590,7 @@ function updateData() {
             lineups = modifiedLineups;
             pushMatchEvents(match, modifiedEvents);
             updateInsightsPanel(match);
+            updatePregameLayout(match, lineups);
             lineups.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;

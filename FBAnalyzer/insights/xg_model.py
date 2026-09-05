@@ -3,9 +3,12 @@
 Canonical Python copy of the model also implemented in static/js/
 fliigalivegame.js and static/js/fliigapage.js (calcxG/calcxGW) - kept in sync
 by hand since there's no shared runtime between the client JS and the
-server. Women's matches currently use the same matrix as men's too (the JS
-has unused women's matrices behind a commented-out branch) - preserved as-is,
-not a bug introduced by this port.
+server. The JS actually does branch on category (calcxG for men, calcxGW
+for women, selected via match.category_id != '384') with genuinely
+different matrices for each - an earlier version of this port wrongly
+assumed the women's matrices were dead code and used the men's matrix for
+both categories. Fixed: calc_xg now takes a category and looks up the
+matching matrix pair, same as the JS.
 
 accounts/management/commands/compute_fliiga_stats.py imports calc_xg from
 here instead of keeping its own copy.
@@ -51,12 +54,53 @@ XG_MATRIX = [
 ]
 
 
-def calc_xg(x, y):
+WOMEN_XG_MATRIX = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [3, 12, 17, 19, 25, 35, 42, 30, 21, 16, 13, 9, 2],
+    [3, 8, 14, 20, 27, 41, 43, 36, 23, 17, 11, 6, 2],
+    [1, 3, 8, 13, 22, 29, 32, 27, 19, 11, 7, 3, 1],
+    [1, 4, 7, 13, 18, 24, 25, 22, 15, 10, 6, 4, 1],
+    [1, 4, 7, 10, 15, 18, 20, 17, 12, 8, 5, 3, 1],
+    [1, 4, 6, 9, 12, 14, 14, 12, 9, 6, 4, 3, 1],
+    [1, 3, 5, 7, 8, 11, 11, 9, 7, 6, 4, 3, 1],
+    [1, 3, 4, 5, 6, 8, 8, 7, 6, 5, 4, 2, 1],
+    [1, 2, 4, 4, 5, 6, 6, 6, 5, 5, 4, 2, 1],
+    [1, 2, 4, 4, 4, 5, 5, 5, 5, 4, 3, 2, 1],
+    [1, 3, 4, 4, 4, 4, 5, 5, 5, 4, 3, 2, 1],
+    [1, 3, 4, 3, 3, 4, 4, 4, 3, 2, 2, 1, 0],
+]
+
+WOMEN_XGOT_MATRIX = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 2, 5, 7, 15, 31, 40, 29, 17, 10, 5, 2, 0],
+    [1, 4, 9, 17, 26, 39, 44, 37, 25, 17, 9, 3, 1],
+    [1, 5, 14, 20, 30, 35, 37, 33, 27, 19, 13, 5, 1],
+    [2, 7, 12, 21, 27, 33, 34, 31, 25, 19, 13, 7, 2],
+    [3, 8, 14, 19, 25, 29, 31, 29, 23, 17, 12, 7, 2],
+    [3, 8, 15, 19, 24, 26, 27, 25, 21, 15, 11, 11, 7],
+    [3, 8, 13, 18, 20, 24, 25, 22, 18, 15, 11, 11, 16],
+    [3, 6, 11, 15, 18, 20, 23, 20, 17, 15, 12, 10, 6],
+    [2, 6, 10, 13, 15, 18, 20, 19, 16, 14, 10, 6, 2],
+    [2, 7, 11, 12, 14, 16, 19, 18, 15, 12, 9, 6, 2],
+    [3, 8, 11, 10, 12, 14, 16, 16, 14, 9, 7, 5, 2],
+    [2, 6, 6, 6, 7, 9, 10, 11, 8, 5, 3, 3, 2],
+]
+
+MATRICES_BY_CATEGORY = {
+    'men': (XG_MATRIX, XGOT_MATRIX),
+    'women': (WOMEN_XG_MATRIX, WOMEN_XGOT_MATRIX),
+}
+
+
+def calc_xg(x, y, category='men'):
+    xg_matrix, xgot_matrix = MATRICES_BY_CATEGORY.get(category, MATRICES_BY_CATEGORY['men'])
     x = 1000 + x
     if y >= MAX_Y:
         y = MAX_Y - 1
     yd = 2 + floor(y / MAX_Y * 12)
     xd = floor(x / MAX_X * 12)
-    yd = max(0, min(yd, len(XG_MATRIX) - 1))
-    xd = max(0, min(xd, len(XG_MATRIX[0]) - 1))
-    return {'xGOT': XGOT_MATRIX[yd][xd] / 100, 'xG': XG_MATRIX[yd][xd] / 100}
+    yd = max(0, min(yd, len(xg_matrix) - 1))
+    xd = max(0, min(xd, len(xg_matrix[0]) - 1))
+    return {'xGOT': xgot_matrix[yd][xd] / 100, 'xG': xg_matrix[yd][xd] / 100}

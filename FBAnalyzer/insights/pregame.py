@@ -315,6 +315,7 @@ def compute_pregame_analysis(match_id, force=False):
         },
         'head_to_head': h2h,
         'lead_angle': lead['key'] if lead else 'even_matchup',
+        'bullets': text_parts,  # same sentences as `text`, kept separate for bullet-point rendering
     }
 
     analysis, _ = PregameAnalysis.objects.update_or_create(

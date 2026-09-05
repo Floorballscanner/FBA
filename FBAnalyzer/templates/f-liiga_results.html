@@ -63,14 +63,16 @@ This is the F-liiga result test page.
             <span class="landing-result__vs">vs</span>
             <img id="imgt2" alt="">
         </div>
-        <p class="landing-result__period" id="periodNr"></p>
-        <p class="landing-result__period" id="label"></p>
+        <div id="periodBlock">
+            <p class="landing-result__period" id="periodNr"></p>
+            <p class="landing-result__period" id="label"></p>
+        </div>
 
-        <div class="landing-result__score">
+        <div class="landing-result__score" id="scoreBlock">
             <span id="sttotg_1">0</span> - <span id="sttotg_2">0</span>
         </div>
 
-        <div class="landing-result__stats">
+        <div class="landing-result__stats" id="statsBlock">
             <div class="landing-result__stat-row">
                 <span id="sttotxG_1">0</span><span class="landing-result__stat-label">xG</span><span id="sttotxG_2">0</span>
             </div>
@@ -103,28 +105,38 @@ This is the F-liiga result test page.
             <ul id="insightsFeed" class="insights-feed" style="display:none;"></ul>
         </div>
 
-        <h3 class="landing-result__section-title">Events</h3>
-        <hr id="eventBar" style="display:none;">
+        <div id="eventsSection">
+            <h3 class="landing-result__section-title">Events</h3>
+            <hr id="eventBar" style="display:none;">
+        </div>
 
-        <h3 class="landing-result__section-title">Top Scorers</h3>
-        <div class="landing-result__player-row"><img id="imgsp1" alt=""><span id="p1s"></span></div>
-        <div class="landing-result__player-row"><img id="imgsp2" alt=""><span id="p2s"></span></div>
-        <div class="landing-result__player-row"><img id="imgsp3" alt=""><span id="p3s"></span></div>
+        <div id="topScorersSection">
+            <h3 class="landing-result__section-title">Top Scorers</h3>
+            <div class="landing-result__player-row"><img id="imgsp1" alt=""><span id="p1s"></span></div>
+            <div class="landing-result__player-row"><img id="imgsp2" alt=""><span id="p2s"></span></div>
+            <div class="landing-result__player-row"><img id="imgsp3" alt=""><span id="p3s"></span></div>
+        </div>
 
-        <h3 class="landing-result__section-title">Top xG players</h3>
-        <div class="landing-result__player-row"><img id="imgp1" alt=""><span id="p1xG"></span> xG</div>
-        <div class="landing-result__player-row"><img id="imgp2" alt=""><span id="p2xG"></span> xG</div>
-        <div class="landing-result__player-row"><img id="imgp3" alt=""><span id="p3xG"></span> xG</div>
+        <div id="topXgSection">
+            <h3 class="landing-result__section-title">Top xG players</h3>
+            <div class="landing-result__player-row"><img id="imgp1" alt=""><span id="p1xG"></span> xG</div>
+            <div class="landing-result__player-row"><img id="imgp2" alt=""><span id="p2xG"></span> xG</div>
+            <div class="landing-result__player-row"><img id="imgp3" alt=""><span id="p3xG"></span> xG</div>
+        </div>
 
-        <h3 class="landing-result__section-title">Starting Goalies</h3>
-        <div class="landing-result__player-row"><img id="imgg1" alt=""><span id="g1xG"></span> GSAx</div>
-        <div class="landing-result__player-row"><img id="imgg2" alt=""><span id="g2xG"></span> GSAx</div>
+        <div id="goaliesSection">
+            <h3 class="landing-result__section-title">Starting Goalies</h3>
+            <div class="landing-result__player-row"><img id="imgg1" alt=""><span id="g1xG"></span> GSAx</div>
+            <div class="landing-result__player-row"><img id="imgg2" alt=""><span id="g2xG"></span> GSAx</div>
+        </div>
 
-        <h3 class="landing-result__section-title">xG by Line and Team</h3>
-        <div class="landing-result__card" id="xGByLine"></div>
+        <div id="xgByLineSection">
+            <h3 class="landing-result__section-title">xG by Line and Team</h3>
+            <div class="landing-result__card" id="xGByLine"></div>
+        </div>
     </div>
 
-    <div class="landing-result">
+    <div class="landing-result" id="chartsSection">
         <div class="landing-result__card">
             <div id="livexGmap"></div>
             <div style="padding-top:40px;" id="xGDist"></div>
@@ -140,7 +152,7 @@ This is the F-liiga result test page.
         </div>
     </div>
 
-    <div class="row justify-content-center" style="padding-top:20px;">
+    <div class="row justify-content-center" style="padding-top:20px;" id="playerStatsSection">
         <div class="col-sm-6">
             <div class="landing-result">
                 <h3 class="landing-result__section-title" style="margin-top:0;"><span id="stt1name">Team 1</span> player stats</h3>

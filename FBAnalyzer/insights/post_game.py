@@ -202,6 +202,7 @@ def compute_post_game_analysis(match_id):
             'top_scorer': top_b, 'goalie': goalie_b,
         },
         'lead_angle': lead['key'] if lead else 'summary',
+        'bullets': text_parts,  # same sentences as `text`, kept separate for bullet-point rendering
     }
 
     analysis, _ = PostGameAnalysis.objects.update_or_create(
