@@ -993,6 +993,23 @@ a.landing-card:hover {
     margin-top: 16px;
 }
 
+/* The season-stats table (many columns, needs every pixel it can get) uses
+   these to shed side padding on narrow screens instead of the game/results
+   pages' standard spacing, which .landing-result/.landing-result__card
+   otherwise share everywhere. Declared after the base rules above so this
+   isn't overridden by their unconditional padding shorthand. */
+@media (max-width: 600px) {
+    .landing-result--wide {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .landing-result__card--flush {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
+
 .landing-result__legend {
     font-size: 12px;
     color: var(--landing-muted);
