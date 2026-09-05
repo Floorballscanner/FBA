@@ -820,14 +820,36 @@ a.landing-card:hover {
 }
 
 .insights-feed li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
     padding: 8px 0;
     border-top: 1px solid rgba(20, 22, 31, 0.08);
     font-size: 14px;
     color: var(--landing-ink);
+    text-align: left;
 }
 
 .insights-feed li:first-child {
     border-top: none;
+}
+
+.insights-feed li .bullet-icon {
+    /* logo_transparent.png is a wide wordmark (icon mark + text) - shown at
+       a fixed height with the crop anchored left so only the square mark
+       renders, instead of squashing the whole wordmark into a tiny box. */
+    width: 14px;
+    height: 14px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    background-image: url('/static/logo_transparent.png');
+    background-size: auto 14px;
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+.insights-feed li .bullet-text {
+    flex: 1;
 }
 
 .insights-feed li time {

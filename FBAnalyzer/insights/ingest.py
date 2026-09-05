@@ -78,7 +78,7 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
 
     new_status = status_from_torneopal(status, live_period)
 
-    state, _ = MatchState.objects.get_or_create(match_id=match_id, defaults={'category': category})
+    state, created = MatchState.objects.get_or_create(match_id=match_id, defaults={'category': category})
     was_played = state.status == 'played'
     was_scheduled = state.status == 'scheduled'
 
@@ -110,7 +110,7 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
         situation = ''
         if code in SHOT_CODES:
             if loc_x is not None and loc_y is not None:
-                result = calc_xg(loc_x, loc_y)
+                result = calc_xg(loc_x, loc_y, category)
                 xg = result['xG']
                 xgot = result['xGOT'] if code in ON_TARGET_CODES else 0.0
             else:
@@ -128,7 +128,7 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
             # coordinates as the shooter's, so xGOT quantifies the quality of
             # the chance the goalie faced (used for goalie GSAx elsewhere).
             if loc_x is not None and loc_y is not None:
-                result = calc_xg(loc_x, loc_y)
+                result = calc_xg(loc_x, loc_y, category)
                 xg, xgot = result['xG'], result['xGOT']
             else:
                 xg = xgot = 0.0
@@ -192,6 +192,12 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
 
     if new_status != 'scheduled' and was_scheduled:
         compute_pregame_analysis(match_id, force=True)
+    elif created and new_status == 'scheduled':
+        # First time this match has ever been seen (e.g. the first client
+        # push for a brand-new fixture nobody's visited before) - compute
+        # pregame analysis right away instead of waiting for the page's own
+        # separate GET request to hit the lazy-fallback endpoint cold.
+        compute_pregame_analysis(match_id)
 
     if new_status == 'played' and not was_played:
         compute_post_game_analysis(match_id)
