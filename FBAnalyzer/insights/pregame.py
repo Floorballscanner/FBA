@@ -6,9 +6,15 @@ footing with xG-driven ones - every angle is scored against the same
 HistoricalBaseline population percentiles the live insight engine uses
 (insights.live_insights), via the shared insights.percentiles.percentile_rank,
 so "extreme" means the same thing in both places. The text leads with
-whichever angle scores most extreme tonight, with up to two more as support,
-plus a head-to-head note if the teams have met recently. If nothing clears
-the notability bar, it falls back to a plain "even matchup" framing.
+whichever angle scores most extreme tonight, with several more as support,
+plus a head-to-head note if the teams have met recently and it wasn't
+already the lead/support angle itself. If nothing clears the notability
+bar, it falls back to a plain "even matchup" framing.
+
+Each angle has 2-3 equivalent phrasings, picked deterministically per
+(match, angle, team) via insights.phrasing.vary - otherwise the same angle
+(e.g. "goalie is hot") renders identical text across every match it fires
+for, which reads as repetitive once you've seen a few.
 
 Team history (_team_history/_head_to_head) is NOT season-scoped: regular-
 season history is compared against regular-season history and playoffs
@@ -33,11 +39,14 @@ from django.db.models import Q
 from .event_codes import ASSIST_CODE, GOAL_AGAINST_CODE, GOAL_CODE, GOALIE_CODES, SHOT_CODES
 from .models import HistoricalBaseline, MatchEvent, MatchState, PregameAnalysis
 from .percentiles import percentile_rank
+from .phrasing import plural, vary
 from .special_teams import PENALTY_CODE_RE
 
 RECENT_FORM_GAMES = 6  # "hot/cold" window for a team's current goalie
 STREAK_NOTABLE_GAMES = 3
 MIN_GOALS_FOR_TOP_SCORER = 5  # don't lead with a "top scorer" who has next to nothing
+MAX_BULLETS = 5  # lead + up to this many support angles
+H2H_MIN_GAMES = 2
 
 
 def is_penalty(code):
@@ -206,56 +215,116 @@ def compute_pregame_analysis(match_id, force=False):
 
     baselines = {
         bt: HistoricalBaseline.objects.filter(baseline_type=bt, category=state.category, stage=state.stage).first()
-        for bt in ('team_xgf_per_game', 'team_gf_axg_per_game', 'team_pp_perc', 'goalie_gsax_per_game')
+        for bt in (
+            'team_xgf_per_game', 'team_xga_per_game', 'team_gf_axg_per_game',
+            'team_pp_perc', 'team_sh_perc', 'goalie_gsax_per_game',
+        )
     }
 
     candidates = []  # each: {'key': str, 'score': float, 'text': str}
 
-    for team_name, streak in ((state.team_a_name, streak_a), (state.team_b_name, streak_b)):
-        if abs(streak) >= STREAK_NOTABLE_GAMES:
-            kind = 'winning' if streak > 0 else 'losing'
-            candidates.append({
-                'key': 'streak', 'score': min(100.0, abs(streak) * 20),
-                'text': f"{team_name} arrive on a {abs(streak)}-game {kind} streak.",
-            })
+    def seed(key, *parts):
+        return ':'.join([str(match_id), key] + [str(p) for p in parts])
 
+    # --- streak ---
+    for team_name, streak in ((state.team_a_name, streak_a), (state.team_b_name, streak_b)):
+        if abs(streak) < STREAK_NOTABLE_GAMES:
+            continue
+        n = abs(streak)
+        if streak > 0:
+            options = [
+                f"{team_name} arrive on a {n}-game winning streak.",
+                f"{team_name} have won {n} in a row coming into tonight.",
+                f"Momentum is with {team_name}, winners of {n} straight.",
+            ]
+        else:
+            options = [
+                f"{team_name} arrive on a {n}-game losing streak.",
+                f"{team_name} have dropped {n} in a row coming into tonight.",
+                f"{team_name} will be looking to snap a {n}-game skid.",
+            ]
+        candidates.append({
+            'key': 'streak', 'score': min(100.0, n * 20),
+            'text': vary(seed('streak', team_name), options),
+        })
+
+    # --- hot/cold goalie ---
     baseline = baselines['goalie_gsax_per_game']
     if baseline:
         for team_name, goalie in ((state.team_a_name, goalie_a), (state.team_b_name, goalie_b)):
             if not goalie or goalie['games'] < 2:
                 continue
             rank = percentile_rank(goalie['gsax_per_game'], baseline.percentiles)
-            quality = 'red-hot' if goalie['gsax_per_game'] > 0 else 'ice-cold'
+            gsax = goalie['gsax_per_game']
+            starts = f"{goalie['games']} {plural(goalie['games'], 'start')}"
+            if gsax > 0:
+                options = [
+                    f"{goalie['name']} ({team_name}) has been red-hot in net over the last {starts} "
+                    f"({gsax:+.2f} goals saved above expected per game).",
+                    f"{goalie['name']} ({team_name}) is in career form right now: {gsax:+.2f} goals saved above "
+                    f"expected per game over the last {starts}.",
+                    f"Goaltending favors {team_name} tonight - {goalie['name']} has been stopping far more than "
+                    f"expected lately ({gsax:+.2f} GSAx/game over the last {starts}).",
+                ]
+            else:
+                options = [
+                    f"{goalie['name']} ({team_name}) has been ice-cold in net over the last {starts} "
+                    f"({gsax:+.2f} goals saved above expected per game).",
+                    f"{goalie['name']} ({team_name}) is struggling right now: {gsax:+.2f} goals saved above "
+                    f"expected per game over the last {starts}.",
+                    f"{team_name} may be vulnerable in net tonight - {goalie['name']} has allowed more than "
+                    f"expected lately ({gsax:+.2f} GSAx/game over the last {starts}).",
+                ]
             candidates.append({
                 'key': 'goalie', 'score': abs(rank - 50) * 2,
-                'text': (
-                    f"{goalie['name']} ({team_name}) has been {quality} in net over the last {goalie['games']} "
-                    f"starts ({goalie['gsax_per_game']:+.2f} goals saved above expected per game)."
-                ),
+                'text': vary(seed('goalie', team_name), options),
             })
 
-    for team_name, top in ((state.team_a_name, top_a), (state.team_b_name, top_b)):
+    # --- top scorer ---
+    for team_name, top, rates in ((state.team_a_name, top_a, rates_a), (state.team_b_name, top_b, rates_b)):
         if top and top['goals'] >= MIN_GOALS_FOR_TOP_SCORER:
+            n = rates['games'] if rates else 0
+            games = f"{n} {plural(n, 'game')}" if rates else "recent games"
+            options = [
+                f"{top['name']} ({team_name}) leads the way with {top['goals']} goals over their last {games}.",
+                f"Keep an eye on {top['name']} ({team_name}) - {top['goals']} goals in their last {games}.",
+                f"{team_name}'s offense runs through {top['name']}, who has {top['goals']} goals over their last "
+                f"{games}.",
+            ]
             candidates.append({
                 'key': 'scorer', 'score': min(100.0, top['goals'] * 6),
-                'text': f"{top['name']} ({team_name}) leads the way with {top['goals']} goals over that stretch.",
+                'text': vary(seed('scorer', team_name), options),
             })
 
+    # --- finishing luck (goals vs own xG, vs league) ---
     baseline = baselines['team_gf_axg_per_game']
     if baseline:
         for team_name, rates in ((state.team_a_name, rates_a), (state.team_b_name, rates_b)):
             if not rates:
                 continue
             rank = percentile_rank(rates['gf_axg_per_game'], baseline.percentiles)
-            direction = 'above' if rates['gf_axg_per_game'] > 0 else 'below'
+            luck = rates['gf_axg_per_game']
+            games = f"{rates['games']} {plural(rates['games'], 'game')}"
+            if luck > 0:
+                options = [
+                    f"{team_name} have scored {luck:.1f} goals per game above their expected goals over their "
+                    f"last {games} - a pace that tends to even out.",
+                    f"{team_name} have been finishing at a hot clip lately, {luck:.1f} goals per game above "
+                    f"expected over their last {games}.",
+                ]
+            else:
+                options = [
+                    f"{team_name} have scored {abs(luck):.1f} goals per game below their expected goals over "
+                    f"their last {games} - a pace that tends to even out.",
+                    f"{team_name} have been snakebitten lately, {abs(luck):.1f} goals per game below expected "
+                    f"over their last {games}.",
+                ]
             candidates.append({
                 'key': 'luck', 'score': abs(rank - 50) * 2,
-                'text': (
-                    f"{team_name} have scored {abs(rates['gf_axg_per_game']):.1f} goals per game {direction} "
-                    f"their expected goals over their last {rates['games']} games - a pace that tends to even out."
-                ),
+                'text': vary(seed('luck', team_name), options),
             })
 
+    # --- attacking xG gap between the two teams ---
     baseline = baselines['team_xgf_per_game']
     if baseline and rates_a and rates_b:
         rank_a = percentile_rank(rates_a['xgf_per_game'], baseline.percentiles)
@@ -265,28 +334,90 @@ def compute_pregame_analysis(match_id, force=False):
             (state.team_a_name, rates_a['xgf_per_game'], rates_b['xgf_per_game']) if gap > 0
             else (state.team_b_name, rates_b['xgf_per_game'], rates_a['xgf_per_game'])
         )
+        options = [
+            f"{leader} hold the clear underlying edge: {lead_val:.2f} to {trail_val:.2f} expected goals per "
+            f"game over their recent form.",
+            f"{leader} have been generating far more quality chances lately - {lead_val:.2f} expected goals "
+            f"per game to their opponent's {trail_val:.2f}.",
+        ]
         candidates.append({
             'key': 'xg_gap', 'score': abs(rank_a - rank_b),
-            'text': (
-                f"{leader} hold the clear underlying edge: {lead_val:.2f} to {trail_val:.2f} expected goals "
-                f"per game over their recent form."
-            ),
+            'text': vary(seed('xg_gap'), options),
         })
 
+    # --- defensive (xG allowed) gap between the two teams ---
+    baseline = baselines['team_xga_per_game']
+    if baseline and rates_a and rates_b:
+        rank_a = percentile_rank(rates_a['xga_per_game'], baseline.percentiles)
+        rank_b = percentile_rank(rates_b['xga_per_game'], baseline.percentiles)
+        gap = rates_a['xga_per_game'] - rates_b['xga_per_game']
+        stingier, stingy_val, other_val = (
+            (state.team_a_name, rates_a['xga_per_game'], rates_b['xga_per_game']) if gap < 0
+            else (state.team_b_name, rates_b['xga_per_game'], rates_a['xga_per_game'])
+        )
+        options = [
+            f"{stingier} have been stingy defensively, allowing just {stingy_val:.2f} expected goals per game "
+            f"compared to their opponent's {other_val:.2f}.",
+            f"Defense could be the separator tonight - {stingier} concede only {stingy_val:.2f} expected goals "
+            f"per game, well below {other_val:.2f}.",
+        ]
+        candidates.append({
+            'key': 'xga_gap', 'score': abs(rank_a - rank_b),
+            'text': vary(seed('xga_gap'), options),
+        })
+
+    # --- special teams: power play ---
     if baselines['team_pp_perc'] and rates_a and rates_b and rates_a['pp_perc'] is not None and rates_b['pp_perc'] is not None:
         gap = abs(rates_a['pp_perc'] - rates_b['pp_perc'])
         better = state.team_a_name if rates_a['pp_perc'] > rates_b['pp_perc'] else state.team_b_name
+        options = [
+            f"Special teams could decide this one: {better} convert power plays at a notably higher rate "
+            f"than their opponent recently.",
+            f"{better} have had the sharper power play lately - worth watching if either team draws penalties "
+            f"tonight.",
+        ]
         candidates.append({
-            'key': 'special_teams', 'score': min(100.0, gap * 150),
-            'text': (
-                f"Special teams could decide this one: {better} convert power plays at a notably higher "
-                f"rate than their opponent recently."
-            ),
+            'key': 'special_teams_pp', 'score': min(100.0, gap * 150),
+            'text': vary(seed('special_teams_pp'), options),
         })
+
+    # --- special teams: penalty kill ---
+    if baselines['team_sh_perc'] and rates_a and rates_b and rates_a['sh_perc'] is not None and rates_b['sh_perc'] is not None:
+        gap = abs(rates_a['sh_perc'] - rates_b['sh_perc'])
+        better = state.team_a_name if rates_a['sh_perc'] > rates_b['sh_perc'] else state.team_b_name
+        options = [
+            f"{better} have been excellent killing penalties recently, well above their opponent's rate.",
+            f"Penalty killing favors {better} tonight - their shorthanded unit has been sharper lately.",
+        ]
+        candidates.append({
+            'key': 'special_teams_sh', 'score': min(100.0, gap * 150),
+            'text': vary(seed('special_teams_sh'), options),
+        })
+
+    # --- head-to-head, scored when lopsided (otherwise just a flavor tail-note below) ---
+    if h2h and h2h['games'] >= H2H_MIN_GAMES:
+        win_rate_a = h2h['wins_a'] / h2h['games']
+        lopsidedness = abs(win_rate_a - 0.5) * 2  # 0 (even split) to 1 (swept)
+        if lopsidedness >= 0.5:
+            dominant, dom_wins = (
+                (state.team_a_name, h2h['wins_a']) if h2h['wins_a'] > h2h['wins_b']
+                else (state.team_b_name, h2h['wins_b'])
+            )
+            options = [
+                f"{dominant} have owned this matchup lately, winning {dom_wins} of their last {h2h['games']} "
+                f"meetings.",
+                f"History favors {dominant} here - {dom_wins} wins in their last {h2h['games']} head-to-head "
+                f"meetings.",
+            ]
+            candidates.append({
+                'key': 'head_to_head', 'score': min(100.0, lopsidedness * 100),
+                'text': vary(seed('head_to_head'), options),
+            })
 
     candidates.sort(key=lambda c: c['score'], reverse=True)
     lead = candidates[0] if candidates else None
-    support = [c for c in candidates[1:] if lead is None or c['key'] != lead['key']][:2]
+    support = [c for c in candidates[1:] if lead is None or c['key'] != lead['key']][:MAX_BULLETS - 1]
+    selected_keys = {c['key'] for c in ([lead] if lead else []) + support}
 
     if lead:
         text_parts = [lead['text']] + [c['text'] for c in support]
@@ -298,9 +429,10 @@ def compute_pregame_analysis(match_id, force=False):
                 f"{state.team_b_name}'s {rates_b['xgf_per_game']:.2f} recently."
             )
 
-    if h2h:
+    if h2h and 'head_to_head' not in selected_keys:
+        times = f"{h2h['games']} {plural(h2h['games'], 'time')}"
         text_parts.append(
-            f"{state.team_a_name} and {state.team_b_name} have met {h2h['games']} time(s) recently "
+            f"{state.team_a_name} and {state.team_b_name} have met {times} recently "
             f"({h2h['wins_a']}-{h2h['wins_b']})."
         )
 
