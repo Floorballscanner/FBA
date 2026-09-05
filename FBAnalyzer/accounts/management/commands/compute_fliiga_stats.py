@@ -380,6 +380,17 @@ class Command(BaseCommand):
             match['S_A'], match['S_B'] = len(shots_a), len(shots_b)
             match['SOG_A'], match['SOG_B'] = len(sog_a), len(sog_b)
             match['G_A'], match['G_B'] = len(goals_a), len(goals_b)
+            match['PPG_A'] = sum(1 for s in goals_a if s.get('situation') == 'PP')
+            match['PPG_B'] = sum(1 for s in goals_b if s.get('situation') == 'PP')
+
+            # PP "opportunities" are counted as raw penalty events (a 2+2 double-minor
+            # counts as one opportunity, matching standard box-score convention) - a
+            # team's own opportunities equal the opponent's penalty-event count.
+            match_events = match_details.get(match_id, {}).get('events') or []
+            pen_events_a = sum(1 for e in match_events if e.get('team') == 'A' and parse_penalty_segments(e.get('code')))
+            pen_events_b = sum(1 for e in match_events if e.get('team') == 'B' and parse_penalty_segments(e.get('code')))
+            match['PPOpp_A'] = pen_events_b
+            match['PPOpp_B'] = pen_events_a
 
             lineups = match_details.get(match_id, {}).get('lineups') or []
             match['Goalie_A'] = next(
@@ -422,6 +433,7 @@ class Command(BaseCommand):
                 'xGF': 0.0, 'xGA': 0.0, 'xGDiff': 0.0, 'xGperc': 0.0,
                 'xGOTF': 0.0, 'xGOTA': 0.0, 'xGOTperc': 0.0, 'GFAxG': 0.0, 'GAAxG': 0.0,
                 'xGFPP': 0.0, 'xGAPP': 0.0,
+                'PPG': 0, 'PPOpp': 0, 'SHOpp': 0, 'PPGA': 0, 'PPperc': 0.0, 'SHperc': 0.0,
             }
             for match in matches_played:
                 if match['team_A_name'] == name:
@@ -431,6 +443,8 @@ class Command(BaseCommand):
                     ts['xGF'] += match['xG_A']; ts['xGA'] += match['xG_B']
                     ts['xGOTF'] += match['xGOT_A']; ts['xGOTA'] += match['xGOT_B']
                     ts['xGFPP'] += match['xGPP_A']; ts['xGAPP'] += match['xGPP_B']
+                    ts['PPG'] += match['PPG_A']; ts['PPOpp'] += match['PPOpp_A']
+                    ts['SHOpp'] += match['PPOpp_B']; ts['PPGA'] += match['PPG_B']
                 if match['team_B_name'] == name:
                     ts['Games'] += 1
                     ts['GF'] += match['G_B']; ts['GA'] += match['G_A']
@@ -438,6 +452,8 @@ class Command(BaseCommand):
                     ts['xGF'] += match['xG_B']; ts['xGA'] += match['xG_A']
                     ts['xGOTF'] += match['xGOT_B']; ts['xGOTA'] += match['xGOT_A']
                     ts['xGFPP'] += match['xGPP_B']; ts['xGAPP'] += match['xGPP_A']
+                    ts['PPG'] += match['PPG_B']; ts['PPOpp'] += match['PPOpp_B']
+                    ts['SHOpp'] += match['PPOpp_A']; ts['PPGA'] += match['PPG_A']
 
             ts['xGDiff'] = round2(ts['xGF'] - ts['xGA'])
             ts['xGperc'] = round2(ts['xGF'] / (ts['xGF'] + ts['xGA'])) if (ts['xGF'] + ts['xGA']) else 0
@@ -449,6 +465,8 @@ class Command(BaseCommand):
             ts['xGF'] = round2(ts['xGF']); ts['xGA'] = round2(ts['xGA'])
             ts['xGOTF'] = round2(ts['xGOTF']); ts['xGOTA'] = round2(ts['xGOTA'])
             ts['xGFPP'] = round2(ts['xGFPP']); ts['xGAPP'] = round2(ts['xGAPP'])
+            ts['PPperc'] = round2(ts['PPG'] / ts['PPOpp']) if ts['PPOpp'] else 0.0
+            ts['SHperc'] = round2(1 - ts['PPGA'] / ts['SHOpp']) if ts['SHOpp'] else 0.0
             team_stats.append(ts)
 
         team_stats.sort(key=lambda t: t['xGDiff'], reverse=True)
@@ -468,21 +486,29 @@ class Command(BaseCommand):
                     'G': num(p.get('goals'), int),
                     'A': num(p.get('assists'), int),
                     'P': num(p.get('points'), int),
-                    'S': num(p.get('shots_total'), int),
-                    'SM': num(p.get('shots_off_target'), int),
+                    # S/SM used to trust Torneopal's own shots_total/shots_off_target
+                    # fields via getTeam, but those come back blank for most players -
+                    # computed from our own shot-level data instead, same as xG/xGOT.
+                    'S': 0, 'SM': 0,
                     'plus': num(p.get('plus'), int),
                     'minus': num(p.get('minus'), int),
-                    'xG': 0.0, 'xGOT': 0.0, 'xGPP': 0.0, 'GAxG': 0.0,
+                    'xG': 0.0, 'xGOT': 0.0, 'xGPP': 0.0, 'PPG': 0, 'PPS': 0, 'GAxG': 0.0,
                 })
 
         player_stats = [p for p in players_all if p['Games'] > 0]
         for player in player_stats:
             for shot in shots:
                 if str(shot.get('player_id')) == player['ID']:
+                    player['S'] += 1
+                    if shot['code'] == 'laukausohi':
+                        player['SM'] += 1
                     player['xG'] += shot['xG']
                     player['xGOT'] += shot['xGOT']
                     if shot.get('situation') == 'PP':
                         player['xGPP'] += shot['xG']
+                        player['PPS'] += 1
+                        if shot['code'] == 'laukausmaali':
+                            player['PPG'] += 1
             player['xG'] = round2(player['xG'])
             player['xGOT'] = round2(player['xGOT'])
             player['xGPP'] = round2(player['xGPP'])
