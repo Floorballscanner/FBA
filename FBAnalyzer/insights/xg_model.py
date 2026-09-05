@@ -12,11 +12,17 @@ matching matrix pair, same as the JS.
 
 accounts/management/commands/compute_fliiga_stats.py imports calc_xg from
 here instead of keeping its own copy.
+
+MAX_Y was wrongly set to 1700 for a while - the JS's own `maxY` constant
+(static/js/fliigalivegame.js) is 3400; 1700 was mistakenly copied from that
+file's "keskiviiva 1700" (center line 1700) comment instead of the variable
+itself. Confirmed against real match data: recomputing a match's team xG
+with MAX_Y=3400 exactly matched the client-side total, MAX_Y=1700 did not.
 """
 
 from math import floor
 
-MAX_Y = 1700
+MAX_Y = 3400
 MAX_X = 2000
 
 XGOT_MATRIX = [

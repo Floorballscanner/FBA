@@ -186,11 +186,11 @@ def compute_post_game_analysis(match_id):
     lead = candidates[0] if candidates else None
     support = [c for c in candidates[1:] if lead is None or c['key'] != lead['key']][:2]
 
-    score_line = f"{state.team_a_name} {state.score_a} - {state.score_b} {state.team_b_name}."
+    # The score itself isn't an insight - it's already shown on the page.
     if lead:
-        text_parts = [score_line, lead['text']] + [c['text'] for c in support]
+        text_parts = [lead['text']] + [c['text'] for c in support]
     else:
-        text_parts = [score_line, f"xG {facts_a['xG']} - {facts_b['xG']}."]
+        text_parts = [f"xG {facts_a['xG']} - {facts_b['xG']}."]
 
     facts = {
         'team_a': {
