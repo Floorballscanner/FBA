@@ -222,10 +222,17 @@ function updateInsightsPanel(match) {
     const isLive = !isPlayed && match.live_period !== '';
 
     section.style.display = '';
-    feedEl.style.display = 'none';
-    feedEl.innerHTML = '';
-    textEl.style.display = '';
-    textEl.textContent = 'Loading...';
+    // Only show the "Loading..." placeholder on the very first render - the
+    // 10s poll calls this again and again, and blanking the panel every
+    // time shrank it to one line for a moment, shifting everything below
+    // it and making the page appear to jump while someone was mid-read.
+    if (!section.dataset.loaded) {
+        feedEl.style.display = 'none';
+        feedEl.innerHTML = '';
+        textEl.style.display = '';
+        textEl.textContent = 'Loading...';
+    }
+    section.dataset.loaded = '1';
 
     if (isPlayed) {
         titleEl.textContent = 'Post-Game Analysis';
@@ -256,6 +263,7 @@ function updateInsightsPanel(match) {
                 }
                 textEl.style.display = 'none';
                 feedEl.style.display = '';
+                feedEl.innerHTML = '';
                 data.insights.forEach(insight => {
                     const li = document.createElement('li');
                     const icon = document.createElement('img');
