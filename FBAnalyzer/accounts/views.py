@@ -4,6 +4,7 @@
 from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -65,7 +66,7 @@ def start_trial(request):
                 "Your 14-day trial is ready. Please log in — it includes full access "
                 "except F-Liiga results."
             )
-            return redirect('login')
+            return redirect(reverse('login') + '?trial_started=trial')
     else:
         form = TrialSignupForm()
 
@@ -95,7 +96,7 @@ def start_fliiga_trial(request):
                 "Your 7-day F-Liiga trial is ready. Please log in — it includes the "
                 "F-Liiga live page."
             )
-            return redirect('login')
+            return redirect(reverse('login') + '?trial_started=fliiga_trial')
     else:
         form = TrialSignupForm()
 
@@ -110,10 +111,10 @@ def fliiga_trial_expired(request):
     return render(request, 'accounts/fliiga_trial_expired.html')
 
 @login_required
-@license_required('fliiga', 'fliiga_trial', 'team', 'club', 'trial')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club', 'trial')
 def index(request):
     license = get_active_license(request.user)
-    if license is not None and license.tier in ('fliiga', 'fliiga_trial'):
+    if license is not None and license.tier in ('fliiga', 'fliiga_full', 'fliiga_trial'):
         # F-Liiga-only tiers don't have anything else to do in the full app —
         # send them straight to the page they actually have access to instead
         # of a dashboard full of links they can't use.
@@ -344,7 +345,7 @@ def saved_games(request):
     return render(request,'accounts/saved_games.html')
 
 @login_required
-@license_required('fliiga', 'team', 'club', 'trial')
+@license_required('fliiga', 'fliiga_full', 'team', 'club', 'trial')
 def update_info(request):
 
     return render(request, 'accounts/update_info.html')
@@ -363,28 +364,28 @@ class UpdatePlayer(generics.UpdateAPIView):
         return Response(serializer.data)
 
 @login_required
-@license_required('fliiga', 'fliiga_trial', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliigagame(request, nr):
     return render(request, 'f-liiga_game.html')
 @login_required
-@license_required('fliiga', 'fliiga_trial', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_main(request):
     return render(request, 'f-liiga.html')
 @login_required
-@license_required('team', 'club')
+@license_required('fliiga_full', 'team', 'club')
 def fliiga_results(request):
     return render(request, 'f-liiga_results.html')
 @login_required
-@license_required('fliiga', 'fliiga_trial', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliigalive(request):
     return render(request, 'f-liiga_live.html')
 @login_required
-@license_required('team', 'club')
+@license_required('fliiga_full', 'team', 'club')
 def fliiga_statistics(request):
     return render(request, 'f-liiga_statistics.html')
 
 @login_required
-@license_required('team', 'club')
+@license_required('fliiga_full', 'team', 'club')
 def fliiga_stats_api(request):
     """Serves a cached FliigaSeasonStats table (team/player/goalie), computed
     ahead of time by the compute_fliiga_stats management command instead of

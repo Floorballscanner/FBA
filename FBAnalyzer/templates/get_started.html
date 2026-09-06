@@ -7,6 +7,7 @@ directly through Stripe Checkout.
 -->
 
 {% extends 'base_layout.html' %}
+{% block title %}Get Started | Floorball Scanner{% endblock %}
 {% load static %}
 
 {% block extra_css %}
@@ -37,7 +38,7 @@ directly through Stripe Checkout.
         </h2>
         <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:flex-start;">
             <div style="max-width:220px;">
-                <form method="post" action="{% url 'stripe-checkout' 'team' %}">
+                <form method="post" action="{% url 'stripe-checkout' 'team' %}" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 300, items: [{item_id: 'team', item_name: 'Team license'}]});">
                     {% csrf_token %}
                     <button type="submit" class="landing-btn landing-btn--primary">Buy Team license</button>
                 </form>
@@ -46,7 +47,7 @@ directly through Stripe Checkout.
                 </p>
             </div>
             <div style="max-width:220px;">
-                <form method="post" action="{% url 'stripe-checkout' 'club' %}">
+                <form method="post" action="{% url 'stripe-checkout' 'club' %}" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 600, items: [{item_id: 'club', item_name: 'Club license'}]});">
                     {% csrf_token %}
                     <button type="submit" class="landing-btn landing-btn--primary">Buy Club license</button>
                 </form>
@@ -55,12 +56,21 @@ directly through Stripe Checkout.
                 </p>
             </div>
             <div style="max-width:220px;">
-                <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}">
+                <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 39, items: [{item_id: 'fliiga', item_name: 'F-Liiga license'}]});">
                     {% csrf_token %}
-                    <button type="submit" class="landing-btn landing-btn--primary">Buy F-Liiga license</button>
+                    <button type="submit" class="landing-btn landing-btn--primary">Buy F-Liiga Live license</button>
                 </form>
                 <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
                     Live tracking of today's F-Liiga matches, 12 months.
+                </p>
+            </div>
+            <div style="max-width:220px;">
+                <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 200, items: [{item_id: 'fliiga_full', item_name: 'F-Liiga Full license'}]});">
+                    {% csrf_token %}
+                    <button type="submit" class="landing-btn landing-btn--primary">Buy F-Liiga Full license</button>
+                </form>
+                <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
+                    F-Liiga Live, plus results and season statistics, 12 months.
                 </p>
             </div>
         </div>

@@ -40,7 +40,7 @@ def send_renewal_email(seat, base_url):
     )
 
 
-def create_or_renew_license(email, tier):
+def create_or_renew_license(email, tier, extend_expiry=True):
     """Creates a new License+LicenseSeat for `email`, or renews/upgrades the existing one
     if a LicenseSeat with that email already exists. Shared by check_holvi_orders and the
     Stripe checkout webhook so both purchase paths behave identically. Returns
@@ -48,22 +48,27 @@ def create_or_renew_license(email, tier):
 
     New: creates a License(tier=tier) + LicenseSeat(email=email) and emails an activation
     link — no user exists yet, so there's nothing to reactivate.
-    Existing: extends expires_at by one LICENSE_DURATION from max(now, current expiry),
-    updates tier/max_seats (e.g. an F-Liiga seat upgrading to Team), and reactivates the
-    license plus any already-activated seat users. Does not email here — callers that want
-    to notify the customer about a renewal (e.g. the Stripe webhook) should call
-    send_renewal_email themselves, since check_holvi_orders' customers already get a Holvi
-    order receipt and don't need a second email.
+    Existing: updates tier/max_seats (e.g. an F-Liiga seat upgrading to Team) and
+    reactivates the license plus any already-activated seat users. By default also
+    extends expires_at by one LICENSE_DURATION from max(now, current expiry) - a normal
+    renewal/upgrade purchase. extend_expiry=False leaves the expiry untouched, for the
+    discounted F-Liiga Live -> Full upgrade (161 = 200 - 39): that price only charges the
+    tier difference, not a fresh year, so the customer keeps whatever term they already
+    paid for and just gets more access for the remainder of it.
+    Does not email here — callers that want to notify the customer about a renewal (e.g.
+    the Stripe webhook) should call send_renewal_email themselves, since check_holvi_orders'
+    customers already get a Holvi order receipt and don't need a second email.
     """
     existing_seat = LicenseSeat.objects.filter(email__iexact=email).first()
 
     if existing_seat:
         license = existing_seat.license
-        now = timezone.now()
-        base = license.expires_at if license.expires_at and license.expires_at > now else now
         license.tier = tier
         license.max_seats = None if tier == 'club' else 1
-        license.expires_at = base + License.LICENSE_DURATION
+        if extend_expiry:
+            now = timezone.now()
+            base = license.expires_at if license.expires_at and license.expires_at > now else now
+            license.expires_at = base + License.LICENSE_DURATION
         license.is_active = True
         license.save()
         for seat in license.seats.all():

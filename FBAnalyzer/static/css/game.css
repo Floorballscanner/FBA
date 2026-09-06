@@ -1,0 +1,136 @@
+/*
+
+Visual layer for templates/game.html only (the public /live/<nr> match page), scoped under
+.game-page. Every element id inside .game-page is read by static/js/livegame.js via
+getElementById — this file only restyles, it never renames or removes an id.
+
+*/
+
+.game-page {
+    --gp-navy: #002072;
+    --gp-navy-dark: #001648;
+    --gp-accent: #3046FB;
+    --gp-ink: #14161f;
+    --gp-muted: #5b5f6e;
+    --gp-border: #e4e6f0;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 20px 64px;
+    color: var(--gp-ink);
+}
+
+.gp-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f5f6fa;
+    margin-bottom: 16px;
+    transition: background 0.15s ease;
+}
+
+.gp-back:hover {
+    background: #e9ebf6;
+}
+
+.gp-back img {
+    width: 16px;
+    height: 16px;
+}
+
+.gp-scoreboard {
+    background: #fff;
+    border: 1px solid var(--gp-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.25);
+    padding: 28px 20px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.gp-scoreboard__date {
+    color: var(--gp-muted);
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0 0 6px;
+}
+
+.gp-scoreboard__teams {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gp-navy-dark);
+    margin: 0 0 16px;
+}
+
+.gp-scoreboard__period {
+    margin-bottom: 18px;
+}
+
+.gp-scoreboard__period h5 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gp-muted);
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.gp-scoreboard__period h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gp-ink);
+    margin: 0;
+}
+
+.gp-scoreboard__stats h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gp-navy);
+    margin: 0 0 8px;
+}
+
+.gp-scoreboard__stats h4 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gp-muted);
+    margin: 4px 0;
+}
+
+.gp-section {
+    margin-bottom: 36px;
+}
+
+.gp-section__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gp-navy-dark);
+    margin: 0 0 14px;
+    text-align: center;
+}
+
+.gp-grid-2up {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.gp-grid-2up:last-child {
+    margin-bottom: 0;
+}
+
+.gp-card {
+    background: #fff;
+    border: 1px solid var(--gp-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -16px rgba(0, 32, 114, 0.2);
+    padding: 20px;
+}
+
+@media (max-width: 640px) {
+    .gp-grid-2up {
+        grid-template-columns: 1fr;
+    }
+}
