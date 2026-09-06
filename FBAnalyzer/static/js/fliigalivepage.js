@@ -4,12 +4,7 @@
 
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = [];
-// TEMPORARY (staging only): the 2025-2026 season is fully finished, so
-// "today" would show nothing real to test insights against. Pinned to
-// 2026-09-12, a real date early in the new 2026-2027 season with several
-// scheduled fixtures - revert both this and FETCH_URLS below to the dynamic
-// today/2025-2026 pairing before this goes anywhere near production.
-var today = '2026-09-12';
+var today = new Date().toISOString().split('T')[0]; // Get YYYY-MM-DD format
 
 // Men/women, regular season (group_id=1, "Runkosarja") and playoffs
 // (group_id=2, "Pudotuspelit") — confirmed against the Torneopal API's own
