@@ -37,7 +37,7 @@ LIVE_INSIGHTS_LIMIT = 10
 
 
 @login_required
-@license_required('fliiga', 'fliiga_trial', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 @require_POST
 def ingest_match_events(request):
     try:
@@ -76,7 +76,7 @@ def ingest_match_events(request):
 
 
 @login_required
-@license_required('fliiga', 'fliiga_trial', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 @require_GET
 def pregame_analysis(request, match_id):
     """Lazy-fallback: serves the PregameAnalysis computed ahead of time by
@@ -100,7 +100,7 @@ def pregame_analysis(request, match_id):
 
 
 @login_required
-@license_required('fliiga', 'fliiga_trial', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 @require_GET
 def post_game_analysis(request, match_id):
     """Lazy-fallback: serves the PostGameAnalysis eagerly computed by
@@ -126,7 +126,7 @@ def post_game_analysis(request, match_id):
 
 
 @login_required
-@license_required('fliiga', 'fliiga_trial', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 @require_GET
 def live_insights(request, match_id):
     """The live, tick-by-tick insight feed for a match in progress (see

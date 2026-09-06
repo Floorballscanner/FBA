@@ -378,7 +378,8 @@ class License(models.Model):
     TIER_CHOICES = [
         ('trial', 'Trial'),
         ('fliiga_trial', 'F-Liiga Trial'),
-        ('fliiga', 'F-Liiga'),
+        ('fliiga', 'F-Liiga Live'),
+        ('fliiga_full', 'F-Liiga Full'),
         ('team', 'Team'),
         ('club', 'Club'),
     ]
@@ -389,7 +390,7 @@ class License(models.Model):
     tier = models.CharField(choices=TIER_CHOICES, max_length=15)
     max_seats = models.PositiveIntegerField(
         null=True, blank=True,
-        help_text="1 for Team/F-Liiga/Trial/F-Liiga Trial. Leave blank for Club (unlimited seats).",
+        help_text="1 for Team/F-Liiga Live/F-Liiga Full/Trial/F-Liiga Trial. Leave blank for Club (unlimited seats).",
     )
     is_active = models.BooleanField(default=True)
     starts_at = models.DateTimeField(null=True, blank=True)

@@ -224,6 +224,11 @@ STRIPE_PRICE_IDS = {
     'team': os.environ.get('STRIPE_PRICE_ID_TEAM', ''),
     'club': os.environ.get('STRIPE_PRICE_ID_CLUB', ''),
     'fliiga': os.environ.get('STRIPE_PRICE_ID_FLIIGA', ''),
+    'fliiga_full': os.environ.get('STRIPE_PRICE_ID_FLIIGA_FULL', ''),
+    # Discounted upgrade price (200 - 39 = 161) for existing F-Liiga Live holders only -
+    # gated in stripe_views.start_checkout/stripe_webhook, not just by not linking to it.
+    # Maps to the same 'fliiga_full' license tier, just a cheaper Price object.
+    'fliiga_full_upgrade': os.environ.get('STRIPE_PRICE_ID_FLIIGA_FULL_UPGRADE', ''),
 }
 
 # Stripe File id (purpose='business_icon') for the Checkout page's brand icon — the

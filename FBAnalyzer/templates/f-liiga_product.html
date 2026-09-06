@@ -68,32 +68,57 @@ what the license includes and buys it directly through Stripe Checkout.
             <img src="{% static 'fliiga_season_stats.jpg' %}" alt="F-Liiga season team statistics">
         </div>
         <div class="landing-feature__text">
-            <h2>Want the full archive too?</h2>
+            <h2>Want results and statistics too?</h2>
             <p>
-                A Team or Club license includes F-Liiga and unlocks everything else
-                Floorball Scanner offers: statistics for every match already played
-                this season, plus season-long team, player, and goalkeeper statistics
-                — expected goals, scoring efficiency, and goalkeeper performance
-                against expected goals. Still covering both men's and women's F-Liiga.
+                F-Liiga Full adds every match's results and season-long team, player,
+                and goalkeeper statistics — expected goals, scoring efficiency, and
+                goalkeeper performance against expected goals — on top of everything
+                F-Liiga Live covers. Still just F-Liiga, both men's and women's series.
             </p>
-            <p><a href="/get-started">See Team &amp; Club licenses &rarr;</a></p>
+            <p>
+                Already have F-Liiga Live? Upgrading to Full only costs the
+                difference (161&euro; instead of 200&euro;) — look for the upgrade
+                button on the F-Liiga page once you're logged in.
+            </p>
+            <p>
+                Want everything else Floorball Scanner offers too, not just F-Liiga?
+                <a href="/get-started">See Team &amp; Club licenses &rarr;</a>
+            </p>
         </div>
     </section>
 
     <section class="landing-demo">
-        <h2>Ready to follow F-Liiga live?</h2>
+        <h2>Ready to follow F-Liiga?</h2>
         <p class="landing-lead" style="margin:0 auto 24px;text-align:center;">
-            Live tracking of today's F-Liiga matches. License valid for 12 months.
+            Both licenses valid for 12 months.
         </p>
-        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 39, items: [{item_id: 'fliiga', item_name: 'F-Liiga license'}]});">
-                {% csrf_token %}
-                <button type="submit" class="landing-btn landing-btn--primary">
-                    Buy F-Liiga license
-                </button>
-            </form>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:flex-start;">
+            <div style="max-width:220px;">
+                <form method="post" action="{% url 'stripe-checkout' 'fliiga' %}" style="display:inline;" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 39, items: [{item_id: 'fliiga', item_name: 'F-Liiga Live license'}]});">
+                    {% csrf_token %}
+                    <button type="submit" class="landing-btn landing-btn--primary">
+                        Buy F-Liiga Live — 39&euro;
+                    </button>
+                </form>
+                <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
+                    Live score, xG and win probability, every match.
+                </p>
+            </div>
+            <div style="max-width:220px;">
+                <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}" style="display:inline;" onsubmit="gtag('event', 'begin_checkout', {currency: 'EUR', value: 200, items: [{item_id: 'fliiga_full', item_name: 'F-Liiga Full license'}]});">
+                    {% csrf_token %}
+                    <button type="submit" class="landing-btn landing-btn--primary">
+                        Buy F-Liiga Full — 200&euro;
+                    </button>
+                </form>
+                <p style="font-size:13px;color:var(--landing-muted);margin:8px 0 0;">
+                    Everything in Live, plus results and season statistics.
+                </p>
+            </div>
+        </div>
+        <div style="margin-top:16px;">
             <a class="landing-btn landing-btn--ghost" href="/f-liiga/trial/" role="button">
-                Try free for 7 days
+                Try F-Liiga Live free for 7 days
             </a>
         </div>
         <p style="margin:20px 0 0;font-size:15px;">
