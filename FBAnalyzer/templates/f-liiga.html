@@ -32,12 +32,15 @@ This is the F-liiga hub page — links to results, live data, and statistics.
             </button>
         </form>
         {% elif license_tier == 'fliiga_trial' %}
-        <a class="landing-card landing-card--locked" href="/get-started">
-            <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
-            <h3>Results</h3>
-            <p>All played game results from Finnish F-Liiga.</p>
-            <span class="landing-card__badge">F-Liiga Full &amp; Team/Club licenses &rarr;</span>
-        </a>
+        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}">
+            {% csrf_token %}
+            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
+                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+                <h3>Results</h3>
+                <p>All played game results from Finnish F-Liiga.</p>
+                <span class="landing-card__badge">Buy F-Liiga Full — 200&euro; &rarr;</span>
+            </button>
+        </form>
         {% else %}
         <a class="landing-card" href="/accounts/fliiga_results">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
@@ -61,12 +64,15 @@ This is the F-liiga hub page — links to results, live data, and statistics.
             </button>
         </form>
         {% elif license_tier == 'fliiga_trial' %}
-        <a class="landing-card landing-card--locked" href="/get-started">
-            <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
-            <h3>Statistics</h3>
-            <p>Advanced F-Liiga statistics.</p>
-            <span class="landing-card__badge">F-Liiga Full &amp; Team/Club licenses &rarr;</span>
-        </a>
+        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}">
+            {% csrf_token %}
+            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
+                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+                <h3>Statistics</h3>
+                <p>Advanced F-Liiga statistics.</p>
+                <span class="landing-card__badge">Buy F-Liiga Full — 200&euro; &rarr;</span>
+            </button>
+        </form>
         {% else %}
         <a class="landing-card" href="/accounts/fliiga_statistics">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
