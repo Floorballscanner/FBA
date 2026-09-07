@@ -13,16 +13,28 @@ matching matrix pair, same as the JS.
 accounts/management/commands/compute_fliiga_stats.py imports calc_xg from
 here instead of keeping its own copy.
 
-MAX_Y was wrongly set to 1700 for a while - the JS's own `maxY` constant
-(static/js/fliigalivegame.js) is 3400; 1700 was mistakenly copied from that
-file's "keskiviiva 1700" (center line 1700) comment instead of the variable
-itself. Confirmed against real match data: recomputing a match's team xG
-with MAX_Y=3400 exactly matched the client-side total, MAX_Y=1700 did not.
+The client JS's own `maxY = 3400` constant (static/js/fliigalivegame.js) is
+doing two unrelated jobs that needed two different numbers: 3400 is
+(approximately) the outer bound of what Torneopal's location_y ever reports
+- confirmed against real data, the observed max across 100k+ shots is 3425 -
+but it was also being used as the divisor that turns y into a matrix row,
+which was never the intent. The intent (confirmed with the model's author):
+half court is at y=1700, y=1700 should land on row yd=13, and anything at or
+beyond half court should be xG=0, not a matrix lookup. Using 3400 as that
+divisor instead of 1700 made every shot's distance look roughly half of what
+it really was, pushing it into a row (and therefore an xG value) meant for a
+much closer shot - shots that really belong out past yd=13 were instead
+landing around yd=6-8, and the real 0-1700 range was being compressed into
+half the row resolution it should have had. HALF_COURT_Y=1700 below is the
+fix: shots at or beyond it now return 0 outright instead of being clamped
+into row 13's real (non-zero) value. static/js/fliigalivegame.js and
+fliigapage.js's calcxG/calcxGW have the identical bug and need the same fix
+applied by hand, same as always, since there's no shared runtime.
 """
 
 from math import floor
 
-MAX_Y = 3400
+HALF_COURT_Y = 1700  # goal line (0) to half court; at or beyond this, xG is 0
 MAX_X = 2000
 
 XGOT_MATRIX = [
@@ -101,11 +113,11 @@ MATRICES_BY_CATEGORY = {
 
 
 def calc_xg(x, y, category='men'):
+    if y >= HALF_COURT_Y:
+        return {'xGOT': 0.0, 'xG': 0.0}
     xg_matrix, xgot_matrix = MATRICES_BY_CATEGORY.get(category, MATRICES_BY_CATEGORY['men'])
     x = 1000 + x
-    if y >= MAX_Y:
-        y = MAX_Y - 1
-    yd = 2 + floor(y / MAX_Y * 12)
+    yd = 2 + floor(y / HALF_COURT_Y * 12)
     xd = floor(x / MAX_X * 12)
     yd = max(0, min(yd, len(xg_matrix) - 1))
     xd = max(0, min(xd, len(xg_matrix[0]) - 1))
