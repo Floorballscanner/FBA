@@ -30,7 +30,12 @@ var t2color = "#002072";
 var t1color_rgba = 'rgba(153, 0, 0';
 var t2color_rgba = 'rgba(0, 32, 114';
 
-var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700
+var maxY = 3400; // Arvioitu, päätyviiva 0 - keskiviiva 1700. Outer bound of Torneopal's own
+// location_y range - NOT the xG matrix's row divisor (see halfCourtY below). Still used as-is
+// by drawShotMap()'s own (separately calibrated) pixel scaling.
+var halfCourtY = 1700; // goal line (0) to half court; at or beyond this, xG is 0 - this IS
+// the xG matrix's row divisor. calcxG/calcxGW used maxY here by mistake, which made every
+// shot's distance look about half of what it really was.
 var maxX = 2000; // [-1000, 1000], maalivahdin näkökulmasta katsottuna oikealle negatiivinen, 0 keskilinjalla
 var g_date = document.getElementById("stdate");
 var period = document.getElementById("periodNr");
@@ -2244,13 +2249,12 @@ function updatePPIndicator(allEvents, periodLengths, teamAName, teamBName) {
 }
 
 function calcxG(x, y) {
+    if (y >= halfCourtY) {
+        return [0, 0];
+    }
     x = 1000 + x;
 
-    if (y >= maxY) {
-        y = maxY - 1;
-    }
-
-    const yd = 2 + Math.floor((y / maxY) * 12);
+    const yd = 2 + Math.floor((y / halfCourtY) * 12);
     const xd = Math.floor((x / maxX) * 12);
     const xGOT = xGOT_matrix[yd][xd] / 100;
     const xG = xG_matrix[yd][xd] / 100;
@@ -2259,13 +2263,12 @@ function calcxG(x, y) {
 }
 
 function calcxGW(x, y) {
+    if (y >= halfCourtY) {
+        return [0, 0];
+    }
     x = 1000 + x;
 
-    if (y >= maxY) {
-        y = maxY - 1;
-    }
-
-    const yd = 2 + Math.floor((y / maxY) * 12);
+    const yd = 2 + Math.floor((y / halfCourtY) * 12);
     const xd = Math.floor((x / maxX) * 12);
     const xGOT = xGOT_matrix_women[yd][xd] / 100;
     const xG = xG_matrix_women[yd][xd] / 100;
