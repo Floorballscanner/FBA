@@ -24,6 +24,7 @@ combination). Use --season/--category/--stage to force one combination,
 including an already-final one, e.g. for the initial backfill.
 """
 
+from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from django.core.management.base import BaseCommand
@@ -301,20 +302,41 @@ class Command(BaseCommand):
         team_stats.sort(key=lambda t: t['xGDiff'], reverse=True)
 
         # --- Player stats ---
+        # Games/goals/assists/points used to trust Torneopal's own per-player
+        # matches/goals/assists/points fields from getTeam - but those are
+        # season-long totals across every stage the team played (getTeam takes
+        # no group_id), so switching between regular season and playoffs never
+        # changed a word of them. Computed from our own stage-filtered lineup/
+        # shot/event data instead, same idea as S/SM/xG/xGOT below. plus/minus
+        # still comes from Torneopal (no per-goal on-ice roster is tracked here
+        # to compute it ourselves) and so remains season-long, not stage-scoped.
+        games_by_player = defaultdict(set)
+        assists_by_player = defaultdict(int)
+        for match in matches_played:
+            match_id = match['match_id']
+            for lineup in match_details.get(match_id, {}).get('lineups') or []:
+                player_id = str(lineup.get('player_id') or '')
+                if player_id:
+                    games_by_player[player_id].add(match_id)
+            for event in match_details.get(match_id, {}).get('events') or []:
+                if event.get('code') == 'syotto':
+                    player_id = str(event.get('player_id') or '')
+                    if player_id:
+                        assists_by_player[player_id] += 1
+
         players_all = []
         for team in teams:
             detail = team_details.get(team['team_id'], {})
             for p in detail.get('players') or []:
+                player_id = str(p.get('player_id'))
                 players_all.append({
-                    'ID': str(p.get('player_id')),
+                    'ID': player_id,
                     'Team': detail.get('team_name'),
                     'Name': f"{p.get('first_name', '')} {p.get('last_name', '')}".strip(),
                     'Nr': p.get('shirt_number'),
                     'Position': p.get('position'),
-                    'Games': num(p.get('matches'), int),
-                    'G': num(p.get('goals'), int),
-                    'A': num(p.get('assists'), int),
-                    'P': num(p.get('points'), int),
+                    'Games': len(games_by_player.get(player_id, ())),
+                    'G': 0, 'A': assists_by_player.get(player_id, 0), 'P': 0,
                     # S/SM used to trust Torneopal's own shots_total/shots_off_target
                     # fields via getTeam, but those come back blank for most players -
                     # computed from our own shot-level data instead, same as xG/xGOT.
@@ -331,6 +353,8 @@ class Command(BaseCommand):
                     player['S'] += 1
                     if shot['code'] == 'laukausohi':
                         player['SM'] += 1
+                    if shot['code'] == 'laukausmaali':
+                        player['G'] += 1
                     player['xG'] += shot['xG']
                     player['xGOT'] += shot['xGOT']
                     if shot.get('situation') == 'PP':
@@ -338,6 +362,7 @@ class Command(BaseCommand):
                         player['PPS'] += 1
                         if shot['code'] == 'laukausmaali':
                             player['PPG'] += 1
+            player['P'] = player['G'] + player['A']
             player['xG'] = round2(player['xG'])
             player['xGOT'] = round2(player['xGOT'])
             player['xGPP'] = round2(player['xGPP'])
