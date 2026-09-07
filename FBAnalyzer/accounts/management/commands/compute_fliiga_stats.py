@@ -302,16 +302,24 @@ class Command(BaseCommand):
         team_stats.sort(key=lambda t: t['xGDiff'], reverse=True)
 
         # --- Player stats ---
-        # Games/goals/assists/points used to trust Torneopal's own per-player
-        # matches/goals/assists/points fields from getTeam - but those are
-        # season-long totals across every stage the team played (getTeam takes
-        # no group_id), so switching between regular season and playoffs never
-        # changed a word of them. Computed from our own stage-filtered lineup/
-        # shot/event data instead, same idea as S/SM/xG/xGOT below. plus/minus
-        # still comes from Torneopal (no per-goal on-ice roster is tracked here
-        # to compute it ourselves) and so remains season-long, not stage-scoped.
+        # Games/goals/assists/points/plus/minus used to trust Torneopal's own
+        # per-player matches/goals/assists/points/plus/minus fields from
+        # getTeam - but those are season-long totals across every stage the
+        # team played (getTeam takes no group_id), so switching between
+        # regular season and playoffs never changed a word of them. Computed
+        # from our own stage-filtered lineup/shot/event data instead, same
+        # idea as S/SM/xG/xGOT below. Torneopal tags on-ice plus/minus itself,
+        # per player per goal: each goal gets its own 'maali' marker event
+        # (separate from the 'laukausmaali' shot event already used for goals/
+        # shots), and every skater on the ice for it gets their own 'plus' (on
+        # the scoring team) or 'miinus' (conceding team) event with
+        # connected_event_id pointing at that 'maali' event's event_id -
+        # confirmed against real match data (5 plus + 5 miinus events per
+        # even-strength goal, fewer under special teams).
         games_by_player = defaultdict(set)
         assists_by_player = defaultdict(int)
+        plus_by_player = defaultdict(int)
+        minus_by_player = defaultdict(int)
         for match in matches_played:
             match_id = match['match_id']
             for lineup in match_details.get(match_id, {}).get('lineups') or []:
@@ -319,10 +327,15 @@ class Command(BaseCommand):
                 if player_id:
                     games_by_player[player_id].add(match_id)
             for event in match_details.get(match_id, {}).get('events') or []:
+                player_id = str(event.get('player_id') or '')
+                if not player_id:
+                    continue
                 if event.get('code') == 'syotto':
-                    player_id = str(event.get('player_id') or '')
-                    if player_id:
-                        assists_by_player[player_id] += 1
+                    assists_by_player[player_id] += 1
+                elif event.get('code') == 'plus':
+                    plus_by_player[player_id] += 1
+                elif event.get('code') == 'miinus':
+                    minus_by_player[player_id] += 1
 
         players_all = []
         for team in teams:
@@ -341,8 +354,8 @@ class Command(BaseCommand):
                     # fields via getTeam, but those come back blank for most players -
                     # computed from our own shot-level data instead, same as xG/xGOT.
                     'S': 0, 'SM': 0,
-                    'plus': num(p.get('plus'), int),
-                    'minus': num(p.get('minus'), int),
+                    'plus': plus_by_player.get(player_id, 0),
+                    'minus': minus_by_player.get(player_id, 0),
                     'xG': 0.0, 'xGOT': 0.0, 'xGPP': 0.0, 'PPG': 0, 'PPS': 0, 'GAxG': 0.0,
                 })
 
