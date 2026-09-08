@@ -29,7 +29,10 @@ from django.db import models
 
 class MatchEvent(models.Model):
     CATEGORY_CHOICES = [('men', 'Men'), ('women', 'Women')]
-    SITUATION_CHOICES = [('PP', 'Powerplay'), ('SH', 'Shorthanded'), ('EVEN', 'Even strength')]
+    SITUATION_CHOICES = [
+        ('PP', 'Powerplay'), ('SH', 'Shorthanded'), ('EVEN', 'Even strength'),
+        ('6V5', "Shooting team's own goalie pulled"),
+    ]
 
     match_id = models.CharField(max_length=20)
     event_id = models.CharField(max_length=20)

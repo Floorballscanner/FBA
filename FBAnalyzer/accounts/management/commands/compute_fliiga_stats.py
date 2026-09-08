@@ -142,7 +142,7 @@ class Command(BaseCommand):
                 team_details[team_id] = future.result().get('team') or {}
 
         team_stats, player_stats, goalie_stats = self.compute_stats(
-            teams, matches_played, match_details, team_details,
+            teams, matches_played, match_details, team_details, category,
         )
 
         FliigaSeasonStats.objects.update_or_create(
@@ -160,7 +160,7 @@ class Command(BaseCommand):
             f"{' (final)' if is_final else ''}."
         ))
 
-    def compute_stats(self, teams, matches_played, match_details, team_details):
+    def compute_stats(self, teams, matches_played, match_details, team_details, category):
         # --- Shots, xG/xGOT per shot ---
         shots = []
         for match in matches_played:
@@ -169,24 +169,29 @@ class Command(BaseCommand):
             period_lengths = match_details.get(match_id, {}).get('period_lengths_sec') or [0, 1200, 1200, 1200, 300]
             shot_situations = compute_shot_situations(events, period_lengths)
             for event in events:
-                if event.get('code') not in ('laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'):
+                code = event.get('code')
+                if code not in ('laukausohi', 'laukausblokattu', 'laukausmaali', 'laukaus'):
                     continue
                 x, y = 0.0, 0.0
                 location = event.get('location') or ''
                 parts = location.split(',')
                 if len(parts) == 2:
                     x, y = num(parts[0]), num(parts[1])
-                res = calc_xg(x, y)
                 shot = dict(event)
                 shot['match_id'] = match_id
                 shot['team_id'] = str(event.get('team_id') or '')
                 shot['player_id'] = event.get('player_id')
-                shot['xG'] = res['xG']
-                shot['xGOT'] = res['xGOT'] if event.get('code') in ('laukaus', 'laukausmaali') else 0
-                if event.get('code') == 'laukausmaali':
-                    shot['situation'] = situation_from_goal_tag(find_goal_tag(events, shot))
+                if code == 'laukausmaali':
+                    # '6V5' (own goalie pulled) takes priority and is computed the same
+                    # way as any other shot; otherwise a goal keeps its own tag-based
+                    # determination (see compute_shot_situations' docstring).
+                    situation = shot_situations.get(event.get('event_id')) or situation_from_goal_tag(find_goal_tag(events, shot))
                 else:
-                    shot['situation'] = shot_situations.get(event.get('event_id'), 'EVEN')
+                    situation = shot_situations.get(event.get('event_id'), 'EVEN')
+                shot['situation'] = situation
+                res = calc_xg(x, y, category, situation)
+                shot['xG'] = res['xG']
+                shot['xGOT'] = res['xGOT'] if code in ('laukaus', 'laukausmaali') else 0
                 shots.append(shot)
 
         # --- Per-match aggregates (shots/goals/xG, SOG, goalies) ---

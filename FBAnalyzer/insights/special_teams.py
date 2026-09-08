@@ -17,9 +17,20 @@ this server-side code. Ruleset confirmed against real Torneopal match data
 
 accounts/management/commands/compute_fliiga_stats.py imports these instead
 of keeping its own copy.
+
+'6V5' (the shooting team's own goalie pulled for an extra attacker) is
+tracked here too, from Torneopal's own 'mvvaihto' event - description
+contains "pois" (goalie out) or "sisään"/"sisaan" (goalie in). Unlike PP/SH,
+this doesn't depend on the penalty-window simulation at all, so it's safe to
+compute for every shot-like event uniformly, goals included - confirmed
+against real match data (a real match's shots never exceeded y=1700 at the
+old, since-fixed half-court boundary, but genuine 6v5 shot volume is
+substantial: ~2000 shots for men, ~1000 for women, across three seasons).
 """
 
 import re
+
+from .event_codes import GOALIE_CODES
 
 PENALTY_CODE_RE = re.compile(r'^(\d+)(?:_(\d+))?min$')
 
@@ -50,14 +61,23 @@ def situation_from_goal_tag(description):
 
 
 def compute_shot_situations(all_events, period_lengths):
-    """Simulates penalty windows chronologically and returns event_id -> situation
-    ('PP'/'SH'/'EVEN') for every non-scoring shot event."""
+    """Simulates penalty windows and goalie-pulled state chronologically and
+    returns event_id -> situation ('PP'/'SH'/'EVEN'/'6V5') for every non-
+    scoring shot event and every goalie-facing event (GOALIE_CODES, from the
+    shooting/opposing team's perspective, since that's whose situation the
+    xG/xGOT matrix lookup needs). '6V5' takes priority over PP/SH/EVEN and is
+    computed the same way for goals too (see situation_from_goal_tag's
+    caller in ingest.py/compute_fliiga_stats.py - goals otherwise keep using
+    their own tag-based PP/SH/EVEN determination, not this function's
+    active-penalty-count simulation, so a non-pulled goal gets no entry
+    here)."""
     timed = sorted(
         all_events,
         key=lambda e: abs_game_time(e.get('period'), e.get('time_sec'), period_lengths),
     )
 
     active = []  # list of dicts: {team, start, end, pending_next}
+    pulled = {'A': False, 'B': False}
 
     def active_count(team, t):
         return sum(1 for w in active if w['team'] == team and w['start'] <= t < w['end'])
@@ -77,20 +97,48 @@ def compute_shot_situations(all_events, period_lengths):
 
     for e in timed:
         t = abs_game_time(e.get('period'), e.get('time_sec'), period_lengths)
-        segs = parse_penalty_segments(e.get('code'))
+        code = e.get('code')
+
+        if code == 'mvvaihto':
+            team = e.get('team')
+            if team in pulled:
+                desc = e.get('description') or ''
+                if 'pois' in desc:
+                    pulled[team] = True
+                elif 'sis' in desc:
+                    pulled[team] = False
+            continue
+
+        segs = parse_penalty_segments(code)
         if segs:
             active.append({
                 'team': e.get('team'), 'start': t, 'end': t + segs[0],
                 'pending_next': segs[1] if len(segs) > 1 else None,
             })
             continue
-        if e.get('code') == 'maali':
+        if code == 'maali':
             end_soonest('B' if e.get('team') == 'A' else 'A', t)
             continue
-        if e.get('code') in ('laukaus', 'laukausohi', 'laukausblokattu'):
-            other = 'B' if e.get('team') == 'A' else 'A'
-            mine = active_count(e.get('team'), t)
+
+        if code in ('laukaus', 'laukausohi', 'laukausblokattu'):
+            team = e.get('team')
+            if pulled.get(team, False):
+                situations[e.get('event_id')] = '6V5'
+                continue
+            other = 'B' if team == 'A' else 'A'
+            mine = active_count(team, t)
             theirs = active_count(other, t)
+            situations[e.get('event_id')] = 'PP' if mine < theirs else ('SH' if mine > theirs else 'EVEN')
+        elif code == 'laukausmaali':
+            if pulled.get(e.get('team'), False):
+                situations[e.get('event_id')] = '6V5'
+        elif code in GOALIE_CODES:
+            shooting_team = 'B' if e.get('team') == 'A' else 'A'
+            if pulled.get(shooting_team, False):
+                situations[e.get('event_id')] = '6V5'
+                continue
+            mine = active_count(shooting_team, t)
+            theirs = active_count(e.get('team'), t)
             situations[e.get('event_id')] = 'PP' if mine < theirs else ('SH' if mine > theirs else 'EVEN')
 
     return situations
