@@ -30,7 +30,7 @@ substantial: ~2000 shots for men, ~1000 for women, across three seasons).
 
 import re
 
-from .event_codes import GOALIE_CODES
+from .event_codes import GOAL_AGAINST_CODE, GOALIE_CODES
 
 PENALTY_CODE_RE = re.compile(r'^(\d+)(?:_(\d+))?min$')
 
@@ -132,7 +132,23 @@ def compute_shot_situations(all_events, period_lengths):
         elif code == 'laukausmaali':
             if pulled.get(e.get('team'), False):
                 situations[e.get('event_id')] = '6V5'
+        elif code == GOAL_AGAINST_CODE:
+            # A goal against ('paastetty') - situation comes from the goal's
+            # own authoritative tag (via find_goal_tag_for_goalie in the
+            # caller), not this active-penalty simulation. Reason: a PP goal
+            # ends the scoring team's power play at this exact instant (the
+            # 'maali' branch above, processed earlier at the same timestamp,
+            # already truncated the window's end to right here), so by the
+            # time this event is reached active_count() no longer sees the
+            # penalty as active - the simulation would misread every PP/SH
+            # goal-against as EVEN. Only the 6V5 (own goalie pulled) override
+            # applies here, same as laukausmaali.
+            shooting_team = 'B' if e.get('team') == 'A' else 'A'
+            if pulled.get(shooting_team, False):
+                situations[e.get('event_id')] = '6V5'
         elif code in GOALIE_CODES:
+            # torjunta - a regular save, not tied to a goal; the
+            # active-penalty simulation is accurate here.
             shooting_team = 'B' if e.get('team') == 'A' else 'A'
             if pulled.get(shooting_team, False):
                 situations[e.get('event_id')] = '6V5'
@@ -151,5 +167,19 @@ def find_goal_tag(all_events, shot):
         if (e.get('code') == 'maali' and e.get('team') == shot.get('team')
                 and e.get('period') == shot.get('period') and e.get('time') == shot.get('time')
                 and e.get('player_id') == shot.get('player_id')):
+            return e.get('description')
+    return ''
+
+
+def find_goal_tag_for_goalie(all_events, goalie_event):
+    """A paastetty (goal-against) event shares period/time with the maali
+    event of the SCORING (opposing) team - matched without player_id, unlike
+    find_goal_tag, since the goalie isn't the scorer. Gives the goalie's side
+    of a goal the same authoritative PP/SH/EVEN tag the shooter's side gets
+    (see compute_shot_situations' GOAL_AGAINST_CODE branch above)."""
+    scoring_team = 'B' if goalie_event.get('team') == 'A' else 'A'
+    for e in all_events:
+        if (e.get('code') == 'maali' and e.get('team') == scoring_team
+                and e.get('period') == goalie_event.get('period') and e.get('time') == goalie_event.get('time')):
             return e.get('description')
     return ''

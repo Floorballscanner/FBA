@@ -956,6 +956,21 @@ a.landing-card:hover {
     50% { opacity: 0.3; }
 }
 
+/* 6-on-5 banner (#sixVFiveIndicator, f-liiga_game.html only) - own goalie
+   pulled for an extra attacker; red/orange to read as higher-stakes than the
+   power-play banner's blue, and to stay distinct when both could theoretically
+   show (the situation model always resolves to 6V5 over PP/SH in that case). */
+.pp-indicator--sixvfive {
+    background: linear-gradient(90deg, #dc2626, #f97316);
+    box-shadow: 0 8px 24px -8px rgba(220, 38, 38, 0.6);
+    animation-name: sixvfive-indicator-pulse;
+}
+
+@keyframes sixvfive-indicator-pulse {
+    0%, 100% { box-shadow: 0 8px 24px -8px rgba(220, 38, 38, 0.6); transform: scale(1); }
+    50% { box-shadow: 0 10px 32px -4px rgba(220, 38, 38, 0.9); transform: scale(1.03); }
+}
+
 .landing-result__stats {
     display: grid;
     gap: 10px;

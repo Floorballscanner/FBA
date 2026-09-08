@@ -23,6 +23,8 @@ const TABLE_COLUMNS = {
         ['xGOTperc', 'number', 'xGOT%'],
         ['xGFPP', 'number', 'xGFPP'],
         ['xGAPP', 'number', 'xGAPP'],
+        ['xGF6v5', 'number', 'xGF6v5'],
+        ['xGA6v5', 'number', 'xGA6v5'],
         ['PPperc', 'number', 'PP%'],
         ['SHperc', 'number', 'SH%'],
         ['GFAxG', 'number', 'GFAxG'],
@@ -70,6 +72,8 @@ const TABLE_LEGENDS = {
         + '<b>xGOTF/xGOTA/xGOT%</b> = same, using only on-target shots, '
         + '<b>xGFPP</b> = expected Goals created while on a powerplay, '
         + '<b>xGAPP</b> = opponents\' expected Goals while this team was shorthanded, '
+        + '<b>xGF6v5</b> = expected Goals created with this team\'s own goalie pulled, '
+        + '<b>xGA6v5</b> = opponents\' expected Goals while their goalie was pulled against this team, '
         + '<b>PP%</b> = percentage of powerplays that ended in a goal, '
         + '<b>SH%</b> = percentage of shorthanded situations the opponent failed to score in, '
         + '<b>GFAxG/GAAxG</b> = Goals minus expected Goals, for/against.',
