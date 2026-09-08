@@ -109,16 +109,20 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
         xg = xgot = None
         situation = ''
         if code in SHOT_CODES:
+            if code == 'laukausmaali':
+                # '6V5' (own goalie pulled) is computed the same way for goals as
+                # for any other shot and takes priority; otherwise a goal keeps
+                # using its own tag-based determination, not the active-penalty-
+                # count simulation (see compute_shot_situations' docstring).
+                situation = shot_situations.get(event_id) or situation_from_goal_tag(find_goal_tag(events, event))
+            else:
+                situation = shot_situations.get(event_id, 'EVEN')
             if loc_x is not None and loc_y is not None:
-                result = calc_xg(loc_x, loc_y, category)
+                result = calc_xg(loc_x, loc_y, category, situation)
                 xg = result['xG']
                 xgot = result['xGOT'] if code in ON_TARGET_CODES else 0.0
             else:
                 xg = xgot = 0.0
-            situation = (
-                situation_from_goal_tag(find_goal_tag(events, event)) if code == 'laukausmaali'
-                else shot_situations.get(event_id, 'EVEN')
-            )
             if team in team_xg:
                 team_xg[team] += xg
                 team_xgot[team] += xgot
@@ -127,8 +131,11 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
             # A goalie's own torjunta/paastetty event carries the same shot
             # coordinates as the shooter's, so xGOT quantifies the quality of
             # the chance the goalie faced (used for goalie GSAx elsewhere).
+            # situation here is already from the shooting team's perspective
+            # (see compute_shot_situations), matching what the matrix lookup needs.
+            situation = shot_situations.get(event_id, 'EVEN')
             if loc_x is not None and loc_y is not None:
-                result = calc_xg(loc_x, loc_y, category)
+                result = calc_xg(loc_x, loc_y, category, situation)
                 xg, xgot = result['xG'], result['xGOT']
             else:
                 xg = xgot = 0.0
