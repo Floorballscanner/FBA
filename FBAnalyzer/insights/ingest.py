@@ -15,12 +15,14 @@ from datetime import date as date_cls, timedelta
 
 from django.utils import timezone
 
-from .event_codes import GOALIE_CODES, ON_TARGET_CODES, SHOT_CODES
+from .event_codes import GOAL_AGAINST_CODE, GOALIE_CODES, ON_TARGET_CODES, SHOT_CODES
 from .live_insights import evaluate_match_insights
 from .models import MatchEvent, MatchState
 from .post_game import compute_post_game_analysis
 from .pregame import compute_pregame_analysis
-from .special_teams import abs_game_time, compute_shot_situations, find_goal_tag, situation_from_goal_tag
+from .special_teams import (
+    abs_game_time, compute_shot_situations, find_goal_tag, find_goal_tag_for_goalie, situation_from_goal_tag,
+)
 from .torneopal import api_get, CATEGORY_ID_MAP, STAGE_GROUP_ID_MAP
 from .win_probability import compute_win_probability
 from .xg_model import calc_xg
@@ -132,8 +134,15 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
             # coordinates as the shooter's, so xGOT quantifies the quality of
             # the chance the goalie faced (used for goalie GSAx elsewhere).
             # situation here is already from the shooting team's perspective
-            # (see compute_shot_situations), matching what the matrix lookup needs.
-            situation = shot_situations.get(event_id, 'EVEN')
+            # (see compute_shot_situations), matching what the matrix lookup
+            # needs - except paastetty (goal against), which falls back to
+            # the goal's own tag just like laukausmaali does, instead of the
+            # active-penalty simulation (see compute_shot_situations'
+            # GOAL_AGAINST_CODE branch for why the simulation misreads it).
+            if code == GOAL_AGAINST_CODE:
+                situation = shot_situations.get(event_id) or situation_from_goal_tag(find_goal_tag_for_goalie(events, event))
+            else:
+                situation = shot_situations.get(event_id, 'EVEN')
             if loc_x is not None and loc_y is not None:
                 result = calc_xg(loc_x, loc_y, category, situation)
                 xg, xgot = result['xG'], result['xGOT']

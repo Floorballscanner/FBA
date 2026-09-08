@@ -46,16 +46,12 @@ var t1xG = document.getElementById('sttotxG_1');
 var t2xG = document.getElementById('sttotxG_2');
 var t1xGOT = document.getElementById('sttotxGOT_1');
 var t2xGOT = document.getElementById('sttotxGOT_2');
-var t1xGPP = document.getElementById('sttotxGPP_1');
-var t2xGPP = document.getElementById('sttotxGPP_2');
 var imgt1 = document.getElementById('imgt1');
 var imgt2 = document.getElementById('imgt2');
 var t1s = document.getElementById('sttotshots_1');
 var t2s = document.getElementById('sttotshots_2');
 var t1sOT = document.getElementById('sttotsOT_1');
 var t2sOT = document.getElementById('sttotsOT_2');
-var t1sPP = document.getElementById('sttotsPP_1');
-var t2sPP = document.getElementById('sttotsPP_2');
 var t1pp = document.getElementById('sttotpp_1');
 var t2pp = document.getElementById('sttotpp_2');
 var t1_wp = document.getElementById('stwp_1');
@@ -205,7 +201,9 @@ window.onload = function() {
                     const y = parseFloat(st[1]);
                     xG = 0;
                     xGOT = 0;
-                    const situation = shotSituations[goaliedata[i].event_id] || 'EVEN';
+                    const situation = goaliedata[i].code === 'paastetty'
+                        ? (shotSituations[goaliedata[i].event_id] || situationFromGoalTag(findGoalTagForGoalie(events, goaliedata[i])))
+                        : (shotSituations[goaliedata[i].event_id] || 'EVEN');
 
                     if (match.category_id != '384') {
                         [xGOT, xG] = calcxG(x, y, situation);
@@ -234,21 +232,11 @@ window.onload = function() {
                 .filter(shot => shot.team === 'B')
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
 
-            t1xGPP_temp = Object.values(shots)
-                .filter(shot => shot.team === 'A' && shot.situation === 'PP')
-                .reduce((sum, shot) => sum + shot.xG, 0);
-
-            t2xGPP_temp = Object.values(shots)
-                .filter(shot => shot.team === 'B' && shot.situation === 'PP')
-                .reduce((sum, shot) => sum + shot.xG, 0);
-
             t1s_temp = Object.values(shots).filter(shot => shot.team === 'A').length;
             t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
             t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
             t2sOT_temp = Object.values(shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
 
-            t1sPP_temp = Object.values(shots).filter(shot => shot.team === 'A' && shot.situation === 'PP').length;
-            t2sPP_temp = Object.values(shots).filter(shot => shot.team === 'B' && shot.situation === 'PP').length;
             const penEventsA = events.filter(e => e.team === 'A' && parsePenaltySegments(e.code)).length;
             const penEventsB = events.filter(e => e.team === 'B' && parsePenaltySegments(e.code)).length;
             t1ppOpp_temp = penEventsB; // team A's PP opportunities = team B's penalty events
@@ -370,15 +358,12 @@ window.onload = function() {
             t2xG.innerHTML = t2xG_temp.toFixed(2);
             t1xGOT.innerHTML = t1xGOT_temp.toFixed(2);
             t2xGOT.innerHTML = t2xGOT_temp.toFixed(2);
-            t1xGPP.innerHTML = t1xGPP_temp.toFixed(2);
-            t2xGPP.innerHTML = t2xGPP_temp.toFixed(2);
             updatePPIndicator(events, match.period_lengths_sec, t1name, t2name);
+            update6v5Indicator(events, match.period_lengths_sec, t1name, t2name);
             t1s.innerHTML = t1s_temp;
             t2s.innerHTML = t2s_temp;
             t1sOT.innerHTML = t1sOT_temp;
             t2sOT.innerHTML = t2sOT_temp;
-            t1sPP.innerHTML = t1sPP_temp;
-            t2sPP.innerHTML = t2sPP_temp;
             t1pp.innerHTML = t1ppGoals_temp + '/' + t1ppOpp_temp;
             t2pp.innerHTML = t2ppGoals_temp + '/' + t2ppOpp_temp;
             g_date.innerHTML = match.date;
@@ -1126,6 +1111,8 @@ function drawCharts() {
     xG_t2PP = Object.values(shots).filter(s => s.team === 'B' && s.situation === 'PP').reduce((sum, s) => sum + s.xG, 0);
     xG_t1SH = Object.values(shots).filter(s => s.team === 'A' && s.situation === 'SH').reduce((sum, s) => sum + s.xG, 0);
     xG_t2SH = Object.values(shots).filter(s => s.team === 'B' && s.situation === 'SH').reduce((sum, s) => sum + s.xG, 0);
+    xG_t16v5 = Object.values(shots).filter(s => s.team === 'A' && s.situation === '6V5').reduce((sum, s) => sum + s.xG, 0);
+    xG_t26v5 = Object.values(shots).filter(s => s.team === 'B' && s.situation === '6V5').reduce((sum, s) => sum + s.xG, 0);
 
     var xGByLineData = google.visualization.arrayToDataTable([
          ['Line', t1name, { role: 'style' }, { role: 'annotation' }, t2name, { role: 'style' }, { role: 'annotation' } ],
@@ -1133,7 +1120,8 @@ function drawCharts() {
          ['Line 2', xG_t1l2, 'color: '+ t1color, xG_t1l2, xG_t2l2, 'color: '+ t2color, xG_t2l2 ],
          ['Line 3', xG_t1l3, 'color: '+ t1color, xG_t1l3, xG_t2l3, 'color: '+ t2color, xG_t2l3 ],
          ['PP', xG_t1PP, 'color: '+ t1color, xG_t1PP, xG_t2PP, 'color: '+ t2color, xG_t2PP ],
-         ['SH', xG_t1SH, 'color: '+ t1color, xG_t1SH, xG_t2SH, 'color: '+ t2color, xG_t2SH ]
+         ['SH', xG_t1SH, 'color: '+ t1color, xG_t1SH, xG_t2SH, 'color: '+ t2color, xG_t2SH ],
+         ['6v5', xG_t16v5, 'color: '+ t1color, xG_t16v5, xG_t26v5, 'color: '+ t2color, xG_t26v5 ]
       ]);
 
     var options = {
@@ -1656,7 +1644,9 @@ function updateData() {
                     const y = parseFloat(st[1]);
                     xG = 0;
                     xGOT = 0;
-                    const situation = shotSituations[goaliedata[i].event_id] || 'EVEN';
+                    const situation = goaliedata[i].code === 'paastetty'
+                        ? (shotSituations[goaliedata[i].event_id] || situationFromGoalTag(findGoalTagForGoalie(events, goaliedata[i])))
+                        : (shotSituations[goaliedata[i].event_id] || 'EVEN');
 
                     if (match.category_id != '384') {
                         [xGOT, xG] = calcxG(x, y, situation);
@@ -1685,21 +1675,11 @@ function updateData() {
                 .filter(shot => shot.team === 'B')
                 .reduce((sum, shot) => sum + shot.xGOT, 0);
 
-            t1xGPP_temp = Object.values(shots)
-                .filter(shot => shot.team === 'A' && shot.situation === 'PP')
-                .reduce((sum, shot) => sum + shot.xG, 0);
-
-            t2xGPP_temp = Object.values(shots)
-                .filter(shot => shot.team === 'B' && shot.situation === 'PP')
-                .reduce((sum, shot) => sum + shot.xG, 0);
-
             t1s_temp = Object.values(shots).filter(shot => shot.team === 'A').length;
             t2s_temp = Object.values(shots).filter(shot => shot.team === 'B').length;
             t1sOT_temp = Object.values(shots).filter(shot => shot.team === "A" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
             t2sOT_temp = Object.values(shots).filter(shot => shot.team === "B" && (shot.code === "laukaus" || shot.code === "laukausmaali")).length;
 
-            t1sPP_temp = Object.values(shots).filter(shot => shot.team === 'A' && shot.situation === 'PP').length;
-            t2sPP_temp = Object.values(shots).filter(shot => shot.team === 'B' && shot.situation === 'PP').length;
             const penEventsA = events.filter(e => e.team === 'A' && parsePenaltySegments(e.code)).length;
             const penEventsB = events.filter(e => e.team === 'B' && parsePenaltySegments(e.code)).length;
             t1ppOpp_temp = penEventsB; // team A's PP opportunities = team B's penalty events
@@ -1832,15 +1812,12 @@ function updateData() {
             t2xG.innerHTML = t2xG_temp.toFixed(2);
             t1xGOT.innerHTML = t1xGOT_temp.toFixed(2);
             t2xGOT.innerHTML = t2xGOT_temp.toFixed(2);
-            t1xGPP.innerHTML = t1xGPP_temp.toFixed(2);
-            t2xGPP.innerHTML = t2xGPP_temp.toFixed(2);
             updatePPIndicator(events, match.period_lengths_sec, t1name, t2name);
+            update6v5Indicator(events, match.period_lengths_sec, t1name, t2name);
             t1s.innerHTML = t1s_temp;
             t2s.innerHTML = t2s_temp;
             t1sOT.innerHTML = t1sOT_temp;
             t2sOT.innerHTML = t2sOT_temp;
-            t1sPP.innerHTML = t1sPP_temp;
-            t2sPP.innerHTML = t2sPP_temp;
             t1pp.innerHTML = t1ppGoals_temp + '/' + t1ppOpp_temp;
             t2pp.innerHTML = t2ppGoals_temp + '/' + t2ppOpp_temp;
             g_date.innerHTML = match.date;
@@ -2203,7 +2180,20 @@ function computeShotSituations(allEvents, periodLengths) {
             if (pulled[e.team]) {
                 situations[e.event_id] = '6V5';
             }
-        } else if (e.code === 'torjunta' || e.code === 'paastetty') {
+        } else if (e.code === 'paastetty') {
+            // A goal against - situation comes from the goal's own
+            // authoritative tag (findGoalTagForGoalie in the caller), not
+            // this active-penalty simulation. A PP goal ends the scoring
+            // team's power play at this exact instant (the 'maali' branch
+            // above, processed earlier at the same timestamp, already
+            // truncated the window to end right here), so by now
+            // activeCount() no longer sees it as active - only the 6V5
+            // (own goalie pulled) override applies here, same as laukausmaali.
+            const shootingTeam = e.team === 'A' ? 'B' : 'A';
+            if (pulled[shootingTeam]) {
+                situations[e.event_id] = '6V5';
+            }
+        } else if (e.code === 'torjunta') {
             const shootingTeam = e.team === 'A' ? 'B' : 'A';
             if (pulled[shootingTeam]) {
                 situations[e.event_id] = '6V5';
@@ -2223,6 +2213,17 @@ function computeShotSituations(allEvents, periodLengths) {
 function findGoalTag(allEvents, shot) {
     const goal = allEvents.find(e => e.code === 'maali' && e.team === shot.team
         && e.period === shot.period && e.time === shot.time && e.player_id === shot.player_id);
+    return goal ? goal.description : '';
+}
+
+// A paastetty (goal-against) event shares period/time with the maali event
+// of the SCORING (opposing) team - matched without player_id, unlike
+// findGoalTag, since the goalie isn't the scorer. Gives the goalie's side of
+// a goal the same authoritative PP/SH/EVEN tag the shooter's side gets.
+function findGoalTagForGoalie(allEvents, goalieEvent) {
+    const scoringTeam = goalieEvent.team === 'A' ? 'B' : 'A';
+    const goal = allEvents.find(e => e.code === 'maali' && e.team === scoringTeam
+        && e.period === goalieEvent.period && e.time === goalieEvent.time);
     return goal ? goal.description : '';
 }
 
@@ -2285,6 +2286,47 @@ function updatePPIndicator(allEvents, periodLengths, teamAName, teamBName) {
     const secs = Math.floor(st.remainingSec % 60);
     document.getElementById('ppIndicatorTeam').innerText = ppTeamName;
     document.getElementById('ppIndicatorTime').innerText = mins + ':' + (secs < 10 ? '0' : '') + secs;
+    indicator.style.display = 'flex';
+}
+
+// Current goalie-pulled state "as of now" (the latest processed event): which
+// team, if any, currently has their own goalie off for an extra attacker.
+// Unlike currentSpecialTeams there's no timer to wind down - mvvaihto simply
+// toggles the state directly (description contains "pois"/"sisään" - see
+// computeShotSituations) - so this just replays every toggle in order and
+// reports where each team landed.
+function current6v5State(allEvents, periodLengths) {
+    const timed = allEvents
+        .map(e => Object.assign({}, e, { _t: absGameTime(e.period, e.time_sec, periodLengths) }))
+        .sort((a, b) => a._t - b._t);
+    const pulled = { A: false, B: false };
+    timed.forEach(e => {
+        if (e.code === 'mvvaihto' && (e.team === 'A' || e.team === 'B')) {
+            const desc = e.description || '';
+            if (desc.indexOf('pois') !== -1) {
+                pulled[e.team] = true;
+            } else if (desc.indexOf('sis') !== -1) {
+                pulled[e.team] = false;
+            }
+        }
+    });
+    if (pulled.A) return 'A';
+    if (pulled.B) return 'B';
+    return null;
+}
+
+// Shows/hides the live 6-vs-5 banner (#sixVFiveIndicator in f-liiga_game.html) -
+// same excitement-building idea as the power-play banner, for the moment a
+// team pulls their goalie for an extra attacker. Refreshes once per poll.
+function update6v5Indicator(allEvents, periodLengths, teamAName, teamBName) {
+    const indicator = document.getElementById('sixVFiveIndicator');
+    if (!indicator) return;
+    const pulledTeam = current6v5State(allEvents, periodLengths);
+    if (!pulledTeam) {
+        indicator.style.display = 'none';
+        return;
+    }
+    document.getElementById('sixVFiveIndicatorTeam').innerText = pulledTeam === 'A' ? teamAName : teamBName;
     indicator.style.display = 'flex';
 }
 
