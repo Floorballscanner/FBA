@@ -354,13 +354,16 @@ function drawCharts() {
     pldatat1l1.addColumn('number', 'A');
     pldatat1l1.addColumn('number', 'P');
     pldatat1l1.addColumn('number', 'S');
-    pldatat1l1.addColumn('number', 'xG');
-    pldatat1l1.addColumn('number', 'xGOT');
-    pldatat1l1.addColumn('number', 'PPG');
-    pldatat1l1.addColumn('number', 'PPS');
-    pldatat1l1.addColumn('number', 'xGPP');
     pldatat1l1.addColumn('number', '+');
     pldatat1l1.addColumn('number', '-');
+    pldatat1l1.addColumn('number', 'xG5v5');
+    pldatat1l1.addColumn('number', 'xGOT5v5');
+    pldatat1l1.addColumn('number', 'xGPP');
+    pldatat1l1.addColumn('number', 'xGOTPP');
+    pldatat1l1.addColumn('number', 'xGSH');
+    pldatat1l1.addColumn('number', 'xGOTSH');
+    pldatat1l1.addColumn('number', 'xG6v5');
+    pldatat1l1.addColumn('number', 'xGOT6v5');
 
     var pldatat1l2 = new google.visualization.DataTable();
     pldatat1l2.addColumn('string', 'Player');
@@ -369,13 +372,16 @@ function drawCharts() {
     pldatat1l2.addColumn('number', 'A');
     pldatat1l2.addColumn('number', 'P');
     pldatat1l2.addColumn('number', 'S');
-    pldatat1l2.addColumn('number', 'xG');
-    pldatat1l2.addColumn('number', 'xGOT');
-    pldatat1l2.addColumn('number', 'PPG');
-    pldatat1l2.addColumn('number', 'PPS');
-    pldatat1l2.addColumn('number', 'xGPP');
     pldatat1l2.addColumn('number', '+');
     pldatat1l2.addColumn('number', '-');
+    pldatat1l2.addColumn('number', 'xG5v5');
+    pldatat1l2.addColumn('number', 'xGOT5v5');
+    pldatat1l2.addColumn('number', 'xGPP');
+    pldatat1l2.addColumn('number', 'xGOTPP');
+    pldatat1l2.addColumn('number', 'xGSH');
+    pldatat1l2.addColumn('number', 'xGOTSH');
+    pldatat1l2.addColumn('number', 'xG6v5');
+    pldatat1l2.addColumn('number', 'xGOT6v5');
 
     var pldatat1l3 = new google.visualization.DataTable();
     pldatat1l3.addColumn('string', 'Player');
@@ -384,13 +390,16 @@ function drawCharts() {
     pldatat1l3.addColumn('number', 'A');
     pldatat1l3.addColumn('number', 'P');
     pldatat1l3.addColumn('number', 'S');
-    pldatat1l3.addColumn('number', 'xG');
-    pldatat1l3.addColumn('number', 'xGOT');
-    pldatat1l3.addColumn('number', 'PPG');
-    pldatat1l3.addColumn('number', 'PPS');
-    pldatat1l3.addColumn('number', 'xGPP');
     pldatat1l3.addColumn('number', '+');
     pldatat1l3.addColumn('number', '-');
+    pldatat1l3.addColumn('number', 'xG5v5');
+    pldatat1l3.addColumn('number', 'xGOT5v5');
+    pldatat1l3.addColumn('number', 'xGPP');
+    pldatat1l3.addColumn('number', 'xGOTPP');
+    pldatat1l3.addColumn('number', 'xGSH');
+    pldatat1l3.addColumn('number', 'xGOTSH');
+    pldatat1l3.addColumn('number', 'xG6v5');
+    pldatat1l3.addColumn('number', 'xGOT6v5');
 
     var pldatat1l4 = new google.visualization.DataTable();
     pldatat1l4.addColumn('string', 'Player');
@@ -399,13 +408,16 @@ function drawCharts() {
     pldatat1l4.addColumn('number', 'A');
     pldatat1l4.addColumn('number', 'P');
     pldatat1l4.addColumn('number', 'S');
-    pldatat1l4.addColumn('number', 'xG');
-    pldatat1l4.addColumn('number', 'xGOT');
-    pldatat1l4.addColumn('number', 'PPG');
-    pldatat1l4.addColumn('number', 'PPS');
-    pldatat1l4.addColumn('number', 'xGPP');
     pldatat1l4.addColumn('number', '+');
     pldatat1l4.addColumn('number', '-');
+    pldatat1l4.addColumn('number', 'xG5v5');
+    pldatat1l4.addColumn('number', 'xGOT5v5');
+    pldatat1l4.addColumn('number', 'xGPP');
+    pldatat1l4.addColumn('number', 'xGOTPP');
+    pldatat1l4.addColumn('number', 'xGSH');
+    pldatat1l4.addColumn('number', 'xGOTSH');
+    pldatat1l4.addColumn('number', 'xG6v5');
+    pldatat1l4.addColumn('number', 'xGOT6v5');
 
     var pldatat2l1 = new google.visualization.DataTable();
     pldatat2l1.addColumn('string', 'Player');
@@ -414,13 +426,16 @@ function drawCharts() {
     pldatat2l1.addColumn('number', 'A');
     pldatat2l1.addColumn('number', 'P');
     pldatat2l1.addColumn('number', 'S');
-    pldatat2l1.addColumn('number', 'xG');
-    pldatat2l1.addColumn('number', 'xGOT');
-    pldatat2l1.addColumn('number', 'PPG');
-    pldatat2l1.addColumn('number', 'PPS');
-    pldatat2l1.addColumn('number', 'xGPP');
     pldatat2l1.addColumn('number', '+');
     pldatat2l1.addColumn('number', '-');
+    pldatat2l1.addColumn('number', 'xG5v5');
+    pldatat2l1.addColumn('number', 'xGOT5v5');
+    pldatat2l1.addColumn('number', 'xGPP');
+    pldatat2l1.addColumn('number', 'xGOTPP');
+    pldatat2l1.addColumn('number', 'xGSH');
+    pldatat2l1.addColumn('number', 'xGOTSH');
+    pldatat2l1.addColumn('number', 'xG6v5');
+    pldatat2l1.addColumn('number', 'xGOT6v5');
 
     var pldatat2l2 = new google.visualization.DataTable();
     pldatat2l2.addColumn('string', 'Player');
@@ -429,13 +444,16 @@ function drawCharts() {
     pldatat2l2.addColumn('number', 'A');
     pldatat2l2.addColumn('number', 'P');
     pldatat2l2.addColumn('number', 'S');
-    pldatat2l2.addColumn('number', 'xG');
-    pldatat2l2.addColumn('number', 'xGOT');
-    pldatat2l2.addColumn('number', 'PPG');
-    pldatat2l2.addColumn('number', 'PPS');
-    pldatat2l2.addColumn('number', 'xGPP');
     pldatat2l2.addColumn('number', '+');
     pldatat2l2.addColumn('number', '-');
+    pldatat2l2.addColumn('number', 'xG5v5');
+    pldatat2l2.addColumn('number', 'xGOT5v5');
+    pldatat2l2.addColumn('number', 'xGPP');
+    pldatat2l2.addColumn('number', 'xGOTPP');
+    pldatat2l2.addColumn('number', 'xGSH');
+    pldatat2l2.addColumn('number', 'xGOTSH');
+    pldatat2l2.addColumn('number', 'xG6v5');
+    pldatat2l2.addColumn('number', 'xGOT6v5');
 
     var pldatat2l3 = new google.visualization.DataTable();
     pldatat2l3.addColumn('string', 'Player');
@@ -444,13 +462,16 @@ function drawCharts() {
     pldatat2l3.addColumn('number', 'A');
     pldatat2l3.addColumn('number', 'P');
     pldatat2l3.addColumn('number', 'S');
-    pldatat2l3.addColumn('number', 'xG');
-    pldatat2l3.addColumn('number', 'xGOT');
-    pldatat2l3.addColumn('number', 'PPG');
-    pldatat2l3.addColumn('number', 'PPS');
-    pldatat2l3.addColumn('number', 'xGPP');
     pldatat2l3.addColumn('number', '+');
     pldatat2l3.addColumn('number', '-');
+    pldatat2l3.addColumn('number', 'xG5v5');
+    pldatat2l3.addColumn('number', 'xGOT5v5');
+    pldatat2l3.addColumn('number', 'xGPP');
+    pldatat2l3.addColumn('number', 'xGOTPP');
+    pldatat2l3.addColumn('number', 'xGSH');
+    pldatat2l3.addColumn('number', 'xGOTSH');
+    pldatat2l3.addColumn('number', 'xG6v5');
+    pldatat2l3.addColumn('number', 'xGOT6v5');
 
     var pldatat2l4 = new google.visualization.DataTable();
     pldatat2l4.addColumn('string', 'Player');
@@ -459,46 +480,56 @@ function drawCharts() {
     pldatat2l4.addColumn('number', 'A');
     pldatat2l4.addColumn('number', 'P');
     pldatat2l4.addColumn('number', 'S');
-    pldatat2l4.addColumn('number', 'xG');
-    pldatat2l4.addColumn('number', 'xGOT');
-    pldatat2l4.addColumn('number', 'PPG');
-    pldatat2l4.addColumn('number', 'PPS');
-    pldatat2l4.addColumn('number', 'xGPP');
     pldatat2l4.addColumn('number', '+');
     pldatat2l4.addColumn('number', '-');
+    pldatat2l4.addColumn('number', 'xG5v5');
+    pldatat2l4.addColumn('number', 'xGOT5v5');
+    pldatat2l4.addColumn('number', 'xGPP');
+    pldatat2l4.addColumn('number', 'xGOTPP');
+    pldatat2l4.addColumn('number', 'xGSH');
+    pldatat2l4.addColumn('number', 'xGOTSH');
+    pldatat2l4.addColumn('number', 'xG6v5');
+    pldatat2l4.addColumn('number', 'xGOT6v5');
 
     lineup_t1l1.forEach(lineup => {
         pldatat1l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t1l2.forEach(lineup => {
         pldatat1l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t1l3.forEach(lineup => {
         pldatat1l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t1l4.forEach(lineup => {
         pldatat1l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
-
     lineup_t2l1.forEach(lineup => {
         pldatat2l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t2l2.forEach(lineup => {
         pldatat2l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t2l3.forEach(lineup => {
         pldatat2l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t2l4.forEach(lineup => {
         pldatat2l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
-        lineup.goals + lineup.assists, lineup.shots, lineup.xG, lineup.xGOT, lineup.PPG, lineup.PPS, lineup.xGPP, lineup.plus, lineup.minus]);
+        lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
 
     var pldatat1g = new google.visualization.DataTable();
@@ -637,12 +668,14 @@ function drawCharts() {
 
     // xG by Line
 
-    xG_t1l1 = lineup_t1l1.reduce(function (sum, player) {return sum + player.xG;}, 0);
-    xG_t1l2 = lineup_t1l2.reduce(function (sum, player) {return sum + player.xG;}, 0);
-    xG_t1l3 = lineup_t1l3.reduce(function (sum, player) {return sum + player.xG;}, 0);
-    xG_t2l1 = lineup_t2l1.reduce(function (sum, player) {return sum + player.xG;}, 0);
-    xG_t2l2 = lineup_t2l2.reduce(function (sum, player) {return sum + player.xG;}, 0);
-    xG_t2l3 = lineup_t2l3.reduce(function (sum, player) {return sum + player.xG;}, 0);
+    // Line 1/2/3 bars are 5v5 xG only - PP/SH/6v5 get their own bars below,
+    // so a line's bar isn't inflated by, e.g., its players' power-play shots.
+    xG_t1l1 = lineup_t1l1.reduce(function (sum, player) {return sum + player.xG5v5;}, 0);
+    xG_t1l2 = lineup_t1l2.reduce(function (sum, player) {return sum + player.xG5v5;}, 0);
+    xG_t1l3 = lineup_t1l3.reduce(function (sum, player) {return sum + player.xG5v5;}, 0);
+    xG_t2l1 = lineup_t2l1.reduce(function (sum, player) {return sum + player.xG5v5;}, 0);
+    xG_t2l2 = lineup_t2l2.reduce(function (sum, player) {return sum + player.xG5v5;}, 0);
+    xG_t2l3 = lineup_t2l3.reduce(function (sum, player) {return sum + player.xG5v5;}, 0);
 
     xG_t1PP = Object.values(shots).filter(s => s.team === 'A' && s.situation === 'PP').reduce((sum, s) => sum + s.xG, 0);
     xG_t2PP = Object.values(shots).filter(s => s.team === 'B' && s.situation === 'PP').reduce((sum, s) => sum + s.xG, 0);
@@ -1189,26 +1222,26 @@ function updateData() {
 
             lineups.forEach(lineup => {
                 pl = lineup.player_id;
+                const playerShots = Object.values(shots).filter(shot => shot.player_id === pl);
 
-                txg = Object.values(shots)
-                .filter(shot => shot.player_id === pl)
-                .reduce((sum, shot) => sum + shot.xG, 0);
-                lineup.xG = Number(txg.toFixed(2));
-                txg = Object.values(shots)
-                .filter(shot => shot.player_id === pl)
-                .reduce((sum, shot) => sum + shot.xGOT, 0);
-                lineup.xGOT = Number(txg.toFixed(2));
-                txg = Object.values(shots)
-                .filter(shot => shot.player_id === pl && shot.situation === 'PP')
-                .reduce((sum, shot) => sum + shot.xG, 0);
-                lineup.xGPP = Number(txg.toFixed(2));
-                lineup.PPG = Object.values(shots)
-                .filter(shot => shot.player_id === pl && shot.situation === 'PP' && shot.code === 'laukausmaali').length;
-                lineup.PPS = Object.values(shots)
-                .filter(shot => shot.player_id === pl && shot.situation === 'PP').length;
-                lineup.shots = Object.values(shots)
-                .filter(shot => shot.player_id === pl).length;
+                const sumXg = (situation) => Number(playerShots
+                    .filter(s => situation === null || s.situation === situation)
+                    .reduce((sum, s) => sum + s.xG, 0).toFixed(2));
+                const sumXgot = (situation) => Number(playerShots
+                    .filter(s => situation === null || s.situation === situation)
+                    .reduce((sum, s) => sum + s.xGOT, 0).toFixed(2));
 
+                lineup.xG = sumXg(null);
+                lineup.xGOT = sumXgot(null);
+                lineup.xG5v5 = sumXg('EVEN');
+                lineup.xGOT5v5 = sumXgot('EVEN');
+                lineup.xGPP = sumXg('PP');
+                lineup.xGOTPP = sumXgot('PP');
+                lineup.xGSH = sumXg('SH');
+                lineup.xGOTSH = sumXgot('SH');
+                lineup.xG6v5 = sumXg('6V5');
+                lineup.xGOT6v5 = sumXgot('6V5');
+                lineup.shots = playerShots.length;
             });
 
             lineup_t1 = Object.values(lineups)

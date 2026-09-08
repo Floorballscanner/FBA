@@ -42,11 +42,14 @@ const TABLE_COLUMNS = {
         ['SM', 'number', 'SM'],
         ['plus', 'number', '+'],
         ['minus', 'number', '-'],
-        ['xG', 'number', 'xG'],
-        ['xGOT', 'number', 'xGOT'],
-        ['PPG', 'number', 'PPG'],
-        ['PPS', 'number', 'PPS'],
+        ['xG5v5', 'number', 'xG5v5'],
+        ['xGOT5v5', 'number', 'xGOT5v5'],
         ['xGPP', 'number', 'xGPP'],
+        ['xGOTPP', 'number', 'xGOTPP'],
+        ['xGSH', 'number', 'xGSH'],
+        ['xGOTSH', 'number', 'xGOTSH'],
+        ['xG6v5', 'number', 'xG6v5'],
+        ['xGOT6v5', 'number', 'xGOT6v5'],
         ['GAxG', 'number', 'GAxG'],
     ],
     goalies: [
@@ -82,11 +85,11 @@ const TABLE_LEGENDS = {
         + '<b>S</b> = Shots (on target and missed), '
         + '<b>SM</b> = Shots that missed the target, '
         + '<b>+/-</b> = On-ice goals for/against, '
-        + '<b>xG/xGOT</b> = expected Goals (all shots / on-target shots only), '
-        + '<b>PPG</b> = Goals scored while on a powerplay, '
-        + '<b>PPS</b> = Shots taken while on a powerplay, '
-        + '<b>xGPP</b> = expected Goals from powerplay shots, '
-        + '<b>GAxG</b> = Goals minus expected Goals.',
+        + '<b>xG5v5/xGOT5v5</b> = expected Goals at even strength (all shots / on-target shots only), '
+        + '<b>xGPP/xGOTPP</b> = same, while on a powerplay, '
+        + '<b>xGSH/xGOTSH</b> = same, while shorthanded, '
+        + '<b>xG6v5/xGOT6v5</b> = same, with this player\'s own goalie pulled, '
+        + '<b>GAxG</b> = Goals minus expected Goals (all situations).',
     goalies: '<b>xGOTA</b> = expected Goals (on-target shots) faced, '
         + '<b>GA</b> = Goals allowed, '
         + '<b>SA</b> = Shots on target faced, '

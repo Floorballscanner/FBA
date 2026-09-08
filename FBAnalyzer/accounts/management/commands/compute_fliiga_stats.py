@@ -366,8 +366,18 @@ class Command(BaseCommand):
                     'S': 0, 'SM': 0,
                     'plus': plus_by_player.get(player_id, 0),
                     'minus': minus_by_player.get(player_id, 0),
-                    'xG': 0.0, 'xGOT': 0.0, 'xGPP': 0.0, 'PPG': 0, 'PPS': 0, 'GAxG': 0.0,
+                    # xG/xGOT (all situations) are kept for GAxG only, not
+                    # displayed directly - the table shows the per-situation
+                    # breakdown below instead.
+                    'xG': 0.0, 'xGOT': 0.0,
+                    'xG5v5': 0.0, 'xGOT5v5': 0.0,
+                    'xGPP': 0.0, 'xGOTPP': 0.0,
+                    'xGSH': 0.0, 'xGOTSH': 0.0,
+                    'xG6v5': 0.0, 'xGOT6v5': 0.0,
+                    'GAxG': 0.0,
                 })
+
+        SITUATION_FIELD_SUFFIX = {'EVEN': '5v5', 'PP': 'PP', 'SH': 'SH', '6V5': '6v5'}
 
         player_stats = [p for p in players_all if p['Games'] > 0]
         for player in player_stats:
@@ -380,15 +390,15 @@ class Command(BaseCommand):
                         player['G'] += 1
                     player['xG'] += shot['xG']
                     player['xGOT'] += shot['xGOT']
-                    if shot.get('situation') == 'PP':
-                        player['xGPP'] += shot['xG']
-                        player['PPS'] += 1
-                        if shot['code'] == 'laukausmaali':
-                            player['PPG'] += 1
+                    suffix = SITUATION_FIELD_SUFFIX.get(shot.get('situation'))
+                    if suffix:
+                        player[f'xG{suffix}'] += shot['xG']
+                        player[f'xGOT{suffix}'] += shot['xGOT']
             player['P'] = player['G'] + player['A']
-            player['xG'] = round2(player['xG'])
-            player['xGOT'] = round2(player['xGOT'])
-            player['xGPP'] = round2(player['xGPP'])
+            for field in (
+                'xG', 'xGOT', 'xG5v5', 'xGOT5v5', 'xGPP', 'xGOTPP', 'xGSH', 'xGOTSH', 'xG6v5', 'xGOT6v5',
+            ):
+                player[field] = round2(player[field])
             player['GAxG'] = round2(player['G'] - player['xG'])
 
         player_stats = [p for p in player_stats if p['xG'] > 0]
