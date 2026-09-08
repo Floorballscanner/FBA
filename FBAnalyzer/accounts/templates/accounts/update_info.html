@@ -18,6 +18,39 @@ static/css/update_info.css, scoped under .update-info-page.
     <h1 class="update-info-page__title">What's new</h1>
 
     <div class="ui-entry ui-entry--highlight">
+        <span class="ui-entry__date">8.9.2026</span>
+        <h2>A more accurate xG model, aware of special teams</h2>
+        <p>
+            Expected goals (xG) on every F-Liiga page are now calculated by a
+            situational model instead of one blanket formula for every shot. A shot
+            taken at 5-on-5, on the power play, shorthanded, or with a goalie pulled
+            for an extra attacker no longer gets judged by the same yardstick — each
+            situation has its own model, built from three full seasons of real F-Liiga
+            shot data.
+        </p>
+        <p>
+            The difference shows up throughout the app:
+        </p>
+        <ul>
+            <li>Live game pages now show a "6 vs 5" banner alongside the power-play
+            banner, so you know at a glance when a team has pulled its goalie.</li>
+            <li>The "xG by Line and Team" chart breaks out 5-on-5, power play,
+            shorthanded, and 6-vs-5 xG separately, instead of mixing special-teams
+            shots into a line's regular xG total.</li>
+            <li>Player tables — on live pages, results pages, and the season
+            statistics page — show the full situational breakdown: xG and xGOT for
+            5-on-5, power play, shorthanded, and 6-vs-5.</li>
+            <li>The season statistics team table adds power-play and 6-vs-5 xG
+            columns alongside the existing ones.</li>
+        </ul>
+        <p>
+            Under the hood, goalie stats (like GSAx) are also more accurate now — a
+            subtle mistagging that occasionally undercounted a goalie's expected
+            goals on power-play and shorthanded goals against has been fixed.
+        </p>
+    </div>
+
+    <div class="ui-entry">
         <span class="ui-entry__date">6.9.2026</span>
         <h2>F-Liiga insights: pregame previews, live notifications, and post-game recaps</h2>
         <p>
