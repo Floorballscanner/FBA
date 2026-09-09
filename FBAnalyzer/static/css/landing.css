@@ -802,6 +802,14 @@ a.landing-card:hover {
     padding: 0 24px 80px;
 }
 
+/* The live-game charts (xG by Line and Team, xG by Team, Goal Probabilities,
+   Momentum, and the tempo/action chart) read better with more horizontal
+   room than the rest of the page - none of them set an explicit pixel width
+   in fliigalivegame.js, so widening this container is enough on its own. */
+.landing-result--charts {
+    max-width: 1200px;
+}
+
 .landing-result__meta {
     text-align: center;
     color: var(--landing-muted);
@@ -859,11 +867,30 @@ a.landing-card:hover {
     margin-top: 2px;
 }
 
-/* fliigalivegame.js prepends a live badge (img) or scheduled kickoff time
-   (h5) as the first child of #gstats depending on match state. */
-.landing-result > img {
-    display: block;
-    margin: 0 auto 12px;
+/* fliigalivegame.js prepends a live badge (span.landing-live-badge) or
+   scheduled kickoff time (h5) as the first child of #gstats depending on
+   match state. Same pulsing-dot look as .landing-match-card__live on the
+   live-games list (livepage.js), reusing its landingLivePulse animation. */
+.landing-live-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #d92d20;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.landing-live-badge::before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #d92d20;
+    animation: landingLivePulse 1.4s ease-in-out infinite;
 }
 
 .landing-result > h5 {

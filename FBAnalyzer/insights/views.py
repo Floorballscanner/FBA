@@ -33,7 +33,7 @@ from .models import Insight, PostGameAnalysis, PregameAnalysis
 from .pregame import compute_pregame_analysis
 from .torneopal import CATEGORY_ID_MAP, STAGE_GROUP_ID_MAP
 
-LIVE_INSIGHTS_LIMIT = 10
+LIVE_INSIGHTS_LIMIT = 3
 
 
 @login_required
@@ -139,11 +139,22 @@ def live_insights(request, match_id):
     insights.live_insights.evaluate_match_insights, run every ~60s from
     ingest_match_tick). Excludes wp_swing's own silent bookkeeping rows
     (empty text) that exist only so the next evaluation has a true previous
-    win-probability value to diff against."""
+    win-probability value to diff against.
+
+    Each insight type gets its own 5-minute cooldown (see COOLDOWN_SECONDS in
+    live_insights.py), not a shared one - so in a lopsided game the same
+    persistently-notable type (xg_over_under, xg_momentum) keeps re-clearing
+    the notability bar every ~5 minutes all game long and would otherwise
+    crowd out the rarer types in a plain "most recent N" feed. Taking only
+    the latest row per distinct insight_type first, then the most recent
+    LIVE_INSIGHTS_LIMIT of those, keeps the feed varied instead of repetitive.
+    """
 
     insights = (
-        Insight.objects.filter(match_id=match_id).exclude(text='').order_by('-created_at')[:LIVE_INSIGHTS_LIMIT]
+        Insight.objects.filter(match_id=match_id).exclude(text='')
+        .order_by('insight_type', '-created_at').distinct('insight_type')
     )
+    insights = sorted(insights, key=lambda i: i.created_at, reverse=True)[:LIVE_INSIGHTS_LIMIT]
     return JsonResponse({
         'insights': [
             {
