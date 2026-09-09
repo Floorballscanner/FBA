@@ -801,6 +801,20 @@ resize the canvas itself.
         justify-content: stretch;
     }
 
+    /* .pg-setup is itself a non-wrapping flex row of three groups (Date, Team 1, Team 2) -
+       stacking .pg-panel to one column doesn't help this card on its own, since three
+       flex items each holding a label plus one or two <select>s still don't fit a phone's
+       width side by side. Stack the groups too; each one then gets the full card width for
+       its own label + select(s), which do have room to sit side by side at that width. */
+    .pg-setup {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pg-setup__group {
+        flex: 1 1 auto;
+    }
+
     .pg-lineups-grid {
         grid-template-columns: repeat(2, 1fr);
     }
