@@ -1303,35 +1303,75 @@ function calcActionArray() {
     }
 }
 
+// dist[k] = exact P(exactly k goals), given each shot is an independent
+// Bernoulli(xGOT) trial - the Poisson-binomial distribution, built one shot
+// at a time. Same idea as insights/win_probability.py's server-side twin;
+// mirrored here (no shared runtime between client and server) so the win%
+// and "Goal Probabilities" chart are exact and cheap instead of resimulated
+// from scratch on every 10s poll.
+function goalDistribution(xgotValues) {
+    let dist = [1.0];
+    for (const p of xgotValues) {
+        const next = new Array(dist.length + 1).fill(0);
+        for (let k = 0; k < dist.length; k++) {
+            next[k] += dist[k] * (1 - p);
+            next[k + 1] += dist[k] * p;
+        }
+        dist = next;
+    }
+    return dist;
+}
+
+// One random draw from a discrete distribution, via its cumulative table -
+// O(goals) per draw instead of the old O(shots) (one random() roll per shot,
+// every draw), and independent of how many shots were actually taken.
+function sampleFromCumulative(cumulative) {
+    const r = Math.random();
+    for (let k = 0; k < cumulative.length; k++) {
+        if (r < cumulative[k]) {
+            return k;
+        }
+    }
+    return cumulative.length - 1;
+}
+
 function calcDistArray() {
 
-    res1 = [];
-    res2 = [];
     t1ar = shots.filter(entry => entry['team'] === "A").map(entry => entry['xGOT']);
     t2ar = shots.filter(entry => entry['team'] === "B").map(entry => entry['xGOT']);
 
-    // Calculators
-    c_1 = 0;
-    c_even = 0;
-    c_2 = 0;
+    const dist1 = goalDistribution(t1ar);
+    const dist2 = goalDistribution(t2ar);
 
+    // Exact win/tie/loss shares, summed directly over the two distributions
+    // instead of counted from n_Sim simulated rounds. c_1/c_even/c_2 are
+    // scaled back up to look like round counts (rather than fractions) so
+    // the existing "/ n_Sim" callers below need no changes.
+    let wp1 = 0, wpEven = 0;
+    for (let i = 0; i < dist1.length; i++) {
+        for (let j = 0; j < dist2.length; j++) {
+            const p = dist1[i] * dist2[j];
+            if (i > j) { wp1 += p; }
+            else if (i === j) { wpEven += p; }
+        }
+    }
+    c_1 = wp1 * n_Sim;
+    c_even = wpEven * n_Sim;
+    c_2 = n_Sim - c_1 - c_even;
+
+    // res1/res2 still feed the "Goal Probabilities" histogram, which expects
+    // n_Sim raw (goalsA, goalsB) sample pairs - draw them from the exact
+    // distributions above instead of resimulating every shot n_Sim times.
+    const cum1 = [], cum2 = [];
+    let running1 = 0, running2 = 0;
+    for (let k = 0; k < dist1.length; k++) { running1 += dist1[k]; cum1.push(running1); }
+    for (let k = 0; k < dist2.length; k++) { running2 += dist2[k]; cum2.push(running2); }
+
+    res1 = [];
+    res2 = [];
     for (let i = 0; i < n_Sim; i++) {
-
-        simVal1 = t1ar.map(val => Math.random() < val);
-        simVal2 = t2ar.map(val => Math.random() < val);
-
-        noSucc1 = simVal1.filter(Boolean).length;
-        noSucc2 = simVal2.filter(Boolean).length;
-
-        // Add results to tables
-        res1.push(noSucc1);
-        res2.push(noSucc2);
-
-        // Update calculators
-        if (noSucc1 > noSucc2) { c_1++; }
-        else if (noSucc1 === noSucc2) { c_even++; }
-        else { c_2++; }
-
+        res1.push(sampleFromCumulative(cum1));
+        res2.push(sampleFromCumulative(cum2));
     }
 }
 
@@ -2086,12 +2126,20 @@ function updateData() {
             setTimeout(drawCharts, 500);
             setTimeout(drawShotMap, 1000);
             console.log('Success:', data);
-            t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
 
         })
         .catch((error) => {
           console.error('Error:', error);
-    });
+        })
+        .finally(() => {
+            // Reschedule the next poll here (not just on success) - a single
+            // transient failure (a mobile signal drop, a brief Torneopal
+            // API hiccup) must not silently and permanently stop the page
+            // from updating. It used to: this call previously lived inside
+            // the success .then() only, so one bad tick and the page went
+            // stale until the viewer manually reloaded.
+            t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
+        });
 }
 
 // ============ Special teams (Powerplay/Shorthanded) derivation ============
