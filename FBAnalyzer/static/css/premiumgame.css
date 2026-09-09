@@ -1,20 +1,29 @@
 /*
 
-Visual layer for accounts/premiumgame.html only, scoped under .premiumgame-page. This page is
-used on tablets/laptops in landscape orientation, never mobile, while actively recording a
-game. The control panel (Date/Team pickers through the possession/game controls) is a dense
-CSS Grid so it fits a tablet screen in landscape without scrolling — canvas, score/clock, line
-buttons, possession, game controls and the three toggles are all reachable without scrolling
-mid-game, in the same left-to-right / top-to-bottom order as the original layout so nothing
-needs to be relearned. Team Lineups sits in its own full-width section right below — it's only
-set up once per game, so scrolling to reach it is fine. Below that, the results section
-(game/period stats, line-by-line detail) reuses the existing shared classes (.linestats,
-.shot-map, .stats-L1 etc.) so it's a pure CSS reskin — none of that markup was touched.
+Visual layer for accounts/premiumgame.html only, scoped under .premiumgame-page. On a
+tablet/laptop screen (>900px, see the mobile breakpoint below), the control panel (Date/Team
+pickers through the possession/game controls) is a dense CSS Grid so it fits a tablet screen
+in landscape without scrolling — canvas, score/clock, line buttons, possession, game controls
+and the three toggles are all reachable without scrolling mid-game, in the same left-to-right
+/ top-to-bottom order as the original layout so nothing needs to be relearned. Team Lineups
+sits in its own full-width section right below — it's only set up once per game, so scrolling
+to reach it is fine. Below that, the results section (game/period stats, line-by-line detail)
+reuses the existing shared classes (.linestats, .shot-map, .stats-L1 etc.) so it's a pure CSS
+reskin — none of that markup was touched, and it already reflows on narrow screens via
+Bootstrap's own .row/.col-sm-* classes (Bootstrap is still loaded site-wide).
+
+On a phone (<=900px), the mobile breakpoint at the bottom of this file stacks the control
+panel's cards to full width instead of the fixed 3-column grid, and drops Team Lineups from
+6 columns to 2 - this page used to work fine on mobile under the old Bootstrap-only styling,
+and stopped when the control panel was rebuilt as a fixed-width CSS Grid.
 
 The shotmap canvases (#myCanvas, #myCanvas_1..5) MUST keep their native width="300"
 height="500" both as HTML attributes and as rendered CSS size — static/js/variables.js
 hardcodes fWidth=300/fLength=500 and premiumfunctions.js maps every click coordinate against
 those exact pixels (see GetCoordinates/FindPosition). Never apply responsive scaling to them.
+At 300px wide this already fits inside a phone viewport unscaled - the mobile breakpoint
+exists to stop its fixed-width siblings from forcing the row wider than the screen, not to
+resize the canvas itself.
 
 */
 
@@ -772,4 +781,27 @@ those exact pixels (see GetCoordinates/FindPosition). Never apply responsive sca
 .premiumgame-page .stats-SH2T2 p {
     margin: 0 0 4px;
     line-height: 1.5;
+}
+
+/* ============ Mobile breakpoint ============
+   Stacks the control panel's fixed 3-column grid to a single column, and eases the Team
+   Lineups roster from 6 columns to 2, so both stay usable on a phone - see this file's
+   top-of-file comment for why. Nothing below this point touches the shotmap canvas itself
+   (already fits a phone viewport unscaled) or the results section (already reflows via
+   Bootstrap's own grid classes). */
+
+@media (max-width: 900px) {
+    .pg-panel {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "setup"
+            "canvas"
+            "score"
+            "controls";
+        justify-content: stretch;
+    }
+
+    .pg-lineups-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
