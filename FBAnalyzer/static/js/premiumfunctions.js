@@ -1030,12 +1030,8 @@
                 [document.getElementById("sT2G").selectedIndex].value;
             }
 
-             // Add one row to timeData - array
              counter++;
              gameCounter++;
-             timeData.push([user_id, game_id, gameCounter, Ball_pos, line_on+1, line_on_2+1]);
-             premTimeData.push([user_id, game_id, gameCounter, Ball_pos, line_on+1, line_on_2+1, p_T1LW, p_T1C, p_T1RW,
-                        p_T1LD, p_T1RD, p_T1G, p_T2LW, p_T2C, p_T2RW, p_T2LD, p_T2RD, p_T2G]);
 
              // Add one row to the xG arrays every minute
              if (gameCounter % 60 == 0) {
@@ -5208,14 +5204,9 @@
     function downloadCsv() {
         name_shot = name_t1+"_"+name_t2+"_shots.csv";
         name_shot = name_shot.replace(/\s/g, "");
-/*        name_time = name_t1+"_"+name_t2+"_positions.csv";
-        name_time = name_time.replace(/\s/g, "");*/
 
         csv_shot = arrayToCsv(printShotData);
         downloadBlob(csv_shot, name_shot, 'text/csv;charset=utf-8;');
-
-/*        csv_time = arrayToCsv(premTimeData);
-        downloadBlob(csv_time, name_time, 'text/csv;charset=utf-8;');*/
     }
 
     function t1n() {
