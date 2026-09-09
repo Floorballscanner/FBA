@@ -8,6 +8,11 @@ var currentLocation = window.location.pathname;
 var locArray = currentLocation.split("/");
 var match_id = locArray[locArray.length-1];
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
+// Whether the match is currently live - gates whether updateData() keeps
+// polling every 10s (see its .finally() below). Starts true so a fetch that
+// fails before we've learned the real status still gets retried, same
+// fail-safe reasoning as the polling-death fix this pairs with.
+var liveGameIsActive = true;
 var matches = "";
 var events = "";
 var lineups = [];
@@ -88,16 +93,15 @@ window.onload = function() {
             document.getElementById('A_teamname').innerHTML = t1name
             document.getElementById('B_teamname').innerHTML = t2name
             document.getElementById('game_attn').innerHTML = match.attendance;
+            updateStreamButton(match);
+            liveGameIsActive = (match.live_period != "" && match.status != "Played");
 
             if (match.live_period != "" && match.status != "Played") {
-                const img = document.createElement('img');
-                img.setAttribute('src',"/static/live.png");
-                img.setAttribute('id', 'img' + match.match_id);
-                img.setAttribute('width', '100px');
-                img.style.paddingTop = "35px";
-                img.style.paddingBottom = "10px"
-                document.getElementById('gstats').prepend(img);
-                document.getElementById('streamBtn').setAttribute('href', match.stream);
+                const badge = document.createElement('span');
+                badge.setAttribute('class', 'landing-live-badge');
+                badge.setAttribute('id', 'liveBadge' + match.match_id);
+                badge.innerText = "Live";
+                document.getElementById('gstats').prepend(badge);
             }
 
             else if (match.live_period == "") {
@@ -604,9 +608,33 @@ window.onload = function() {
         })
         .catch((error) => {
           console.error('Error:', error);
-    });
+        })
+        .finally(() => {
+            // Only keep polling while the match is actually live - before
+            // kickoff and after final whistle the page is static until
+            // manually reloaded, instead of hitting Torneopal/our own
+            // ingestion endpoint every 10s forever for no reason.
+            if (liveGameIsActive) {
+                t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
+            }
+        });
+}
 
-    t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
+// Torneopal exposes several similarly-named stream fields (stream, stream_url,
+// stream_media, live_url) and not every match populates the same one - some
+// matches/tiers have no broadcast at all. Try them in priority order and hide
+// the button entirely rather than leaving a dead link when nothing is set.
+function updateStreamButton(match) {
+    const btn = document.getElementById('streamBtn');
+    if (!btn) return;
+    const isLive = match.live_period != "" && match.status != "Played";
+    const url = isLive ? (match.stream_url || match.stream || match.stream_media || match.live_url || '') : '';
+    if (url) {
+        btn.setAttribute('href', url);
+        btn.style.display = '';
+    } else {
+        btn.style.display = 'none';
+    }
 }
 
 function getCookie(name) {
@@ -1583,10 +1611,12 @@ function updateData() {
             t1name = match.team_A_name;
             t2name = match.team_B_name;
             document.getElementById('game_attn').innerHTML = match.attendance;
+            updateStreamButton(match);
+            liveGameIsActive = (match.status != "Played" && match.live_period != "");
 
             if (match.status == "Played") {
-                if (document.getElementById('img' + match.match_id) != null) {
-                    document.getElementById('img' + match.match_id).remove();
+                if (document.getElementById('liveBadge' + match.match_id) != null) {
+                    document.getElementById('liveBadge' + match.match_id).remove();
                 }
                 if (document.getElementById('time' + match.match_id) == null) {
                     const gametime = document.createElement('h5');
@@ -1598,8 +1628,8 @@ function updateData() {
             }
 
             else if (match.status != "Played" && match.live_period == "") {
-                if (document.getElementById('img' + match.match_id) != null) {
-                    document.getElementById('img' + match.match_id).remove();
+                if (document.getElementById('liveBadge' + match.match_id) != null) {
+                    document.getElementById('liveBadge' + match.match_id).remove();
                 }
                 if (document.getElementById('time' + match.match_id) == null) {
                     const gametime = document.createElement('h5');
@@ -1611,14 +1641,12 @@ function updateData() {
             }
 
             else if (match.status != "Played" && match.live_period != "") {
-                if (document.getElementById('img' + match.match_id) == null) {
-                    const img = document.createElement('img');
-                    img.setAttribute('src',"/static/live.png");
-                    img.setAttribute('id', 'img' + match.match_id);
-                    img.setAttribute('width', '100px');
-                    img.style.paddingTop = "35px";
-                    img.style.paddingBottom = "10px"
-                    document.getElementById('gstats').prepend(img);
+                if (document.getElementById('liveBadge' + match.match_id) == null) {
+                    const badge = document.createElement('span');
+                    badge.setAttribute('class', 'landing-live-badge');
+                    badge.setAttribute('id', 'liveBadge' + match.match_id);
+                    badge.innerText = "Live";
+                    document.getElementById('gstats').prepend(badge);
                 }
                 if (document.getElementById('time' + match.match_id) != null) {
                     document.getElementById('time' + match.match_id).remove();
@@ -2138,7 +2166,15 @@ function updateData() {
             // from updating. It used to: this call previously lived inside
             // the success .then() only, so one bad tick and the page went
             // stale until the viewer manually reloaded.
-            t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
+            //
+            // But only keep polling at all while the match is actually live -
+            // liveGameIsActive was just refreshed above from this tick's own
+            // match.status/live_period (or, on a failed fetch, still holds
+            // its last known value, so a transient failure mid-game doesn't
+            // stop polling either).
+            if (liveGameIsActive) {
+                t = setTimeout(function(){ updateData() }, 10000); // Update page every 10 seconds
+            }
         });
 }
 
