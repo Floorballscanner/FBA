@@ -93,7 +93,7 @@ class Command(BaseCommand):
                 match_details[match_id] = future.result().get('match') or {}
 
         for match_id, match in match_details.items():
-            self.ingest_one(match_id, match)
+            self.ingest_one(match_id, match, force=force)
 
         self.stdout.write(self.style.SUCCESS(f"  Done: {season_id}/{category}/{stage}."))
 
@@ -102,10 +102,16 @@ class Command(BaseCommand):
             self.stdout.write(f"{match_id} already backfilled, use --force to re-ingest.")
             return
         match = api_get('getMatch', match_id=match_id).get('match') or {}
-        self.ingest_one(match_id, match)
+        self.ingest_one(match_id, match, force=force)
 
-    def ingest_one(self, match_id, match):
-        new_status = ingest_raw_match(match_id, match)
+    def ingest_one(self, match_id, match, force):
+        # overwrite_existing=force: a plain (non-force) backfill only ever
+        # reaches never-before-seen matches (see the already_done filter in
+        # handle_combo / the early-return in backfill_one_match above), so
+        # every event is new either way there - overwrite_existing only
+        # matters, and must be True, for --force's actual job: re-deriving
+        # already-stored matches under corrected logic.
+        new_status = ingest_raw_match(match_id, match, overwrite_existing=force)
         if new_status is None:
             self.stderr.write(f"  {match_id}: unrecognised category_id {match.get('category_id')!r}, skipping.")
             return

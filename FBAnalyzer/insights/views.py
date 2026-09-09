@@ -70,6 +70,12 @@ def ingest_match_events(request):
         score_a=payload.get('score_a'),
         score_b=payload.get('score_b'),
         events=events,
+        # This endpoint gets the client's *entire* running event list on every
+        # ~10s poll, from every viewer's browser independently - once an event
+        # is stored its derived fields are stable, so skip re-deriving/
+        # rewriting anything already known instead of upserting all of it
+        # every tick (see ingest_match_tick's docstring).
+        overwrite_existing=False,
     )
 
     return JsonResponse({'status': 'ok', 'match_status': new_status})

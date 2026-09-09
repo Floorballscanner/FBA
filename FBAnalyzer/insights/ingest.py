@@ -13,6 +13,7 @@ logic.
 
 from datetime import date as date_cls, timedelta
 
+from django.db.models import Q
 from django.utils import timezone
 
 from .event_codes import GOAL_AGAINST_CODE, GOALIE_CODES, ON_TARGET_CODES, SHOT_CODES
@@ -72,11 +73,26 @@ def parse_location(location):
 
 def ingest_match_tick(*, match_id, category, season_id, stage, date, status, live_period, period_lengths,
                        team_a_id, team_b_id, team_a_name, team_b_name,
-                       score_a, score_b, events):
+                       score_a, score_b, events, overwrite_existing=True):
     """Upserts MatchEvent rows and MatchState for one match snapshot ('tick')
     - either a live client-push, or one historical-backfill pass over an
     already-played match. Returns the new status string ('scheduled'/'live'/
-    'played')."""
+    'played').
+
+    overwrite_existing=True (the default) re-derives and writes every event
+    in `events`, same as always - required for insights.management.commands.
+    backfill_match_events's --force path, which exists specifically to make
+    corrected derivation logic (a fixed xG model, a fixed situation bug...)
+    overwrite already-stored xg/xgot/situation values. The live client-push
+    path (insights.views.ingest_match_events) and the lazy post-game-recovery
+    path (fetch_and_ingest_match below) pass overwrite_existing=False instead:
+    the client resends the match's *entire* event list on every ~10s tick,
+    but once an event is stored its derived fields are stable (situation
+    derivation only ever looks at events at-or-before its own timestamp, all
+    already present the first time we saw it), so re-deriving and rewriting
+    every already-known event on every single poll is pure waste - this was
+    the primary driver of the response-time degradation during the first
+    live game (see git history around this comment for the incident)."""
 
     new_status = status_from_torneopal(status, live_period)
 
@@ -91,9 +107,28 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
     team_xg = {'A': 0.0, 'B': 0.0}
     team_xgot = {'A': 0.0, 'B': 0.0}
 
+    existing_event_ids = frozenset()
+    if not overwrite_existing:
+        existing_event_ids = frozenset(
+            MatchEvent.objects.filter(match_id=match_id).values_list('event_id', flat=True)
+        )
+        # Seed team totals / win-probability inputs from already-stored shots,
+        # since the loop below skips them entirely and never re-derives xg/xgot.
+        for row in MatchEvent.objects.filter(match_id=match_id, code__in=SHOT_CODES).values('team', 'xg', 'xgot'):
+            team = row['team']
+            if team in team_xg:
+                xg, xgot = float(row['xg'] or 0), float(row['xgot'] or 0)
+                team_xg[team] += xg
+                team_xgot[team] += xgot
+                team_shot_xgot[team].append(xgot)
+
+    new_rows = []
+
     for event in events:
         event_id = event.get('event_id')
         if not event_id:
+            continue
+        if not overwrite_existing and event_id in existing_event_ids:
             continue
 
         code = event.get('code')
@@ -149,26 +184,32 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
             else:
                 xg = xgot = 0.0
 
-        MatchEvent.objects.update_or_create(
-            match_id=match_id, event_id=event_id,
-            defaults={
-                'category': category,
-                'code': code or '',
-                'team': team or '',
-                'team_id': event.get('team_id') or '',
-                'player_id': event.get('player_id') or '',
-                'period': period,
-                'time_sec': time_sec,
-                'abs_time_sec': abs_time,
-                'description': event.get('description') or '',
-                'location_x': loc_x,
-                'location_y': loc_y,
-                'xg': xg,
-                'xgot': xgot,
-                'situation': situation,
-                'raw': event,
-            },
-        )
+        event_fields = {
+            'category': category,
+            'code': code or '',
+            'team': team or '',
+            'team_id': event.get('team_id') or '',
+            'player_id': event.get('player_id') or '',
+            'period': period,
+            'time_sec': time_sec,
+            'abs_time_sec': abs_time,
+            'description': event.get('description') or '',
+            'location_x': loc_x,
+            'location_y': loc_y,
+            'xg': xg,
+            'xgot': xgot,
+            'situation': situation,
+            'raw': event,
+        }
+        if overwrite_existing:
+            MatchEvent.objects.update_or_create(match_id=match_id, event_id=event_id, defaults=event_fields)
+        else:
+            new_rows.append(MatchEvent(match_id=match_id, event_id=event_id, **event_fields))
+
+    if new_rows:
+        # ignore_conflicts covers two concurrent viewers' ticks both deciding
+        # the same event_id is "new" before either has written it.
+        MatchEvent.objects.bulk_create(new_rows, ignore_conflicts=True)
 
     wp_a = wp_b = None
     if team_shot_xgot['A'] or team_shot_xgot['B']:
@@ -200,11 +241,17 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
 
     if new_status != 'scheduled':
         now = timezone.now()
-        due = state.last_evaluated_at is None or (now - state.last_evaluated_at) >= INSIGHT_EVAL_GATE
-        if due:
+        cutoff = now - INSIGHT_EVAL_GATE
+        # Atomic claim: an UPDATE...WHERE only one concurrent request's tick
+        # can match (the others see last_evaluated_at already bumped to `now`
+        # and affect 0 rows) - a plain read-then-write here let several
+        # viewers polling within the same instant all pass the "due" check
+        # and each run the full (expensive) evaluate_match_insights.
+        claimed = MatchState.objects.filter(match_id=match_id).filter(
+            Q(last_evaluated_at__isnull=True) | Q(last_evaluated_at__lt=cutoff)
+        ).update(last_evaluated_at=now)
+        if claimed:
             evaluate_match_insights(match_id)
-            state.last_evaluated_at = now
-            state.save(update_fields=['last_evaluated_at'])
 
     if new_status != 'scheduled' and was_scheduled:
         compute_pregame_analysis(match_id, force=True)
@@ -221,7 +268,7 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
     return new_status
 
 
-def ingest_raw_match(match_id, match):
+def ingest_raw_match(match_id, match, overwrite_existing=True):
     """Normalizes one raw Torneopal getMatch `match` object's events and
     runs it through ingest_match_tick. Used by both the historical backfill
     command and fetch_and_ingest_match() below. Returns the new status
@@ -252,6 +299,7 @@ def ingest_raw_match(match_id, match):
         score_a=match.get('fs_A'),
         score_b=match.get('fs_B'),
         events=events,
+        overwrite_existing=overwrite_existing,
     )
 
 
@@ -260,9 +308,14 @@ def fetch_and_ingest_match(match_id):
     lazy-fallback endpoint's recovery path (insights.views.post_game_analysis)
     for a match that was never live-pushed (browser closed early, license
     lapsed mid-game, etc.). Returns the new status string, or None if
-    Torneopal has no such match or an unrecognised category_id."""
+    Torneopal has no such match or an unrecognised category_id.
+
+    overwrite_existing=False: nothing should already be stored for a match
+    that was never live-pushed (or only a partial prefix is, if the browser
+    that was covering it closed mid-game) - either way there's nothing to
+    gain from re-deriving/rewriting whatever prefix does already exist."""
 
     match = api_get('getMatch', match_id=match_id).get('match') or {}
     if not match:
         return None
-    return ingest_raw_match(match_id, match)
+    return ingest_raw_match(match_id, match, overwrite_existing=False)
