@@ -223,7 +223,7 @@ function initializeLive() {
 
     console.log(data);
 
-    let response = fetch("https://fbscanner.io/apis/livedata/", {
+    let response = fetch("/apis/livedata/", {
 
           method: 'POST', // or 'PUT'
           mode: 'cors',

@@ -86,7 +86,7 @@ function editLevel() {
 
     else {
 
-       fetch("https://fbscanner.io/apis/levels/" + e_level.options[e_level.selectedIndex].value + "/")
+       fetch("/apis/levels/" + e_level.options[e_level.selectedIndex].value + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -131,7 +131,7 @@ function editLevelButton() {
         // New level - Create new Level - instance
         if (e_level.options[e_level.selectedIndex].value == "new_level") {
 
-            fetch("https://fbscanner.io/apis/levels/", {
+            fetch("/apis/levels/", {
 
               method: 'POST', // or 'PUT'
               headers: {
@@ -168,7 +168,7 @@ function editLevelButton() {
         }
         else {
 
-            fetch("https://fbscanner.io/apis/levels/" + e_level_id.value + "/", {
+            fetch("/apis/levels/" + e_level_id.value + "/", {
 
               method: 'PATCH', // or 'PUT'
               headers: {
@@ -211,7 +211,7 @@ function deleteLevelButton() {
     var r = confirm("Are you sure you want to delete Level, all saved information will be lost?");
     if (r == true) {
 
-        fetch("https://fbscanner.io/apis/levels/" + e_level_id.value + "/", {
+        fetch("/apis/levels/" + e_level_id.value + "/", {
 
               method: 'DELETE', // or 'PUT'
               headers: {
@@ -248,7 +248,7 @@ function deleteLevelButton() {
 function editTeam() {
     
     if (e_team_level.length < 2) {
-        fetch("https://fbscanner.io/apis/levels/")
+        fetch("/apis/levels/")
                 .then(response => response.json())
                 .then(levels => {
                     console.log('Success:', levels);
@@ -283,7 +283,7 @@ function editTeam() {
 
     else {
 
-       fetch("https://fbscanner.io/apis/teams/" + e_team.options[e_team.selectedIndex].value + "/")
+       fetch("/apis/teams/" + e_team.options[e_team.selectedIndex].value + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -326,7 +326,7 @@ function editTeamButton() {
         // New level - Create new Level - instance
         if (e_team.options[e_team.selectedIndex].value == "new_team") {
 
-            fetch("https://fbscanner.io/apis/teams/", {
+            fetch("/apis/teams/", {
 
               method: 'POST', // or 'PUT'
               headers: {
@@ -364,7 +364,7 @@ function editTeamButton() {
         }
         else {
 
-            fetch("https://fbscanner.io/apis/levels/" + e_level_id.value + "/", {
+            fetch("/apis/levels/" + e_level_id.value + "/", {
 
               method: 'PATCH', // or 'PUT'
               headers: {
@@ -408,7 +408,7 @@ function deleteTeamButton() {
     var r = confirm("Are you sure you want to delete Team, all saved information will be lost?");
     if (r == true) {
 
-        fetch("https://fbscanner.io/apis/teams/" + e_team_id.value + "/", {
+        fetch("/apis/teams/" + e_team_id.value + "/", {
 
           method: 'DELETE', // or 'PUT'
           headers: {
@@ -447,7 +447,7 @@ function editPlayer() {
 
     // If level list empty, fetch all levels and add them to the dropdown
     if (e_player_level.length < 2) {
-        fetch("https://fbscanner.io/apis/levels/")
+        fetch("/apis/levels/")
                 .then(response => response.json())
                 .then(levels => {
                     console.log('Success:', levels);
@@ -468,7 +468,7 @@ function editPlayer() {
         e_player_team.remove(i);
     }
 
-    fetch("https://fbscanner.io/apis/teamlist?level_id=" + level_id)
+    fetch("/apis/teamlist?level_id=" + level_id)
             .then(response => response.json())
             .then(teams => {
                 console.log('Success:', teams);
@@ -508,7 +508,7 @@ function editPlayer() {
 
     else {
 
-       fetch("https://fbscanner.io/apis/players/" + e_player.value + "/")
+       fetch("/apis/players/" + e_player.value + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -550,7 +550,7 @@ function editPlayerButton() {
         // New player - Create new player - instance
         if (e_player.options[e_player.selectedIndex].value == "new_player") {
 
-            fetch("https://fbscanner.io/apis/players/", {
+            fetch("/apis/players/", {
 
               method: 'POST', // or 'PUT'
               headers: {
@@ -591,7 +591,7 @@ function editPlayerButton() {
         }
         else {
 
-            fetch("https://fbscanner.io/apis/players/" + e_player_id.value + "/", {
+            fetch("/apis/players/" + e_player_id.value + "/", {
 
               method: 'PATCH', // or 'PUT'
               headers: {
@@ -635,7 +635,7 @@ function deletePlayerButton() {
     var r = confirm("Are you sure you want to delete Player, all saved information will be lost?");
     if (r == true) {
 
-        fetch("https://fbscanner.io/apis/players/" + e_player_id.value + "/", {
+        fetch("/apis/players/" + e_player_id.value + "/", {
 
           method: 'DELETE', // or 'PUT'
           headers: {
@@ -672,7 +672,7 @@ function deletePlayerButton() {
 
 function changeTeamLevel() {
 
-    fetch("https://fbscanner.io/apis/levels/" + e_team_level.options[e_team_level.selectedIndex].value + "/")
+    fetch("/apis/levels/" + e_team_level.options[e_team_level.selectedIndex].value + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -695,7 +695,7 @@ function changePlayerLevel() {
         e_player_team.remove(i);
     }
 
-    fetch("https://fbscanner.io/apis/teamlist?level_id=" + e_player_level.value)
+    fetch("/apis/teamlist?level_id=" + e_player_level.value)
             .then(response => response.json())
             .then(teams => {
                 console.log('Success:', teams);
@@ -714,7 +714,7 @@ function changePlayerLevel() {
 
 function updateLevels() {
 
-    fetch("https://fbscanner.io/apis/levels/")
+    fetch("/apis/levels/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -741,7 +741,7 @@ function updateTeams(s_box, level_id) {
         nr = 0;
     }
 
-    fetch("https://fbscanner.io/apis/teams/")
+    fetch("/apis/teams/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -764,7 +764,7 @@ function updateTeams(s_box, level_id) {
 
 function updatePlayers() {
 
-        fetch("https://fbscanner.io/apis/playerlist?team_id=" + team_id)
+        fetch("/apis/playerlist?team_id=" + team_id)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);

@@ -9,7 +9,7 @@
         ctx5.drawImage(myImg,0,0,fWidth,fLength);
         document.getElementById('select-date').value = new Date().toISOString().slice(0, 10);
 
-        /*fetch("https://fbscanner.io/apis/gamelist?user_id=" + user_id)
+        /*fetch("/apis/gamelist?user_id=" + user_id)
             .then(response => response.json())
             .then(games => {
                 console.log('Success:', games);
@@ -4811,7 +4811,7 @@
                         "isSH" : premShotData[i][24],
                     }
                     // Save data to database
-                    fetch('https://fbscanner.io/apis/shots/', {
+                    fetch('/apis/shots/', {
 
                     method: 'POST', // or 'PUSH'
                     headers: {
@@ -4846,7 +4846,7 @@
 
             if (game_id == 0) {
 
-                fetch("https://fbscanner.io/apis/games/" , {
+                fetch("/apis/games/" , {
 
                   method: 'POST', // or 'PUT'
                   headers: {
@@ -4872,7 +4872,7 @@
 
             else {
 
-                fetch("https://fbscanner.io/apis/games/" + game_id + "/", {
+                fetch("/apis/games/" + game_id + "/", {
 
                       method: 'PATCH', // or 'PUSH'
                       mode: 'cors',
@@ -4973,7 +4973,7 @@
 
             s_T1.disabled = false;
 
-            fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level_T1.options[s_Level_T1.selectedIndex].value)
+            fetch("/apis/teamlist/?level_id=" + s_Level_T1.options[s_Level_T1.selectedIndex].value)
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
@@ -5003,7 +5003,7 @@
 
             s_T2.disabled = false;
 
-            fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level_T2.options[s_Level_T2.selectedIndex].value)
+            fetch("/apis/teamlist/?level_id=" + s_Level_T2.options[s_Level_T2.selectedIndex].value)
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
@@ -5030,7 +5030,7 @@
             s_T1_p[i].disabled = false;
         }
 
-        fetch("https://fbscanner.io/apis/playerlist/?team_id=" + s_T1.options[s_T1.selectedIndex].value)
+        fetch("/apis/playerlist/?team_id=" + s_T1.options[s_T1.selectedIndex].value)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -5062,7 +5062,7 @@
             s_T2_p[i].disabled = false;
         }
 
-        fetch("https://fbscanner.io/apis/playerlist/?team_id=" + s_T2.options[s_T2.selectedIndex].value)
+        fetch("/apis/playerlist/?team_id=" + s_T2.options[s_T2.selectedIndex].value)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -5098,7 +5098,7 @@
         var s_team = position.substring(1, 3);
 
         // GET all players from the team, empty position of the previous player
-        fetch("https://fbscanner.io/apis/playerlist/?team_id=" + eval("s_"+s_team+".options[s_"+s_team+".selectedIndex].value"))
+        fetch("/apis/playerlist/?team_id=" + eval("s_"+s_team+".options[s_"+s_team+".selectedIndex].value"))
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data)
@@ -5119,7 +5119,7 @@
                 data = {"line" : [],
                         "position" : [],};
                 console.log("Setting old player line and position as zero")
-                fetch("https://fbscanner.io/apis/players/" + old_id + "/", {
+                fetch("/apis/players/" + old_id + "/", {
 
                   method: 'PATCH', // or 'PUT'
                   headers: {
@@ -5144,7 +5144,7 @@
 
         // GET the new player old line and position, if on the roster then the position is zeroed
         console.log("Find the new player old line and set the old position to zero")
-        fetch("https://fbscanner.io/apis/players/" + player_id + "/")
+        fetch("/apis/players/" + player_id + "/")
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
@@ -5168,7 +5168,7 @@
         }
 
         console.log("Set the new player line and position")
-        fetch("https://fbscanner.io/apis/players/" + player_id + "/", {
+        fetch("/apis/players/" + player_id + "/", {
 
           method: 'PATCH', // or 'PUT'
           headers: {
@@ -5788,7 +5788,7 @@
 
 /*        data = {"game_data" : data_object}
 
-        fetch("https://fbscanner.io/apis/games/" + game_id + "/", {
+        fetch("/apis/games/" + game_id + "/", {
 
           method: 'PATCH', // or 'PUSH'
           mode: 'cors',
@@ -6781,7 +6781,7 @@
 
         game_id = load_game.options[load_game.selectedIndex].value;
 
-        fetch("https://fbscanner.io/apis/games/" + game_id + "/")
+        fetch("/apis/games/" + game_id + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
