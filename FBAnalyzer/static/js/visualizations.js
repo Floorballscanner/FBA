@@ -23,6 +23,56 @@
     name_t2 = "";
 
 
+    // Mirrors premiumfunctions.js's Draw()/shotVisualStyle() color rules, for
+    // redrawing this page's smaller (200x332) shot-map canvases from stored shot
+    // positions - kept in sync with those if the tagging tool's rules change.
+    function shotVisualStyle(dataType, ballPos, type, dataxG) {
+        const radius = (1 + 20 * dataxG) * (fWidth / 300);
+        if (dataType == 5) { return { text: '+', fillStyle: 'blue' }; }
+        if (dataType == 6) { return { text: '-', fillStyle: 'red' }; }
+
+        const opacity = (type == 1 || type == 3) ? '0.25' : '0.75';
+        const COLORS = {
+            1: { 0: 'rgba(0, 100, 0', 1: 'rgba(124, 252, 0', 2: 'rgba(0, 0, 0', 3: 'rgba(0, 0, 255', 4: 'rgba(0, 0, 255' },
+            2: { 0: 'rgba(139, 69, 19', 1: 'rgba(255, 165, 0', 2: 'rgba(255, 255, 255', 3: 'rgba(255, 69, 0', 4: 'rgba(255, 69, 0' },
+        };
+        const base = (COLORS[ballPos] || {})[dataType];
+        if (!base) { return { fillStyle: null, radius }; }
+        return { fillStyle: base + ', ' + opacity + ')', radius, stroke: type == 4 };
+    }
+
+    // shotMapData rows are recorded at the tagging tool's native 300x500 canvas size
+    // (premiumfunctions.js) - scale x/y down to this page's smaller canvases.
+    function redrawShotMap(ctx, shots) {
+        const scaleX = fWidth / 300;
+        const scaleY = fLength / 500;
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.drawImage(myImg, 0, 0, fWidth, fLength);
+        ctx.font = "12px Arial";
+        shots.forEach(row => {
+            const [x, y, , ballPos, dataType, type, dataxG] = row;
+            const sx = x * scaleX;
+            const sy = y * scaleY;
+            const style = shotVisualStyle(dataType, ballPos, type, dataxG);
+            if (style.text) {
+                ctx.fillStyle = style.fillStyle;
+                ctx.fillText(style.text, sx, sy);
+                return;
+            }
+            if (!style.fillStyle) { return; }
+            ctx.fillStyle = style.fillStyle;
+            ctx.beginPath();
+            ctx.arc(sx, sy, style.radius, 0, 2 * Math.PI);
+            ctx.fill();
+            if (style.stroke) {
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+            }
+            ctx.closePath();
+        });
+    }
+
     // Function for Analysis.html - game chart visualization
 
     window.onload = function() {
@@ -76,22 +126,31 @@
                     gd.xGTeam_array[0][2] = 'xG ' + team_2;
                     gd.xGTeam_array[0][4] = 'Goal ' + team_2;
 
-                    img1.src = gd.cnvs_1_url;
-                    img1.onload = function() {
-                        ctx1.drawImage(img1,0,0,fWidth,fLength);
-                     };
-                    img2.src = gd.cnvs_2_url;
-                    img2.onload = function() {
-                        ctx2.drawImage(img2,0,0,fWidth,fLength);
-                     };
-                    img3.src = gd.cnvs_3_url;
-                    img3.onload = function() {
-                        ctx3.drawImage(img3,0,0,fWidth,fLength);
-                     };
-                    img4.src = gd.cnvs_4_url;
-                    img4.onload = function() {
-                        ctx4.drawImage(img4,0,0,fWidth,fLength);
-                     };
+                    if (gd.shotMapData) {
+                        redrawShotMap(ctx1, gd.shotMapData.filter(row => row[2] == 1));
+                        redrawShotMap(ctx2, gd.shotMapData.filter(row => row[2] == 2));
+                        redrawShotMap(ctx3, gd.shotMapData.filter(row => row[2] == 3));
+                        redrawShotMap(ctx4, gd.shotMapData.filter(row => row[2] == 4));
+                    } else {
+                        // Games saved before shot positions were recorded (no
+                        // shotMapData) only have these pre-rendered PNGs to fall back on.
+                        img1.src = gd.cnvs_1_url;
+                        img1.onload = function() {
+                            ctx1.drawImage(img1,0,0,fWidth,fLength);
+                         };
+                        img2.src = gd.cnvs_2_url;
+                        img2.onload = function() {
+                            ctx2.drawImage(img2,0,0,fWidth,fLength);
+                         };
+                        img3.src = gd.cnvs_3_url;
+                        img3.onload = function() {
+                            ctx3.drawImage(img3,0,0,fWidth,fLength);
+                         };
+                        img4.src = gd.cnvs_4_url;
+                        img4.onload = function() {
+                            ctx4.drawImage(img4,0,0,fWidth,fLength);
+                         };
+                    }
 
                     // xG Game Chart
 

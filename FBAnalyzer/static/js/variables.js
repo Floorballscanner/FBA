@@ -202,6 +202,13 @@
     var printShotData = [['Date', 'Team 1', 'Team 2', 'Time', 'Shooting Team', 'Result', 'Type', 'xG', 'xGOT', 'Shooter',
                         'Passer', 'T1LW', 'T1C', 'T1RW', 'T1LD', 'T1RD', 'T1G', 'T1X', 'T2LW', 'T2C', 'T2RW', 'T2LD', 'T2RD', 'T2G', 'T2X',
                         'PP', 'SH','Distance','Angle', 'Player Team 1', 'Player Team 2']];
+    // [x, y, period, Ball_pos, dataType, type, dataxG] per shot - enough to redraw the
+    // shot-map canvases (see redrawShotMap()) without storing pre-rendered PNGs. Pushed
+    // alongside printShotData wherever a shot is recorded; no header row (internal only).
+    var shotMapData = [];
+    var lastShotX = 0;
+    var lastShotY = 0;
+    var lastShotType = 0;
     var timeData = [['User', 'Game', 'Time', 'Possession', 'Line T1', 'Line T2']];
     var dataShot = 0;
     var dataRes = 0;
