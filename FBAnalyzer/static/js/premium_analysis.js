@@ -50,7 +50,7 @@ async function getGameData(game_ids) {
     // .../light/ strips legacy shot-map PNGs this aggregate view never reads - see
     // GameViewSet.light() (accounts/views.py). This is the actual fix for Premium
     // Analysis downloading/holding a full image set per analyzed game.
-    let apiResponse = await fetch("https://fbscanner.io/apis/games/" + game_ids[0] + "/light/");
+    let apiResponse = await fetch("/apis/games/" + game_ids[0] + "/light/");
     data = await apiResponse.json();
     gd = data.game_data;
     date = data.date;
@@ -140,7 +140,7 @@ async function getGameData(game_ids) {
     }
     for (i=1;i<game_ids.length;i++) {
         console.log('Next game: ' + game_ids[i])
-        let apiResponse = await fetch("https://fbscanner.io/apis/games/" + game_ids[i] + "/light/");
+        let apiResponse = await fetch("/apis/games/" + game_ids[i] + "/light/");
         data = await apiResponse.json();
         gd = data.game_data;
         date = data.date;

@@ -300,7 +300,7 @@
                         "teams" : [s_T1.value, s_T2.value]
                 };
 
-                fetch("https://fbscanner.io/apis/games/" , {
+                fetch("/apis/games/" , {
 
                   method: 'POST', // or 'PUT'
                   headers: {
@@ -2060,7 +2060,7 @@
         s_T1.selectedIndex = "0";
         s_T1.disabled = false;
 
-        fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level_T1.options[s_Level_T1.selectedIndex].value)
+        fetch("/apis/teamlist/?level_id=" + s_Level_T1.options[s_Level_T1.selectedIndex].value)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -2084,7 +2084,7 @@
         s_T2.selectedIndex = "0";
         s_T2.disabled = false;
 
-        fetch("https://fbscanner.io/apis/teamlist/?level_id=" + s_Level_T2.options[s_Level_T2.selectedIndex].value)
+        fetch("/apis/teamlist/?level_id=" + s_Level_T2.options[s_Level_T2.selectedIndex].value)
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -2126,7 +2126,7 @@
                     }
 
                     // Save data to database
-                    fetch('https://fbscanner.io/apis/times/', {
+                    fetch('/apis/times/', {
 
                     method: 'POST', // or 'PUSH'
                     headers: {
@@ -2169,7 +2169,7 @@
                         "isSH" : shotData[i][10],
                     }
                     // Save data to database
-                    fetch('https://fbscanner.io/apis/shots/', {
+                    fetch('/apis/shots/', {
 
                     method: 'POST', // or 'PUSH'
                     headers: {

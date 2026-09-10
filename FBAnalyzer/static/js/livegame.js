@@ -12,7 +12,7 @@ var nr = locArray[locArray.length-1];
 
 window.onload = function() {
 
-    fetch("https://fbscanner.io/apis/livedata/" + nr)
+    fetch("/apis/livedata/" + nr)
         .then(response => response.json())
         .then(jsonData => {
 
@@ -69,7 +69,7 @@ function getCookie(name) {
 
 function updatePage() {
 
-    fetch("https://fbscanner.io/apis/livedata/" + nr)
+    fetch("/apis/livedata/" + nr)
         .then(response => response.json())
         .then(jsonData => {
 

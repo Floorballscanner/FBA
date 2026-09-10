@@ -88,7 +88,7 @@
         team_1 = 0;
         team_2 = 0;
 
-        fetch("https://fbscanner.io/apis/games/" + game_id + "/")
+        fetch("/apis/games/" + game_id + "/")
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -529,7 +529,7 @@
         var r = confirm("Are you sure you want to delete game data, all saved information will be lost?");
         if (r == true) {
 
-            fetch("https://fbscanner.io/apis/games/" + s_game.options[s_game.selectedIndex].value + "/", {
+            fetch("/apis/games/" + s_game.options[s_game.selectedIndex].value + "/", {
 
               method: 'DELETE', // or 'PUT'
               headers: {
@@ -930,6 +930,6 @@
     function timerIncrement() {
         idleTime = idleTime + 1;
         if (idleTime > 19) { // 20 minutes
-            window.location.replace("https://fbscanner.io/accounts");
+            window.location.replace("/accounts");
         }
     }
