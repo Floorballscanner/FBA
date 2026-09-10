@@ -17,6 +17,7 @@ from accounts.forms import AddNewPlayer, TrialSignupForm
 from accounts.decorators import license_required, get_active_license
 from datetime import datetime
 from rest_framework import viewsets, generics
+from rest_framework.decorators import action
 from django.forms import modelformset_factory
 from .serializers import UserSerializer, TeamSerializer, LineSerializer, PositionSerializer, LevelSerializer, TimeSerializer
 from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerializer, LiveDataSerializer, ShotSerializer
@@ -249,6 +250,24 @@ class LineViewSet(viewsets.ModelViewSet):
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all().order_by("id")
     serializer_class = GameSerializer
+
+    # Some games' game_data still carries these pre-rendered shot-map PNGs from
+    # before shot positions started being recorded (see shotMapData/updateSaveData()
+    # in premiumfunctions.js) - multi-game aggregate views (premium_analysis.js) never
+    # read them, only ever a handful of stat fields, so fetching them for every game
+    # in an analyzed set was the actual source of Premium Analysis's memory/bandwidth
+    # cost. GET /apis/games/<id>/light/ returns the same payload with these stripped.
+    LEGACY_IMAGE_KEYS = ('cnvs_url', 'cnvs_1_url', 'cnvs_2_url', 'cnvs_3_url', 'cnvs_4_url', 'cnvs_5_url')
+
+    @action(detail=True, methods=['get'])
+    def light(self, request, pk=None):
+        game = self.get_object()
+        data = GameSerializer(game, context={'request': request}).data
+        game_data = data.get('game_data') or {}
+        for key in self.LEGACY_IMAGE_KEYS:
+            game_data.pop(key, None)
+        data['game_data'] = game_data
+        return Response(data)
 
 class LiveDataViewSet(viewsets.ModelViewSet):
     queryset = LiveData.objects.all()

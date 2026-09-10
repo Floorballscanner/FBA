@@ -3040,7 +3040,60 @@
 
     }
 
+    // Mirrors Draw()'s own color/opacity/radius/stroke rules below, for redrawing a
+    // stored shot instead of painting a live one - keep in sync if those rules change.
+    function shotVisualStyle(dataType, ballPos, type, dataxG) {
+        const radius = 1 + 20 * dataxG;
+        if (dataType == 5) { return { text: '+', fillStyle: 'blue' }; }
+        if (dataType == 6) { return { text: '-', fillStyle: 'red' }; }
+
+        const opacity = (type == 1 || type == 3) ? '0.25' : '0.75';
+        const COLORS = {
+            1: { 0: 'rgba(0, 100, 0', 1: 'rgba(124, 252, 0', 2: 'rgba(0, 0, 0', 3: 'rgba(0, 0, 255', 4: 'rgba(0, 0, 255' },
+            2: { 0: 'rgba(139, 69, 19', 1: 'rgba(255, 165, 0', 2: 'rgba(255, 255, 255', 3: 'rgba(255, 69, 0', 4: 'rgba(255, 69, 0' },
+        };
+        const base = (COLORS[ballPos] || {})[dataType];
+        if (!base) { return { fillStyle: null, radius }; }
+        return { fillStyle: base + ', ' + opacity + ')', radius, stroke: type == 4 };
+    }
+
+    // Clears a shot-map canvas and repaints it from a shotMapData-shaped array
+    // ([x, y, period, Ball_pos, dataType, type, dataxG] rows) - the redraw counterpart
+    // to Draw()'s live per-shot painting, used once a game's data no longer carries
+    // pre-rendered PNG snapshots (see updateSaveData() and undoButton()).
+    function redrawShotMap(ctx, shots) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.drawImage(myImg, 0, 0, fWidth, fLength);
+        ctx.font = "12px Arial";
+        shots.forEach(row => {
+            const [x, y, , ballPos, dataType, type, dataxG] = row;
+            const style = shotVisualStyle(dataType, ballPos, type, dataxG);
+            if (style.text) {
+                ctx.fillStyle = style.fillStyle;
+                ctx.fillText(style.text, x, y);
+                return;
+            }
+            if (!style.fillStyle) { return; }
+            ctx.fillStyle = style.fillStyle;
+            ctx.beginPath();
+            ctx.arc(x, y, style.radius, 0, 2 * Math.PI);
+            ctx.fill();
+            if (style.stroke) {
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+            }
+            ctx.closePath();
+        });
+    }
+
     function Draw(x,y,type) {
+
+        // Stashed for the shotMapData.push() calls further down (and in shotPasser(),
+        // a different function) - see redrawShotMap() above.
+        lastShotX = x;
+        lastShotY = y;
+        lastShotType = type;
 
         if (periodN == 1) {ctx_p = cnvs_1.getContext("2d");}
         else if (periodN == 2) {ctx_p = cnvs_2.getContext("2d");}
@@ -3833,6 +3886,7 @@
             printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                                 passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
                                 p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), posT1_str, posT2_str]);
+            shotMapData.push([lastShotX, lastShotY, periodN, Ball_pos, dataType, lastShotType, dataxG]);
 
             shot_on = 0; // End the shot tag process
             shotCounter++;
@@ -3896,6 +3950,7 @@
                     printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                             passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
                             p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
+                    shotMapData.push([lastShotX, lastShotY, periodN, Ball_pos, dataType, lastShotType, dataxG]);
 
                     if (shotCounter > 1) {
                         document.getElementById("undo").disabled = false;
@@ -3996,6 +4051,7 @@
                     printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                             passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
                             p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
+                    shotMapData.push([lastShotX, lastShotY, periodN, Ball_pos, dataType, lastShotType, dataxG]);
 
                     if (shotCounter > 1) {
                         document.getElementById("undo").disabled = false;
@@ -4061,6 +4117,7 @@
                     printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                             passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
                             p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
+                    shotMapData.push([lastShotX, lastShotY, periodN, Ball_pos, dataType, lastShotType, dataxG]);
 
                     if (shotCounter > 1) {
                         document.getElementById("undo").disabled = false;
@@ -4162,6 +4219,7 @@
                 printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                             passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
                             p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
+                shotMapData.push([lastShotX, lastShotY, periodN, Ball_pos, dataType, lastShotType, dataxG]);
 
                 if (shotCounter > 1) {
                     document.getElementById("undo").disabled = false;
@@ -4399,6 +4457,7 @@
         printShotData.push([document.getElementById("select-date").value, name_t1, name_t2, gameCounter, shooting_team, dataRes_str, dataType_str, dataxG.toFixed(2), dataxGOT.toFixed(2), shooter_str,
                             passer_str, p_T1LW_str, p_T1C_str, p_T1RW_str, p_T1LD_str, p_T1RD_str, p_T1G_str, p_T1X_str, p_T2LW_str, p_T2C_str,
                             p_T2RW_str, p_T2LD_str, p_T2RD_str, p_T2G_str, p_T2X_str, dataPp, dataSh, dataDis.toFixed(2), dataAngle.toFixed(2), 0, 0]);
+        shotMapData.push([lastShotX, lastShotY, periodN, Ball_pos, dataType, lastShotType, dataxG]);
 
         shot_on = 0; // End the shot tag process
 
@@ -5223,6 +5282,16 @@
         // Create a new window for printing
         const printWindow = window.open('', '', 'width=1000px,height=600px');
 
+        // Printing is rare and user-initiated, unlike per-shot saving - so the 5
+        // shotmap images this PDF needs are generated here, on demand, straight from
+        // the live canvases (which Draw()/undoButton() already keep painted
+        // correctly) instead of being pre-rendered and stored on every shot tagged.
+        printShotmap_5 = cnvs_5.toDataURL();
+        printShotmap_1 = cnvs_1.toDataURL();
+        printShotmap_2 = cnvs_2.toDataURL();
+        printShotmap_3 = cnvs_3.toDataURL();
+        printShotmap_4 = cnvs_4.toDataURL();
+
         temp1 = document.getElementById('T1linestats_1');
         temp2 = document.getElementById('T2linestats_1');
         temp3 = document.getElementById('T1plstats_1');
@@ -5274,7 +5343,7 @@
                     <div class="row" style="display: flex;">
                         <div class="column" style="flex:33%;">
                             <h5>Game shotmap</h5>
-                            <img src = ${data_object.cnvs_5_url} width="200px"><br>
+                            <img src = ${printShotmap_5} width="200px"><br>
                         </div>
                         <div class="column" style="flex:33%;">
                             <img src = ${p_T1_typechart} width="250px"><br>
@@ -5305,7 +5374,7 @@
                     <div class="row" style="display: flex;">
                         <div class="column" style="flex:33%;">
                             <h5>Period 1 shotmap</h5>
-                            <img src = ${data_object.cnvs_1_url} width="200px"><br>
+                            <img src = ${printShotmap_1} width="200px"><br>
                         </div>
                         <div class="column" style="flex:33%;">
                             <img src = ${p_T1_typechart_1} width="250px"><br>
@@ -5336,7 +5405,7 @@
                     <div class="row" style="display: flex;">
                         <div class="column" style="flex:33%;">
                             <h5>Period 2 shotmap</h5>
-                            <img src = ${data_object.cnvs_2_url} width="200px"><br>
+                            <img src = ${printShotmap_2} width="200px"><br>
                         </div>
                         <div class="column" style="flex:33%;">
                             <img src = ${p_T1_typechart_2} width="250px"><br>
@@ -5367,7 +5436,7 @@
                     <div class="row" style="display: flex;">
                         <div class="column" style="flex:33%;">
                             <h5>Period 3 shotmap</h5>
-                            <img src = ${data_object.cnvs_3_url} width="200px"><br>
+                            <img src = ${printShotmap_3} width="200px"><br>
                         </div>
                         <div class="column" style="flex:33%;">
                             <img src = ${p_T1_typechart_3} width="250px"><br>
@@ -5398,7 +5467,7 @@
                     <div class="row" style="display: flex;">
                         <div class="column" style="flex:33%;">
                             <h5>Overtime shotmap</h5>
-                            <img src = ${data_object.cnvs_4_url} width="200px"><br>
+                            <img src = ${printShotmap_4} width="200px"><br>
                         </div>
                         <div class="column" style="flex:33%;">
                             <img src = ${p_T1_typechart_4} width="250px"><br>
@@ -5503,6 +5572,7 @@
             "shotData" : shotData,
             "premShotData" : premShotData,
             "printShotData" : printShotData,
+            "shotMapData" : shotMapData,
             "dataShot" : dataShot,
             "dataRes" : dataRes,
             "dataRes_str" : dataRes_str,
@@ -5632,12 +5702,6 @@
             "xGaT2_p" : xGaT2_p,
             "xGaT2_g" : xGaT2_g,
             "xGOTaT2_g" : xGOTaT2_g,
-            "cnvs_url" : cnvs.toDataURL(),
-            "cnvs_1_url" : cnvs_1.toDataURL(),
-            "cnvs_2_url" : cnvs_2.toDataURL(),
-            "cnvs_3_url" : cnvs_3.toDataURL(),
-            "cnvs_4_url" : cnvs_4.toDataURL(),
-            "cnvs_5_url" : cnvs_5.toDataURL(),
             "sf_p" : [sf_p[0].innerHTML, sf_p[1].innerHTML, sf_p[2].innerHTML, sf_p[3].innerHTML, sf_p[4].innerHTML, sf_p[5].innerHTML, sf_p[6].innerHTML, sf_p[7].innerHTML],
             "sa_p" : [sa_p[0].innerHTML, sa_p[1].innerHTML, sa_p[2].innerHTML, sa_p[3].innerHTML, sa_p[4].innerHTML, sa_p[5].innerHTML, sa_p[6].innerHTML, sa_p[7].innerHTML],
             "gf_p" : [gf_p[0].innerHTML, gf_p[1].innerHTML, gf_p[2].innerHTML, gf_p[3].innerHTML, gf_p[4].innerHTML, gf_p[5].innerHTML, gf_p[6].innerHTML, gf_p[7].innerHTML],
@@ -5745,31 +5809,44 @@
     }
     function undoButton() {
 
-        // Redraw shotmaps
-        img.src = undo_object.cnvs_url;
-        img.onload = function() {
-            ctx.drawImage(img,0,0,fWidth,fLength);
-        };
-        img1.src = undo_object.cnvs_1_url;
-        img1.onload = function() {
-            ctx1.drawImage(img1,0,0,fWidth,fLength);
-        };
-        img2.src = undo_object.cnvs_2_url;
-        img2.onload = function() {
-            ctx2.drawImage(img2,0,0,fWidth,fLength);
-        };
-        img3.src = undo_object.cnvs_3_url;
-        img3.onload = function() {
-            ctx3.drawImage(img3,0,0,fWidth,fLength);
-        };
-        img4.src = undo_object.cnvs_4_url;
-        img4.onload = function() {
-            ctx4.drawImage(img4,0,0,fWidth,fLength);
-        };
-        img5.src = undo_object.cnvs_5_url;
-        img5.onload = function() {
-            ctx5.drawImage(img5,0,0,fWidth,fLength);
-        };
+        // Redraw shotmaps - this also runs from loadGame() (resuming a saved game),
+        // not just real undo, since loadGame() sets undo_object = data.game_data and
+        // calls this directly.
+        if (undo_object.shotMapData) {
+            redrawShotMap(ctx, undo_object.shotMapData);
+            redrawShotMap(ctx1, undo_object.shotMapData.filter(row => row[2] == 1));
+            redrawShotMap(ctx2, undo_object.shotMapData.filter(row => row[2] == 2));
+            redrawShotMap(ctx3, undo_object.shotMapData.filter(row => row[2] == 3));
+            redrawShotMap(ctx4, undo_object.shotMapData.filter(row => row[2] == 4));
+            redrawShotMap(ctx5, undo_object.shotMapData);
+        } else {
+            // Games saved before shot positions were recorded (no shotMapData) only
+            // have these pre-rendered PNG snapshots to fall back on.
+            img.src = undo_object.cnvs_url;
+            img.onload = function() {
+                ctx.drawImage(img,0,0,fWidth,fLength);
+            };
+            img1.src = undo_object.cnvs_1_url;
+            img1.onload = function() {
+                ctx1.drawImage(img1,0,0,fWidth,fLength);
+            };
+            img2.src = undo_object.cnvs_2_url;
+            img2.onload = function() {
+                ctx2.drawImage(img2,0,0,fWidth,fLength);
+            };
+            img3.src = undo_object.cnvs_3_url;
+            img3.onload = function() {
+                ctx3.drawImage(img3,0,0,fWidth,fLength);
+            };
+            img4.src = undo_object.cnvs_4_url;
+            img4.onload = function() {
+                ctx4.drawImage(img4,0,0,fWidth,fLength);
+            };
+            img5.src = undo_object.cnvs_5_url;
+            img5.onload = function() {
+                ctx5.drawImage(img5,0,0,fWidth,fLength);
+            };
+        }
 
         tgt_1.innerHTML = undo_object.tgt_1;
         tgt_2.innerHTML = undo_object.tgt_2;
@@ -5788,6 +5865,7 @@
         shotData = undo_object.shotData;
         premShotData = undo_object.premShotData;
         if (typeof undo_object.printShotData != "undefined") {printShotData = undo_object.printShotData;}
+        shotMapData = undo_object.shotMapData || [];
         dataShot = undo_object.dataShot;
         dataRes = undo_object.dataRes;
         dataRes_str = undo_object.dataRes_str;
