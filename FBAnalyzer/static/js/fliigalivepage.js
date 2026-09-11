@@ -4,9 +4,9 @@
 
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
 var matches = [];
-var today = '2026-09-09'; // STAGING PREVIEW: hardcoded to tomorrow so the live page can be
-// checked ahead of time - revert to `new Date().toISOString().split('T')[0]` before/when
-// deploying this rollout to production.
+var today = '2026-09-11'; // STAGING PREVIEW: hardcoded to today so the live page shows
+// today's real fixtures (e.g. Oilers-TPS) - revert to
+// `new Date().toISOString().split('T')[0]` before/when deploying this rollout to production.
 
 // Men/women, regular season (group_id=1, "Runkosarja") and playoffs
 // (group_id=2, "Pudotuspelit") — confirmed against the Torneopal API's own
