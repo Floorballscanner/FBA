@@ -245,9 +245,20 @@ def compute_pregame_analysis(match_id, force=False):
         return ':'.join([str(match_id), key] + [str(p) for p in parts])
 
     # --- streak ---
-    for team_name, streak in ((state.team_a_name, streak_a), (state.team_b_name, streak_b)):
+    # A team's win/loss streak is against whoever they've faced lately, not
+    # necessarily tonight's opponent - skip it when it'd read as a direct
+    # contradiction next to the head-to-head fact below (e.g. "momentum is
+    # with TPS" alongside "Oilers have won 5 of the last 7 meetings").
+    for team_name, streak, is_team_a in (
+        (state.team_a_name, streak_a, True), (state.team_b_name, streak_b, False),
+    ):
         if abs(streak) < STREAK_NOTABLE_GAMES:
             continue
+        if h2h and h2h['games'] >= H2H_MIN_GAMES:
+            h2h_wins = h2h['wins_a'] if is_team_a else h2h['wins_b']
+            h2h_losses = h2h['games'] - h2h_wins
+            if h2h_wins != h2h_losses and (streak > 0) != (h2h_wins > h2h_losses):
+                continue
         n = abs(streak)
         if streak > 0:
             options = [
