@@ -556,9 +556,11 @@ resize the canvas itself.
     margin: 0 auto;
 }
 
+/* One grid, 10 cards in DOM order (Team 1: Line1/2/3, PP1, 6vs5, then Team 2:
+   the same) - 5 columns wraps them into a Team 1 row then a Team 2 row. */
 .pg-lineups-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 14px;
     margin-bottom: 18px;
 }
@@ -815,7 +817,11 @@ resize the canvas itself.
         flex: 1 1 auto;
     }
 
+    /* One column so DOM order becomes reading order: Team 1's Line 1/2/3,
+       PP1, 6vs5, then Team 2's - a 2-column wrap split team boundaries
+       mid-row (e.g. Team 1 Line 3 next to Team 2 Line 1), which read as
+       out of order. */
     .pg-lineups-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
     }
 }
