@@ -175,21 +175,13 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
 
     <div class="pg-lineups pg-card">
         <div class="pg-lineups__title">Team Lineups</div>
-        <div class="pg-lineups-goalies">
-                <div class="pg-lineups-goalies__team">
+            <div class="pg-lineups-grid">
+                <div>
                     <h5><span id="name_t1_20">Team 1</span></h5>
                     <select disabled onchange="changePlayer('sT1G',0,8)" id="sT1G" class="pg-select">
                         <option selected disabled>Select a goalie...</option>
                     </select>
                 </div>
-                <div class="pg-lineups-goalies__team">
-                    <h5><span id="name_t2_20">Team 2</span></h5>
-                    <select disabled onchange="changePlayer('sT2G',0,8)" id="sT2G" class="pg-select">
-                        <option selected disabled>Select a goalie...</option>
-                    </select>
-                </div>
-            </div>
-            <div class="pg-lineups-grid">
                 <div>
                     <h5>Line 1</h5>
                     <select disabled onchange="changePlayer('sT1L1LW',2,3)" id="sT1L1LW" class="pg-select">
@@ -281,6 +273,12 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
                     </select>
                     <select disabled onchange="changePlayer('sT1L5X',5,7)" id="sT1L5X" class="pg-select">
                         <option selected disabled>Select X...</option>
+                    </select>
+                </div>
+                <div>
+                    <h5><span id="name_t2_20">Team 2</span></h5>
+                    <select disabled onchange="changePlayer('sT2G',0,8)" id="sT2G" class="pg-select">
+                        <option selected disabled>Select a goalie...</option>
                     </select>
                 </div>
                 <div>

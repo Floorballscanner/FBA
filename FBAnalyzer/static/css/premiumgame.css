@@ -532,35 +532,11 @@ resize the canvas itself.
     margin-bottom: 14px;
 }
 
-.pg-lineups-goalies {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    max-width: 640px;
-    margin: 0 auto 18px;
-}
-
-.pg-lineups-goalies__team {
-    text-align: center;
-}
-
-.pg-lineups-goalies__team h5 {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--pg-navy);
-    margin-bottom: 6px;
-}
-
-.pg-lineups-goalies .pg-select {
-    max-width: 260px;
-    margin: 0 auto;
-}
-
-/* One grid, 10 cards in DOM order (Team 1: Line1/2/3, PP1, 6vs5, then Team 2:
-   the same) - 5 columns wraps them into a Team 1 row then a Team 2 row. */
+/* One grid, 12 cards in DOM order (Team 1: goalie, Line1/2/3, PP1, 6vs5, then
+   Team 2: the same) - 6 columns wraps them into a Team 1 row then a Team 2 row. */
 .pg-lineups-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 14px;
     margin-bottom: 18px;
 }
