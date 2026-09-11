@@ -2,6 +2,16 @@
 match - i.e. matches insights already knows about via a backfill or a live
 push for the season, but that haven't started yet.
 
+Excludes 'scheduled' rows with no date: these are Torneopal's placeholder
+bracket slots ("winner of semifinal 1 vs winner of semifinal 2") that get a
+real date only once qualification is decided - if a season ends without the
+slot ever resolving, Torneopal leaves it dangling as 'scheduled' forever
+with date=None. A match with no known date has no kickoff to preview, so
+skip it rather than compute a pregame analysis nobody will ever see -
+confirmed live 2026-09-11: dozens of these from 2023-2024 through 2025-2026
+were otherwise getting recomputed every run, each one correctly (by
+season_id) but pointlessly surfacing that old season's roster/stats.
+
 Run this a few hours before kickoff (Heroku Scheduler), after that day's
 backfill_match_events pass so MatchState rows exist for the games about to
 be played. Safe to re-run any time before kickoff: each not-yet-final
@@ -26,7 +36,7 @@ class Command(BaseCommand):
         parser.add_argument('--match-id', help="Compute only this one match_id.")
 
     def handle(self, *args, **options):
-        qs = MatchState.objects.filter(status='scheduled')
+        qs = MatchState.objects.filter(status='scheduled', date__isnull=False)
         if options['match_id']:
             qs = qs.filter(match_id=options['match_id'])
         if options['category']:
