@@ -1313,9 +1313,9 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="/static/js/variables.js"></script>
-<script type="text/javascript" src="/static/js/premiumfunctions.js"></script>
-<script type="text/javascript" src="/static/js/livedata.js"></script>
+<script type="text/javascript" src="{% static 'js/variables.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/premiumfunctions.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/livedata.js' %}"></script>
 <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'bar']});
     google.charts.load('current', {'packages':['table']});
