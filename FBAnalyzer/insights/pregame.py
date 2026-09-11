@@ -23,6 +23,15 @@ currently ingested - same as HistoricalBaseline, which has no season_id
 either. This is what keeps week-1-of-a-new-season pregame text meaningful
 instead of empty.
 
+Player-level facts (_top_scorer, _recent_goalie) are the opposite: scoped to
+the *current* season_id only, never pooled across seasons. Rosters turn
+over - a team's all-time leading scorer from two seasons ago may not even
+be on the roster anymore, so surfacing them by name would be actively
+misleading rather than just stale. If a team hasn't played enough games
+yet this season to clear a stat's own notability bar, that angle simply
+doesn't fire yet (same graceful-omission behavior as any other candidate
+that doesn't clear the bar) rather than falling back to older seasons.
+
 Computed either by the compute_pregame management command (ahead of
 kickoff) or lazily on first request via the pregame API endpoint - whichever
 gets there first; update_or_create makes re-running harmless. Once a match
@@ -137,6 +146,8 @@ def _rate_stats(team_id, matches):
 
 
 def _top_scorer(team_id, matches):
+    """`matches` is expected to already be filtered to the current season by
+    the caller - see the module docstring on player-level facts."""
     match_ids = [m.match_id for m in matches]
     players = defaultdict(lambda: {'points': 0, 'goals': 0, 'name': ''})
     for e in MatchEvent.objects.filter(match_id__in=match_ids, team_id=team_id, code__in=(GOAL_CODE, ASSIST_CODE)):
@@ -152,7 +163,9 @@ def _top_scorer(team_id, matches):
 
 def _recent_goalie(team_id, matches):
     """The goalie with the most appearances among the team's last
-    RECENT_FORM_GAMES matches, and their GSAx/game over that window."""
+    RECENT_FORM_GAMES matches, and their GSAx/game over that window.
+    `matches` is expected to already be filtered to the current season by
+    the caller - see the module docstring on player-level facts."""
     recent_ids = [m.match_id for m in matches[-RECENT_FORM_GAMES:]]
     if not recent_ids:
         return None
@@ -203,14 +216,19 @@ def compute_pregame_analysis(match_id, force=False):
     history_a = _team_history(state.team_a_id, state.category, state.stage, before_date=state.date)
     history_b = _team_history(state.team_b_id, state.category, state.stage, before_date=state.date)
 
+    # Player-level facts must not reach across a roster turnover - see the module
+    # docstring. Team-level form (rates/record/streak) keeps pooling every season.
+    season_history_a = [m for m in history_a if m.season_id == state.season_id]
+    season_history_b = [m for m in history_b if m.season_id == state.season_id]
+
     rates_a = _rate_stats(state.team_a_id, history_a)
     rates_b = _rate_stats(state.team_b_id, history_b)
     wins_a, losses_a, streak_a = _record_and_streak(state.team_a_id, history_a)
     wins_b, losses_b, streak_b = _record_and_streak(state.team_b_id, history_b)
-    top_a = _top_scorer(state.team_a_id, history_a)
-    top_b = _top_scorer(state.team_b_id, history_b)
-    goalie_a = _recent_goalie(state.team_a_id, history_a)
-    goalie_b = _recent_goalie(state.team_b_id, history_b)
+    top_a = _top_scorer(state.team_a_id, season_history_a)
+    top_b = _top_scorer(state.team_b_id, season_history_b)
+    goalie_a = _recent_goalie(state.team_a_id, season_history_a)
+    goalie_b = _recent_goalie(state.team_b_id, season_history_b)
     h2h = _head_to_head(state.team_a_id, state.team_b_id, state.category, state.stage)
 
     baselines = {
@@ -293,10 +311,11 @@ def compute_pregame_analysis(match_id, force=False):
             })
 
     # --- top scorer ---
-    for team_name, top, rates in ((state.team_a_name, top_a, rates_a), (state.team_b_name, top_b, rates_b)):
+    for team_name, top, n in (
+        (state.team_a_name, top_a, len(season_history_a)), (state.team_b_name, top_b, len(season_history_b)),
+    ):
         if top and top['goals'] >= MIN_GOALS_FOR_TOP_SCORER:
-            n = rates['games'] if rates else 0
-            games = f"{n} {plural(n, 'game')}" if rates else "recent games"
+            games = f"{n} {plural(n, 'game')}" if n else "recent games"
             options = [
                 f"{top['name']} ({team_name}) leads the way with {top['goals']} goals over their last {games}.",
                 f"Keep an eye on {top['name']} ({team_name}) - {top['goals']} goals in their last {games}.",
