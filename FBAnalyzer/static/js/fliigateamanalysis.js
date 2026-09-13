@@ -161,11 +161,25 @@ function perc(value) {
     return value === null || value === undefined ? "-" : (value * 100).toFixed(1) + "%";
 }
 
+function rankTier(rankInfo) {
+    // 0 (best) .. 1 (worst) position along the field, split into thirds for
+    // an at-a-glance good/mid/bad color - same idea as a form guide, not
+    // meant to replace the exact "3rd of 12" text next to it.
+    const t = rankInfo.of > 1 ? (rankInfo.rank - 1) / (rankInfo.of - 1) : 0;
+    if (t <= 1 / 3) return {t: t, color: '#16a34a'};
+    if (t <= 2 / 3) return {t: t, color: '#f59e0b'};
+    return {t: t, color: '#d92d20'};
+}
+
 function rankBadge(rankInfo) {
     if (!rankInfo) {
         return '';
     }
-    return '<div class="team-kpi-tile__rank">' + ordinal(rankInfo.rank) + ' of ' + rankInfo.of + '</div>';
+    const tier = rankTier(rankInfo);
+    return '<div class="team-kpi-tile__rank">'
+        + '<div class="team-rank-bar"><div class="team-rank-bar__marker" style="left:' + (tier.t * 100) + '%;background:' + tier.color + ';"></div></div>'
+        + '<div class="team-rank-bar__label">' + ordinal(rankInfo.rank) + ' of ' + rankInfo.of + '</div>'
+        + '</div>';
 }
 
 function kpiTile(label, value, rankInfo) {
