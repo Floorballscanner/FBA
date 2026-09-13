@@ -146,7 +146,7 @@ window.onload = function() {
 
             events = modifiedEvents;
             lineups = modifiedLineups;
-            pushMatchEvents(match, modifiedEvents);
+            pushMatchEvents(match, modifiedEvents, modifiedLineups);
             updateInsightsPanel(match);
             updatePregameLayout(match, lineups);
             lineups.forEach(event => {
@@ -657,7 +657,7 @@ function getCookie(name) {
 // endpoint. All xG/xGOT/situation derivation happens server-side (see
 // insights/views.py), so only Torneopal's own raw fields are sent. Fire-
 // and-forget: a failed push must never block the page's own rendering.
-function pushMatchEvents(match, events) {
+function pushMatchEvents(match, events, lineups) {
     const payload = {
         match_id: match.match_id,
         category_id: match.category_id,
@@ -674,6 +674,7 @@ function pushMatchEvents(match, events) {
         score_a: match.fs_A,
         score_b: match.fs_B,
         events: events,
+        lineups: lineups,
     };
 
     fetch("/apis/insights/events/", {
@@ -1687,7 +1688,7 @@ function updateData() {
 
             events = modifiedEvents;
             lineups = modifiedLineups;
-            pushMatchEvents(match, modifiedEvents);
+            pushMatchEvents(match, modifiedEvents, modifiedLineups);
             updateInsightsPanel(match);
             updatePregameLayout(match, lineups);
             lineups.forEach(event => {

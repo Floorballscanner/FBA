@@ -17,8 +17,9 @@ from django.db.models import Q
 from django.utils import timezone
 
 from .event_codes import GOAL_AGAINST_CODE, GOALIE_CODES, ON_TARGET_CODES, SHOT_CODES
+from .lineups import parse_position
 from .live_insights import evaluate_match_insights
-from .models import MatchEvent, MatchState
+from .models import MatchEvent, MatchLineup, MatchState
 from .post_game import compute_post_game_analysis
 from .pregame import compute_pregame_analysis
 from .special_teams import (
@@ -37,6 +38,10 @@ SELECTED_EVENT_KEYS = (
     'event_id', 'code', 'team_id', 'player_id', 'player_name', 'shirt_number',
     'time', 'time_sec', 'period', 'code_fi', 'description', 'location', 'placement', 'team',
 )
+
+# Same whitelist fliigalivegame.js applies to Torneopal's raw match.lineups
+# entries - only what MatchLineup actually stores (see insights.lineups).
+SELECTED_LINEUP_KEYS = ('team_id', 'player_id', 'player_name', 'position')
 
 
 def status_from_torneopal(status, live_period):
@@ -71,9 +76,39 @@ def parse_location(location):
         return None, None
 
 
+def _ingest_lineups(match_id, category, lineups, overwrite_existing):
+    """Persists MatchLineup rows the first time this match is seen with
+    lineup data - a lineup doesn't change tick-to-tick, so (unlike events)
+    there's nothing to gain from re-checking on every live poll. --force
+    backfill re-derivation (overwrite_existing=True) replaces whatever was
+    stored, e.g. after a position-parsing fix."""
+    if not lineups:
+        return
+    if not overwrite_existing and MatchLineup.objects.filter(match_id=match_id).exists():
+        return
+
+    rows = []
+    for entry in lineups:
+        player_id = entry.get('player_id')
+        if not player_id:
+            continue
+        role, line_number = parse_position(entry.get('position'))
+        rows.append(MatchLineup(
+            match_id=match_id, category=category, team_id=entry.get('team_id') or '',
+            player_id=player_id, player_name=entry.get('player_name') or '',
+            role=role, line_number=line_number, is_starter=(line_number == 1),
+        ))
+    if not rows:
+        return
+
+    if overwrite_existing:
+        MatchLineup.objects.filter(match_id=match_id).delete()
+    MatchLineup.objects.bulk_create(rows, ignore_conflicts=True)
+
+
 def ingest_match_tick(*, match_id, category, season_id, stage, date, status, live_period, period_lengths,
                        team_a_id, team_b_id, team_a_name, team_b_name,
-                       score_a, score_b, events, overwrite_existing=True):
+                       score_a, score_b, events, overwrite_existing=True, lineups=None):
     """Upserts MatchEvent rows and MatchState for one match snapshot ('tick')
     - either a live client-push, or one historical-backfill pass over an
     already-played match. Returns the new status string ('scheduled'/'live'/
@@ -99,6 +134,8 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
     state, created = MatchState.objects.get_or_create(match_id=match_id, defaults={'category': category})
     was_played = state.status == 'played'
     was_scheduled = state.status == 'scheduled'
+
+    _ingest_lineups(match_id, category, lineups, overwrite_existing)
 
     shot_situations = compute_shot_situations(events, period_lengths)
 
@@ -282,6 +319,10 @@ def ingest_raw_match(match_id, match, overwrite_existing=True):
         {k: e[k] for k in SELECTED_EVENT_KEYS if k in e}
         for e in (match.get('events') or [])
     ]
+    lineups = [
+        {k: p[k] for k in SELECTED_LINEUP_KEYS if k in p}
+        for p in (match.get('lineups') or [])
+    ]
 
     return ingest_match_tick(
         match_id=match_id,
@@ -300,6 +341,7 @@ def ingest_raw_match(match_id, match, overwrite_existing=True):
         score_b=match.get('fs_B'),
         events=events,
         overwrite_existing=overwrite_existing,
+        lineups=lineups,
     )
 
 

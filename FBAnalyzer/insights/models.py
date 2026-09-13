@@ -176,6 +176,44 @@ class HistoricalBaseline(models.Model):
         return f'{self.baseline_type} {self.category} {self.stage} (n={self.sample_size})'
 
 
+class MatchLineup(models.Model):
+    """One player's line assignment for one match, parsed from Torneopal's
+    getMatch `match.lineups[].position` field (e.g. "VL/1", "MV/2") - role
+    abbreviation + "/" + line number, see insights.lineups.parse_position.
+    Written once per match by insights.ingest (both the live client-push path
+    and the historical backfill already fetch match.lineups from Torneopal;
+    this just persists what was previously only used transiently client-side
+    for pregame roster display - see the F-Liiga Team Analysis plan's Phase 2).
+
+    Unlike MatchEvent, a lineup doesn't change tick-to-tick, so ingestion only
+    writes these once per match (first tick that has them) rather than
+    re-deriving on every poll - see insights.ingest._ingest_lineups.
+    """
+
+    match_id = models.CharField(max_length=20)
+    category = models.CharField(max_length=10, choices=MatchEvent.CATEGORY_CHOICES)
+    team_id = models.CharField(max_length=20, blank=True)
+    player_id = models.CharField(max_length=20, blank=True)
+    player_name = models.CharField(max_length=100, blank=True)
+
+    role = models.CharField(max_length=4, blank=True)  # 'OL'/'VL'/'KH'/'VP'/'OP'/'MV' - see insights.lineups.ROLE_LABELS
+    line_number = models.PositiveSmallIntegerField(null=True, blank=True)
+    is_starter = models.BooleanField(default=False)  # line_number == 1
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['match_id', 'player_id'], name='unique_match_lineup'),
+        ]
+        indexes = [
+            models.Index(fields=['match_id', 'team_id']),
+        ]
+
+    def __str__(self):
+        return f'{self.match_id}: {self.player_name} ({self.role}/{self.line_number})'
+
+
 class TeamSeasonStats(models.Model):
     """Cached whole-season performance for one team, computed by the
     compute_team_stats management command instead of on every Team Analysis
