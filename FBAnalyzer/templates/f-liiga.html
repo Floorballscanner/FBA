@@ -80,6 +80,33 @@ This is the F-liiga hub page — links to results, live data, and statistics.
             <p>Advanced F-Liiga statistics.</p>
         </a>
         {% endif %}
+        {% if license_tier == 'fliiga' %}
+        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full_upgrade' %}">
+            {% csrf_token %}
+            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
+                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+                <h3>Team Analysis</h3>
+                <p>Season breakdown of any F-Liiga team, built for coaches.</p>
+                <span class="landing-card__badge">Upgrade to Full — 161&euro; &rarr;</span>
+            </button>
+        </form>
+        {% elif license_tier == 'fliiga_trial' %}
+        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}">
+            {% csrf_token %}
+            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
+                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+                <h3>Team Analysis</h3>
+                <p>Season breakdown of any F-Liiga team, built for coaches.</p>
+                <span class="landing-card__badge">Buy F-Liiga Full — 200&euro; &rarr;</span>
+            </button>
+        </form>
+        {% else %}
+        <a class="landing-card" href="/accounts/fliiga_team_analysis">
+            <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
+            <h3>Team Analysis</h3>
+            <p>Season breakdown of any F-Liiga team, built for coaches.</p>
+        </a>
+        {% endif %}
     </div>
 
 </div>

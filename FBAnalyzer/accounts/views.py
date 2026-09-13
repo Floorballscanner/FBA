@@ -12,6 +12,7 @@ from django.contrib.auth.forms import UserCreationForm
 from rest_framework.response import Response
 
 from .models import Player, Team, Game, Level, Position, Line, LiveData, Shot, Time, License, LicenseSeat, FliigaSeasonStats
+from insights.models import MatchState, TeamSeasonStats
 from django.http import HttpResponseRedirect, JsonResponse
 from accounts.forms import AddNewPlayer, TrialSignupForm
 from accounts.decorators import license_required, get_active_license
@@ -429,4 +430,59 @@ def fliiga_stats_api(request):
         'is_final': row.is_final,
         'computed_at': row.computed_at.isoformat(),
         'rows': getattr(row, table_field),
+    })
+
+@login_required
+@license_required('fliiga_full', 'team', 'club')
+def fliiga_team_analysis(request):
+    return render(request, 'f-liiga_team_analysis.html')
+
+@login_required
+@license_required('fliiga_full', 'team', 'club')
+def fliiga_team_list_api(request):
+    """Distinct teams available to pick from for a category, pulled straight
+    from MatchState's team_a/team_b sides (no separate Team model exists for
+    F-Liiga - see insights.models module docstring)."""
+
+    category = request.GET.get('category')
+    if category not in ('men', 'women'):
+        return JsonResponse({'error': 'category must be men or women'}, status=400)
+
+    teams = {}
+    qs = MatchState.objects.filter(category=category).exclude(team_a_id='').values_list(
+        'team_a_id', 'team_a_name', 'team_b_id', 'team_b_name',
+    )
+    for team_a_id, team_a_name, team_b_id, team_b_name in qs:
+        teams[team_a_id] = team_a_name
+        if team_b_id:
+            teams[team_b_id] = team_b_name
+
+    rows = sorted(({'team_id': tid, 'team_name': name} for tid, name in teams.items()), key=lambda t: t['team_name'])
+    return JsonResponse({'teams': rows})
+
+@login_required
+@license_required('fliiga_full', 'team', 'club')
+def fliiga_team_stats_api(request):
+    """Serves a cached TeamSeasonStats row, computed ahead of time by the
+    compute_team_stats management command. Returns status='pending' if that
+    combination hasn't been computed yet."""
+
+    team_id = request.GET.get('team_id')
+    category = request.GET.get('category')
+    season_id = request.GET.get('season')
+    stage = request.GET.get('stage', 'regular')
+    if not (team_id and category and season_id):
+        return JsonResponse({'error': 'team_id, category, and season are required'}, status=400)
+
+    row = TeamSeasonStats.objects.filter(
+        team_id=team_id, category=category, season_id=season_id, stage=stage,
+    ).first()
+    if row is None:
+        return JsonResponse({'status': 'pending'})
+
+    return JsonResponse({
+        'status': 'ready',
+        'team_name': row.team_name,
+        'computed_at': row.computed_at.isoformat(),
+        'facts': row.facts,
     })
