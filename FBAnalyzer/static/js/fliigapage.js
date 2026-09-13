@@ -106,6 +106,19 @@ const STAGE_GROUP_IDS = {
     playoffs: '2',
 };
 
+// F-Liiga Live/Trial tier users only get season FLIIGA_TEASER_SEASON for free - other
+// seasons show the upgrade CTA instead of loading any games. See also fliigastatspage.js/
+// fliigateamanalysis.js, which apply the same rule server-side too (this page's match list
+// comes straight from Torneopal client-side, so it can only be gated here).
+const FLIIGA_TEASER_TIERS = ['fliiga', 'fliiga_trial'];
+const FLIIGA_TEASER_SEASON = '2024-2025';
+
+function isFliigaSeasonLocked(season) {
+    const tierEl = document.getElementById('license_tier');
+    const tier = tierEl ? JSON.parse(tierEl.textContent) : null;
+    return FLIIGA_TEASER_TIERS.includes(tier) && season !== FLIIGA_TEASER_SEASON;
+}
+
 // Fires whenever the league/season/stage selectors change. Only loads games
 // once all three have a value.
 function maybeLoadGames() {
@@ -117,6 +130,16 @@ function maybeLoadGames() {
     if (!league || !season || !stage) {
         return;
     }
+
+    const cta = document.getElementById('fliiga-teaser-cta');
+    if (isFliigaSeasonLocked(season)) {
+        if (cta) cta.style.display = "block";
+        s_game.innerHTML = "";
+        s_game.appendChild(new Option("Select a game..."));
+        document.getElementById('no-games-message').style.display = "none";
+        return;
+    }
+    if (cta) cta.style.display = "none";
 
     loadGames(season, SEASON_COMPETITION_IDS[season], LEAGUE_CATEGORY_IDS[league], STAGE_GROUP_IDS[stage]);
 }

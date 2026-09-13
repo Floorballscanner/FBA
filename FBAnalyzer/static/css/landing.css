@@ -489,6 +489,48 @@ a.landing-card:hover {
     text-transform: uppercase;
 }
 
+/* Preview badge — the card is a real, working link (not locked); this just sets
+   expectations that F-Liiga Live/Trial tiers only see one free season on it. */
+.landing-card__badge--preview {
+    background: transparent;
+    border: 1px solid rgba(0, 32, 114, 0.35);
+    color: var(--landing-navy);
+}
+
+/* Teaser upgrade panel — shown in place of real data on Results/Statistics/Team Analysis
+   when an F-Liiga Live/Trial tier user picks a season outside their free preview season. */
+
+.landing-teaser-cta {
+    max-width: 560px;
+    margin: 0 auto 24px;
+    padding: 24px 28px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(0, 32, 114, 0.12);
+    text-align: center;
+}
+
+.landing-teaser-cta h3 {
+    margin: 0 0 8px;
+    color: var(--landing-navy-dark);
+    font-size: 18px;
+}
+
+.landing-teaser-cta p {
+    margin: 0;
+    color: var(--landing-muted);
+}
+
+.landing-teaser-cta form {
+    display: inline-block;
+}
+
+.landing-teaser-cta .landing-card__badge {
+    margin-top: 16px;
+    padding: 8px 20px;
+    font-size: 13px;
+}
+
 /* Match cards (live.html, built by livepage.js) */
 
 .landing-match-grid {

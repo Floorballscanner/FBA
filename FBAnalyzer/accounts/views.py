@@ -39,6 +39,20 @@ def _game_dropdown_queryset(queryset):
     ).values('id', 'date', 'name_t1', 'name_t2')
 
 
+# F-Liiga Live/Trial tier users get a free teaser of Results/Statistics/Team Analysis,
+# limited to one season - anything else asks them to buy F-Liiga Full.
+FLIIGA_TEASER_TIERS = ('fliiga', 'fliiga_trial')
+FLIIGA_TEASER_SEASON = '2024-2025'
+
+
+def _fliiga_season_locked(request, season_id):
+    """True if request.user's license is a teaser tier and season_id isn't the
+    free teaser season - callers should return a 'locked' status instead of
+    real data. Staff (no license object) are never locked."""
+    license = get_active_license(request.user)
+    return license is not None and license.tier in FLIIGA_TEASER_TIERS and season_id != FLIIGA_TEASER_SEASON
+
+
 def activate(request, token):
     seat = get_object_or_404(LicenseSeat, activation_token=token, user__isnull=True)
 
@@ -406,7 +420,7 @@ def fliigagame(request, nr):
 def fliiga_main(request):
     return render(request, 'f-liiga.html')
 @login_required
-@license_required('fliiga_full', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_results(request):
     return render(request, 'f-liiga_results.html')
 @login_required
@@ -414,12 +428,12 @@ def fliiga_results(request):
 def fliigalive(request):
     return render(request, 'f-liiga_live.html')
 @login_required
-@license_required('fliiga_full', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_statistics(request):
     return render(request, 'f-liiga_statistics.html')
 
 @login_required
-@license_required('fliiga_full', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_stats_api(request):
     """Serves a cached FliigaSeasonStats table (team/player/goalie), computed
     ahead of time by the compute_fliiga_stats management command instead of
@@ -435,6 +449,9 @@ def fliiga_stats_api(request):
     if not (season_id and category and stage and table_field):
         return JsonResponse({'error': 'season, category, stage, and table are required'}, status=400)
 
+    if _fliiga_season_locked(request, season_id):
+        return JsonResponse({'status': 'locked'})
+
     row = FliigaSeasonStats.objects.filter(season_id=season_id, category=category, stage=stage).first()
     if row is None:
         return JsonResponse({'status': 'pending'})
@@ -447,12 +464,12 @@ def fliiga_stats_api(request):
     })
 
 @login_required
-@license_required('fliiga_full', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_team_analysis(request):
     return render(request, 'f-liiga_team_analysis.html')
 
 @login_required
-@license_required('fliiga_full', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_team_list_api(request):
     """Distinct teams available to pick from for a category, pulled straight
     from MatchState's team_a/team_b sides (no separate Team model exists for
@@ -475,7 +492,7 @@ def fliiga_team_list_api(request):
     return JsonResponse({'teams': rows})
 
 @login_required
-@license_required('fliiga_full', 'team', 'club')
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_team_stats_api(request):
     """Serves a cached TeamSeasonStats row, computed ahead of time by the
     compute_team_stats management command. Returns status='pending' if that
@@ -487,6 +504,9 @@ def fliiga_team_stats_api(request):
     stage = request.GET.get('stage', 'regular')
     if not (team_id and category and season_id):
         return JsonResponse({'error': 'team_id, category, and season are required'}, status=400)
+
+    if _fliiga_season_locked(request, season_id):
+        return JsonResponse({'status': 'locked'})
 
     row = TeamSeasonStats.objects.filter(
         team_id=team_id, category=category, season_id=season_id, stage=stage,

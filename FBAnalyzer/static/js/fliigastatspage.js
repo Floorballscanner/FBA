@@ -98,6 +98,19 @@ const TABLE_LEGENDS = {
         + '<b>GSAx/Game</b> = GSAx per game played.',
 };
 
+// F-Liiga Live/Trial tier users only get season FLIIGA_TEASER_SEASON for free - other
+// seasons show the upgrade CTA instead of loading real stats. fliiga_stats_api enforces
+// this server-side too (see accounts/views.py _fliiga_season_locked); this is just so the
+// page doesn't even bother asking before showing the CTA.
+const FLIIGA_TEASER_TIERS = ['fliiga', 'fliiga_trial'];
+const FLIIGA_TEASER_SEASON = '2024-2025';
+
+function isFliigaSeasonLocked(season) {
+    const tierEl = document.getElementById('license_tier');
+    const tier = tierEl ? JSON.parse(tierEl.textContent) : null;
+    return FLIIGA_TEASER_TIERS.includes(tier) && season !== FLIIGA_TEASER_SEASON;
+}
+
 function maybeLoadStats() {
 
     const league = document.getElementById('select-league').value;
@@ -108,6 +121,17 @@ function maybeLoadStats() {
     if (!league || !season || !stage || !table) {
         return;
     }
+
+    const cta = document.getElementById('fliiga-teaser-cta');
+    if (isFliigaSeasonLocked(season)) {
+        if (cta) cta.style.display = "block";
+        document.getElementById('pending-message').style.display = "none";
+        document.getElementById('stats-meta').style.display = "none";
+        document.getElementById('stats-legend').style.display = "none";
+        document.getElementById('stats_table').innerHTML = "";
+        return;
+    }
+    if (cta) cta.style.display = "none";
 
     loadStats(season, league, stage, table);
 }
@@ -131,6 +155,11 @@ function loadStats(season, category, stage, table) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
+            if (data.status === "locked") {
+                const cta = document.getElementById('fliiga-teaser-cta');
+                if (cta) cta.style.display = "block";
+                return;
+            }
             if (data.status !== "ready") {
                 pendingMessage.style.display = "block";
                 return;
