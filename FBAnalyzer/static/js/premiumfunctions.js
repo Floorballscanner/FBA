@@ -6664,14 +6664,14 @@
         var data = new google.visualization.arrayToDataTable([
         ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
         ['Direct Attack', stxGT1Teamg_array[2] + stxGT1Teamg_array[4] + stxGT1Teamg_array[3], 'color: #002072', stxGT1Teamg_array[2] + stxGT1Teamg_array[4] + stxGT1Teamg_array[3]],
-        ['Turnover Attack', stxGT1Teamg_array[0] + stxGT1Teamg_array[1], 'color: #59D9EB', stxGT1Teamg_array[0] + stxGT1Teamg_array[1]]
+        ['Turnover Attack', stxGT1Teamg_array[0] + stxGT1Teamg_array[1], 'color: ' + TURNOVER_COLOR, stxGT1Teamg_array[0] + stxGT1Teamg_array[1]]
 
         ]);
 
         var data_p = new google.visualization.arrayToDataTable([
         ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
         ['Direct Attack', stxGT1Teamp_array[2] + stxGT1Teamp_array[4] + stxGT1Teamp_array[3], 'color: #002072', stxGT1Teamp_array[2] + stxGT1Teamp_array[4] + stxGT1Teamp_array[3]],
-        ['Turnover Attack', stxGT1Teamp_array[0] + stxGT1Teamp_array[1], 'color: #59D9EB', stxGT1Teamp_array[0] + stxGT1Teamp_array[1]]
+        ['Turnover Attack', stxGT1Teamp_array[0] + stxGT1Teamp_array[1], 'color: ' + TURNOVER_COLOR, stxGT1Teamp_array[0] + stxGT1Teamp_array[1]]
 
         ]);
 
@@ -6692,14 +6692,14 @@
         var data2 = new google.visualization.arrayToDataTable([
         ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
         ['Direct Attack', stxGT2Teamg_array[2] + stxGT2Teamg_array[4] + stxGT2Teamg_array[3], 'color: #002072', stxGT2Teamg_array[2] + stxGT2Teamg_array[4] + stxGT2Teamg_array[3]],
-        ['Turnover Attack', stxGT2Teamg_array[0] + stxGT2Teamg_array[1], 'color: #59D9EB', stxGT2Teamg_array[0] + stxGT2Teamg_array[1]]
+        ['Turnover Attack', stxGT2Teamg_array[0] + stxGT2Teamg_array[1], 'color: ' + TURNOVER_COLOR, stxGT2Teamg_array[0] + stxGT2Teamg_array[1]]
 
         ]);
 
         var data2_p = new google.visualization.arrayToDataTable([
         ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
         ['Direct Attack', stxGT2Teamp_array[2] + stxGT2Teamp_array[4] + stxGT2Teamp_array[3], 'color: #002072', stxGT2Teamp_array[2] + stxGT2Teamp_array[4] + stxGT2Teamp_array[3]],
-        ['Turnover Attack', stxGT2Teamp_array[0] + stxGT2Teamp_array[1], 'color: #59D9EB', stxGT2Teamp_array[0] + stxGT2Teamp_array[1]]
+        ['Turnover Attack', stxGT2Teamp_array[0] + stxGT2Teamp_array[1], 'color: ' + TURNOVER_COLOR, stxGT2Teamp_array[0] + stxGT2Teamp_array[1]]
 
         ]);
 
@@ -6740,7 +6740,7 @@
                 title: title,
                 isStacked: 'percent',
                 legend: { position: 'bottom' },
-                colors: ['#002072', '#59D9EB'],
+                colors: ['#002072', TURNOVER_COLOR],
                 chartArea: { width: '60%' },
             };
             var chart = new google.visualization.BarChart(document.getElementById(elementId));
@@ -6793,7 +6793,7 @@
         var data = new google.visualization.arrayToDataTable([
         ['Type of Goals', 'Goals', { role: 'style' }, { role: 'annotation' } ],
         ['Direct Attack', gtT1TeamD, 'color: #002072', gtT1TeamD],
-        ['Turnover Attack', gtT1TeamT, 'color: #59D9EB', gtT1TeamT]
+        ['Turnover Attack', gtT1TeamT, 'color: ' + TURNOVER_COLOR, gtT1TeamT]
 
         ]);
 
@@ -6810,7 +6810,7 @@
         var data2 = new google.visualization.arrayToDataTable([
         ['Type of Goals', 'Goals', { role: 'style' }, { role: 'annotation' } ],
         ['Direct Attack', gtT2TeamD, 'color: #002072', gtT2TeamD],
-        ['Turnover Attack', gtT2TeamT, 'color: #59D9EB', gtT2TeamT]
+        ['Turnover Attack', gtT2TeamT, 'color: ' + TURNOVER_COLOR, gtT2TeamT]
         ]);
 
         var options2 = {
