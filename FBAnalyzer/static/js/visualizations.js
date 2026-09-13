@@ -1,4 +1,11 @@
 
+    // Single source of truth for "Turnover Attack" across every Type-of-xG chart
+    // on this page (and the matching charts in premium_analysis.js and
+    // premiumfunctions.js) - was previously hardcoded per chart as '#59D9EB' (a
+    // light cyan), inconsistent with charts elsewhere that already used red for
+    // the same category. Direct Attack's navy (#002072) is unaffected.
+    var TURNOVER_COLOR = '#D92D20';
+
     var s_game = document.getElementById("select-game");
     var game_delete = document.getElementById("analyse_delete");
     var img1 = new Image();
@@ -499,7 +506,7 @@
                             title: title,
                             isStacked: 'percent',
                             legend: { position: 'bottom' },
-                            colors: ['#002072', '#59D9EB'],
+                            colors: ['#002072', TURNOVER_COLOR],
                             chartArea: { width: '60%' },
                         };
                         var chart = new google.visualization.BarChart(document.getElementById(elementId));
@@ -892,7 +899,7 @@
             ['Line 1 For', 'Line 1 Against', 'Line 2 For', 'Line 2 Against', 'Line 3 For', 'Line 3 Against']
                 .forEach(function (label) { emptyData.addRow([label, 0, 0]); });
             var chart = new google.visualization.BarChart(document.getElementById(elementId));
-            chart.draw(emptyData, { isStacked: 'percent', legend: { position: 'bottom' }, colors: ['#002072', '#59D9EB'] });
+            chart.draw(emptyData, { isStacked: 'percent', legend: { position: 'bottom' }, colors: ['#002072', TURNOVER_COLOR] });
         });
 
         // Team xG Chart

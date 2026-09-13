@@ -1,5 +1,12 @@
     // Variables file for New Game - html
 
+    // Single source of truth for "Turnover Attack" across every Type-of-xG/Goals
+    // chart in premiumfunctions.js (and the matching charts in premium_analysis.js
+    // and visualizations.js) - was previously hardcoded per chart as '#59D9EB' (a
+    // light cyan), inconsistent with charts elsewhere that already used red for
+    // the same category. Direct Attack's navy (#002072) is unaffected.
+    var TURNOVER_COLOR = '#D92D20';
+
     var tgt_1 = document.getElementById("totg_1");
     var tgt_2 = document.getElementById("totg_2");
     var txG_1 = document.getElementById("totxG_1");

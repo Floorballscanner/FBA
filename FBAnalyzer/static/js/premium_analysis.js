@@ -1,4 +1,11 @@
 
+    // Single source of truth for "Turnover Attack" across every Type-of-xG/Goals
+    // chart on this page (and the matching charts in premiumfunctions.js and
+    // visualizations.js) - was previously hardcoded per chart as '#59D9EB' (a
+    // light cyan), inconsistent with charts elsewhere that already used red for
+    // the same category. Direct Attack's navy (#002072) is unaffected.
+    var TURNOVER_COLOR = '#D92D20';
+
     var s_game = document.getElementById("select-game");
     var playerData = [['ID','Name','Games','ixG','ixAss','ixG_PP','ixAss_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
     var playerData_5v5 = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
@@ -577,7 +584,7 @@ function drawCharts() {
     var typeChartF = google.visualization.arrayToDataTable([
          ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
          ['Direct Attack', xGtypeAvg[0], 'color: #002072', xGtypeAvg[0]],
-         ['Turnover Attack', xGtypeAvg[2], 'color: #59D9EB', xGtypeAvg[2] ]
+         ['Turnover Attack', xGtypeAvg[2], 'color: ' + TURNOVER_COLOR, xGtypeAvg[2] ]
       ]);
 
     var options = {
@@ -592,7 +599,7 @@ function drawCharts() {
     var typeChartA = google.visualization.arrayToDataTable([
          ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' } ],
          ['Direct Attack', xGtypeAvg[1], 'color: #002072', xGtypeAvg[1]],
-         ['Turnover Attack', xGtypeAvg[3], 'color: #59D9EB', xGtypeAvg[3] ]
+         ['Turnover Attack', xGtypeAvg[3], 'color: ' + TURNOVER_COLOR, xGtypeAvg[3] ]
       ]);
 
     var options = {
@@ -619,7 +626,7 @@ function drawCharts() {
         title: 'Type of xG by line',
         isStacked: 'percent',
         legend: { position: 'bottom' },
-        colors: ['#002072', '#59D9EB'],
+        colors: ['#002072', TURNOVER_COLOR],
         chartArea: { width: '60%' },
     });
 
