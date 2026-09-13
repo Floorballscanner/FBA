@@ -16,12 +16,16 @@ from insights.models import MatchState, TeamSeasonStats
 from django.http import HttpResponseRedirect, JsonResponse
 from accounts.forms import AddNewPlayer, TrialSignupForm
 from accounts.decorators import license_required, get_active_license
-from datetime import datetime
 from rest_framework import viewsets, generics
 from rest_framework.decorators import action
 from django.forms import modelformset_factory
 from .serializers import UserSerializer, TeamSerializer, LineSerializer, PositionSerializer, LevelSerializer, TimeSerializer
 from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerializer, LiveDataSerializer, ShotSerializer
+
+# Staff accounts have no games of their own, so analyse()/premium_analysis() let them browse
+# other users' games to test functionality - capped, since staff previously got every game
+# site-wide since 2026-01-01 loaded (with its full game_data JSON) on every page open.
+STAFF_RECENT_GAMES_LIMIT = 10
 
 
 def activate(request, token):
@@ -177,7 +181,7 @@ def edit_teams(request):
 def analyse(request):
 
     if request.user.is_staff:
-        games = Game.objects.filter(date__gte=datetime(2026, 1, 1)).order_by('date')
+        games = list(reversed(Game.objects.order_by('-date')[:STAFF_RECENT_GAMES_LIMIT]))
     else:
         games = Game.objects.filter(user=request.user).order_by('date')
 
@@ -342,8 +346,7 @@ def premium_game(request):
 def premium_analysis(request):
 
     if request.user.is_staff:
-        games = Game.objects.filter(date__gte=datetime(2026, 1, 1)).order_by('date')
-
+        games = list(reversed(Game.objects.order_by('-date')[:STAFF_RECENT_GAMES_LIMIT]))
     else:
         games = Game.objects.filter(user=request.user).order_by('date')
 
