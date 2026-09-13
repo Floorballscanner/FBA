@@ -420,6 +420,28 @@
                 stT2L2p_array = [0,0,0,0,0];
                 stT1L3p_array = [0,0,0,0,0];
                 stT2L3p_array = [0,0,0,0,0];
+                // xG-weighted counterparts of the shot-count arrays just above (stT1Teamp_array
+                // etc.) - these were never reset here, so every "per period" xG-type chart
+                // (team-level and, now, per-line) was actually showing a cumulative-since-
+                // kickoff total mislabeled as "this period only". Fixing it here for both the
+                // existing "for" side and the new "against" side together, since leaving one
+                // reset and not the other would make them silently inconsistent with each other.
+                stxGT1Teamp_array = [0,0,0,0,0];
+                stxGT2Teamp_array = [0,0,0,0,0];
+                stxGT1L1p_array = [0,0,0,0,0];
+                stxGT2L1p_array = [0,0,0,0,0];
+                stxGT1L2p_array = [0,0,0,0,0];
+                stxGT2L2p_array = [0,0,0,0,0];
+                stxGT1L3p_array = [0,0,0,0,0];
+                stxGT2L3p_array = [0,0,0,0,0];
+                staxGT1Teamp_array = [0,0,0,0,0];
+                staxGT2Teamp_array = [0,0,0,0,0];
+                staxGT1L1p_array = [0,0,0,0,0];
+                staxGT2L1p_array = [0,0,0,0,0];
+                staxGT1L2p_array = [0,0,0,0,0];
+                staxGT2L2p_array = [0,0,0,0,0];
+                staxGT1L3p_array = [0,0,0,0,0];
+                staxGT2L3p_array = [0,0,0,0,0];
                 posplusT1p_array = [0,0,0,0];
                 posplusT2p_array = [0,0,0,0];
                 plT1p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
@@ -6693,36 +6715,54 @@
 
         chart_per.draw(data2_p, options2);
 
-        // Type of xG For/Against per 5v5 line, both teams (game total only - no
-        // per-period split, matching Game Analysis's scope for these charts).
-        // "For" = stxGT{team}L{n}g_array (this team's own line's shots, already
-        // tracked); "Against" = staxGT{team}L{n}g_array (opponent shots while this
-        // team's line was on the ice - see the mirrored accumulation added
-        // alongside stxGT* earlier in shotMissed/shotBlocked/shotSaved/shotGoal).
-        function drawLineXgTypePie(elementId, title, arr) {
-            var direct = arr[2] + arr[3] + arr[4];
-            var turnover = arr[0] + arr[1];
-            var data = google.visualization.arrayToDataTable([
-                ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' }],
-                ['Direct Attack', direct, 'color: #002072', direct],
-                ['Turnover Attack', turnover, 'color: #59D9EB', turnover],
-            ]);
-            var pie = new google.visualization.PieChart(document.getElementById(elementId));
-            pie.draw(data, { title: title });
+        // Type of xG by line, both teams, one compact 100%-stacked bar chart per
+        // team (6 bars: Line 1-3 x For/Against) instead of 6 separate pie charts -
+        // one shared legend, far less vertical space. "For" = stxGT{team}L{n}g_array
+        // (this team's own line's shots, already tracked); "Against" =
+        // staxGT{team}L{n}g_array (opponent shots while this team's line was on the
+        // ice - see the mirrored accumulation added alongside stxGT* earlier in
+        // shotMissed/shotBlocked/shotSaved/shotGoal). Also drawn once per period
+        // (using the *p_array variants, reset every period in Period() above)
+        // into that period's own container, matching how T1_st_piechart_<periodN>
+        // works just above - only the CURRENT period's container is redrawn here;
+        // earlier periods keep whatever was last drawn into them before the period
+        // advanced.
+        function drawLineXgTypeBar(elementId, title, rows) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Line');
+            data.addColumn('number', 'Direct Attack');
+            data.addColumn('number', 'Turnover Attack');
+            rows.forEach(function (row) {
+                var arr = row[1];
+                data.addRow([row[0], arr[2] + arr[3] + arr[4], arr[0] + arr[1]]);
+            });
+            var options = {
+                title: title,
+                isStacked: 'percent',
+                legend: { position: 'bottom' },
+                colors: ['#002072', '#59D9EB'],
+                chartArea: { width: '60%' },
+            };
+            var chart = new google.visualization.BarChart(document.getElementById(elementId));
+            chart.draw(data, options);
         }
 
-        drawLineXgTypePie('T1L1_xgtype_f', 'Type of xG For, Team 1 Line 1', stxGT1L1g_array);
-        drawLineXgTypePie('T1L1_xgtype_a', 'Type of xG Against, Team 1 Line 1', staxGT1L1g_array);
-        drawLineXgTypePie('T1L2_xgtype_f', 'Type of xG For, Team 1 Line 2', stxGT1L2g_array);
-        drawLineXgTypePie('T1L2_xgtype_a', 'Type of xG Against, Team 1 Line 2', staxGT1L2g_array);
-        drawLineXgTypePie('T1L3_xgtype_f', 'Type of xG For, Team 1 Line 3', stxGT1L3g_array);
-        drawLineXgTypePie('T1L3_xgtype_a', 'Type of xG Against, Team 1 Line 3', staxGT1L3g_array);
-        drawLineXgTypePie('T2L1_xgtype_f', 'Type of xG For, Team 2 Line 1', stxGT2L1g_array);
-        drawLineXgTypePie('T2L1_xgtype_a', 'Type of xG Against, Team 2 Line 1', staxGT2L1g_array);
-        drawLineXgTypePie('T2L2_xgtype_f', 'Type of xG For, Team 2 Line 2', stxGT2L2g_array);
-        drawLineXgTypePie('T2L2_xgtype_a', 'Type of xG Against, Team 2 Line 2', staxGT2L2g_array);
-        drawLineXgTypePie('T2L3_xgtype_f', 'Type of xG For, Team 2 Line 3', stxGT2L3g_array);
-        drawLineXgTypePie('T2L3_xgtype_a', 'Type of xG Against, Team 2 Line 3', staxGT2L3g_array);
+        function drawTeamLineXgTypeBars(elementId, title, l1, l2, l3) {
+            drawLineXgTypeBar(elementId, title, [
+                ['Line 1 For', l1[0]], ['Line 1 Against', l1[1]],
+                ['Line 2 For', l2[0]], ['Line 2 Against', l2[1]],
+                ['Line 3 For', l3[0]], ['Line 3 Against', l3[1]],
+            ]);
+        }
+
+        drawTeamLineXgTypeBars('T1_xgtype_bar', 'Type of xG by line, Team 1',
+            [stxGT1L1g_array, staxGT1L1g_array], [stxGT1L2g_array, staxGT1L2g_array], [stxGT1L3g_array, staxGT1L3g_array]);
+        drawTeamLineXgTypeBars('T2_xgtype_bar', 'Type of xG by line, Team 2',
+            [stxGT2L1g_array, staxGT2L1g_array], [stxGT2L2g_array, staxGT2L2g_array], [stxGT2L3g_array, staxGT2L3g_array]);
+        drawTeamLineXgTypeBars('T1_xgtype_bar_' + periodN, 'Type of xG by line, Team 1',
+            [stxGT1L1p_array, staxGT1L1p_array], [stxGT1L2p_array, staxGT1L2p_array], [stxGT1L3p_array, staxGT1L3p_array]);
+        drawTeamLineXgTypeBars('T2_xgtype_bar_' + periodN, 'Type of xG by line, Team 2',
+            [stxGT2L1p_array, staxGT2L1p_array], [stxGT2L2p_array, staxGT2L2p_array], [stxGT2L3p_array, staxGT2L3p_array]);
 
         // Pie Chart, Goals per type Team 1
 

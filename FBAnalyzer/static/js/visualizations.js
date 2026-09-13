@@ -476,40 +476,46 @@
                     var chart = new google.visualization.PieChart(document.getElementById('stT2_st_piechart'));
                     chart.draw(data2, options2);
 
-                    // Type of xG For/Against per 5v5 line, both teams - same 2-slice
-                    // (Direct/Turnover Attack), non-3D pie style as premium_analysis.js's
-                    // line-level charts. "For" = stxGT{team}L{n}g_array (this team's own
-                    // line's shots, already tracked); "Against" = staxGT{team}L{n}g_array
-                    // (opponent shots while this team's line was on the ice - see the
-                    // mirrored accumulation added alongside stxGT* in premiumfunctions.js).
+                    // Type of xG by line, both teams - one compact 100%-stacked bar
+                    // chart per team (6 bars: Line 1-3 x For/Against) instead of 6
+                    // separate pie charts each, one shared legend. "For" =
+                    // stxGT{team}L{n}g_array (this team's own line's shots, already
+                    // tracked); "Against" = staxGT{team}L{n}g_array (opponent shots
+                    // while this team's line was on the ice - see the mirrored
+                    // accumulation added alongside stxGT* in premiumfunctions.js).
                     function safeArr5(a) {
                         return (Array.isArray(a) && a.length === 5) ? a : [0, 0, 0, 0, 0];
                     }
-                    function drawLineXgTypePie(elementId, title, arr) {
-                        arr = safeArr5(arr);
-                        var direct = arr[2] + arr[3] + arr[4];
-                        var turnover = arr[0] + arr[1];
-                        var data = google.visualization.arrayToDataTable([
-                            ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' }],
-                            ['Direct Attack', direct, 'color: #002072', direct],
-                            ['Turnover Attack', turnover, 'color: #59D9EB', turnover],
-                        ]);
-                        var pie = new google.visualization.PieChart(document.getElementById(elementId));
-                        pie.draw(data, { title: title });
+                    function drawLineXgTypeBar(elementId, title, rows) {
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Line');
+                        data.addColumn('number', 'Direct Attack');
+                        data.addColumn('number', 'Turnover Attack');
+                        rows.forEach(function (row) {
+                            var arr = safeArr5(row[1]);
+                            data.addRow([row[0], arr[2] + arr[3] + arr[4], arr[0] + arr[1]]);
+                        });
+                        var options = {
+                            title: title,
+                            isStacked: 'percent',
+                            legend: { position: 'bottom' },
+                            colors: ['#002072', '#59D9EB'],
+                            chartArea: { width: '60%' },
+                        };
+                        var chart = new google.visualization.BarChart(document.getElementById(elementId));
+                        chart.draw(data, options);
                     }
 
-                    drawLineXgTypePie('stT1L1_xgtype_f', 'Type of xG For, Line 1', gd.stxGT1L1g_array);
-                    drawLineXgTypePie('stT1L1_xgtype_a', 'Type of xG Against, Line 1', gd.staxGT1L1g_array);
-                    drawLineXgTypePie('stT1L2_xgtype_f', 'Type of xG For, Line 2', gd.stxGT1L2g_array);
-                    drawLineXgTypePie('stT1L2_xgtype_a', 'Type of xG Against, Line 2', gd.staxGT1L2g_array);
-                    drawLineXgTypePie('stT1L3_xgtype_f', 'Type of xG For, Line 3', gd.stxGT1L3g_array);
-                    drawLineXgTypePie('stT1L3_xgtype_a', 'Type of xG Against, Line 3', gd.staxGT1L3g_array);
-                    drawLineXgTypePie('stT2L1_xgtype_f', 'Type of xG For, Line 1', gd.stxGT2L1g_array);
-                    drawLineXgTypePie('stT2L1_xgtype_a', 'Type of xG Against, Line 1', gd.staxGT2L1g_array);
-                    drawLineXgTypePie('stT2L2_xgtype_f', 'Type of xG For, Line 2', gd.stxGT2L2g_array);
-                    drawLineXgTypePie('stT2L2_xgtype_a', 'Type of xG Against, Line 2', gd.staxGT2L2g_array);
-                    drawLineXgTypePie('stT2L3_xgtype_f', 'Type of xG For, Line 3', gd.stxGT2L3g_array);
-                    drawLineXgTypePie('stT2L3_xgtype_a', 'Type of xG Against, Line 3', gd.staxGT2L3g_array);
+                    drawLineXgTypeBar('stT1_xgtype_bar', 'Type of xG by line', [
+                        ['Line 1 For', gd.stxGT1L1g_array], ['Line 1 Against', gd.staxGT1L1g_array],
+                        ['Line 2 For', gd.stxGT1L2g_array], ['Line 2 Against', gd.staxGT1L2g_array],
+                        ['Line 3 For', gd.stxGT1L3g_array], ['Line 3 Against', gd.staxGT1L3g_array],
+                    ]);
+                    drawLineXgTypeBar('stT2_xgtype_bar', 'Type of xG by line', [
+                        ['Line 1 For', gd.stxGT2L1g_array], ['Line 1 Against', gd.staxGT2L1g_array],
+                        ['Line 2 For', gd.stxGT2L2g_array], ['Line 2 Against', gd.staxGT2L2g_array],
+                        ['Line 3 For', gd.stxGT2L3g_array], ['Line 3 Against', gd.staxGT2L3g_array],
+                    ]);
 
                     // Team xG Chart
                     var data = google.visualization.arrayToDataTable(gd.xGTeam_array);
@@ -875,20 +881,18 @@
         var chart = new google.visualization.PieChart(document.getElementById('stT2_st_piechart'));
         chart.draw(data2, options2);
 
-        // Type of xG by line (For/Against, both teams) - blanked out the same way as
-        // the rest of this function; see the real-data draws in changeGame() above
-        // for what these look like once a game is loaded.
-        ['stT1L1_xgtype_f', 'stT1L1_xgtype_a', 'stT1L2_xgtype_f', 'stT1L2_xgtype_a',
-         'stT1L3_xgtype_f', 'stT1L3_xgtype_a', 'stT2L1_xgtype_f', 'stT2L1_xgtype_a',
-         'stT2L2_xgtype_f', 'stT2L2_xgtype_a', 'stT2L3_xgtype_f', 'stT2L3_xgtype_a',
-        ].forEach(function (elementId) {
-            var emptyData = google.visualization.arrayToDataTable([
-                ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' }],
-                ['Direct Attack', 0, 'color: #002072', 0],
-                ['Turnover Attack', 0, 'color: #59D9EB', 0],
-            ]);
-            var pie = new google.visualization.PieChart(document.getElementById(elementId));
-            pie.draw(emptyData, {});
+        // Type of xG by line (both teams) - blanked out the same way as the rest of
+        // this function; see the real-data draws in changeGame() above for what
+        // these look like once a game is loaded.
+        ['stT1_xgtype_bar', 'stT2_xgtype_bar'].forEach(function (elementId) {
+            var emptyData = new google.visualization.DataTable();
+            emptyData.addColumn('string', 'Line');
+            emptyData.addColumn('number', 'Direct Attack');
+            emptyData.addColumn('number', 'Turnover Attack');
+            ['Line 1 For', 'Line 1 Against', 'Line 2 For', 'Line 2 Against', 'Line 3 For', 'Line 3 Against']
+                .forEach(function (label) { emptyData.addRow([label, 0, 0]); });
+            var chart = new google.visualization.BarChart(document.getElementById(elementId));
+            chart.draw(emptyData, { isStacked: 'percent', legend: { position: 'bottom' }, colors: ['#002072', '#59D9EB'] });
         });
 
         // Team xG Chart
