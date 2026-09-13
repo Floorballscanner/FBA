@@ -27,7 +27,7 @@ from collections import defaultdict
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 
-from insights.event_codes import ASSIST_CODE, GOAL_CODE, SHOT_CODES
+from insights.event_codes import ASSIST_CODE, GOAL_CODE, NO_PLAYER_ID, SHOT_CODES
 from insights.lineups import GOALIE_ROLE, SKATER_ROLES, most_probable_lineup
 from insights.models import MatchState, MatchEvent, MatchLineup, TeamSeasonStats
 from insights.pregame import is_penalty
@@ -139,7 +139,7 @@ def _compute_facts(team_id, season_id, category, stage):
         sh_opp += sum(1 for e in evs if e.team == side and is_penalty(e.code))
 
         for e in own_shots:
-            if not e.player_id:
+            if not e.player_id or e.player_id == NO_PLAYER_ID:
                 continue
             p = players[e.player_id]
             p['xg'] += float(e.xg or 0)
@@ -149,7 +149,7 @@ def _compute_facts(team_id, season_id, category, stage):
                 p['goals'] += 1
                 p['points'] += 1
         for e in evs:
-            if e.code == ASSIST_CODE and e.team == side and e.player_id:
+            if e.code == ASSIST_CODE and e.team == side and e.player_id and e.player_id != NO_PLAYER_ID:
                 p = players[e.player_id]
                 p['assists'] += 1
                 p['points'] += 1
