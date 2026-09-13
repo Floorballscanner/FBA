@@ -1,0 +1,99 @@
+<!--
+
+F-Liiga Team Analysis - Phase 1 (General season performance only; see the
+approved plan under insights.models.TeamSeasonStats's docstring for Phase 2/3).
+Category -> team pickers populate from fliiga_team_list_api; the stats
+themselves come from the cached TeamSeasonStats row via fliiga_team_stats_api,
+computed ahead of time by the compute_team_stats management command.
+
+-->
+
+{% extends 'app_layout.html' %}
+{% block title %}F-Liiga Team Analysis | Floorball Scanner{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing" style="--landing-bg: #ffffff;">
+
+    <div class="landing-page-header">
+        <a href="/accounts/fliiga" aria-label="Back" style="display:inline-block;margin-bottom:12px;">
+            <img src="{% static 'back.png' %}" width="20" alt="">
+        </a>
+        <h1>Team Analysis</h1>
+        <p>Pick a team to see its season broken down - built to help a coach understand an upcoming opponent.</p>
+    </div>
+
+    <div class="landing-match-selector">
+        <div class="landing-select-group">
+            <label for="select-category">League</label>
+            <select id="select-category" onchange="onCategoryChange()">
+                <option value="" selected disabled>Select...</option>
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+            </select>
+        </div>
+        <div class="landing-select-group">
+            <label for="select-team">Team</label>
+            <select id="select-team" onchange="maybeLoadTeamStats()" disabled>
+                <option value="" selected disabled>Select a league first...</option>
+            </select>
+        </div>
+        <div class="landing-select-group">
+            <label for="select-season">Season</label>
+            <select id="select-season" onchange="maybeLoadTeamStats()">
+                <option value="2026-2027">2026-2027</option>
+                <option value="2025-2026" selected>2025-2026</option>
+                <option value="2024-2025">2024-2025</option>
+            </select>
+        </div>
+        <div class="landing-select-group">
+            <label for="select-stage">Stage</label>
+            <select id="select-stage" onchange="maybeLoadTeamStats()">
+                <option value="regular" selected>Regular season</option>
+                <option value="playoffs">Playoffs</option>
+            </select>
+        </div>
+    </div>
+
+    <p id="empty-message" style="text-align:center;color:var(--landing-muted);padding-bottom:24px;">
+        Choose a league and team above to see their season breakdown.
+    </p>
+
+    <p id="pending-message" style="display:none;text-align:center;color:var(--landing-muted);padding-bottom:24px;">
+        Stats are being prepared for this team - check back soon.
+    </p>
+
+    <div id="team-stats" style="display:none;">
+
+        <p id="stats-meta" style="text-align:center;color:var(--landing-muted);font-size:13px;padding-bottom:12px;"></p>
+
+        <div class="landing-result landing-result--wide">
+            <div class="landing-result__card">
+                <h4 class="landing-result__section-title" style="margin-top:0;">General season performance</h4>
+                <div class="team-kpi-grid" id="kpi-grid"></div>
+            </div>
+
+            <div class="landing-result__card">
+                <h4 class="landing-result__section-title" style="margin-top:0;">Best players</h4>
+                <div style="overflow-x:auto;">
+                    <table class="team-stats-table" id="players-table"></table>
+                </div>
+            </div>
+
+            <div class="landing-result__card">
+                <h4 class="landing-result__section-title" style="margin-top:0;">Last 5 games</h4>
+                <div style="overflow-x:auto;">
+                    <table class="team-stats-table" id="games-table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="{% static 'js/fliigateamanalysis.js' %}"></script>
+{% endblock %}

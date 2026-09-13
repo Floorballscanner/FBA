@@ -1122,6 +1122,65 @@ a.landing-card:hover {
     border-radius: 12px;
 }
 
+/* Team Analysis page (f-liiga_team_analysis.html / fliigateamanalysis.js) */
+
+.team-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.team-kpi-tile {
+    background: var(--landing-bg, #f5f6fa);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.team-kpi-tile__value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--landing-accent);
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.team-kpi-tile__label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--landing-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-top: 4px;
+}
+
+.team-stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.team-stats-table th,
+.team-stats-table td {
+    padding: 8px 12px;
+    text-align: left;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.team-stats-table th {
+    color: var(--landing-muted);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid var(--landing-navy);
+}
+
+.team-stats-table tr:not(:first-child) {
+    border-top: 1px solid #eceef3;
+}
+
 /* Testimonial cards (references.html) */
 
 .landing-testimonial {

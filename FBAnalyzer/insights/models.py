@@ -174,3 +174,34 @@ class HistoricalBaseline(models.Model):
 
     def __str__(self):
         return f'{self.baseline_type} {self.category} {self.stage} (n={self.sample_size})'
+
+
+class TeamSeasonStats(models.Model):
+    """Cached whole-season performance for one team, computed by the
+    compute_team_stats management command instead of on every Team Analysis
+    page load. facts holds everything the page renders (KPIs, best players,
+    last-5-games) - see that command's module docstring for the exact shape.
+    Unlike PregameAnalysis, there's no "final" lock: a team's season stats
+    keep changing after every game it plays all season long, so this is
+    simply recomputed in full on every scheduled run."""
+
+    STAGE_CHOICES = [('regular', 'Regular season'), ('playoffs', 'Playoffs')]
+
+    season_id = models.CharField(max_length=20)
+    category = models.CharField(max_length=10, choices=MatchEvent.CATEGORY_CHOICES)
+    stage = models.CharField(max_length=10, choices=STAGE_CHOICES)
+    team_id = models.CharField(max_length=20)
+    team_name = models.CharField(max_length=100, blank=True)
+
+    facts = models.JSONField(default=dict, blank=True)
+    computed_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['season_id', 'category', 'stage', 'team_id'], name='unique_team_season_stats'
+            )
+        ]
+
+    def __str__(self):
+        return f'{self.team_name} {self.season_id} {self.category} {self.stage}'
