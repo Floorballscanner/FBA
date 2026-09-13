@@ -200,6 +200,12 @@ class MatchLineup(models.Model):
     line_number = models.PositiveSmallIntegerField(null=True, blank=True)
     is_starter = models.BooleanField(default=False)  # line_number == 1
 
+    # Torneopal's own +/- for this player in this match - used to attribute
+    # "goals against" to a line (compute_team_stats), since there's no on-ice/
+    # shift data to attribute an opponent's shot to a specific defensive line.
+    plus = models.PositiveSmallIntegerField(default=0)
+    minus = models.PositiveSmallIntegerField(default=0)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -28,7 +28,6 @@ from django.core.management.base import BaseCommand
 from django.db.models import Q
 
 from insights.event_codes import ASSIST_CODE, GOAL_CODE, SHOT_CODES
-from insights.heatmap import add_to_grid, empty_grid
 from insights.lineups import GOALIE_ROLE, SKATER_ROLES, most_probable_lineup
 from insights.models import MatchState, MatchEvent, MatchLineup, TeamSeasonStats
 from insights.pregame import is_penalty
@@ -38,6 +37,17 @@ LAST_N_GAMES = 5
 BEST_PLAYERS_PER_METRIC = 5
 PLAYER_METRICS = ('points', 'goals', 'assists', 'xg', 'xgot', 'gaxg')
 LINE_NUMBERS = (1, 2, 3)
+
+# "Most probable lineup" is identified from only this many of the team's most
+# recent games, not the full season: a team's actual matchday lineup at any
+# point tends to look like its last handful of games (rotation, injuries,
+# call-ups) more than its season-long average - confirmed empirically on
+# real 2025-2026 staging data 2026-09-13 (see git history around this
+# constant), where several Line 2/3 and goalie-rotation slots the full-season
+# count called a close-to-50/50 toss-up resolved clearly under a recent
+# window. Full-season data is still used for every rate/volume stat (more
+# signal, and those aren't trying to answer "who plays next").
+RECENT_LINEUP_GAMES = 5
 
 # (facts key, sort direction) for every KPI ranked against the rest of the
 # league in this season/category/stage. 'asc' means lower is better (e.g.
@@ -175,17 +185,25 @@ def _compute_facts(team_id, season_id, category, stage):
 def _compute_five_v_five(team_id, matches, events_by_match):
     """The 5v5 theme: team-wide EVEN-situation KPIs (both for and against -
     directly computable from shot events alone), plus per-line offense
-    (shots/goals/xG/xGOT/heatmaps attributed via each shooter's MatchLineup
-    role for that match) and the season's most probable Line 1-3 + starting/
-    backup goalie.
+    (shots/goals/xG/xGOT/shot-and-goal locations, attributed via each
+    shooter's MatchLineup role for that match), a per-line "goals against"
+    estimate, and the season's most probable Line 1-3 + starting/backup
+    goalie (identified from only the last RECENT_LINEUP_GAMES games - see
+    that constant).
 
-    Per-line KPIs are offense-only (attributed by the shooting player's own
-    line) - there's no shift/on-ice data to say which opposing line was on
-    the ice for a shot against, so a "shots/goals against by line" can't be
-    derived from what Torneopal provides. Team-wide xGA/GA above has no such
-    gap since it doesn't need per-line attribution.
+    Per-line offense is exact (attributed by the shooting player's own line).
+    Per-line "goals against" is necessarily an estimate: there's no on-ice/
+    shift data to say which of the team's own lines was on the ice for a
+    given opponent goal, so instead of a per-shot attribution it's the sum of
+    each of that line's most-probable-lineup players' own Torneopal '-' (on-
+    ice goals against) tally across the full season - i.e. "how many goals
+    went in while a player who's now on this line was on the ice", not
+    "how many goals this specific line unit conceded". Team-wide xGA/GA above
+    has no such gap since it doesn't need per-line attribution.
     """
     match_ids = [m.match_id for m in matches]
+    recent_match_ids = {m.match_id for m in matches[-RECENT_LINEUP_GAMES:]}
+
     lineup_rows = list(MatchLineup.objects.filter(match_id__in=match_ids, team_id=team_id))
     lineup_by_match = defaultdict(dict)
     for row in lineup_rows:
@@ -195,7 +213,7 @@ def _compute_five_v_five(team_id, matches, events_by_match):
     xgf = xga = 0.0
     gf = ga = 0
     lines = {
-        n: {'shots': 0, 'goals': 0, 'xg': 0.0, 'xgot': 0.0, 'shot_heatmap': empty_grid(), 'goal_heatmap': empty_grid()}
+        n: {'shots': 0, 'goals': 0, 'xg': 0.0, 'xgot': 0.0, 'shot_locations': [], 'goal_locations': []}
         for n in LINE_NUMBERS
     }
 
@@ -221,23 +239,29 @@ def _compute_five_v_five(team_id, matches, events_by_match):
             line['shots'] += 1
             line['xg'] += float(s.xg or 0)
             line['xgot'] += float(s.xgot or 0)
-            add_to_grid(line['shot_heatmap'], s.location_x, s.location_y)
+            if s.location_x is not None and s.location_y is not None:
+                line['shot_locations'].append([round(s.location_x, 1), round(s.location_y, 1)])
+                if s.code == GOAL_CODE:
+                    line['goal_locations'].append([round(s.location_x, 1), round(s.location_y, 1)])
             if s.code == GOAL_CODE:
                 line['goals'] += 1
-                add_to_grid(line['goal_heatmap'], s.location_x, s.location_y)
 
-    probable = most_probable_lineup(lineup_rows)
+    recent_lineup_rows = [row for row in lineup_rows if row.match_id in recent_match_ids]
+    probable = most_probable_lineup(recent_lineup_rows)
 
     line_facts = []
     for n in LINE_NUMBERS:
         agg = lines[n]
+        players = {role: probable.get((role, n)) for role in SKATER_ROLES}
+        assigned_ids = {slot['player_id'] for slot in players.values() if slot}
+        goals_against = sum(row.minus for row in lineup_rows if row.player_id in assigned_ids)
         line_facts.append({
             'line_number': n,
-            'players': {role: probable.get((role, n)) for role in SKATER_ROLES},
-            'shots': agg['shots'], 'goals': agg['goals'],
+            'players': players,
+            'shots': agg['shots'], 'goals': agg['goals'], 'goals_against': goals_against,
             'xg': round(agg['xg'], 2), 'xgot': round(agg['xgot'], 2),
             'gaxg': round(agg['goals'] - agg['xg'], 2),
-            'shot_heatmap': agg['shot_heatmap'], 'goal_heatmap': agg['goal_heatmap'],
+            'shot_locations': agg['shot_locations'], 'goal_locations': agg['goal_locations'],
         })
 
     return {

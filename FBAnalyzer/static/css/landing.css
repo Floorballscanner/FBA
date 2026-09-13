@@ -1301,6 +1301,9 @@ a.landing-card:hover {
     border-radius: 6px;
     background: #fff;
     display: block;
+    width: 160px;
+    height: 133px;
+    max-width: 100%;
 }
 
 .team-best-players-grid {
