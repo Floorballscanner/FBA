@@ -28,13 +28,16 @@ from django.core.management.base import BaseCommand
 from django.db.models import Q
 
 from insights.event_codes import ASSIST_CODE, GOAL_CODE, SHOT_CODES
-from insights.models import MatchState, MatchEvent, TeamSeasonStats
+from insights.heatmap import add_to_grid, empty_grid
+from insights.lineups import GOALIE_ROLE, SKATER_ROLES, most_probable_lineup
+from insights.models import MatchState, MatchEvent, MatchLineup, TeamSeasonStats
 from insights.pregame import is_penalty
 from insights.torneopal import CATEGORY_IDS, STAGE_GROUP_IDS
 
 LAST_N_GAMES = 5
 BEST_PLAYERS_PER_METRIC = 5
 PLAYER_METRICS = ('points', 'goals', 'assists', 'xg', 'xgot', 'gaxg')
+LINE_NUMBERS = (1, 2, 3)
 
 # (facts key, sort direction) for every KPI ranked against the rest of the
 # league in this season/category/stage. 'asc' means lower is better (e.g.
@@ -163,6 +166,85 @@ def _compute_facts(team_id, season_id, category, stage):
         'sh_perc': round(1 - pp_goals_against / sh_opp, 3) if sh_opp else None,
         'best_players': best_players,
         'last_games': last_games[-LAST_N_GAMES:][::-1],  # most recent first
+        'five_v_five': _compute_five_v_five(team_id, matches, events_by_match),
+    }
+
+
+def _compute_five_v_five(team_id, matches, events_by_match):
+    """The 5v5 theme: team-wide EVEN-situation KPIs (both for and against -
+    directly computable from shot events alone), plus per-line offense
+    (shots/goals/xG/xGOT/heatmaps attributed via each shooter's MatchLineup
+    role for that match) and the season's most probable Line 1-3 + starting/
+    backup goalie.
+
+    Per-line KPIs are offense-only (attributed by the shooting player's own
+    line) - there's no shift/on-ice data to say which opposing line was on
+    the ice for a shot against, so a "shots/goals against by line" can't be
+    derived from what Torneopal provides. Team-wide xGA/GA above has no such
+    gap since it doesn't need per-line attribution.
+    """
+    match_ids = [m.match_id for m in matches]
+    lineup_rows = list(MatchLineup.objects.filter(match_id__in=match_ids, team_id=team_id))
+    lineup_by_match = defaultdict(dict)
+    for row in lineup_rows:
+        lineup_by_match[row.match_id][row.player_id] = (row.role, row.line_number)
+
+    games = len(matches)
+    xgf = xga = 0.0
+    gf = ga = 0
+    lines = {
+        n: {'shots': 0, 'goals': 0, 'xg': 0.0, 'xgot': 0.0, 'shot_heatmap': empty_grid(), 'goal_heatmap': empty_grid()}
+        for n in LINE_NUMBERS
+    }
+
+    for m in matches:
+        side = 'A' if m.team_a_id == team_id else 'B'
+        opp_side = 'B' if side == 'A' else 'A'
+        evs = events_by_match.get(m.match_id, [])
+        even_shots = [e for e in evs if e.code in SHOT_CODES and e.situation == 'EVEN']
+        own_shots = [s for s in even_shots if s.team == side]
+        opp_shots = [s for s in even_shots if s.team == opp_side]
+
+        xgf += sum(float(s.xg or 0) for s in own_shots)
+        xga += sum(float(s.xg or 0) for s in opp_shots)
+        gf += sum(1 for s in own_shots if s.code == GOAL_CODE)
+        ga += sum(1 for s in opp_shots if s.code == GOAL_CODE)
+
+        player_lines = lineup_by_match.get(m.match_id, {})
+        for s in own_shots:
+            role, line_number = player_lines.get(s.player_id, ('', None))
+            if role not in SKATER_ROLES or line_number not in LINE_NUMBERS:
+                continue
+            line = lines[line_number]
+            line['shots'] += 1
+            line['xg'] += float(s.xg or 0)
+            line['xgot'] += float(s.xgot or 0)
+            add_to_grid(line['shot_heatmap'], s.location_x, s.location_y)
+            if s.code == GOAL_CODE:
+                line['goals'] += 1
+                add_to_grid(line['goal_heatmap'], s.location_x, s.location_y)
+
+    probable = most_probable_lineup(lineup_rows)
+
+    line_facts = []
+    for n in LINE_NUMBERS:
+        agg = lines[n]
+        line_facts.append({
+            'line_number': n,
+            'players': {role: probable.get((role, n)) for role in SKATER_ROLES},
+            'shots': agg['shots'], 'goals': agg['goals'],
+            'xg': round(agg['xg'], 2), 'xgot': round(agg['xgot'], 2),
+            'gaxg': round(agg['goals'] - agg['xg'], 2),
+            'shot_heatmap': agg['shot_heatmap'], 'goal_heatmap': agg['goal_heatmap'],
+        })
+
+    return {
+        'games': games,
+        'xgf_per_game': round(xgf / games, 3), 'xga_per_game': round(xga / games, 3),
+        'gf_per_game': round(gf / games, 3), 'ga_per_game': round(ga / games, 3),
+        'lines': line_facts,
+        'starting_goalie': probable.get((GOALIE_ROLE, 1)),
+        'backup_goalie': probable.get((GOALIE_ROLE, 2)),
     }
 
 
