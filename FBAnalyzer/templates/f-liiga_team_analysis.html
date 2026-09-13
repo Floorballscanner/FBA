@@ -72,7 +72,17 @@ management command.
 
     <div id="team-stats" style="display:none;">
 
-        <p id="stats-meta" style="text-align:center;color:var(--landing-muted);font-size:13px;padding-bottom:12px;"></p>
+        <div class="team-header">
+            <img id="team-header-crest" class="team-header__crest" src="" alt="" onerror="handleImgError(this)">
+            <div class="team-header__info">
+                <h2 id="team-header-name" class="team-header__name"></h2>
+                <div class="team-header__meta">
+                    <span id="team-header-record" class="team-header__record"></span>
+                    <div id="team-header-form" class="team-header__form"></div>
+                </div>
+                <div id="team-header-updated" class="team-header__updated"></div>
+            </div>
+        </div>
 
         <div class="landing-result landing-result--wide">
             <div class="landing-result__card">

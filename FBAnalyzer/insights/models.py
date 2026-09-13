@@ -86,6 +86,8 @@ class MatchState(models.Model):
     team_b_id = models.CharField(max_length=20, blank=True)
     team_a_name = models.CharField(max_length=100, blank=True)
     team_b_name = models.CharField(max_length=100, blank=True)
+    team_a_crest = models.URLField(blank=True)  # Torneopal's club_A_crest - a club's crest, keyed one level up from team_id
+    team_b_crest = models.URLField(blank=True)
 
     period = models.PositiveSmallIntegerField(null=True, blank=True)
     score_a = models.PositiveSmallIntegerField(default=0)
@@ -195,6 +197,7 @@ class MatchLineup(models.Model):
     team_id = models.CharField(max_length=20, blank=True)
     player_id = models.CharField(max_length=20, blank=True)
     player_name = models.CharField(max_length=100, blank=True)
+    photo_url = models.URLField(blank=True)  # Torneopal's own per-player headshot, if any
 
     role = models.CharField(max_length=4, blank=True)  # 'OL'/'VL'/'KH'/'VP'/'OP'/'MV' - see insights.lineups.ROLE_LABELS
     line_number = models.PositiveSmallIntegerField(null=True, blank=True)

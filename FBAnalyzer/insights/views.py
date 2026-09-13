@@ -14,10 +14,11 @@ Expected JSON body:
   "status": "<Torneopal match.status>", "live_period": "<Torneopal match.live_period>",
   "period_lengths_sec": [...],
   "team_a_id": "...", "team_b_id": "...", "team_a_name": "...", "team_b_name": "...",
+  "team_a_crest": "...", "team_b_crest": "...",
   "score_a": 0, "score_b": 0,
   "events": [{event_id, code, team, team_id, player_id, period, time_sec,
               description, location, player_name, ...}, ...],
-  "lineups": [{team_id, player_id, player_name, position}, ...]
+  "lineups": [{team_id, player_id, player_name, position, plus, minus, img_url}, ...]
 }
 """
 
@@ -68,6 +69,8 @@ def ingest_match_events(request):
         team_b_id=payload.get('team_b_id'),
         team_a_name=payload.get('team_a_name'),
         team_b_name=payload.get('team_b_name'),
+        team_a_crest=payload.get('team_a_crest'),
+        team_b_crest=payload.get('team_b_crest'),
         score_a=payload.get('score_a'),
         score_b=payload.get('score_b'),
         events=events,
