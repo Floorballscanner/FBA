@@ -30,7 +30,7 @@ static/css/analysis.css, scoped under .analyse-page.
             <select onchange="changeGame()" id="select-game" class="analyse-select">
                 <option selected disabled>Select a game...</option>
                 {% for game in games reversed %}
-                    <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.game_data.name_t1}} - {{game.game_data.name_t2}}</option>
+                    <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.name_t1}} - {{game.name_t2}}</option>
                 {% endfor %}
             </select>
             <button id="dl_csv" type="button" onclick="downloadCsv()" disabled="true" class="analyse-btn">Download Shots</button>

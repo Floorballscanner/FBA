@@ -16,6 +16,7 @@ from insights.models import MatchState, TeamSeasonStats
 from django.http import HttpResponseRedirect, JsonResponse
 from accounts.forms import AddNewPlayer, TrialSignupForm
 from accounts.decorators import license_required, get_active_license
+from django.db.models.fields.json import KeyTextTransform
 from rest_framework import viewsets, generics
 from rest_framework.decorators import action
 from django.forms import modelformset_factory
@@ -26,6 +27,16 @@ from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerialize
 # other users' games to test functionality - capped, since staff previously got every game
 # site-wide since 2026-01-01 loaded (with its full game_data JSON) on every page open.
 STAFF_RECENT_GAMES_LIMIT = 10
+
+
+def _game_dropdown_queryset(queryset):
+    """Project a Game queryset down to just what the game-select dropdown needs
+    (id, date, team names) instead of loading each row's full game_data JSON,
+    which can carry legacy embedded shot-map images."""
+    return queryset.annotate(
+        name_t1=KeyTextTransform('name_t1', 'game_data'),
+        name_t2=KeyTextTransform('name_t2', 'game_data'),
+    ).values('id', 'date', 'name_t1', 'name_t2')
 
 
 def activate(request, token):
@@ -181,9 +192,9 @@ def edit_teams(request):
 def analyse(request):
 
     if request.user.is_staff:
-        games = list(reversed(Game.objects.order_by('-date')[:STAFF_RECENT_GAMES_LIMIT]))
+        games = list(reversed(_game_dropdown_queryset(Game.objects.order_by('-date'))[:STAFF_RECENT_GAMES_LIMIT]))
     else:
-        games = Game.objects.filter(user=request.user).order_by('date')
+        games = _game_dropdown_queryset(Game.objects.filter(user=request.user)).order_by('date')
 
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
@@ -346,9 +357,9 @@ def premium_game(request):
 def premium_analysis(request):
 
     if request.user.is_staff:
-        games = list(reversed(Game.objects.order_by('-date')[:STAFF_RECENT_GAMES_LIMIT]))
+        games = list(reversed(_game_dropdown_queryset(Game.objects.order_by('-date'))[:STAFF_RECENT_GAMES_LIMIT]))
     else:
-        games = Game.objects.filter(user=request.user).order_by('date')
+        games = _game_dropdown_queryset(Game.objects.filter(user=request.user)).order_by('date')
 
     context = {
         'games': games,

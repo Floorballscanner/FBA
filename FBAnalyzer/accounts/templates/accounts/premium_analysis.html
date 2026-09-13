@@ -34,7 +34,7 @@ lives in static/css/premium_analysis.css, scoped under .premium-analyse-page.
             <select id="select-game" class="pa-select" multiple>
                 <option disabled>Select games...</option>
                 {% for game in games reversed %}
-                    <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.game_data.name_t1}} - {{game.game_data.name_t2}}</option>
+                    <option value="{{game.id}}">{{game.date|date:"d.m.Y"}}: {{game.name_t1}} - {{game.name_t2}}</option>
                 {% endfor %}
             </select>
             <button type="button" onclick="changeGame()" class="pa-btn">Load</button>

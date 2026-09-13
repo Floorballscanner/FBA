@@ -1,2 +1,2 @@
-web: gunicorn analyzer.wsgi --workers 3 --log-file -
+web: gunicorn analyzer.wsgi --workers 3 --max-requests 500 --max-requests-jitter 50 --log-file -
 release: python manage.py migrate
