@@ -116,7 +116,7 @@ window.onload = function() {
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','time_sec','period','code_fi','description','location','placement','team'];
 
             // List of keys you want to select from lineups_json
-            const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','position','shots','saves','goals','assists','points','plus','minus'];
+            const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','position','shots','saves','goals','assists','points','plus','minus','img_url'];
 
             // Create a new array to store the modified JSON objects
             const modifiedEvents = [];
@@ -671,6 +671,8 @@ function pushMatchEvents(match, events, lineups) {
         team_b_id: match.team_B_id,
         team_a_name: match.team_A_name,
         team_b_name: match.team_B_name,
+        team_a_crest: match.club_A_crest,
+        team_b_crest: match.club_B_crest,
         score_a: match.fs_A,
         score_b: match.fs_B,
         events: events,
@@ -1658,7 +1660,7 @@ function updateData() {
             const selectedKeys = ['event_id','code','team_id','player_id','player_name','shirt_number','time','time_sec','period','code_fi','description','location','placement','team'];
 
             // List of keys you want to select from lineups_json
-            const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','position','shots','saves','goals','assists','points','plus','minus'];
+            const selectedKeys_lineup = ['team_id','player_id','player_name','shirt_number','position','shots','saves','goals','assists','points','plus','minus','img_url'];
 
             // Create a new array to store the modified JSON objects
             const modifiedEvents = [];

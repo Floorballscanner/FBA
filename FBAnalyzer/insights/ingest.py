@@ -41,7 +41,7 @@ SELECTED_EVENT_KEYS = (
 
 # Same whitelist fliigalivegame.js applies to Torneopal's raw match.lineups
 # entries - only what MatchLineup actually stores (see insights.lineups).
-SELECTED_LINEUP_KEYS = ('team_id', 'player_id', 'player_name', 'position', 'plus', 'minus')
+SELECTED_LINEUP_KEYS = ('team_id', 'player_id', 'player_name', 'position', 'plus', 'minus', 'img_url')
 
 
 def status_from_torneopal(status, live_period):
@@ -96,6 +96,7 @@ def _ingest_lineups(match_id, category, lineups, overwrite_existing):
         rows.append(MatchLineup(
             match_id=match_id, category=category, team_id=entry.get('team_id') or '',
             player_id=player_id, player_name=entry.get('player_name') or '',
+            photo_url=entry.get('img_url') or '',
             role=role, line_number=line_number, is_starter=(line_number == 1),
             plus=entry.get('plus') or 0, minus=entry.get('minus') or 0,
         ))
@@ -109,7 +110,8 @@ def _ingest_lineups(match_id, category, lineups, overwrite_existing):
 
 def ingest_match_tick(*, match_id, category, season_id, stage, date, status, live_period, period_lengths,
                        team_a_id, team_b_id, team_a_name, team_b_name,
-                       score_a, score_b, events, overwrite_existing=True, lineups=None):
+                       score_a, score_b, events, overwrite_existing=True, lineups=None,
+                       team_a_crest=None, team_b_crest=None):
     """Upserts MatchEvent rows and MatchState for one match snapshot ('tick')
     - either a live client-push, or one historical-backfill pass over an
     already-played match. Returns the new status string ('scheduled'/'live'/
@@ -264,6 +266,8 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
     state.team_b_id = team_b_id or state.team_b_id
     state.team_a_name = team_a_name or state.team_a_name
     state.team_b_name = team_b_name or state.team_b_name
+    state.team_a_crest = team_a_crest or state.team_a_crest
+    state.team_b_crest = team_b_crest or state.team_b_crest
     state.period = safe_int(live_period)
     state.score_a = safe_int(score_a, 0)
     state.score_b = safe_int(score_b, 0)
@@ -338,6 +342,8 @@ def ingest_raw_match(match_id, match, overwrite_existing=True):
         team_b_id=match.get('team_B_id'),
         team_a_name=match.get('team_A_name'),
         team_b_name=match.get('team_B_name'),
+        team_a_crest=match.get('club_A_crest'),
+        team_b_crest=match.get('club_B_crest'),
         score_a=match.get('fs_A'),
         score_b=match.get('fs_B'),
         events=events,

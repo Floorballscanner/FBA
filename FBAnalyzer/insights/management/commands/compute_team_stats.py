@@ -100,12 +100,18 @@ def _compute_facts(team_id, season_id, category, stage):
     for e in MatchEvent.objects.filter(match_id__in=match_ids):
         events_by_match[e.match_id].append(e)
 
+    lineup_rows = list(MatchLineup.objects.filter(match_id__in=match_ids, team_id=team_id))
+    photo_by_player = {row.player_id: row.photo_url for row in lineup_rows if row.photo_url}
+
+    last_match = matches[-1]
+    team_crest = last_match.team_a_crest if last_match.team_a_id == team_id else last_match.team_b_crest
+
     games = len(matches)
     wins = losses = 0
     xgf = xga = xgotf = xgota = 0.0
     gf = ga = 0
     pp_goals = pp_opp = sh_opp = pp_goals_against = 0
-    players = defaultdict(lambda: {'name': '', 'points': 0, 'goals': 0, 'assists': 0, 'xg': 0.0, 'xgot': 0.0, 'plus_minus': 0})
+    players = defaultdict(lambda: {'name': '', 'photo': '', 'points': 0, 'goals': 0, 'assists': 0, 'xg': 0.0, 'xgot': 0.0, 'plus_minus': 0})
     # xg/xgot accumulate from every shot the player took (own_shots below), not just
     # goals - matches accounts.compute_fliiga_stats' player table convention. xgot
     # stays computed (used elsewhere/available if needed) even though it no longer
@@ -165,10 +171,11 @@ def _compute_facts(team_id, season_id, category, stage):
             'result': 'W' if won else 'L',
         })
 
-    for row in MatchLineup.objects.filter(match_id__in=match_ids, team_id=team_id):
+    for row in lineup_rows:
         p = players[row.player_id]
         p['plus_minus'] += row.plus - row.minus
         p['name'] = p['name'] or row.player_name
+        p['photo'] = p['photo'] or row.photo_url
 
     for p in players.values():
         p['xg'] = round(p['xg'], 2)
@@ -184,6 +191,7 @@ def _compute_facts(team_id, season_id, category, stage):
     return {
         'games': games, 'wins': wins, 'losses': losses,
         'win_perc': round(wins / games, 3),
+        'team_crest': team_crest,
         'xgf_per_game': round(xgf / games, 3), 'xga_per_game': round(xga / games, 3),
         'xgotf_per_game': round(xgotf / games, 3), 'xgota_per_game': round(xgota / games, 3),
         'gf_per_game': round(gf / games, 3), 'ga_per_game': round(ga / games, 3),
@@ -192,12 +200,18 @@ def _compute_facts(team_id, season_id, category, stage):
         'sh_perc': round(1 - pp_goals_against / sh_opp, 3) if sh_opp else None,
         'best_players': best_players,
         'last_games': last_games[-LAST_N_GAMES:][::-1],  # most recent first
-        'five_v_five': _compute_five_v_five(team_id, matches, events_by_match),
-        'special_teams': _compute_special_teams(team_id, matches, events_by_match),
+        'five_v_five': _compute_five_v_five(team_id, matches, events_by_match, lineup_rows),
+        'special_teams': _compute_special_teams(team_id, matches, events_by_match, photo_by_player),
     }
 
 
-def _compute_five_v_five(team_id, matches, events_by_match):
+def _add_photo(slot, photo_by_player):
+    if slot:
+        slot['photo'] = photo_by_player.get(slot['player_id'], '')
+    return slot
+
+
+def _compute_five_v_five(team_id, matches, events_by_match, lineup_rows):
     """The 5v5 theme: team-wide EVEN-situation KPIs (both for and against,
     full season - directly computable from shot events alone), plus the
     most probable Line 1-3 + starting/backup goalie, and per-line offense
@@ -216,12 +230,11 @@ def _compute_five_v_five(team_id, matches, events_by_match):
     facing number that LOOKS precise but is actually a rough proxy (tried
     and reverted here - see git history) is worse than no number at all.
     """
-    match_ids = [m.match_id for m in matches]
     recent_matches = matches[-RECENT_LINEUP_GAMES:]
     recent_match_ids = {m.match_id for m in recent_matches}
     recent_games = len(recent_matches)
 
-    lineup_rows = list(MatchLineup.objects.filter(match_id__in=match_ids, team_id=team_id))
+    photo_by_player = {row.player_id: row.photo_url for row in lineup_rows if row.photo_url}
     lineup_by_match = defaultdict(dict)
     for row in lineup_rows:
         lineup_by_match[row.match_id][row.player_id] = (row.role, row.line_number)
@@ -274,7 +287,7 @@ def _compute_five_v_five(team_id, matches, events_by_match):
         agg = lines[n]
         line_facts.append({
             'line_number': n,
-            'players': {role: probable.get((role, n)) for role in SKATER_ROLES},
+            'players': {role: _add_photo(probable.get((role, n)), photo_by_player) for role in SKATER_ROLES},
             'games': recent_games,
             'shots_per_game': round(agg['shots'] / recent_games, 2) if recent_games else 0,
             'goals_per_game': round(agg['goals'] / recent_games, 2) if recent_games else 0,
@@ -289,12 +302,12 @@ def _compute_five_v_five(team_id, matches, events_by_match):
         'xgf_per_game': round(xgf / games, 3), 'xga_per_game': round(xga / games, 3),
         'gf_per_game': round(gf / games, 3), 'ga_per_game': round(ga / games, 3),
         'lines': line_facts,
-        'starting_goalie': probable.get((GOALIE_ROLE, 1)),
-        'backup_goalie': probable.get((GOALIE_ROLE, 2)),
+        'starting_goalie': _add_photo(probable.get((GOALIE_ROLE, 1)), photo_by_player),
+        'backup_goalie': _add_photo(probable.get((GOALIE_ROLE, 2)), photo_by_player),
     }
 
 
-def _compute_special_teams(team_id, matches, events_by_match):
+def _compute_special_teams(team_id, matches, events_by_match, photo_by_player):
     """The Special Teams theme: powerplay (own PP - opponent penalized) and
     shorthanded (own SH - this team penalized) KPIs, each with a shot and a
     goal heatmap, plus the season's top PP performers by goals, shots, and xG.
@@ -319,7 +332,7 @@ def _compute_special_teams(team_id, matches, events_by_match):
     sh_xg_against = sh_xgot_against = 0.0
     sh_shot_locations, sh_goal_locations = [], []
 
-    pp_players = defaultdict(lambda: {'name': '', 'goals': 0, 'shots': 0, 'xg': 0.0})
+    pp_players = defaultdict(lambda: {'name': '', 'photo': '', 'goals': 0, 'shots': 0, 'xg': 0.0})
 
     for m in matches:
         side = 'A' if m.team_a_id == team_id else 'B'
@@ -343,6 +356,7 @@ def _compute_special_teams(team_id, matches, events_by_match):
                 p['shots'] += 1
                 p['xg'] += float(s.xg or 0)
                 p['name'] = p['name'] or (s.raw or {}).get('player_name', '')
+                p['photo'] = p['photo'] or photo_by_player.get(s.player_id, '')
                 if s.code == GOAL_CODE:
                     p['goals'] += 1
             if s.code == GOAL_CODE:

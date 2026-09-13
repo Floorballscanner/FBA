@@ -15,6 +15,32 @@ const ROLE_LABELS = {
     OL: 'Right Wing', VL: 'Left Wing', KH: 'Center', VP: 'Left Defense', OP: 'Right Defense',
 };
 
+// Generic silhouette shown until a real player/team image loads, or in place
+// of one that 404s - Torneopal's own photo coverage is close to complete but
+// not guaranteed, and a broken-image icon reads as a bug rather than "no
+// photo available".
+const PLACEHOLDER_AVATAR = 'data:image/svg+xml,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'
+    + '<rect width="24" height="24" fill="#e3e6ef"/>'
+    + '<circle cx="12" cy="9.5" r="4" fill="#aab0c2"/>'
+    + '<path d="M3.5 21c0-4.7 4.2-7.5 8.5-7.5s8.5 2.8 8.5 7.5" fill="#aab0c2"/>'
+    + '</svg>'
+);
+
+function handleImgError(img) {
+    img.onerror = null;
+    img.src = PLACEHOLDER_AVATAR;
+}
+
+function avatarImg(photoUrl, size) {
+    const src = photoUrl || PLACEHOLDER_AVATAR;
+    return '<img class="player-avatar" width="' + size + '" height="' + size + '" src="' + src + '" onerror="handleImgError(this)" alt="">';
+}
+
+function playerCell(photoUrl, name, size) {
+    return '<div class="player-cell">' + avatarImg(photoUrl, size || 24) + '<span>' + name + '</span></div>';
+}
+
 function onCategoryChange() {
     const category = document.getElementById('select-category').value;
     const teamSelect = document.getElementById('select-team');
@@ -98,12 +124,24 @@ function loadTeamStats(teamId, category, season, stage) {
         });
 }
 
+function renderTeamHeader(teamName, computedAt, facts) {
+    document.getElementById('team-header-crest').src = facts.team_crest || PLACEHOLDER_AVATAR;
+    document.getElementById('team-header-name').innerText = teamName;
+    document.getElementById('team-header-record').innerText = facts.wins + '-' + facts.losses + ' (' + perc(facts.win_perc) + ')';
+    document.getElementById('team-header-updated').innerText = 'Updated ' + computedAt.toLocaleString();
+
+    const recentForm = (facts.last_games || []).slice(0, 5).slice().reverse();
+    document.getElementById('team-header-form').innerHTML = recentForm.map(g =>
+        '<span class="team-form-badge team-form-badge--' + (g.result === 'W' ? 'win' : 'loss') + '" title="'
+        + g.date + ' vs ' + g.opponent + ' (' + g.score_for + '-' + g.score_against + ')">' + g.result + '</span>'
+    ).join('');
+}
+
 function renderTeamStats(data) {
     const facts = data.facts;
-
     const computedAt = new Date(data.computed_at);
-    document.getElementById('stats-meta').innerText = data.team_name + " - Updated " + computedAt.toLocaleString();
 
+    renderTeamHeader(data.team_name, computedAt, facts);
     renderKpiGrid(facts);
     renderGamesTable(facts.last_games || []);
     renderPlayerTables(facts.best_players || {});
@@ -166,7 +204,7 @@ function renderPlayerTables(bestPlayers) {
     container.innerHTML = PLAYER_METRICS.map(([key, label]) => {
         const players = bestPlayers[key] || [];
         const rows = players.length
-            ? players.map(p => '<tr><td>' + p.name + '</td><td>' + (key === 'plus_minus' ? signed(p[key]) : p[key]) + '</td></tr>').join('')
+            ? players.map(p => '<tr><td>' + playerCell(p.photo, p.name) + '</td><td>' + (key === 'plus_minus' ? signed(p[key]) : p[key]) + '</td></tr>').join('')
             : '<tr><td colspan="2">No data yet.</td></tr>';
         return '<div class="team-best-players-table">'
             + '<h5>' + label + '</h5>'
@@ -201,9 +239,12 @@ function goalieCard(label, goalie) {
         return '<div class="team-goalie-card"><h5>' + label + '</h5><p class="team-goalie-card__empty">No data yet.</p></div>';
     }
     return '<div class="team-goalie-card">'
+        + avatarImg(goalie.photo, 40)
+        + '<div class="team-goalie-card__info">'
         + '<h5>' + label + '</h5>'
         + '<div class="team-goalie-card__name">' + goalie.player_name + '</div>'
         + '<div class="team-goalie-card__confidence">' + probabilityLabel(goalie) + '</div>'
+        + '</div>'
         + '</div>';
 }
 
@@ -300,6 +341,7 @@ function lineCard(line) {
         const name = slot ? slot.player_name : 'Unknown';
         const confidence = slot ? probabilityLabel(slot) : '';
         return '<div class="team-line-slot">'
+            + avatarImg(slot ? slot.photo : '', 32)
             + '<div class="team-line-slot__role">' + ROLE_LABELS[role] + '</div>'
             + '<div class="team-line-slot__name">' + name + '</div>'
             + (confidence ? '<div class="team-line-slot__confidence">' + confidence + '</div>' : '')
@@ -361,7 +403,7 @@ function renderPpPlayersTable(tableId, players, metricKey, metricLabel) {
     }
     let html = '<tr><th>Player</th><th>' + metricLabel + '</th></tr>';
     players.forEach(p => {
-        html += '<tr><td>' + p.name + '</td><td>' + p[metricKey] + '</td></tr>';
+        html += '<tr><td>' + playerCell(p.photo, p.name) + '</td><td>' + p[metricKey] + '</td></tr>';
     });
     table.innerHTML = html;
 }
