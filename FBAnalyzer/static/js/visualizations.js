@@ -117,12 +117,14 @@
                     document.getElementById('stteam_1').innerHTML = team_1;
                     document.getElementById('stt1name1').innerHTML = team_1;
                     document.getElementById('stt1name2').innerHTML = team_1;
+                    document.getElementById('stt1name3').innerHTML = team_1;
                     gd.xGTeam_array[0][1] = 'xG ' + team_1;
                     gd.xGTeam_array[0][3] = 'Goal ' + team_1;
 
                     document.getElementById('stteam_2').innerHTML = team_2;
                     document.getElementById('stt2name1').innerHTML = team_2;
                     document.getElementById('stt2name2').innerHTML = team_2;
+                    document.getElementById('stt2name3').innerHTML = team_2;
                     gd.xGTeam_array[0][2] = 'xG ' + team_2;
                     gd.xGTeam_array[0][4] = 'Goal ' + team_2;
 
@@ -474,6 +476,41 @@
                     var chart = new google.visualization.PieChart(document.getElementById('stT2_st_piechart'));
                     chart.draw(data2, options2);
 
+                    // Type of xG For/Against per 5v5 line, both teams - same 2-slice
+                    // (Direct/Turnover Attack), non-3D pie style as premium_analysis.js's
+                    // line-level charts. "For" = stxGT{team}L{n}g_array (this team's own
+                    // line's shots, already tracked); "Against" = staxGT{team}L{n}g_array
+                    // (opponent shots while this team's line was on the ice - see the
+                    // mirrored accumulation added alongside stxGT* in premiumfunctions.js).
+                    function safeArr5(a) {
+                        return (Array.isArray(a) && a.length === 5) ? a : [0, 0, 0, 0, 0];
+                    }
+                    function drawLineXgTypePie(elementId, title, arr) {
+                        arr = safeArr5(arr);
+                        var direct = arr[2] + arr[3] + arr[4];
+                        var turnover = arr[0] + arr[1];
+                        var data = google.visualization.arrayToDataTable([
+                            ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' }],
+                            ['Direct Attack', direct, 'color: #002072', direct],
+                            ['Turnover Attack', turnover, 'color: #59D9EB', turnover],
+                        ]);
+                        var pie = new google.visualization.PieChart(document.getElementById(elementId));
+                        pie.draw(data, { title: title });
+                    }
+
+                    drawLineXgTypePie('stT1L1_xgtype_f', 'Type of xG For, Line 1', gd.stxGT1L1g_array);
+                    drawLineXgTypePie('stT1L1_xgtype_a', 'Type of xG Against, Line 1', gd.staxGT1L1g_array);
+                    drawLineXgTypePie('stT1L2_xgtype_f', 'Type of xG For, Line 2', gd.stxGT1L2g_array);
+                    drawLineXgTypePie('stT1L2_xgtype_a', 'Type of xG Against, Line 2', gd.staxGT1L2g_array);
+                    drawLineXgTypePie('stT1L3_xgtype_f', 'Type of xG For, Line 3', gd.stxGT1L3g_array);
+                    drawLineXgTypePie('stT1L3_xgtype_a', 'Type of xG Against, Line 3', gd.staxGT1L3g_array);
+                    drawLineXgTypePie('stT2L1_xgtype_f', 'Type of xG For, Line 1', gd.stxGT2L1g_array);
+                    drawLineXgTypePie('stT2L1_xgtype_a', 'Type of xG Against, Line 1', gd.staxGT2L1g_array);
+                    drawLineXgTypePie('stT2L2_xgtype_f', 'Type of xG For, Line 2', gd.stxGT2L2g_array);
+                    drawLineXgTypePie('stT2L2_xgtype_a', 'Type of xG Against, Line 2', gd.staxGT2L2g_array);
+                    drawLineXgTypePie('stT2L3_xgtype_f', 'Type of xG For, Line 3', gd.stxGT2L3g_array);
+                    drawLineXgTypePie('stT2L3_xgtype_a', 'Type of xG Against, Line 3', gd.staxGT2L3g_array);
+
                     // Team xG Chart
                     var data = google.visualization.arrayToDataTable(gd.xGTeam_array);
 
@@ -566,9 +603,11 @@
         document.getElementById('stteam_1').innerHTML = ""
         document.getElementById('stt1name1').innerHTML = ""
         document.getElementById('stt1name2').innerHTML = ""
+        document.getElementById('stt1name3').innerHTML = ""
         document.getElementById('stteam_2').innerHTML = ""
         document.getElementById('stt2name1').innerHTML = ""
         document.getElementById('stt2name2').innerHTML = ""
+        document.getElementById('stt2name3').innerHTML = ""
         csvButton.disabled = true;
 
         ctx1.drawImage(myImg,0,0,fWidth,fLength);
@@ -835,6 +874,22 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('stT2_st_piechart'));
         chart.draw(data2, options2);
+
+        // Type of xG by line (For/Against, both teams) - blanked out the same way as
+        // the rest of this function; see the real-data draws in changeGame() above
+        // for what these look like once a game is loaded.
+        ['stT1L1_xgtype_f', 'stT1L1_xgtype_a', 'stT1L2_xgtype_f', 'stT1L2_xgtype_a',
+         'stT1L3_xgtype_f', 'stT1L3_xgtype_a', 'stT2L1_xgtype_f', 'stT2L1_xgtype_a',
+         'stT2L2_xgtype_f', 'stT2L2_xgtype_a', 'stT2L3_xgtype_f', 'stT2L3_xgtype_a',
+        ].forEach(function (elementId) {
+            var emptyData = google.visualization.arrayToDataTable([
+                ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' }],
+                ['Direct Attack', 0, 'color: #002072', 0],
+                ['Turnover Attack', 0, 'color: #59D9EB', 0],
+            ]);
+            var pie = new google.visualization.PieChart(document.getElementById(elementId));
+            pie.draw(emptyData, {});
+        });
 
         // Team xG Chart
         var data = google.visualization.arrayToDataTable([['Time','xG Team 1','xG Team 2','Goal Team 1','Goal Team 2'],["",0,0,0,0]]);

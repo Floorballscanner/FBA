@@ -1222,6 +1222,17 @@
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
 
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 2 here, since Ball_pos==1 in this branch),
+                // attributed to whichever of Team 2's own lines was on the ice
+                // (line_on_2) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT2Teamg_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["staxGT2L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["staxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT2Teamp_array"][dataType] += dataxG;
+
 
             }
         }
@@ -1320,6 +1331,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 2 here, since Ball_pos==1 in this branch),
+                // attributed to whichever of Team 2's own lines was on the ice
+                // (line_on_2) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT2Teamg_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["staxGT2L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["staxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT2Teamp_array"][dataType] += dataxG;
             }
         }
 
@@ -1414,6 +1436,17 @@
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
 
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 1 here, since Ball_pos==2 in this branch),
+                // attributed to whichever of Team 1's own lines was on the ice
+                // (line_on) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT1Teamg_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
+                    window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT1Teamp_array"][dataType] += dataxG;
+
             }
         }
 
@@ -1507,6 +1540,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 1 here, since Ball_pos==2 in this branch),
+                // attributed to whichever of Team 1's own lines was on the ice
+                // (line_on) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT1Teamg_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
+                    window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT1Teamp_array"][dataType] += dataxG;
             }
         }
 
@@ -1612,6 +1656,17 @@
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
 
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 2 here, since Ball_pos==1 in this branch),
+                // attributed to whichever of Team 2's own lines was on the ice
+                // (line_on_2) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT2Teamg_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["staxGT2L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["staxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT2Teamp_array"][dataType] += dataxG;
+
             }
         }
 
@@ -1709,6 +1764,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 2 here, since Ball_pos==1 in this branch),
+                // attributed to whichever of Team 2's own lines was on the ice
+                // (line_on_2) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT2Teamg_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["staxGT2L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["staxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT2Teamp_array"][dataType] += dataxG;
             }
         }
 
@@ -1803,6 +1869,17 @@
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
 
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 1 here, since Ball_pos==2 in this branch),
+                // attributed to whichever of Team 1's own lines was on the ice
+                // (line_on) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT1Teamg_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
+                    window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT1Teamp_array"][dataType] += dataxG;
+
             }
         }
 
@@ -1896,6 +1973,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 1 here, since Ball_pos==2 in this branch),
+                // attributed to whichever of Team 1's own lines was on the ice
+                // (line_on) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT1Teamg_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
+                    window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT1Teamp_array"][dataType] += dataxG;
             }
         }
 
@@ -2015,6 +2103,17 @@
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
 
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 2 here, since Ball_pos==1 in this branch),
+                // attributed to whichever of Team 2's own lines was on the ice
+                // (line_on_2) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT2Teamg_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["staxGT2L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["staxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT2Teamp_array"][dataType] += dataxG;
+
             }
         }
 
@@ -2127,6 +2226,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 2 here, since Ball_pos==1 in this branch),
+                // attributed to whichever of Team 2's own lines was on the ice
+                // (line_on_2) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT2Teamg_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["staxGT2L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["staxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT2Teamp_array"][dataType] += dataxG;
             }
         }
 
@@ -2239,6 +2349,17 @@
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
 
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 1 here, since Ball_pos==2 in this branch),
+                // attributed to whichever of Team 1's own lines was on the ice
+                // (line_on) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT1Teamg_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
+                    window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT1Teamp_array"][dataType] += dataxG;
+
             }
         }
 
@@ -2349,6 +2470,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 1 here, since Ball_pos==2 in this branch),
+                // attributed to whichever of Team 1's own lines was on the ice
+                // (line_on) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT1Teamg_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
+                    window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT1Teamp_array"][dataType] += dataxG;
             }
         }
 
@@ -2467,6 +2599,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 2 here, since Ball_pos==1 in this branch),
+                // attributed to whichever of Team 2's own lines was on the ice
+                // (line_on_2) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT2Teamg_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["staxGT2L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["staxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT2Teamp_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
@@ -2606,6 +2749,17 @@
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
 
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 2 here, since Ball_pos==1 in this branch),
+                // attributed to whichever of Team 2's own lines was on the ice
+                // (line_on_2) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT2Teamg_array"][dataType] += dataxG;
+                if (line_on_2 < 4) {
+                    window["staxGT2L"+line_on_2+"g_array"][dataType] += dataxG;
+                    window["staxGT2L"+line_on_2+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT2Teamp_array"][dataType] += dataxG;
+
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], xGf_g[0], 0]);
                     xGL2_array.push([display, xGf_g[1], xGa_g[1], 0, 0]);
@@ -2742,6 +2896,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 1 here, since Ball_pos==2 in this branch),
+                // attributed to whichever of Team 1's own lines was on the ice
+                // (line_on) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT1Teamg_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
+                    window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT1Teamp_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
@@ -2884,6 +3049,17 @@
                     window["stxGT"+Ball_pos+"L"+line_on_2+"p_array"][dataType] += dataxG;
                 }
                 window["stxGT"+Ball_pos+"Teamp_array"][dataType] += dataxG;
+
+                // Mirror of the block above: same shot, but tallied as xG AGAINST
+                // the conceding team (Team 1 here, since Ball_pos==2 in this branch),
+                // attributed to whichever of Team 1's own lines was on the ice
+                // (line_on) - feeds the "Type of xG Against" per-line charts.
+                window["staxGT1Teamg_array"][dataType] += dataxG;
+                if (line_on < 4) {
+                    window["staxGT1L"+line_on+"g_array"][dataType] += dataxG;
+                    window["staxGT1L"+line_on+"p_array"][dataType] += dataxG;
+                }
+                window["staxGT1Teamp_array"][dataType] += dataxG;
 
                 if (line_on == 1) {
                     xGL1_array.push([display, xGf_g[0], xGa_g[0], 0, xGa_g[0]]);
@@ -6516,6 +6692,37 @@
         var chart_per = new google.visualization.PieChart(document.getElementById('T2_st_piechart_' + periodN));
 
         chart_per.draw(data2_p, options2);
+
+        // Type of xG For/Against per 5v5 line, both teams (game total only - no
+        // per-period split, matching Game Analysis's scope for these charts).
+        // "For" = stxGT{team}L{n}g_array (this team's own line's shots, already
+        // tracked); "Against" = staxGT{team}L{n}g_array (opponent shots while this
+        // team's line was on the ice - see the mirrored accumulation added
+        // alongside stxGT* earlier in shotMissed/shotBlocked/shotSaved/shotGoal).
+        function drawLineXgTypePie(elementId, title, arr) {
+            var direct = arr[2] + arr[3] + arr[4];
+            var turnover = arr[0] + arr[1];
+            var data = google.visualization.arrayToDataTable([
+                ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' }],
+                ['Direct Attack', direct, 'color: #002072', direct],
+                ['Turnover Attack', turnover, 'color: #59D9EB', turnover],
+            ]);
+            var pie = new google.visualization.PieChart(document.getElementById(elementId));
+            pie.draw(data, { title: title });
+        }
+
+        drawLineXgTypePie('T1L1_xgtype_f', 'Type of xG For, Line 1', stxGT1L1g_array);
+        drawLineXgTypePie('T1L1_xgtype_a', 'Type of xG Against, Line 1', staxGT1L1g_array);
+        drawLineXgTypePie('T1L2_xgtype_f', 'Type of xG For, Line 2', stxGT1L2g_array);
+        drawLineXgTypePie('T1L2_xgtype_a', 'Type of xG Against, Line 2', staxGT1L2g_array);
+        drawLineXgTypePie('T1L3_xgtype_f', 'Type of xG For, Line 3', stxGT1L3g_array);
+        drawLineXgTypePie('T1L3_xgtype_a', 'Type of xG Against, Line 3', staxGT1L3g_array);
+        drawLineXgTypePie('T2L1_xgtype_f', 'Type of xG For, Line 1', stxGT2L1g_array);
+        drawLineXgTypePie('T2L1_xgtype_a', 'Type of xG Against, Line 1', staxGT2L1g_array);
+        drawLineXgTypePie('T2L2_xgtype_f', 'Type of xG For, Line 2', stxGT2L2g_array);
+        drawLineXgTypePie('T2L2_xgtype_a', 'Type of xG Against, Line 2', staxGT2L2g_array);
+        drawLineXgTypePie('T2L3_xgtype_f', 'Type of xG For, Line 3', stxGT2L3g_array);
+        drawLineXgTypePie('T2L3_xgtype_a', 'Type of xG Against, Line 3', staxGT2L3g_array);
 
         // Pie Chart, Goals per type Team 1
 

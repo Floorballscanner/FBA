@@ -8,6 +8,18 @@
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     var gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     var xGtypeData = [['xGFDir%','xGADir%','xGFTO%','xGATO%']];
+    // Per-line (5v5 Line 1/2/3) versions of xGtypeData above, one row per selected
+    // game: [Direct xG For, Turnover xG For, Direct xG Against, Turnover xG Against].
+    // "For" comes from stxGT1L{n}g_array (this team's own line, already wired up);
+    // "Against" comes from staxGT1L{n}g_array (opponent shots while this team's
+    // line was on the ice - see the mirrored accumulation added alongside stxGT*
+    // in premiumfunctions.js's shotMissed/shotBlocked/shotSaved/shotGoal). Unlike
+    // the team-level xGtypeData, this can't reuse "the other team's For" as "our
+    // Against": Team 2's own line numbering is independent of Team 1's, so a
+    // per-line against figure only exists via its own staxGT1L{n} accumulator.
+    var xGtypeDataL1 = [['xGFDir','xGFTO','xGADir','xGATO']];
+    var xGtypeDataL2 = [['xGFDir','xGFTO','xGADir','xGATO']];
+    var xGtypeDataL3 = [['xGFDir','xGFTO','xGADir','xGATO']];
     var shotData = [];
     var selectedValues = [];
     var data = 0;
@@ -43,6 +55,25 @@
     var ctx3p = cnvs3p.getContext("2d");
     var ctx4p = cnvs4p.getContext("2d");
     var ctx5p = cnvs5p.getContext("2d");*/
+
+// Games saved before staxGT1L{n}g_array's accumulation was wired up simply have it
+// present but all-zero (it was already in the save schema - see premiumfunctions.js);
+// this guards the rare older save where the key might be missing entirely.
+function safeArr5(a) {
+    return (Array.isArray(a) && a.length === 5) ? a : [0, 0, 0, 0, 0];
+}
+
+// Appends this game's Line{lineNumber} "Type of xG" breakdown - For (this team's
+// own line's shots) and Against (opponent shots while this line was on the ice) -
+// to the running per-line data used by the "Type of xG by line" card.
+function pushLineXgTypeData(gd, lineNumber, target) {
+    var forArr = safeArr5(gd["stxGT1L" + lineNumber + "g_array"]);
+    var againstArr = safeArr5(gd["staxGT1L" + lineNumber + "g_array"]);
+    target.push([
+        forArr[2] + forArr[3] + forArr[4], forArr[0] + forArr[1],
+        againstArr[2] + againstArr[3] + againstArr[4], againstArr[0] + againstArr[1],
+    ]);
+}
 
 async function getGameData(game_ids) {
 
@@ -137,6 +168,9 @@ async function getGameData(game_ids) {
 
         gameData.push([date,gd.name_t1,gd.name_t2,Number(gd.txG_1),Number(gd.txG_2),Number(gd.txGOT_1),Number(gd.txGOT_2),Number(gd.tgt_1),Number(gd.tgt_2),Number(gd.sf_g[7]),Number(gd.sfT2_g[7]),xGf5v5,xGa5v5,gf5v5,ga5v5,xGfPP,xGaPP,gfPP,gaPP,xGfSH,xGaSH,gfSH,gaSH,xGFDir_p,xGADir_p,xGFTO_p,xGATO_p]);
         xGtypeData.push([gd.stxGT1Teamg_array[2] + gd.stxGT1Teamg_array[3] + gd.stxGT1Teamg_array[4],gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4],gd.stxGT1Teamg_array[0] + gd.stxGT1Teamg_array[1],gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1]]);
+        pushLineXgTypeData(gd, 1, xGtypeDataL1);
+        pushLineXgTypeData(gd, 2, xGtypeDataL2);
+        pushLineXgTypeData(gd, 3, xGtypeDataL3);
     }
     for (i=1;i<game_ids.length;i++) {
         console.log('Next game: ' + game_ids[i])
@@ -235,6 +269,9 @@ async function getGameData(game_ids) {
 
             gameData.push([date,gd.name_t1,gd.name_t2,Number(gd.txG_1),Number(gd.txG_2),Number(gd.txGOT_1),Number(gd.txGOT_2),Number(gd.tgt_1),Number(gd.tgt_2),Number(gd.sf_g[7]),Number(gd.sfT2_g[7]),xGf5v5,xGa5v5,gf5v5,ga5v5,xGfPP,xGaPP,gfPP,gaPP,xGfSH,xGaSH,gfSH,gaSH,xGFDir_p,xGADir_p,xGFTO_p,xGATO_p]);
             xGtypeData.push([gd.stxGT1Teamg_array[2] + gd.stxGT1Teamg_array[3] + gd.stxGT1Teamg_array[4],gd.stxGT2Teamg_array[2] + gd.stxGT2Teamg_array[3] + gd.stxGT2Teamg_array[4],gd.stxGT1Teamg_array[0] + gd.stxGT1Teamg_array[1],gd.stxGT2Teamg_array[0] + gd.stxGT2Teamg_array[1]]);
+        pushLineXgTypeData(gd, 1, xGtypeDataL1);
+        pushLineXgTypeData(gd, 2, xGtypeDataL2);
+        pushLineXgTypeData(gd, 3, xGtypeDataL3);
         }
     }
 }
@@ -247,6 +284,9 @@ function changeGame() {
     playerData_PP = [['ID','Name','Games','xG%','ixG','iGoals','xAss%','ixAss','iAss','iShots','iPasses','Pos+','Pos-','xGF','xGA','xG%','GF','GA','+-','SF','SA','xPoints%','ixPoints','iPoints','xG/Shot','TOC']];
     gameData = [['Date','Team1','Team2','xGF','xGA','xGOTF','xGOTA','GF','GA','SF','SA','xGF5v5','xGA5v5','GF5v5','GA5v5','xGFPP','xGAPP','GFPP','GAPP','xGFSH','xGASH','GFSH','GASH','xGFDir%','xGADir%','xGFTO%','xGATO%']];
     xGtypeData = [['xGFDir%','xGADir%','xGFTO%','xGATO%']];
+    xGtypeDataL1 = [['xGFDir','xGFTO','xGADir','xGATO']];
+    xGtypeDataL2 = [['xGFDir','xGFTO','xGADir','xGATO']];
+    xGtypeDataL3 = [['xGFDir','xGFTO','xGADir','xGATO']];
     shotData = [];
     selectedValues = [];
 
@@ -472,6 +512,21 @@ function drawCharts() {
     xGtypeAvg[2] = Number(xGtypeAvg[2].toFixed(2));
     xGtypeAvg[3] = Number(xGtypeAvg[3].toFixed(2));
 
+    // Same running-total (not average, matching xGtypeAvg above) for each 5v5 line.
+    function sumLineXgType(lineData) {
+        var sum = [0, 0, 0, 0];
+        for (var row = 1; row < lineData.length; row++) {
+            for (var col = 0; col < 4; col++) {
+                sum[col] += lineData[row][col];
+            }
+        }
+        return sum.map(function (v) { return Number(v.toFixed(2)); });
+    }
+
+    var xGtypeAvgL1 = sumLineXgType(xGtypeDataL1);
+    var xGtypeAvgL2 = sumLineXgType(xGtypeDataL2);
+    var xGtypeAvgL3 = sumLineXgType(xGtypeDataL3);
+
     // Game Data Chart For
 
     max = Math.max(gameDataAvg[3],gameDataAvg[7],gameDataAvg[4],gameDataAvg[8]);
@@ -546,6 +601,25 @@ function drawCharts() {
 
     var typeCA = new google.visualization.PieChart(document.getElementById('xGTypeStatsA'));
     typeCA.draw(typeChartA, options);
+
+    // Type of xG For/Against per 5v5 line - same 2-slice (Direct/Turnover Attack),
+    // non-3D pie style as the team-level charts just above, one pair per line.
+    function drawLineXgTypePie(elementId, title, directValue, turnoverValue) {
+        var data = google.visualization.arrayToDataTable([
+            ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' }],
+            ['Direct Attack', directValue, 'color: #002072', directValue],
+            ['Turnover Attack', turnoverValue, 'color: #59D9EB', turnoverValue],
+        ]);
+        var chart = new google.visualization.PieChart(document.getElementById(elementId));
+        chart.draw(data, { title: title });
+    }
+
+    drawLineXgTypePie('xGTypeStatsL1F', 'Type of xG For, Line 1', xGtypeAvgL1[0], xGtypeAvgL1[1]);
+    drawLineXgTypePie('xGTypeStatsL1A', 'Type of xG Against, Line 1', xGtypeAvgL1[2], xGtypeAvgL1[3]);
+    drawLineXgTypePie('xGTypeStatsL2F', 'Type of xG For, Line 2', xGtypeAvgL2[0], xGtypeAvgL2[1]);
+    drawLineXgTypePie('xGTypeStatsL2A', 'Type of xG Against, Line 2', xGtypeAvgL2[2], xGtypeAvgL2[3]);
+    drawLineXgTypePie('xGTypeStatsL3F', 'Type of xG For, Line 3', xGtypeAvgL3[0], xGtypeAvgL3[1]);
+    drawLineXgTypePie('xGTypeStatsL3A', 'Type of xG Against, Line 3', xGtypeAvgL3[2], xGtypeAvgL3[3]);
 
     // Game data chart
     var gdata = new google.visualization.DataTable();
