@@ -108,6 +108,7 @@ function renderTeamStats(data) {
     renderGamesTable(facts.last_games || []);
     renderPlayerTables(facts.best_players || {});
     renderFiveVFive(facts.five_v_five || null);
+    renderSpecialTeams(facts.special_teams || null);
 }
 
 function ordinal(n) {
@@ -346,4 +347,58 @@ function renderFiveVFive(fivevfive) {
         renderHeatmap(document.getElementById('shot-heatmap-' + line.line_number), line.shot_locations, SHOT_COLOR);
         renderHeatmap(document.getElementById('goal-heatmap-' + line.line_number), line.goal_locations, GOAL_COLOR);
     });
+}
+
+function renderPpScorersTable(scorers) {
+    const table = document.getElementById('pp-scorers-table');
+    if (!scorers.length) {
+        table.innerHTML = '<tr><td>No PP goals yet.</td></tr>';
+        return;
+    }
+    let html = '<tr><th>Player</th><th>Goals</th></tr>';
+    scorers.forEach(p => {
+        html += '<tr><td>' + p.name + '</td><td>' + p.goals + '</td></tr>';
+    });
+    table.innerHTML = html;
+}
+
+function optTile(label, value) {
+    return kpiTile(label, value === null || value === undefined ? '-' : value.toFixed(2));
+}
+
+function renderSpecialTeams(specialTeams) {
+    const ppGrid = document.getElementById('pp-kpi-grid');
+    const shGrid = document.getElementById('sh-kpi-grid');
+
+    if (!specialTeams) {
+        ppGrid.innerHTML = '';
+        shGrid.innerHTML = '';
+        document.getElementById('pp-scorers-table').innerHTML = '';
+        return;
+    }
+
+    ppGrid.innerHTML = [
+        kpiTile("PP Opportunities / Game", specialTeams.pp_opportunities_per_game.toFixed(2)),
+        kpiTile("PP Goals / Game", specialTeams.pp_goals_per_game.toFixed(2)),
+        kpiTile("Powerplay %", perc(specialTeams.pp_perc)),
+        optTile("PP Shots / Opportunity", specialTeams.pp_shots_per_opportunity),
+        optTile("PP xG / Opportunity", specialTeams.pp_xg_per_opportunity),
+        optTile("PP xGOT / Opportunity", specialTeams.pp_xgot_per_opportunity),
+    ].join('');
+
+    shGrid.innerHTML = [
+        kpiTile("SH Situations / Game", specialTeams.sh_situations_per_game.toFixed(2)),
+        kpiTile("SH Goals Against / Game", specialTeams.sh_goals_against_per_game.toFixed(2)),
+        kpiTile("Shorthanded %", perc(specialTeams.sh_perc)),
+        optTile("SH Shots Against / Situation", specialTeams.sh_shots_against_per_situation),
+        optTile("SH xG Against / Situation", specialTeams.sh_xg_against_per_situation),
+        optTile("SH xGOT Against / Situation", specialTeams.sh_xgot_against_per_situation),
+    ].join('');
+
+    renderPpScorersTable(specialTeams.best_pp_scorers || []);
+
+    renderHeatmap(document.getElementById('pp-shot-heatmap'), specialTeams.pp_shot_locations, SHOT_COLOR);
+    renderHeatmap(document.getElementById('pp-goal-heatmap'), specialTeams.pp_goal_locations, GOAL_COLOR);
+    renderHeatmap(document.getElementById('sh-shot-heatmap'), specialTeams.sh_shot_locations, SHOT_COLOR);
+    renderHeatmap(document.getElementById('sh-goal-heatmap'), specialTeams.sh_goal_locations, GOAL_COLOR);
 }

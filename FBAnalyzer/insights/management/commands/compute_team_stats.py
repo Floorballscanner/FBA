@@ -185,6 +185,7 @@ def _compute_facts(team_id, season_id, category, stage):
         'best_players': best_players,
         'last_games': last_games[-LAST_N_GAMES:][::-1],  # most recent first
         'five_v_five': _compute_five_v_five(team_id, matches, events_by_match),
+        'special_teams': _compute_special_teams(team_id, matches, events_by_match),
     }
 
 
@@ -282,6 +283,92 @@ def _compute_five_v_five(team_id, matches, events_by_match):
         'lines': line_facts,
         'starting_goalie': probable.get((GOALIE_ROLE, 1)),
         'backup_goalie': probable.get((GOALIE_ROLE, 2)),
+    }
+
+
+def _compute_special_teams(team_id, matches, events_by_match):
+    """The Special Teams theme: powerplay (own PP - opponent penalized) and
+    shorthanded (own SH - this team penalized) KPIs, each with a shot and a
+    goal heatmap, plus the season's top PP goal scorers.
+
+    Unlike 5v5's per-line stats, this needs no per-player/per-line
+    attribution to be exact: 'situation' is already computed per-shot at
+    ingestion (see insights.special_teams) from the shooting team's own
+    perspective, so "shots against while shorthanded" is simply the
+    opponent's own situation='PP' shots - no on-ice-unit guess needed, and
+    so no reason to restrict to a recent window the way 5v5 lines are.
+    PP assists aren't included in best_pp_scorers: unlike a goal, a 'syotto'
+    (assist) event carries no situation of its own (see insights.ingest),
+    so there's no direct way to tell an assist happened during a PP without
+    a further data change - only goals are included here.
+    """
+    games = len(matches)
+    pp_opportunities = pp_goals = pp_shots = 0
+    pp_xg = pp_xgot = 0.0
+    pp_shot_locations, pp_goal_locations = [], []
+
+    sh_situations = sh_goals_against = sh_shots_against = 0
+    sh_xg_against = sh_xgot_against = 0.0
+    sh_shot_locations, sh_goal_locations = [], []
+
+    scorers = defaultdict(lambda: {'name': '', 'goals': 0})
+
+    for m in matches:
+        side = 'A' if m.team_a_id == team_id else 'B'
+        opp_side = 'B' if side == 'A' else 'A'
+        evs = events_by_match.get(m.match_id, [])
+
+        pp_opportunities += sum(1 for e in evs if e.team == opp_side and is_penalty(e.code))
+        sh_situations += sum(1 for e in evs if e.team == side and is_penalty(e.code))
+
+        pp_shots_this_game = [e for e in evs if e.code in SHOT_CODES and e.team == side and e.situation == 'PP']
+        sh_shots_this_game = [e for e in evs if e.code in SHOT_CODES and e.team == opp_side and e.situation == 'PP']
+
+        for s in pp_shots_this_game:
+            pp_shots += 1
+            pp_xg += float(s.xg or 0)
+            pp_xgot += float(s.xgot or 0)
+            if s.location_x is not None and s.location_y is not None:
+                pp_shot_locations.append([round(s.location_x, 1), round(s.location_y, 1)])
+            if s.code == GOAL_CODE:
+                pp_goals += 1
+                if s.location_x is not None and s.location_y is not None:
+                    pp_goal_locations.append([round(s.location_x, 1), round(s.location_y, 1)])
+                if s.player_id and s.player_id != NO_PLAYER_ID:
+                    scorer = scorers[s.player_id]
+                    scorer['goals'] += 1
+                    scorer['name'] = scorer['name'] or (s.raw or {}).get('player_name', '')
+
+        for s in sh_shots_this_game:
+            sh_shots_against += 1
+            sh_xg_against += float(s.xg or 0)
+            sh_xgot_against += float(s.xgot or 0)
+            if s.location_x is not None and s.location_y is not None:
+                sh_shot_locations.append([round(s.location_x, 1), round(s.location_y, 1)])
+            if s.code == GOAL_CODE:
+                sh_goals_against += 1
+                if s.location_x is not None and s.location_y is not None:
+                    sh_goal_locations.append([round(s.location_x, 1), round(s.location_y, 1)])
+
+    best_pp_scorers = sorted(scorers.values(), key=lambda p: p['goals'], reverse=True)[:BEST_PLAYERS_PER_METRIC]
+
+    return {
+        'games': games,
+        'pp_opportunities': pp_opportunities, 'pp_opportunities_per_game': round(pp_opportunities / games, 2),
+        'pp_goals': pp_goals, 'pp_goals_per_game': round(pp_goals / games, 2),
+        'pp_perc': round(pp_goals / pp_opportunities, 3) if pp_opportunities else None,
+        'pp_shots_per_opportunity': round(pp_shots / pp_opportunities, 2) if pp_opportunities else None,
+        'pp_xg_per_opportunity': round(pp_xg / pp_opportunities, 2) if pp_opportunities else None,
+        'pp_xgot_per_opportunity': round(pp_xgot / pp_opportunities, 2) if pp_opportunities else None,
+        'pp_shot_locations': pp_shot_locations, 'pp_goal_locations': pp_goal_locations,
+        'sh_situations': sh_situations, 'sh_situations_per_game': round(sh_situations / games, 2),
+        'sh_goals_against': sh_goals_against, 'sh_goals_against_per_game': round(sh_goals_against / games, 2),
+        'sh_perc': round(1 - sh_goals_against / sh_situations, 3) if sh_situations else None,
+        'sh_shots_against_per_situation': round(sh_shots_against / sh_situations, 2) if sh_situations else None,
+        'sh_xg_against_per_situation': round(sh_xg_against / sh_situations, 2) if sh_situations else None,
+        'sh_xgot_against_per_situation': round(sh_xgot_against / sh_situations, 2) if sh_situations else None,
+        'sh_shot_locations': sh_shot_locations, 'sh_goal_locations': sh_goal_locations,
+        'best_pp_scorers': best_pp_scorers,
     }
 
 
