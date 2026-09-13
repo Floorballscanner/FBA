@@ -602,24 +602,26 @@ function drawCharts() {
     var typeCA = new google.visualization.PieChart(document.getElementById('xGTypeStatsA'));
     typeCA.draw(typeChartA, options);
 
-    // Type of xG For/Against per 5v5 line - same 2-slice (Direct/Turnover Attack),
-    // non-3D pie style as the team-level charts just above, one pair per line.
-    function drawLineXgTypePie(elementId, title, directValue, turnoverValue) {
-        var data = google.visualization.arrayToDataTable([
-            ['Type of xG', 'xG', { role: 'style' }, { role: 'annotation' }],
-            ['Direct Attack', directValue, 'color: #002072', directValue],
-            ['Turnover Attack', turnoverValue, 'color: #59D9EB', turnoverValue],
-        ]);
-        var chart = new google.visualization.PieChart(document.getElementById(elementId));
-        chart.draw(data, { title: title });
-    }
-
-    drawLineXgTypePie('xGTypeStatsL1F', 'Type of xG For, Line 1', xGtypeAvgL1[0], xGtypeAvgL1[1]);
-    drawLineXgTypePie('xGTypeStatsL1A', 'Type of xG Against, Line 1', xGtypeAvgL1[2], xGtypeAvgL1[3]);
-    drawLineXgTypePie('xGTypeStatsL2F', 'Type of xG For, Line 2', xGtypeAvgL2[0], xGtypeAvgL2[1]);
-    drawLineXgTypePie('xGTypeStatsL2A', 'Type of xG Against, Line 2', xGtypeAvgL2[2], xGtypeAvgL2[3]);
-    drawLineXgTypePie('xGTypeStatsL3F', 'Type of xG For, Line 3', xGtypeAvgL3[0], xGtypeAvgL3[1]);
-    drawLineXgTypePie('xGTypeStatsL3A', 'Type of xG Against, Line 3', xGtypeAvgL3[2], xGtypeAvgL3[3]);
+    // Type of xG by line - one compact 100%-stacked bar chart (6 bars: Line 1-3 x
+    // For/Against) instead of 6 separate pie charts, one shared legend. Each
+    // xGtypeAvgL{n} is [directFor, turnoverFor, directAgainst, turnoverAgainst].
+    var xgTypeBarData = new google.visualization.DataTable();
+    xgTypeBarData.addColumn('string', 'Line');
+    xgTypeBarData.addColumn('number', 'Direct Attack');
+    xgTypeBarData.addColumn('number', 'Turnover Attack');
+    xgTypeBarData.addRows([
+        ['Line 1 For', xGtypeAvgL1[0], xGtypeAvgL1[1]], ['Line 1 Against', xGtypeAvgL1[2], xGtypeAvgL1[3]],
+        ['Line 2 For', xGtypeAvgL2[0], xGtypeAvgL2[1]], ['Line 2 Against', xGtypeAvgL2[2], xGtypeAvgL2[3]],
+        ['Line 3 For', xGtypeAvgL3[0], xGtypeAvgL3[1]], ['Line 3 Against', xGtypeAvgL3[2], xGtypeAvgL3[3]],
+    ]);
+    var xgTypeBarChart = new google.visualization.BarChart(document.getElementById('xGTypeStatsByLine'));
+    xgTypeBarChart.draw(xgTypeBarData, {
+        title: 'Type of xG by line',
+        isStacked: 'percent',
+        legend: { position: 'bottom' },
+        colors: ['#002072', '#59D9EB'],
+        chartArea: { width: '60%' },
+    });
 
     // Game data chart
     var gdata = new google.visualization.DataTable();
