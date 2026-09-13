@@ -16,7 +16,8 @@ Expected JSON body:
   "team_a_id": "...", "team_b_id": "...", "team_a_name": "...", "team_b_name": "...",
   "score_a": 0, "score_b": 0,
   "events": [{event_id, code, team, team_id, player_id, period, time_sec,
-              description, location, player_name, ...}, ...]
+              description, location, player_name, ...}, ...],
+  "lineups": [{team_id, player_id, player_name, position}, ...]
 }
 """
 
@@ -70,6 +71,7 @@ def ingest_match_events(request):
         score_a=payload.get('score_a'),
         score_b=payload.get('score_b'),
         events=events,
+        lineups=payload.get('lineups'),
         # This endpoint gets the client's *entire* running event list on every
         # ~10s poll, from every viewer's browser independently - once an event
         # is stored its derived fields are stable, so skip re-deriving/
