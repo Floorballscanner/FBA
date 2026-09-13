@@ -5,7 +5,7 @@
 
 const PLAYER_METRICS = [
     ['points', 'Points'], ['goals', 'Goals'], ['assists', 'Assists'],
-    ['xg', 'xG'], ['xgot', 'xGOT'], ['gaxg', 'GAxG'],
+    ['xg', 'xG'], ['plus_minus', '+/-'], ['gaxg', 'GAxG'],
 ];
 
 // Mirrors insights.lineups.ROLE_LABELS/SKATER_ROLES - left-to-right display
@@ -157,12 +157,16 @@ function renderKpiGrid(facts) {
     document.getElementById('kpi-grid').innerHTML = tiles.join('');
 }
 
+function signed(value) {
+    return value > 0 ? '+' + value : String(value);
+}
+
 function renderPlayerTables(bestPlayers) {
     const container = document.getElementById('players-tables');
     container.innerHTML = PLAYER_METRICS.map(([key, label]) => {
         const players = bestPlayers[key] || [];
         const rows = players.length
-            ? players.map(p => '<tr><td>' + p.name + '</td><td>' + p[key] + '</td></tr>').join('')
+            ? players.map(p => '<tr><td>' + p.name + '</td><td>' + (key === 'plus_minus' ? signed(p[key]) : p[key]) + '</td></tr>').join('')
             : '<tr><td colspan="2">No data yet.</td></tr>';
         return '<div class="team-best-players-table">'
             + '<h5>' + label + '</h5>'
