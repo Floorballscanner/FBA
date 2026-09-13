@@ -289,7 +289,7 @@ def _compute_five_v_five(team_id, matches, events_by_match):
 def _compute_special_teams(team_id, matches, events_by_match):
     """The Special Teams theme: powerplay (own PP - opponent penalized) and
     shorthanded (own SH - this team penalized) KPIs, each with a shot and a
-    goal heatmap, plus the season's top PP goal scorers.
+    goal heatmap, plus the season's top PP performers by goals, shots, and xG.
 
     Unlike 5v5's per-line stats, this needs no per-player/per-line
     attribution to be exact: 'situation' is already computed per-shot at
@@ -297,10 +297,10 @@ def _compute_special_teams(team_id, matches, events_by_match):
     perspective, so "shots against while shorthanded" is simply the
     opponent's own situation='PP' shots - no on-ice-unit guess needed, and
     so no reason to restrict to a recent window the way 5v5 lines are.
-    PP assists aren't included in best_pp_scorers: unlike a goal, a 'syotto'
-    (assist) event carries no situation of its own (see insights.ingest),
-    so there's no direct way to tell an assist happened during a PP without
-    a further data change - only goals are included here.
+    PP assists aren't included in the top-PP-players tables: unlike a shot
+    or goal, a 'syotto' (assist) event carries no situation of its own (see
+    insights.ingest), so there's no direct way to tell an assist happened
+    during a PP without a further data change.
     """
     games = len(matches)
     pp_opportunities = pp_goals = pp_shots = 0
@@ -311,7 +311,7 @@ def _compute_special_teams(team_id, matches, events_by_match):
     sh_xg_against = sh_xgot_against = 0.0
     sh_shot_locations, sh_goal_locations = [], []
 
-    scorers = defaultdict(lambda: {'name': '', 'goals': 0})
+    pp_players = defaultdict(lambda: {'name': '', 'goals': 0, 'shots': 0, 'xg': 0.0})
 
     for m in matches:
         side = 'A' if m.team_a_id == team_id else 'B'
@@ -330,14 +330,17 @@ def _compute_special_teams(team_id, matches, events_by_match):
             pp_xgot += float(s.xgot or 0)
             if s.location_x is not None and s.location_y is not None:
                 pp_shot_locations.append([round(s.location_x, 1), round(s.location_y, 1)])
+            if s.player_id and s.player_id != NO_PLAYER_ID:
+                p = pp_players[s.player_id]
+                p['shots'] += 1
+                p['xg'] += float(s.xg or 0)
+                p['name'] = p['name'] or (s.raw or {}).get('player_name', '')
+                if s.code == GOAL_CODE:
+                    p['goals'] += 1
             if s.code == GOAL_CODE:
                 pp_goals += 1
                 if s.location_x is not None and s.location_y is not None:
                     pp_goal_locations.append([round(s.location_x, 1), round(s.location_y, 1)])
-                if s.player_id and s.player_id != NO_PLAYER_ID:
-                    scorer = scorers[s.player_id]
-                    scorer['goals'] += 1
-                    scorer['name'] = scorer['name'] or (s.raw or {}).get('player_name', '')
 
         for s in sh_shots_this_game:
             sh_shots_against += 1
@@ -350,7 +353,15 @@ def _compute_special_teams(team_id, matches, events_by_match):
                 if s.location_x is not None and s.location_y is not None:
                     sh_goal_locations.append([round(s.location_x, 1), round(s.location_y, 1)])
 
-    best_pp_scorers = sorted(scorers.values(), key=lambda p: p['goals'], reverse=True)[:BEST_PLAYERS_PER_METRIC]
+    for p in pp_players.values():
+        p['xg'] = round(p['xg'], 2)
+    all_pp_players = list(pp_players.values())
+
+    best_pp_scorers = sorted(
+        [p for p in all_pp_players if p['goals'] > 0], key=lambda p: p['goals'], reverse=True,
+    )[:BEST_PLAYERS_PER_METRIC]
+    best_pp_shooters = sorted(all_pp_players, key=lambda p: p['shots'], reverse=True)[:BEST_PLAYERS_PER_METRIC]
+    best_pp_xg = sorted(all_pp_players, key=lambda p: p['xg'], reverse=True)[:BEST_PLAYERS_PER_METRIC]
 
     return {
         'games': games,
@@ -369,6 +380,8 @@ def _compute_special_teams(team_id, matches, events_by_match):
         'sh_xgot_against_per_situation': round(sh_xgot_against / sh_situations, 2) if sh_situations else None,
         'sh_shot_locations': sh_shot_locations, 'sh_goal_locations': sh_goal_locations,
         'best_pp_scorers': best_pp_scorers,
+        'best_pp_shooters': best_pp_shooters,
+        'best_pp_xg': best_pp_xg,
     }
 
 
