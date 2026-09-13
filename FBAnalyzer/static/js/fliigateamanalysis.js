@@ -349,15 +349,15 @@ function renderFiveVFive(fivevfive) {
     });
 }
 
-function renderPpScorersTable(scorers) {
-    const table = document.getElementById('pp-scorers-table');
-    if (!scorers.length) {
-        table.innerHTML = '<tr><td>No PP goals yet.</td></tr>';
+function renderPpPlayersTable(tableId, players, metricKey, metricLabel) {
+    const table = document.getElementById(tableId);
+    if (!players.length) {
+        table.innerHTML = '<tr><td>No data yet.</td></tr>';
         return;
     }
-    let html = '<tr><th>Player</th><th>Goals</th></tr>';
-    scorers.forEach(p => {
-        html += '<tr><td>' + p.name + '</td><td>' + p.goals + '</td></tr>';
+    let html = '<tr><th>Player</th><th>' + metricLabel + '</th></tr>';
+    players.forEach(p => {
+        html += '<tr><td>' + p.name + '</td><td>' + p[metricKey] + '</td></tr>';
     });
     table.innerHTML = html;
 }
@@ -373,7 +373,9 @@ function renderSpecialTeams(specialTeams) {
     if (!specialTeams) {
         ppGrid.innerHTML = '';
         shGrid.innerHTML = '';
-        document.getElementById('pp-scorers-table').innerHTML = '';
+        ['pp-scorers-table', 'pp-shooters-table', 'pp-xg-table'].forEach(id => {
+            document.getElementById(id).innerHTML = '';
+        });
         return;
     }
 
@@ -395,7 +397,9 @@ function renderSpecialTeams(specialTeams) {
         optTile("SH xGOT Against / Situation", specialTeams.sh_xgot_against_per_situation),
     ].join('');
 
-    renderPpScorersTable(specialTeams.best_pp_scorers || []);
+    renderPpPlayersTable('pp-scorers-table', specialTeams.best_pp_scorers || [], 'goals', 'Goals');
+    renderPpPlayersTable('pp-shooters-table', specialTeams.best_pp_shooters || [], 'shots', 'Shots');
+    renderPpPlayersTable('pp-xg-table', specialTeams.best_pp_xg || [], 'xg', 'xG');
 
     renderHeatmap(document.getElementById('pp-shot-heatmap'), specialTeams.pp_shot_locations, SHOT_COLOR);
     renderHeatmap(document.getElementById('pp-goal-heatmap'), specialTeams.pp_goal_locations, GOAL_COLOR);
