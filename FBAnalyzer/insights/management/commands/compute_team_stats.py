@@ -35,7 +35,7 @@ from insights.torneopal import CATEGORY_IDS, STAGE_GROUP_IDS
 
 LAST_N_GAMES = 5
 BEST_PLAYERS_PER_METRIC = 5
-PLAYER_METRICS = ('points', 'goals', 'assists', 'xg', 'xgot', 'gaxg')
+PLAYER_METRICS = ('points', 'goals', 'assists', 'xg', 'plus_minus', 'gaxg')
 LINE_NUMBERS = (1, 2, 3)
 
 # Both "most probable lineup" and per-line 5v5 offense (compute_five_v_five)
@@ -105,9 +105,12 @@ def _compute_facts(team_id, season_id, category, stage):
     xgf = xga = xgotf = xgota = 0.0
     gf = ga = 0
     pp_goals = pp_opp = sh_opp = pp_goals_against = 0
-    players = defaultdict(lambda: {'name': '', 'points': 0, 'goals': 0, 'assists': 0, 'xg': 0.0, 'xgot': 0.0})
+    players = defaultdict(lambda: {'name': '', 'points': 0, 'goals': 0, 'assists': 0, 'xg': 0.0, 'xgot': 0.0, 'plus_minus': 0})
     # xg/xgot accumulate from every shot the player took (own_shots below), not just
-    # goals - matches accounts.compute_fliiga_stats' player table convention.
+    # goals - matches accounts.compute_fliiga_stats' player table convention. xgot
+    # stays computed (used elsewhere/available if needed) even though it no longer
+    # has its own best_players table - see PLAYER_METRICS. plus_minus is Torneopal's
+    # own net on-ice rating (MatchLineup.plus - MatchLineup.minus), merged in below.
     last_games = []
 
     for m in matches:
@@ -161,6 +164,11 @@ def _compute_facts(team_id, season_id, category, stage):
             'xg_for': round(game_xgf, 2), 'xg_against': round(game_xga, 2),
             'result': 'W' if won else 'L',
         })
+
+    for row in MatchLineup.objects.filter(match_id__in=match_ids, team_id=team_id):
+        p = players[row.player_id]
+        p['plus_minus'] += row.plus - row.minus
+        p['name'] = p['name'] or row.player_name
 
     for p in players.values():
         p['xg'] = round(p['xg'], 2)
