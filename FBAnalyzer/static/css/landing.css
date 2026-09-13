@@ -1165,6 +1165,21 @@ a.landing-card:hover {
     border-radius: 999px;
 }
 
+.team-subsection-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--landing-navy-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 28px 0 4px;
+}
+
+.team-subsection-hint {
+    font-size: 13px;
+    color: var(--landing-muted);
+    margin: 0;
+}
+
 .team-goalie-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

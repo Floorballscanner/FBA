@@ -47,6 +47,7 @@ RANK_METRICS = [
     ('gf_per_game', 'desc'), ('ga_per_game', 'asc'),
     ('xgf_per_game', 'desc'), ('xga_per_game', 'asc'),
     ('xgotf_per_game', 'desc'), ('xgota_per_game', 'asc'),
+    ('gaxgf_per_game', 'desc'), ('gaxga_per_game', 'asc'),
     ('pp_perc', 'desc'), ('sh_perc', 'desc'),
 ]
 
@@ -162,6 +163,7 @@ def _compute_facts(team_id, season_id, category, stage):
         'xgf_per_game': round(xgf / games, 3), 'xga_per_game': round(xga / games, 3),
         'xgotf_per_game': round(xgotf / games, 3), 'xgota_per_game': round(xgota / games, 3),
         'gf_per_game': round(gf / games, 3), 'ga_per_game': round(ga / games, 3),
+        'gaxgf_per_game': round((gf - xgf) / games, 3), 'gaxga_per_game': round((ga - xga) / games, 3),
         'pp_perc': round(pp_goals / pp_opp, 3) if pp_opp else None,
         'sh_perc': round(1 - pp_goals_against / sh_opp, 3) if sh_opp else None,
         'best_players': best_players,
