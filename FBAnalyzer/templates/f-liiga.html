@@ -21,92 +21,35 @@ This is the F-liiga hub page — links to results, live data, and statistics.
     </div>
 
     <div class="landing-card-grid">
-        {% if license_tier == 'fliiga' %}
-        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full_upgrade' %}">
-            {% csrf_token %}
-            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
-                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
-                <h3>Results</h3>
-                <p>All played game results from Finnish F-Liiga.</p>
-                <span class="landing-card__badge">Upgrade to Full — 161&euro; &rarr;</span>
-            </button>
-        </form>
-        {% elif license_tier == 'fliiga_trial' %}
-        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}">
-            {% csrf_token %}
-            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
-                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
-                <h3>Results</h3>
-                <p>All played game results from Finnish F-Liiga.</p>
-                <span class="landing-card__badge">Buy F-Liiga Full — 200&euro; &rarr;</span>
-            </button>
-        </form>
-        {% else %}
         <a class="landing-card" href="/accounts/fliiga_results">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
             <h3>Results</h3>
             <p>All played game results from Finnish F-Liiga.</p>
+            {% if license_tier == 'fliiga' or license_tier == 'fliiga_trial' %}
+            <span class="landing-card__badge landing-card__badge--preview">Preview: 2024-2025 season</span>
+            {% endif %}
         </a>
-        {% endif %}
         <a class="landing-card" href="/accounts/fliigalive">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
             <h3>Live</h3>
             <p>Live game data from Finnish F-Liiga.</p>
         </a>
-        {% if license_tier == 'fliiga' %}
-        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full_upgrade' %}">
-            {% csrf_token %}
-            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
-                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
-                <h3>Statistics</h3>
-                <p>Advanced F-Liiga statistics.</p>
-                <span class="landing-card__badge">Upgrade to Full — 161&euro; &rarr;</span>
-            </button>
-        </form>
-        {% elif license_tier == 'fliiga_trial' %}
-        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}">
-            {% csrf_token %}
-            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
-                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
-                <h3>Statistics</h3>
-                <p>Advanced F-Liiga statistics.</p>
-                <span class="landing-card__badge">Buy F-Liiga Full — 200&euro; &rarr;</span>
-            </button>
-        </form>
-        {% else %}
         <a class="landing-card" href="/accounts/fliiga_statistics">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
             <h3>Statistics</h3>
             <p>Advanced F-Liiga statistics.</p>
+            {% if license_tier == 'fliiga' or license_tier == 'fliiga_trial' %}
+            <span class="landing-card__badge landing-card__badge--preview">Preview: 2024-2025 season</span>
+            {% endif %}
         </a>
-        {% endif %}
-        {% if license_tier == 'fliiga' %}
-        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full_upgrade' %}">
-            {% csrf_token %}
-            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
-                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
-                <h3>Team Analysis</h3>
-                <p>Season breakdown of any F-Liiga team, built for coaches.</p>
-                <span class="landing-card__badge">Upgrade to Full — 161&euro; &rarr;</span>
-            </button>
-        </form>
-        {% elif license_tier == 'fliiga_trial' %}
-        <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}">
-            {% csrf_token %}
-            <button type="submit" class="landing-card landing-card--locked" style="width:100%;border:none;font:inherit;cursor:pointer;">
-                <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
-                <h3>Team Analysis</h3>
-                <p>Season breakdown of any F-Liiga team, built for coaches.</p>
-                <span class="landing-card__badge">Buy F-Liiga Full — 200&euro; &rarr;</span>
-            </button>
-        </form>
-        {% else %}
         <a class="landing-card" href="/accounts/fliiga_team_analysis">
             <img src="{% static 'fliigalogo.svg' %}" width="60" alt="">
             <h3>Team Analysis</h3>
             <p>Season breakdown of any F-Liiga team, built for coaches.</p>
+            {% if license_tier == 'fliiga' or license_tier == 'fliiga_trial' %}
+            <span class="landing-card__badge landing-card__badge--preview">Preview: 2024-2025 season</span>
+            {% endif %}
         </a>
-        {% endif %}
     </div>
 
 </div>

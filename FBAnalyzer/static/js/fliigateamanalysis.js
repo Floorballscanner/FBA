@@ -76,6 +76,19 @@ function onCategoryChange() {
         });
 }
 
+// F-Liiga Live/Trial tier users only get season FLIIGA_TEASER_SEASON for free - other
+// seasons show the upgrade CTA instead of loading real stats. fliiga_team_stats_api
+// enforces this server-side too (see accounts/views.py _fliiga_season_locked); this is
+// just so the page doesn't even bother asking before showing the CTA.
+const FLIIGA_TEASER_TIERS = ['fliiga', 'fliiga_trial'];
+const FLIIGA_TEASER_SEASON = '2024-2025';
+
+function isFliigaSeasonLocked(season) {
+    const tierEl = document.getElementById('license_tier');
+    const tier = tierEl ? JSON.parse(tierEl.textContent) : null;
+    return FLIIGA_TEASER_TIERS.includes(tier) && season !== FLIIGA_TEASER_SEASON;
+}
+
 function maybeLoadTeamStats() {
     const teamId = document.getElementById('select-team').value;
     const category = document.getElementById('select-category').value;
@@ -86,6 +99,16 @@ function maybeLoadTeamStats() {
         return;
     }
 
+    const cta = document.getElementById('fliiga-teaser-cta');
+    if (isFliigaSeasonLocked(season)) {
+        if (cta) cta.style.display = "block";
+        document.getElementById('team-stats').style.display = "none";
+        document.getElementById('pending-message').style.display = "none";
+        document.getElementById('empty-message').style.display = "none";
+        return;
+    }
+    if (cta) cta.style.display = "none";
+
     loadTeamStats(teamId, category, season, stage);
 }
 
@@ -93,6 +116,8 @@ function hideStats() {
     document.getElementById('team-stats').style.display = "none";
     document.getElementById('pending-message').style.display = "none";
     document.getElementById('empty-message').style.display = "block";
+    const cta = document.getElementById('fliiga-teaser-cta');
+    if (cta) cta.style.display = "none";
 }
 
 function loadTeamStats(teamId, category, season, stage) {
@@ -111,6 +136,11 @@ function loadTeamStats(teamId, category, season, stage) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
+            if (data.status === "locked") {
+                const cta = document.getElementById('fliiga-teaser-cta');
+                if (cta) cta.style.display = "block";
+                return;
+            }
             if (data.status !== "ready") {
                 pendingMessage.style.display = "block";
                 return;
