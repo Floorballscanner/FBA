@@ -32,14 +32,23 @@ def parse_position(position):
 
 def most_probable_lineup(lineup_rows):
     """Given every MatchLineup row for a team across a season, returns the
-    single most common player at each (role, line_number) slot - e.g.
-    {('KH', 1): {'player_id': ..., 'player_name': ..., 'games': 14, 'of': 18}}.
-    'games'/'of' let the caller show "14 of 18 games" as a confidence hint
-    alongside the guessed lineup, since a team's actual matchday lineup
-    varies game to game (injuries, rotation, roster moves)."""
+    single most probable player at each (role, line_number) slot - e.g.
+    {('KH', 1): {'player_id': ..., 'player_name': ..., 'games': 14, 'of': 18,
+    'probability': 0.778}}. 'probability' (games at this slot / of) is the
+    guessed lineup's actual confidence hint, since a team's real matchday
+    lineup varies game to game (injuries, rotation, roster moves).
+
+    A player can only end up in one slot: (slot, player, count) triples are
+    resolved greedily, highest count first, each already-used slot or player
+    skipped from then on - otherwise a versatile player who splits time
+    between two slots (e.g. Line 1 and Line 2 center) could independently top
+    both slots' counts and appear "in the lineup twice", or - for goalies,
+    where a team only really has two candidates - both MV/1 and MV/2 could
+    resolve to the same starter. Confirmed live 2026-09-13: exactly these two
+    cases (a skater in two positions, a goalie in both goalie slots) for real
+    F-Liiga teams before this fix."""
 
     slot_counts = defaultdict(Counter)
-    slot_games = defaultdict(set)
     player_names = {}
 
     for row in lineup_rows:
@@ -47,16 +56,28 @@ def most_probable_lineup(lineup_rows):
             continue
         slot = (row.role, row.line_number)
         slot_counts[slot][row.player_id] += 1
-        slot_games[slot].add(row.match_id)
         player_names[row.player_id] = row.player_name
 
     total_games = len({row.match_id for row in lineup_rows})
 
+    candidates = [
+        (count, slot, player_id)
+        for slot, counts in slot_counts.items()
+        for player_id, count in counts.items()
+    ]
+    candidates.sort(key=lambda c: c[0], reverse=True)
+
     lineup = {}
-    for slot, counts in slot_counts.items():
-        player_id, games_at_slot = counts.most_common(1)[0]
+    filled_slots = set()
+    assigned_players = set()
+    for count, slot, player_id in candidates:
+        if slot in filled_slots or player_id in assigned_players:
+            continue
         lineup[slot] = {
             'player_id': player_id, 'player_name': player_names.get(player_id, ''),
-            'games': games_at_slot, 'of': total_games,
+            'games': count, 'of': total_games,
+            'probability': round(count / total_games, 3) if total_games else 0,
         }
+        filled_slots.add(slot)
+        assigned_players.add(player_id)
     return lineup

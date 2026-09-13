@@ -148,6 +148,8 @@ function renderKpiGrid(facts) {
         kpiTile("xG Against / Game", facts.xga_per_game.toFixed(2), ranks.xga_per_game),
         kpiTile("xGOT For / Game", facts.xgotf_per_game.toFixed(2), ranks.xgotf_per_game),
         kpiTile("xGOT Against / Game", facts.xgota_per_game.toFixed(2), ranks.xgota_per_game),
+        kpiTile("GAxG For / Game", facts.gaxgf_per_game.toFixed(2), ranks.gaxgf_per_game),
+        kpiTile("GAxG Against / Game", facts.gaxga_per_game.toFixed(2), ranks.gaxga_per_game),
         kpiTile("Powerplay %", perc(facts.pp_perc), ranks.pp_perc),
         kpiTile("Shorthanded %", perc(facts.sh_perc), ranks.sh_perc),
     ];
@@ -185,6 +187,10 @@ function renderGamesTable(games) {
     table.innerHTML = html;
 }
 
+function probabilityLabel(slot) {
+    return Math.round(slot.probability * 100) + '% (' + slot.games + ' of ' + slot.of + ' games)';
+}
+
 function goalieCard(label, goalie) {
     if (!goalie) {
         return '<div class="team-goalie-card"><h5>' + label + '</h5><p class="team-goalie-card__empty">No data yet.</p></div>';
@@ -192,7 +198,7 @@ function goalieCard(label, goalie) {
     return '<div class="team-goalie-card">'
         + '<h5>' + label + '</h5>'
         + '<div class="team-goalie-card__name">' + goalie.player_name + '</div>'
-        + '<div class="team-goalie-card__confidence">' + goalie.games + ' of ' + goalie.of + ' games</div>'
+        + '<div class="team-goalie-card__confidence">' + probabilityLabel(goalie) + '</div>'
         + '</div>';
 }
 
@@ -219,11 +225,11 @@ function lineCard(line) {
     const playersHtml = SKATER_ROLES.map(role => {
         const slot = line.players[role];
         const name = slot ? slot.player_name : 'Unknown';
-        const confidence = slot ? slot.games + '/' + slot.of : '';
+        const confidence = slot ? probabilityLabel(slot) : '';
         return '<div class="team-line-slot">'
             + '<div class="team-line-slot__role">' + ROLE_LABELS[role] + '</div>'
             + '<div class="team-line-slot__name">' + name + '</div>'
-            + (confidence ? '<div class="team-line-slot__confidence">' + confidence + ' games</div>' : '')
+            + (confidence ? '<div class="team-line-slot__confidence">' + confidence + '</div>' : '')
             + '</div>';
     }).join('');
 
