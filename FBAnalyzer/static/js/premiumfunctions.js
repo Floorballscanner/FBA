@@ -6711,18 +6711,18 @@
             pie.draw(data, { title: title });
         }
 
-        drawLineXgTypePie('T1L1_xgtype_f', 'Type of xG For, Line 1', stxGT1L1g_array);
-        drawLineXgTypePie('T1L1_xgtype_a', 'Type of xG Against, Line 1', staxGT1L1g_array);
-        drawLineXgTypePie('T1L2_xgtype_f', 'Type of xG For, Line 2', stxGT1L2g_array);
-        drawLineXgTypePie('T1L2_xgtype_a', 'Type of xG Against, Line 2', staxGT1L2g_array);
-        drawLineXgTypePie('T1L3_xgtype_f', 'Type of xG For, Line 3', stxGT1L3g_array);
-        drawLineXgTypePie('T1L3_xgtype_a', 'Type of xG Against, Line 3', staxGT1L3g_array);
-        drawLineXgTypePie('T2L1_xgtype_f', 'Type of xG For, Line 1', stxGT2L1g_array);
-        drawLineXgTypePie('T2L1_xgtype_a', 'Type of xG Against, Line 1', staxGT2L1g_array);
-        drawLineXgTypePie('T2L2_xgtype_f', 'Type of xG For, Line 2', stxGT2L2g_array);
-        drawLineXgTypePie('T2L2_xgtype_a', 'Type of xG Against, Line 2', staxGT2L2g_array);
-        drawLineXgTypePie('T2L3_xgtype_f', 'Type of xG For, Line 3', stxGT2L3g_array);
-        drawLineXgTypePie('T2L3_xgtype_a', 'Type of xG Against, Line 3', staxGT2L3g_array);
+        drawLineXgTypePie('T1L1_xgtype_f', 'Type of xG For, Team 1 Line 1', stxGT1L1g_array);
+        drawLineXgTypePie('T1L1_xgtype_a', 'Type of xG Against, Team 1 Line 1', staxGT1L1g_array);
+        drawLineXgTypePie('T1L2_xgtype_f', 'Type of xG For, Team 1 Line 2', stxGT1L2g_array);
+        drawLineXgTypePie('T1L2_xgtype_a', 'Type of xG Against, Team 1 Line 2', staxGT1L2g_array);
+        drawLineXgTypePie('T1L3_xgtype_f', 'Type of xG For, Team 1 Line 3', stxGT1L3g_array);
+        drawLineXgTypePie('T1L3_xgtype_a', 'Type of xG Against, Team 1 Line 3', staxGT1L3g_array);
+        drawLineXgTypePie('T2L1_xgtype_f', 'Type of xG For, Team 2 Line 1', stxGT2L1g_array);
+        drawLineXgTypePie('T2L1_xgtype_a', 'Type of xG Against, Team 2 Line 1', staxGT2L1g_array);
+        drawLineXgTypePie('T2L2_xgtype_f', 'Type of xG For, Team 2 Line 2', stxGT2L2g_array);
+        drawLineXgTypePie('T2L2_xgtype_a', 'Type of xG Against, Team 2 Line 2', staxGT2L2g_array);
+        drawLineXgTypePie('T2L3_xgtype_f', 'Type of xG For, Team 2 Line 3', stxGT2L3g_array);
+        drawLineXgTypePie('T2L3_xgtype_a', 'Type of xG Against, Team 2 Line 3', staxGT2L3g_array);
 
         // Pie Chart, Goals per type Team 1
 
