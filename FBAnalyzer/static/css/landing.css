@@ -1234,6 +1234,12 @@ a.landing-card:hover {
     color: var(--landing-navy-dark);
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    margin: 0 0 2px;
+}
+
+.team-line-card__caption {
+    font-size: 12px;
+    color: var(--landing-muted);
     margin: 0 0 12px;
 }
 

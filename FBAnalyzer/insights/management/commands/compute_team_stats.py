@@ -38,15 +38,21 @@ BEST_PLAYERS_PER_METRIC = 5
 PLAYER_METRICS = ('points', 'goals', 'assists', 'xg', 'xgot', 'gaxg')
 LINE_NUMBERS = (1, 2, 3)
 
-# "Most probable lineup" is identified from only this many of the team's most
-# recent games, not the full season: a team's actual matchday lineup at any
-# point tends to look like its last handful of games (rotation, injuries,
-# call-ups) more than its season-long average - confirmed empirically on
-# real 2025-2026 staging data 2026-09-13 (see git history around this
-# constant), where several Line 2/3 and goalie-rotation slots the full-season
-# count called a close-to-50/50 toss-up resolved clearly under a recent
-# window. Full-season data is still used for every rate/volume stat (more
-# signal, and those aren't trying to answer "who plays next").
+# Both "most probable lineup" and per-line 5v5 offense (compute_five_v_five)
+# are identified/computed from only this many of the team's most recent
+# games, not the full season. For the lineup: a team's actual matchday
+# lineup at any point tends to look like its last handful of games
+# (rotation, injuries, call-ups) more than its season-long average -
+# confirmed empirically on real 2025-2026 staging data 2026-09-13 (see git
+# history around this constant), where several Line 2/3 and goalie-rotation
+# slots the full-season count called a close-to-50/50 toss-up resolved
+# clearly under a recent window. For per-line shots/goals/xG/heatmaps: a
+# full season's worth (~30+ games) per line washes into near-identical
+# blobs across all three lines - a recent window is sharper and more
+# current-form-specific. Every OTHER rate/volume stat (team-wide, best
+# players, general season performance) still uses the full season - more
+# signal, and those aren't trying to answer "what does this line look like
+# right now".
 RECENT_LINEUP_GAMES = 5
 
 # (facts key, sort direction) for every KPI ranked against the rest of the
@@ -183,26 +189,28 @@ def _compute_facts(team_id, season_id, category, stage):
 
 
 def _compute_five_v_five(team_id, matches, events_by_match):
-    """The 5v5 theme: team-wide EVEN-situation KPIs (both for and against -
-    directly computable from shot events alone), plus per-line offense
+    """The 5v5 theme: team-wide EVEN-situation KPIs (both for and against,
+    full season - directly computable from shot events alone), plus the
+    most probable Line 1-3 + starting/backup goalie, and per-line offense
     (shots/goals/xG/xGOT/shot-and-goal locations, attributed via each
-    shooter's MatchLineup role for that match), a per-line "goals against"
-    estimate, and the season's most probable Line 1-3 + starting/backup
-    goalie (identified from only the last RECENT_LINEUP_GAMES games - see
-    that constant).
+    shooter's MatchLineup role for that match) as per-game rates.
 
-    Per-line offense is exact (attributed by the shooting player's own line).
-    Per-line "goals against" is necessarily an estimate: there's no on-ice/
-    shift data to say which of the team's own lines was on the ice for a
-    given opponent goal, so instead of a per-shot attribution it's the sum of
-    each of that line's most-probable-lineup players' own Torneopal '-' (on-
-    ice goals against) tally across the full season - i.e. "how many goals
-    went in while a player who's now on this line was on the ice", not
-    "how many goals this specific line unit conceded". Team-wide xGA/GA above
-    has no such gap since it doesn't need per-line attribution.
+    Both the lineup identification and the per-line offense stats use only
+    the last RECENT_LINEUP_GAMES games, not the full season: a team's actual
+    matchday lineup looks like its last handful of games more than its
+    season-long average (see that constant's own comment), and full-season
+    per-line shot/goal totals from ~30+ games wash out into near-identical-
+    looking heatmaps across all three lines - a recent window gives sharper,
+    more current-form-specific patterns. There's no per-line "against" stat
+    (offense or heatmap): there's no on-ice/shift data to say which of the
+    team's own lines was on the ice for a given opponent goal, and a coach-
+    facing number that LOOKS precise but is actually a rough proxy (tried
+    and reverted here - see git history) is worse than no number at all.
     """
     match_ids = [m.match_id for m in matches]
-    recent_match_ids = {m.match_id for m in matches[-RECENT_LINEUP_GAMES:]}
+    recent_matches = matches[-RECENT_LINEUP_GAMES:]
+    recent_match_ids = {m.match_id for m in recent_matches}
+    recent_games = len(recent_matches)
 
     lineup_rows = list(MatchLineup.objects.filter(match_id__in=match_ids, team_id=team_id))
     lineup_by_match = defaultdict(dict)
@@ -230,6 +238,9 @@ def _compute_five_v_five(team_id, matches, events_by_match):
         gf += sum(1 for s in own_shots if s.code == GOAL_CODE)
         ga += sum(1 for s in opp_shots if s.code == GOAL_CODE)
 
+        if m.match_id not in recent_match_ids:
+            continue  # per-line stats/heatmaps only use the recent window
+
         player_lines = lineup_by_match.get(m.match_id, {})
         for s in own_shots:
             role, line_number = player_lines.get(s.player_id, ('', None))
@@ -252,15 +263,15 @@ def _compute_five_v_five(team_id, matches, events_by_match):
     line_facts = []
     for n in LINE_NUMBERS:
         agg = lines[n]
-        players = {role: probable.get((role, n)) for role in SKATER_ROLES}
-        assigned_ids = {slot['player_id'] for slot in players.values() if slot}
-        goals_against = sum(row.minus for row in lineup_rows if row.player_id in assigned_ids)
         line_facts.append({
             'line_number': n,
-            'players': players,
-            'shots': agg['shots'], 'goals': agg['goals'], 'goals_against': goals_against,
-            'xg': round(agg['xg'], 2), 'xgot': round(agg['xgot'], 2),
-            'gaxg': round(agg['goals'] - agg['xg'], 2),
+            'players': {role: probable.get((role, n)) for role in SKATER_ROLES},
+            'games': recent_games,
+            'shots_per_game': round(agg['shots'] / recent_games, 2) if recent_games else 0,
+            'goals_per_game': round(agg['goals'] / recent_games, 2) if recent_games else 0,
+            'xg_per_game': round(agg['xg'] / recent_games, 2) if recent_games else 0,
+            'xgot_per_game': round(agg['xgot'] / recent_games, 2) if recent_games else 0,
+            'gaxg_per_game': round((agg['goals'] - agg['xg']) / recent_games, 2) if recent_games else 0,
             'shot_locations': agg['shot_locations'], 'goal_locations': agg['goal_locations'],
         })
 
