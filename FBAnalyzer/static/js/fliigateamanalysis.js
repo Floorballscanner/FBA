@@ -8,6 +8,13 @@ const PLAYER_METRICS = [
     ['xg', 'xG'], ['xgot', 'xGOT'], ['gaxg', 'GAxG'],
 ];
 
+// Mirrors insights.lineups.ROLE_LABELS/SKATER_ROLES - left-to-right display
+// order for one line (left wing, center, right wing, left D, right D).
+const SKATER_ROLES = ['VL', 'KH', 'OL', 'VP', 'OP'];
+const ROLE_LABELS = {
+    OL: 'Right Wing', VL: 'Left Wing', KH: 'Center', VP: 'Left Defense', OP: 'Right Defense',
+};
+
 function onCategoryChange() {
     const category = document.getElementById('select-category').value;
     const teamSelect = document.getElementById('select-team');
@@ -100,6 +107,7 @@ function renderTeamStats(data) {
     renderKpiGrid(facts);
     renderGamesTable(facts.last_games || []);
     renderPlayerTables(facts.best_players || {});
+    renderFiveVFive(facts.five_v_five || null);
 }
 
 function ordinal(n) {
@@ -175,4 +183,92 @@ function renderGamesTable(games) {
         html += '<tr>' + columns.map(([key]) => '<td>' + g[key] + '</td>').join('') + '</tr>';
     });
     table.innerHTML = html;
+}
+
+function goalieCard(label, goalie) {
+    if (!goalie) {
+        return '<div class="team-goalie-card"><h5>' + label + '</h5><p class="team-goalie-card__empty">No data yet.</p></div>';
+    }
+    return '<div class="team-goalie-card">'
+        + '<h5>' + label + '</h5>'
+        + '<div class="team-goalie-card__name">' + goalie.player_name + '</div>'
+        + '<div class="team-goalie-card__confidence">' + goalie.games + ' of ' + goalie.of + ' games</div>'
+        + '</div>';
+}
+
+function renderHeatmap(canvas, grid) {
+    const ctx = canvas.getContext('2d');
+    const rows = grid.length, cols = grid[0].length;
+    const cellW = canvas.width / cols, cellH = canvas.height / rows;
+    const max = Math.max(1, ...grid.flat());
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const value = grid[r][c];
+            const alpha = value ? 0.12 + 0.88 * (value / max) : 0;
+            ctx.fillStyle = 'rgba(48, 70, 251,' + alpha + ')';
+            ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
+        }
+    }
+    ctx.strokeStyle = 'rgba(20, 22, 31, 0.08)';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+}
+
+function lineCard(line) {
+    const playersHtml = SKATER_ROLES.map(role => {
+        const slot = line.players[role];
+        const name = slot ? slot.player_name : 'Unknown';
+        const confidence = slot ? slot.games + '/' + slot.of : '';
+        return '<div class="team-line-slot">'
+            + '<div class="team-line-slot__role">' + ROLE_LABELS[role] + '</div>'
+            + '<div class="team-line-slot__name">' + name + '</div>'
+            + (confidence ? '<div class="team-line-slot__confidence">' + confidence + ' games</div>' : '')
+            + '</div>';
+    }).join('');
+
+    return '<div class="team-line-card">'
+        + '<h5>Line ' + line.line_number + '</h5>'
+        + '<div class="team-line-slots">' + playersHtml + '</div>'
+        + '<div class="team-line-kpis">'
+        + '<span>' + line.shots + ' shots</span>'
+        + '<span>' + line.goals + ' goals</span>'
+        + '<span>' + line.xg + ' xG</span>'
+        + '<span>' + line.xgot + ' xGOT</span>'
+        + '<span>' + line.gaxg + ' GAxG</span>'
+        + '</div>'
+        + '<div class="team-line-heatmaps">'
+        + '<div><div class="team-line-heatmaps__label">Shots</div><canvas width="140" height="119" id="shot-heatmap-' + line.line_number + '"></canvas></div>'
+        + '<div><div class="team-line-heatmaps__label">Goals</div><canvas width="140" height="119" id="goal-heatmap-' + line.line_number + '"></canvas></div>'
+        + '</div>'
+        + '</div>';
+}
+
+function renderFiveVFive(fivevfive) {
+    const kpiGrid = document.getElementById('fivevfive-kpi-grid');
+    const goaliesEl = document.getElementById('fivevfive-goalies');
+    const linesEl = document.getElementById('fivevfive-lines');
+
+    if (!fivevfive) {
+        kpiGrid.innerHTML = '';
+        goaliesEl.innerHTML = '<p>No 5v5 data yet.</p>';
+        linesEl.innerHTML = '';
+        return;
+    }
+
+    kpiGrid.innerHTML = [
+        kpiTile("xG For / Game (5v5)", fivevfive.xgf_per_game.toFixed(2)),
+        kpiTile("xG Against / Game (5v5)", fivevfive.xga_per_game.toFixed(2)),
+        kpiTile("Goals For / Game (5v5)", fivevfive.gf_per_game.toFixed(2)),
+        kpiTile("Goals Against / Game (5v5)", fivevfive.ga_per_game.toFixed(2)),
+    ].join('');
+
+    goaliesEl.innerHTML = goalieCard('Starting Goalie', fivevfive.starting_goalie)
+        + goalieCard('Backup Goalie', fivevfive.backup_goalie);
+
+    linesEl.innerHTML = fivevfive.lines.map(lineCard).join('');
+    fivevfive.lines.forEach(line => {
+        renderHeatmap(document.getElementById('shot-heatmap-' + line.line_number), line.shot_heatmap);
+        renderHeatmap(document.getElementById('goal-heatmap-' + line.line_number), line.goal_heatmap);
+    });
 }

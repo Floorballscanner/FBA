@@ -1,10 +1,12 @@
 <!--
 
-F-Liiga Team Analysis - Phase 1 (General season performance only; see the
-approved plan under insights.models.TeamSeasonStats's docstring for Phase 2/3).
-Category -> team pickers populate from fliiga_team_list_api; the stats
-themselves come from the cached TeamSeasonStats row via fliiga_team_stats_api,
-computed ahead of time by the compute_team_stats management command.
+F-Liiga Team Analysis - General season performance (Phase 1) and 5v5 play
+(Phase 2: most probable lineup, per-line offense KPIs, shot/goal heatmaps -
+see the approved plan under insights.models.TeamSeasonStats's docstring for
+Phase 3, Special Teams). Category -> team pickers populate from
+fliiga_team_list_api; the stats themselves come from the cached
+TeamSeasonStats row via fliiga_team_stats_api, computed ahead of time by the
+compute_team_stats management command.
 
 -->
 
@@ -87,6 +89,13 @@ computed ahead of time by the compute_team_stats management command.
             <div class="landing-result__card">
                 <h4 class="landing-result__section-title" style="margin-top:0;">Best players</h4>
                 <div class="team-best-players-grid" id="players-tables"></div>
+            </div>
+
+            <div class="landing-result__card">
+                <h4 class="landing-result__section-title" style="margin-top:0;">5v5 play</h4>
+                <div class="team-kpi-grid" id="fivevfive-kpi-grid"></div>
+                <div class="team-goalie-row" id="fivevfive-goalies"></div>
+                <div class="team-lines" id="fivevfive-lines"></div>
             </div>
         </div>
     </div>
