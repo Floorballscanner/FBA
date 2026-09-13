@@ -202,24 +202,92 @@ function goalieCard(label, goalie) {
         + '</div>';
 }
 
-function renderHeatmap(canvas, grid) {
-    const ctx = canvas.getContext('2d');
-    const rows = grid.length, cols = grid[0].length;
-    const cellW = canvas.width / cols, cellH = canvas.height / rows;
-    const max = Math.max(1, ...grid.flat());
+// Smooth (seaborn-style) heatmaps drawn over the same rink image the live
+// game shotmap uses, cropped to one attacking zone (field-half.png - the top
+// half of field-new.png, goal line at the top edge). Every location_x/
+// location_y pair is a soft Gaussian "splat" instead of a hard grid cell, so
+// overlapping shots build up continuous density rather than blocky squares.
+const HEATMAP_WIDTH = 200;
+const HEATMAP_HEIGHT = 166;  // matches field-half.png's ~516:428 aspect ratio
+const HEATMAP_SIGMA = 13;    // splat radius in canvas px
+const HEATMAP_MAX_X = 2000;  // insights.xg_model.MAX_X - location_x spans [-1000, 1000]
+const HEATMAP_HALF_COURT_Y = 1700;  // insights.xg_model.HALF_COURT_Y - location_y spans [0, 1700]
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-            const value = grid[r][c];
-            const alpha = value ? 0.12 + 0.88 * (value / max) : 0;
-            ctx.fillStyle = 'rgba(48, 70, 251,' + alpha + ')';
-            ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
-        }
-    }
-    ctx.strokeStyle = 'rgba(20, 22, 31, 0.08)';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+const rinkImage = new Image();
+let rinkImageReady = false;
+rinkImage.onload = () => { rinkImageReady = true; };
+rinkImage.src = "/static/field-half.png";
+
+function projectToHeatmap(x, y) {
+    return [
+        (x + HEATMAP_MAX_X / 2) / HEATMAP_MAX_X * HEATMAP_WIDTH,
+        y / HEATMAP_HALF_COURT_Y * HEATMAP_HEIGHT,
+    ];
 }
+
+function buildDensity(locations) {
+    const density = new Float32Array(HEATMAP_WIDTH * HEATMAP_HEIGHT);
+    const radius = Math.ceil(HEATMAP_SIGMA * 2.5);
+    const twoSigmaSq = 2 * HEATMAP_SIGMA * HEATMAP_SIGMA;
+
+    locations.forEach(([px, py]) => {
+        const [cx, cy] = projectToHeatmap(px, py);
+        const x0 = Math.max(0, Math.floor(cx - radius)), x1 = Math.min(HEATMAP_WIDTH - 1, Math.ceil(cx + radius));
+        const y0 = Math.max(0, Math.floor(cy - radius)), y1 = Math.min(HEATMAP_HEIGHT - 1, Math.ceil(cy + radius));
+        for (let yy = y0; yy <= y1; yy++) {
+            for (let xx = x0; xx <= x1; xx++) {
+                const dx = xx - cx, dy = yy - cy;
+                density[yy * HEATMAP_WIDTH + xx] += Math.exp(-(dx * dx + dy * dy) / twoSigmaSq);
+            }
+        }
+    });
+    return density;
+}
+
+function renderHeatmap(canvas, locations, rgb) {
+    canvas.width = HEATMAP_WIDTH;
+    canvas.height = HEATMAP_HEIGHT;
+    const ctx = canvas.getContext('2d');
+    if (rinkImageReady) {
+        ctx.drawImage(rinkImage, 0, 0, HEATMAP_WIDTH, HEATMAP_HEIGHT);
+    } else {
+        // Background image not decoded yet (first render before onload fires) -
+        // retry once it is, rather than leaving the canvas blank forever.
+        rinkImage.addEventListener('load', () => renderHeatmap(canvas, locations, rgb), {once: true});
+        ctx.fillStyle = '#8fb4d9';
+        ctx.fillRect(0, 0, HEATMAP_WIDTH, HEATMAP_HEIGHT);
+    }
+
+    if (!locations.length) {
+        return;
+    }
+
+    const density = buildDensity(locations);
+    let max = 0;
+    for (let i = 0; i < density.length; i++) {
+        max = Math.max(max, density[i]);
+    }
+    if (max <= 0) {
+        return;
+    }
+
+    const imageData = ctx.getImageData(0, 0, HEATMAP_WIDTH, HEATMAP_HEIGHT);
+    for (let i = 0; i < density.length; i++) {
+        const t = density[i] / max;
+        if (t <= 0.03) {
+            continue;
+        }
+        const alpha = Math.min(0.85, t * 1.5);
+        const idx = i * 4;
+        imageData.data[idx] = rgb[0] * alpha + imageData.data[idx] * (1 - alpha);
+        imageData.data[idx + 1] = rgb[1] * alpha + imageData.data[idx + 1] * (1 - alpha);
+        imageData.data[idx + 2] = rgb[2] * alpha + imageData.data[idx + 2] * (1 - alpha);
+    }
+    ctx.putImageData(imageData, 0, 0);
+}
+
+const SHOT_COLOR = [48, 70, 251];   // var(--landing-accent)
+const GOAL_COLOR = [249, 115, 22];  // matches the site's existing 6v5-banner orange
 
 function lineCard(line) {
     const playersHtml = SKATER_ROLES.map(role => {
@@ -239,13 +307,14 @@ function lineCard(line) {
         + '<div class="team-line-kpis">'
         + '<span>' + line.shots + ' shots</span>'
         + '<span>' + line.goals + ' goals</span>'
+        + '<span>' + line.goals_against + ' goals against (est.)</span>'
         + '<span>' + line.xg + ' xG</span>'
         + '<span>' + line.xgot + ' xGOT</span>'
         + '<span>' + line.gaxg + ' GAxG</span>'
         + '</div>'
         + '<div class="team-line-heatmaps">'
-        + '<div><div class="team-line-heatmaps__label">Shots</div><canvas width="140" height="119" id="shot-heatmap-' + line.line_number + '"></canvas></div>'
-        + '<div><div class="team-line-heatmaps__label">Goals</div><canvas width="140" height="119" id="goal-heatmap-' + line.line_number + '"></canvas></div>'
+        + '<div><div class="team-line-heatmaps__label">Shots</div><canvas id="shot-heatmap-' + line.line_number + '"></canvas></div>'
+        + '<div><div class="team-line-heatmaps__label">Goals</div><canvas id="goal-heatmap-' + line.line_number + '"></canvas></div>'
         + '</div>'
         + '</div>';
 }
@@ -274,7 +343,7 @@ function renderFiveVFive(fivevfive) {
 
     linesEl.innerHTML = fivevfive.lines.map(lineCard).join('');
     fivevfive.lines.forEach(line => {
-        renderHeatmap(document.getElementById('shot-heatmap-' + line.line_number), line.shot_heatmap);
-        renderHeatmap(document.getElementById('goal-heatmap-' + line.line_number), line.goal_heatmap);
+        renderHeatmap(document.getElementById('shot-heatmap-' + line.line_number), line.shot_locations, SHOT_COLOR);
+        renderHeatmap(document.getElementById('goal-heatmap-' + line.line_number), line.goal_locations, GOAL_COLOR);
     });
 }

@@ -41,7 +41,7 @@ SELECTED_EVENT_KEYS = (
 
 # Same whitelist fliigalivegame.js applies to Torneopal's raw match.lineups
 # entries - only what MatchLineup actually stores (see insights.lineups).
-SELECTED_LINEUP_KEYS = ('team_id', 'player_id', 'player_name', 'position')
+SELECTED_LINEUP_KEYS = ('team_id', 'player_id', 'player_name', 'position', 'plus', 'minus')
 
 
 def status_from_torneopal(status, live_period):
@@ -97,6 +97,7 @@ def _ingest_lineups(match_id, category, lineups, overwrite_existing):
             match_id=match_id, category=category, team_id=entry.get('team_id') or '',
             player_id=player_id, player_name=entry.get('player_name') or '',
             role=role, line_number=line_number, is_starter=(line_number == 1),
+            plus=entry.get('plus') or 0, minus=entry.get('minus') or 0,
         ))
     if not rows:
         return
