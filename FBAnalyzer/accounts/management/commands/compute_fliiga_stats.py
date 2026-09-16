@@ -364,8 +364,7 @@ class Command(BaseCommand):
                     # fields via getTeam, but those come back blank for most players -
                     # computed from our own shot-level data instead, same as xG/xGOT.
                     'S': 0, 'SM': 0,
-                    'plus': plus_by_player.get(player_id, 0),
-                    'minus': minus_by_player.get(player_id, 0),
+                    'plus_minus': plus_by_player.get(player_id, 0) - minus_by_player.get(player_id, 0),
                     # xG/xGOT (all situations) are kept for GAxG only, not
                     # displayed directly - the table shows the per-situation
                     # breakdown below instead.
