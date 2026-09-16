@@ -56,12 +56,13 @@ const TABLE_COLUMNS = {
         ['Name', 'string', 'Goalie'],
         ['Team', 'string', 'Team'],
         ['Games', 'number', 'Games'],
+        ['Minutes', 'number', 'TOC'],
         ['xGOTA', 'number', 'xGOTA'],
         ['GA', 'number', 'GA'],
         ['SA', 'number', 'SA'],
         ['Saves', 'number', 'Saves'],
         ['GSAx', 'number', 'GSAx'],
-        ['GSAxPerGame', 'number', 'GSAx/Game'],
+        ['GSAx60', 'number', 'GSAx/60'],
     ],
 };
 
@@ -91,12 +92,13 @@ const TABLE_LEGENDS = {
         + '<b>xGSH/xGOTSH</b> = same, while shorthanded, '
         + '<b>xG6v5/xGOT6v5</b> = same, with this player\'s own goalie pulled, '
         + '<b>GAxG</b> = Goals minus expected Goals (all situations).',
-    goalies: '<b>xGOTA</b> = expected Goals (on-target shots) faced, '
+    goalies: '<b>TOC</b> = Time On Court (minutes), reconstructed from save/goal-against event timestamps since Torneopal doesn\'t track it directly, '
+        + '<b>xGOTA</b> = expected Goals (on-target shots) faced, '
         + '<b>GA</b> = Goals allowed, '
         + '<b>SA</b> = Shots on target faced, '
         + '<b>Saves</b> = Shots saved, '
         + '<b>GSAx</b> = Goals Saved above expected (xGOTA minus GA), '
-        + '<b>GSAx/Game</b> = GSAx per game played.',
+        + '<b>GSAx/60</b> = GSAx per 60 minutes played.',
 };
 
 // F-Liiga Live/Trial tier users only get season FLIIGA_TEASER_SEASON for free - other

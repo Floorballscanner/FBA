@@ -538,6 +538,7 @@ class Command(BaseCommand):
             goalie['GSAx'] = round2(goalie['xGOTA'] - goalie['GA'])
             goalie['GSAxPerGame'] = round2(goalie['GSAx'] / goalie['Games']) if goalie['Games'] else 0.0
             minutes = goalie['PlaySeconds'] / 60
+            goalie['Minutes'] = round2(minutes)
             goalie['GA60'] = round2(goalie['GA'] / minutes * 60) if minutes else 0.0
             goalie['xGOTA60'] = round2(goalie['xGOTA'] / minutes * 60) if minutes else 0.0
             goalie['GSAx60'] = round2(goalie['GSAx'] / minutes * 60) if minutes else 0.0
