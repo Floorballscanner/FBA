@@ -50,6 +50,20 @@ def round2(x):
     return round(x, 2)
 
 
+def sanitize_period_lengths(raw):
+    """Torneopal's period_lengths_sec occasionally reports a wildly wrong value for
+    one period (seen in real data: 7200 instead of 1200 for a regulation period,
+    match_id 868881) - clamp each period to a sane floorball bound instead of
+    trusting it verbatim, since abs_game_time (and anything computing playing time
+    or shot situations from it) would otherwise silently explode for that match."""
+    raw = raw or [0, 1200, 1200, 1200, 300]
+    lengths = [0]
+    for i, v in enumerate(raw[1:], start=1):
+        cap = 1200 if i <= 3 else 600
+        lengths.append(min(num(v, int, cap), cap))
+    return lengths
+
+
 def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, match_end_time, shots_against):
     """Splits one team's share of a match into per-goalie playing-time stints.
 
@@ -227,7 +241,7 @@ class Command(BaseCommand):
         for match in matches_played:
             match_id = match['match_id']
             events = match_details.get(match_id, {}).get('events') or []
-            period_lengths = match_details.get(match_id, {}).get('period_lengths_sec') or [0, 1200, 1200, 1200, 300]
+            period_lengths = sanitize_period_lengths(match_details.get(match_id, {}).get('period_lengths_sec'))
             shot_situations = compute_shot_situations(events, period_lengths)
             for event in events:
                 code = event.get('code')
@@ -291,7 +305,7 @@ class Command(BaseCommand):
             match['PPOpp_B'] = pen_events_a
 
             lineups = match_details.get(match_id, {}).get('lineups') or []
-            period_lengths = match_details.get(match_id, {}).get('period_lengths_sec') or [0, 1200, 1200, 1200, 300]
+            period_lengths = sanitize_period_lengths(match_details.get(match_id, {}).get('period_lengths_sec'))
             match_end_time = max(
                 (abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths) for e in match_events),
                 default=0,
