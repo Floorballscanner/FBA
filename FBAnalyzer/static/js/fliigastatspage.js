@@ -179,6 +179,7 @@ const TEAM_TOP3_CARDS = [
     { label: 'Goals Against / Game', direction: 'asc', value: row => row.Games ? row.GA / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
     { label: 'xG For / Game', direction: 'desc', value: row => row.Games ? row.xGF / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
     { label: 'xG Against / Game', direction: 'asc', value: row => row.Games ? row.xGA / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
+    { label: 'xG %', direction: 'desc', value: row => row.Games ? row.xGperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest },
     { label: 'Points / Game', direction: 'desc', value: row => row.Games ? row.Points / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
     { label: 'Powerplay %', direction: 'desc', value: row => row.Games ? row.PPperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest },
     { label: 'Shorthanded %', direction: 'desc', value: row => row.Games ? row.SHperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest },
