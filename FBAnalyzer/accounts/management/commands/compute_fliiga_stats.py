@@ -306,9 +306,19 @@ class Command(BaseCommand):
 
             lineups = match_details.get(match_id, {}).get('lineups') or []
             period_lengths = sanitize_period_lengths(match_details.get(match_id, {}).get('period_lengths_sec'))
-            match_end_time = max(
-                (abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths) for e in match_events),
-                default=0,
+            # Every match carries an 'otteluloppui' ("match ended") sentinel event
+            # tagged as period 9 - not a real 9th period. abs_game_time's own
+            # fallback (any period beyond period_lengths' length defaults to 1200s)
+            # would otherwise treat that as ~5 extra 20-minute periods and inflate
+            # match_end_time by roughly 100 minutes (seen in real data, match
+            # 868875 and effectively every other match checked). Cap at the
+            # sanitized period lengths' own total instead of trusting the raw max.
+            match_end_time = min(
+                max(
+                    (abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths) for e in match_events),
+                    default=0,
+                ),
+                sum(period_lengths),
             )
             match['GoalieStintsA'] = goalie_stints(match_events, lineups, 'A', team_a_id, period_lengths, match_end_time, shots_b)
             match['GoalieStintsB'] = goalie_stints(match_events, lineups, 'B', team_b_id, period_lengths, match_end_time, shots_a)
