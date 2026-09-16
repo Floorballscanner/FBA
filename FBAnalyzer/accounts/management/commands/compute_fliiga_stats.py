@@ -339,12 +339,15 @@ class Command(BaseCommand):
         assists_by_player = defaultdict(int)
         plus_by_player = defaultdict(int)
         minus_by_player = defaultdict(int)
+        photo_by_player = {}
         for match in matches_played:
             match_id = match['match_id']
             for lineup in match_details.get(match_id, {}).get('lineups') or []:
                 player_id = str(lineup.get('player_id') or '')
                 if player_id:
                     games_by_player[player_id].add(match_id)
+                    if player_id not in photo_by_player and lineup.get('img_url'):
+                        photo_by_player[player_id] = lineup['img_url']
             for event in match_details.get(match_id, {}).get('events') or []:
                 player_id = str(event.get('player_id') or '')
                 if not player_id:
@@ -367,6 +370,7 @@ class Command(BaseCommand):
                     'Name': f"{p.get('first_name', '')} {p.get('last_name', '')}".strip(),
                     'Nr': p.get('shirt_number'),
                     'Position': p.get('position'),
+                    'photo': photo_by_player.get(player_id, ''),
                     'Games': len(games_by_player.get(player_id, ())),
                     'G': 0, 'A': assists_by_player.get(player_id, 0), 'P': 0,
                     # S/SM used to trust Torneopal's own shots_total/shots_off_target

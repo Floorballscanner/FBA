@@ -1297,6 +1297,15 @@ a.landing-card:hover {
     flex-shrink: 0;
 }
 
+.top3-card__logo--avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    /* Same face-crop treatment as .player-avatar - Torneopal's player photos are
+       waist-up shots with the face in roughly the top fifth. */
+    object-position: center top;
+    background: #e3e6ef;
+}
+
 .top3-card__name {
     flex: 1;
     min-width: 0;
@@ -1305,12 +1314,21 @@ a.landing-card:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+}
+
+.top3-card__sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--landing-muted);
 }
 
 .top3-card__value {
     font-size: 14px;
     font-weight: 800;
     color: var(--landing-navy);
+    flex-shrink: 0;
 }
 
 .player-avatar {
