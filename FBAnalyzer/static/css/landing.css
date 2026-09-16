@@ -1239,6 +1239,80 @@ a.landing-card:hover {
     margin-top: 4px;
 }
 
+/* TOP 3 leaderboard cards (F-Liiga Statistics page) - one card per stat, three ranked
+   rows each with a team crest. Generic across teams/players/goalies. */
+
+.top3-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    max-width: 1120px;
+    margin: 0 auto 24px;
+    padding: 0 24px;
+}
+
+.top3-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -28px rgba(20, 22, 31, 0.25);
+    padding: 18px 20px;
+}
+
+.top3-card__title {
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--landing-navy-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.top3-card__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+}
+
+.top3-card__row + .top3-card__row {
+    border-top: 1px solid rgba(20, 22, 31, 0.06);
+}
+
+.top3-card__row--first {
+    font-weight: 700;
+}
+
+.top3-card__rank {
+    width: 18px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--landing-muted);
+}
+
+.top3-card__logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.top3-card__name {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: var(--landing-ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.top3-card__value {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--landing-navy);
+}
+
 .player-avatar {
     border-radius: 50%;
     object-fit: cover;

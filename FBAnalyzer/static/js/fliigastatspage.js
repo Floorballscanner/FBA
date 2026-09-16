@@ -8,6 +8,7 @@ const TABLE_COLUMNS = {
     teams: [
         ['team_name', 'string', 'Team'],
         ['Games', 'number', 'Games'],
+        ['Points', 'number', 'Points'],
         ['GF', 'number', 'GF'],
         ['GA', 'number', 'GA'],
         ['GDiff', 'number', 'GDiff'],
@@ -67,7 +68,8 @@ const TABLE_COLUMNS = {
 // Explains every column abbreviation, same idea as the legend on the
 // per-game live/results pages.
 const TABLE_LEGENDS = {
-    teams: '<b>GF/GA/GDiff</b> = Goals for/against/differential, '
+    teams: '<b>Points</b> = League points (regulation win 3, OT/SO win 2, OT/SO loss 1, regulation loss 0), '
+        + '<b>GF/GA/GDiff</b> = Goals for/against/differential, '
         + '<b>SF/SA/SDiff</b> = Shots for/against/differential, '
         + '<b>xGF/xGA/xGDiff</b> = expected Goals for/against/differential, '
         + '<b>xG%</b> = share of combined xG this team created, '
@@ -135,16 +137,65 @@ function maybeLoadStats() {
     loadStats(season, league, stage, table);
 }
 
+// Renders a set of "TOP 3" leaderboard cards - one per stat, each showing the top 3
+// rows ranked by that stat with a logo and the formatted value. Generic over `rows` and
+// `cards` so Players/Goalies can reuse this once their own TOP 3 lists are added.
+function renderTop3Cards(containerId, rows, cards) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = "";
+    if (!rows || !rows.length) return;
+
+    cards.forEach(card => {
+        const ranked = rows
+            .map(row => ({ row, value: card.value(row) }))
+            .filter(r => Number.isFinite(r.value))
+            .sort((a, b) => card.direction === 'asc' ? a.value - b.value : b.value - a.value)
+            .slice(0, 3);
+        if (!ranked.length) return;
+
+        const cardEl = document.createElement('div');
+        cardEl.className = 'top3-card';
+        cardEl.innerHTML = '<h3 class="top3-card__title">' + card.label + '</h3>';
+
+        ranked.forEach((entry, i) => {
+            const logoUrl = card.logo(entry.row);
+            const rowEl = document.createElement('div');
+            rowEl.className = 'top3-card__row' + (i === 0 ? ' top3-card__row--first' : '');
+            rowEl.innerHTML =
+                '<span class="top3-card__rank">' + (i + 1) + '</span>'
+                + (logoUrl ? '<img class="top3-card__logo" src="' + logoUrl + '" alt="">' : '<span class="top3-card__logo"></span>')
+                + '<span class="top3-card__name">' + entry.row.team_name + '</span>'
+                + '<span class="top3-card__value">' + card.format(entry.value) + '</span>';
+            cardEl.appendChild(rowEl);
+        });
+
+        container.appendChild(cardEl);
+    });
+}
+
+const TEAM_TOP3_CARDS = [
+    { label: 'Goals For / Game', direction: 'desc', value: row => row.Games ? row.GF / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
+    { label: 'Goals Against / Game', direction: 'asc', value: row => row.Games ? row.GA / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
+    { label: 'xG For / Game', direction: 'desc', value: row => row.Games ? row.xGF / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
+    { label: 'xG Against / Game', direction: 'asc', value: row => row.Games ? row.xGA / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
+    { label: 'Points / Game', direction: 'desc', value: row => row.Games ? row.Points / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
+    { label: 'Powerplay %', direction: 'desc', value: row => row.Games ? row.PPperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest },
+    { label: 'Shorthanded %', direction: 'desc', value: row => row.Games ? row.SHperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest },
+];
+
 function loadStats(season, category, stage, table) {
 
     const pendingMessage = document.getElementById('pending-message');
     const metaEl = document.getElementById('stats-meta');
     const legendEl = document.getElementById('stats-legend');
     const container = document.getElementById('stats_table');
+    const top3Container = document.getElementById('top3-teams');
     pendingMessage.style.display = "none";
     metaEl.style.display = "none";
     legendEl.style.display = "none";
     container.innerHTML = "";
+    if (top3Container) { top3Container.innerHTML = ""; top3Container.style.display = "none"; }
 
     const url = "/accounts/fliiga_stats_api/?season=" + encodeURIComponent(season)
         + "&category=" + encodeURIComponent(category)
@@ -185,6 +236,11 @@ function loadStats(season, category, stage, table) {
             };
             const chart = new google.visualization.Table(container);
             chart.draw(dataTable, options);
+
+            if (table === 'teams' && top3Container) {
+                renderTop3Cards('top3-teams', data.rows, TEAM_TOP3_CARDS);
+                top3Container.style.display = "grid";
+            }
         })
         .catch((error) => {
             console.error('Error:', error);

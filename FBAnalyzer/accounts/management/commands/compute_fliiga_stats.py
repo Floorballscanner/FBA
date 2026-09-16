@@ -265,16 +265,23 @@ class Command(BaseCommand):
         for team in teams:
             name = team['team_name']
             ts = {
-                'team_id': team['team_id'], 'team_name': name,
+                'team_id': team['team_id'], 'team_name': name, 'crest': '',
                 'Games': 0, 'GF': 0, 'GA': 0, 'GDiff': 0, 'SF': 0, 'SA': 0, 'SDiff': 0,
+                'Points': 0,
                 'xGF': 0.0, 'xGA': 0.0, 'xGDiff': 0.0, 'xGperc': 0.0,
                 'xGOTF': 0.0, 'xGOTA': 0.0, 'xGOTperc': 0.0, 'GFAxG': 0.0, 'GAAxG': 0.0,
                 'xGFPP': 0.0, 'xGAPP': 0.0, 'xGF6v5': 0.0, 'xGA6v5': 0.0,
                 'PPG': 0, 'PPOpp': 0, 'SHOpp': 0, 'PPGA': 0, 'PPperc': 0.0, 'SHperc': 0.0,
             }
+            # Torneopal already computes each team's points for the match (regulation
+            # win=3, OT/SO win=2, OT/SO loss=1, regulation loss=0) as points_A/points_B -
+            # no need to re-derive win/OT logic ourselves. club_A_crest/club_B_crest are
+            # the team's own logo URL, same on every match it plays - grabbed once.
             for match in matches_played:
                 if match['team_A_name'] == name:
                     ts['Games'] += 1
+                    ts['crest'] = ts['crest'] or match.get('club_A_crest') or ''
+                    ts['Points'] += match.get('points_A') or 0
                     ts['GF'] += match['G_A']; ts['GA'] += match['G_B']
                     ts['SF'] += match['S_A']; ts['SA'] += match['S_B']
                     ts['xGF'] += match['xG_A']; ts['xGA'] += match['xG_B']
@@ -285,6 +292,8 @@ class Command(BaseCommand):
                     ts['SHOpp'] += match['PPOpp_B']; ts['PPGA'] += match['PPG_B']
                 if match['team_B_name'] == name:
                     ts['Games'] += 1
+                    ts['crest'] = ts['crest'] or match.get('club_B_crest') or ''
+                    ts['Points'] += match.get('points_B') or 0
                     ts['GF'] += match['G_B']; ts['GA'] += match['G_A']
                     ts['SF'] += match['S_B']; ts['SA'] += match['S_A']
                     ts['xGF'] += match['xG_B']; ts['xGA'] += match['xG_A']
