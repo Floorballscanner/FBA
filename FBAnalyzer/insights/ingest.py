@@ -78,10 +78,14 @@ def parse_location(location):
 
 def _ingest_lineups(match_id, category, lineups, overwrite_existing):
     """Persists MatchLineup rows the first time this match is seen with
-    lineup data - a lineup doesn't change tick-to-tick, so (unlike events)
-    there's nothing to gain from re-checking on every live poll. --force
-    backfill re-derivation (overwrite_existing=True) replaces whatever was
-    stored, e.g. after a position-parsing fix."""
+    lineup data - a lineup's roster/line/role doesn't change tick-to-tick, so
+    (unlike events) there's nothing to gain from re-checking on every live
+    poll. plus/minus IS a running counter that changes as the match goes on,
+    though, so the caller forces one final overwrite (overwrite_existing=True)
+    the moment the match completes - see ingest_match_tick's 'played' branch -
+    rather than trusting whatever the first-seen tick's snapshot was. --force
+    backfill re-derivation does the same for a whole season at once, e.g.
+    after a position-parsing fix."""
     if not lineups:
         return
     if not overwrite_existing and MatchLineup.objects.filter(match_id=match_id).exists():
@@ -305,6 +309,14 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
         compute_pregame_analysis(match_id)
 
     if new_status == 'played' and not was_played:
+        # MatchLineup rows (above) are written once, on whichever tick first
+        # carries lineup data - fine for roster/line/role, which don't change
+        # mid-match, but plus/minus are running counters that keep changing
+        # as goals go in, so that first-seen snapshot is usually still all
+        # zeros. Force one final overwrite now that the match is complete and
+        # this tick's lineups carry the real, final numbers - same one-shot
+        # cost as compute_post_game_analysis below, not a per-tick re-check.
+        _ingest_lineups(match_id, category, lineups, overwrite_existing=True)
         compute_post_game_analysis(match_id)
 
     return new_status
