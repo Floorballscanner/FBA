@@ -138,9 +138,12 @@ function maybeLoadStats() {
 }
 
 // Renders a set of "TOP 3" leaderboard cards - one per stat, each showing the top 3
-// rows ranked by that stat with a logo and the formatted value. Generic over `rows` and
-// `cards` so Players/Goalies can reuse this once their own TOP 3 lists are added.
-function renderTop3Cards(containerId, rows, cards) {
+// rows ranked by that stat with a picture and the formatted value. Generic over `rows`
+// and `cards` so teams/players/goalies can all reuse it.
+// Each card: { label, direction: 'asc'|'desc', value(row), format(value), logo(row),
+//              name(row), sub(row)? }. `avatarClass` (e.g. 'top3-card__logo--avatar')
+// switches the image from the plain-logo treatment to a circular face-cropped one.
+function renderTop3Cards(containerId, rows, cards, avatarClass) {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = "";
@@ -160,12 +163,15 @@ function renderTop3Cards(containerId, rows, cards) {
 
         ranked.forEach((entry, i) => {
             const logoUrl = card.logo(entry.row);
+            const logoClasses = 'top3-card__logo' + (avatarClass ? ' ' + avatarClass : '');
+            const sub = card.sub ? card.sub(entry.row) : '';
             const rowEl = document.createElement('div');
             rowEl.className = 'top3-card__row' + (i === 0 ? ' top3-card__row--first' : '');
             rowEl.innerHTML =
                 '<span class="top3-card__rank">' + (i + 1) + '</span>'
-                + (logoUrl ? '<img class="top3-card__logo" src="' + logoUrl + '" alt="">' : '<span class="top3-card__logo"></span>')
-                + '<span class="top3-card__name">' + entry.row.team_name + '</span>'
+                + (logoUrl ? '<img class="' + logoClasses + '" src="' + logoUrl + '" alt="">' : '<span class="' + logoClasses + '"></span>')
+                + '<span class="top3-card__name">' + card.name(entry.row)
+                + (sub ? '<small class="top3-card__sub">' + sub + '</small>' : '') + '</span>'
                 + '<span class="top3-card__value">' + card.format(entry.value) + '</span>';
             cardEl.appendChild(rowEl);
         });
@@ -175,14 +181,25 @@ function renderTop3Cards(containerId, rows, cards) {
 }
 
 const TEAM_TOP3_CARDS = [
-    { label: 'Goals For / Game', direction: 'desc', value: row => row.Games ? row.GF / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
-    { label: 'Goals Against / Game', direction: 'asc', value: row => row.Games ? row.GA / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
-    { label: 'xG For / Game', direction: 'desc', value: row => row.Games ? row.xGF / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
-    { label: 'xG Against / Game', direction: 'asc', value: row => row.Games ? row.xGA / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
-    { label: 'xG %', direction: 'desc', value: row => row.Games ? row.xGperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest },
-    { label: 'Points / Game', direction: 'desc', value: row => row.Games ? row.Points / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest },
-    { label: 'Powerplay %', direction: 'desc', value: row => row.Games ? row.PPperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest },
-    { label: 'Shorthanded %', direction: 'desc', value: row => row.Games ? row.SHperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest },
+    { label: 'Goals For / Game', direction: 'desc', value: row => row.Games ? row.GF / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest, name: row => row.team_name },
+    { label: 'Goals Against / Game', direction: 'asc', value: row => row.Games ? row.GA / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest, name: row => row.team_name },
+    { label: 'xG For / Game', direction: 'desc', value: row => row.Games ? row.xGF / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest, name: row => row.team_name },
+    { label: 'xG Against / Game', direction: 'asc', value: row => row.Games ? row.xGA / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest, name: row => row.team_name },
+    { label: 'xG %', direction: 'desc', value: row => row.Games ? row.xGperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest, name: row => row.team_name },
+    { label: 'Points / Game', direction: 'desc', value: row => row.Games ? row.Points / row.Games : NaN, format: v => v.toFixed(2), logo: row => row.crest, name: row => row.team_name },
+    { label: 'Powerplay %', direction: 'desc', value: row => row.Games ? row.PPperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest, name: row => row.team_name },
+    { label: 'Shorthanded %', direction: 'desc', value: row => row.Games ? row.SHperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest, name: row => row.team_name },
+];
+
+const PLAYER_TOP3_CARDS = [
+    { label: 'Goals', direction: 'desc', value: row => row.G, format: v => String(v), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'Assists', direction: 'desc', value: row => row.A, format: v => String(v), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'Points', direction: 'desc', value: row => row.P, format: v => String(v), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: '+/-', direction: 'desc', value: row => row.plus_minus, format: v => (v > 0 ? '+' + v : String(v)), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'xG', direction: 'desc', value: row => row.xG, format: v => v.toFixed(2), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'Shots', direction: 'desc', value: row => row.S, format: v => String(v), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'GAxG', direction: 'desc', value: row => row.GAxG, format: v => (v > 0 ? '+' + v.toFixed(2) : v.toFixed(2)), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'Shot %', direction: 'desc', value: row => row.S ? (row.G / row.S) * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
 ];
 
 function loadStats(season, category, stage, table) {
@@ -191,12 +208,12 @@ function loadStats(season, category, stage, table) {
     const metaEl = document.getElementById('stats-meta');
     const legendEl = document.getElementById('stats-legend');
     const container = document.getElementById('stats_table');
-    const top3Container = document.getElementById('top3-teams');
+    const top3Containers = { teams: document.getElementById('top3-teams'), players: document.getElementById('top3-players') };
     pendingMessage.style.display = "none";
     metaEl.style.display = "none";
     legendEl.style.display = "none";
     container.innerHTML = "";
-    if (top3Container) { top3Container.innerHTML = ""; top3Container.style.display = "none"; }
+    Object.values(top3Containers).forEach(el => { if (el) { el.innerHTML = ""; el.style.display = "none"; } });
 
     const url = "/accounts/fliiga_stats_api/?season=" + encodeURIComponent(season)
         + "&category=" + encodeURIComponent(category)
@@ -238,9 +255,13 @@ function loadStats(season, category, stage, table) {
             const chart = new google.visualization.Table(container);
             chart.draw(dataTable, options);
 
-            if (table === 'teams' && top3Container) {
+            if (table === 'teams' && top3Containers.teams) {
                 renderTop3Cards('top3-teams', data.rows, TEAM_TOP3_CARDS);
-                top3Container.style.display = "grid";
+                top3Containers.teams.style.display = "grid";
+            }
+            if (table === 'players' && top3Containers.players) {
+                renderTop3Cards('top3-players', data.rows, PLAYER_TOP3_CARDS, 'top3-card__logo--avatar');
+                top3Containers.players.style.display = "grid";
             }
         })
         .catch((error) => {
