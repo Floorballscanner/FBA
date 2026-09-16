@@ -289,6 +289,32 @@ class GameViewSet(viewsets.ModelViewSet):
     # cost. GET /apis/games/<id>/light/ returns the same payload with these stripped.
     LEGACY_IMAGE_KEYS = ('cnvs_url', 'cnvs_1_url', 'cnvs_2_url', 'cnvs_3_url', 'cnvs_4_url', 'cnvs_5_url')
 
+    # Every consumer of a full game_data payload (visualizations.js's Game
+    # Analysis page, premiumfunctions.js's undo/resume flow) only ever reads
+    # these legacy PNGs when shotMapData is missing - the same shotMapData-vs-
+    # cnvs_*_url fallback appears in both places. Once shotMapData exists,
+    # nothing reads them, so the plain (non-/light/) retrieve/list responses
+    # can drop them too instead of serializing multi-MB embedded images that
+    # get thrown away unread - this was the same class of cost as the /light/
+    # fix above, just for the single-game fetch instead of the multi-game one.
+    def _drop_unused_legacy_images(self, data):
+        game_data = data.get('game_data') or {}
+        if game_data.get('shotMapData'):
+            for key in self.LEGACY_IMAGE_KEYS:
+                game_data.pop(key, None)
+            data['game_data'] = game_data
+        return data
+
+    def retrieve(self, request, *args, **kwargs):
+        response = super().retrieve(request, *args, **kwargs)
+        response.data = self._drop_unused_legacy_images(response.data)
+        return response
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        response.data = [self._drop_unused_legacy_images(row) for row in response.data]
+        return response
+
     @action(detail=True, methods=['get'])
     def light(self, request, pk=None):
         game = self.get_object()
