@@ -32,7 +32,7 @@ from django.core.management.base import BaseCommand
 from accounts.models import FliigaSeasonStats
 from insights.xg_model import calc_xg
 from insights.special_teams import (
-    parse_penalty_segments, situation_from_goal_tag, compute_shot_situations, find_goal_tag,
+    abs_game_time, parse_penalty_segments, situation_from_goal_tag, compute_shot_situations, find_goal_tag,
 )
 from insights.torneopal import (
     api_get, CATEGORY_IDS, MAX_WORKERS, SEASON_COMPETITION_IDS, STAGE_GROUP_IDS,
@@ -48,6 +48,67 @@ def num(value, cast=float, default=0):
 
 def round2(x):
     return round(x, 2)
+
+
+def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, match_end_time, shots_against):
+    """Splits one team's share of a match into per-goalie playing-time stints.
+
+    Torneopal's own playing_time_min is always 0 for every player in every match
+    (confirmed against real data), so it can't be used. Instead this reconstructs
+    time-in-net from the sequence of the goalie's own torjunta/paastetty (save/
+    goal-against) events: whenever the tagged player_id changes, that's a goalie
+    change, and the timestamp of the first event under the new player_id becomes
+    the stint boundary. The first stint is assumed to start at kickoff (0) and the
+    last stint is assumed to run to the match's own last event - own-goalie-pulled
+    empty-net time is the one gap this can't see, since there's no event marking
+    "goalie left the ice" specifically. A reasonable, event-derived approximation,
+    not exact to the second.
+    """
+    events_sorted = sorted(
+        (e for e in match_events if e.get('code') in ('torjunta', 'paastetty') and e.get('team') == team_key),
+        key=lambda e: abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths),
+    )
+    changes = []  # [player_id, name, start_time]
+    for e in events_sorted:
+        player_id = str(e.get('player_id') or '')
+        if not player_id:
+            continue
+        t = abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths)
+        if not changes or changes[-1][0] != player_id:
+            changes.append([player_id, e.get('player_name') or '', t])
+
+    if not changes:
+        # No goalie events at all (e.g. a shutout facing zero shots) - fall back to
+        # the lineup's starting goalie for the whole match.
+        starter = next(
+            (l for l in lineups if str(l.get('team_id')) == team_id_str and l.get('position') == 'MV/1'),
+            None,
+        )
+        if not starter:
+            return []
+        changes = [[str(starter.get('player_id') or ''), starter.get('player_name') or '', 0]]
+
+    stints = []
+    for i, (player_id, name, start) in enumerate(changes):
+        range_start = 0 if i == 0 else start
+        is_last = (i + 1 == len(changes))
+        range_end = match_end_time if is_last else changes[i + 1][2]
+        # Half-open [start, end) except the final stint, which also claims anything
+        # timestamped exactly at the match's last event.
+        shot_end = range_end + 1 if is_last else range_end
+        stint_shots = [
+            s for s in shots_against
+            if range_start <= abs_game_time(s.get('period') or 1, s.get('time_sec') or 0, period_lengths) < shot_end
+        ]
+        sog = [s for s in stint_shots if s['code'] in ('laukausmaali', 'laukaus')]
+        goals = [s for s in stint_shots if s['code'] == 'laukausmaali']
+        stints.append({
+            'player_id': player_id, 'name': name,
+            'seconds': max(range_end - range_start, 0),
+            'GA': len(goals), 'SA': len(sog),
+            'xGOTA': sum(s['xGOT'] for s in sog),
+        })
+    return stints
 
 
 class Command(BaseCommand):
@@ -230,14 +291,13 @@ class Command(BaseCommand):
             match['PPOpp_B'] = pen_events_a
 
             lineups = match_details.get(match_id, {}).get('lineups') or []
-            match['Goalie_A'] = next(
-                (l['player_name'] for l in lineups if str(l.get('team_id')) == team_a_id and l.get('position') == 'MV/1'),
-                None,
+            period_lengths = match_details.get(match_id, {}).get('period_lengths_sec') or [0, 1200, 1200, 1200, 300]
+            match_end_time = max(
+                (abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths) for e in match_events),
+                default=0,
             )
-            match['Goalie_B'] = next(
-                (l['player_name'] for l in lineups if str(l.get('team_id')) == team_b_id and l.get('position') == 'MV/1'),
-                None,
-            )
+            match['GoalieStintsA'] = goalie_stints(match_events, lineups, 'A', team_a_id, period_lengths, match_end_time, shots_b)
+            match['GoalieStintsB'] = goalie_stints(match_events, lineups, 'B', team_b_id, period_lengths, match_end_time, shots_a)
 
         # RL (rangaistuslaukaus?) and TM adjustments, same as the JS.
         for match in matches_played:
@@ -423,30 +483,41 @@ class Command(BaseCommand):
             for p in detail.get('players') or []:
                 if p.get('position') != 'MV':
                     continue
+                player_id = str(p.get('player_id'))
                 goalies_all.append({
+                    'ID': player_id,
                     'Name': f"{p.get('last_name', '')} {p.get('first_name', '')}".strip(),
                     'Team': detail.get('team_name'),
-                    'Games': 0, 'xGOTA': 0.0, 'GA': 0, 'SA': 0, 'Saves': 0,
+                    'photo': photo_by_player.get(player_id, ''),
+                    'Games': 0, 'PlaySeconds': 0, 'xGOTA': 0.0, 'GA': 0, 'SA': 0, 'Saves': 0,
                     'GSAx': 0.0, 'GSAxPerGame': 0.0,
+                    'GA60': 0.0, 'xGOTA60': 0.0, 'GSAx60': 0.0, 'SavePerc': 0.0,
                 })
 
+        goalies_by_id = {g['ID']: g for g in goalies_all}
+        games_by_goalie = defaultdict(set)
+        for match in matches_played:
+            for stint in match['GoalieStintsA'] + match['GoalieStintsB']:
+                goalie = goalies_by_id.get(stint['player_id'])
+                if not goalie or stint['seconds'] <= 0:
+                    continue
+                games_by_goalie[stint['player_id']].add(match['match_id'])
+                goalie['PlaySeconds'] += stint['seconds']
+                goalie['xGOTA'] += stint['xGOTA']
+                goalie['GA'] += stint['GA']
+                goalie['SA'] += stint['SA']
+                goalie['Saves'] += stint['SA'] - stint['GA']
+
         for goalie in goalies_all:
-            for match in matches_played:
-                if match.get('Goalie_A') == goalie['Name']:
-                    goalie['Games'] += 1
-                    goalie['xGOTA'] += match['xGOT_B']
-                    goalie['GA'] += match['G_B']
-                    goalie['SA'] += match['SOG_B']
-                    goalie['Saves'] += match['SOG_B'] - match['G_B']
-                if match.get('Goalie_B') == goalie['Name']:
-                    goalie['Games'] += 1
-                    goalie['xGOTA'] += match['xGOT_A']
-                    goalie['GA'] += match['G_A']
-                    goalie['SA'] += match['SOG_A']
-                    goalie['Saves'] += match['SOG_A'] - match['G_A']
+            goalie['Games'] = len(games_by_goalie.get(goalie['ID'], ()))
             goalie['xGOTA'] = round2(goalie['xGOTA'])
             goalie['GSAx'] = round2(goalie['xGOTA'] - goalie['GA'])
             goalie['GSAxPerGame'] = round2(goalie['GSAx'] / goalie['Games']) if goalie['Games'] else 0.0
+            minutes = goalie['PlaySeconds'] / 60
+            goalie['GA60'] = round2(goalie['GA'] / minutes * 60) if minutes else 0.0
+            goalie['xGOTA60'] = round2(goalie['xGOTA'] / minutes * 60) if minutes else 0.0
+            goalie['GSAx60'] = round2(goalie['GSAx'] / minutes * 60) if minutes else 0.0
+            goalie['SavePerc'] = round2(goalie['Saves'] / goalie['SA']) if goalie['SA'] else 0.0
 
         goalie_stats = [g for g in goalies_all if g['Games'] > 0]
         goalie_stats.sort(key=lambda g: g['GSAxPerGame'], reverse=True)

@@ -202,13 +202,24 @@ const PLAYER_TOP3_CARDS = [
     { label: 'Shot %', direction: 'desc', value: row => row.S ? (row.G / row.S) * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
 ];
 
+const GOALIE_TOP3_CARDS = [
+    { label: 'GA / 60', direction: 'asc', value: row => row.PlaySeconds ? row.GA60 : NaN, format: v => v.toFixed(2), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'xGOT / 60', direction: 'desc', value: row => row.PlaySeconds ? row.xGOTA60 : NaN, format: v => v.toFixed(2), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'Save %', direction: 'desc', value: row => row.SA ? row.SavePerc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+    { label: 'GSAx / 60', direction: 'desc', value: row => row.PlaySeconds ? row.GSAx60 : NaN, format: v => (v > 0 ? '+' + v.toFixed(2) : v.toFixed(2)), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
+];
+
 function loadStats(season, category, stage, table) {
 
     const pendingMessage = document.getElementById('pending-message');
     const metaEl = document.getElementById('stats-meta');
     const legendEl = document.getElementById('stats-legend');
     const container = document.getElementById('stats_table');
-    const top3Containers = { teams: document.getElementById('top3-teams'), players: document.getElementById('top3-players') };
+    const top3Containers = {
+        teams: document.getElementById('top3-teams'),
+        players: document.getElementById('top3-players'),
+        goalies: document.getElementById('top3-goalies'),
+    };
     pendingMessage.style.display = "none";
     metaEl.style.display = "none";
     legendEl.style.display = "none";
@@ -262,6 +273,10 @@ function loadStats(season, category, stage, table) {
             if (table === 'players' && top3Containers.players) {
                 renderTop3Cards('top3-players', data.rows, PLAYER_TOP3_CARDS, 'top3-card__logo--avatar');
                 top3Containers.players.style.display = "grid";
+            }
+            if (table === 'goalies' && top3Containers.goalies) {
+                renderTop3Cards('top3-goalies', data.rows, GOALIE_TOP3_CARDS, 'top3-card__logo--avatar');
+                top3Containers.goalies.style.display = "grid";
             }
         })
         .catch((error) => {
