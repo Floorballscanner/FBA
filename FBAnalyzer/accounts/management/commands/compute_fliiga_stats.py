@@ -50,28 +50,27 @@ def round2(x):
     return round(x, 2)
 
 
-# Shot and goalie-action event codes - the only ones reliably tagged with the real
-# period/time_sec play was happening at. Used to find a match's real last moment of
-# play without trusting administrative/sentinel events (e.g. 'otteluloppui') or the
-# raw period_lengths_sec array, both of which have been seen carrying garbage.
-GAMEPLAY_END_CODES = {'laukaus', 'laukausohi', 'laukausblokattu', 'laukausmaali', 'torjunta', 'paastetty'}
-
 
 def sanitize_period_lengths(raw):
     """Torneopal's period_lengths_sec occasionally reports a wildly wrong value for
     one period (seen in real data: 7200 instead of 1200 for a regulation period,
-    match_id 868881) - clamp each period to a sane floorball bound instead of
-    trusting it verbatim, since abs_game_time (and anything computing playing time
-    or shot situations from it) would otherwise silently explode for that match."""
-    raw = raw or [0, 1200, 1200, 1200, 300]
+    match_id 868881) or a bogus trailing element past index 4 (seen: 3599 as a 6th
+    entry, match 929541) - clamp each of the 5 real slots (pregame buffer + 3
+    regulation periods + OT) to a sane floorball bound and always pad/truncate to
+    exactly that length, instead of trusting the raw array's own length or values.
+    Anything computing playing time or shot situations from this would otherwise
+    silently explode."""
+    raw = raw or []
+    defaults = [0, 1200, 1200, 1200, 300]
     lengths = [0]
-    for i, v in enumerate(raw[1:], start=1):
+    for i in range(1, 5):
+        v = raw[i] if i < len(raw) else defaults[i]
         cap = 1200 if i <= 3 else 600
-        lengths.append(min(num(v, int, cap), cap))
+        lengths.append(min(num(v, int, defaults[i]), cap))
     return lengths
 
 
-def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, match_end_time, shots_against):
+def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, nominal_duration, shots_against):
     """Splits one team's share of a match into per-goalie playing-time stints.
 
     Torneopal's own playing_time_min is always 0 for every player in every match
@@ -79,11 +78,16 @@ def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, 
     time-in-net from the sequence of the goalie's own torjunta/paastetty (save/
     goal-against) events: whenever the tagged player_id changes, that's a goalie
     change, and the timestamp of the first event under the new player_id becomes
-    the stint boundary. The first stint is assumed to start at kickoff (0) and the
-    last stint is assumed to run to the match's own last event - own-goalie-pulled
-    empty-net time is the one gap this can't see, since there's no event marking
-    "goalie left the ice" specifically. A reasonable, event-derived approximation,
-    not exact to the second.
+    the stint boundary. The first stint starts at kickoff (0); the last stint runs
+    to `nominal_duration` - the match's own known regulation+OT length (see the
+    caller), not the timestamp of whichever shot/goalie event happened to be
+    recorded last, which almost always falls a few seconds to half a minute short
+    of the real period end (most periods end on a whistle/faceoff with no shot in
+    the closing seconds) and would otherwise dock every full-game goalie a little
+    time for no real reason. Own-goalie-pulled empty-net time is the one gap this
+    still can't see, since there's no event marking "goalie left the ice"
+    specifically - a reasonable, event-derived approximation, not exact to the
+    second.
     """
     events_sorted = sorted(
         (e for e in match_events if e.get('code') in ('torjunta', 'paastetty') and e.get('team') == team_key),
@@ -113,9 +117,9 @@ def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, 
     for i, (player_id, name, start) in enumerate(changes):
         range_start = 0 if i == 0 else start
         is_last = (i + 1 == len(changes))
-        range_end = match_end_time if is_last else changes[i + 1][2]
+        range_end = nominal_duration if is_last else changes[i + 1][2]
         # Half-open [start, end) except the final stint, which also claims anything
-        # timestamped exactly at the match's last event.
+        # timestamped exactly at nominal_duration.
         shot_end = range_end + 1 if is_last else range_end
         stint_shots = [
             s for s in shots_against
@@ -313,32 +317,21 @@ class Command(BaseCommand):
 
             lineups = match_details.get(match_id, {}).get('lineups') or []
             period_lengths = sanitize_period_lengths(match_details.get(match_id, {}).get('period_lengths_sec'))
-            # match_end_time must come from real gameplay events only, not the raw
-            # max over every event: every match carries an 'otteluloppui' ("match
-            # ended") sentinel tagged as period 9 (not a real 9th period), and
-            # period_lengths_sec itself has been seen with a bogus trailing element
-            # (e.g. [0,1200,1200,1200,300,3599] - that last 3599 isn't a real
-            # period either, seen on a match that genuinely went to overtime,
-            # match 929541) - so neither "trust every event" nor "cap at the sum of
-            # period_lengths" is safe on its own. Shot/goalie events
-            # (GAMEPLAY_END_CODES) are always tagged with the real period they
-            # happened in, so their own max is self-limiting without needing to
-            # trust period_lengths' length or sum at all. A hard ceiling (90 min -
-            # three periods, OT, and a shootout, generously) is kept as a
-            # last-resort safety net against whatever anomaly shows up next.
-            match_end_time = min(
-                max(
-                    (
-                        abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths)
-                        for e in match_events
-                        if e.get('code') in GAMEPLAY_END_CODES
-                    ),
-                    default=0,
-                ),
-                5400,
-            )
-            match['GoalieStintsA'] = goalie_stints(match_events, lineups, 'A', team_a_id, period_lengths, match_end_time, shots_b)
-            match['GoalieStintsB'] = goalie_stints(match_events, lineups, 'B', team_b_id, period_lengths, match_end_time, shots_a)
+            # A goalie's final stint (or their only one, if there was no change)
+            # should run to the match's real, known duration - not to the
+            # timestamp of whichever shot/goalie event happened to be recorded
+            # last, which almost always falls a few seconds to half a minute short
+            # of the actual period end (periods routinely end on a whistle/faceoff
+            # with no shot in the closing seconds), silently docking every
+            # full-game goalie a little time for no real reason. Regulation is
+            # always 3 periods; OT is added only if the match actually needed it -
+            # read from Torneopal's own points_A/points_B (a 2/1 split means the
+            # match was decided in OT or a shootout, 3/0 means regulation), which
+            # is simpler and more reliable than scanning events for period >= 4.
+            went_to_ot = int(num(match.get('points_A'), int, 0)) in (1, 2) and int(num(match.get('points_B'), int, 0)) in (1, 2)
+            nominal_duration = sum(period_lengths[1:4]) + (period_lengths[4] if went_to_ot else 0)
+            match['GoalieStintsA'] = goalie_stints(match_events, lineups, 'A', team_a_id, period_lengths, nominal_duration, shots_b)
+            match['GoalieStintsB'] = goalie_stints(match_events, lineups, 'B', team_b_id, period_lengths, nominal_duration, shots_a)
 
         # RL (rangaistuslaukaus?) and TM adjustments, same as the JS.
         for match in matches_played:
