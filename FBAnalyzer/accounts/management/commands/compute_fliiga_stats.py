@@ -50,6 +50,13 @@ def round2(x):
     return round(x, 2)
 
 
+# Shot and goalie-action event codes - the only ones reliably tagged with the real
+# period/time_sec play was happening at. Used to find a match's real last moment of
+# play without trusting administrative/sentinel events (e.g. 'otteluloppui') or the
+# raw period_lengths_sec array, both of which have been seen carrying garbage.
+GAMEPLAY_END_CODES = {'laukaus', 'laukausohi', 'laukausblokattu', 'laukausmaali', 'torjunta', 'paastetty'}
+
+
 def sanitize_period_lengths(raw):
     """Torneopal's period_lengths_sec occasionally reports a wildly wrong value for
     one period (seen in real data: 7200 instead of 1200 for a regulation period,
@@ -306,19 +313,29 @@ class Command(BaseCommand):
 
             lineups = match_details.get(match_id, {}).get('lineups') or []
             period_lengths = sanitize_period_lengths(match_details.get(match_id, {}).get('period_lengths_sec'))
-            # Every match carries an 'otteluloppui' ("match ended") sentinel event
-            # tagged as period 9 - not a real 9th period. abs_game_time's own
-            # fallback (any period beyond period_lengths' length defaults to 1200s)
-            # would otherwise treat that as ~5 extra 20-minute periods and inflate
-            # match_end_time by roughly 100 minutes (seen in real data, match
-            # 868875 and effectively every other match checked). Cap at the
-            # sanitized period lengths' own total instead of trusting the raw max.
+            # match_end_time must come from real gameplay events only, not the raw
+            # max over every event: every match carries an 'otteluloppui' ("match
+            # ended") sentinel tagged as period 9 (not a real 9th period), and
+            # period_lengths_sec itself has been seen with a bogus trailing element
+            # (e.g. [0,1200,1200,1200,300,3599] - that last 3599 isn't a real
+            # period either, seen on a match that genuinely went to overtime,
+            # match 929541) - so neither "trust every event" nor "cap at the sum of
+            # period_lengths" is safe on its own. Shot/goalie events
+            # (GAMEPLAY_END_CODES) are always tagged with the real period they
+            # happened in, so their own max is self-limiting without needing to
+            # trust period_lengths' length or sum at all. A hard ceiling (90 min -
+            # three periods, OT, and a shootout, generously) is kept as a
+            # last-resort safety net against whatever anomaly shows up next.
             match_end_time = min(
                 max(
-                    (abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths) for e in match_events),
+                    (
+                        abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths)
+                        for e in match_events
+                        if e.get('code') in GAMEPLAY_END_CODES
+                    ),
                     default=0,
                 ),
-                sum(period_lengths),
+                5400,
             )
             match['GoalieStintsA'] = goalie_stints(match_events, lineups, 'A', team_a_id, period_lengths, match_end_time, shots_b)
             match['GoalieStintsB'] = goalie_stints(match_events, lineups, 'B', team_b_id, period_lengths, match_end_time, shots_a)
