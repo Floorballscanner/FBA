@@ -70,30 +70,50 @@ def sanitize_period_lengths(raw):
     return lengths
 
 
-def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, nominal_duration, shots_against):
-    """Splits one team's share of a match into per-goalie playing-time stints.
+def _stints_from_segments(segments, nominal_duration, period_lengths, shots_against):
+    """Turns a list of [player_id_or_None, name, start_time] segments (already in
+    chronological order, first one starting at kickoff) into stints, tallying each
+    stint's GA/SA/xGOTA from shots_against timestamped inside its window. Segments
+    with player_id None (nobody in net - see goalie_stints) contribute no stint at
+    all, so that time isn't credited to anyone."""
+    stints = []
+    for i, (player_id, name, start) in enumerate(segments):
+        range_start = 0 if i == 0 else start
+        is_last = (i + 1 == len(segments))
+        range_end = nominal_duration if is_last else segments[i + 1][2]
+        if not player_id:
+            continue
+        # Half-open [start, end) except the final stint, which also claims anything
+        # timestamped exactly at nominal_duration.
+        shot_end = range_end + 1 if is_last else range_end
+        stint_shots = [
+            s for s in shots_against
+            if range_start <= abs_game_time(s.get('period') or 1, s.get('time_sec') or 0, period_lengths) < shot_end
+        ]
+        sog = [s for s in stint_shots if s['code'] in ('laukausmaali', 'laukaus')]
+        goals = [s for s in stint_shots if s['code'] == 'laukausmaali']
+        stints.append({
+            'player_id': player_id, 'name': name,
+            'seconds': max(range_end - range_start, 0),
+            'GA': len(goals), 'SA': len(sog),
+            'xGOTA': sum(s['xGOT'] for s in sog),
+        })
+    return stints
 
-    Torneopal's own playing_time_min is always 0 for every player in every match
-    (confirmed against real data), so it can't be used. Instead this reconstructs
-    time-in-net from the sequence of the goalie's own torjunta/paastetty (save/
-    goal-against) events: whenever the tagged player_id changes, that's a goalie
-    change, and the timestamp of the first event under the new player_id becomes
-    the stint boundary. The first stint starts at kickoff (0); the last stint runs
-    to `nominal_duration` - the match's own known regulation+OT length (see the
-    caller), not the timestamp of whichever shot/goalie event happened to be
-    recorded last, which almost always falls a few seconds to half a minute short
-    of the real period end (most periods end on a whistle/faceoff with no shot in
-    the closing seconds) and would otherwise dock every full-game goalie a little
-    time for no real reason. Own-goalie-pulled empty-net time is the one gap this
-    still can't see, since there's no event marking "goalie left the ice"
-    specifically - a reasonable, event-derived approximation, not exact to the
-    second.
-    """
+
+def _goalie_stints_from_saves(match_events, lineups, team_key, team_id_str, period_lengths, nominal_duration, shots_against):
+    """Fallback for a match with no mvvaihto data for this side at all: infer
+    changes from the tagged player_id on the goalie's own torjunta/paastetty (save/
+    goal-against) events instead. Can't see own-goalie-pulled empty-net time (no
+    goalie is tagged on any save/goal-against event either way to signal the gap,
+    so it silently keeps crediting whoever was in net last) - mvvaihto's explicit
+    pois/sisaan markers are what avoid that, see
+    goalie_stints."""
     events_sorted = sorted(
         (e for e in match_events if e.get('code') in ('torjunta', 'paastetty') and e.get('team') == team_key),
         key=lambda e: abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths),
     )
-    changes = []  # [player_id, name, start_time]
+    changes = []
     for e in events_sorted:
         player_id = str(e.get('player_id') or '')
         if not player_id:
@@ -113,27 +133,56 @@ def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, 
             return []
         changes = [[str(starter.get('player_id') or ''), starter.get('player_name') or '', 0]]
 
-    stints = []
-    for i, (player_id, name, start) in enumerate(changes):
-        range_start = 0 if i == 0 else start
-        is_last = (i + 1 == len(changes))
-        range_end = nominal_duration if is_last else changes[i + 1][2]
-        # Half-open [start, end) except the final stint, which also claims anything
-        # timestamped exactly at nominal_duration.
-        shot_end = range_end + 1 if is_last else range_end
-        stint_shots = [
-            s for s in shots_against
-            if range_start <= abs_game_time(s.get('period') or 1, s.get('time_sec') or 0, period_lengths) < shot_end
-        ]
-        sog = [s for s in stint_shots if s['code'] in ('laukausmaali', 'laukaus')]
-        goals = [s for s in stint_shots if s['code'] == 'laukausmaali']
-        stints.append({
-            'player_id': player_id, 'name': name,
-            'seconds': max(range_end - range_start, 0),
-            'GA': len(goals), 'SA': len(sog),
-            'xGOTA': sum(s['xGOT'] for s in sog),
-        })
-    return stints
+    return _stints_from_segments(changes, nominal_duration, period_lengths, shots_against)
+
+
+def goalie_stints(match_events, lineups, team_key, team_id_str, period_lengths, nominal_duration, shots_against):
+    """Splits one team's share of a match into per-goalie playing-time stints.
+
+    Torneopal's own playing_time_min is always 0 for every player in every match
+    (confirmed against real data), so it can't be used. Instead this reads the
+    team's own mvvaihto (goalie substitution) events - the same signal
+    insights.special_teams.compute_shot_situations already uses to tag '6V5' shots
+    (own goalie pulled for an extra attacker): the opening event of the match names
+    the starter (empty description); a 'maalivahti pois' ("goalie out") event marks
+    the goalie leaving the ice with nobody credited until a following
+    'maalivahti sisaan'/'sisään' ("goalie in") event names whoever returns - the
+    same player_id if they were simply pulled for an extra attacker, or someone
+    else if a real substitution happened while pulled. Without this, a pulled
+    goalie's empty-net window would silently keep counting as their own playing
+    time, since no goalie is tagged on any save/goal-against event either way to
+    signal the gap.
+
+    The last segment (or the only one, if there was no change) runs to
+    `nominal_duration` - the match's own known regulation+OT length (see the
+    caller) - not the timestamp of whichever shot/goalie event happened to be
+    recorded last, which almost always falls a few seconds to half a minute short
+    of the real period end (most periods end on a whistle/faceoff with no shot in
+    the closing seconds).
+    """
+    mv_events = sorted(
+        (e for e in match_events if e.get('code') == 'mvvaihto' and e.get('team') == team_key),
+        key=lambda e: abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths),
+    )
+
+    segments = []  # [player_id_or_None, name, start_time]
+    for e in mv_events:
+        t = abs_game_time(e.get('period') or 1, e.get('time_sec') or 0, period_lengths)
+        desc = (e.get('description') or '').lower()
+        if 'pois' in desc:
+            segments.append([None, '', t])
+        elif 'sis' in desc or not segments:
+            # 'sisaan'/'sisään' (goalie back in), or the match-opening assignment
+            # (empty description, no segment recorded yet).
+            segments.append([str(e.get('player_id') or ''), e.get('player_name') or '', t])
+        # An mvvaihto with neither "pois" nor "sis" in its description, after the
+        # opening assignment, isn't a pattern seen in real data - ignored rather
+        # than guessed at.
+
+    if not segments:
+        return _goalie_stints_from_saves(match_events, lineups, team_key, team_id_str, period_lengths, nominal_duration, shots_against)
+
+    return _stints_from_segments(segments, nominal_duration, period_lengths, shots_against)
 
 
 class Command(BaseCommand):
