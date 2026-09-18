@@ -33,6 +33,12 @@ NOTABLE_THRESHOLD = 60  # on the 0-100 "score" scale computed below
 COOLDOWN_SECONDS = 300  # don't repeat the same (match, insight_type) more than once per 5 min
 TRAILING_WINDOW_SEC = 600  # 10 minutes, for xg_momentum
 MOMENTUM_MIN_GAP = 0.5  # xG gap over the trailing window before it's worth reporting at all
+MOMENTUM_SCORE_MULT = 60  # gap * this = score; 60 makes a 1.0 gap notable (~90th percentile of real
+# trailing-window snapshots this season - the old value of 40 needed a 1.5 gap, ~98th percentile,
+# which is why this fired exactly once across 1241 matches with any insight at all.
+WP_SWING_SCORE_MULT = 400  # delta * this = score; 400 makes a 0.15 swing notable (down from needing
+# 0.4, which - per real win-probability data - this season's biggest swing (0.375) never even reached,
+# so wp_swing fired zero notable times in 2026-2027 despite 1060 ticks logged.
 MIN_OPP_FOR_RATE = 2  # need at least this many PP opportunities before a rate is meaningful
 STANDOUT_MIN_GOALS = 3  # or...
 STANDOUT_MIN_POINTS = 5  # ...this many points (goals+assists), before standout_performer even considers firing -
@@ -181,7 +187,7 @@ def evaluate_match_insights(match_id):
             leader, xg_lead, xg_trail = (
                 (state.team_a_name, xg_a, xg_b) if gap > 0 else (state.team_b_name, xg_b, xg_a)
             )
-            score = min(100.0, abs(gap) * 40)
+            score = min(100.0, abs(gap) * MOMENTUM_SCORE_MULT)
             maybe_create(
                 'xg_momentum', score,
                 {
@@ -197,7 +203,7 @@ def evaluate_match_insights(match_id):
         last = Insight.objects.filter(match_id=match_id, insight_type='wp_swing').order_by('-created_at').first()
         prev_wp_a = float(last.payload.get('wp_a', 0.5)) if last else 0.5
         delta = float(state.wp_a) - prev_wp_a
-        score = min(100.0, abs(delta) * 150)
+        score = min(100.0, abs(delta) * WP_SWING_SCORE_MULT)
         gainer = state.team_a_name if delta > 0 else state.team_b_name
         text = (
             f"Big swing: {gainer}'s win probability just moved {abs(round(delta * 100))} points."
