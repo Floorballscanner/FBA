@@ -146,8 +146,8 @@ window.onload = function() {
 
             events = modifiedEvents;
             lineups = modifiedLineups;
-            pushMatchEvents(match, modifiedEvents, modifiedLineups);
-            updateInsightsPanel(match);
+            const pushPromise = pushMatchEvents(match, modifiedEvents, modifiedLineups);
+            updateInsightsPanel(match, pushPromise);
             updatePregameLayout(match, lineups);
             lineups.forEach(event => {
                 event.xGOT = 0;
@@ -656,7 +656,11 @@ function getCookie(name) {
 // Pushes this tick's match + event data to the insight engine's ingestion
 // endpoint. All xG/xGOT/situation derivation happens server-side (see
 // insights/views.py), so only Torneopal's own raw fields are sent. Fire-
-// and-forget: a failed push must never block the page's own rendering.
+// and-forget as far as the page's own rendering is concerned - callers
+// don't need to wait on this - but it returns its fetch promise so
+// updateInsightsPanel's pregame branch can sequence after it, since this
+// request is what creates the match's MatchState row on a first-ever tick
+// (see updateInsightsPanel's pregame branch for why that ordering matters).
 function pushMatchEvents(match, events, lineups) {
     const payload = {
         match_id: match.match_id,
@@ -679,7 +683,7 @@ function pushMatchEvents(match, events, lineups) {
         lineups: lineups,
     };
 
-    fetch("/apis/insights/events/", {
+    return fetch("/apis/insights/events/", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -715,7 +719,7 @@ function renderInsightBullets(feedEl, sentences) {
     });
 }
 
-function updateInsightsPanel(match) {
+function updateInsightsPanel(match, pushPromise) {
     const section = document.getElementById('insightsSection');
     if (section == null) {
         return;
@@ -792,7 +796,15 @@ function updateInsightsPanel(match) {
             .catch(() => { section.style.display = 'none'; });
     } else {
         titleEl.textContent = 'Pregame Analysis';
-        fetch('/apis/insights/pregame/' + match.match_id + '/')
+        // On a match's very first-ever tick, this GET can otherwise race ahead of
+        // pushMatchEvents' POST - the request that creates this match's MatchState
+        // row server-side. Losing that race means there's nothing to compute a
+        // pregame analysis from yet, which hid the whole section instead of just
+        // retrying on the next 10s poll. Waiting for the push to settle first (it
+        // already finished server-side by the time its own fetch promise resolves)
+        // closes that gap for a first view instead of relying on a later poll to
+        // paper over it.
+        const fetchPregame = () => fetch('/apis/insights/pregame/' + match.match_id + '/')
             .then(response => response.json())
             .then(data => {
                 const bullets = data.status === 'ready' && data.facts && data.facts.bullets;
@@ -808,6 +820,7 @@ function updateInsightsPanel(match) {
                 }
             })
             .catch(() => { section.style.display = 'none'; });
+        Promise.resolve(pushPromise).catch(() => {}).then(fetchPregame);
     }
 }
 
@@ -1690,8 +1703,8 @@ function updateData() {
 
             events = modifiedEvents;
             lineups = modifiedLineups;
-            pushMatchEvents(match, modifiedEvents, modifiedLineups);
-            updateInsightsPanel(match);
+            const pushPromise = pushMatchEvents(match, modifiedEvents, modifiedLineups);
+            updateInsightsPanel(match, pushPromise);
             updatePregameLayout(match, lineups);
             lineups.forEach(event => {
                 event.xGOT = 0;

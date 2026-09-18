@@ -11,6 +11,13 @@ plus a head-to-head note if the teams have met recently and it wasn't
 already the lead/support angle itself. If nothing clears the notability
 bar, it falls back to a plain "even matchup" framing.
 
+One angle, win_probability, is scored the same way as any other candidate but is also
+always written to facts['win_probability'] (when computable) regardless of whether it
+wins the lead/support slot, so the frontend has a number to show even on a close
+matchup. It projects each team's goals tonight by blending their own attack with the
+opponent's own defense, then converts to a win share with the same Poisson-binomial
+aggregation the live win-probability model uses - see insights.win_probability.
+
 Each angle has 2-3 equivalent phrasings, picked deterministically per
 (match, angle, team) via insights.phrasing.vary - otherwise the same angle
 (e.g. "goalie is hot") renders identical text across every match it fires
@@ -50,12 +57,15 @@ from .models import HistoricalBaseline, MatchEvent, MatchState, PregameAnalysis
 from .percentiles import percentile_rank
 from .phrasing import plural, vary
 from .special_teams import PENALTY_CODE_RE
+from .win_probability import compute_pregame_win_probability
 
 RECENT_FORM_GAMES = 6  # "hot/cold" window for a team's current goalie
 STREAK_NOTABLE_GAMES = 3
 MIN_GOALS_FOR_TOP_SCORER = 5  # don't lead with a "top scorer" who has next to nothing
 MAX_BULLETS = 5  # lead + up to this many support angles
 H2H_MIN_GAMES = 2
+WIN_PROB_CLEAR_FAVORITE = 0.60  # favorite's own win share, above which the phrasing steps up
+# from "slight edge" to "clear favorite"
 
 
 def is_penalty(code):
@@ -223,6 +233,16 @@ def compute_pregame_analysis(match_id, force=False):
 
     rates_a = _rate_stats(state.team_a_id, history_a)
     rates_b = _rate_stats(state.team_b_id, history_b)
+    win_prob = None
+    if rates_a and rates_b:
+        # Blend each team's own attack with the opponent's own defense to project
+        # tonight's goals, same idea as any goals-based matchup projection - then
+        # convert to a win share via the same Poisson-binomial aggregation the live
+        # win-probability model uses (see insights.win_probability).
+        lambda_a = (rates_a['xgf_per_game'] + rates_b['xga_per_game']) / 2
+        lambda_b = (rates_b['xgf_per_game'] + rates_a['xga_per_game']) / 2
+        wp_a, wp_b = compute_pregame_win_probability(lambda_a, lambda_b)
+        win_prob = {'team_a': round(wp_a, 3), 'team_b': round(wp_b, 3)}
     wins_a, losses_a, streak_a = _record_and_streak(state.team_a_id, history_a)
     wins_b, losses_b, streak_b = _record_and_streak(state.team_b_id, history_b)
     top_a = _top_scorer(state.team_a_id, season_history_a)
@@ -403,6 +423,32 @@ def compute_pregame_analysis(match_id, force=False):
             'text': vary(seed('xg_gap'), options),
         })
 
+    # --- win probability: projected favorite tonight, from each team's own attack/defense ---
+    if win_prob:
+        favorite, favorite_wp = (
+            (state.team_a_name, win_prob['team_a']) if win_prob['team_a'] >= win_prob['team_b']
+            else (state.team_b_name, win_prob['team_b'])
+        )
+        pct = round(favorite_wp * 100)
+        if favorite_wp >= WIN_PROB_CLEAR_FAVORITE:
+            options = [
+                f"{favorite} are a clear favorite tonight, projected at {pct}% to win.",
+                f"The numbers strongly favor {favorite} here - a projected {pct}% win probability.",
+                f"{favorite} should be the heavy favorite tonight, with a projected {pct}% chance to win.",
+                f"On paper this leans hard toward {favorite}, projected at {pct}% to come out on top.",
+            ]
+        else:
+            options = [
+                f"{favorite} hold a slight edge tonight, projected at {pct}% to win.",
+                f"{favorite} are given a modest edge here, projected at {pct}% to win.",
+                f"This leans slightly toward {favorite}, projected at {pct}% to win tonight.",
+                f"{favorite} come in as the mild favorite, {pct}% projected win probability.",
+            ]
+        candidates.append({
+            'key': 'win_probability', 'score': min(100.0, abs(favorite_wp - 0.5) * 200),
+            'text': vary(seed('win_probability'), options),
+        })
+
     # --- defensive (xG allowed) gap between the two teams ---
     baseline = baselines['team_xga_per_game']
     if baseline and rates_a and rates_b:
@@ -523,6 +569,7 @@ def compute_pregame_analysis(match_id, force=False):
             'rates': rates_b, 'top_scorer': top_b, 'goalie': goalie_b,
         },
         'head_to_head': h2h,
+        'win_probability': win_prob,  # {'team_a': .., 'team_b': ..} or None - see the win_probability candidate above
         'lead_angle': lead['key'] if lead else 'even_matchup',
         'bullets': text_parts,  # same sentences as `text`, kept separate for bullet-point rendering
     }
