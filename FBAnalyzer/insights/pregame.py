@@ -11,12 +11,13 @@ plus a head-to-head note if the teams have met recently and it wasn't
 already the lead/support angle itself. If nothing clears the notability
 bar, it falls back to a plain "even matchup" framing.
 
-One angle, win_probability, is scored the same way as any other candidate but is also
-always written to facts['win_probability'] (when computable) regardless of whether it
-wins the lead/support slot, so the frontend has a number to show even on a close
-matchup. It projects each team's goals tonight by blending their own attack with the
-opponent's own defense, then converts to a win share with the same Poisson-binomial
-aggregation the live win-probability model uses - see insights.win_probability.
+One angle, win_probability, is exempt from that competition: it's always both the first
+bullet and facts['win_probability'] (when computable) - the single most direct "who's
+favored tonight" framing shouldn't have to out-score every other angle just to be shown,
+or get bumped off the end once MAX_BULLETS other strong angles exist. It projects each
+team's goals tonight by blending their own attack with the opponent's own defense, then
+converts to a win share with the same Poisson-binomial aggregation the live
+win-probability model uses - see insights.win_probability.
 
 Each angle has 2-3 equivalent phrasings, picked deterministically per
 (match, angle, team) via insights.phrasing.vary - otherwise the same angle
@@ -531,13 +532,29 @@ def compute_pregame_analysis(match_id, force=False):
                 'text': vary(seed('head_to_head'), options),
             })
 
-    candidates.sort(key=lambda c: c['score'], reverse=True)
-    lead = candidates[0] if candidates else None
-    support = [c for c in candidates[1:] if lead is None or c['key'] != lead['key']][:MAX_BULLETS - 1]
-    selected_keys = {c['key'] for c in ([lead] if lead else []) + support}
+    # win_probability is pulled out of the normal scored competition and always shown
+    # first when computable - it's the single most direct "who's favored tonight"
+    # framing, and burying it behind whichever other angle happens to score highest
+    # meant it could get crowded out of the MAX_BULLETS cap entirely on a night with
+    # several other strong angles.
+    win_prob_candidate = next((c for c in candidates if c['key'] == 'win_probability'), None)
+    other_candidates = [c for c in candidates if c['key'] != 'win_probability']
+    other_candidates.sort(key=lambda c: c['score'], reverse=True)
 
-    if lead:
-        text_parts = [lead['text']] + [c['text'] for c in support]
+    remaining_slots = MAX_BULLETS - (1 if win_prob_candidate else 0)
+    lead = other_candidates[0] if other_candidates else None
+    support = other_candidates[1:][:max(0, remaining_slots - 1)] if lead else []
+    selected_keys = {c['key'] for c in ([lead] if lead else []) + support}
+    if win_prob_candidate:
+        selected_keys.add('win_probability')
+
+    if win_prob_candidate or lead:
+        text_parts = []
+        if win_prob_candidate:
+            text_parts.append(win_prob_candidate['text'])
+        if lead:
+            text_parts.append(lead['text'])
+            text_parts.extend(c['text'] for c in support)
     else:
         even_options = [
             f"A close matchup on paper between {state.team_a_name} and {state.team_b_name}.",
@@ -570,7 +587,7 @@ def compute_pregame_analysis(match_id, force=False):
         },
         'head_to_head': h2h,
         'win_probability': win_prob,  # {'team_a': .., 'team_b': ..} or None - see the win_probability candidate above
-        'lead_angle': lead['key'] if lead else 'even_matchup',
+        'lead_angle': (win_prob_candidate or lead)['key'] if (win_prob_candidate or lead) else 'even_matchup',
         'bullets': text_parts,  # same sentences as `text`, kept separate for bullet-point rendering
     }
 
