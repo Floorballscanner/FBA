@@ -34,6 +34,10 @@ COOLDOWN_SECONDS = 300  # don't repeat the same (match, insight_type) more than 
 TRAILING_WINDOW_SEC = 600  # 10 minutes, for xg_momentum
 MOMENTUM_MIN_GAP = 0.5  # xG gap over the trailing window before it's worth reporting at all
 MIN_OPP_FOR_RATE = 2  # need at least this many PP opportunities before a rate is meaningful
+STANDOUT_MIN_GOALS = 3  # or...
+STANDOUT_MIN_POINTS = 5  # ...this many points (goals+assists), before standout_performer even considers firing -
+# the percentile rank alone let a single point (an 86.6th percentile night by itself, per real production
+# data) fire on literally the first goal or assist of the match every time.
 
 
 def is_penalty(code):
@@ -122,18 +126,24 @@ def evaluate_match_insights(match_id):
     # --- standout_performer: player points so far vs the league's per-game baseline ---
     baseline = baselines['player_points_per_game']
     if baseline:
-        players = defaultdict(lambda: {'points': 0, 'name': ''})
+        players = defaultdict(lambda: {'points': 0, 'goals': 0, 'name': ''})
         for e in events:
             if e.player_id and e.code in (GOAL_CODE, ASSIST_CODE):
                 p = players[e.player_id]
                 p['points'] += 1
+                if e.code == GOAL_CODE:
+                    p['goals'] += 1
                 p['name'] = p['name'] or (e.raw or {}).get('player_name', '')
         for player_id, p in players.items():
+            if not p['name']:
+                continue  # placeholder/system entries (e.g. player_id '1') carry no real name
+            if p['goals'] < STANDOUT_MIN_GOALS and p['points'] < STANDOUT_MIN_POINTS:
+                continue
             rank = percentile_rank(p['points'], baseline.percentiles)
             score = max(0.0, rank - 50) * 2  # only "standout" on the high side
             maybe_create(
                 'standout_performer', score,
-                {'player_id': player_id, 'name': p['name'], 'points': p['points'], 'percentile': round(rank, 1)},
+                {'player_id': player_id, 'name': p['name'], 'points': p['points'], 'goals': p['goals'], 'percentile': round(rank, 1)},
                 f"{p['name']} already has {p['points']} points tonight - well above a typical full game.",
             )
 
