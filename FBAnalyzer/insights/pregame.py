@@ -11,13 +11,15 @@ plus a head-to-head note if the teams have met recently and it wasn't
 already the lead/support angle itself. If nothing clears the notability
 bar, it falls back to a plain "even matchup" framing.
 
-One angle, win_probability, is exempt from that competition: it's always both the first
-bullet and facts['win_probability'] (when computable) - the single most direct "who's
-favored tonight" framing shouldn't have to out-score every other angle just to be shown,
-or get bumped off the end once MAX_BULLETS other strong angles exist. It projects each
-team's goals tonight by blending their own attack with the opponent's own defense, then
-converts to a win share with the same Poisson-binomial aggregation the live
-win-probability model uses - see insights.win_probability.
+One angle, win_probability, is exempt from that competition: it's always the first bullet
+when computable - the single most direct "who's favored tonight" framing shouldn't have to
+out-score every other angle just to be shown, or get bumped off the end once MAX_BULLETS
+other strong angles exist. It projects each team's goals tonight by blending their own
+attack with the opponent's own defense, then converts to a win share with the same
+Poisson-binomial aggregation the live win-probability model uses (see
+insights.win_probability) - but only the resulting call (clear favorite / slight favorite /
+even) is surfaced, deliberately as text only, with no percentage in either the text or
+facts; a bare win-share number invites second-guessing that the qualitative call doesn't.
 
 Each angle has 2-3 equivalent phrasings, picked deterministically per
 (match, angle, team) via insights.phrasing.vary - otherwise the same angle
@@ -67,6 +69,8 @@ MAX_BULLETS = 5  # lead + up to this many support angles
 H2H_MIN_GAMES = 2
 WIN_PROB_CLEAR_FAVORITE = 0.60  # favorite's own win share, above which the phrasing steps up
 # from "slight edge" to "clear favorite"
+WIN_PROB_SLIGHT_FAVORITE = 0.55  # below this, favorite_wp is close enough to 50/50 that the
+# text calls it even instead of giving either team credit for an "edge"
 
 
 def is_penalty(code):
@@ -425,25 +429,33 @@ def compute_pregame_analysis(match_id, force=False):
         })
 
     # --- win probability: projected favorite tonight, from each team's own attack/defense ---
+    # Described qualitatively only (clear favorite / slight favorite / even) - no percentage
+    # in the text or facts, so this reads as a call rather than a number to second-guess.
     if win_prob:
         favorite, favorite_wp = (
             (state.team_a_name, win_prob['team_a']) if win_prob['team_a'] >= win_prob['team_b']
             else (state.team_b_name, win_prob['team_b'])
         )
-        pct = round(favorite_wp * 100)
         if favorite_wp >= WIN_PROB_CLEAR_FAVORITE:
             options = [
-                f"{favorite} are a clear favorite tonight, projected at {pct}% to win.",
-                f"The numbers strongly favor {favorite} here - a projected {pct}% win probability.",
-                f"{favorite} should be the heavy favorite tonight, with a projected {pct}% chance to win.",
-                f"On paper this leans hard toward {favorite}, projected at {pct}% to come out on top.",
+                f"{favorite} are a clear favorite tonight.",
+                f"The numbers strongly favor {favorite} here.",
+                f"{favorite} should be the heavy favorite tonight.",
+                f"On paper this leans hard toward {favorite}.",
+            ]
+        elif favorite_wp >= WIN_PROB_SLIGHT_FAVORITE:
+            options = [
+                f"{favorite} hold a slight edge tonight.",
+                f"{favorite} are given a modest edge here.",
+                f"This leans slightly toward {favorite}.",
+                f"{favorite} come in as the mild favorite tonight.",
             ]
         else:
             options = [
-                f"{favorite} hold a slight edge tonight, projected at {pct}% to win.",
-                f"{favorite} are given a modest edge here, projected at {pct}% to win.",
-                f"This leans slightly toward {favorite}, projected at {pct}% to win tonight.",
-                f"{favorite} come in as the mild favorite, {pct}% projected win probability.",
+                f"This one looks like a coin flip on paper.",
+                f"Not much separates these two on paper tonight.",
+                f"{state.team_a_name} and {state.team_b_name} look evenly matched heading into tonight.",
+                f"A close matchup on paper between {state.team_a_name} and {state.team_b_name}.",
             ]
         candidates.append({
             'key': 'win_probability', 'score': min(100.0, abs(favorite_wp - 0.5) * 200),
@@ -586,7 +598,6 @@ def compute_pregame_analysis(match_id, force=False):
             'rates': rates_b, 'top_scorer': top_b, 'goalie': goalie_b,
         },
         'head_to_head': h2h,
-        'win_probability': win_prob,  # {'team_a': .., 'team_b': ..} or None - see the win_probability candidate above
         'lead_angle': (win_prob_candidate or lead)['key'] if (win_prob_candidate or lead) else 'even_matchup',
         'bullets': text_parts,  # same sentences as `text`, kept separate for bullet-point rendering
     }
