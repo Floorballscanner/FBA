@@ -115,6 +115,11 @@ class Insight(models.Model):
         ('goalie_gsax', 'Goalie GSAx'),
         ('wp_swing', 'Biggest win-probability swing'),
         ('special_teams_rate', 'In-game special-teams rate vs league average'),
+        ('against_the_odds', 'Leading on the scoreboard despite a worse win probability'),
+        ('line_battle', '5v5 line-vs-line xG/goal gap'),
+        ('special_teams_battle', 'Head-to-head power-play goal differential'),
+        ('penalty_discipline', 'Penalty count gap between the two teams'),
+        ('goalie_duel', 'Head-to-head GSAx between the two starting goalies'),
     ]
 
     match_id = models.CharField(max_length=20)
