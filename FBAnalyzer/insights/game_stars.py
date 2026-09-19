@@ -131,7 +131,11 @@ def compute_game_stars(match_id):
     skaters, goalies = _player_game_stats(events, lineups)
     team_names = {state.team_a_id: state.team_a_name, state.team_b_id: state.team_b_name}
 
-    def top_skaters(role_set, weights, baseline_types):
+    def rate_all_skaters(role_set, weights, baseline_types):
+        """Every skater in role_set, rated and ranked best-first - not just the top 3, so
+        this doubles as the source for both the 3/2/1-star picks and the full per-player
+        Rating column shown in the match's own line-by-line stat tables (see
+        insights.views.game_stars and fliigalivegame.js's drawCharts/ratingFor)."""
         baselines = _load_baselines(baseline_types, state.category, state.stage)
         if baselines is None:
             return []
@@ -144,14 +148,14 @@ def compute_game_stars(match_id):
             for s in skaters.values() if s['role'] in role_set
         ]
         rated.sort(key=lambda r: -r['rating'])
-        return rated[:TOP_N_SKATERS]
+        return rated
 
-    def top_goalie():
+    def rate_all_goalies():
         if not goalies:
-            return None
+            return []
         baselines = _load_baselines(GOALIE_BASELINE_TYPES, state.category, state.stage)
         if baselines is None:
-            return None
+            return []
         rated = [
             {
                 'player_id': g['player_id'], 'name': g['name'], 'photo_url': g['photo_url'],
@@ -161,19 +165,30 @@ def compute_game_stars(match_id):
             for g in goalies.values()
         ]
         rated.sort(key=lambda r: -r['rating'])
-        return rated[0]
+        return rated
 
-    forwards = top_skaters(FORWARD_ROLES, FORWARD_WEIGHTS, BASELINE_TYPES['forward'])
-    defense = top_skaters(DEFENSE_ROLES, DEFENSE_WEIGHTS, BASELINE_TYPES['defense'])
-    goalie = top_goalie()
+    all_forwards = rate_all_skaters(FORWARD_ROLES, FORWARD_WEIGHTS, BASELINE_TYPES['forward'])
+    all_defense = rate_all_skaters(DEFENSE_ROLES, DEFENSE_WEIGHTS, BASELINE_TYPES['defense'])
+    all_goalies_rated = rate_all_goalies()
+
+    forwards = all_forwards[:TOP_N_SKATERS]
+    defense = all_defense[:TOP_N_SKATERS]
+    goalie = all_goalies_rated[0] if all_goalies_rated else None
 
     if not forwards and not defense and not goalie:
         # No per-game baseline exists yet for this category/stage (season too young) -
         # nothing to rank against, so no GameStars row at all rather than an empty one.
         return None
 
+    # Every rated player (not just the 3/3/1 stars), keyed by player_id - lets the match's
+    # own line-by-line stat tables show a Rating for everyone, not only the picks above.
+    all_ratings = {r['player_id']: r['rating'] for r in all_forwards + all_defense + all_goalies_rated}
+
     stars, _ = GameStars.objects.update_or_create(
         match_id=match_id,
-        defaults={'category': state.category, 'facts': {'forwards': forwards, 'defense': defense, 'goalie': goalie}},
+        defaults={
+            'category': state.category,
+            'facts': {'forwards': forwards, 'defense': defense, 'goalie': goalie, 'all_ratings': all_ratings},
+        },
     )
     return stars
