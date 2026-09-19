@@ -964,14 +964,34 @@ function renderPlayerComparison(players) {
 // #comparePlayerA, away in #comparePlayerB (see renderComparison) - so there's no way
 // to pick two players from the same side, matching how a real head-to-head comparison
 // should work here.
+// Last name for sort purposes only - player names come through as "First Last"
+// (compute_fliiga_stats.py's Name field), so the last whitespace-separated token is a
+// good enough heuristic without needing a backend change just for this ordering.
+function lastNameOf(fullName) {
+    const parts = (fullName || '').trim().split(/\s+/);
+    return parts[parts.length - 1] || '';
+}
+
 function populateTeamPlayerSelect(select, players, teamName) {
     select.innerHTML = '<option value="">Select a player...</option>';
-    players.filter(p => p.team === teamName).forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = p.name + (p.position ? ' (' + p.position + ')' : '');
-        select.appendChild(opt);
-    });
+    players
+        .filter(p => p.team === teamName)
+        // Best Rating first; players with no Rating yet (too few games - see
+        // MIN_GAMES_FOR_RATING) sort to the bottom rather than the top or scattered
+        // throughout. Within a tie (including "no rating" vs "no rating"), alphabetical
+        // by last name.
+        .sort((a, b) => {
+            const ratingA = a.rating != null ? a.rating : -Infinity;
+            const ratingB = b.rating != null ? b.rating : -Infinity;
+            if (ratingB !== ratingA) return ratingB - ratingA;
+            return lastNameOf(a.name).localeCompare(lastNameOf(b.name), 'fi');
+        })
+        .forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.id;
+            opt.textContent = p.name + (p.position ? ' (' + p.position + ')' : '');
+            select.appendChild(opt);
+        });
 }
 
 function renderComparison(data) {
