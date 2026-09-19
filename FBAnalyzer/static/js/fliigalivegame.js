@@ -888,14 +888,32 @@ const PLAYER_COMPARE_METRICS = [
     { label: 'Rating', key: 'rating', higherIsBetter: true, format: v => v.toFixed(1) },
 ];
 
+// Builds the inner HTML for a comparison table's <th> - a logo/photo (crest for teams,
+// headshot for players, falling back to an initial-letter badge when a player has no
+// photo on file) above the name, so both tables read as "who" first, stats second.
+function buildCompareHeaderCell(logoUrl, name, isAvatar) {
+    let image;
+    if (logoUrl) {
+        image = '<img class="landing-compare-table__logo' + (isAvatar ? ' landing-compare-table__logo--avatar' : '')
+            + '" src="' + logoUrl + '" alt="">';
+    } else if (isAvatar) {
+        image = '<span class="landing-compare-table__logo landing-compare-table__logo--avatar '
+            + 'landing-compare-table__logo--placeholder">' + (name ? name.charAt(0) : '?') + '</span>';
+    } else {
+        image = '';
+    }
+    return image + '<div>' + name + '</div>';
+}
+
 // Builds a 3-column (label, side A, side B) comparison <table> into `table`, using
 // `metrics` ({label, higherIsBetter, format} + either value(obj) for team facts or
 // key for flat player objects) to pull each row's two raw values and decide which
 // side "wins" it (bolded via .landing-compare-table__winner, see landing.css).
-function renderCompareTable(table, headerA, headerB, metrics, objA, objB, getValue) {
+// headerCellA/B are pre-built <th> inner HTML - see buildCompareHeaderCell.
+function renderCompareTable(table, headerCellA, headerCellB, metrics, objA, objB, getValue) {
     table.innerHTML = '';
     const header = document.createElement('tr');
-    header.innerHTML = '<th></th><th>' + headerA + '</th><th>' + headerB + '</th>';
+    header.innerHTML = '<th></th><th>' + headerCellA + '</th><th>' + headerCellB + '</th>';
     table.appendChild(header);
 
     metrics.forEach(metric => {
@@ -930,9 +948,26 @@ function renderPlayerComparison(players) {
     }
     table.style.display = '';
     renderCompareTable(
-        table, playerA.name, playerB.name, PLAYER_COMPARE_METRICS, playerA, playerB,
+        table,
+        buildCompareHeaderCell(playerA.photo, playerA.name, true),
+        buildCompareHeaderCell(playerB.photo, playerB.name, true),
+        PLAYER_COMPARE_METRICS, playerA, playerB,
         (metric, obj) => obj[metric.key]
     );
+}
+
+// Populates one player <select> with only that team's players - home in
+// #comparePlayerA, away in #comparePlayerB (see renderComparison) - so there's no way
+// to pick two players from the same side, matching how a real head-to-head comparison
+// should work here.
+function populateTeamPlayerSelect(select, players, teamName) {
+    select.innerHTML = '<option value="">Select a player...</option>';
+    players.filter(p => p.team === teamName).forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = p.name + (p.position ? ' (' + p.position + ')' : '');
+        select.appendChild(opt);
+    });
 }
 
 function renderComparison(data) {
@@ -955,22 +990,19 @@ function renderComparison(data) {
     content.style.display = '';
 
     renderCompareTable(
-        document.getElementById('teamComparisonTable'), data.team_a.team_name, data.team_b.team_name,
+        document.getElementById('teamComparisonTable'),
+        buildCompareHeaderCell(data.team_a.facts.team_crest, data.team_a.team_name, false),
+        buildCompareHeaderCell(data.team_b.facts.team_crest, data.team_b.team_name, false),
         TEAM_COMPARE_METRICS, data.team_a.facts, data.team_b.facts,
         (metric, facts) => metric.value(facts)
     );
 
     const selectA = document.getElementById('comparePlayerA');
     const selectB = document.getElementById('comparePlayerB');
-    [selectA, selectB].forEach(select => {
-        select.innerHTML = '<option value="">Select a player...</option>';
-        data.players.forEach(p => {
-            const opt = document.createElement('option');
-            opt.value = p.id;
-            opt.textContent = p.name + ' (' + p.team + ')';
-            select.appendChild(opt);
-        });
-    });
+    document.getElementById('comparePlayerALabel').textContent = 'Home player - ' + data.team_a.team_name;
+    document.getElementById('comparePlayerBLabel').textContent = 'Away player - ' + data.team_b.team_name;
+    populateTeamPlayerSelect(selectA, data.players, data.team_a.team_name);
+    populateTeamPlayerSelect(selectB, data.players, data.team_b.team_name);
     const onPick = () => renderPlayerComparison(data.players);
     selectA.onchange = onPick;
     selectB.onchange = onPick;

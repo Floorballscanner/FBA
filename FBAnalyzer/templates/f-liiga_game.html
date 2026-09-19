@@ -89,12 +89,18 @@ are built and refreshed every 10 seconds by fliigalivegame.js.
             <div id="comparisonContent" style="display:none;">
                 <table class="landing-compare-table" id="teamComparisonTable"></table>
                 <div class="landing-compare-picker">
-                    <select id="comparePlayerA">
-                        <option value="">Select a player...</option>
-                    </select>
-                    <select id="comparePlayerB">
-                        <option value="">Select a player...</option>
-                    </select>
+                    <div class="landing-compare-picker__col">
+                        <label class="landing-compare-picker__label" id="comparePlayerALabel" for="comparePlayerA">Home player</label>
+                        <select id="comparePlayerA">
+                            <option value="">Select a player...</option>
+                        </select>
+                    </div>
+                    <div class="landing-compare-picker__col">
+                        <label class="landing-compare-picker__label" id="comparePlayerBLabel" for="comparePlayerB">Away player</label>
+                        <select id="comparePlayerB">
+                            <option value="">Select a player...</option>
+                        </select>
+                    </div>
                 </div>
                 <table class="landing-compare-table" id="playerComparisonTable" style="display:none;"></table>
             </div>

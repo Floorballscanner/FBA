@@ -606,6 +606,7 @@ def fliiga_comparison_api(request):
     players = [
         {
             'id': p['ID'], 'name': p['Name'], 'team': p['Team'], 'position': p['Position'],
+            'photo': p.get('photo', ''),
             'games': p['Games'], 'goals': p['G'], 'assists': p['A'], 'points': p['P'],
             'xg': p['xG'], 'plus_minus': p['plus_minus'], 'rating': p.get('Rating'),
         }

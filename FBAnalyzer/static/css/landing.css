@@ -1797,6 +1797,49 @@ a.landing-card:hover {
     background: #fff;
 }
 
+.landing-compare-picker__col {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.landing-compare-picker__label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--landing-muted);
+}
+
+/* Team crest / player headshot shown above the name in each comparison table's header
+   row (buildCompareHeaderCell, fliigalivegame.js) - the "make it visual" pass. Crests
+   use --logo (square, contain-fit); player headshots add --avatar (circular, cover-fit,
+   with a --placeholder initial-letter fallback for players with no photo on file). */
+.landing-compare-table__logo {
+    display: block;
+    margin: 0 auto 6px;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.landing-compare-table__logo--avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    background: #eceef3;
+}
+
+.landing-compare-table__logo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    background: var(--landing-navy);
+}
+
 /* Comparison-tool teaser (templates/f-liiga_game.html) - a modifier on the shared
    .landing-teaser-cta base (kept for the plain version still used on the Statistics
    page), styled as a self-contained "locked feature" card: icon badge, soft gradient,
