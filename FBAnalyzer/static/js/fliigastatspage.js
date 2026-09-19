@@ -34,6 +34,8 @@ const TABLE_COLUMNS = {
     players: [
         ['Name', 'string', 'Player'],
         ['Team', 'string', 'Team'],
+        ['Position', 'string', 'Pos'],
+        ['Rating', 'number', 'Rating'],
         ['Nr', 'string', 'Nr'],
         ['Games', 'number', 'Games'],
         ['G', 'number', 'G'],
@@ -55,6 +57,7 @@ const TABLE_COLUMNS = {
     goalies: [
         ['Name', 'string', 'Goalie'],
         ['Team', 'string', 'Team'],
+        ['Rating', 'number', 'Rating'],
         ['Games', 'number', 'Games'],
         ['Minutes', 'number', 'TOC'],
         ['xGOTA', 'number', 'xGOTA'],
@@ -82,7 +85,11 @@ const TABLE_LEGENDS = {
         + '<b>PP%</b> = percentage of powerplays that ended in a goal, '
         + '<b>SH%</b> = percentage of shorthanded situations the opponent failed to score in, '
         + '<b>GFAxG/GAAxG</b> = Goals minus expected Goals, for/against.',
-    players: '<b>Nr</b> = Shirt number, '
+    players: '<b>Pos</b> = Position (OL/VL/KH = forward, VP/OP = defense, MV = goalie), '
+        + '<b>Rating</b> = 0-100 season rating, blending points/xG5v5/+- (weighted differently for '
+        + 'forwards vs. defense) into a single number - only shown after at least 2 games played, ranked '
+        + 'only against players of the same role (a forward and a defenseman are never compared directly), '
+        + '<b>Nr</b> = Shirt number, '
         + '<b>G/A/P</b> = Goals/Assists/Points, '
         + '<b>S</b> = Shots (on target and missed), '
         + '<b>SM</b> = Shots that missed the target, '
@@ -92,7 +99,9 @@ const TABLE_LEGENDS = {
         + '<b>xGSH/xGOTSH</b> = same, while shorthanded, '
         + '<b>xG6v5/xGOT6v5</b> = same, with this player\'s own goalie pulled, '
         + '<b>GAxG</b> = Goals minus expected Goals (all situations).',
-    goalies: '<b>TOC</b> = Time On Court (minutes), reconstructed from save/goal-against event timestamps since Torneopal doesn\'t track it directly, '
+    goalies: '<b>Rating</b> = 0-100 season rating, blending GSAx/60 and Save% into a single number - '
+        + 'only shown after at least 2 games played, ranked only against other goalies, '
+        + '<b>TOC</b> = Time On Court (minutes), reconstructed from save/goal-against event timestamps since Torneopal doesn\'t track it directly, '
         + '<b>xGOTA</b> = expected Goals (on-target shots) faced, '
         + '<b>GA</b> = Goals allowed, '
         + '<b>SA</b> = Shots on target faced, '
@@ -193,7 +202,24 @@ const TEAM_TOP3_CARDS = [
     { label: 'Shorthanded %', direction: 'desc', value: row => row.Games ? row.SHperc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.crest, name: row => row.team_name },
 ];
 
+// Forwards and defense are rated on different scales (see TABLE_LEGENDS.players), so "best
+// player overall" isn't a single list - two separate role-filtered TOP3 cards instead, each
+// using the same renderTop3Cards machinery: a row whose Position isn't in the target role
+// group returns NaN, which the existing Number.isFinite filter already drops.
+const FORWARD_POSITIONS = ['OL', 'VL', 'KH'];
+const DEFENSE_POSITIONS = ['VP', 'OP'];
+
 const PLAYER_TOP3_CARDS = [
+    {
+        label: 'Best Forwards', direction: 'desc',
+        value: row => (FORWARD_POSITIONS.includes(row.Position) && row.Rating != null) ? row.Rating : NaN,
+        format: v => v.toFixed(1), logo: row => row.photo, name: row => row.Name, sub: row => row.Team,
+    },
+    {
+        label: 'Best Defense', direction: 'desc',
+        value: row => (DEFENSE_POSITIONS.includes(row.Position) && row.Rating != null) ? row.Rating : NaN,
+        format: v => v.toFixed(1), logo: row => row.photo, name: row => row.Name, sub: row => row.Team,
+    },
     { label: 'Goals', direction: 'desc', value: row => row.G, format: v => String(v), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
     { label: 'Assists', direction: 'desc', value: row => row.A, format: v => String(v), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
     { label: 'Points', direction: 'desc', value: row => row.P, format: v => String(v), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
@@ -205,6 +231,11 @@ const PLAYER_TOP3_CARDS = [
 ];
 
 const GOALIE_TOP3_CARDS = [
+    {
+        label: 'Best Goalies', direction: 'desc',
+        value: row => row.Rating != null ? row.Rating : NaN,
+        format: v => v.toFixed(1), logo: row => row.photo, name: row => row.Name, sub: row => row.Team,
+    },
     { label: 'GA / 60', direction: 'asc', value: row => row.PlaySeconds ? row.GA60 : NaN, format: v => v.toFixed(2), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
     { label: 'xGOT / 60', direction: 'desc', value: row => row.PlaySeconds ? row.xGOTA60 : NaN, format: v => v.toFixed(2), logo: row => row.photo, name: row => row.Name, sub: row => row.Team },
     { label: 'Save %', direction: 'desc', value: row => row.SA ? row.SavePerc * 100 : NaN, format: v => v.toFixed(1) + '%', logo: row => row.photo, name: row => row.Name, sub: row => row.Team },

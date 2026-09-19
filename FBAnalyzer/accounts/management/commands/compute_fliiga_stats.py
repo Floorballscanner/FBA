@@ -50,6 +50,86 @@ def round2(x):
     return round(x, 2)
 
 
+# Player rating (0-100): forwards and defense are each rated within their own pool, using
+# different metric weights - never compared to each other on one flat scale. Every reference
+# system from other sports does the same (PFF grades, soccer's PlayeRank, NHL WAR/GSAx-based
+# models): a defenseman's points-per-game sits at a structurally lower scale than a forward's
+# (confirmed with real 2026-2027 data: median 0.11 xG5v5/game for defense vs. 0.32 for
+# forwards - roughly a third), so comparing them directly would just reward playing forward.
+# See insights.lineups.ROLE_LABELS for what each role abbreviation means.
+FORWARD_ROLES = {'OL', 'VL', 'KH'}
+DEFENSE_ROLES = {'VP', 'OP'}
+MIN_GAMES_FOR_RATING = 2  # skaters need at least this many games before a Rating is published,
+# rather than one noisy game standing in for a season - with real 2026-2027 data (2 weeks into
+# the season) almost nobody clears this yet, so most players simply show no Rating for now;
+# expected, not a bug, and fills in as more games are played.
+
+FORWARD_WEIGHTS = {'points_per_game': 0.40, 'xg5v5_per_game': 0.35, 'plus_minus_per_game': 0.25}
+DEFENSE_WEIGHTS = {'plus_minus_per_game': 0.45, 'points_per_game': 0.30, 'xg5v5_per_game': 0.25}
+# GAxG (goals vs. expected) is deliberately excluded from both - insights.live_insights already
+# treats this exact quantity as "luck" (xg_over_under's own framing), not a stable skill signal
+# over a still-young season. Shot volume is excluded too - redundant with xG5v5, which already
+# reflects shot quality *and* implies volume; including both would double-count the same thing.
+GOALIE_WEIGHTS = {'gsax60': 0.70, 'saveperc': 0.30}  # GSAx60 is already shot-quality-adjusted
+# (via real ice time from goalie_stints below) and weighted higher than the unadjusted save%.
+
+
+def _percentile_of(value, values):
+    """Exact percentile rank (0-100) of value within values. Simpler than
+    insights.percentiles.percentile_rank, which interpolates against a compressed 7-point
+    HistoricalBaseline summary because that's all a stored baseline keeps - here the whole
+    population is already in memory, so this just counts directly. Ties split the credit
+    between them (the "mean rank" convention) rather than all claiming the same rank."""
+    n = len(values)
+    if n <= 1:
+        return 50.0
+    below = sum(1 for v in values if v < value)
+    equal = sum(1 for v in values if v == value)
+    return (below + 0.5 * (equal - 1)) / (n - 1) * 100
+
+
+def _rate_skaters(player_stats):
+    """Adds a 0-100 'Rating' key to every player dict in player_stats (None if they haven't
+    played enough games yet - see MIN_GAMES_FOR_RATING, or if their Position isn't a
+    recognised forward/defense role)."""
+    for p in player_stats:
+        p['Rating'] = None
+    for role_set, weights in ((FORWARD_ROLES, FORWARD_WEIGHTS), (DEFENSE_ROLES, DEFENSE_WEIGHTS)):
+        pool = [p for p in player_stats if p.get('Position') in role_set and p['Games'] >= MIN_GAMES_FOR_RATING]
+        if not pool:
+            continue
+        rates = {
+            p['ID']: {
+                'points_per_game': p['P'] / p['Games'],
+                'xg5v5_per_game': p['xG5v5'] / p['Games'],
+                'plus_minus_per_game': p['plus_minus'] / p['Games'],
+            }
+            for p in pool
+        }
+        percentiles = {metric: [r[metric] for r in rates.values()] for metric in weights}
+        for p in pool:
+            r = rates[p['ID']]
+            p['Rating'] = round(
+                sum(weight * _percentile_of(r[metric], percentiles[metric]) for metric, weight in weights.items()), 1
+            )
+
+
+def _rate_goalies(goalie_stats):
+    """Same idea as _rate_skaters, one pool (goalies aren't split by role)."""
+    for g in goalie_stats:
+        g['Rating'] = None
+    pool = [g for g in goalie_stats if g['Games'] >= MIN_GAMES_FOR_RATING]
+    if not pool:
+        return
+    gsax60_values = [g['GSAx60'] for g in pool]
+    saveperc_values = [g['SavePerc'] for g in pool]
+    for g in pool:
+        g['Rating'] = round(
+            GOALIE_WEIGHTS['gsax60'] * _percentile_of(g['GSAx60'], gsax60_values)
+            + GOALIE_WEIGHTS['saveperc'] * _percentile_of(g['SavePerc'], saveperc_values), 1
+        )
+
+
 
 def sanitize_period_lengths(raw):
     """Torneopal's period_lengths_sec occasionally reports a wildly wrong value for
@@ -605,5 +685,8 @@ class Command(BaseCommand):
 
         goalie_stats = [g for g in goalies_all if g['Games'] > 0]
         goalie_stats.sort(key=lambda g: g['GSAxPerGame'], reverse=True)
+
+        _rate_skaters(player_stats)
+        _rate_goalies(goalie_stats)
 
         return team_stats, player_stats, goalie_stats
