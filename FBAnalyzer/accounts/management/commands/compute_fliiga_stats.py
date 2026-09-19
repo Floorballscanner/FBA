@@ -24,13 +24,14 @@ combination). Use --season/--category/--stage to force one combination,
 including an already-final one, e.g. for the initial backfill.
 """
 
-from collections import defaultdict
+from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from django.core.management.base import BaseCommand
 
 from accounts.models import FliigaSeasonStats
 from insights.xg_model import calc_xg
+from insights.lineups import parse_position
 from insights.special_teams import (
     abs_game_time, parse_penalty_segments, situation_from_goal_tag, compute_shot_situations, find_goal_tag,
 )
@@ -48,6 +49,18 @@ def num(value, cast=float, default=0):
 
 def round2(x):
     return round(x, 2)
+
+
+def _resolve_position(raw_position, player_id, positions_by_player):
+    """getTeam's own 'position' field comes back blank for many players (confirmed: 95/213
+    men in the 2024-2025 regular season alone, including several of the league's top
+    scorers) - each match's own lineup entry is far more reliable, so fall back to the role
+    seen most often across a player's actual appearances (positions_by_player, built from
+    match_details' lineups - see compute_stats)."""
+    if raw_position:
+        return raw_position
+    fallback = positions_by_player.get(player_id)
+    return fallback.most_common(1)[0][0] if fallback else ''
 
 
 # Player rating (0-100): forwards and defense are each rated within their own pool, using
@@ -563,6 +576,12 @@ class Command(BaseCommand):
         plus_by_player = defaultdict(int)
         minus_by_player = defaultdict(int)
         photo_by_player = {}
+        # getTeam's own 'position' field (used below) comes back blank for a large share of
+        # players, especially in past seasons (confirmed: 95/213 men in 2024-2025 regular
+        # season alone) - including some of the league's top scorers. Each match's own lineup
+        # entry ("KH/1" etc.) is far more reliable, so track the role seen most often across
+        # a player's actual appearances as a fallback.
+        positions_by_player = defaultdict(Counter)
         for match in matches_played:
             match_id = match['match_id']
             for lineup in match_details.get(match_id, {}).get('lineups') or []:
@@ -571,6 +590,9 @@ class Command(BaseCommand):
                     games_by_player[player_id].add(match_id)
                     if player_id not in photo_by_player and lineup.get('img_url'):
                         photo_by_player[player_id] = lineup['img_url']
+                    role, _ = parse_position(lineup.get('position'))
+                    if role:
+                        positions_by_player[player_id][role] += 1
             for event in match_details.get(match_id, {}).get('events') or []:
                 player_id = str(event.get('player_id') or '')
                 if not player_id:
@@ -587,12 +609,13 @@ class Command(BaseCommand):
             detail = team_details.get(team['team_id'], {})
             for p in detail.get('players') or []:
                 player_id = str(p.get('player_id'))
+                position = _resolve_position(p.get('position'), player_id, positions_by_player)
                 players_all.append({
                     'ID': player_id,
                     'Team': detail.get('team_name'),
                     'Name': f"{p.get('first_name', '')} {p.get('last_name', '')}".strip(),
                     'Nr': p.get('shirt_number'),
-                    'Position': p.get('position'),
+                    'Position': position,
                     'photo': photo_by_player.get(player_id, ''),
                     'Games': len(games_by_player.get(player_id, ())),
                     'G': 0, 'A': assists_by_player.get(player_id, 0), 'P': 0,
@@ -644,9 +667,9 @@ class Command(BaseCommand):
         for team in teams:
             detail = team_details.get(team['team_id'], {})
             for p in detail.get('players') or []:
-                if p.get('position') != 'MV':
-                    continue
                 player_id = str(p.get('player_id'))
+                if _resolve_position(p.get('position'), player_id, positions_by_player) != 'MV':
+                    continue
                 goalies_all.append({
                     'ID': player_id,
                     'Name': f"{p.get('last_name', '')} {p.get('first_name', '')}".strip(),
