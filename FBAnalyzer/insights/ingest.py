@@ -285,7 +285,16 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
     state.last_event_abs_time = max_abs_time
     state.save()
 
-    if new_status != 'scheduled':
+    # Only while the match is actually live, or on the single tick where it just
+    # finished (to catch final-state insights - final xG gap, final GSAx, etc.).
+    # A match sitting at 'played' otherwise never has new MatchEvent data to
+    # evaluate, so a later tick here (someone's browser tab left open and still
+    # polling long after the game ended) just re-ran the same final numbers
+    # through evaluate_match_insights every INSIGHT_EVAL_GATE once the 5-minute
+    # per-type cooldown in maybe_create() had expired - hours of duplicate
+    # "still up big in xG" / "goalie still having a rough night" rows drowning
+    # out the rarer, more interesting insight types in sheer volume.
+    if new_status == 'live' or (new_status == 'played' and not was_played):
         now = timezone.now()
         cutoff = now - INSIGHT_EVAL_GATE
         # Atomic claim: an UPDATE...WHERE only one concurrent request's tick
