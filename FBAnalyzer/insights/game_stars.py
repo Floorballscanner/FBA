@@ -95,7 +95,7 @@ def _player_game_stats(events, lineups):
             xg5v5 = sum(float(s.xg or 0) for s in p_shots if s.situation == 'EVEN')
             skaters[lineup.player_id] = {
                 'player_id': lineup.player_id, 'name': lineup.player_name, 'team_id': lineup.team_id,
-                'role': lineup.role,
+                'photo_url': lineup.photo_url, 'role': lineup.role,
                 'metrics': {
                     'points_per_game': goals + assists_by_player.get(lineup.player_id, 0),
                     'xg5v5_per_game': xg5v5,
@@ -112,6 +112,7 @@ def _player_game_stats(events, lineups):
             xgot_faced = sum(float(e.xgot or 0) for e in g_events)
             goalies[lineup.player_id] = {
                 'player_id': lineup.player_id, 'name': lineup.player_name, 'team_id': lineup.team_id,
+                'photo_url': lineup.photo_url,
                 'metrics': {'gsax': xgot_faced - ga, 'saveperc': (shots_faced - ga) / shots_faced},
             }
     return skaters, goalies
@@ -136,7 +137,7 @@ def compute_game_stars(match_id):
             return []
         rated = [
             {
-                'player_id': s['player_id'], 'name': s['name'],
+                'player_id': s['player_id'], 'name': s['name'], 'photo_url': s['photo_url'],
                 'team_id': s['team_id'], 'team_name': team_names.get(s['team_id'], ''),
                 'rating': _blend(s['metrics'], weights, baselines),
             }
@@ -153,7 +154,7 @@ def compute_game_stars(match_id):
             return None
         rated = [
             {
-                'player_id': g['player_id'], 'name': g['name'],
+                'player_id': g['player_id'], 'name': g['name'], 'photo_url': g['photo_url'],
                 'team_id': g['team_id'], 'team_name': team_names.get(g['team_id'], ''),
                 'rating': _blend(g['metrics'], GOALIE_WEIGHTS, baselines),
             }

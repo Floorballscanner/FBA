@@ -170,6 +170,7 @@ window.onload = function() {
             updateInsightsPanel(match, pushPromise);
             updatePregameLayout(match, lineups);
             updateComparisonPanel(match);
+            updateGameStarsPanel(match);
             lineups.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;
@@ -1030,6 +1031,66 @@ function renderComparison(data) {
     const onPick = () => renderPlayerComparison(data.players);
     selectA.onchange = onPick;
     selectB.onchange = onPick;
+}
+
+// Post-game only (insights.game_stars.compute_game_stars only ever produces a row once a
+// match reaches 'played'), not license-gated - same visibility rule as insightsSection's own
+// post-game branch. Renders nothing (leaves the section hidden) for a too-young season with
+// no per-game baseline yet - see that module's docstring - or before the match is over.
+function buildStarRow(photoUrl, name, teamName, rating) {
+    const row = document.createElement('div');
+    row.className = 'landing-result__player-row';
+    const img = document.createElement('img');
+    img.alt = '';
+    img.src = photoUrl || '/static/logo_transparent.png';
+    const span = document.createElement('span');
+    span.textContent = name + ' (' + teamName + ') – ' + rating;
+    row.appendChild(img);
+    row.appendChild(span);
+    return row;
+}
+
+function updateGameStarsPanel(match) {
+    const section = document.getElementById('gameStarsSection');
+    if (section == null) {
+        return;
+    }
+    if (match.status !== 'Played') {
+        section.style.display = 'none';
+        return;
+    }
+    // Post-game facts don't change once computed - fetch at most once per page load.
+    if (section.dataset.loaded) {
+        return;
+    }
+    section.dataset.loaded = '1';
+
+    fetch('/apis/insights/game-stars/' + match.match_id + '/')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status !== 'ready') {
+                section.style.display = 'none';
+                return;
+            }
+            const forwardsEl = document.getElementById('gameStarsForwards');
+            const defenseEl = document.getElementById('gameStarsDefense');
+            const goalieEl = document.getElementById('gameStarsGoalie');
+            forwardsEl.innerHTML = '';
+            defenseEl.innerHTML = '';
+            goalieEl.innerHTML = '';
+            (data.facts.forwards || []).forEach(p => {
+                forwardsEl.appendChild(buildStarRow(p.photo_url, p.name, p.team_name, p.rating));
+            });
+            (data.facts.defense || []).forEach(p => {
+                defenseEl.appendChild(buildStarRow(p.photo_url, p.name, p.team_name, p.rating));
+            });
+            if (data.facts.goalie) {
+                const g = data.facts.goalie;
+                goalieEl.appendChild(buildStarRow(g.photo_url, g.name, g.team_name, g.rating));
+            }
+            section.style.display = '';
+        })
+        .catch(() => { section.style.display = 'none'; });
 }
 
 // Pregame-only, license-gated (see templates/f-liiga_game.html - a locked tier renders
@@ -1934,6 +1995,7 @@ function updateData() {
             updateInsightsPanel(match, pushPromise);
             updatePregameLayout(match, lineups);
             updateComparisonPanel(match);
+            updateGameStarsPanel(match);
             lineups.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;
