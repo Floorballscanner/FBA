@@ -20,6 +20,11 @@ Poisson-binomial aggregation the live win-probability model uses (see
 insights.win_probability) - but only the resulting call (clear favorite / slight favorite /
 even) is surfaced, deliberately as text only, with no percentage in either the text or
 facts; a bare win-share number invites second-guessing that the qualitative call doesn't.
+Unlike every other rate-based angle below, its inputs ARE season-scoped (see the note on
+player-level facts below for why) - a stale multi-season blend once rated a newly-promoted
+team as a near-even matchup against a reigning champion, purely because our own database
+happened to have 67 tracked games for one team and 1 for the other, spread across seasons
+in which either team's roster/division could have been completely different.
 
 Each angle has 2-3 equivalent phrasings, picked deterministically per
 (match, angle, team) via insights.phrasing.vary - otherwise the same angle
@@ -238,14 +243,24 @@ def compute_pregame_analysis(match_id, force=False):
 
     rates_a = _rate_stats(state.team_a_id, history_a)
     rates_b = _rate_stats(state.team_b_id, history_b)
+
+    # win_probability is the one rate-based angle that IS season-scoped, unlike every
+    # other rate/record/streak candidate below - a team's roster (and division: a club
+    # freshly promoted into F-Liiga is a common case) can change enough between seasons
+    # that pooling prior-season results into a projected scoreline is actively
+    # misleading, not just noisy. If a team hasn't played enough games yet this season,
+    # this simply doesn't fire yet (same graceful-omission behavior as the player-level
+    # facts below) rather than falling back to older seasons.
+    season_rates_a = _rate_stats(state.team_a_id, season_history_a)
+    season_rates_b = _rate_stats(state.team_b_id, season_history_b)
     win_prob = None
-    if rates_a and rates_b:
+    if season_rates_a and season_rates_b:
         # Blend each team's own attack with the opponent's own defense to project
         # tonight's goals, same idea as any goals-based matchup projection - then
         # convert to a win share via the same Poisson-binomial aggregation the live
         # win-probability model uses (see insights.win_probability).
-        lambda_a = (rates_a['xgf_per_game'] + rates_b['xga_per_game']) / 2
-        lambda_b = (rates_b['xgf_per_game'] + rates_a['xga_per_game']) / 2
+        lambda_a = (season_rates_a['xgf_per_game'] + season_rates_b['xga_per_game']) / 2
+        lambda_b = (season_rates_b['xgf_per_game'] + season_rates_a['xga_per_game']) / 2
         wp_a, wp_b = compute_pregame_win_probability(lambda_a, lambda_b)
         win_prob = {'team_a': round(wp_a, 3), 'team_b': round(wp_b, 3)}
     wins_a, losses_a, streak_a = _record_and_streak(state.team_a_id, history_a)
