@@ -1794,7 +1794,11 @@ a.landing-card:hover {
    compact, custom-drawn arrow - the select itself is small; only the surrounding
    native box was ever "too large". */
 .landing-compare-picker select {
-    flex: 1 1 200px;
+    /* Not flex:1 1 200px - .landing-compare-picker__col (the select's actual parent) is
+       flex-direction:column, so a flex-basis there sets a preferred HEIGHT, not width,
+       which is what was inflating this to ~200px tall. Plain 100% width is correct here;
+       .landing-compare-picker__col's own flex:1 1 200px already sizes the column itself. */
+    width: 100%;
     -webkit-appearance: none;
     appearance: none;
     padding: 8px 32px 8px 12px;
