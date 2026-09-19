@@ -15,6 +15,12 @@ ROLE_LABELS = {
 }
 SKATER_ROLES = ('VL', 'KH', 'OL', 'VP', 'OP')  # left-to-right display order for one line
 GOALIE_ROLE = 'MV'
+# Shared forward/defense role grouping - used everywhere a player needs to be rated or
+# pooled by broad position (accounts.compute_fliiga_stats' season Rating, insights.game_stars'
+# per-game rating, insights.compute_baselines' per-game-instance baselines) rather than by
+# exact line slot.
+FORWARD_ROLES = {'OL', 'VL', 'KH'}
+DEFENSE_ROLES = {'VP', 'OP'}
 
 POSITION_RE = re.compile(r'^([A-Z]{2})/(\d+)$')
 

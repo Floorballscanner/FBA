@@ -166,6 +166,27 @@ class PostGameAnalysis(models.Model):
         return f'Post-game {self.match_id}'
 
 
+class GameStars(models.Model):
+    """'Stars of the game' - best 3 forwards, best 3 defense, best goalie for
+    one match, computed once (see insights.game_stars.compute_game_stars) the
+    moment the match reaches 'played', same trigger/lifecycle as
+    PostGameAnalysis. Kept as its own model rather than folded into
+    PostGameAnalysis.facts: a structurally distinct, list-shaped concern with
+    its own missing-baseline fallback (no HistoricalBaseline yet this early
+    in a season means no stars at all, independent of whether the post-game
+    narrative itself has enough to say), matching this file's existing
+    one-model-per-concern split (Pregame/PostGame/Insight/HistoricalBaseline
+    are all separate for the same reason)."""
+
+    match_id = models.CharField(max_length=20, unique=True)
+    category = models.CharField(max_length=10, choices=MatchEvent.CATEGORY_CHOICES)
+    facts = models.JSONField(default=dict, blank=True)  # {'forwards': [...], 'defense': [...], 'goalie': {...}}
+    computed_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'Game stars {self.match_id}'
+
+
 class HistoricalBaseline(models.Model):
     STAGE_CHOICES = [('regular', 'Regular season'), ('playoffs', 'Playoffs')]
 

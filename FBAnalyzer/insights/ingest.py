@@ -17,6 +17,7 @@ from django.db.models import Q
 from django.utils import timezone
 
 from .event_codes import GOAL_AGAINST_CODE, GOALIE_CODES, ON_TARGET_CODES, SHOT_CODES
+from .game_stars import compute_game_stars
 from .lineups import parse_position
 from .live_insights import evaluate_match_insights
 from .models import MatchEvent, MatchLineup, MatchState
@@ -327,6 +328,7 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
         # cost as compute_post_game_analysis below, not a per-tick re-check.
         _ingest_lineups(match_id, category, lineups, overwrite_existing=True)
         compute_post_game_analysis(match_id)
+        compute_game_stars(match_id)
 
     return new_status
 

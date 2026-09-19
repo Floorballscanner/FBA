@@ -31,7 +31,7 @@ from django.views.decorators.http import require_GET, require_POST
 from accounts.decorators import license_required
 
 from .ingest import fetch_and_ingest_match, ingest_match_tick
-from .models import Insight, PostGameAnalysis, PregameAnalysis
+from .models import GameStars, Insight, PostGameAnalysis, PregameAnalysis
 from .pregame import compute_pregame_analysis
 from .torneopal import CATEGORY_ID_MAP, STAGE_GROUP_ID_MAP
 
@@ -133,6 +133,34 @@ def post_game_analysis(request, match_id):
         'computed_at': analysis.computed_at.isoformat(),
         'text': analysis.text,
         'facts': analysis.facts,
+    })
+
+
+@login_required
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
+@require_GET
+def game_stars(request, match_id):
+    """Lazy-fallback for GameStars, same pattern as post_game_analysis above - eagerly
+    computed by ingest_match_tick's post-game trigger branch for a live-pushed match;
+    recovered here via fetch_and_ingest_match for one that wasn't. 'status': 'unavailable'
+    (distinct from 'pending', which implies a retry will help) covers the case where the
+    match is genuinely played but its category/stage doesn't have per-game baselines yet
+    (season too young - see insights.game_stars' module docstring) - re-fetching won't
+    change that outcome."""
+
+    stars = GameStars.objects.filter(match_id=match_id).first()
+    if stars is None:
+        fetch_and_ingest_match(match_id)
+        stars = GameStars.objects.filter(match_id=match_id).first()
+    if stars is None:
+        if PostGameAnalysis.objects.filter(match_id=match_id).exists():
+            return JsonResponse({'status': 'unavailable'})
+        return JsonResponse({'status': 'pending'})
+
+    return JsonResponse({
+        'status': 'ready',
+        'computed_at': stars.computed_at.isoformat(),
+        'facts': stars.facts,
     })
 
 
