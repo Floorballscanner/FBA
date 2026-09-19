@@ -440,7 +440,19 @@ class UpdatePlayer(generics.UpdateAPIView):
 @login_required
 @license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliigagame(request, nr):
-    return render(request, 'f-liiga_game.html')
+    # Deliberately not the license_tier the app_layout.html context processor exposes
+    # (accounts.context_processors.license_status) - that one returns {} (so no
+    # license_tier at all) for staff/superusers and for any license with no expires_at,
+    # since it only exists to power the "N days left" banner, not gate features. The
+    # comparison-tool teaser below needs the real tier (for the right upgrade copy) and
+    # the real unlock decision (via _comparison_locked, same check the API endpoint
+    # itself enforces) regardless of either of those short-circuits, so both are
+    # computed fresh here instead.
+    license = get_active_license(request.user)
+    return render(request, 'f-liiga_game.html', {
+        'license_tier': license.tier if license else '',
+        'comparison_unlocked': not _comparison_locked(request),
+    })
 @login_required
 @license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_main(request):
