@@ -890,30 +890,34 @@ const PLAYER_COMPARE_METRICS = [
 
 // Builds the inner HTML for a comparison table's <th> - a logo/photo (crest for teams,
 // headshot for players, falling back to an initial-letter badge when a player has no
-// photo on file) above the name, so both tables read as "who" first, stats second.
-function buildCompareHeaderCell(logoUrl, name, isAvatar) {
+// photo on file). Teams show the crest only (showName=false - the two teams' colors/
+// crests are already distinctive enough, and dropping the name keeps the header
+// compact); players keep their name underneath, since a face alone isn't identifying
+// the way a crest is.
+function buildCompareHeaderCell(logoUrl, name, isAvatar, showName) {
     let image;
     if (logoUrl) {
         image = '<img class="landing-compare-table__logo' + (isAvatar ? ' landing-compare-table__logo--avatar' : '')
-            + '" src="' + logoUrl + '" alt="">';
+            + '" src="' + logoUrl + '" alt="' + name + '">';
     } else if (isAvatar) {
         image = '<span class="landing-compare-table__logo landing-compare-table__logo--avatar '
             + 'landing-compare-table__logo--placeholder">' + (name ? name.charAt(0) : '?') + '</span>';
     } else {
         image = '';
     }
-    return image + '<div>' + name + '</div>';
+    return image + (showName ? '<div>' + name + '</div>' : '');
 }
 
-// Builds a 3-column (label, side A, side B) comparison <table> into `table`, using
-// `metrics` ({label, higherIsBetter, format} + either value(obj) for team facts or
-// key for flat player objects) to pull each row's two raw values and decide which
-// side "wins" it (bolded via .landing-compare-table__winner, see landing.css).
+// Builds a 3-column (side A value, stat label, side B value) comparison <table> into
+// `table` - the stat name sits in the middle, matching a "head to head" layout, with
+// each side's value on its own side. `metrics` ({label, higherIsBetter, format} +
+// either value(obj) for team facts or key for flat player objects) drives each row;
+// the winning side is bolded (.landing-compare-table__winner, see landing.css).
 // headerCellA/B are pre-built <th> inner HTML - see buildCompareHeaderCell.
 function renderCompareTable(table, headerCellA, headerCellB, metrics, objA, objB, getValue) {
     table.innerHTML = '';
     const header = document.createElement('tr');
-    header.innerHTML = '<th></th><th>' + headerCellA + '</th><th>' + headerCellB + '</th>';
+    header.innerHTML = '<th>' + headerCellA + '</th><th></th><th>' + headerCellB + '</th>';
     table.appendChild(header);
 
     metrics.forEach(metric => {
@@ -925,8 +929,8 @@ function renderCompareTable(table, headerCellA, headerCellB, metrics, objA, objB
         const bWins = valA != null && valB != null && (metric.higherIsBetter ? valB > valA : valB < valA);
         const row = document.createElement('tr');
         row.innerHTML =
-            '<td>' + metric.label + '</td>'
-            + '<td class="' + (aWins ? 'landing-compare-table__winner' : '') + '">' + cellA + '</td>'
+            '<td class="' + (aWins ? 'landing-compare-table__winner' : '') + '">' + cellA + '</td>'
+            + '<td class="landing-compare-table__label">' + metric.label + '</td>'
             + '<td class="' + (bWins ? 'landing-compare-table__winner' : '') + '">' + cellB + '</td>';
         table.appendChild(row);
     });
@@ -949,8 +953,8 @@ function renderPlayerComparison(players) {
     table.style.display = '';
     renderCompareTable(
         table,
-        buildCompareHeaderCell(playerA.photo, playerA.name, true),
-        buildCompareHeaderCell(playerB.photo, playerB.name, true),
+        buildCompareHeaderCell(playerA.photo, playerA.name, true, true),
+        buildCompareHeaderCell(playerB.photo, playerB.name, true, true),
         PLAYER_COMPARE_METRICS, playerA, playerB,
         (metric, obj) => obj[metric.key]
     );
@@ -991,8 +995,8 @@ function renderComparison(data) {
 
     renderCompareTable(
         document.getElementById('teamComparisonTable'),
-        buildCompareHeaderCell(data.team_a.facts.team_crest, data.team_a.team_name, false),
-        buildCompareHeaderCell(data.team_b.facts.team_crest, data.team_b.team_name, false),
+        buildCompareHeaderCell(data.team_a.facts.team_crest, data.team_a.team_name, false, false),
+        buildCompareHeaderCell(data.team_b.facts.team_crest, data.team_b.team_name, false, false),
         TEAM_COMPARE_METRICS, data.team_a.facts, data.team_b.facts,
         (metric, facts) => metric.value(facts)
     );

@@ -1768,11 +1768,13 @@ a.landing-card:hover {
     border-bottom: 1px solid #eceef3;
 }
 
-.landing-compare-table th:first-child,
-.landing-compare-table td:first-child {
-    text-align: left;
+/* Stat name sits in the middle column now (side A value | label | side B value) -
+   narrower and muted so the two values on either side stay the visual focus. */
+.landing-compare-table th:nth-child(2),
+.landing-compare-table td.landing-compare-table__label {
+    width: 40%;
     color: var(--landing-muted);
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .landing-compare-table td.landing-compare-table__winner {
@@ -1787,14 +1789,24 @@ a.landing-card:hover {
     flex-wrap: wrap;
 }
 
+/* appearance:none strips each browser/OS's own native control chrome (which was
+   rendering noticeably bulkier than the rest of this hand-styled page) in favor of a
+   compact, custom-drawn arrow - the select itself is small; only the surrounding
+   native box was ever "too large". */
 .landing-compare-picker select {
     flex: 1 1 200px;
-    padding: 10px 12px;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 8px 32px 8px 12px;
     border-radius: 10px;
     border: 1px solid #dcdfe8;
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.4;
     color: var(--landing-ink);
-    background: #fff;
+    background:
+        #fff
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235b5f6e' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        no-repeat right 12px center;
 }
 
 .landing-compare-picker__col {
@@ -1812,21 +1824,27 @@ a.landing-card:hover {
     color: var(--landing-muted);
 }
 
-/* Team crest / player headshot shown above the name in each comparison table's header
-   row (buildCompareHeaderCell, fliigalivegame.js) - the "make it visual" pass. Crests
-   use --logo (square, contain-fit); player headshots add --avatar (circular, cover-fit,
-   with a --placeholder initial-letter fallback for players with no photo on file). */
+/* Team crest / player headshot shown in each comparison table's header row
+   (buildCompareHeaderCell, fliigalivegame.js) - the "make it visual" pass. Crests use
+   --logo alone (square, contain-fit, no name below - the crest is the whole header
+   now); player headshots add --avatar (circular, cover-fit, with a --placeholder
+   initial-letter fallback for players with no photo on file). Sized up from the first
+   pass now that the crest carries the header alone with no name text next to it. */
 .landing-compare-table__logo {
     display: block;
     margin: 0 auto 6px;
-    width: 36px;
-    height: 36px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
 }
 
 .landing-compare-table__logo--avatar {
     border-radius: 50%;
     object-fit: cover;
+    /* Same face-crop treatment as .player-avatar/.top3-card__logo--avatar - Torneopal's
+       player photos are waist-up shots with the face in roughly the top fifth, so a
+       plain center-crop (object-fit:cover's default) lands on the jersey/chest instead. */
+    object-position: center top;
     background: #eceef3;
 }
 
