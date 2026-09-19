@@ -1918,3 +1918,64 @@ a.landing-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 14px 28px -12px rgba(48, 70, 251, 0.7);
 }
+
+/* Stars of the Game (see fliigalivegame.js's buildStarRow) - photo, then a two-row info
+   block: star-rank icons + name on top, "Rating <bold number>" underneath. */
+.landing-stars-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+}
+
+.landing-stars-row img {
+    height: 48px;
+    width: auto;
+    max-width: 48px;
+    border-radius: 8px;
+    object-fit: contain;
+    background: #eef0f5;
+}
+
+.landing-stars-row__info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.landing-stars-row__name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    color: var(--landing-ink);
+}
+
+.landing-stars-row__stars {
+    display: inline-flex;
+    gap: 1px;
+    flex: none;
+}
+
+.landing-stars-row__star {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: #c9ccd6;
+    stroke-width: 1.5;
+}
+
+.landing-stars-row__star--filled {
+    fill: #f5b301;
+    stroke: #f5b301;
+}
+
+.landing-stars-row__rating {
+    font-size: 13px;
+    color: var(--landing-muted);
+}
+
+.landing-stars-row__rating strong {
+    color: var(--landing-ink);
+    font-weight: 700;
+}

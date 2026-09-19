@@ -1037,16 +1037,48 @@ function renderComparison(data) {
 // match reaches 'played'), not license-gated - same visibility rule as insightsSection's own
 // post-game branch. Renders nothing (leaves the section hidden) for a too-young season with
 // no per-game baseline yet - see that module's docstring - or before the match is over.
-function buildStarRow(photoUrl, name, teamName, rating) {
+const STAR_ICON_PATH = 'M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279' +
+    '-6.064-5.828 8.332-1.151z';
+
+// filledCount stars filled gold out of 3 - the classic hockey "3 stars of the game" idiom,
+// applied per group here: forwards/defense rank 1-3 within their own group (3/2/1 stars),
+// the lone goalie always shows as a full 3-star performance (see updateGameStarsPanel).
+function starIconsHTML(filledCount) {
+    let html = '';
+    for (let i = 0; i < 3; i++) {
+        const filled = i < filledCount;
+        html += '<svg class="landing-stars-row__star' + (filled ? ' landing-stars-row__star--filled' : '')
+            + '" viewBox="0 0 24 24" aria-hidden="true"><path d="' + STAR_ICON_PATH + '"></path></svg>';
+    }
+    return html;
+}
+
+function buildStarRow(photoUrl, name, teamName, rating, starCount) {
     const row = document.createElement('div');
-    row.className = 'landing-result__player-row';
+    row.className = 'landing-stars-row';
+
     const img = document.createElement('img');
     img.alt = '';
     img.src = photoUrl || '/static/logo_transparent.png';
-    const span = document.createElement('span');
-    span.textContent = name + ' (' + teamName + ') – ' + rating;
     row.appendChild(img);
-    row.appendChild(span);
+
+    const info = document.createElement('div');
+    info.className = 'landing-stars-row__info';
+
+    const nameRow = document.createElement('div');
+    nameRow.className = 'landing-stars-row__name';
+    nameRow.innerHTML = '<span class="landing-stars-row__stars">' + starIconsHTML(starCount) + '</span>';
+    const nameText = document.createElement('span');
+    nameText.textContent = name + ' (' + teamName + ')';
+    nameRow.appendChild(nameText);
+    info.appendChild(nameRow);
+
+    const ratingRow = document.createElement('div');
+    ratingRow.className = 'landing-stars-row__rating';
+    ratingRow.innerHTML = 'Rating <strong>' + rating + '</strong>';
+    info.appendChild(ratingRow);
+
+    row.appendChild(info);
     return row;
 }
 
@@ -1078,15 +1110,17 @@ function updateGameStarsPanel(match) {
             forwardsEl.innerHTML = '';
             defenseEl.innerHTML = '';
             goalieEl.innerHTML = '';
-            (data.facts.forwards || []).forEach(p => {
-                forwardsEl.appendChild(buildStarRow(p.photo_url, p.name, p.team_name, p.rating));
+            // Already ranked best-first by insights.game_stars - index 0 is the 3-star
+            // performance, index 1 is 2-star, index 2 is 1-star.
+            (data.facts.forwards || []).forEach((p, i) => {
+                forwardsEl.appendChild(buildStarRow(p.photo_url, p.name, p.team_name, p.rating, 3 - i));
             });
-            (data.facts.defense || []).forEach(p => {
-                defenseEl.appendChild(buildStarRow(p.photo_url, p.name, p.team_name, p.rating));
+            (data.facts.defense || []).forEach((p, i) => {
+                defenseEl.appendChild(buildStarRow(p.photo_url, p.name, p.team_name, p.rating, 3 - i));
             });
             if (data.facts.goalie) {
                 const g = data.facts.goalie;
-                goalieEl.appendChild(buildStarRow(g.photo_url, g.name, g.team_name, g.rating));
+                goalieEl.appendChild(buildStarRow(g.photo_url, g.name, g.team_name, g.rating, 3));
             }
             section.style.display = '';
         })
