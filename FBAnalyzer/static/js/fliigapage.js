@@ -1139,6 +1139,17 @@ function updateData() {
             const lineups_json = match.lineups;
             t1name = match.team_A_name;
             t2name = match.team_B_name;
+            // Torneopal's own venue_name/venue_city_name for this match - useful mainly
+            // pregame, before there's much else to show on the page, but left visible
+            // throughout since the venue doesn't change once the game starts.
+            const venueBlock = document.getElementById('venueBlock');
+            if (match.venue_name) {
+                document.getElementById('game_venue').innerHTML = match.venue_city_name
+                    ? match.venue_name + ', ' + match.venue_city_name : match.venue_name;
+                venueBlock.style.display = '';
+            } else {
+                venueBlock.style.display = 'none';
+            }
             // Torneopal reports 0 both for "genuinely no attendance recorded" and for "not
             // updated yet" - there's no way to tell those apart, so treat 0 as "nothing to
             // show" rather than displaying a literal 0 that reads as a real, empty crowd.
