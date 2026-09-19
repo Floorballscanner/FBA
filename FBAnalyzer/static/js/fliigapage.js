@@ -386,6 +386,7 @@ function drawCharts() {
     var pldatat1l1 = new google.visualization.DataTable();
     pldatat1l1.addColumn('string', 'Player');
     pldatat1l1.addColumn('string', 'Pos.');
+    pldatat1l1.addColumn('number', 'Rating');
     pldatat1l1.addColumn('number', 'G');
     pldatat1l1.addColumn('number', 'A');
     pldatat1l1.addColumn('number', 'P');
@@ -400,11 +401,11 @@ function drawCharts() {
     pldatat1l1.addColumn('number', 'xGOTSH');
     pldatat1l1.addColumn('number', 'xG6v5');
     pldatat1l1.addColumn('number', 'xGOT6v5');
-    pldatat1l1.addColumn('number', 'Rating');
 
     var pldatat1l2 = new google.visualization.DataTable();
     pldatat1l2.addColumn('string', 'Player');
     pldatat1l2.addColumn('string', 'Pos.');
+    pldatat1l2.addColumn('number', 'Rating');
     pldatat1l2.addColumn('number', 'G');
     pldatat1l2.addColumn('number', 'A');
     pldatat1l2.addColumn('number', 'P');
@@ -419,11 +420,11 @@ function drawCharts() {
     pldatat1l2.addColumn('number', 'xGOTSH');
     pldatat1l2.addColumn('number', 'xG6v5');
     pldatat1l2.addColumn('number', 'xGOT6v5');
-    pldatat1l2.addColumn('number', 'Rating');
 
     var pldatat1l3 = new google.visualization.DataTable();
     pldatat1l3.addColumn('string', 'Player');
     pldatat1l3.addColumn('string', 'Pos.');
+    pldatat1l3.addColumn('number', 'Rating');
     pldatat1l3.addColumn('number', 'G');
     pldatat1l3.addColumn('number', 'A');
     pldatat1l3.addColumn('number', 'P');
@@ -438,11 +439,11 @@ function drawCharts() {
     pldatat1l3.addColumn('number', 'xGOTSH');
     pldatat1l3.addColumn('number', 'xG6v5');
     pldatat1l3.addColumn('number', 'xGOT6v5');
-    pldatat1l3.addColumn('number', 'Rating');
 
     var pldatat1l4 = new google.visualization.DataTable();
     pldatat1l4.addColumn('string', 'Player');
     pldatat1l4.addColumn('string', 'Pos.');
+    pldatat1l4.addColumn('number', 'Rating');
     pldatat1l4.addColumn('number', 'G');
     pldatat1l4.addColumn('number', 'A');
     pldatat1l4.addColumn('number', 'P');
@@ -457,11 +458,11 @@ function drawCharts() {
     pldatat1l4.addColumn('number', 'xGOTSH');
     pldatat1l4.addColumn('number', 'xG6v5');
     pldatat1l4.addColumn('number', 'xGOT6v5');
-    pldatat1l4.addColumn('number', 'Rating');
 
     var pldatat2l1 = new google.visualization.DataTable();
     pldatat2l1.addColumn('string', 'Player');
     pldatat2l1.addColumn('string', 'Pos.');
+    pldatat2l1.addColumn('number', 'Rating');
     pldatat2l1.addColumn('number', 'G');
     pldatat2l1.addColumn('number', 'A');
     pldatat2l1.addColumn('number', 'P');
@@ -476,11 +477,11 @@ function drawCharts() {
     pldatat2l1.addColumn('number', 'xGOTSH');
     pldatat2l1.addColumn('number', 'xG6v5');
     pldatat2l1.addColumn('number', 'xGOT6v5');
-    pldatat2l1.addColumn('number', 'Rating');
 
     var pldatat2l2 = new google.visualization.DataTable();
     pldatat2l2.addColumn('string', 'Player');
     pldatat2l2.addColumn('string', 'Pos.');
+    pldatat2l2.addColumn('number', 'Rating');
     pldatat2l2.addColumn('number', 'G');
     pldatat2l2.addColumn('number', 'A');
     pldatat2l2.addColumn('number', 'P');
@@ -495,11 +496,11 @@ function drawCharts() {
     pldatat2l2.addColumn('number', 'xGOTSH');
     pldatat2l2.addColumn('number', 'xG6v5');
     pldatat2l2.addColumn('number', 'xGOT6v5');
-    pldatat2l2.addColumn('number', 'Rating');
 
     var pldatat2l3 = new google.visualization.DataTable();
     pldatat2l3.addColumn('string', 'Player');
     pldatat2l3.addColumn('string', 'Pos.');
+    pldatat2l3.addColumn('number', 'Rating');
     pldatat2l3.addColumn('number', 'G');
     pldatat2l3.addColumn('number', 'A');
     pldatat2l3.addColumn('number', 'P');
@@ -514,11 +515,11 @@ function drawCharts() {
     pldatat2l3.addColumn('number', 'xGOTSH');
     pldatat2l3.addColumn('number', 'xG6v5');
     pldatat2l3.addColumn('number', 'xGOT6v5');
-    pldatat2l3.addColumn('number', 'Rating');
 
     var pldatat2l4 = new google.visualization.DataTable();
     pldatat2l4.addColumn('string', 'Player');
     pldatat2l4.addColumn('string', 'Pos.');
+    pldatat2l4.addColumn('number', 'Rating');
     pldatat2l4.addColumn('number', 'G');
     pldatat2l4.addColumn('number', 'A');
     pldatat2l4.addColumn('number', 'P');
@@ -533,75 +534,74 @@ function drawCharts() {
     pldatat2l4.addColumn('number', 'xGOTSH');
     pldatat2l4.addColumn('number', 'xG6v5');
     pldatat2l4.addColumn('number', 'xGOT6v5');
-    pldatat2l4.addColumn('number', 'Rating');
 
     lineup_t1l1.forEach(lineup => {
-        pldatat1l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldatat1l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
-        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5, ratingFor(lineup)]);
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t1l2.forEach(lineup => {
-        pldatat1l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldatat1l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
-        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5, ratingFor(lineup)]);
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t1l3.forEach(lineup => {
-        pldatat1l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldatat1l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
-        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5, ratingFor(lineup)]);
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t1l4.forEach(lineup => {
-        pldatat1l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldatat1l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
-        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5, ratingFor(lineup)]);
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t2l1.forEach(lineup => {
-        pldatat2l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldatat2l1.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
-        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5, ratingFor(lineup)]);
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t2l2.forEach(lineup => {
-        pldatat2l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldatat2l2.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
-        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5, ratingFor(lineup)]);
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t2l3.forEach(lineup => {
-        pldatat2l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldatat2l3.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
-        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5, ratingFor(lineup)]);
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
     lineup_t2l4.forEach(lineup => {
-        pldatat2l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.assists,
+        pldatat2l4.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.assists,
         lineup.goals + lineup.assists, lineup.shots, lineup.plus, lineup.minus,
-        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5, ratingFor(lineup)]);
+        lineup.xG5v5, lineup.xGOT5v5, lineup.xGPP, lineup.xGOTPP, lineup.xGSH, lineup.xGOTSH, lineup.xG6v5, lineup.xGOT6v5]);
     });
 
     var pldatat1g = new google.visualization.DataTable();
     pldatat1g.addColumn('string', 'Player');
     pldatat1g.addColumn('string', 'Pos.');
+    pldatat1g.addColumn('number', 'Rating');
     pldatat1g.addColumn('number', 'GA');
     pldatat1g.addColumn('number', 'SA');
     pldatat1g.addColumn('number', 'xGOTA');
     pldatat1g.addColumn('number', 'GSAx');
-    pldatat1g.addColumn('number', 'Rating');
 
     var pldatat2g = new google.visualization.DataTable();
     pldatat2g.addColumn('string', 'Player');
     pldatat2g.addColumn('string', 'Pos.');
+    pldatat2g.addColumn('number', 'Rating');
     pldatat2g.addColumn('number', 'GA');
     pldatat2g.addColumn('number', 'SA');
     pldatat2g.addColumn('number', 'xGOTA');
     pldatat2g.addColumn('number', 'GSAx');
-    pldatat2g.addColumn('number', 'Rating');
 
     lineup_t1g.forEach(lineup => {
-        pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.saves,
-        lineup.xGOT,lineup.xGOT - lineup.goals, ratingFor(lineup)]);
+        pldatat1g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.saves,
+        lineup.xGOT,lineup.xGOT - lineup.goals]);
     });
 
     lineup_t2g.forEach(lineup => {
-        pldatat2g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, lineup.goals, lineup.saves,
-        lineup.xGOT,lineup.xGOT - lineup.goals, ratingFor(lineup)]);
+        pldatat2g.addRow(["#" + lineup.shirt_number + " " + lineup.player_name, lineup.position, ratingFor(lineup), lineup.goals, lineup.saves,
+        lineup.xGOT,lineup.xGOT - lineup.goals]);
     });
 
     var options = {
@@ -1505,14 +1505,14 @@ function updateData() {
             var arrayPoints = Object.entries(lineups);
             // Filter out objects with position values "MV/1" or "MV/2"
             arrayPoints = arrayPoints.filter(obj => obj[1].position !== 'MV/1' && obj[1].position !== 'MV/2');
-            // Sort the array based on xG values in descending order
-            arrayPoints.sort((a, b) => b[1].points - a[1].points);
+            // Points descending, goals scored as the tiebreak (more goals ranks higher on an equal points total).
+            arrayPoints.sort((a, b) => b[1].points - a[1].points || b[1].goals - a[1].goals);
 
             if (arrayPoints.length >= 3) {
             pl_id1 = arrayPoints[0][1].player_id;
-            pts = arrayPoints[0][1].goals + arrayPoints[0][1].assists;
+            var pts1 = arrayPoints[0][1].goals + arrayPoints[0][1].assists;
             document.getElementById('p1s').innerHTML = arrayPoints[0][1].player_name + "&emsp;" +
-            arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + pts;
+            arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + pts1;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id1)
             .then(response => response.json())
             .then(data => {
@@ -1525,15 +1525,15 @@ function updateData() {
                     document.getElementById('imgsp1').src = "/static/silhouette.png";
                     document.getElementById("imgsp1").style.width = "40px";
                     document.getElementById('p1s').innerHTML = "&emsp;" + arrayPoints[0][1].player_name + "&emsp;" +
-                    arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + pts;
+                    arrayPoints[0][1].goals + " + " + arrayPoints[0][1].assists + " = " + pts1;
 
                 }
             })
 
             pl_id2 = arrayPoints[1][1].player_id;
-            pts = arrayPoints[1][1].goals + arrayPoints[1][1].assists;
+            var pts2 = arrayPoints[1][1].goals + arrayPoints[1][1].assists;
             document.getElementById('p2s').innerHTML = arrayPoints[1][1].player_name + "&emsp;" +
-            arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + pts;
+            arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + pts2;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id2)
             .then(response => response.json())
             .then(data => {
@@ -1546,15 +1546,15 @@ function updateData() {
                     document.getElementById('imgsp2').src = "/static/silhouette.png";
                     document.getElementById("imgsp2").style.width = "40px";
                     document.getElementById('p2s').innerHTML = "&emsp;" + arrayPoints[1][1].player_name + "&emsp;" +
-                    arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + pts;
+                    arrayPoints[1][1].goals + " + " + arrayPoints[1][1].assists + " = " + pts2;
 
                 }
             })
 
             pl_id3 = arrayPoints[2][1].player_id;
-            pts = arrayPoints[2][1].goals + arrayPoints[2][1].assists;
+            var pts3 = arrayPoints[2][1].goals + arrayPoints[2][1].assists;
             document.getElementById('p3s').innerHTML = arrayPoints[2][1].player_name + "&emsp;" +
-            arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + pts;
+            arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + pts3;
             fetch("https://salibandy.api.torneopal.com/taso/rest/getPlayer?api_key="+api_key+"&player_id="+pl_id3)
             .then(response => response.json())
             .then(data => {
@@ -1567,7 +1567,7 @@ function updateData() {
                     document.getElementById('imgsp3').src = "/static/silhouette.png";
                     document.getElementById("imgsp3").style.width = "40px";
                     document.getElementById('p3s').innerHTML = "&emsp;" + arrayPoints[2][1].player_name + "&emsp;" +
-                    arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + pts;
+                    arrayPoints[2][1].goals + " + " + arrayPoints[2][1].assists + " = " + pts3;
 
                 }
             })
