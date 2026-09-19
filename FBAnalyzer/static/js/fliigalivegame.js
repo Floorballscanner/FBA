@@ -169,6 +169,7 @@ window.onload = function() {
             const pushPromise = pushMatchEvents(match, modifiedEvents, modifiedLineups);
             updateInsightsPanel(match, pushPromise);
             updatePregameLayout(match, lineups);
+            updateComparisonPanel(match);
             lineups.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;
@@ -865,6 +866,136 @@ function updatePregameLayout(match, lineups) {
         const hasLineups = lineups != null && lineups.length > 0;
         playerStats.style.display = (isScheduled && !hasLineups) ? 'none' : '';
     }
+}
+
+const TEAM_COMPARE_METRICS = [
+    { label: 'Win %', value: f => f.win_perc != null ? f.win_perc * 100 : null, format: v => v.toFixed(1) + '%', higherIsBetter: true },
+    { label: 'Goals For / Game', value: f => f.gf_per_game, format: v => v.toFixed(2), higherIsBetter: true },
+    { label: 'Goals Against / Game', value: f => f.ga_per_game, format: v => v.toFixed(2), higherIsBetter: false },
+    { label: 'xG For / Game', value: f => f.xgf_per_game, format: v => v.toFixed(2), higherIsBetter: true },
+    { label: 'xG Against / Game', value: f => f.xga_per_game, format: v => v.toFixed(2), higherIsBetter: false },
+    { label: 'Powerplay %', value: f => f.pp_perc != null ? f.pp_perc * 100 : null, format: v => v.toFixed(1) + '%', higherIsBetter: true },
+    { label: 'Penalty Kill %', value: f => f.sh_perc != null ? f.sh_perc * 100 : null, format: v => v.toFixed(1) + '%', higherIsBetter: true },
+];
+
+const PLAYER_COMPARE_METRICS = [
+    { label: 'Games', key: 'games', higherIsBetter: true, format: v => String(v) },
+    { label: 'Goals', key: 'goals', higherIsBetter: true, format: v => String(v) },
+    { label: 'Assists', key: 'assists', higherIsBetter: true, format: v => String(v) },
+    { label: 'Points', key: 'points', higherIsBetter: true, format: v => String(v) },
+    { label: 'xG', key: 'xg', higherIsBetter: true, format: v => v.toFixed(2) },
+    { label: '+/-', key: 'plus_minus', higherIsBetter: true, format: v => (v > 0 ? '+' + v : String(v)) },
+    { label: 'Rating', key: 'rating', higherIsBetter: true, format: v => v.toFixed(1) },
+];
+
+// Builds a 3-column (label, side A, side B) comparison <table> into `table`, using
+// `metrics` ({label, higherIsBetter, format} + either value(obj) for team facts or
+// key for flat player objects) to pull each row's two raw values and decide which
+// side "wins" it (bolded via .landing-compare-table__winner, see landing.css).
+function renderCompareTable(table, headerA, headerB, metrics, objA, objB, getValue) {
+    table.innerHTML = '';
+    const header = document.createElement('tr');
+    header.innerHTML = '<th></th><th>' + headerA + '</th><th>' + headerB + '</th>';
+    table.appendChild(header);
+
+    metrics.forEach(metric => {
+        const valA = getValue(metric, objA);
+        const valB = getValue(metric, objB);
+        const cellA = (valA != null) ? metric.format(valA) : '-';
+        const cellB = (valB != null) ? metric.format(valB) : '-';
+        const aWins = valA != null && valB != null && (metric.higherIsBetter ? valA > valB : valA < valB);
+        const bWins = valA != null && valB != null && (metric.higherIsBetter ? valB > valA : valB < valA);
+        const row = document.createElement('tr');
+        row.innerHTML =
+            '<td>' + metric.label + '</td>'
+            + '<td class="' + (aWins ? 'landing-compare-table__winner' : '') + '">' + cellA + '</td>'
+            + '<td class="' + (bWins ? 'landing-compare-table__winner' : '') + '">' + cellB + '</td>';
+        table.appendChild(row);
+    });
+}
+
+function renderPlayerComparison(players) {
+    const table = document.getElementById('playerComparisonTable');
+    const idA = document.getElementById('comparePlayerA').value;
+    const idB = document.getElementById('comparePlayerB').value;
+    if (!idA || !idB) {
+        table.style.display = 'none';
+        return;
+    }
+    const playerA = players.find(p => p.id === idA);
+    const playerB = players.find(p => p.id === idB);
+    if (!playerA || !playerB) {
+        table.style.display = 'none';
+        return;
+    }
+    table.style.display = '';
+    renderCompareTable(
+        table, playerA.name, playerB.name, PLAYER_COMPARE_METRICS, playerA, playerB,
+        (metric, obj) => obj[metric.key]
+    );
+}
+
+function renderComparison(data) {
+    const pending = document.getElementById('comparisonPending');
+    const content = document.getElementById('comparisonContent');
+    if (data.status === 'locked') {
+        // Shouldn't normally happen - #comparisonContent only exists in the DOM for
+        // unlocked tiers, so this fetch wouldn't have fired otherwise (see
+        // updateComparisonPanel) - but a license downgrade mid-session could hit this,
+        // so fail closed rather than showing a "not ready yet" message that's just wrong.
+        document.getElementById('comparisonSection').style.display = 'none';
+        return;
+    }
+    if (data.status !== 'ready') {
+        content.style.display = 'none';
+        pending.style.display = '';
+        return;
+    }
+    pending.style.display = 'none';
+    content.style.display = '';
+
+    renderCompareTable(
+        document.getElementById('teamComparisonTable'), data.team_a.team_name, data.team_b.team_name,
+        TEAM_COMPARE_METRICS, data.team_a.facts, data.team_b.facts,
+        (metric, facts) => metric.value(facts)
+    );
+
+    const selectA = document.getElementById('comparePlayerA');
+    const selectB = document.getElementById('comparePlayerB');
+    [selectA, selectB].forEach(select => {
+        select.innerHTML = '<option value="">Select a player...</option>';
+        data.players.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.id;
+            opt.textContent = p.name + ' (' + p.team + ')';
+            select.appendChild(opt);
+        });
+    });
+    const onPick = () => renderPlayerComparison(data.players);
+    selectA.onchange = onPick;
+    selectB.onchange = onPick;
+}
+
+// Pregame-only, license-gated (see templates/f-liiga_game.html - a locked tier renders
+// a teaser instead of #comparisonContent, so there's simply nothing to fetch for them).
+// Only fetches once per page load: comparison data can't change before the match starts.
+function updateComparisonPanel(match) {
+    const section = document.getElementById('comparisonSection');
+    if (section == null) return;
+
+    const isPlayed = match.status === 'Played';
+    const isScheduled = !isPlayed && match.live_period === '';
+    section.style.display = isScheduled ? '' : 'none';
+    if (!isScheduled || section.dataset.loaded) return;
+
+    const content = document.getElementById('comparisonContent');
+    if (content == null) return;  // locked tier - teaser markup only, nothing to fetch
+    section.dataset.loaded = '1';
+
+    fetch('/accounts/fliiga_comparison_api/?match_id=' + match.match_id)
+        .then(response => response.json())
+        .then(data => renderComparison(data))
+        .catch(() => { section.style.display = 'none'; });
 }
 
 // Function updates the Live page every second
@@ -1746,6 +1877,7 @@ function updateData() {
             const pushPromise = pushMatchEvents(match, modifiedEvents, modifiedLineups);
             updateInsightsPanel(match, pushPromise);
             updatePregameLayout(match, lineups);
+            updateComparisonPanel(match);
             lineups.forEach(event => {
                 event.xGOT = 0;
                 event.xG = 0;

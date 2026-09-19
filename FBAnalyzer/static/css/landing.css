@@ -1749,3 +1749,50 @@ a.landing-card:hover {
     width: 26px;
     height: 26px;
 }
+
+/* Pregame team/player comparison table (templates/f-liiga_game.html) - a plain
+   3-column layout (metric label, team/player A value, team/player B value),
+   the winning side per row bolded rather than colored so it still reads fine
+   without relying on color contrast alone. */
+.landing-compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.landing-compare-table th,
+.landing-compare-table td {
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid #eceef3;
+}
+
+.landing-compare-table th:first-child,
+.landing-compare-table td:first-child {
+    text-align: left;
+    color: var(--landing-muted);
+    font-size: 13px;
+}
+
+.landing-compare-table td.landing-compare-table__winner {
+    font-weight: 700;
+    color: var(--landing-navy);
+}
+
+.landing-compare-picker {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.landing-compare-picker select {
+    flex: 1 1 200px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #dcdfe8;
+    font-size: 14px;
+    color: var(--landing-ink);
+    background: #fff;
+}

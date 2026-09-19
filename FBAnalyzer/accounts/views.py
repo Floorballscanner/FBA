@@ -546,3 +546,63 @@ def fliiga_team_stats_api(request):
         'computed_at': row.computed_at.isoformat(),
         'facts': row.facts,
     })
+
+def _comparison_locked(request):
+    """True if request.user's license shouldn't see the pregame team/player comparison
+    tool at all - Full/Team/Club only, no season exception (unlike
+    _fliiga_season_locked's teaser, which lets Live/Trial through for one season).
+    Staff (no license object) are never locked."""
+    license = get_active_license(request.user)
+    return license is not None and license.tier in FLIIGA_TEASER_TIERS
+
+@login_required
+@license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
+def fliiga_comparison_api(request):
+    """Pregame team + player comparison for one match - Full/Team/Club tiers only (see
+    _comparison_locked), reusing TeamSeasonStats/FliigaSeasonStats' already-computed
+    season facts rather than computing anything new."""
+
+    match_id = request.GET.get('match_id')
+    if not match_id:
+        return JsonResponse({'error': 'match_id is required'}, status=400)
+
+    state = MatchState.objects.filter(match_id=match_id).first()
+    if state is None or not state.team_a_id or not state.team_b_id:
+        return JsonResponse({'error': 'unknown match_id'}, status=404)
+
+    if _comparison_locked(request):
+        return JsonResponse({'status': 'locked'})
+
+    team_rows = {
+        row.team_id: row for row in TeamSeasonStats.objects.filter(
+            team_id__in=(state.team_a_id, state.team_b_id),
+            category=state.category, season_id=state.season_id, stage=state.stage,
+        )
+    }
+    team_a = team_rows.get(state.team_a_id)
+    team_b = team_rows.get(state.team_b_id)
+    if team_a is None or team_b is None:
+        return JsonResponse({'status': 'pending'})
+
+    season_stats = FliigaSeasonStats.objects.filter(
+        season_id=state.season_id, category=state.category, stage=state.stage,
+    ).first()
+    if season_stats is None:
+        return JsonResponse({'status': 'pending'})
+
+    team_names = (state.team_a_name, state.team_b_name)
+    players = [
+        {
+            'id': p['ID'], 'name': p['Name'], 'team': p['Team'], 'position': p['Position'],
+            'games': p['Games'], 'goals': p['G'], 'assists': p['A'], 'points': p['P'],
+            'xg': p['xG'], 'plus_minus': p['plus_minus'], 'rating': p.get('Rating'),
+        }
+        for p in season_stats.player_stats if p['Team'] in team_names
+    ]
+
+    return JsonResponse({
+        'status': 'ready',
+        'team_a': {'team_id': state.team_a_id, 'team_name': state.team_a_name, 'facts': team_a.facts},
+        'team_b': {'team_id': state.team_b_id, 'team_name': state.team_b_name, 'facts': team_b.facts},
+        'players': players,
+    })

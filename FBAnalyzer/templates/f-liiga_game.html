@@ -80,6 +80,46 @@ are built and refreshed every 10 seconds by fliigalivegame.js.
             <ul id="insightsFeed" class="insights-feed" style="display:none;"></ul>
         </div>
 
+        {% if license_tier == 'fliiga_full' or license_tier == 'team' or license_tier == 'club' %}
+        <div id="comparisonSection" class="landing-result__card" style="display:none;">
+            <h3 class="landing-result__section-title">Team &amp; Player Comparison</h3>
+            <p id="comparisonPending" class="landing-result__meta" style="display:none;">
+                Comparison data isn't ready for this match yet - check back soon.
+            </p>
+            <div id="comparisonContent" style="display:none;">
+                <table class="landing-compare-table" id="teamComparisonTable"></table>
+                <div class="landing-compare-picker">
+                    <select id="comparePlayerA">
+                        <option value="">Select a player...</option>
+                    </select>
+                    <select id="comparePlayerB">
+                        <option value="">Select a player...</option>
+                    </select>
+                </div>
+                <table class="landing-compare-table" id="playerComparisonTable" style="display:none;"></table>
+            </div>
+        </div>
+        {% else %}
+        <div id="comparisonSection" class="landing-result__card" style="display:none;">
+            <h3 class="landing-result__section-title">Team &amp; Player Comparison</h3>
+            <div class="landing-teaser-cta">
+                <h3>Upgrade to see</h3>
+                <p>Comparing teams and players before every match is available on F-Liiga Full, Team, and Club licenses.</p>
+                {% if license_tier == 'fliiga' %}
+                <form method="post" action="{% url 'stripe-checkout' 'fliiga_full_upgrade' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="landing-card__badge" style="border:none;font:inherit;cursor:pointer;">Upgrade to Full — 161&euro; &rarr;</button>
+                </form>
+                {% elif license_tier == 'fliiga_trial' %}
+                <form method="post" action="{% url 'stripe-checkout' 'fliiga_full' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="landing-card__badge" style="border:none;font:inherit;cursor:pointer;">Buy F-Liiga Full — 200&euro; &rarr;</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
         <div id="eventsSection">
             <h3 class="landing-result__section-title">Events</h3>
             <hr id="eventBar" style="display:none;">
