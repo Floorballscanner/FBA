@@ -92,7 +92,16 @@ window.onload = function() {
             t2name = match.team_B_name;
             document.getElementById('A_teamname').innerHTML = t1name
             document.getElementById('B_teamname').innerHTML = t2name
-            document.getElementById('game_attn').innerHTML = match.attendance;
+            // Torneopal reports 0 both for "genuinely no attendance recorded" and for "not
+            // updated yet" - there's no way to tell those apart, so treat 0 as "nothing to
+            // show" rather than displaying a literal 0 that reads as a real, empty crowd.
+            const attendanceBlock = document.getElementById('attendanceBlock');
+            if (Number(match.attendance) > 0) {
+                document.getElementById('game_attn').innerHTML = match.attendance;
+                attendanceBlock.style.display = '';
+            } else {
+                attendanceBlock.style.display = 'none';
+            }
             updateStreamButton(match);
             liveGameIsActive = (match.live_period != "" && match.status != "Played");
 
@@ -1626,7 +1635,16 @@ function updateData() {
             const lineups_json = match.lineups;
             t1name = match.team_A_name;
             t2name = match.team_B_name;
-            document.getElementById('game_attn').innerHTML = match.attendance;
+            // Torneopal reports 0 both for "genuinely no attendance recorded" and for "not
+            // updated yet" - there's no way to tell those apart, so treat 0 as "nothing to
+            // show" rather than displaying a literal 0 that reads as a real, empty crowd.
+            const attendanceBlock = document.getElementById('attendanceBlock');
+            if (Number(match.attendance) > 0) {
+                document.getElementById('game_attn').innerHTML = match.attendance;
+                attendanceBlock.style.display = '';
+            } else {
+                attendanceBlock.style.display = 'none';
+            }
             updateStreamButton(match);
             liveGameIsActive = (match.status != "Played" && match.live_period != "");
 
