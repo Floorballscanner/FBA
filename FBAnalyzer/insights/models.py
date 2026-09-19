@@ -120,6 +120,10 @@ class Insight(models.Model):
         ('special_teams_battle', 'Head-to-head power-play goal differential'),
         ('penalty_discipline', 'Penalty count gap between the two teams'),
         ('goalie_duel', 'Head-to-head GSAx between the two starting goalies'),
+        ('comeback', 'Biggest deficit overcome by the current leader'),
+        ('lead_change', 'Number of times the lead has changed hands'),
+        ('balanced_scoring', 'Goals spread across many different players'),
+        ('clean_sweep', 'Every line individually ahead of its counterpart'),
     ]
 
     match_id = models.CharField(max_length=20)

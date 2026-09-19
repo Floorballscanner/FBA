@@ -55,18 +55,42 @@ LINE_XG_GAP_MIN = 1.5  # 5v5-only xG gap between the same-numbered line on both 
 # percentile. PP/SH/6V5 shots are excluded so this reflects pure 5v5 play, not special teams.
 LINE_SCORE_MULT = 40  # gap * this = score; 40 makes a 1.5 xG gap score 60
 
-SPECIAL_TEAMS_BATTLE_MIN_NET = 2  # net PP goal differential, head-to-head - from real data (median 0, p90 1
-# across this season's 14 matches) a net of 2+ hasn't happened yet, so it's a clear signal when it does.
-SPECIAL_TEAMS_BATTLE_SCORE_MULT = 40  # net * this = score; 40 makes a net of 2 score 80
+SPECIAL_TEAMS_BATTLE_MIN_NET = 1  # net PP goal differential, head-to-head - revised down from 2 after a
+# full-season check (15 matches): net PP differential has never once reached 2 all season, so that bar
+# required something that's literally never happened. Still gated on combined PP opportunities >= 4 below,
+# so this won't fire on one fluky PP goal in an otherwise penalty-free game.
+SPECIAL_TEAMS_BATTLE_SCORE_MULT = 60  # net * this = score; 60 makes a net of 1 score 60
 
-PENALTY_DISCIPLINE_MIN_GAP = 3  # penalty-count gap between the two teams - from real data (median 1, p90 2,
-# p95 3, max 3 across this season's 14 matches) a gap of 3 sits at the very top of what's been observed.
-PENALTY_DISCIPLINE_SCORE_MULT = 20  # gap * this = score; 20 makes a gap of 3 score 60
+PENALTY_DISCIPLINE_MIN_GAP = 2  # penalty-count gap between the two teams - revised down from 3 after a
+# full-season check (15 matches): real gap distribution is 0,0,0,0,1,1,1,1,1,1,1,2,2,2,3 - median 1, p90 2,
+# and only the single most extreme game all season ever reached the old bar of 3. 2 is the real p90.
+PENALTY_DISCIPLINE_SCORE_MULT = 30  # gap * this = score; 30 makes a gap of 2 score 60
 
 GOALIE_DUEL_MIN_FACED = 3  # shots faced, before a starting goalie's GSAx is meaningful enough to compare
 GOALIE_DUEL_MIN_GAP = 5.0  # GSAx gap between the two starters - from real data (median 1.21, p75 3.88,
 # p90 5.93, p95 6.41 across this season's 14 matches) 5.0 sits right around the 90th percentile.
 GOALIE_DUEL_SCORE_MULT = 12  # gap * this = score; 12 makes a gap of 5.0 score 60
+
+COMEBACK_MIN_DEFICIT = 2  # goals - the biggest deficit the *current* leader faced earlier in the match,
+# before this fires. From a full-season check (15 matches), 2 is the real season max so far (one team
+# came back from down 2) - a first-pass bar, like the original 5 new types' thresholds were.
+COMEBACK_SCORE_MULT = 30  # deficit_overcome * this = score; 30 makes a 2-goal comeback score 60
+
+LEAD_CHANGE_MIN = 2  # number of times the lead has flipped so far, before this fires. From a full-season
+# check (15 matches), 2 is the real season max so far (one game changed hands twice) - same first-pass
+# reasoning as COMEBACK_MIN_DEFICIT above.
+LEAD_CHANGE_SCORE_MULT = 30  # changes * this = score; 30 makes 2 lead changes score 60
+
+BALANCED_SCORING_MIN_SCORERS = 6  # distinct goal-scorers for one team, before this fires - from real
+# 2026-2027 data (28 team-match samples with a goal): median 4, p75 5, p90 6, max 9 (the Oilers-Hawks game
+# that prompted this - the single highest count in the sample).
+BALANCED_SCORING_SCORE_MULT = 10  # distinct_scorers * this = score; 10 makes 6 scorers score 60
+
+CLEAN_SWEEP_MIN_GAP = 0.3  # the *weakest* of a team's three 5v5 line-vs-line xG gaps (see line_battle),
+# before a full "every line was better" sweep is notable - from real 2026-2027 data (15 matches with all 3
+# lines on both sides; 5 were sweeps): weakest-line gaps were 0.04, 0.23, 0.34, 0.72, 1.29 - 0.3 keeps the
+# 3 more convincing ones (including the Oilers-Hawks game that prompted this, at 0.34).
+CLEAN_SWEEP_SCORE_MULT = 200  # min_gap * this = score; 200 makes a 0.3 weakest-line gap score 60
 
 
 def is_penalty(code):
@@ -200,6 +224,65 @@ def evaluate_match_insights(match_id):
                 f"{p['name']} already has {p['points']} points tonight - well above a typical full game.",
             )
 
+    # --- balanced_scoring: goals spread across many different players, rather than concentrated ---
+    scorers = defaultdict(set)
+    for e in events:
+        if e.player_id and e.code == GOAL_CODE:
+            scorers[e.team].add(e.player_id)
+    for side, team_name in (('A', state.team_a_name), ('B', state.team_b_name)):
+        distinct = len(scorers.get(side, ()))
+        if distinct < BALANCED_SCORING_MIN_SCORERS:
+            continue
+        score = min(100.0, distinct * BALANCED_SCORING_SCORE_MULT)
+        maybe_create(
+            'balanced_scoring', score,
+            {'team': team_name, 'distinct_scorers': distinct},
+            f"{team_name} have found the net from {distinct} different players tonight - "
+            f"balanced scoring up and down the lineup.",
+        )
+
+    # --- comeback / lead_change: chronological replay of this match's goals ---
+    goals = [e for e in events if e.code == GOAL_CODE]
+    if goals:
+        running_a = running_b = 0
+        max_deficit_a = max_deficit_b = 0
+        lead_changes = 0
+        prev_leader = 0
+        for g in sorted(goals, key=lambda e: e.abs_time_sec or 0):
+            if g.team == 'A':
+                running_a += 1
+            elif g.team == 'B':
+                running_b += 1
+            max_deficit_a = max(max_deficit_a, running_b - running_a)
+            max_deficit_b = max(max_deficit_b, running_a - running_b)
+            leader = 1 if running_a > running_b else (-1 if running_b > running_a else 0)
+            if leader and prev_leader and leader != prev_leader:
+                lead_changes += 1
+            if leader:
+                prev_leader = leader
+
+        if state.score_a != state.score_b:
+            leader_name, deficit_overcome = (
+                (state.team_a_name, max_deficit_a) if state.score_a > state.score_b
+                else (state.team_b_name, max_deficit_b)
+            )
+            if deficit_overcome >= COMEBACK_MIN_DEFICIT:
+                score = min(100.0, deficit_overcome * COMEBACK_SCORE_MULT)
+                maybe_create(
+                    'comeback', score,
+                    {'team': leader_name, 'deficit_overcome': deficit_overcome},
+                    f"{leader_name} have erased a {deficit_overcome}-goal deficit to take the lead - "
+                    f"quite the turnaround.",
+                )
+
+        if lead_changes >= LEAD_CHANGE_MIN:
+            score = min(100.0, lead_changes * LEAD_CHANGE_SCORE_MULT)
+            maybe_create(
+                'lead_change', score,
+                {'lead_changes': lead_changes},
+                f"This one's gone back and forth - the lead has changed hands {lead_changes} times tonight.",
+            )
+
     # --- special teams: in-game PP goals/opportunities, shared by special_teams_rate/battle/discipline below ---
     pp_goals_a = sum(1 for s in shots if s.team == 'A' and s.code == GOAL_CODE and s.situation == 'PP')
     pp_goals_b = sum(1 for s in shots if s.team == 'B' and s.code == GOAL_CODE and s.situation == 'PP')
@@ -298,12 +381,14 @@ def evaluate_match_insights(match_id):
                 cell['goals'] += 1
         team_names = {state.team_a_id: state.team_a_name, state.team_b_id: state.team_b_name}
         if state.team_a_id in lines and state.team_b_id in lines:
+            all_gaps = []  # (line_number, gap) for every line present on both sides - clean_sweep below
             for line_number in (1, 2, 3):
                 cell_a = lines[state.team_a_id].get(line_number)
                 cell_b = lines[state.team_b_id].get(line_number)
                 if not cell_a or not cell_b:
                     continue
                 gap = cell_a['xg'] - cell_b['xg']
+                all_gaps.append(gap)
                 if abs(gap) < LINE_XG_GAP_MIN:
                     continue
                 leader_id, trailer_id = (
@@ -322,6 +407,24 @@ def evaluate_match_insights(match_id):
                     f"Line {line_number} at 5v5: {round(leader_cell['xg'], 2)} to {round(trailer_cell['xg'], 2)} "
                     f"in expected goals.",
                 )
+
+            # --- clean_sweep: every line individually ahead, even if none alone clears LINE_XG_GAP_MIN ---
+            if len(all_gaps) == 3 and (all(g > 0 for g in all_gaps) or all(g < 0 for g in all_gaps)):
+                sweeper_id, other_id = (
+                    (state.team_a_id, state.team_b_id) if all_gaps[0] > 0 else (state.team_b_id, state.team_a_id)
+                )
+                min_gap = min(abs(g) for g in all_gaps)
+                if min_gap >= CLEAN_SWEEP_MIN_GAP:
+                    score = min(100.0, min_gap * CLEAN_SWEEP_SCORE_MULT)
+                    maybe_create(
+                        'clean_sweep', score,
+                        {
+                            'team': team_names[sweeper_id], 'opponent': team_names[other_id],
+                            'line_gaps': [round(abs(g), 2) for g in all_gaps], 'min_gap': round(min_gap, 2),
+                        },
+                        f"{team_names[sweeper_id]} have been better on every line tonight - "
+                        f"no letdown from top to bottom against {team_names[other_id]}.",
+                    )
 
     # --- xg_momentum: trailing-window xG gap between the two teams ---
     if events:
