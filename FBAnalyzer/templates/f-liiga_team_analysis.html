@@ -49,8 +49,8 @@ management command.
         <div class="landing-select-group">
             <label for="select-season">Season</label>
             <select id="select-season" onchange="maybeLoadTeamStats()">
-                <option value="2026-2027">2026-2027</option>
-                <option value="2025-2026" {% if license_tier != 'fliiga' and license_tier != 'fliiga_trial' %}selected{% endif %}>2025-2026</option>
+                <option value="2026-2027" {% if license_tier != 'fliiga' and license_tier != 'fliiga_trial' %}selected{% endif %}>2026-2027</option>
+                <option value="2025-2026">2025-2026</option>
                 <option value="2024-2025" {% if license_tier == 'fliiga' or license_tier == 'fliiga_trial' %}selected{% endif %}>2024-2025</option>
             </select>
         </div>
