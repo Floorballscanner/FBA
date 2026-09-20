@@ -353,10 +353,13 @@ see [How to Use Match Data to Prepare for Your Next Opponent](/blog/how-to-use-m
                 'question': 'What should I actually change in a game plan based on this data?',
                 'answer': (
                     "The most common, concrete adjustments are: which of your lines you match "
-                    "against their most dangerous line, where you tell your defense to funnel "
-                    "shots away from (based on where the opponent creates their best chances "
-                    "from), and how aggressively to attack on special teams based on their "
-                    "actual PP/PK rates rather than reputation."
+                    "against their most dangerous line, which individual player is running hot "
+                    "enough to warrant keeping the ball away from them specifically, how much to "
+                    "trust your own shot volume based on their goalie's recent form, whether "
+                    "their offense leans on structured play or rushes off turnovers (which "
+                    "changes how you manage the ball against them), and how aggressively to "
+                    "attack on special teams based on their actual PP/PK rates rather than "
+                    "reputation."
                 ),
             },
         ],
@@ -365,8 +368,11 @@ see [How to Use Match Data to Prepare for Your Next Opponent](/blog/how-to-use-m
 >
 > - Start with the underlying numbers (xG for/against), not just the record - a team can be
 >   winning while getting outchanced, or losing while dominating play.
-> - Look at line-by-line performance, not just team totals, to plan matchups.
-> - Check shot location tendencies to know where an opponent generates their chances from.
+> - Break performance down by line and by individual player - hot and cold streaks (and your
+>   opponent's goalie form) change who to defend tightest and how much to trust your own shot
+>   volume.
+> - Check both where an opponent's chances come from and how they're created - rush vs.
+>   structured play reveals their actual game strategy, not just their shot chart.
 > - Special-teams rates matter, but weight recent games more than season-long averages.
 
 Most floorball coaches already watch film before a big game. Match data doesn't replace that - it
@@ -390,7 +396,7 @@ for and xG against. The gap between the two tells you something the record alone
 This single check resets expectations before anything else, and it's the fastest way to avoid
 either over- or under-respecting an opponent based on the scoreboard alone.
 
-## Step 2: Break It Down by Line
+## Step 2: Break It Down by Line and by Player
 
 Team totals hide a lot. A team's overall xG can look average while one specific line is doing
 almost all of the damage, and the others are being comfortably contained. Look at each line's xG
@@ -401,6 +407,19 @@ for and against individually:
   secondary line handle it?
 - Which of their lines is getting outchanged? That's where you want to direct pressure, and where
   your own secondary scoring has the best chance of getting results.
+
+Then go one level deeper, to individual players:
+
+- **Who's running hot or cold (GAxG)?** A player scoring well above their own expected goals over
+  the last several games is a real, current threat regardless of their season-long reputation -
+  worth specifically noting, and worth trying to keep the ball away from as much as possible, even
+  if that means an unconventional matchup. A player running well below their xG isn't necessarily
+  any less dangerous underneath - they're still generating the same quality of chances, just not
+  finishing them right now - and can snap out of it without warning.
+- **How is their goalie performing?** A goalie running hot (strong recent GSAx) changes how much
+  you should trust your own shot volume to turn into goals - it may be worth manufacturing better
+  chances rather than settling for volume. A goalie running cold is exactly the moment to shoot the
+  first good look instead of looking for the extra pass.
 
 ## Step 3: Look at Where Their Chances Come From
 
@@ -413,6 +432,18 @@ concrete defensive instruction, not just a general "play tight defense" reminder
   than it needs shot-blocking.
 - A team with a lot of low-percentage perimeter shots but little slot presence may simply not be a
   major shot-quality threat, freeing you to defend more aggressively elsewhere.
+
+It's also worth checking *how* those chances are created, not just where they came from: what
+share of an opponent's xG comes from odd-man rushes off a turnover (a 2-against-1 or 3-against-2
+break) versus structured offense against a set defense. That split says a lot about their actual
+game strategy, not just their shot chart:
+
+- A team generating a large share of its xG off the rush is usually playing an aggressive,
+  high-pressure style built around forcing turnovers and attacking in transition - against them,
+  careful ball management and disciplined neutral-zone play matters more than raw shot-blocking.
+- A team generating most of its xG from structured possession is playing a more patient,
+  positional game - against them, defensive-zone coverage discipline and eliminating second-chance
+  looks matters more than transition defense.
 
 ## Step 4: Check Special Teams - But Weight Recent Form
 
@@ -433,10 +464,12 @@ small number of specific, communicable instructions for the team, for example:
 
 1. "Their top line drives almost all of their offense from the left circle - our matchup line
    collapses there first."
-2. "They're winning games but getting outchanced - play our game, don't panic if the score is
-   close."
-3. "Their penalty kill has been below 70% over the last month - we take the power-play chance if
-   it's offered."
+2. "Their #17 is running well above his expected goals over the last five games - our matchup pair
+   takes his line and keeps the ball away from him whenever possible. Their goalie's numbers have
+   dipped the last two weeks - we shoot the first good look instead of looking for the extra pass."
+3. "Nearly half of their expected goals over the last month have come off the rush - we protect
+   the ball through the neutral zone and cut down on soft turnovers, rather than trying to simply
+   out-shoot them."
 
 That's the actual output of data-driven scouting: not more numbers, but a shorter, more specific
 game plan than "watch some film and go with your gut."
