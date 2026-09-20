@@ -205,7 +205,7 @@ a rundown of the other KPIs that go alongside xG.
                 'question': 'Is plus/minus a reliable stat on its own?',
                 'answer': (
                     "It's a useful team-context signal, but it's heavily influenced by linemates, "
-                    "deployment, and luck - a player can be on the ice for a great chance that "
+                    "deployment, and luck - a player can be on the field for a great chance that "
                     "happens to go in, or a bad shift that happens not to. It's most reliable "
                     "combined with individual, on-ball numbers like points and xG contribution, "
                     "not read alone."
@@ -217,7 +217,7 @@ a rundown of the other KPIs that go alongside xG.
                     "It depends heavily on the level and the shot quality a goalie actually "
                     "faces, which is exactly why raw save percentage alone is limited - a goalie "
                     "facing tougher, higher-xG shots will have a lower save percentage than one "
-                    "facing easy ones, even if they're the better goaltender. GSAx accounts for "
+                    "facing easy ones, even if they're the better goalkeeper. GSAx accounts for "
                     "that by comparing saves to shot quality faced."
                 ),
             },
@@ -253,7 +253,7 @@ the looks you get* (a big gap between xG and xGOT).
 ### GAxG (Goals vs. Expected)
 
 Actual goals scored minus xG. A large positive number usually means hot finishing (which tends not
-to last); a large negative number usually means the process is sound but the puck isn't going in
+to last); a large negative number usually means the process is sound but the ball isn't going in
 yet (which, more often than not, is a sign of better results coming).
 
 ## Goaltending
@@ -272,7 +272,7 @@ mostly low-danger shots will post a higher save percentage than an equally good 
 harder chances, purely because of what they're up against. Best read alongside GSAx, not instead
 of it.
 
-## Individual Skater Metrics
+## Individual Player Metrics
 
 ### Points (Goals + Assists)
 
@@ -282,7 +282,7 @@ on defense entirely.
 
 ### Plus/Minus
 
-Goals scored while a player is on the ice, minus goals conceded while they're on the ice. It
+Goals scored while a player is on the field, minus goals conceded while they're on the field. It
 captures team-context defensive/offensive impact that points alone miss, but it's heavily shaped by
 linemates and deployment - a strong player can post a mediocre plus/minus on a weak line, and vice
 versa. Most useful alongside individual, on-ball numbers (points, xG contribution) rather than read
