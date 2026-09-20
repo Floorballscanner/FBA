@@ -27,7 +27,7 @@ class Post(models.Model):
     cover_image = models.URLField(blank=True)
     body = models.TextField()  # Markdown source
     faq = models.JSONField(default=list, blank=True)  # [{"question": "...", "answer": "..."}, ...]
-    author = models.CharField(max_length=100, default='Floorball Scanner Team')
+    author = models.CharField(max_length=100, default='Floorball Scanner')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     published_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)

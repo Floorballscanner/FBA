@@ -37,10 +37,12 @@ POSTS = [
                 'question': 'How is xG calculated?',
                 'answer': (
                     "Models estimate a shot's goal probability from its location on the rink "
-                    "(distance and angle to goal) and its situation (even strength, power play, "
-                    "shorthanded, or the shooting team's own goalie pulled), trained on "
-                    "historical shot outcomes. Floorball Scanner's model is built on floorball "
-                    "shot data specifically, not adapted from ice hockey."
+                    "(distance and angle to goal), how the chance was created (a direct shot, a "
+                    "cross-pass one-timer, or a rebound), whether it came from a structured "
+                    "chance or a rush off a turnover, and the special-teams situation (even "
+                    "strength, power play, shorthanded, or the shooting team's own goalie "
+                    "pulled) - all trained on historical shot outcomes. Floorball Scanner's model "
+                    "is built on floorball shot data specifically, not adapted from ice hockey."
                 ),
             },
             {
@@ -82,13 +84,23 @@ win 4-1 off a couple of lucky bounces. xG is the underlying signal underneath th
 
 xG models are built by looking at a large sample of historical shots and their outcomes (goal or
 no goal), then finding the patterns that separate high-probability shots from low-probability ones.
-The two biggest factors are almost always:
+The main factors are:
 
 - **Distance and angle to goal** - a shot from the slot has a dramatically better chance than the
   same shot from a sharp angle near the boards.
-- **Situation** - an even-strength shot, a power-play shot, a shorthanded shot, and a shot against
-  a pulled goalie (6-on-5) all carry different baseline probabilities, even from the same spot on
-  the rink.
+- **How the chance was created (shot type)** - a direct shot, a one-timer off a cross-pass, and a
+  shot off a rebound all carry different baseline probabilities even from the exact same spot on
+  the rink, because each one finds the goalkeeper in a different position. A cross-pass or a
+  rebound often catches the goalkeeper still moving or out of position; a direct, unassisted shot
+  usually finds them set and ready.
+- **Whether it's a structured chance or a rush off a turnover** - a shot from a 2-against-1 or
+  3-against-2 break carries a much higher scoring probability than the same shot location would
+  against a fully set defense, simply because the defending team is numerically outnumbered in
+  that moment. A shot created from set, structured offense against a set defense is a different,
+  lower-probability chance even from an identical spot on the rink.
+- **Special-teams situation** - an even-strength shot, a power-play shot, a shorthanded shot, and
+  a shot against a pulled goalie (6-on-5) all carry different baseline probabilities too, again
+  even from the same location.
 
 It's worth being specific here: a floorball xG model needs to be trained on floorball shot data.
 Rink dimensions, goal size, shot speed, and defensive structure are different enough from ice
@@ -99,7 +111,7 @@ Scanner's model is built from the ground up on floorball shot locations and outc
 
 The scoreboard answers one question: who won tonight. xG answers a more useful one for a coach
 planning next week's practice: **who is actually generating and preventing good chances,
-regardless of whether the puck went in.**
+regardless of whether the ball went in.**
 
 That distinction shows up constantly:
 
@@ -117,7 +129,7 @@ None of that is visible in goals and assists alone. It's visible in xG.
 One of the simplest and most useful derived numbers is **GAxG**: actual goals scored minus xG. A
 team (or a player) with a strongly positive GAxG is finishing well above what their chances
 "should" produce - either genuinely clinical finishing, or a hot streak that's unlikely to hold. A
-strongly negative GAxG usually means the process is fine but the puck isn't going in - which, more
+strongly negative GAxG usually means the process is fine but the ball isn't going in - which, more
 often than not, is a sign of better results coming, not worse ones.
 
 This is exactly the same idea hockey analysts call "shooting percentage luck," applied to
@@ -142,16 +154,26 @@ xG is a process metric, not a verdict. A few things worth keeping in mind:
 
 In practice, most coaches get the most value from three simple habits:
 
-1. **Track xG for and against by line**, not just by team - it's often the fastest way to spot
-   which matchups are actually working.
-2. **Watch the gap between goals and xG (GAxG)** over a rolling stretch of games, rather than
-   reacting to any single result.
-3. **Use it pregame**, not just postgame - knowing an upcoming opponent's shot-quality tendencies
-   (where they generate their chances from) is direct input into a scouting plan.
+1. **Start collecting xG data.** The more of it you have - from individual players, from lines,
+   and from the team as a whole - the better the picture becomes, and the more confidently you can
+   act on what it tells you.
+2. **Follow what works and what doesn't.** Track which lines and players are consistently
+   outperforming their chances, and who isn't. Show the data to your players openly rather than
+   keeping it to yourself, and use it to help them understand - and improve - their own game.
+3. **Use it pregame, whenever you can.** The same data that explains your own team works just as
+   well on an opponent - use it to understand where they're strong and where they're vulnerable,
+   and build your game plan around it.
 
-If you want to see this tracked automatically, live, for every match rather than calculating it by
-hand, that's exactly what [Floorball Scanner's F-Liiga tracking](/f-liiga/) does - xG, shot maps,
-and a full breakdown by team, line, and player, updating as the game happens. See the
+## Getting Started with Floorball Scanner
+
+If you coach or play in F-Liiga, this is already easier than it sounds: an F-Liiga licence tracks
+every one of these numbers automatically, live, for every match - no manual tagging required.
+
+For everyone else, a Floorball Scanner Team or Club licence gives you the tools to start
+collecting and using this kind of data on your own team already today.
+
+[Explore F-Liiga](/f-liiga/) if you play or coach in the league, or [get started](/get-started)
+with a Team or Club licence to bring the same data to your own team. See the
 [Floorball Analytics Glossary](/blog/floorball-analytics-glossary-xg-gsax-and-other-kpis/) next for
 a rundown of the other KPIs that go alongside xG.
 """,
@@ -566,6 +588,7 @@ class Command(BaseCommand):
                     'meta_description': data['meta_description'],
                     'body': data['body'],
                     'faq': data['faq'],
+                    'author': 'Floorball Scanner',
                 },
             )
             self.stdout.write(self.style.SUCCESS(f"{'Created' if created else 'Updated'}: {post.title}"))

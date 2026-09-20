@@ -1985,6 +1985,7 @@ a.landing-card:hover {
 .landing-blog-header {
     max-width: 680px;
     margin: 0 auto 32px;
+    padding: 0 20px;
     text-align: center;
 }
 
@@ -2018,6 +2019,7 @@ a.landing-card:hover {
     gap: 24px;
     margin: 0 auto;
     max-width: 1080px;
+    padding: 0 20px;
 }
 
 .landing-blog-card {
@@ -2100,6 +2102,7 @@ a.landing-card:hover {
 .landing-blog-article {
     max-width: 720px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .landing-blog-breadcrumb {
@@ -2231,4 +2234,5 @@ a.landing-card:hover {
 .landing-blog-related {
     max-width: 1080px;
     margin: 48px auto 0;
+    padding: 0 20px;
 }
