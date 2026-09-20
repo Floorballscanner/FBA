@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /blog/
+Disallow: /accounts/
+Disallow: /apis/
+Disallow: /admin/
+
+Sitemap: https://fbscanner.io/sitemap.xml

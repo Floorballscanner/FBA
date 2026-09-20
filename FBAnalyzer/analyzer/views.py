@@ -6,6 +6,8 @@ views.function returns a HttpResponse - that is the .html file content
 
 from django.shortcuts import redirect, render
 
+from blog.models import Post
+
 
 def homepage(request):
     #return HttpResponse('Home')
@@ -22,6 +24,13 @@ def get_started(request):
 
 def sitemap(request):
     return render(request, 'sitemap.txt')
+
+def robots_txt(request):
+    return render(request, 'robots.txt', content_type='text/plain')
+
+def llms_txt(request):
+    posts = Post.objects.filter(status='published').order_by('-published_at')
+    return render(request, 'llms.txt', {'posts': posts}, content_type='text/plain')
 
 def live(request):
     return render(request, 'live.html')

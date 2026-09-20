@@ -1,0 +1,67 @@
+<!--
+
+Blog index - card grid of published posts, optionally filtered by category.
+
+-->
+
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block title %}Blog | Floorball Scanner{% endblock %}
+{% block meta_description %}Floorball analytics explained: expected goals (xG), GSAx, and other KPIs, plus practical guides for data-driven floorball coaching.{% endblock %}
+{% block canonical %}https://fbscanner.io{% url 'blog-index' %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="landing">
+
+    <section class="landing-blog-header">
+        <p class="landing-eyebrow">Floorball Scanner Blog</p>
+        <h1>Data-driven floorball, explained.</h1>
+        <p class="landing-lead">
+            Expected goals, shot quality, and other analytics KPIs explained in plain language -
+            plus practical guides for using match data in your own coaching.
+        </p>
+        <div class="landing-blog-filters">
+            <a href="{% url 'blog-index' %}" class="landing-blog-filter{% if not active_category %} landing-blog-filter--active{% endif %}">All</a>
+            {% for value, label in categories %}
+            <a href="{% url 'blog-index' %}?category={{ value }}" class="landing-blog-filter{% if active_category == value %} landing-blog-filter--active{% endif %}">{{ label }}</a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="landing-blog-grid">
+        {% for post in page %}
+        <a class="landing-blog-card" href="{% url 'blog-detail' post.slug %}">
+            {% if post.cover_image %}
+            <img class="landing-blog-card__image" src="{{ post.cover_image }}" alt="{{ post.title }}">
+            {% endif %}
+            <div class="landing-blog-card__body">
+                <span class="landing-blog-card__category">{{ post.get_category_display }}</span>
+                <h2 class="landing-blog-card__title">{{ post.title }}</h2>
+                <p class="landing-blog-card__excerpt">{{ post.excerpt }}</p>
+                <span class="landing-blog-card__meta">{{ post.published_at|date:"M j, Y" }} &middot; {{ post.reading_minutes }} min read</span>
+            </div>
+        </a>
+        {% empty %}
+        <p>No articles published yet - check back soon.</p>
+        {% endfor %}
+    </section>
+
+    {% if page.has_other_pages %}
+    <nav class="landing-blog-pagination">
+        {% if page.has_previous %}
+        <a href="?page={{ page.previous_page_number }}{% if active_category %}&category={{ active_category }}{% endif %}">&larr; Newer</a>
+        {% endif %}
+        <span>Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+        {% if page.has_next %}
+        <a href="?page={{ page.next_page_number }}{% if active_category %}&category={{ active_category }}{% endif %}">Older &rarr;</a>
+        {% endif %}
+    </nav>
+    {% endif %}
+
+</div>
+{% endblock %}

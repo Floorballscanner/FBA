@@ -22,6 +22,37 @@ when there is not a logged in user.
     <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
     {% block extra_css %}{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- SEO: meta description/canonical/OG all have a sitewide default here - a child template
+         only needs to override the block if it has something more specific to say (see
+         blog_post.html for the per-article version of all three). -->
+    <meta name="description" content="{% block meta_description %}Floorball Scanner is a web-based analytics platform for floorball coaches - live expected goals (xG), shot maps, and team, line, and player performance data.{% endblock %}">
+    <link rel="canonical" href="{% block canonical %}https://fbscanner.io{{ request.path }}{% endblock %}">
+    {% block og_tags %}
+    <meta property="og:site_name" content="Floorball Scanner">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Floorball Scanner">
+    <meta property="og:description" content="Data-driven floorball coaching - live xG, shot maps, and performance analytics.">
+    <meta property="og:image" content="https://fbscanner.io{% static 'logo_transparent.png' %}">
+    <meta property="og:url" content="https://fbscanner.io{{ request.path }}">
+    <meta name="twitter:card" content="summary_large_image">
+    {% endblock %}
+
+    <!-- Sitewide Organization/WebSite structured data - helps entity recognition on every page.
+         Article-level structured data (BlogPosting/FAQPage) is added per-page via this same block. -->
+    {% block structured_data %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Floorball Scanner",
+        "url": "https://fbscanner.io",
+        "logo": "https://fbscanner.io{% static 'logo_transparent.png' %}",
+        "description": "Web-based analytics platform for floorball coaches - live expected goals (xG), shot maps, and team, line, and player performance data."
+    }
+    </script>
+    {% endblock %}
+
     <meta name="google-site-verification" content="0G4LRoNP-1vwJXnGckjN_p_ZdGB01eg3aZqsebUemJQ" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMTSGWEP4V"></script>
     <script>
@@ -58,6 +89,9 @@ when there is not a logged in user.
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/references">References</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog/">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/signup">Contact Us</a>

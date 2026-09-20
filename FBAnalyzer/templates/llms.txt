@@ -1,0 +1,19 @@
+# Floorball Scanner
+
+> Floorball Scanner is a web-based analytics platform for floorball coaches: live expected
+> goals (xG), shot maps, and team/line/player performance data. Built by two former Finnish
+> Elite-league players and analytics coaches.
+
+## Product
+
+- [Homepage](https://fbscanner.io/): overview of the platform and its features.
+- [F-Liiga](https://fbscanner.io/f-liiga/): live F-Liiga match tracking, xG, shot maps, team
+  and player statistics, and a 0-100 player performance Rating.
+
+## Blog
+
+Articles explaining floorball analytics (expected goals, GSAx, and other KPIs) and how coaches
+can use match data in practice.
+{% for post in posts %}
+- [{{ post.title }}](https://fbscanner.io/blog/{{ post.slug }}/): {{ post.excerpt }}
+{% endfor %}

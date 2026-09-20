@@ -2,12 +2,16 @@
 """
 
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 from accounts import urls as accounts_urls
 from accounts import views as accounts_views
 from accounts import stripe_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
+from .sitemaps import BlogPostSitemap, StaticViewSitemap
+
+SITEMAPS = {'static': StaticViewSitemap, 'blog': BlogPostSitemap}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +29,10 @@ urlpatterns = [
     path('buy/<str:tier>/', stripe_views.start_checkout, name="stripe-checkout"),
     path('stripe/webhook/', stripe_views.stripe_webhook, name="stripe-webhook"),
     path('sitemap', views.sitemap, name="sitemap"),
+    path('sitemap.xml', sitemap, {'sitemaps': SITEMAPS}, name="django-sitemap"),
+    path('robots.txt', views.robots_txt, name="robots-txt"),
+    path('llms.txt', views.llms_txt, name="llms-txt"),
+    path('blog/', include('blog.urls')),
     path('apis/', include(accounts_urls)),
     path('apis/insights/', include('insights.urls')),
     path('live/', views.live, name="livepage"),
