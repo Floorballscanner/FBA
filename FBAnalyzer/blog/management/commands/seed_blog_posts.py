@@ -166,14 +166,14 @@ In practice, most coaches get the most value from three simple habits:
 
 ## Getting Started with Floorball Scanner
 
-If you coach or play in F-Liiga, this is already easier than it sounds: an F-Liiga licence tracks
-every one of these numbers automatically, live, for every match - no manual tagging required.
+With a Floorball Scanner Team or Club licence, you already have everything you need to start
+collecting and using this kind of xG data on your own team today.
 
-For everyone else, a Floorball Scanner Team or Club licence gives you the tools to start
-collecting and using this kind of data on your own team already today.
+If you coach or play in F-Liiga, it's even easier: an F-Liiga licence tracks every one of these
+numbers automatically, live, for every match - no manual tagging required.
 
-[Explore F-Liiga](/f-liiga/) if you play or coach in the league, or [get started](/get-started)
-with a Team or Club licence to bring the same data to your own team. See the
+[Get started](/get-started) with a Team or Club licence to bring this to your own team, or
+[explore F-Liiga](/f-liiga/) if you play or coach in the league. See the
 [Floorball Analytics Glossary](/blog/floorball-analytics-glossary-xg-gsax-and-other-kpis/) next for
 a rundown of the other KPIs that go alongside xG.
 """,
@@ -311,10 +311,12 @@ are "one goal" in the box score.
 
 ---
 
-Every one of these is tracked automatically, live, for F-Liiga matches on
-[Floorball Scanner](/f-liiga/) - by team, by line, and by individual player - so you're not
-calculating any of it by hand. For the practical side of turning these numbers into a game plan,
-see [How to Use Match Data to Prepare for Your Next Opponent](/blog/how-to-use-match-data-to-prepare-for-your-next-opponent/).
+With [Floorball Scanner](/), you can track every one of these numbers - xG, GSAx, plus/minus, and
+the rest - for your own team and your opponents, by team, by line, and by individual player. For
+F-Liiga matches specifically, [Floorball Scanner's F-Liiga tracking](/f-liiga/) computes all of it
+automatically and live, so you're not calculating any of it by hand. For the practical side of
+turning these numbers into a game plan, see
+[How to Use Match Data to Prepare for Your Next Opponent](/blog/how-to-use-match-data-to-prepare-for-your-next-opponent/).
 """,
     },
     {
@@ -476,9 +478,10 @@ game plan than "watch some film and go with your gut."
 
 ---
 
-[Floorball Scanner's F-Liiga tracking](/f-liiga/) computes all of this automatically - team, line,
-and player-level xG, shot maps, and special-teams rates for every match - so this kind of
-prep takes minutes, not a manual film-and-spreadsheet session. See the
+With [Floorball Scanner](/), you can build this same scouting picture for any opponent yourself -
+team, line, and player-level xG, shot maps, and special-teams rates. For F-Liiga matches,
+[Floorball Scanner's F-Liiga tracking](/f-liiga/) computes all of it automatically for every match,
+so this kind of prep takes minutes, not a manual film-and-spreadsheet session. See the
 [Floorball Analytics Glossary](/blog/floorball-analytics-glossary-xg-gsax-and-other-kpis/) for a
 full rundown of what each number means, or [get started](/get-started) to try it with your own
 team.
