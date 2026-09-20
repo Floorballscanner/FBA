@@ -2216,6 +2216,8 @@ a.landing-card:hover {
 
 .landing-blog-cta .landing-cta {
     justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
     margin-bottom: 0;
 }
 
@@ -2229,6 +2231,55 @@ a.landing-card:hover {
 .landing-blog-cta .landing-btn--ghost:hover {
     color: #fff;
     border-color: #fff;
+}
+
+/* .landing-btn--primary's navy background (styled for a light card elsewhere) disappears
+   against this block's own navy background - use the accent blue here instead. */
+.landing-blog-cta .landing-btn--primary {
+    background: var(--landing-accent);
+    box-shadow: none;
+}
+
+.landing-blog-cta .landing-btn--primary:hover {
+    background: #2438d6;
+}
+
+/* Two paths - F-Liiga licence vs. Team/Club licence - side by side on desktop, stacked on
+   narrow screens (matches .landing-blog-article's own mobile column layout). */
+.landing-blog-cta__columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+.landing-blog-cta__column {
+    flex: 1 1 220px;
+    max-width: 260px;
+}
+
+.landing-blog-cta__column + .landing-blog-cta__column {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    padding-left: 32px;
+}
+
+.landing-blog-cta__column-label {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 12px;
+}
+
+@media (max-width: 520px) {
+    .landing-blog-cta__column + .landing-blog-cta__column {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 24px;
+    }
 }
 
 .landing-blog-related {

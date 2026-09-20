@@ -92,9 +92,21 @@ GEO/rich-result extraction), closing product CTA, related posts.
         <div class="landing-blog-cta">
             <h3>See these numbers on your own team</h3>
             <p>Floorball Scanner tracks xG, shot quality, and player performance live, for every F-Liiga match.</p>
-            <div class="landing-cta">
-                <a class="landing-btn landing-btn--primary" href="{% url 'fliiga-product' %}">Explore F-Liiga</a>
-                <a class="landing-btn landing-btn--ghost" href="{% url 'get-started' %}">Get started</a>
+            <div class="landing-blog-cta__columns">
+                <div class="landing-blog-cta__column">
+                    <p class="landing-blog-cta__column-label">Play or coach in F-Liiga</p>
+                    <div class="landing-cta">
+                        <a class="landing-btn landing-btn--ghost" href="{% url 'fliiga-product' %}">Explore F-Liiga</a>
+                        <a class="landing-btn landing-btn--primary" href="{% url 'fliiga-product' %}#buy">Buy F-Liiga licence</a>
+                    </div>
+                </div>
+                <div class="landing-blog-cta__column">
+                    <p class="landing-blog-cta__column-label">New to Floorball Scanner</p>
+                    <div class="landing-cta">
+                        <a class="landing-btn landing-btn--ghost" href="/">Explore Floorball Scanner</a>
+                        <a class="landing-btn landing-btn--primary" href="{% url 'get-started' %}#buy">Buy Team or Club licence</a>
+                    </div>
+                </div>
             </div>
         </div>
     </article>
