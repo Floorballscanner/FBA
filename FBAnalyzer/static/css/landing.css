@@ -2211,6 +2211,23 @@ a.landing-card:hover {
     color: rgba(255, 255, 255, 0.85);
 }
 
+.landing-blog-cta .landing-cta {
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+/* .landing-btn--ghost's navy text/border (styled for a light background elsewhere on the
+   site) is invisible against this block's navy background - flip to white here. */
+.landing-blog-cta .landing-btn--ghost {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.landing-blog-cta .landing-btn--ghost:hover {
+    color: #fff;
+    border-color: #fff;
+}
+
 .landing-blog-related {
     max-width: 1080px;
     margin: 48px auto 0;
