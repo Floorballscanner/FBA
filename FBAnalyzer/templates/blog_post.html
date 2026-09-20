@@ -30,12 +30,12 @@ GEO/rich-result extraction), closing product CTA, related posts.
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": {{ post.title|escapejs }},
-    "description": {{ post.meta_description_text|escapejs }},
+    "headline": "{{ post.title|escapejs }}",
+    "description": "{{ post.meta_description_text|escapejs }}",
     "image": "{{ post.cover_image|default:'https://fbscanner.io/static/logo_transparent.png' }}",
     "datePublished": "{{ post.published_at|date:'c' }}",
     "dateModified": "{{ post.updated_at|date:'c' }}",
-    "author": {"@type": "Organization", "name": {{ post.author|escapejs }}},
+    "author": {"@type": "Organization", "name": "{{ post.author|escapejs }}"},
     "publisher": {
         "@type": "Organization",
         "name": "Floorball Scanner",
@@ -53,8 +53,8 @@ GEO/rich-result extraction), closing product CTA, related posts.
         {% for question, answer in post.faq_items %}
         {
             "@type": "Question",
-            "name": {{ question|escapejs }},
-            "acceptedAnswer": {"@type": "Answer", "text": {{ answer|escapejs }}}
+            "name": "{{ question|escapejs }}",
+            "acceptedAnswer": {"@type": "Answer", "text": "{{ answer|escapejs }}"}
         }{% if not forloop.last %},{% endif %}
         {% endfor %}
     ]
