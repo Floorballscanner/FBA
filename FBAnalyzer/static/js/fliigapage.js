@@ -370,6 +370,75 @@ function GetSortOrder(prop) {
     }
 }
 
+// Stars of the Game - a results-page match is always already played, so this is fetched
+// unconditionally (see the call site after calcxGArray() below), same data/markup as
+// fliigalivegame.js's own version of these three functions.
+const STAR_ICON_PATH = 'M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279' +
+    '-6.064-5.828 8.332-1.151z';
+
+function starIconsHTML(filledCount) {
+    let html = '';
+    for (let i = 0; i < 3; i++) {
+        const filled = i < filledCount;
+        html += '<svg class="landing-stars-row__star' + (filled ? ' landing-stars-row__star--filled' : '')
+            + '" viewBox="0 0 24 24" aria-hidden="true"><path d="' + STAR_ICON_PATH + '"></path></svg>';
+    }
+    return html;
+}
+
+function buildStarRow(photoUrl, name, teamName, rating, starCount) {
+    const row = document.createElement('div');
+    row.className = 'landing-stars-row';
+
+    const img = document.createElement('img');
+    img.alt = '';
+    img.src = photoUrl || '/static/logo_transparent.png';
+    row.appendChild(img);
+
+    const info = document.createElement('div');
+    info.className = 'landing-stars-row__info';
+
+    const nameRow = document.createElement('div');
+    nameRow.className = 'landing-stars-row__name';
+    nameRow.innerHTML = '<span class="landing-stars-row__stars">' + starIconsHTML(starCount) + '</span>';
+    const nameText = document.createElement('span');
+    nameText.textContent = name + ' (' + teamName + ')';
+    nameRow.appendChild(nameText);
+    info.appendChild(nameRow);
+
+    const ratingRow = document.createElement('div');
+    ratingRow.className = 'landing-stars-row__rating';
+    ratingRow.innerHTML = 'Rating <strong>' + rating + '</strong>';
+    info.appendChild(ratingRow);
+
+    row.appendChild(info);
+    return row;
+}
+
+function updateGameStarsPanel(gameStarsData) {
+    const section = document.getElementById('gameStarsSection');
+    if (section == null || gameStarsData.status !== 'ready') {
+        return;
+    }
+    const forwardsEl = document.getElementById('gameStarsForwards');
+    const defenseEl = document.getElementById('gameStarsDefense');
+    const goalieEl = document.getElementById('gameStarsGoalie');
+    forwardsEl.innerHTML = '';
+    defenseEl.innerHTML = '';
+    goalieEl.innerHTML = '';
+    (gameStarsData.facts.forwards || []).forEach((p, i) => {
+        forwardsEl.appendChild(buildStarRow(p.photo_url, p.name, p.team_name, p.rating, 3 - i));
+    });
+    (gameStarsData.facts.defense || []).forEach((p, i) => {
+        defenseEl.appendChild(buildStarRow(p.photo_url, p.name, p.team_name, p.rating, 3 - i));
+    });
+    if (gameStarsData.facts.goalie) {
+        const g = gameStarsData.facts.goalie;
+        goalieEl.appendChild(buildStarRow(g.photo_url, g.name, g.team_name, g.rating, 3));
+    }
+    section.style.display = '';
+}
+
 // Per-game Rating for this one lineup row - looked up from gameStarRatings (populated after
 // calcxGArray() above, once /apis/insights/game-stars/ resolves). Returns null (not 0 or '-')
 // so Google Charts' 'number' column renders a blank cell rather than a misleading value.
@@ -1689,7 +1758,8 @@ function updateData() {
             setTimeout(drawShotMap, 1000);
 
             // Adds the Rating column once it arrives - drawCharts() above will already have
-            // run once without it (fetch is async), so this redraws with ratings filled in.
+            // run once without it (fetch is async), so this redraws with ratings filled in -
+            // and renders the Stars of the Game card from the same response.
             fetch('/apis/insights/game-stars/' + match_id + '/')
                 .then(response => response.json())
                 .then(gameStarsData => {
@@ -1697,6 +1767,7 @@ function updateData() {
                         gameStarRatings = gameStarsData.facts.all_ratings || {};
                         drawCharts();
                     }
+                    updateGameStarsPanel(gameStarsData);
                 })
                 .catch(() => {});
 
