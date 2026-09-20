@@ -514,7 +514,7 @@ team.
                     "and sticks into high-danger space consistently, whether through offensive "
                     "structure, transition speed, or simply outmuscling defenders there. It's "
                     "one of the most repeatable, coachable patterns to look for, on both sides "
-                    "of the puck."
+                    "of the ball."
                 ),
             },
             {
@@ -535,6 +535,8 @@ team.
 >   more than raw shot count.
 > - A cluster of shots near the net usually signals a repeatable offensive (or defensive) strength.
 > - Perimeter-heavy shot maps often mean plenty of volume but limited quality.
+> - How a chance was created matters too - a team living off turnovers needs different preparation
+>   than one working a set offense, and it cuts both ways.
 > - A shot map is most reliable pooled over several games, not read from a single one.
 
 A shot map plots every shot attempt by its location on the rink. On its own it looks like a
@@ -576,6 +578,25 @@ scoring threat, which is exactly the kind of gap a shot map exposes that a shot 
 Defensively, if you're forcing an opponent into mostly perimeter shots, that's usually a sign your
 own structure is working, even on nights the shot total looks high.
 
+## What to Look For: Turnover vs. Structured Chances
+
+Location alone doesn't tell you *how* a chance came together, and that matters for preparation as
+much as where the dots are clustered. A team generating a lot of its xG off the rush - odd-man
+breaks created by turnovers rather than structured possession - needs a genuinely different kind
+of preparation than a team that mostly works the ball through a set offense, and it cuts both ways:
+
+- **As the team being prepared for them:** don't lose the ball. A team built around transition
+  speed turns a single giveaway into a real scoring chance faster than almost anything else, so
+  careful ball management matters more here than it does against a structured opponent - and be
+  ready for the situation to flip instantly, your attack becoming their break the moment the ball
+  changes hands.
+- **But it cuts the other way too:** a team that plays this style tends to give up its own share of
+  turnovers as well, simply because of the pace and risk built into how they play. That means you
+  should expect more odd-man chances of your own against them than against a patient, structured
+  opponent - and being efficient when you get them matters just as much as defending theirs. A team
+  that both protects the ball at home and finishes its own transition chances cleanly is the one
+  that actually wins this particular matchup, not just the one that defends well.
+
 ## Reading a Shot Map for Your Own Team vs. an Opponent
 
 The same map answers two different, equally useful questions depending on whose shots you're
@@ -598,10 +619,12 @@ reliable. Treat a one-game shot map as a snapshot, and a multi-game one as the p
 
 ---
 
-[Floorball Scanner](/f-liiga/) generates a live shot map automatically for every F-Liiga match -
-by team and by individual player - alongside the full xG breakdown, so you're reading the pattern
-in real time instead of reconstructing it after the fact. [Get started](/get-started) to see it on
-your own team's games.
+With [Floorball Scanner](/), you can generate your own team's - and your opponents' - shot maps at
+the team, line, and individual player level, with our intuitive, user-friendly mapping tool. For
+F-Liiga matches specifically, [Floorball Scanner's F-Liiga tracking](/f-liiga/) builds this
+automatically and live for every game, alongside the full xG breakdown, so you're reading the
+pattern in real time instead of reconstructing it after the fact. [Get started](/get-started) to
+build shot maps for your own team.
 """,
     },
 ]
