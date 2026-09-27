@@ -412,12 +412,25 @@ def premium_game(request, game_id=None):
 
     # Lets a user jump straight into a game they didn't finish tagging without leaving
     # this page for Saved Games - excludes the one already open here, if any.
-    in_progress_games = Game.objects.filter(
+    in_progress_games = list(Game.objects.filter(
         user=request.user, status='in_progress',
     ).exclude(id=resume_game_id).order_by('-updated_at').annotate(
         name_t1=KeyTextTransform('name_t1', 'game_data'),
         name_t2=KeyTextTransform('name_t2', 'game_data'),
-    ).values('id', 'date', 'name_t1', 'name_t2')
+        counter=KeyTextTransform('counter', 'game_data'),
+        periodN=KeyTextTransform('periodN', 'game_data'),
+    ).values('id', 'date', 'name_t1', 'name_t2', 'counter', 'periodN'))
+
+    # So the dropdown can show how far into the game each save got (e.g. "13:13 Period 1")
+    # instead of just date/teams, which doesn't distinguish a game barely started from one
+    # nearly finished.
+    for game in in_progress_games:
+        try:
+            counter = int(float(game['counter']))
+        except (TypeError, ValueError):
+            counter = 0
+        game['clock'] = '%02d:%02d' % (counter // 60, counter % 60)
+        game['period'] = game['periodN'] or '1'
 
     context = {
         'teams': teams,

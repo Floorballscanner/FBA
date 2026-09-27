@@ -141,7 +141,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
                         {% if in_progress_games %}
                             <option value="" selected disabled>Load a game...</option>
                             {% for game in in_progress_games %}
-                                <option value="{{ game.id }}">{{ game.date }} | {{ game.name_t1|default:"Team 1" }} - {{ game.name_t2|default:"Team 2" }}</option>
+                                <option value="{{ game.id }}">{{ game.date }} | {{ game.clock }} Period {{ game.period }} | {{ game.name_t1|default:"Team 1" }} - {{ game.name_t2|default:"Team 2" }}</option>
                             {% endfor %}
                         {% else %}
                             <option value="" selected disabled>No unfinished games</option>
