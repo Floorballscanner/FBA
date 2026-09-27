@@ -389,136 +389,142 @@
     }
     // Press the Period button
     function Period() {
-        var r = confirm("Changing period will reset clock and statistics,\nand save data, are you sure?");
-            if (r == true) {
-                periodN++
-                counter = 0;
-                shotCounter = 0;
-                document.getElementById("periodNr").innerHTML = "Period " + periodN;
-                document.getElementById("label").innerHTML = "00:00:00";
-                tgtp_2.innerHTML = "0";
-                tgtp_1.innerHTML = "0";
-                txGp_1.innerHTML = "0";
-                txGp_2.innerHTML = "0";
-                txGOTp_1.innerHTML = "0";
-                txGOTp_2.innerHTML = "0";
+        document.getElementById("period-modal").hidden = false;
+    }
 
-                var ctx = cnvs.getContext("2d");
-                ctx.drawImage(myImg,0,0,fWidth,fLength);
-                PosTime = 0;
-                LineTime = 0;
-                dataShot = 0;
-                dataRes = 0;
-                dataxG = 0;
-                shiftPos = 0;
-                PosTime_2 = 0;
-                LineTime_2 = 0;
-                dataShot = 0;
-                dataRes = 0;
-                dataxG = 0;
-                dataxGOT = 0;
-                shiftPos_2 = 0;
-                stT1Teamp_array = [0,0,0,0,0];
-                stT2Teamp_array = [0,0,0,0,0];
-                stT1L1p_array = [0,0,0,0,0];
-                stT2L1p_array = [0,0,0,0,0];
-                stT1L2p_array = [0,0,0,0,0];
-                stT2L2p_array = [0,0,0,0,0];
-                stT1L3p_array = [0,0,0,0,0];
-                stT2L3p_array = [0,0,0,0,0];
-                // xG-weighted counterparts of the shot-count arrays just above (stT1Teamp_array
-                // etc.) - these were never reset here, so every "per period" xG-type chart
-                // (team-level and, now, per-line) was actually showing a cumulative-since-
-                // kickoff total mislabeled as "this period only". Fixing it here for both the
-                // existing "for" side and the new "against" side together, since leaving one
-                // reset and not the other would make them silently inconsistent with each other.
-                stxGT1Teamp_array = [0,0,0,0,0];
-                stxGT2Teamp_array = [0,0,0,0,0];
-                stxGT1L1p_array = [0,0,0,0,0];
-                stxGT2L1p_array = [0,0,0,0,0];
-                stxGT1L2p_array = [0,0,0,0,0];
-                stxGT2L2p_array = [0,0,0,0,0];
-                stxGT1L3p_array = [0,0,0,0,0];
-                stxGT2L3p_array = [0,0,0,0,0];
-                staxGT1Teamp_array = [0,0,0,0,0];
-                staxGT2Teamp_array = [0,0,0,0,0];
-                staxGT1L1p_array = [0,0,0,0,0];
-                staxGT2L1p_array = [0,0,0,0,0];
-                staxGT1L2p_array = [0,0,0,0,0];
-                staxGT2L2p_array = [0,0,0,0,0];
-                staxGT1L3p_array = [0,0,0,0,0];
-                staxGT2L3p_array = [0,0,0,0,0];
-                posplusT1p_array = [0,0,0,0];
-                posplusT2p_array = [0,0,0,0];
-                plT1p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
-                plT2p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
+    function closePeriodModal() {
+        document.getElementById("period-modal").hidden = true;
+    }
+
+    function confirmPeriod() {
+        closePeriodModal();
+
+            periodN++
+            counter = 0;
+            shotCounter = 0;
+            document.getElementById("periodNr").innerHTML = "Period " + periodN;
+            document.getElementById("label").innerHTML = "00:00:00";
+            tgtp_2.innerHTML = "0";
+            tgtp_1.innerHTML = "0";
+            txGp_1.innerHTML = "0";
+            txGp_2.innerHTML = "0";
+            txGOTp_1.innerHTML = "0";
+            txGOTp_2.innerHTML = "0";
+
+            var ctx = cnvs.getContext("2d");
+            ctx.drawImage(myImg,0,0,fWidth,fLength);
+            PosTime = 0;
+            LineTime = 0;
+            dataShot = 0;
+            dataRes = 0;
+            dataxG = 0;
+            shiftPos = 0;
+            PosTime_2 = 0;
+            LineTime_2 = 0;
+            dataShot = 0;
+            dataRes = 0;
+            dataxG = 0;
+            dataxGOT = 0;
+            shiftPos_2 = 0;
+            stT1Teamp_array = [0,0,0,0,0];
+            stT2Teamp_array = [0,0,0,0,0];
+            stT1L1p_array = [0,0,0,0,0];
+            stT2L1p_array = [0,0,0,0,0];
+            stT1L2p_array = [0,0,0,0,0];
+            stT2L2p_array = [0,0,0,0,0];
+            stT1L3p_array = [0,0,0,0,0];
+            stT2L3p_array = [0,0,0,0,0];
+            // xG-weighted counterparts of the shot-count arrays just above (stT1Teamp_array
+            // etc.) - these were never reset here, so every "per period" xG-type chart
+            // (team-level and, now, per-line) was actually showing a cumulative-since-
+            // kickoff total mislabeled as "this period only". Fixing it here for both the
+            // existing "for" side and the new "against" side together, since leaving one
+            // reset and not the other would make them silently inconsistent with each other.
+            stxGT1Teamp_array = [0,0,0,0,0];
+            stxGT2Teamp_array = [0,0,0,0,0];
+            stxGT1L1p_array = [0,0,0,0,0];
+            stxGT2L1p_array = [0,0,0,0,0];
+            stxGT1L2p_array = [0,0,0,0,0];
+            stxGT2L2p_array = [0,0,0,0,0];
+            stxGT1L3p_array = [0,0,0,0,0];
+            stxGT2L3p_array = [0,0,0,0,0];
+            staxGT1Teamp_array = [0,0,0,0,0];
+            staxGT2Teamp_array = [0,0,0,0,0];
+            staxGT1L1p_array = [0,0,0,0,0];
+            staxGT2L1p_array = [0,0,0,0,0];
+            staxGT1L2p_array = [0,0,0,0,0];
+            staxGT2L2p_array = [0,0,0,0,0];
+            staxGT1L3p_array = [0,0,0,0,0];
+            staxGT2L3p_array = [0,0,0,0,0];
+            posplusT1p_array = [0,0,0,0];
+            posplusT2p_array = [0,0,0,0];
+            plT1p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
+            plT2p_array = [['ID','Name','Shot_xG','Passed_xG','Shot_xG_PP','Passed_xG_PP','Goals','Assists','Shots','Shot Assists','Possession+','Possession-','TOC_5v5','TOC_PP','TOC_SH']];
 
 
-                for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 8; i++) {
 
-                    sf_p[i].innerHTML = 0;
-                    sa_p[i].innerHTML = 0;
-                    gf_p[i].innerHTML = 0;
-                    ga_p[i].innerHTML = 0;
-                    pm_p[i].innerHTML = 0;
-                    bf_p[i].innerHTML = 0;
-                    ba_p[i].innerHTML = 0;
-                    mf_p[i].innerHTML = 0;
-                    ma_p[i].innerHTML = 0;
-                    saf_p[i].innerHTML = 0;
-                    saa_p[i].innerHTML = 0;
-                    xf_p[i].innerHTML = 0;
-                    xa_p[i].innerHTML = 0;
+                sf_p[i].innerHTML = 0;
+                sa_p[i].innerHTML = 0;
+                gf_p[i].innerHTML = 0;
+                ga_p[i].innerHTML = 0;
+                pm_p[i].innerHTML = 0;
+                bf_p[i].innerHTML = 0;
+                ba_p[i].innerHTML = 0;
+                mf_p[i].innerHTML = 0;
+                ma_p[i].innerHTML = 0;
+                saf_p[i].innerHTML = 0;
+                saa_p[i].innerHTML = 0;
+                xf_p[i].innerHTML = 0;
+                xa_p[i].innerHTML = 0;
 
-                    Pos_p[i] = 0;
-                    Toc_p[i] = 0;
-                    xGf_p[i] = 0;
-                    xGa_p[i] = 0;
-                    Not_p[i] = 0;
-                    Nos_p[i] = 0;
-                    Notno_p[i] = 0;
+                Pos_p[i] = 0;
+                Toc_p[i] = 0;
+                xGf_p[i] = 0;
+                xGa_p[i] = 0;
+                Not_p[i] = 0;
+                Nos_p[i] = 0;
+                Notno_p[i] = 0;
 
-                    p_p[i].innerHTML = 0;
-                    toc_p[i].innerHTML = "00:00";
-                    atoc_p[i].innerHTML = "00:00";
-                    avg_p[i].innerHTML = "00:00";
-                    avgno_p[i].innerHTML = "00:00";
+                p_p[i].innerHTML = 0;
+                toc_p[i].innerHTML = "00:00";
+                atoc_p[i].innerHTML = "00:00";
+                avg_p[i].innerHTML = "00:00";
+                avgno_p[i].innerHTML = "00:00";
 
-                    sfT2_p[i].innerHTML = 0;
-                    saT2_p[i].innerHTML = 0;
-                    gfT2_p[i].innerHTML = 0;
-                    gaT2_p[i].innerHTML = 0;
-                    pmT2_p[i].innerHTML = 0;
-                    bfT2_p[i].innerHTML = 0;
-                    baT2_p[i].innerHTML = 0;
-                    mfT2_p[i].innerHTML = 0;
-                    maT2_p[i].innerHTML = 0;
-                    safT2_p[i].innerHTML = 0;
-                    saaT2_p[i].innerHTML = 0;
-                    xfT2_p[i].innerHTML = 0;
-                    xaT2_p[i].innerHTML = 0;
+                sfT2_p[i].innerHTML = 0;
+                saT2_p[i].innerHTML = 0;
+                gfT2_p[i].innerHTML = 0;
+                gaT2_p[i].innerHTML = 0;
+                pmT2_p[i].innerHTML = 0;
+                bfT2_p[i].innerHTML = 0;
+                baT2_p[i].innerHTML = 0;
+                mfT2_p[i].innerHTML = 0;
+                maT2_p[i].innerHTML = 0;
+                safT2_p[i].innerHTML = 0;
+                saaT2_p[i].innerHTML = 0;
+                xfT2_p[i].innerHTML = 0;
+                xaT2_p[i].innerHTML = 0;
 
-                    PosT2_p[i] = 0;
-                    TocT2_p[i] = 0;
-                    xGfT2_p[i] = 0;
-                    xGaT2_p[i] = 0;
-                    NotT2_p[i] = 0;
-                    NosT2_p[i] = 0;
-                    NotnoT2_p[i] = 0;
+                PosT2_p[i] = 0;
+                TocT2_p[i] = 0;
+                xGfT2_p[i] = 0;
+                xGaT2_p[i] = 0;
+                NotT2_p[i] = 0;
+                NosT2_p[i] = 0;
+                NotnoT2_p[i] = 0;
 
-                    pT2_p[i].innerHTML = 0;
-                    tocT2_p[i].innerHTML = "00:00";
-                    atocT2_p[i].innerHTML = "00:00";
-                    avgT2_p[i].innerHTML = "00:00";
-                    avgnoT2_p[i].innerHTML = "00:00";
-                }
-                if (document.getElementById("ck1a").checked) {
-                    updateLive(); // Update the API
-                }
-                document.getElementById("undo").disabled = true;
-
-            } else {
+                pT2_p[i].innerHTML = 0;
+                tocT2_p[i].innerHTML = "00:00";
+                atocT2_p[i].innerHTML = "00:00";
+                avgT2_p[i].innerHTML = "00:00";
+                avgnoT2_p[i].innerHTML = "00:00";
             }
+            if (document.getElementById("ck1a").checked) {
+                updateLive(); // Update the API
+            }
+            document.getElementById("undo").disabled = true;
+
     }
     function Counter() {
         t = setTimeout(function(){ Count() }, 1000);
@@ -4996,8 +5002,23 @@
         });
     }
 
+    // "Finish Game" in the Save Game modal doesn't finalize immediately - it opens this second
+    // modal so CSV/PDF export are explicit choices instead of two more confirm() dialogs stacked
+    // after the fact. PDF defaults checked since that's what most users want; CSV defaults
+    // unchecked since it's the less common raw-data export.
     function confirmFinishGame() {
         closeSaveGameModal();
+        document.getElementById("finish-game-modal").hidden = false;
+    }
+
+    function closeFinishGameModal() {
+        document.getElementById("finish-game-modal").hidden = true;
+    }
+
+    function finalizeGame() {
+        var wantCsv = document.getElementById("finish-csv-checkbox").checked;
+        var wantPdf = document.getElementById("finish-pdf-checkbox").checked;
+        closeFinishGameModal();
 
         // Shot data
 
@@ -5061,15 +5082,11 @@
 
         saveGameRow('completed', function() { dirty = false; });
 
-        var conf_csv = confirm("Press OK to download shots in a csv-file");
-
-        if (conf_csv == true) {
-            downloadCsv()
+        if (wantCsv) {
+            downloadCsv();
         }
-        var conf_pr = confirm("Press OK to print results in a PDF-file");
-
-        if (conf_pr == true) {
-            Print()
+        if (wantPdf) {
+            Print();
         }
     }
 
@@ -5172,6 +5189,8 @@
         if (e.key !== 'Escape') { return; }
         if (!document.getElementById("save-game-modal").hidden) { closeSaveGameModal(); }
         if (!document.getElementById("start-game-modal").hidden) { closeStartGameModal(); }
+        if (!document.getElementById("period-modal").hidden) { closePeriodModal(); }
+        if (!document.getElementById("finish-game-modal").hidden) { closeFinishGameModal(); }
     });
 
     function set_t1_names() {

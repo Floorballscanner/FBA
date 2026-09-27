@@ -408,6 +408,29 @@ resize the canvas itself.
     line-height: 1.5;
 }
 
+.pg-modal__checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pg-modal__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--pg-ink);
+    cursor: pointer;
+}
+
+.pg-modal__checkbox input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--pg-navy);
+    cursor: pointer;
+}
+
 .pg-modal__actions {
     display: flex;
     flex-direction: column;
@@ -966,6 +989,15 @@ resize the canvas itself.
    canvases, already all rendered in the DOM (no tabs, nothing to reveal first). This stylesheet
    only decides what's hidden, how it paginates, and styles the cover page Print() fills in and
    reveals right before printing. */
+/* @page must be a top-level rule, NOT nested inside @media print - Chrome silently ignores it
+   when nested (this was the actual cause of print ignoring the A4-landscape size entirely and
+   falling back to the browser/OS default). It only ever applies during pagination anyway, so
+   nesting bought nothing. */
+@page {
+    size: A4 landscape;
+    margin: 10mm;
+}
+
 @media print {
 
     /* Everything that's for tagging, not reporting. */
@@ -977,11 +1009,6 @@ resize the canvas itself.
 
     #print-cover[hidden] {
         display: block !important;
-    }
-
-    @page {
-        size: A4 landscape;
-        margin: 12mm;
     }
 
     .premiumgame-page {
@@ -1006,9 +1033,18 @@ resize the canvas itself.
         break-before: page;
     }
 
-    .premiumgame-page [class^="col-sm-"],
-    .premiumgame-page [class^="stats-"] {
-        break-inside: avoid;
+    /* The screen layout spaces every heading/row apart with 10-40px of inline Padding-top
+       (65 elements' worth) meant for a comfortable scroll, not a page budget - across 7
+       sections that's what was actually forcing "one graph per page": a chart that would
+       otherwise fit the remaining space on a page got pushed past it by padding alone, not
+       by its own content height. Flattened to a few px for print regardless of the inline
+       value; !important is required to beat the inline style at all. */
+    .premiumgame-page [style*="Padding-top"] {
+        padding-top: 4px !important;
+    }
+
+    .premiumgame-page hr {
+        margin: 6px 0 !important;
     }
 }
 

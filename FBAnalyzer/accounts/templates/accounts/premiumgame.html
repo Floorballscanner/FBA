@@ -1337,6 +1337,38 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
             </div>
         </div>
     </div>
+
+    <div id="period-modal" class="pg-modal-overlay" hidden onclick="if (event.target === this) { closePeriodModal(); }">
+        <div class="pg-modal">
+            <h3>New Period</h3>
+            <p>Changing period will reset the clock and per-period statistics, and save data. Continue?</p>
+            <div class="pg-modal__actions">
+                <button type="button" class="pg-modal__btn pg-modal__btn--save" onclick="confirmPeriod()">New Period</button>
+                <button type="button" class="pg-modal__btn pg-modal__btn--cancel" onclick="closePeriodModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="finish-game-modal" class="pg-modal-overlay" hidden onclick="if (event.target === this) { closeFinishGameModal(); }">
+        <div class="pg-modal">
+            <h3>Finish Game</h3>
+            <p>Finishing the game marks it complete and saves every tagged shot. Export anything first?</p>
+            <div class="pg-modal__checkboxes">
+                <label class="pg-modal__checkbox">
+                    <input type="checkbox" id="finish-csv-checkbox">
+                    Download shots as CSV
+                </label>
+                <label class="pg-modal__checkbox">
+                    <input type="checkbox" id="finish-pdf-checkbox" checked>
+                    Print PDF report
+                </label>
+            </div>
+            <div class="pg-modal__actions">
+                <button type="button" class="pg-modal__btn pg-modal__btn--save" onclick="finalizeGame()">Finalize</button>
+                <button type="button" class="pg-modal__btn pg-modal__btn--cancel" onclick="closeFinishGameModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="shotmenu" class="shot-menu">
