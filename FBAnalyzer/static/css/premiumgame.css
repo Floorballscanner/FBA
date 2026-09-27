@@ -959,3 +959,90 @@ resize the canvas itself.
         grid-template-columns: 1fr;
     }
 }
+
+/* ============ Print / PDF report ============
+   "Print" (Print() in premiumfunctions.js) is a plain window.print() on this same page - none
+   of the Results section markup changes for this, still the same live Google Charts and
+   canvases, already all rendered in the DOM (no tabs, nothing to reveal first). This stylesheet
+   only decides what's hidden, how it paginates, and styles the cover page Print() fills in and
+   reveals right before printing. */
+@media print {
+
+    /* Everything that's for tagging, not reporting. */
+    nav.navbar,
+    .pg-panel,
+    .pg-lineups {
+        display: none !important;
+    }
+
+    #print-cover[hidden] {
+        display: block !important;
+    }
+
+    @page {
+        size: A4 landscape;
+        margin: 12mm;
+    }
+
+    .premiumgame-page {
+        padding: 0;
+        font-size: 12px;
+    }
+
+    /* None of these set an explicit pixel width - Google Charts already size to their
+       container's width - this only stops the 5 read-only shotmap canvases (Game/Period
+       1-3/Overtime) from overflowing the printed page. */
+    .premiumgame-page canvas,
+    .premiumgame-page img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Marks the Game/Period 1/2/3/Overtime and Team 1/Team 2 detail headings specifically
+       (added directly on those 7 <h4>s in the template) - not every <h4>, since the many
+       per-line/situation stat panels (Line 1, PP1, 6vs5...) are also <h4>s and would each
+       force their own page otherwise. */
+    .pg-print-section {
+        break-before: page;
+    }
+
+    .premiumgame-page [class^="col-sm-"],
+    .premiumgame-page [class^="stats-"] {
+        break-inside: avoid;
+    }
+}
+
+#print-cover {
+    text-align: center;
+    padding: 60px 0;
+}
+
+#print-cover img {
+    width: 64px;
+    margin-bottom: 16px;
+}
+
+#print-cover h1 {
+    color: var(--pg-navy-dark);
+    margin: 0 0 6px;
+    font-size: 28px;
+}
+
+#print-cover .print-cover__date {
+    color: var(--pg-muted);
+    margin: 0 0 32px;
+    font-size: 14px;
+}
+
+#print-cover .print-cover__score {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--pg-navy);
+    margin: 0;
+}
+
+#print-cover .print-cover__xg {
+    color: var(--pg-muted);
+    margin: 10px 0 0;
+    font-size: 15px;
+}

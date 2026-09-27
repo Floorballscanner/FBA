@@ -29,6 +29,14 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
 
 <div class="premiumgame-page">
 
+    <div id="print-cover" hidden>
+        <img src="{% static 'symbol_transparent.png' %}" alt="">
+        <h1><span id="print-cover-teams"></span></h1>
+        <p class="print-cover__date"><span id="print-cover-date"></span></p>
+        <p class="print-cover__score"><span id="print-cover-result"></span></p>
+        <p class="print-cover__xg"><span id="print-cover-xg"></span></p>
+    </div>
+
     <div class="pg-panel">
 
         <div class="pg-setup pg-card">
@@ -402,7 +410,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
     <hr width="100%" size="2" align="center" color="#002072" noshade>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h4>Game statistics</h4>
+        <h4 class="pg-print-section">Game statistics</h4>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 10px;">
@@ -505,7 +513,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
     <hr width="100%" size="2" align="center" color="#002072" noshade>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h4>Period 1 stats</h4>
+        <h4 class="pg-print-section">Period 1 stats</h4>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 10px;">
@@ -595,7 +603,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
     <hr width="100%" size="2" align="center" color="#002072" noshade>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h4>Period 2 stats</h4>
+        <h4 class="pg-print-section">Period 2 stats</h4>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 10px;">
@@ -685,7 +693,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
     <hr width="100%" size="2" align="center" color="#002072" noshade>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h4>Period 3 stats</h4>
+        <h4 class="pg-print-section">Period 3 stats</h4>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 10px;">
@@ -775,7 +783,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
     <hr width="100%" size="2" align="center" color="#002072" noshade>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h4>Overtime stats</h4>
+        <h4 class="pg-print-section">Overtime stats</h4>
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 10px;">
@@ -861,7 +869,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">
-        <h4><span id="name_t1_3">Team 1</span></h4>
+        <h4 class="pg-print-section"><span id="name_t1_3">Team 1</span></h4>
     </div>
 
     <div class="row">
@@ -1077,7 +1085,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
         </div>
     </div>
     <div class="row justify-content-center" style="Padding-top: 100px;">
-        <h4><span id="name_t2_3">Team 2</span></h4>
+        <h4 class="pg-print-section"><span id="name_t2_3">Team 2</span></h4>
     </div>
     <div class="row">
         <div class="col-sm-3">
