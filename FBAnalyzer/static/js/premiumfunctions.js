@@ -399,6 +399,14 @@
     function confirmPeriod() {
         closePeriodModal();
 
+            // drawChart() only otherwise runs when the clock is manually stopped (see Start())
+            // or on loadGame() - never on a period change. Without this, a period's own xG/xG%/
+            // turnover/+- charts (the _<periodN> suffixed ones) stay blank forever unless the
+            // user happened to pause the clock at some point during that period, since this is
+            // the only other moment that period's final numbers are still the "current" ones -
+            // periodN++ below moves on to the next period immediately after.
+            drawChart();
+
             periodN++
             counter = 0;
             shotCounter = 0;
@@ -5019,6 +5027,11 @@
         var wantCsv = document.getElementById("finish-csv-checkbox").checked;
         var wantPdf = document.getElementById("finish-pdf-checkbox").checked;
         closeFinishGameModal();
+
+        // Same reasoning as confirmPeriod() - drawChart() doesn't run on its own here, so the
+        // current period's charts could still be showing stale (or entirely blank) data if the
+        // user finished the game without ever pausing the clock during this last period.
+        drawChart();
 
         // Shot data
 

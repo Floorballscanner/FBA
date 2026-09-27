@@ -1016,7 +1016,15 @@ resize the canvas itself.
     }
 
     .premiumgame-page {
-        padding: 0;
+        /* Not 0 - Summary_game/Summary_game_<periodN> (a google.visualization.Table) was
+           rendering with its own left border, and the first 1-2 characters of every row label,
+           clipped flush against the page's physical edge with no padding at all. Google Charts'
+           Table sizes itself in JS against whatever width its container had on screen (inside a
+           centered flex row) - print's wider, uncentered container isn't the cause of width, but
+           something about that mismatch was still enough to clip its left edge; a small buffer
+           here is cheaper than fully untangling the Table's own sizing logic for a fix this
+           narrow in scope. */
+        padding: 0 10px;
         font-size: 12px;
     }
 
