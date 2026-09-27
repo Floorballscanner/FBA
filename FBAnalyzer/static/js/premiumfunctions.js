@@ -302,6 +302,7 @@
                 document.getElementById("ck1a").disabled = true;
                 started = 1;
                 sData.style.display = "block";
+                document.getElementById("save-game-btn").disabled = false;
 
                 if (!autosaveTimerId) {
                     autosaveTimerId = setInterval(autosave, 60000);
@@ -7100,6 +7101,7 @@
                 document.getElementById("periodNr").innerHTML = "Period " + periodN;
                 started = 0;
                 sData.style.display = "block";
+                document.getElementById("save-game-btn").disabled = false;
                 var opt = new Option(name_t1, data.teams[0]);
                 s_T1.appendChild(opt);
                 s_T1.selectedIndex = s_T1.length - 1;
