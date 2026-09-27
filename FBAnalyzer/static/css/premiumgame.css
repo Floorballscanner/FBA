@@ -1028,13 +1028,28 @@ resize the canvas itself.
         font-size: 12px;
     }
 
-    /* None of these set an explicit pixel width - Google Charts already size to their
-       container's width - this only stops the 5 read-only shotmap canvases (Game/Period
-       1-3/Overtime) from overflowing the printed page. */
+    /* Canvases/images don't set an explicit pixel width - this stops the 5 read-only shotmap
+       canvases (Game/Period 1-3/Overtime) from overflowing the printed page. Google Charts is
+       different: it draws an <svg> sized in absolute pixels to whatever its container's width
+       was AT DRAW TIME (screen layout) and never redraws on resize, so on a narrower print page
+       that frozen SVG could be wider than its new container - scale it down to fit instead of
+       overflowing past the card's border. */
     .premiumgame-page canvas,
-    .premiumgame-page img {
+    .premiumgame-page img,
+    .premiumgame-page svg {
         max-width: 100%;
         height: auto;
+    }
+
+    /* The actual reason "xG and xGOT by Team" and the paired xG/xG% charts weren't centering
+       even after .row's text-align:center fix: .linestats (used to wrap nearly every chart
+       here) has carried width:90% site-wide (static/css/styles.css) since long before this
+       report existed - on screen, inside a flex row, that 10% never turned into a visible gap;
+       inline-block in print exposes it directly, worst on the widest (single- or two-column)
+       rows where 10% is a lot of empty space, easiest to miss on the narrow 3-4 column ones
+       where it barely registers. */
+    .premiumgame-page .linestats {
+        width: 100% !important;
     }
 
     /* Marks the Game/Period 1/2/3/Overtime and Team 1/Team 2 detail headings specifically
