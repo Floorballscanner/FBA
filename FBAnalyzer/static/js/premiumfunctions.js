@@ -290,38 +290,7 @@
     function Start() {
         // If the game has not started
         if (started == 0) {   // Start game and disable teams etc.
-            var r = confirm("Do you want to start the game,\n changing teams will be disabled?");
-            if (r == true) {
-                document.getElementById("select-level-t1").disabled = true;
-                document.getElementById("select-level-t2").disabled = true;
-                document.getElementById("select-team-1").disabled = true;
-                document.getElementById("select-team-2").disabled = true;
-                document.getElementById("select-date").disabled = true;
-                document.getElementById("period").disabled = false;
-                document.getElementById("reset").disabled = false;
-                document.getElementById("ck1a").disabled = true;
-                started = 1;
-                sData.style.display = "block";
-                document.getElementById("save-game-btn").disabled = false;
-
-                if (!autosaveTimerId) {
-                    autosaveTimerId = setInterval(autosave, 60000);
-                }
-
-                name_t1 = s_T1.options[s_T1.selectedIndex].text
-                set_t1_names();
-
-                name_t2 = s_T2.options[s_T2.selectedIndex].text;
-                set_t2_names();
-
-                // Initialize the API and gain the URL for the Live Data instance.
-
-                if (document.getElementById("ck1a").checked) {
-                    initializeLive()
-                }
-
-            } else {
-            }
+            document.getElementById("start-game-modal").hidden = false;
         }
         // Game has already started, then start/stop the game clock
         else {
@@ -376,6 +345,42 @@
                     updateLive(); // Update the API
                  }
             }
+        }
+    }
+
+    function closeStartGameModal() {
+        document.getElementById("start-game-modal").hidden = true;
+    }
+
+    function confirmStartGame() {
+        closeStartGameModal();
+
+        document.getElementById("select-level-t1").disabled = true;
+        document.getElementById("select-level-t2").disabled = true;
+        document.getElementById("select-team-1").disabled = true;
+        document.getElementById("select-team-2").disabled = true;
+        document.getElementById("select-date").disabled = true;
+        document.getElementById("period").disabled = false;
+        document.getElementById("reset").disabled = false;
+        document.getElementById("ck1a").disabled = true;
+        started = 1;
+        sData.style.display = "block";
+        document.getElementById("save-game-btn").disabled = false;
+
+        if (!autosaveTimerId) {
+            autosaveTimerId = setInterval(autosave, 60000);
+        }
+
+        name_t1 = s_T1.options[s_T1.selectedIndex].text
+        set_t1_names();
+
+        name_t2 = s_T2.options[s_T2.selectedIndex].text;
+        set_t2_names();
+
+        // Initialize the API and gain the URL for the Live Data instance.
+
+        if (document.getElementById("ck1a").checked) {
+            initializeLive()
         }
     }
     // Press the Reset button
@@ -5164,9 +5169,9 @@
     });
 
     window.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !document.getElementById("save-game-modal").hidden) {
-            closeSaveGameModal();
-        }
+        if (e.key !== 'Escape') { return; }
+        if (!document.getElementById("save-game-modal").hidden) { closeSaveGameModal(); }
+        if (!document.getElementById("start-game-modal").hidden) { closeStartGameModal(); }
     });
 
     function set_t1_names() {

@@ -1318,6 +1318,17 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
             </div>
         </div>
     </div>
+
+    <div id="start-game-modal" class="pg-modal-overlay" hidden onclick="if (event.target === this) { closeStartGameModal(); }">
+        <div class="pg-modal">
+            <h3>Start Game</h3>
+            <p>Changing teams will be disabled once the game starts. Continue?</p>
+            <div class="pg-modal__actions">
+                <button type="button" class="pg-modal__btn pg-modal__btn--save" onclick="confirmStartGame()">Start Game</button>
+                <button type="button" class="pg-modal__btn pg-modal__btn--cancel" onclick="closeStartGameModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="shotmenu" class="shot-menu">
