@@ -778,7 +778,10 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
         </div>
     </div>
 
-    <!-- Overtime stats-->
+    <!-- Overtime stats - id'd so Print() can skip this whole section when the game never
+         reached a 4th period, instead of a print report always carrying a page of nothing but
+         empty charts for games that were decided in regulation. -->
+    <div id="ot-section">
 
     <hr width="100%" size="2" align="center" color="#002072" noshade>
 
@@ -866,6 +869,8 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
             <h5 style="text-align: center;">Team 2 line stats</h5>
             <div style="text-align: center;" id="T2linestats_4"></div>
         </div>
+    </div>
+
     </div>
 
     <div class="row justify-content-center" style="Padding-top: 40px;">

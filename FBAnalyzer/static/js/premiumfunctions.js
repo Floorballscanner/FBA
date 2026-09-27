@@ -5583,7 +5583,16 @@
         document.getElementById("print-cover-date").textContent = document.getElementById("select-date").value;
         document.getElementById("print-cover-result").textContent = tgt_1.innerHTML + " - " + tgt_2.innerHTML;
         document.getElementById("print-cover-xg").textContent = "xG " + txG_1.innerHTML + " - " + txG_2.innerHTML + " | xGOT " + txGOT_1.innerHTML + " - " + txGOT_2.innerHTML;
+
+        // periodN only ever reaches 4 if the game actually went to overtime - skip that whole
+        // section in the printed report otherwise instead of a page of nothing but empty charts.
+        // Reverted right after printing so the (normally invisible-on-screen) section doesn't
+        // stay hidden if the user keeps tagging afterward.
+        var otSection = document.getElementById("ot-section");
+        var hadOvertime = periodN >= 4;
+        if (!hadOvertime) { otSection.style.display = "none"; }
         window.print();
+        if (!hadOvertime) { otSection.style.display = ""; }
     }
     function updateSaveData() {
 
