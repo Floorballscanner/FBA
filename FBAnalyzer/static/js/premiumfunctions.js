@@ -4971,9 +4971,22 @@
 
     function saveData() {
 
-        var conf_save = confirm("Are you sure you want to save data,\n do this when your game is over?");
+        var conf_finish = confirm("Finish and save this game?\n\nPress Cancel if you just want to save your progress and continue tagging later.");
 
-        if (conf_save == true) {
+        if (conf_finish == false) {
+            var conf_progress = confirm("Save your current progress so you can continue later?");
+            if (conf_progress == true) {
+                saveGameRow('in_progress', function() {
+                    dirty = false;
+                    setAutosaveStatus("Saved " + new Date().toLocaleTimeString());
+                }, function() {
+                    setAutosaveStatus("⚠ Not saved - check your connection", true);
+                });
+            }
+            return;
+        }
+
+        if (conf_finish == true) {
 
             // Shot data
 
@@ -5051,8 +5064,9 @@
     }
 
     // POST if this game has never been saved (game_id == 0), else PATCH the existing row.
-    // Shared by the final "Save Game Data" click (status 'completed') and autosave (status
-    // 'in_progress') - the only difference between them is this one status value.
+    // Shared by autosave, a manual "save progress" (both status 'in_progress'), and finishing
+    // the game via saveData() (status 'completed') - the only difference between them is this
+    // one status value.
     function saveGameRow(status, onSuccess, onError) {
 
         var payload = { "date" : document.getElementById("select-date").value,
