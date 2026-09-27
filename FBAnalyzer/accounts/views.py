@@ -285,6 +285,12 @@ class GameViewSet(viewsets.ModelViewSet):
         # Previously unscoped (queryset above is only the DRF router's schema/fallback) - any
         # authenticated user could GET/PATCH/DELETE any other user's game by id. Scoping this
         # matters more now that autosave PATCHes constantly and Resume surfaces a real id.
+        # There's no DRF authentication/permission class configured project-wide (see
+        # REST_FRAMEWORK in settings.py), so request.user can be AnonymousUser here rather than
+        # just "some other user" - filter(user=AnonymousUser) crashes instead of denying, since
+        # Django can't cast it to the FK's int. Guard that case explicitly.
+        if not self.request.user.is_authenticated:
+            return Game.objects.none()
         return Game.objects.filter(user=self.request.user).order_by("id")
 
     # Some games' game_data still carries these pre-rendered shot-map PNGs from
