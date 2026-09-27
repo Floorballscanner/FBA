@@ -27,10 +27,6 @@
         });*/
 
     }
-    window.onbeforeunload = function() {
-      return "Dude, are you sure you want to leave? Think of the kittens!";
-    }
-
     // When the change team order button is changed, the teams switch sides
     function ChangeOrder() {
         if (Order == 1) { // Team 1 is moved as the upper one, defence zone is up
