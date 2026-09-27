@@ -5072,8 +5072,12 @@
               },
               body: JSON.stringify(payload),
             })
-            .then(response => response.json())
-            .then(data => {
+            // fetch() only rejects on a network-level failure - a 4xx/5xx still resolves here
+            // with a parseable JSON error body, so response.ok must be checked explicitly or a
+            // rejected save (e.g. session expired, validation error) reads as a silent success.
+            .then(response => response.json().then(data => ({ok: response.ok, data})))
+            .then(({ok, data}) => {
+                if (!ok) { throw data; }
                 console.log('Success:', data);
                 console.log("New Game instance created")
                 game_id = data.id;
@@ -5097,8 +5101,9 @@
                   },
                   body: JSON.stringify(payload),
             })
-                .then(response => response.json())
-                .then(data => {
+                .then(response => response.json().then(data => ({ok: response.ok, data})))
+                .then(({ok, data}) => {
+                  if (!ok) { throw data; }
                   console.log('Success:', data);
                   if (onSuccess) { onSuccess(data); }
             })
