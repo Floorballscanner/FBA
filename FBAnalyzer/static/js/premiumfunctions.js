@@ -367,6 +367,12 @@
         sData.style.display = "block";
         document.getElementById("save-game-btn").disabled = false;
 
+        // Same reasoning as loadGame() disabling itself once done - once this game is active,
+        // Load must not stay clickable, or picking a saved game from the dropdown would
+        // silently overwrite everything just tagged here.
+        document.getElementById("load-game-btn").disabled = true;
+        document.getElementById("load-game").disabled = true;
+
         if (!autosaveTimerId) {
             autosaveTimerId = setInterval(autosave, 60000);
         }
@@ -6980,6 +6986,15 @@
                     document.getElementById("TeamL").classList.remove('pg-btn--active');
                     document.getElementById("TeamR").classList.add('pg-btn--active');
                 }
+
+                // Load stayed clickable after a successful load, with the just-loaded game
+                // still selected - an accidental second click (or an accidental re-click of an
+                // already-loaded game) would silently overwrite everything tagged since, since
+                // loadGame() has no confirm of its own for a repeat call with the same id. Once
+                // loaded, disable both the select and the button; picking a game again (the
+                // select's onchange already re-enables the button) is an explicit new action.
+                document.getElementById("load-game-btn").disabled = true;
+                document.getElementById("load-game").disabled = true;
             })
 
         .catch((error) => {
