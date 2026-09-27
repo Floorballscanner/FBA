@@ -1052,6 +1052,17 @@ resize the canvas itself.
         width: 100% !important;
     }
 
+    /* google.visualization's own root element for a chart (as opposed to a Table, which
+       already centers fine) is a plain display:block div - .row's inherited text-align:center
+       only ever centers inline/inline-block content, so it silently did nothing for these.
+       margin:auto centers a block box instead, and costs nothing if the box already happens to
+       be full width (auto margins with no slack space to distribute is a no-op either way). */
+    .premiumgame-page .linestats > div,
+    .premiumgame-page #xGTeam_chart > div {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
     /* Marks the Game/Period 1/2/3/Overtime and Team 1/Team 2 detail headings specifically
        (added directly on those 7 <h4>s in the template) - not every <h4>, since the many
        per-line/situation stat panels (Line 1, PP1, 6vs5...) are also <h4>s and would each
