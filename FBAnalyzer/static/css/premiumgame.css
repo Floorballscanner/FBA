@@ -332,7 +332,10 @@ resize the canvas itself.
     gap: 8px;
 }
 
-.pg-persist-save {
+/* .pg-game-btn (below) also sets height/font-size at equal specificity and comes later in
+   the cascade, so it would otherwise win over this - .pg-game-btn.pg-persist-save raises
+   specificity instead of depending on staying after it in file order. */
+.pg-game-btn.pg-persist-save {
     flex: none;
     width: 100%;
     height: 56px;
