@@ -19,6 +19,7 @@ from accounts.decorators import license_required, get_active_license
 from django.db.models.fields.json import KeyTextTransform
 from rest_framework import viewsets, generics
 from rest_framework.decorators import action
+from rest_framework.authentication import SessionAuthentication
 from django.forms import modelformset_factory
 from .serializers import UserSerializer, TeamSerializer, LineSerializer, PositionSerializer, LevelSerializer, TimeSerializer
 from .serializers import GameSerializer, PlayerSerializer, PlayerUpdateSerializer, LiveDataSerializer, ShotSerializer
@@ -281,21 +282,22 @@ class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all().order_by("id")
     serializer_class = GameSerializer
 
+    # DEFAULT_AUTHENTICATION_CLASSES is empty project-wide (see settings.py). Without an
+    # authenticator here, DRF's Request never resolves the real session user - it falls through
+    # to AnonymousUser, and as a side effect of that fallback also overwrites the underlying
+    # Django request's own .user with that same AnonymousUser (DRF's Request.user setter writes
+    # through to request._request.user), so even reading self.request._request.user in
+    # get_queryset() below would come back anonymous by then. SessionAuthentication reads the
+    # real session user first and returns it, before that overwrite would otherwise happen.
+    authentication_classes = [SessionAuthentication]
+
     def get_queryset(self):
         # Previously unscoped (queryset above is only the DRF router's schema/fallback) - any
         # authenticated user could GET/PATCH/DELETE any other user's game by id. Scoping this
         # matters more now that autosave PATCHes constantly and Resume surfaces a real id.
-        #
-        # self.request.user (DRF's Request) - not self.request._request.user (the underlying
-        # Django HttpRequest) - is unconditionally AnonymousUser here: DEFAULT_AUTHENTICATION_CLASSES
-        # is empty in settings.py, so DRF's Request._authenticate() has no authenticator to run and
-        # always falls through to _not_authenticated(), regardless of the real Django session.
-        # Confirmed on staging: filtering on self.request.user silently matched nothing for every
-        # real logged-in user, not just anonymous ones.
-        user = self.request._request.user
-        if not user.is_authenticated:
+        if not self.request.user.is_authenticated:
             return Game.objects.none()
-        return Game.objects.filter(user=user).order_by("id")
+        return Game.objects.filter(user=self.request.user).order_by("id")
 
     # Some games' game_data still carries these pre-rendered shot-map PNGs from
     # before shot positions started being recorded (see shotMapData/updateSaveData()
