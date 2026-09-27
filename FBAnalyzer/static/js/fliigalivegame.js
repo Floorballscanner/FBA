@@ -36,6 +36,55 @@ var goaliedata = [];
 // (and every row's Rating blank) until then - same "post-game only" rule as Stars of the
 // Game itself, since the per-game baseline a rating needs isn't meaningful mid-match.
 var gameStarRatings = {};
+
+// Previous tick's cumulative goals/shots per team, so a new poll can tell whether a goal or
+// shot just happened (rather than silently updating the digit) - see flashGoalsAndShots below.
+// Start at null so the very first tick just establishes a baseline without flashing anything;
+// a freshly loaded page hasn't had "something just happen", it's just catching up.
+var prevGoalsA = null, prevGoalsB = null, prevShotsA = null, prevShotsB = null;
+const REDUCE_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Flashes #scoreBlock + shows the goal banner when a team's goal count increases, and pulses
+// that team's own shots number when its shot count increases - two distinct visual weights for
+// two very different frequencies of event. Safe to call every tick; a tick where nothing
+// changed (or the very first tick) does nothing beyond updating the tracked previous values.
+function flashGoalsAndShots(goalsA, goalsB, shotsA, shotsB, teamAName, teamBName) {
+    if (!REDUCE_MOTION) {
+        if (prevGoalsA !== null && (goalsA > prevGoalsA || goalsB > prevGoalsB)) {
+            const scorer = goalsA > prevGoalsA ? teamAName : teamBName;
+            const scoreBlock = document.getElementById('scoreBlock');
+            const banner = document.getElementById('goalBanner');
+            if (scoreBlock) {
+                scoreBlock.classList.remove('goal-flash');
+                void scoreBlock.offsetWidth;
+                scoreBlock.classList.add('goal-flash');
+            }
+            if (banner) {
+                document.getElementById('goalBannerTeam').innerText = scorer;
+                banner.style.display = 'flex';
+                clearTimeout(banner._hideTimer);
+                banner._hideTimer = setTimeout(() => { banner.style.display = 'none'; }, 5000);
+            }
+        }
+        if (prevShotsA !== null && shotsA > prevShotsA) {
+            const el = document.getElementById('sttotshots_1');
+            if (el) {
+                el.classList.remove('shot-flash');
+                void el.offsetWidth;
+                el.classList.add('shot-flash');
+            }
+        }
+        if (prevShotsB !== null && shotsB > prevShotsB) {
+            const el = document.getElementById('sttotshots_2');
+            if (el) {
+                el.classList.remove('shot-flash');
+                void el.offsetWidth;
+                el.classList.add('shot-flash');
+            }
+        }
+    }
+    prevGoalsA = goalsA; prevGoalsB = goalsB; prevShotsA = shotsA; prevShotsB = shotsB;
+}
 var t1color = "#990000";
 var t2color = "#002072";
 var t1color_rgba = 'rgba(153, 0, 0';
@@ -394,6 +443,7 @@ window.onload = function() {
             update6v5Indicator(events, match.period_lengths_sec, t1name, t2name, match.status === 'Played');
             t1s.innerHTML = t1s_temp;
             t2s.innerHTML = t2s_temp;
+            flashGoalsAndShots(Number(match.fs_A), Number(match.fs_B), t1s_temp, t2s_temp, t1name, t2name);
             t1sOT.innerHTML = t1sOT_temp;
             t2sOT.innerHTML = t2sOT_temp;
             t1pp.innerHTML = t1ppGoals_temp + '/' + t1ppOpp_temp;
@@ -2299,6 +2349,7 @@ function updateData() {
             update6v5Indicator(events, match.period_lengths_sec, t1name, t2name, match.status === 'Played');
             t1s.innerHTML = t1s_temp;
             t2s.innerHTML = t2s_temp;
+            flashGoalsAndShots(Number(match.fs_A), Number(match.fs_B), t1s_temp, t2s_temp, t1name, t2name);
             t1sOT.innerHTML = t1sOT_temp;
             t2sOT.innerHTML = t2sOT_temp;
             t1pp.innerHTML = t1ppGoals_temp + '/' + t1ppOpp_temp;

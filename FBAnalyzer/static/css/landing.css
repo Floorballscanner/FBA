@@ -698,6 +698,22 @@ a.landing-card:hover {
     text-align: right;
 }
 
+/* Flashes once when a match's score changes between refreshes (see fliigalivepage.js's
+   previousScores diffing) - never on first render, only on an actual change. */
+.landing-match-row__score--flash {
+    animation: match-score-flash 1.6s ease-in-out;
+}
+
+@keyframes match-score-flash {
+    0% { color: var(--landing-accent); transform: scale(1); }
+    30% { color: #17a34a; transform: scale(1.3); }
+    100% { color: var(--landing-accent); transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-match-row__score--flash { animation: none; }
+}
+
 .landing-match-row__chevron {
     flex: 0 0 auto;
     color: var(--landing-muted);
@@ -1038,6 +1054,47 @@ a.landing-card:hover {
 @keyframes sixvfive-indicator-pulse {
     0%, 100% { box-shadow: 0 8px 24px -8px rgba(220, 38, 38, 0.6); transform: scale(1); }
     50% { box-shadow: 0 10px 32px -4px rgba(220, 38, 38, 0.9); transform: scale(1.03); }
+}
+
+/* Goal banner (#goalBanner) - shown briefly by flashGoalsAndShots() in fliigalivegame.js when
+   a team's goal count increases, auto-hidden again a few seconds later. */
+.pp-indicator--goal {
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+    box-shadow: 0 8px 24px -8px rgba(22, 163, 74, 0.6);
+    animation-name: goal-indicator-pulse;
+}
+
+@keyframes goal-indicator-pulse {
+    0%, 100% { box-shadow: 0 8px 24px -8px rgba(22, 163, 74, 0.6); transform: scale(1); }
+    50% { box-shadow: 0 10px 32px -4px rgba(22, 163, 74, 0.9); transform: scale(1.04); }
+}
+
+/* Score/shots flashes (see flashGoalsAndShots() in fliigalivegame.js) - goals get a bigger,
+   more celebratory pulse than shots, matching how much rarer a goal is. */
+.goal-flash {
+    animation: goal-flash 2s ease-in-out;
+}
+
+@keyframes goal-flash {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.15); color: #16a34a; }
+    100% { transform: scale(1); }
+}
+
+.shot-flash {
+    display: inline-block;
+    border-radius: 6px;
+    animation: shot-flash 1s ease-in-out;
+}
+
+@keyframes shot-flash {
+    0% { background: transparent; }
+    30% { background: rgba(48, 70, 251, 0.18); }
+    100% { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pp-indicator--goal, .goal-flash, .shot-flash { animation: none; }
 }
 
 .landing-result__stats {
