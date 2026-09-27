@@ -410,11 +410,21 @@ def premium_game(request, game_id=None):
         get_object_or_404(Game, id=game_id, user=request.user, status='in_progress')
         resume_game_id = game_id
 
+    # Lets a user jump straight into a game they didn't finish tagging without leaving
+    # this page for Saved Games - excludes the one already open here, if any.
+    in_progress_games = Game.objects.filter(
+        user=request.user, status='in_progress',
+    ).exclude(id=resume_game_id).order_by('-updated_at').annotate(
+        name_t1=KeyTextTransform('name_t1', 'game_data'),
+        name_t2=KeyTextTransform('name_t2', 'game_data'),
+    ).values('id', 'date', 'name_t1', 'name_t2')
+
     context = {
         'teams': teams,
         'levels': levels,
         'players': players,
         'resume_game_id': resume_game_id,
+        'in_progress_games': in_progress_games,
     }
     return render(request, 'accounts/premiumgame.html', context=context)
 
