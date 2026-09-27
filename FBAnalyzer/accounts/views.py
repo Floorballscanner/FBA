@@ -281,6 +281,12 @@ class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all().order_by("id")
     serializer_class = GameSerializer
 
+    def get_queryset(self):
+        # Previously unscoped (queryset above is only the DRF router's schema/fallback) - any
+        # authenticated user could GET/PATCH/DELETE any other user's game by id. Scoping this
+        # matters more now that autosave PATCHes constantly and Resume surfaces a real id.
+        return Game.objects.filter(user=self.request.user).order_by("id")
+
     # Some games' game_data still carries these pre-rendered shot-map PNGs from
     # before shot positions started being recorded (see shotMapData/updateSaveData()
     # in premiumfunctions.js) - multi-game aggregate views (premium_analysis.js) never
@@ -380,15 +386,23 @@ class GameList(generics.ListAPIView):
 
 @login_required
 @license_required('team', 'club', 'trial')
-def premium_game(request):
+def premium_game(request, game_id=None):
     teams = Team.objects.all().order_by('name')
     levels = Level.objects.all().order_by('name')
     players = Player.objects.all().order_by('jersey_number')
+
+    resume_game_id = None
+    if game_id is not None:
+        # Only an in-progress game of this same user can be resumed into the editable
+        # tool - a completed game 404s here instead of silently reopening it for editing.
+        get_object_or_404(Game, id=game_id, user=request.user, status='in_progress')
+        resume_game_id = game_id
 
     context = {
         'teams': teams,
         'levels': levels,
         'players': players,
+        'resume_game_id': resume_game_id,
     }
     return render(request, 'accounts/premiumgame.html', context=context)
 
@@ -416,7 +430,13 @@ def edit_data(request):
 @login_required
 @license_required('team', 'club', 'trial')
 def saved_games(request):
-    return render(request,'accounts/saved_games.html')
+    games = Game.objects.filter(user=request.user).order_by('-updated_at').annotate(
+        name_t1=KeyTextTransform('name_t1', 'game_data'),
+        name_t2=KeyTextTransform('name_t2', 'game_data'),
+    ).values('id', 'date', 'status', 'updated_at', 'name_t1', 'name_t2')
+
+    context = {'games': games}
+    return render(request, 'accounts/saved_games.html', context=context)
 
 @login_required
 @license_required('fliiga', 'fliiga_full', 'team', 'club', 'trial')

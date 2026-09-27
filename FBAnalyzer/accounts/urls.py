@@ -31,6 +31,7 @@ urlpatterns = [
     path('accounts/activate/<uuid:token>/', views.activate, name="license-activate"),
     path('accounts', views.index, name="home"),
     path('accounts/premium_game/', views.premium_game, name="new-game-premium"),
+    path('accounts/premium_game/<int:game_id>/', views.premium_game, name="resume-game-premium"),
     path('accounts/edit_players/', views.edit_players, name="edit-players"),
     path('accounts/edit_teams/', views.edit_teams, name="edit-teams"),
     path('accounts/edit_levels/', views.edit_levels, name="edit-levels"),

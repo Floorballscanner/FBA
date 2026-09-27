@@ -64,6 +64,8 @@
     var undo_object = {}; // Undo object contains previous state data
     var data_object_stringified = {} // Deep copy of a data_object
     var idleTime = 0; // Calculate page idle time
+    var dirty = false; // True once data_object has changed since the last successful save
+    var autosaveTimerId = null; // setInterval handle for autosave(), started once by Start()
 
     // Premium game level, team, and player select box elements
 

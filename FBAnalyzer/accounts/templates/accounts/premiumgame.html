@@ -25,6 +25,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
 {% endblock %}
 {% block content %}
 {{ request.user.id|json_script:"user_id" }}
+{{ resume_game_id|json_script:"resume-game-id" }}
 
 <div class="premiumgame-page">
 
@@ -143,6 +144,7 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
                 <button id="start" type="button" onclick="Start()" class="pg-game-btn pg-game-btn--primary">Start game</button>
                 <button id="period" type="button" onclick="Period()" disabled="true" class="pg-game-btn pg-game-btn--secondary">Period</button>
             </div>
+            <span id="autosaveStatus" class="pg-autosave-status" aria-live="polite"></span>
             <div class="pg-toggle-group">
                 <div class="pg-toggle">
                     <input type="checkbox" id="ck1a" onclick="checkLive()" class="pg-toggle__input">
@@ -1374,6 +1376,11 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
 <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'bar']});
     google.charts.load('current', {'packages':['table']});
+
+    var RESUME_GAME_ID = JSON.parse(document.getElementById('resume-game-id').textContent);
+    if (RESUME_GAME_ID) {
+        loadGame(RESUME_GAME_ID);
+    }
 </script>
 
 {% endblock %}

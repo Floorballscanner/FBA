@@ -307,6 +307,10 @@
                 started = 1;
                 sData.style.display = "block";
 
+                if (!autosaveTimerId) {
+                    autosaveTimerId = setInterval(autosave, 60000);
+                }
+
                 name_t1 = s_T1.options[s_T1.selectedIndex].text
                 set_t1_names();
 
@@ -5032,63 +5036,9 @@
                 }
             }
 
-            // Crate a new Game instance
+            // Create or update the Game instance, marked completed - this is the final save.
 
-            data = { "date" : document.getElementById("select-date").value,
-                    "user" : user_id,
-                    "teams" : [s_T1.value, s_T2.value],
-                    "game_data" : data_object,
-            };
-
-            // Crate a new Game instance
-
-            if (game_id == 0) {
-
-                fetch("/apis/games/" , {
-
-                  method: 'POST', // or 'PUT'
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken,
-                  },
-                  body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                    console.log("New Game instance created")
-                    game_id = data.id;
-                    updateSaveData();
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-
-            }
-
-            // Update the saved game instance
-
-            else {
-
-                fetch("/apis/games/" + game_id + "/", {
-
-                      method: 'PATCH', // or 'PUSH'
-                      mode: 'cors',
-                      headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': csrftoken,
-                      },
-                      body: JSON.stringify(data),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                      console.log('Success:', data);
-                })
-                    .catch((error) => {
-                      console.error('Error:', error);
-                });
-
-            }
+            saveGameRow('completed');
 
             var conf_csv = confirm("Press OK to download shots in a csv-file");
 
@@ -5102,6 +5052,95 @@
             }
         }
     }
+
+    // POST if this game has never been saved (game_id == 0), else PATCH the existing row.
+    // Shared by the final "Save Game Data" click (status 'completed') and autosave (status
+    // 'in_progress') - the only difference between them is this one status value.
+    function saveGameRow(status, onSuccess, onError) {
+
+        var payload = { "date" : document.getElementById("select-date").value,
+                "user" : user_id,
+                "teams" : [s_T1.value, s_T2.value],
+                "game_data" : data_object,
+                "status" : status,
+        };
+
+        if (game_id == 0) {
+
+            fetch("/apis/games/" , {
+
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+              },
+              body: JSON.stringify(payload),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                console.log("New Game instance created")
+                game_id = data.id;
+                updateSaveData(); // Refresh data_object.game_id now that it's known
+                if (onSuccess) { onSuccess(data); }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                if (onError) { onError(error); }
+            });
+
+        } else {
+
+            fetch("/apis/games/" + game_id + "/", {
+
+                  method: 'PATCH',
+                  mode: 'cors',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                  },
+                  body: JSON.stringify(payload),
+            })
+                .then(response => response.json())
+                .then(data => {
+                  console.log('Success:', data);
+                  if (onSuccess) { onSuccess(data); }
+            })
+                .catch((error) => {
+                  console.error('Error:', error);
+                  if (onError) { onError(error); }
+            });
+
+        }
+    }
+
+    function setAutosaveStatus(text, isWarning) {
+        var el = document.getElementById("autosaveStatus");
+        if (!el) { return; }
+        el.textContent = text;
+        el.classList.toggle("pg-autosave-status--warning", !!isWarning);
+    }
+
+    // Runs every 60s once the game has been started (see Start()). Only ever touches
+    // Game.game_data - never /apis/shots/, which are only ever POSTed once, at the final
+    // save - so a repeated PATCH from a retried tick is always safe.
+    function autosave() {
+        if (!dirty) { return; }
+        saveGameRow('in_progress', function() {
+            dirty = false;
+            setAutosaveStatus("Autosaved " + new Date().toLocaleTimeString());
+        }, function() {
+            // dirty stays true, so the next tick retries with the latest state.
+            setAutosaveStatus("⚠ Not saved - check your connection", true);
+        });
+    }
+
+    window.addEventListener('beforeunload', function(e) {
+        if (dirty) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
 
     function set_t1_names() {
 
@@ -5724,6 +5763,7 @@
     function updateSaveData() {
 
         console.log("updateSaveData()")
+        dirty = true;
         undo_object = JSON.parse(JSON.stringify(data_object_stringified));
 
         data_object = {
@@ -6265,7 +6305,12 @@
             xaT2_g[i].innerHTML = undo_object.xaT2_g[i];
         }
 
+        // undoButton() only restores the underlying globals/DOM above - data_object itself
+        // (what autosave/save actually persist) stays stale at its pre-undo value otherwise,
+        // since only updateSaveData() normally rebuilds it.
+        data_object = JSON.parse(JSON.stringify(undo_object));
         data_object_stringified = JSON.parse(JSON.stringify(data_object));
+        dirty = true;
         document.getElementById("undo").disabled = true; // Disable Undo-button
     }
 
@@ -7024,9 +7069,11 @@
 
     }
 
-    function loadGame() {
+    // Resuming a game (see RESUME_GAME_ID in premiumgame.html) calls this with an explicit id,
+    // bypassing the #load-game select this function otherwise depends on.
+    function loadGame(id) {
 
-        game_id = load_game.options[load_game.selectedIndex].value;
+        game_id = (typeof id !== "undefined") ? id : load_game.options[load_game.selectedIndex].value;
 
         fetch("/apis/games/" + game_id + "/")
             .then(response => response.json())
@@ -7061,6 +7108,43 @@
                 s_T2.selectedIndex = s_T1.length - 1;
                 changeTeam2()
                 drawChart(); // Update charts
+
+                // Possession/shift-timer state - not covered by undoButton() above, which only
+                // restores what a real in-game undo needs. The clock itself is always resumed
+                // paused (is_on = 0, matching the "Start" label already shown) regardless of
+                // whether it was running at the moment of the last autosave - the elapsed real
+                // time since then makes trusting a saved "running" state meaningless anyway.
+                is_on = 0;
+                Order = data.game_data.Order;
+                PosTime = data.game_data.PosTime;
+                PosTime_2 = data.game_data.PosTime_2;
+                LineTime = data.game_data.LineTime;
+                LineTime_2 = data.game_data.LineTime_2;
+                shiftNo = data.game_data.shiftNo;
+                shiftNo_2 = data.game_data.shiftNo_2;
+                shiftPos = data.game_data.shiftPos;
+                shiftPos_2 = data.game_data.shiftPos_2;
+                shot_on = data.game_data.shot_on;
+
+                shooter_select = data.game_data.shooter_select;
+                document.getElementById("ck2a").checked = (shooter_select == 1);
+
+                document.getElementById(lines[line_on-1]).classList.remove('pg-btn--active');
+                line_on = data.game_data.line_on;
+                document.getElementById(lines[line_on-1]).classList.add('pg-btn--active');
+
+                document.getElementById(lines_2[line_on_2-1]).classList.remove('pg-btn--active');
+                line_on_2 = data.game_data.line_on_2;
+                document.getElementById(lines_2[line_on_2-1]).classList.add('pg-btn--active');
+
+                Ball_pos = data.game_data.Ball_pos;
+                if (Ball_pos == 1) {
+                    document.getElementById("TeamR").classList.remove('pg-btn--active');
+                    document.getElementById("TeamL").classList.add('pg-btn--active');
+                } else {
+                    document.getElementById("TeamL").classList.remove('pg-btn--active');
+                    document.getElementById("TeamR").classList.add('pg-btn--active');
+                }
             })
 
         .catch((error) => {

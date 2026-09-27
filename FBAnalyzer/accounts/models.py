@@ -57,10 +57,21 @@ class Position(models.Model):
 class Game(models.Model):
     objects = models.Manager()
 
+    STATUS_CHOICES = [('in_progress', 'In progress'), ('completed', 'Completed')]
+
     date = models.DateField()
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     teams = models.ManyToManyField(Team)
     game_data = models.JSONField()
+    # Every Game row used to only ever get created once, at the final explicit save - so there
+    # was never a need to distinguish "still being tagged" from "finished". Autosave changes
+    # that: a row can now exist mid-game, PATCHed every ~60s, well before the user is done -
+    # this is what lets "Saved Games" tell an interrupted game apart from a finished one and
+    # offer Resume only for the former. default='in_progress' since every autosave (and the
+    # first POST from a fresh game) starts here; the final "Save Game Data" click is what
+    # flips a row to 'completed'.
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='in_progress')
+    updated_at = models.DateTimeField(auto_now=True)  # "last saved" timestamp for the resume list
 
 
     def __str__(self):

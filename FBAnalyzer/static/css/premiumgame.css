@@ -355,6 +355,19 @@ resize the canvas itself.
     margin-bottom: 6px;
 }
 
+.pg-autosave-status {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: var(--pg-muted);
+    min-height: 14px;
+}
+
+.pg-autosave-status--warning {
+    color: #D92D20;
+    font-weight: 700;
+}
+
 .pg-game-btn {
     display: block;
     flex: 1 1 0;

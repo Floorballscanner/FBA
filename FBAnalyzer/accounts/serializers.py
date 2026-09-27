@@ -27,7 +27,8 @@ class LineSerializer(serializers.ModelSerializer):
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
-        fields = ['url', 'id', 'date', 'user', 'teams', 'game_data']
+        fields = ['url', 'id', 'date', 'user', 'teams', 'game_data', 'status', 'updated_at']
+        read_only_fields = ['updated_at']
 
 class PlayerSerializer(serializers.ModelSerializer):
 
