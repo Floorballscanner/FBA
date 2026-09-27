@@ -318,12 +318,23 @@ resize the canvas itself.
    a border plus extra padding, not just the column's normal gap, since these are rarer,
    higher-consequence actions that shouldn't be an easy mis-click away from the constantly
    used ones. */
-.pg-persist-row {
+.pg-persist {
     display: flex;
+    flex-direction: column;
     gap: 8px;
     padding-bottom: 14px;
     margin-bottom: 2px;
     border-bottom: 1px solid var(--pg-border);
+}
+
+.pg-persist-row {
+    display: flex;
+    gap: 8px;
+}
+
+.pg-persist-save {
+    flex: none;
+    width: 100%;
 }
 
 .pg-controls-col__label {

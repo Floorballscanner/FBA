@@ -134,21 +134,23 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
         </div>
 
         <div class="pg-controls-col pg-card">
-            <div class="pg-persist-row">
-                <select id="load-game" class="pg-select" {% if not in_progress_games %}disabled{% endif %}
-                        onchange="document.getElementById('load-game-btn').disabled = !this.value;">
-                    {% if in_progress_games %}
-                        <option value="" selected disabled>Load a game...</option>
-                        {% for game in in_progress_games %}
-                            <option value="{{ game.id }}">{{ game.date }} | {{ game.name_t1|default:"Team 1" }} - {{ game.name_t2|default:"Team 2" }}</option>
-                        {% endfor %}
-                    {% else %}
-                        <option value="" selected disabled>No unfinished games</option>
-                    {% endif %}
-                </select>
-                <button id="load-game-btn" type="button" disabled class="pg-game-btn pg-game-btn--secondary"
-                        onclick="if (!dirty || confirm('Loading a saved game will discard your current unsaved progress. Continue?')) { loadGame(); }">Load</button>
-                <button id="save-game-btn" type="button" disabled class="pg-game-btn pg-game-btn--secondary" onclick="saveData()">Save Game Data</button>
+            <div class="pg-persist">
+                <div class="pg-persist-row">
+                    <select id="load-game" class="pg-select" {% if not in_progress_games %}disabled{% endif %}
+                            onchange="document.getElementById('load-game-btn').disabled = !this.value;">
+                        {% if in_progress_games %}
+                            <option value="" selected disabled>Load a game...</option>
+                            {% for game in in_progress_games %}
+                                <option value="{{ game.id }}">{{ game.date }} | {{ game.name_t1|default:"Team 1" }} - {{ game.name_t2|default:"Team 2" }}</option>
+                            {% endfor %}
+                        {% else %}
+                            <option value="" selected disabled>No unfinished games</option>
+                        {% endif %}
+                    </select>
+                    <button id="load-game-btn" type="button" disabled class="pg-game-btn pg-game-btn--secondary"
+                            onclick="if (!dirty || confirm('Loading a saved game will discard your current unsaved progress. Continue?')) { loadGame(); }">Load</button>
+                </div>
+                <button id="save-game-btn" type="button" disabled class="pg-game-btn pg-game-btn--secondary pg-persist-save" onclick="saveData()">Save Game Data</button>
             </div>
             <div>
                 <div class="pg-controls-col__label">Possession</div>
