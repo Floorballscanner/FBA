@@ -332,14 +332,39 @@ resize the canvas itself.
     gap: 8px;
 }
 
-/* .pg-game-btn (below) also sets height/font-size at equal specificity and comes later in
-   the cascade, so it would otherwise win over this - .pg-game-btn.pg-persist-save raises
-   specificity instead of depending on staying after it in file order. */
+/* Load's label needs more room than an even flex split with the select gives it - fixed to
+   its content width instead, so the select (which can truncate its own long text) gives up
+   the space Load actually needs. */
+.pg-persist-row .pg-game-btn {
+    flex: none;
+    width: auto;
+    padding: 0 16px;
+}
+
+/* .pg-game-btn (below) also sets height/font-size/background at equal specificity and comes
+   later in the cascade, so it would otherwise win over this - .pg-game-btn.pg-persist-save
+   raises specificity instead of depending on staying after it in file order.
+   Outlined rather than filled navy, unlike Start/Reset/Period and the possession buttons'
+   active state - so it doesn't read as one more button in that same group. */
 .pg-game-btn.pg-persist-save {
     flex: none;
     width: 100%;
-    height: 56px;
-    font-size: 16px;
+    height: 46px;
+    font-size: 15px;
+    background: #fff;
+    color: var(--pg-navy);
+    border: 2px solid var(--pg-navy);
+}
+
+.pg-game-btn.pg-persist-save:hover:not(:disabled) {
+    background: var(--pg-navy);
+    color: #fff;
+}
+
+.pg-game-btn.pg-persist-save:disabled {
+    background: var(--pg-bg);
+    border-color: var(--pg-border);
+    color: var(--pg-muted);
 }
 
 .pg-controls-col__label {
