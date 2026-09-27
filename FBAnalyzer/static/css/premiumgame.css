@@ -993,8 +993,12 @@ resize the canvas itself.
    when nested (this was the actual cause of print ignoring the A4-landscape size entirely and
    falling back to the browser/OS default). It only ever applies during pagination anyway, so
    nesting bought nothing. */
+/* Portrait, not landscape: most of the report's content (Summary_game, xGTeam_chart, the
+   4 player/line stat tables) is already a single full-width block that gains nothing from
+   landscape's extra width - what it loses is ~30% of the page height landscape has less of,
+   which is exactly the room these tall tables/stacked-chart columns needed. */
 @page {
-    size: A4 landscape;
+    size: A4 portrait;
     margin: 10mm;
 }
 
@@ -1045,6 +1049,37 @@ resize the canvas itself.
 
     .premiumgame-page hr {
         margin: 6px 0 !important;
+    }
+
+    /* The actual cause of charts "randomly" landing alone on an otherwise-empty page: Bootstrap's
+       .row is a flex container, and Chrome (like most browsers) treats a flex container as one
+       unbreakable unit when paginating for print - it can't split between the .col-sm-* children,
+       so if the row as a whole doesn't fit what's left on a page, the ENTIRE row (often 3-4
+       charts) jumps to a fresh page together, wherever it lands. Switching to a plain block +
+       inline-block layout for print keeps the same visual columns, but each column can now
+       independently stay on the current page or flow to the next, since ordinary block boxes
+       (unlike flex/grid children) do fragment across pages. */
+    .premiumgame-page .row {
+        display: block !important;
+    }
+
+    .premiumgame-page [class^="col-sm-"] {
+        display: inline-block !important;
+        float: none !important;
+        vertical-align: top !important;
+    }
+
+    /* Bootstrap's own col-sm-N is N/12 columns - same fractions here, just shaved a hair under
+       so adjacent inline-blocks don't wrap from the whitespace between them in the HTML source. */
+    .premiumgame-page .col-sm-3 { width: 24% !important; }
+    .premiumgame-page .col-sm-4 { width: 32.5% !important; }
+    .premiumgame-page .col-sm-6 { width: 49% !important; }
+    .premiumgame-page .col-sm-12 { width: 100% !important; }
+
+    /* A frozen hover tooltip from whatever chart the cursor last touched before printing -
+       Google Charts renders these as real DOM overlays that don't hide themselves for print. */
+    .google-visualization-tooltip {
+        display: none !important;
     }
 }
 
