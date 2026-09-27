@@ -367,6 +367,98 @@ resize the canvas itself.
     color: var(--pg-muted);
 }
 
+/* Save Game's modal - a native confirm() can't label its own buttons, so "Save" vs "Finish"
+   only ever lived in text most people don't read before hitting the one button that's there.
+   Save Progress is the visually stronger action of the two on purpose: it's the one taken
+   far more often (every mid-game save), while Finish Game ending the game outright is the
+   rarer, harder-to-undo one. */
+.pg-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 22, 31, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.pg-modal-overlay[hidden] {
+    display: none;
+}
+
+.pg-modal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    width: calc(100% - 32px);
+    max-width: 340px;
+    box-shadow: 0 20px 50px -12px rgba(0, 32, 114, 0.4);
+}
+
+.pg-modal h3 {
+    margin: 0 0 8px;
+    color: var(--pg-navy-dark);
+    font-size: 18px;
+}
+
+.pg-modal p {
+    margin: 0 0 20px;
+    color: var(--pg-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.pg-modal__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pg-modal__btn {
+    height: 46px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.pg-modal__btn--save {
+    background: var(--pg-navy);
+    border: none;
+    color: #fff;
+}
+
+.pg-modal__btn--save:hover {
+    background: var(--pg-accent);
+}
+
+.pg-modal__btn--finish {
+    background: #fff;
+    border: 2px solid var(--pg-border);
+    color: var(--pg-ink);
+    height: 42px;
+    font-size: 14px;
+}
+
+.pg-modal__btn--finish:hover {
+    border-color: var(--pg-navy);
+    color: var(--pg-navy);
+}
+
+.pg-modal__btn--cancel {
+    background: transparent;
+    border: none;
+    color: var(--pg-muted);
+    height: 32px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pg-modal__btn--cancel:hover {
+    color: var(--pg-ink);
+}
+
 .pg-controls-col__label {
     font-size: 11.5px;
     text-transform: uppercase;

@@ -4969,97 +4969,102 @@
         // console.log(shotData);
     }
 
+    // A native confirm() only ever has two buttons, both fixed as OK/Cancel by the browser -
+    // there's no way to label them "Save" vs "Finish", only the dialog's body text, which is
+    // exactly what a rushed click skips past. This modal exists so each action has its own
+    // unambiguous label instead.
     function saveData() {
+        document.getElementById("save-game-modal").hidden = false;
+    }
 
-        var conf_finish = confirm("Finish and save this game?\n\nPress Cancel if you just want to save your progress and continue tagging later.");
+    function closeSaveGameModal() {
+        document.getElementById("save-game-modal").hidden = true;
+    }
 
-        if (conf_finish == false) {
-            var conf_progress = confirm("Save your current progress so you can continue later?");
-            if (conf_progress == true) {
-                saveGameRow('in_progress', function() {
-                    dirty = false;
-                    setAutosaveStatus("Saved " + new Date().toLocaleTimeString());
-                }, function() {
-                    setAutosaveStatus("⚠ Not saved - check your connection", true);
+    function confirmSaveProgress() {
+        closeSaveGameModal();
+        saveGameRow('in_progress', function() {
+            dirty = false;
+            setAutosaveStatus("Saved " + new Date().toLocaleTimeString());
+        }, function() {
+            setAutosaveStatus("⚠ Not saved - check your connection", true);
+        });
+    }
+
+    function confirmFinishGame() {
+        closeSaveGameModal();
+
+        // Shot data
+
+        i = 1;
+        saveNextS(i);
+
+        function saveNextS(i) {
+            if (i<premShotData.length) {
+                s_data = {
+                    "user" : premShotData[i][0],
+                    "game" : premShotData[i][1],
+                    "time" : premShotData[i][2],
+                    "position" : premShotData[i][3],
+                    "result" : premShotData[i][4],
+                    "type" : premShotData[i][5],
+                    "distance" : premShotData[i][6],
+                    "angle" : premShotData[i][7],
+                    "xG" : premShotData[i][8],
+                    "shooter" : premShotData[i][9],
+                    "passer" : premShotData[i][10],
+                    "T1LW" : premShotData[i][11],
+                    "T1C" : premShotData[i][12],
+                    "T1RW" : premShotData[i][13],
+                    "T1LD" : premShotData[i][14],
+                    "T1RD" : premShotData[i][15],
+                    "T1G" : premShotData[i][16],
+                    "T2LW" : premShotData[i][17],
+                    "T2C" : premShotData[i][18],
+                    "T2RW" : premShotData[i][19],
+                    "T2LD" : premShotData[i][20],
+                    "T2RD" : premShotData[i][21],
+                    "T2G" : premShotData[i][22],
+                    "isPP" : premShotData[i][23],
+                    "isSH" : premShotData[i][24],
+                }
+                // Save data to database
+                fetch('/apis/shots/', {
+
+                method: 'POST', // or 'PUSH'
+                headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify(s_data),
+                })
+
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    i++;
+                    saveNextS(i);
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+                console.log("Erroria pukkaa");
                 });
             }
-            return;
         }
 
-        if (conf_finish == true) {
+        // Create or update the Game instance, marked completed - this is the final save.
 
-            // Shot data
+        saveGameRow('completed', function() { dirty = false; });
 
-            i = 1;
-            saveNextS(i);
+        var conf_csv = confirm("Press OK to download shots in a csv-file");
 
-            function saveNextS(i) {
-                if (i<premShotData.length) {
-                    s_data = {
-                        "user" : premShotData[i][0],
-                        "game" : premShotData[i][1],
-                        "time" : premShotData[i][2],
-                        "position" : premShotData[i][3],
-                        "result" : premShotData[i][4],
-                        "type" : premShotData[i][5],
-                        "distance" : premShotData[i][6],
-                        "angle" : premShotData[i][7],
-                        "xG" : premShotData[i][8],
-                        "shooter" : premShotData[i][9],
-                        "passer" : premShotData[i][10],
-                        "T1LW" : premShotData[i][11],
-                        "T1C" : premShotData[i][12],
-                        "T1RW" : premShotData[i][13],
-                        "T1LD" : premShotData[i][14],
-                        "T1RD" : premShotData[i][15],
-                        "T1G" : premShotData[i][16],
-                        "T2LW" : premShotData[i][17],
-                        "T2C" : premShotData[i][18],
-                        "T2RW" : premShotData[i][19],
-                        "T2LD" : premShotData[i][20],
-                        "T2RD" : premShotData[i][21],
-                        "T2G" : premShotData[i][22],
-                        "isPP" : premShotData[i][23],
-                        "isSH" : premShotData[i][24],
-                    }
-                    // Save data to database
-                    fetch('/apis/shots/', {
+        if (conf_csv == true) {
+            downloadCsv()
+        }
+        var conf_pr = confirm("Press OK to print results in a PDF-file");
 
-                    method: 'POST', // or 'PUSH'
-                    headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken,
-                    },
-                    body: JSON.stringify(s_data),
-                    })
-
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data);
-                        i++;
-                        saveNextS(i);
-                    })
-                    .catch((error) => {
-                    console.error('Error:', error);
-                    console.log("Erroria pukkaa");
-                    });
-                }
-            }
-
-            // Create or update the Game instance, marked completed - this is the final save.
-
-            saveGameRow('completed', function() { dirty = false; });
-
-            var conf_csv = confirm("Press OK to download shots in a csv-file");
-
-            if (conf_csv == true) {
-                downloadCsv()
-            }
-            var conf_pr = confirm("Press OK to print results in a PDF-file");
-
-            if (conf_pr == true) {
-                Print()
-            }
+        if (conf_pr == true) {
+            Print()
         }
     }
 
@@ -5155,6 +5160,12 @@
         if (dirty) {
             e.preventDefault();
             e.returnValue = '';
+        }
+    });
+
+    window.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !document.getElementById("save-game-modal").hidden) {
+            closeSaveGameModal();
         }
     });
 

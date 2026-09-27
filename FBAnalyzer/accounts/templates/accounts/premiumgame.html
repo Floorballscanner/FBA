@@ -1306,6 +1306,18 @@ Styling lives in static/css/premiumgame.css, scoped under .premiumgame-page.
             <div id="xGL3_chart" style="height: 300px"></div>
         </div>
     </div>
+
+    <div id="save-game-modal" class="pg-modal-overlay" hidden onclick="if (event.target === this) { closeSaveGameModal(); }">
+        <div class="pg-modal">
+            <h3>Save Game</h3>
+            <p>Finish this game, or just save your progress and continue tagging later?</p>
+            <div class="pg-modal__actions">
+                <button type="button" class="pg-modal__btn pg-modal__btn--save" onclick="confirmSaveProgress()">Save Progress</button>
+                <button type="button" class="pg-modal__btn pg-modal__btn--finish" onclick="confirmFinishGame()">Finish Game</button>
+                <button type="button" class="pg-modal__btn pg-modal__btn--cancel" onclick="closeSaveGameModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="shotmenu" class="shot-menu">
