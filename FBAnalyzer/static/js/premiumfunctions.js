@@ -5034,7 +5034,7 @@
 
             // Create or update the Game instance, marked completed - this is the final save.
 
-            saveGameRow('completed');
+            saveGameRow('completed', function() { dirty = false; });
 
             var conf_csv = confirm("Press OK to download shots in a csv-file");
 
