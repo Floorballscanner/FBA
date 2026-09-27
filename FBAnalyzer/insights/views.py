@@ -23,19 +23,31 @@ Expected JSON body:
 """
 
 import json
+from datetime import timedelta
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
 
 from accounts.decorators import license_required
 
 from .ingest import fetch_and_ingest_match, ingest_match_tick
+from .live_insights import COOLDOWN_SECONDS
 from .models import GameStars, Insight, PostGameAnalysis, PregameAnalysis
 from .pregame import compute_pregame_analysis
 from .torneopal import CATEGORY_ID_MAP, STAGE_GROUP_ID_MAP
 
 LIVE_INSIGHTS_LIMIT = 3
+# A threshold-gated insight type (e.g. penalty_discipline) only gets a fresh row while its
+# condition keeps clearing the bar - once it stops (a team's penalty gap shrinks back below
+# PENALTY_DISCIPLINE_MIN_GAP, say), its last-fired row would otherwise keep being served here
+# as "the latest row for that type" indefinitely, contradicting whatever the page's own live
+# fields show by then (confirmed with real data: a penalty_discipline insight kept claiming
+# a 2-penalty gap for the rest of a match after the real gap had already dropped to 1). A
+# continuously-true condition refires within COOLDOWN_SECONDS of its last row, so anything
+# older than 2x that has gone stale and should drop out of the feed rather than linger.
+LIVE_INSIGHT_MAX_AGE = timedelta(seconds=COOLDOWN_SECONDS * 2)
 
 
 @login_required
@@ -181,13 +193,22 @@ def live_insights(request, match_id):
     crowd out the rarer types in a plain "most recent N" feed. Taking only
     the latest row per distinct insight_type first, then the most recent
     LIVE_INSIGHTS_LIMIT of those, keeps the feed varied instead of repetitive.
+
+    Also excludes any type whose latest row is older than LIVE_INSIGHT_MAX_AGE - a
+    threshold-gated insight (e.g. penalty_discipline) stops getting new rows the moment its
+    condition falls back below the bar, and without this it would keep being served as "the
+    latest row for that type" for the rest of the match, contradicting the page's own live
+    fields (e.g. the penalty count) by then.
     """
 
     insights = (
         Insight.objects.filter(match_id=match_id).exclude(text='')
         .order_by('insight_type', '-created_at').distinct('insight_type')
     )
-    insights = sorted(insights, key=lambda i: i.created_at, reverse=True)[:LIVE_INSIGHTS_LIMIT]
+    stale_cutoff = timezone.now() - LIVE_INSIGHT_MAX_AGE
+    insights = sorted(
+        (i for i in insights if i.created_at >= stale_cutoff), key=lambda i: i.created_at, reverse=True,
+    )[:LIVE_INSIGHTS_LIMIT]
     return JsonResponse({
         'insights': [
             {

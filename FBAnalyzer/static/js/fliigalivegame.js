@@ -175,7 +175,7 @@ window.onload = function() {
             const pushPromise = pushMatchEvents(match, modifiedEvents, modifiedLineups);
             updateInsightsPanel(match, pushPromise);
             updatePregameLayout(match, lineups);
-            updateComparisonPanel(match);
+            updateComparisonPanel(match, pushPromise);
             updateGameStarsPanel(match);
             lineups.forEach(event => {
                 event.xGOT = 0;
@@ -391,7 +391,7 @@ window.onload = function() {
             t1xGOT.innerHTML = t1xGOT_temp.toFixed(2);
             t2xGOT.innerHTML = t2xGOT_temp.toFixed(2);
             updatePPIndicator(events, match.period_lengths_sec, t1name, t2name);
-            update6v5Indicator(events, match.period_lengths_sec, t1name, t2name);
+            update6v5Indicator(events, match.period_lengths_sec, t1name, t2name, match.status === 'Played');
             t1s.innerHTML = t1s_temp;
             t2s.innerHTML = t2s_temp;
             t1sOT.innerHTML = t1sOT_temp;
@@ -1147,7 +1147,7 @@ function updateGameStarsPanel(match) {
 // Pregame-only, license-gated (see templates/f-liiga_game.html - a locked tier renders
 // a teaser instead of #comparisonContent, so there's simply nothing to fetch for them).
 // Only fetches once per page load: comparison data can't change before the match starts.
-function updateComparisonPanel(match) {
+function updateComparisonPanel(match, pushPromise) {
     const section = document.getElementById('comparisonSection');
     if (section == null) return;
 
@@ -1160,10 +1160,17 @@ function updateComparisonPanel(match) {
     if (content == null) return;  // locked tier - teaser markup only, nothing to fetch
     section.dataset.loaded = '1';
 
-    fetch('/accounts/fliiga_comparison_api/?match_id=' + match.match_id)
-        .then(response => response.json())
-        .then(data => renderComparison(data))
-        .catch(() => { section.style.display = 'none'; });
+    // Wait for this tick's own event push to land server-side first (same pattern
+    // updateInsightsPanel already uses) - on a brand-new match's very first tick, the
+    // MatchState row this API needs doesn't exist until that push is processed, and this
+    // fetch would otherwise race it and permanently show "not ready" for the rest of the
+    // page's lifetime (dataset.loaded above only allows one attempt per page load).
+    Promise.resolve(pushPromise).catch(() => {}).then(() => {
+        fetch('/accounts/fliiga_comparison_api/?match_id=' + match.match_id)
+            .then(response => response.json())
+            .then(data => renderComparison(data))
+            .catch(() => { section.style.display = 'none'; });
+    });
 }
 
 // Function updates the Live page every second
@@ -2063,7 +2070,7 @@ function updateData() {
             const pushPromise = pushMatchEvents(match, modifiedEvents, modifiedLineups);
             updateInsightsPanel(match, pushPromise);
             updatePregameLayout(match, lineups);
-            updateComparisonPanel(match);
+            updateComparisonPanel(match, pushPromise);
             updateGameStarsPanel(match);
             lineups.forEach(event => {
                 event.xGOT = 0;
@@ -2289,7 +2296,7 @@ function updateData() {
             t1xGOT.innerHTML = t1xGOT_temp.toFixed(2);
             t2xGOT.innerHTML = t2xGOT_temp.toFixed(2);
             updatePPIndicator(events, match.period_lengths_sec, t1name, t2name);
-            update6v5Indicator(events, match.period_lengths_sec, t1name, t2name);
+            update6v5Indicator(events, match.period_lengths_sec, t1name, t2name, match.status === 'Played');
             t1s.innerHTML = t1s_temp;
             t2s.innerHTML = t2s_temp;
             t1sOT.innerHTML = t1sOT_temp;
@@ -2810,9 +2817,20 @@ function current6v5State(allEvents, periodLengths) {
 // Shows/hides the live 6-vs-5 banner (#sixVFiveIndicator in f-liiga_game.html) -
 // same excitement-building idea as the power-play banner, for the moment a
 // team pulls their goalie for an extra attacker. Refreshes once per poll.
-function update6v5Indicator(allEvents, periodLengths, teamAName, teamBName) {
+//
+// Unlike the power-play indicator (a countdown that naturally reaches zero),
+// current6v5State is a plain toggle with no expiry - it stays "pulled" until an
+// explicit "goalie back in" mvvaihto event flips it off, which never happens if
+// the match simply ends with the net still empty (the horn sounds, play stops,
+// no further mvvaihto is ever recorded). isPlayed forces the banner off once the
+// match is over, regardless of that last toggle state.
+function update6v5Indicator(allEvents, periodLengths, teamAName, teamBName, isPlayed) {
     const indicator = document.getElementById('sixVFiveIndicator');
     if (!indicator) return;
+    if (isPlayed) {
+        indicator.style.display = 'none';
+        return;
+    }
     const pulledTeam = current6v5State(allEvents, periodLengths);
     if (!pulledTeam) {
         indicator.style.display = 'none';

@@ -41,18 +41,26 @@ function playerCell(photoUrl, name, size) {
     return '<div class="player-cell">' + avatarImg(photoUrl, size || 24) + '<span>' + name + '</span></div>';
 }
 
-function onCategoryChange() {
+// Re-fetches the team picker whenever league, season, or stage changes - not just league -
+// since the team list itself is season/stage-scoped (a team's roster of opponents differs
+// by season, and Torneopal has re-registered at least one real club under a new team_id
+// between seasons, e.g. women's PSS - so the same season/stage filter that keeps last
+// season's now-irrelevant teams out also keeps that club from appearing twice).
+function refreshTeamList() {
     const category = document.getElementById('select-category').value;
+    const season = document.getElementById('select-season').value;
+    const stage = document.getElementById('select-stage').value;
     const teamSelect = document.getElementById('select-team');
     teamSelect.innerHTML = '<option value="" selected disabled>Loading...</option>';
     teamSelect.disabled = true;
     hideStats();
 
-    if (!category) {
+    if (!category || !season || !stage) {
         return;
     }
 
-    fetch("/accounts/fliiga_team_list_api/?category=" + encodeURIComponent(category))
+    const params = new URLSearchParams({category, season, stage});
+    fetch("/accounts/fliiga_team_list_api/?" + params.toString())
         .then(response => response.json())
         .then(data => {
             teamSelect.innerHTML = '';

@@ -36,9 +36,10 @@ MOMENTUM_MIN_GAP = 0.5  # xG gap over the trailing window before it's worth repo
 MOMENTUM_SCORE_MULT = 60  # gap * this = score; 60 makes a 1.0 gap notable (~90th percentile of real
 # trailing-window snapshots this season - the old value of 40 needed a 1.5 gap, ~98th percentile,
 # which is why this fired exactly once across 1241 matches with any insight at all.
-WP_SWING_SCORE_MULT = 400  # delta * this = score; 400 makes a 0.15 swing notable (down from needing
-# 0.4, which - per real win-probability data - this season's biggest swing (0.375) never even reached,
-# so wp_swing fired zero notable times in 2026-2027 despite 1060 ticks logged.
+WP_SWING_SCORE_MULT = 400  # delta * this = score; 400 makes a 0.15 swing notable. Real genuine
+# subsequent-tick swings this season have ranged 0.15-0.25 (15-25 points) - see the first-evaluation
+# guard below for the actual reason this used to look broken (294/307 "notable" firings ever recorded
+# were a first-evaluation artifact, not a real swing).
 MIN_OPP_FOR_RATE = 2  # need at least this many PP opportunities before a rate is meaningful
 STANDOUT_MIN_GOALS = 3  # or...
 STANDOUT_MIN_POINTS = 5  # ...this many points (goals+assists), before standout_performer even considers firing -
@@ -452,13 +453,21 @@ def evaluate_match_insights(match_id):
     # --- wp_swing: change in win probability since the last evaluation ---
     if state.wp_a is not None:
         last = Insight.objects.filter(match_id=match_id, insight_type='wp_swing').order_by('-created_at').first()
+        # No real previous win probability exists on a match's first-ever evaluation - falling
+        # back to a neutral 0.5 and treating THAT gap as a "swing" was the actual bug here:
+        # confirmed against real data, 294 of 307 "notable" firings ever recorded were this
+        # exact first-evaluation artifact (e.g. "team's win probability just moved 45 points"
+        # on a match that had simply already reached 3-0 by the first ~60s-gated check - not a
+        # real swing, just distance from an arbitrary default), against only 13 genuine
+        # subsequent-tick swings. Still log the silent snapshot row so the *next* evaluation has
+        # a true previous value to diff against, but never surface a "notable" swing from it.
         prev_wp_a = float(last.payload.get('wp_a', 0.5)) if last else 0.5
         delta = float(state.wp_a) - prev_wp_a
         score = min(100.0, abs(delta) * WP_SWING_SCORE_MULT)
         gainer = state.team_a_name if delta > 0 else state.team_b_name
         text = (
             f"Big swing: {gainer}'s win probability just moved {abs(round(delta * 100))} points."
-            if score >= NOTABLE_THRESHOLD else ''
+            if last is not None and score >= NOTABLE_THRESHOLD else ''
         )
         insight = Insight.objects.create(
             match_id=match_id, insight_type='wp_swing', score=round(score, 3),

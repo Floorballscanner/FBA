@@ -509,16 +509,27 @@ def fliiga_team_analysis(request):
 @login_required
 @license_required('fliiga', 'fliiga_full', 'fliiga_trial', 'team', 'club')
 def fliiga_team_list_api(request):
-    """Distinct teams available to pick from for a category, pulled straight
-    from MatchState's team_a/team_b sides (no separate Team model exists for
-    F-Liiga - see insights.models module docstring)."""
+    """Distinct teams available to pick from for a category/season/stage, pulled straight
+    from MatchState's team_a/team_b sides (no separate Team model exists for F-Liiga - see
+    insights.models module docstring). season and stage are required, not just category -
+    without them this pooled every team that ever appeared in ANY season/stage for this
+    category, which both pulled in teams no longer in F-Liiga this season and could show
+    the same real club twice under two different team_ids if Torneopal re-registered them
+    between seasons (confirmed with real data: women's PSS has one team_id in an older
+    season and a different one this season)."""
 
     category = request.GET.get('category')
+    season_id = request.GET.get('season')
+    stage = request.GET.get('stage')
     if category not in ('men', 'women'):
         return JsonResponse({'error': 'category must be men or women'}, status=400)
+    if not season_id or not stage:
+        return JsonResponse({'error': 'season and stage are required'}, status=400)
 
     teams = {}
-    qs = MatchState.objects.filter(category=category).exclude(team_a_id='').values_list(
+    qs = MatchState.objects.filter(
+        category=category, season_id=season_id, stage=stage,
+    ).exclude(team_a_id='').values_list(
         'team_a_id', 'team_a_name', 'team_b_id', 'team_b_name',
     )
     for team_a_id, team_a_name, team_b_id, team_b_name in qs:
