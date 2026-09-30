@@ -475,10 +475,12 @@ def edit_data(request):
 @login_required
 @license_required('team', 'club', 'trial')
 def saved_games(request):
-    games = Game.objects.filter(user=request.user).order_by('-updated_at').annotate(
+    # Only unfinished games - a completed game has nothing to "resume" into, and browsing
+    # finished games is what the Single Game / Premium Analysis cards below are already for.
+    games = Game.objects.filter(user=request.user, status='in_progress').order_by('-updated_at').annotate(
         name_t1=KeyTextTransform('name_t1', 'game_data'),
         name_t2=KeyTextTransform('name_t2', 'game_data'),
-    ).values('id', 'date', 'status', 'updated_at', 'name_t1', 'name_t2')
+    ).values('id', 'date', 'updated_at', 'name_t1', 'name_t2')
 
     context = {'games': games}
     return render(request, 'accounts/saved_games.html', context=context)

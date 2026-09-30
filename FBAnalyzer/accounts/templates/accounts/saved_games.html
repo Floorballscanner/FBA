@@ -15,24 +15,24 @@
 
     <div class="landing-page-header">
         <h1>Saved Games</h1>
-        <p>Resume a game you didn't finish tagging, or analyse a completed one.</p>
+        <p>Resume a game you didn't finish tagging.</p>
     </div>
 
     <div class="landing-match-list">
         {% for game in games %}
-        <a class="landing-match-row" href="{% if game.status == 'in_progress' %}/accounts/premium_game/{{ game.id }}/{% else %}/accounts/analyse{% endif %}">
-            <span class="landing-match-row__status{% if game.status == 'in_progress' %} landing-match-row__status--live{% endif %}">{% if game.status == 'in_progress' %}Resume{% else %}Done{% endif %}</span>
+        <a class="landing-match-row" href="/accounts/premium_game/{{ game.id }}/">
+            <span class="landing-match-row__status landing-match-row__status--live">Resume</span>
             <span class="landing-match-row__teams">{{ game.name_t1|default:"Team 1" }} - {{ game.name_t2|default:"Team 2" }}</span>
             <span class="landing-match-row__score">{{ game.date }}</span>
             <span class="landing-match-row__chevron">›</span>
         </a>
         {% empty %}
-        <p>No games saved yet - start one from New Game.</p>
+        <p>No unfinished games - start one from New Game.</p>
         {% endfor %}
     </div>
 
     <div class="landing-page-header">
-        <p>Or browse all your games together:</p>
+        <p>Browse completed games:</p>
     </div>
 
     <div class="landing-card-grid">
