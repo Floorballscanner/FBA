@@ -295,9 +295,19 @@ class GameViewSet(viewsets.ModelViewSet):
         # Previously unscoped (queryset above is only the DRF router's schema/fallback) - any
         # authenticated user could GET/PATCH/DELETE any other user's game by id. Scoping this
         # matters more now that autosave PATCHes constantly and Resume surfaces a real id.
-        if not self.request.user.is_authenticated:
+        #
+        # Staff bypass this: analyse()/premium_analysis() (this same file) already let staff
+        # browse any user's recent games via _game_dropdown_queryset(), and their "Load"/"Data"
+        # buttons fetch the full game through this exact endpoint (static/js/visualizations.js,
+        # premium_analysis.js) - without the bypass, loading anything but a staff member's own
+        # game 404s, breaking both pages' Load for staff even though the dropdown itself was
+        # never restricted.
+        user = self.request.user
+        if not user.is_authenticated:
             return Game.objects.none()
-        return Game.objects.filter(user=self.request.user).order_by("id")
+        if user.is_staff:
+            return Game.objects.all().order_by("id")
+        return Game.objects.filter(user=user).order_by("id")
 
     # Some games' game_data still carries these pre-rendered shot-map PNGs from
     # before shot positions started being recorded (see shotMapData/updateSaveData()
