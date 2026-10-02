@@ -440,7 +440,6 @@ class Command(BaseCommand):
             match['xG6v5_B'] = round2(sum(s['xG'] for s in shots_b if s.get('situation') == '6V5'))
             match['S_A'], match['S_B'] = len(shots_a), len(shots_b)
             match['SOG_A'], match['SOG_B'] = len(sog_a), len(sog_b)
-            match['G_A'], match['G_B'] = len(goals_a), len(goals_b)
             match['PPG_A'] = sum(1 for s in goals_a if s.get('situation') == 'PP')
             match['PPG_B'] = sum(1 for s in goals_b if s.get('situation') == 'PP')
 
@@ -471,7 +470,8 @@ class Command(BaseCommand):
             match['GoalieStintsA'] = goalie_stints(match_events, lineups, 'A', team_a_id, period_lengths, nominal_duration, shots_b)
             match['GoalieStintsB'] = goalie_stints(match_events, lineups, 'B', team_b_id, period_lengths, nominal_duration, shots_a)
 
-        # RL (rangaistuslaukaus?) and TM adjustments, same as the JS.
+        # RL (rangaistuslaukaus?) and TM adjustments, same as the JS. Goals
+        # themselves are no longer touched here - see the GF/GA comment below.
         for match in matches_played:
             match_id = match['match_id']
             events = match_details.get(match_id, {}).get('events') or []
@@ -486,10 +486,8 @@ class Command(BaseCommand):
                         match['xGOT_A'] += 0.5
                 if 'tm' in description or 'TM' in description:
                     if event.get('team') == 'A':
-                        match['G_A'] -= 1
                         match['S_A'] -= 1
                     elif event.get('team') == 'B':
-                        match['G_B'] -= 1
                         match['S_B'] -= 1
 
         # --- Team stats ---
@@ -514,7 +512,12 @@ class Command(BaseCommand):
                     ts['Games'] += 1
                     ts['crest'] = ts['crest'] or match.get('club_A_crest') or ''
                     ts['Points'] += match.get('points_A') or 0
-                    ts['GF'] += match['G_A']; ts['GA'] += match['G_B']
+                    # GF/GA come straight from Torneopal's own confirmed score
+                    # (fs_A/fs_B), not from counting 'laukausmaali' shot events -
+                    # a goal Torneopal logs without a paired shot-location event
+                    # (a penalty shot, an empty-netter, ...) has no such event to
+                    # count, which silently undercounted real goals here before.
+                    ts['GF'] += num(match.get('fs_A'), int, 0); ts['GA'] += num(match.get('fs_B'), int, 0)
                     ts['SF'] += match['S_A']; ts['SA'] += match['S_B']
                     ts['xGF'] += match['xG_A']; ts['xGA'] += match['xG_B']
                     ts['xGOTF'] += match['xGOT_A']; ts['xGOTA'] += match['xGOT_B']
@@ -526,7 +529,7 @@ class Command(BaseCommand):
                     ts['Games'] += 1
                     ts['crest'] = ts['crest'] or match.get('club_B_crest') or ''
                     ts['Points'] += match.get('points_B') or 0
-                    ts['GF'] += match['G_B']; ts['GA'] += match['G_A']
+                    ts['GF'] += num(match.get('fs_B'), int, 0); ts['GA'] += num(match.get('fs_A'), int, 0)
                     ts['SF'] += match['S_B']; ts['SA'] += match['S_A']
                     ts['xGF'] += match['xG_B']; ts['xGA'] += match['xG_A']
                     ts['xGOTF'] += match['xGOT_B']; ts['xGOTA'] += match['xGOT_A']
