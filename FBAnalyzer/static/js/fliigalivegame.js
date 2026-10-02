@@ -743,7 +743,12 @@ function pushMatchEvents(match, events, lineups) {
     const payload = {
         match_id: match.match_id,
         category_id: match.category_id,
-        season_id: match.season_id,
+        // Torneopal's getMatch response has no season_id field at all (confirmed always
+        // missing) - the real value is under competition_season instead, in the same
+        // "2026-2027" format. Every match pushed since the 2026-2027 season started got
+        // stored with an empty season_id because of this, breaking the pregame comparison
+        // tool's lookup (it filters TeamSeasonStats by this match's own season_id).
+        season_id: match.competition_season,
         group_id: match.group_id,
         date: match.date,
         status: match.status,

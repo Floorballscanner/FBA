@@ -355,7 +355,10 @@ def ingest_raw_match(match_id, match, overwrite_existing=True):
     return ingest_match_tick(
         match_id=match_id,
         category=category,
-        season_id=match.get('season_id'),
+        # Torneopal's getMatch has no season_id field (confirmed always missing) - the real
+        # value is under competition_season, same format. season_id kept as a fallback only
+        # in case some caller's raw dict does carry it from elsewhere.
+        season_id=match.get('competition_season') or match.get('season_id'),
         stage=STAGE_GROUP_ID_MAP.get(str(match.get('group_id'))),
         date=match.get('date'),
         status=match.get('status'),
