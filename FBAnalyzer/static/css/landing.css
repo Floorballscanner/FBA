@@ -614,6 +614,44 @@ a.landing-card:hover {
     margin-top: 4px;
 }
 
+/* Date carousel (f-liiga_live.html) - lets you page through upcoming days' fixtures
+   instead of being stuck on today. Horizontally scrollable rather than wrapped, since a
+   week of pills plus padding routinely exceeds a phone's width. */
+
+.date-carousel {
+    display: flex;
+    gap: 8px;
+    max-width: 720px;
+    margin: 0 auto 16px;
+    padding: 0 24px 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.date-carousel__pill {
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid #eceef3;
+    background: #fff;
+    color: var(--landing-ink);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.date-carousel__pill:hover {
+    border-color: var(--landing-accent);
+}
+
+.date-carousel__pill--active {
+    background: var(--landing-navy);
+    border-color: var(--landing-navy);
+    color: #fff;
+}
+
 /* Compact single-row-per-game list (f-liiga_live.html "Today's Matches") —
    deliberately not a card grid, so many games are scannable at a glance,
    especially on mobile. */

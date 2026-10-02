@@ -8,6 +8,10 @@ var currentLocation = window.location.pathname;
 var locArray = currentLocation.split("/");
 var match_id = locArray[locArray.length-1];
 var api_key = 'n76qrhjnyygtcz7fzhg57sftbv6wtgjk';
+// The F-Liiga Live date carousel (fliigalivepage.js) now links to future days' scheduled
+// matches, not just today's - Insights and the Comparison tool stay exclusive to today's
+// games (see updateInsightsPanel's pregame branch and updateComparisonPanel).
+var today = new Date().toISOString().split('T')[0];
 // Whether the match is currently live - gates whether updateData() keeps
 // polling every 10s (see its .finally() below). Starts true so a fetch that
 // fails before we've learned the real status still gets retried, same
@@ -814,6 +818,15 @@ function updateInsightsPanel(match, pushPromise) {
     const isPlayed = match.status === 'Played';
     const isLive = !isPlayed && match.live_period !== '';
 
+    // A scheduled match can only ever be pregame (not live, not played) before its own day
+    // - the date carousel on F-Liiga Live now links to future days' fixtures too, and
+    // Insights stays exclusive to today's games rather than offering a pregame read on
+    // something still days out.
+    if (!isPlayed && !isLive && match.date !== today) {
+        section.style.display = 'none';
+        return;
+    }
+
     section.style.display = '';
     // Only show the "Loading..." placeholder on the very first render - the
     // 10s poll calls this again and again, and blanking the panel every
@@ -1207,7 +1220,9 @@ function updateComparisonPanel(match, pushPromise) {
     if (section == null) return;
 
     const isPlayed = match.status === 'Played';
-    const isScheduled = !isPlayed && match.live_period === '';
+    // Today only - see updateInsightsPanel's matching check for why (the date carousel
+    // on F-Liiga Live links to future days' fixtures too now).
+    const isScheduled = !isPlayed && match.live_period === '' && match.date === today;
     section.style.display = isScheduled ? '' : 'none';
     if (!isScheduled || section.dataset.loaded) return;
 

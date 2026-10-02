@@ -22,9 +22,11 @@ built by fliigalivepage.js; this template just provides the shell.
         <a href="/accounts/fliiga" aria-label="Back" style="display:inline-block;margin-bottom:12px;">
             <img src="{% static 'back.png' %}" width="20" alt="">
         </a>
-        <h1>Today's matches</h1>
-        <p>Live and finished F-Liiga games for today.</p>
+        <h1>F-Liiga matches</h1>
+        <p>Live and finished games for today, or pick an upcoming day below.</p>
     </div>
+
+    <div id="dateCarousel" class="date-carousel" style="display:none;"></div>
 
     <p id="empty-state" style="display:none;text-align:center;color:var(--landing-muted);">
         No F-Liiga matches today.
