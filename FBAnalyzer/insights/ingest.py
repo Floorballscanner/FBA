@@ -260,6 +260,23 @@ def ingest_match_tick(*, match_id, category, season_id, stage, date, status, liv
     if team_shot_xgot['A'] or team_shot_xgot['B']:
         wp_a, wp_b = compute_win_probability(team_shot_xgot['A'], team_shot_xgot['B'])
 
+    # RL (rangaistuslaukaus, penalty shot) adjustment: Torneopal logs a penalty
+    # shot's outcome as a bare 'maali'/'ohi' marker event with no shot
+    # coordinates (so SHOT_CODES above never sees it) tagged with 'rl'/'RL' in
+    # its description - same flat +0.5 xG/xGOT credit to the opposing team as
+    # accounts.compute_fliiga_stats applies, so MatchState's totals agree with
+    # the F-Liiga statistics page for matches that had a penalty shot.
+    for event in events:
+        description = event.get('description') or ''
+        if 'rl' in description or 'RL' in description:
+            event_team = event.get('team')
+            if event_team == 'A':
+                team_xg['B'] += 0.5
+                team_xgot['B'] += 0.5
+            elif event_team == 'B':
+                team_xg['A'] += 0.5
+                team_xgot['A'] += 0.5
+
     state.category = category
     state.season_id = season_id or state.season_id
     state.stage = stage or state.stage

@@ -136,10 +136,27 @@ def _compute_facts(team_id, season_id, category, stage):
 
         game_xgf = sum(float(s.xg or 0) for s in own_shots)
         game_xga = sum(float(s.xg or 0) for s in opp_shots)
+        game_xgotf = sum(float(s.xgot or 0) for s in own_shots)
+        game_xgota = sum(float(s.xgot or 0) for s in opp_shots)
+
+        # RL (penalty shot) adjustment - mirrors insights.ingest.ingest_match_tick's
+        # identical pass. This command recomputes straight from MatchEvent rather
+        # than reading MatchState's own already-adjusted xg_a/xg_b, so the same
+        # +0.5 credit has to be reapplied here too.
+        for e in evs:
+            description = e.description or ''
+            if 'rl' in description or 'RL' in description:
+                if e.team == side:
+                    game_xga += 0.5
+                    game_xgota += 0.5
+                elif e.team == opp_side:
+                    game_xgf += 0.5
+                    game_xgotf += 0.5
+
         xgf += game_xgf
         xga += game_xga
-        xgotf += sum(float(s.xgot or 0) for s in own_shots)
-        xgota += sum(float(s.xgot or 0) for s in opp_shots)
+        xgotf += game_xgotf
+        xgota += game_xgota
         gf += score_for
         ga += score_against
         pp_goals += sum(1 for s in own_shots if s.code == GOAL_CODE and s.situation == 'PP')
