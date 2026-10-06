@@ -640,18 +640,19 @@ build shot maps for your own team.
             "everyone skips - a personal KPI for every player."
         ),
         'meta_description': (
-            "Why good floorball coaching mirrors good company management: a strategy/tactics/"
-            "operations structure, and KPIs that cascade all the way down to each player."
+            "Why good floorball coaching mirrors good company management: a strategic/tactical/"
+            "operational structure, and KPIs that cascade all the way down to each player."
         ),
         'faq': [
             {
                 'question': 'What are the three layers of a data-driven coaching structure?',
                 'answer': (
-                    "Strategy, tactics, and operations, each on its own time horizon. Strategy is "
-                    "the multi-year ambition (win the cup, reach the playoffs). Tactics is the "
-                    "medium-term view, a few months at a time rather than a full season. "
-                    "Operations is the day-to-day view: a single practice, a single game, even a "
-                    "single shift, where data gets used live to make in-game adjustments."
+                    "Strategic, tactical, and operational, each on its own time horizon. The "
+                    "strategic layer is the multi-year ambition (win the cup, reach the "
+                    "playoffs). The tactical layer is the medium-term view, a few months at a "
+                    "time rather than a full season. The operational layer is the day-to-day "
+                    "view: a single practice, a single game, even a single shift, where data "
+                    "gets used live to make in-game adjustments."
                 ),
             },
             {
@@ -680,8 +681,8 @@ build shot maps for your own team.
         'body': """\
 > **Key takeaways**
 >
-> - Good floorball coaching and good company management share the same structure: strategy,
->   tactics, and operations, each with its own time horizon.
+> - Good floorball coaching and good company management share the same structure: strategic,
+>   tactical, and operational layers, each with its own time horizon.
 > - Know your team's identity (defense-first vs. offense-first, possession vs. counter-attack)
 >   before picking which KPIs actually matter for you.
 > - Targets should cascade cleanly from the league table all the way down to a single line, and
@@ -696,29 +697,29 @@ connection. They track shots and possession, but nobody connects that data to a 
 nobody cascades a target down to an individual player.
 
 This piece draws out two of the principles that good company management and good floorball
-coaching have in common. The first is a simple three-layer structure: strategy, tactics, and
-operations, each with its own time horizon. The second, and the more overlooked one, is that having
+coaching have in common. The first is a simple three-layer structure: strategic, tactical, and
+operational, each with its own time horizon. The second, and the more overlooked one, is that having
 good data means nothing if it never reaches the individual player as a clear, personal target
 they're actually held to.
 
-## Strategy, Tactics, Operations: Three Layers, Three Time Horizons
+## Strategic, Tactical, Operational: Three Layers, Three Time Horizons
 
 In company management, decisions tend to split into three layers, each with a different time
 horizon. The same split shows up naturally in how a floorball team is managed.
 
-**Strategy** is the multi-year view, roughly two to five years. For a team, that's the realistic
-ambition given the players and resources available: win the cup, reach the playoffs, or simply
-reach a certain level in the league. It also includes knowing your team's identity, more on that
-below.
+**The strategic layer** is the multi-year view, roughly two to five years. For a team, that's the
+realistic ambition given the players and resources available: win the cup, reach the playoffs, or
+simply reach a certain level in the league. It also includes knowing your team's identity, more on
+that below.
 
-**Tactics** is the medium-term view, a few months rather than years. A full season is too long a
-period to set meaningful targets for; people lose motivation chasing a number ten months away. A
-floorball season, which starts in October, splits naturally into chunks: the fall stretch up to
-Christmas, the winter stretch from Christmas to the start of the playoffs, and the playoffs
-themselves. Each chunk gets its own target.
+**The tactical layer** is the medium-term view, a few months rather than years - not game tactics,
+but planning horizon. A full season is too long a period to set meaningful targets for; people lose
+motivation chasing a number ten months away. A floorball season, which starts in October, splits
+naturally into chunks: the fall stretch up to Christmas, the winter stretch from Christmas to the
+start of the playoffs, and the playoffs themselves. Each chunk gets its own target.
 
-**Operations** is the day-to-day view: a single practice session, a single game, even a single
-shift. This is where the data gets used live, in the moment, to make in-game adjustments.
+**The operational layer** is the day-to-day view: a single practice session, a single game, even a
+single shift. This is where the data gets used live, in the moment, to make in-game adjustments.
 
 ## Know Your Team Before You Pick Your KPIs
 
@@ -807,7 +808,7 @@ numbers a company director would expect from a dashboard, broken down to the lev
 can actually act on them: team, line, and individual player.
 
 Bring the two ideas together and the point is simple. Structure your season like a company
-structures its planning, strategy, tactics, operations, each with its own horizon and its own
+structures its planning, strategic, tactical, operational, each with its own horizon and its own
 targets. Then do the harder thing most coaches and most companies skip: carry those targets all the
 way down to a single player, with a number they know they're being measured on and someone actually
 following up on it.
