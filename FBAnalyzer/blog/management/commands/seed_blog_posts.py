@@ -630,6 +630,202 @@ pattern in real time instead of reconstructing it after the fact. [Get started](
 build shot maps for your own team.
 """,
     },
+    {
+        'title': 'From the Boardroom to the Bench: Data-Driven Coaching',
+        'slug': 'from-the-boardroom-to-the-bench-data-driven-coaching',
+        'category': 'coaching-guides',
+        'excerpt': (
+            "Leading a floorball team runs on the same principles as leading a company: a clear "
+            "strategy, targets that cascade down through the organization, and - the step almost "
+            "everyone skips - a personal KPI for every player."
+        ),
+        'meta_description': (
+            "Why good floorball coaching mirrors good company management: a strategy/tactics/"
+            "operations structure, and KPIs that cascade all the way down to each player."
+        ),
+        'faq': [
+            {
+                'question': 'What are the three layers of a data-driven coaching structure?',
+                'answer': (
+                    "Strategy, tactics, and operations, each on its own time horizon. Strategy is "
+                    "the multi-year ambition (win the cup, reach the playoffs). Tactics is the "
+                    "medium-term view, a few months at a time rather than a full season. "
+                    "Operations is the day-to-day view: a single practice, a single game, even a "
+                    "single shift, where data gets used live to make in-game adjustments."
+                ),
+            },
+            {
+                'question': "Why does individual accountability matter more than just having good data?",
+                'answer': (
+                    "Most teams, like most companies, have plenty of data but never cascade it "
+                    "down into a personal target for an individual player. A player rarely knows, "
+                    "in concrete terms, what \"good\" looks like for their role this month, and "
+                    "nobody follows up on it regularly. Turning a team or line target into an "
+                    "individual player's number - and tying recognition to hitting it - is what "
+                    "turns analytics from a report into actual management."
+                ),
+            },
+            {
+                'question': "How should a player's KPI differ based on their role on the line?",
+                'answer': (
+                    "It should follow directly from their job, not a single generic number for "
+                    "the whole line. A playmaking center might be judged on expected assists - do "
+                    "their passes find teammates in good scoring positions. A finisher might be "
+                    "judged on individual expected goals and actual shots taken. A shutdown "
+                    "defender might be judged on expected-goals-against while they're on the "
+                    "floor, or how often they win their matchup against the opponent's top scorer."
+                ),
+            },
+        ],
+        'body': """\
+> **Key takeaways**
+>
+> - Good floorball coaching and good company management share the same structure: strategy,
+>   tactics, and operations, each with its own time horizon.
+> - Know your team's identity (defense-first vs. offense-first, possession vs. counter-attack)
+>   before picking which KPIs actually matter for you.
+> - Targets should cascade cleanly from the league table all the way down to a single line, and
+>   from there to a single player's number for their specific role.
+> - The step almost everyone skips: turning that number into a personal target a player is
+>   actually held to, reviewed on a regular cadence.
+
+Leading a successful floorball team runs on the same principles as managing a successful company:
+setting a strategy, choosing targets that serve it, and making sure every person knows their
+number. Most coaches, even ones sitting on mountains of game data, never fully draw out that
+connection. They track shots and possession, but nobody connects that data to a target, and almost
+nobody cascades a target down to an individual player.
+
+This piece draws out two of the principles that good company management and good floorball
+coaching have in common. The first is a simple three-layer structure: strategy, tactics, and
+operations, each with its own time horizon. The second, and the more overlooked one, is that having
+good data means nothing if it never reaches the individual player as a clear, personal target
+they're actually held to.
+
+## Strategy, Tactics, Operations: Three Layers, Three Time Horizons
+
+In company management, decisions tend to split into three layers, each with a different time
+horizon. The same split shows up naturally in how a floorball team is managed.
+
+**Strategy** is the multi-year view, roughly two to five years. For a team, that's the realistic
+ambition given the players and resources available: win the cup, reach the playoffs, or simply
+reach a certain level in the league. It also includes knowing your team's identity, more on that
+below.
+
+**Tactics** is the medium-term view, a few months rather than years. A full season is too long a
+period to set meaningful targets for; people lose motivation chasing a number ten months away. A
+floorball season, which starts in October, splits naturally into chunks: the fall stretch up to
+Christmas, the winter stretch from Christmas to the start of the playoffs, and the playoffs
+themselves. Each chunk gets its own target.
+
+**Operations** is the day-to-day view: a single practice session, a single game, even a single
+shift. This is where the data gets used live, in the moment, to make in-game adjustments.
+
+## Know Your Team Before You Pick Your KPIs
+
+Before setting any target, a company assesses its own strengths. A team should do the same. Are you
+a defense-first team, or do you have the league's best forwards? That identity should shape which
+KPIs actually matter for you, not a generic list borrowed from someone else's team.
+
+A few identity metrics worth tracking at the strategic level:
+
+- **Odd-man-rush share**: what percentage of your expected goals comes from clean odd-man rushes,
+  two-on-ones, three-on-twos, rather than grinding against a set defense. Odd-man rushes convert at
+  a far higher rate, so a team built to create them should be setting targets around that share,
+  not just raw shot volume.
+- **Possession tendency**: some teams want to control the ball and wear opponents down; others are
+  fine ceding possession if they're dangerous on the counter-attack. Knowing which kind of team you
+  are changes what a "good" possession number even looks like for you.
+- **Defensive versus offensive balance**: whether your identity is built on preventing goals or
+  scoring them changes which expected-goals number, for or against, you should be watching most
+  closely.
+
+This self-assessment is what keeps the whole KPI structure from becoming generic. It's the same
+reason a company doesn't copy a competitor's scorecard wholesale; the targets have to fit what
+you're actually good at.
+
+## The Cascade: From League Target to a Single Shift
+
+The real value of this framework shows up when targets cascade cleanly from one layer to the next,
+each one a direct input to the layer above it.
+
+Start strategic: how many points does your league typically require to reach the playoffs? That
+number becomes the top-line target for the season.
+
+Drop to tactical: break that season target into chunks, say 12 to 13 games for the fall stretch,
+and look at the actual schedule. Not every game is equally winnable. Identify which opponents you
+should be taking points from and which ones a single point would already be a good result against.
+From there, calculate what you need: for example, score at least six goals and concede fewer than
+four across that stretch of games to stay on pace.
+
+That points target then breaks down into expected-goals-for and expected-goals-against for the
+period, and from there into a target for each line, with each line given its own job based on who
+it actually faces. A third line typically plays against the opponent's third line, so its target
+isn't the first line's scoring rate; it's winning its own matchup.
+
+From there the line target breaks down one level further, into a KPI for each individual player on
+it, matched to their actual role rather than one generic number for the whole line. A playmaking
+center might be given a target for expected assists: do their passes consistently find teammates in
+positions to generate high expected goals, rather than just racking up raw assist counts. A
+finisher on the same line might instead be judged on individual expected goals and actual shots
+taken, turning the chances created into real goals. A shutdown defender's target might be an
+expected-goals-against number for the time they're on the floor, or how often they win their
+individual matchup against the opponent's top scorer.
+
+None of these are generic; they follow directly from the player's job on that line. That's what
+makes them usable: a player can look at their own number after a game and know immediately whether
+they did their job.
+
+Finally, operational: inside a single game, track each line's live expected-goals differential in
+real time to see whether they're winning their matchup as it happens, not just after the final
+whistle. This is the layer where the data stops being a season report and becomes a coaching tool
+you can act on between shifts.
+
+## The Gap Almost Everyone Misses: Individual Accountability
+
+Here's the uncomfortable parallel. Most companies, even ones with plenty of data, don't actually
+give individual workers clear KPIs, follow them consistently, and reward people for hitting them.
+Floorball coaching has exactly the same gap. Plenty of coaches are genuinely good at gathering and
+understanding data, but very few ever cascade that data down into a personal target for an
+individual player.
+
+A player rarely knows, in concrete terms, what "good" looks like for their role this month. They
+don't have a number they're being measured against, and nobody is following up on it regularly.
+That's the equivalent of a company that builds excellent dashboards nobody's job depends on.
+
+Closing that gap doesn't require more data than most teams already have. It requires the last,
+hardest step: turning a line's expected-goals target into an individual player's target, reviewing
+it with them on a regular cadence, and tying recognition, more ice time, a role change, visible
+credit, to whether they're hitting it. That's the step that turns analytics from a report into
+actual management.
+
+## Making the Cascade Measurable
+
+None of this works without the underlying data: possession, shot maps, expected goals, line-by-line
+and player-by-player, tracked live during the game rather than reconstructed afterward. That's
+exactly the gap Floorball Scanner is built to close for coaches, giving you the same real-time
+numbers a company director would expect from a dashboard, broken down to the level where a coach
+can actually act on them: team, line, and individual player.
+
+Bring the two ideas together and the point is simple. Structure your season like a company
+structures its planning, strategy, tactics, operations, each with its own horizon and its own
+targets. Then do the harder thing most coaches and most companies skip: carry those targets all the
+way down to a single player, with a number they know they're being measured on and someone actually
+following up on it.
+
+That's the whole point: data that doesn't just describe the game, but tells each player exactly
+what they're being measured on, and whether they're hitting it.
+
+---
+
+With [Floorball Scanner](/), you get the real-time, line-by-line and player-by-player data this
+cascade runs on - xG, shot maps, and special-teams rates - without a manual tagging session. For
+F-Liiga matches, [Floorball Scanner's F-Liiga tracking](/f-liiga/) builds all of it automatically
+and live for every game. See
+[How to Use Match Data to Prepare for Your Next Opponent](/blog/how-to-use-match-data-to-prepare-for-your-next-opponent/)
+for how the same numbers apply to scouting, or [get started](/get-started) to build this structure
+for your own team.
+""",
+    },
 ]
 
 
